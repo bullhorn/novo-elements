@@ -175,7 +175,6 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
    */
   public get panelClosingActions(): Observable<any> {
     return merge(
-      // this.overlayTemplate._keyManager.tabOut,
       this.outsideClickStream,
     );
   }
@@ -215,7 +214,6 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
    */
   protected subscribeToClosingActions(): Subscription {
     const firstStable: Observable<any> = this.zone.onStable.asObservable().pipe(first());
-    // const valueChanges = Observable.from(this.value);
     // When the zone is stable initially, and when the option list changes...
     return (
       merge(firstStable)

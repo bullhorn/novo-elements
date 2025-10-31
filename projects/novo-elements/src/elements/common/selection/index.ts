@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { NovoPseudoCheckbox } from './pseudo-checkbox/pseudo-checkbox.component';
-// import {NovoCommonModule} from '../common-behaviors/common-module';
 
 @NgModule({
   imports: [],

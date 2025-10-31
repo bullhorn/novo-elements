@@ -1,6 +1,9 @@
 .drag-box {
     width: 500px;
     display: block;
+    &.wider {
+        width: 200%;
+    }
 }
 .demo-drag-item {
     display: inline-flex;
@@ -8,4 +11,9 @@
     margin: 10px;
     width: 122px;
     position: relative;
+}
+
+.scroll-container {
+    max-width: 100%;
+    overflow-x: scroll;
 }

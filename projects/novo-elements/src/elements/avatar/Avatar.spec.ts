@@ -43,7 +43,6 @@ describe('Elements: NovoAvatarElement', () => {
       };
       component.ngOnInit();
       expect(component.sanitizer.bypassSecurityTrustUrl).toHaveBeenCalled();
-      // expect(component.sanitizer.bypassSecurityTrustUrl.calls.mostRecent().args[0]).toContain('data:image/svg+xml;base64');
     });
   });
 });

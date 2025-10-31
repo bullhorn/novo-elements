@@ -54,7 +54,6 @@ export class NovoExpansionPanelHeader implements OnDestroy {
   constructor(
     @Host() public panel: NovoExpansionPanel,
     private _element: ElementRef,
-    // private _focusMonitor: FocusMonitor,
     private _changeDetectorRef: ChangeDetectorRef,
   ) {
     // Since the toggle state depends on an @Input on the panel, we
@@ -64,8 +63,6 @@ export class NovoExpansionPanelHeader implements OnDestroy {
       panel.closed,
       panel._inputChanges.pipe(filter((changes) => !!(changes.hideToggle || changes.disabled))),
     ).subscribe(() => this._changeDetectorRef.markForCheck());
-
-    // _focusMonitor.monitor(_element.nativeElement);
   }
 
   /** Height of the header while the panel is expanded. */
@@ -117,7 +114,6 @@ export class NovoExpansionPanelHeader implements OnDestroy {
 
   ngOnDestroy() {
     this._parentChangeSubscription.unsubscribe();
-    // this._focusMonitor.stopMonitoring(this._element.nativeElement);
   }
 }
 

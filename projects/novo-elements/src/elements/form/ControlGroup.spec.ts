@@ -9,7 +9,7 @@ import { FormUtils } from './utils/FormUtils';
 import { NovoControlGroup } from './ControlGroup';
 import { NovoFormModule } from './Form.module';
 
-xdescribe('Elements: NovoControlGroup', () => {
+describe('Elements: NovoControlGroup', () => {
   let fixture;
   let component;
 

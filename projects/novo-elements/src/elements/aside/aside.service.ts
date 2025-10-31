@@ -62,7 +62,6 @@ export class NovoAsideService {
   }
 
   private getOverlayConfig(config: AsideConfig): AsideConfig {
-    // const positionStrategy = this.overlay.position().global().centerHorizontally().centerVertically();
     const scrollStrategy = config.hasBackdrop ? this.overlay.scrollStrategies.block() : this.overlay.scrollStrategies.noop();
 
     return {

@@ -15,7 +15,7 @@ import { NovoDataTableCellHeader } from './data-table-header-cell.component';
 
 // App
 
-xdescribe('Elements: NovoDataTableCellHeader', () => {
+describe('Elements: NovoDataTableCellHeader', () => {
   let fixture;
   let component;
 
@@ -318,16 +318,14 @@ xdescribe('Elements: NovoDataTableCellHeader', () => {
     });
 
     it('should change the width when moving mouse', async () => {
-      jest.spyOn(component.renderer, 'setStyle');
+      jest.spyOn(component, 'setWidth');
       component.startResize(mouseDownEvent);
 
       const mouseMoveEvent: MouseEvent = window.document.createEvent('MouseEvents');
       mouseMoveEvent.initMouseEvent('mousemove', true, true, window, 1, 50, 50, 550, 50, false, false, false, false, 0, null);
       window.document.dispatchEvent(mouseMoveEvent);
-
-      expect(component.renderer.setStyle).toHaveBeenCalledWith(component.elementRef.nativeElement, 'min-width', '170px');
-      expect(component.renderer.setStyle).toHaveBeenCalledWith(component.elementRef.nativeElement, 'width', '170px');
-      expect(component.renderer.setStyle).toHaveBeenCalledWith(component.elementRef.nativeElement, 'max-width', '170px');
+      
+      expect(component.setWidth).toHaveBeenCalledWith(170);
       expect(component._column.width).toEqual(170);
       window.document.dispatchEvent(mouseUpEvent);
     });

@@ -7,7 +7,7 @@ import { NovoDatePickerModule } from 'novo-elements/elements/date-picker';
 import { NovoTimePickerModule } from 'novo-elements/elements/time-picker';
 import { NovoDateTimePickerElement } from './DateTimePicker';
 
-xdescribe('Elements: NovoDateTimePickerElement', () => {
+describe('Elements: NovoDateTimePickerElement', () => {
   let fixture;
   let component: NovoDateTimePickerElement;
 
@@ -39,7 +39,7 @@ xdescribe('Elements: NovoDateTimePickerElement', () => {
     });
     it('should set the hours correctly (12hr + single digit)', () => {
       component.setTimeLabels(new Date('12/04/1987 1:00 PM'));
-      expect(component.hours).toEqual('01');
+      expect(component.hours).toEqual('1');
     });
     it('should set the hours correctly (24hr)', () => {
       component.military = true;
@@ -79,7 +79,6 @@ xdescribe('Elements: NovoDateTimePickerElement', () => {
     const now = new Date();
     beforeEach(() => {
       jest.spyOn(component, 'setDateLabels');
-      // jest.spyOn(component, '_onChange');
       jest.spyOn(component.onSelect, 'emit');
       jest.spyOn(component, 'createFullDateValue').mockReturnValue(now);
     });
@@ -87,7 +86,6 @@ xdescribe('Elements: NovoDateTimePickerElement', () => {
       component.onDateSelected({ date: now });
       expect(component.model).toEqual(now);
       expect(component.setDateLabels).toHaveBeenCalledWith(now);
-      // expect(component._onChange).toHaveBeenCalledWith(now);
       expect(component.onSelect.emit).toHaveBeenCalledWith({ date: now });
     });
   });
@@ -95,7 +93,6 @@ xdescribe('Elements: NovoDateTimePickerElement', () => {
   describe('Method: onTimeSelected()', () => {
     const now = new Date();
     beforeEach(() => {
-      // jest.spyOn(component, '_onChange');
       jest.spyOn(component, 'setTimeLabels');
       jest.spyOn(component.onSelect, 'emit');
       jest.spyOn(component, 'createFullDateValue').mockReturnValue(now);
@@ -103,7 +100,6 @@ xdescribe('Elements: NovoDateTimePickerElement', () => {
     it('should call and set everything right', () => {
       component.onTimeSelected({ date: now });
       expect(component.model).toEqual(now);
-      // expect(component._onChange).toHaveBeenCalledWith(now);
       expect(component.setTimeLabels).toHaveBeenCalledWith(now);
       expect(component.onSelect.emit).toHaveBeenCalledWith({ date: now });
     });

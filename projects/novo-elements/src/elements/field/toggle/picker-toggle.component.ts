@@ -26,7 +26,6 @@ import { NovoFieldElement, NOVO_FORM_FIELD } from '../field';
 @Component({
     selector: 'novo-picker-toggle',
     templateUrl: 'picker-toggle.component.html',
-    styleUrls: ['picker-toggle.component.scss'],
     host: {
         class: 'novo-picker-toggle',
         // Always set the tabindex to -1 so that it doesn't overlap with any custom tabindex the

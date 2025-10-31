@@ -62,9 +62,14 @@ describe('Elements: NovoCKEditorElement', () => {
       expect(component.value).toEqual({});
     });
 
-    xit('should update the instance', () => {
+    it('should update the instance', () => {
+      component.instance = {
+        setData: jest.fn(),
+      }
       component.writeValue({});
       expect(component.instance.setData).toHaveBeenCalledWith({});
+      // reset to null to not affect other tests
+      component.instance = null;
     });
   });
 

@@ -75,6 +75,7 @@ export class DataTableRowsExample implements AfterViewInit {
       handlers: {
         click: this.preview.bind(this),
       },
+      draggable: false,
       action: {
         icon: 'preview',
       },
@@ -84,6 +85,7 @@ export class DataTableRowsExample implements AfterViewInit {
       type: 'action',
       label: 'Actions',
       enabled: true,
+      draggable: false,
       action: {
         options: [
           { label: 'Action 1', handlers: { click: this.log.bind(this) } },
@@ -100,6 +102,7 @@ export class DataTableRowsExample implements AfterViewInit {
       filterable: {
         type: 'number',
       },
+      draggable: false,
       sortable: true,
       resizable: true,
     },

@@ -8,7 +8,7 @@
             <novo-action (click)="removeObject(item)" icon="close" tooltip="Close Item"></novo-action>
         </novo-card-header>
         <novo-card-content>
-            <novo-caption novoPreventDrag>{{item.name}} (Non-draggable area)</novo-caption>
+            <novo-caption>{{item.name}} (Non-draggable area)</novo-caption>
         </novo-card-content>
     </novo-card>
 </div>
@@ -26,7 +26,22 @@
             <novo-action (click)="removeObject2(item)" icon="close" tooltip="Close Item"></novo-action>
         </novo-card-header>
         <novo-card-content>
-            <novo-caption novoPreventDrag>{{item.name}} (Non-draggable area)</novo-caption>
+            <novo-caption>{{item.name}} (Non-draggable area)</novo-caption>
         </novo-card-content>
     </novo-card>
+</div>
+
+<h2>Draggable items in a scrolling list</h2>
+<div class="scroll-container">
+    <div [novoDragDrop]="objects3" (novoDragDropFinish)="dragFinished3($event)" class="drag-box wider">
+        <novo-card *ngFor="let item of objects3"
+            class="demo-drag-item">
+            <novo-card-header class="novo-drag-target {{item.bgClass}}">
+                <novo-title>{{item.headerText}}</novo-title>
+            </novo-card-header>
+            <novo-card-content>
+                <novo-caption>{{item.name}} (Non-draggable area)</novo-caption>
+            </novo-card-content>
+        </novo-card>
+    </div>
 </div>
