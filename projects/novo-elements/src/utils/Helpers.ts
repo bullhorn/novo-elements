@@ -118,7 +118,7 @@ export class Helpers {
    * Checks to see if the object is undefined or null
    */
   static isBlank(obj: any): boolean {
-    return obj === undefined || obj === null;
+    return Helpers.isNullOrUndefined(obj);
   }
 
   /**
