@@ -26,10 +26,10 @@ interface ParsedMetadataResults {
 }
 
 /** Path to find the examples */
-const examplesPath = path.join('./projects/', 'novo-examples', 'src');
+const examplesPath = path.posix.join('./projects/', 'novo-examples', 'src');
 
 /** Output path of the module that is being created */
-const outputModuleFilename = path.join(examplesPath, 'examples.module.ts');
+const outputModuleFilename = path.posix.join(examplesPath, 'examples.module.ts');
 
 /** Build ES module import statements for the examples. */
 function buildImportsTemplate(metadata: ExampleMetadata, prefix = 'import'): string {
@@ -224,7 +224,7 @@ function parseExampleMetadata(fileName: string, sourceContent: string): ParsedMe
  */
 const task = () => {
   const results: ExampleMetadata[] = [];
-  const matchedFiles = glob(path.join(examplesPath, '**/*-example.ts'));
+  const matchedFiles = glob(path.posix.join(examplesPath, '**/*-example.ts'), { posix: true });
 
   for (const sourcePath of matchedFiles) {
     if (sourcePath === outputModuleFilename) {

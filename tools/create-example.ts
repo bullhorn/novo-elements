@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 
 /** Path to find the examples */
-const examplesPath = path.join('./projects/', 'examples');
+const examplesPath = path.posix.join('./projects/', 'examples');
 
 /**
  * Builds the template for the examples module
@@ -84,19 +84,19 @@ const task = () => {
   const section = process.argv[2];
   const example = process.argv[3];
   const selector = `${example}-example`;
-  const dir = path.join(examplesPath, section, example);
+  const dir = path.posix.join(examplesPath, section, example);
   fs.mkdirSync(dir);
 
   const tsTmp = generateTSTemplate(selector);
-  const tsOutputFile = path.join(dir, `${selector}.ts`);
+  const tsOutputFile = path.posix.join(dir, `${selector}.ts`);
   fs.writeFileSync(tsOutputFile, tsTmp);
 
   const cssTmp = generateCSSTemplate(selector);
-  const cssOutputFile = path.join(dir, `${selector}.css`);
+  const cssOutputFile = path.posix.join(dir, `${selector}.css`);
   fs.writeFileSync(cssOutputFile, cssTmp);
 
   const htmlTmp = generateHTMLTemplate(selector);
-  const htmlOutputFile = path.join(dir, `${selector}.html`);
+  const htmlOutputFile = path.posix.join(dir, `${selector}.html`);
   fs.writeFileSync(htmlOutputFile, htmlTmp);
 };
 
