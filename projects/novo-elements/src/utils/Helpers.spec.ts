@@ -158,4 +158,138 @@ describe('Utils: Helpers', () => {
       });
     });
   });
+
+  describe('Method: isBlank', () => {
+    it('should return true when object is undefined', () => {
+      expect(Helpers.isBlank(undefined)).toBe(true);
+    });
+
+    it('should return true when object is null', () => {
+      expect(Helpers.isBlank(null)).toBe(true);
+    });
+
+    it('should return false when object is an empty string', () => {
+      expect(Helpers.isBlank('')).toBe(false);
+    });
+
+    it('should return false when object is zero', () => {
+      expect(Helpers.isBlank(0)).toBe(false);
+    });
+
+    it('should return false when object is false', () => {
+      expect(Helpers.isBlank(false)).toBe(false);
+    });
+
+    it('should return false when object is an empty array', () => {
+      expect(Helpers.isBlank([])).toBe(false);
+    });
+
+    it('should return false when object is an empty object', () => {
+      expect(Helpers.isBlank({})).toBe(false);
+    });
+
+    it('should return false when object is a string', () => {
+      expect(Helpers.isBlank('test')).toBe(false);
+    });
+
+    it('should return false when object is a number', () => {
+      expect(Helpers.isBlank(13)).toBe(false);
+    });
+
+    it('should return false when object is an object with properties', () => {
+      expect(Helpers.isBlank({ key: 'value' })).toBe(false);
+    });
+  });
+
+  describe('Method: isNullOrUndefined', () => {
+    it('should return true when object is undefined', () => {
+      expect(Helpers.isNullOrUndefined(undefined)).toBe(true);
+    });
+
+    it('should return true when object is null', () => {
+      expect(Helpers.isNullOrUndefined(null)).toBe(true);
+    });
+
+    it('should return false when object is an empty string', () => {
+      expect(Helpers.isNullOrUndefined('')).toBe(false);
+    });
+
+    it('should return false when object is zero', () => {
+      expect(Helpers.isNullOrUndefined(0)).toBe(false);
+    });
+
+    it('should return false when object is false', () => {
+      expect(Helpers.isNullOrUndefined(false)).toBe(false);
+    });
+
+    it('should return false when object is an empty array', () => {
+      expect(Helpers.isNullOrUndefined([])).toBe(false);
+    });
+
+    it('should return false when object is an empty object', () => {
+      expect(Helpers.isNullOrUndefined({})).toBe(false);
+    });
+
+    it('should return false when object is a string', () => {
+      expect(Helpers.isNullOrUndefined('test')).toBe(false);
+    });
+
+    it('should return false when object is a number', () => {
+      expect(Helpers.isNullOrUndefined(13)).toBe(false);
+    });
+
+    it('should return false when object is an object with properties', () => {
+      expect(Helpers.isNullOrUndefined({ key: 'value' })).toBe(false);
+    });
+  });
+
+  describe('Method: isEmpty', () => {
+    it('should return true when object is undefined', () => {
+      expect(Helpers.isEmpty(undefined)).toBe(true);
+    });
+
+    it('should return true when object is null', () => {
+      expect(Helpers.isEmpty(null)).toBe(true);
+    });
+
+    it('should return true when object is an empty string', () => {
+      expect(Helpers.isEmpty('')).toBe(true);
+    });
+
+    it('should return true when object is an empty array', () => {
+      expect(Helpers.isEmpty([])).toBe(true);
+    });
+
+    it('should return false when object is zero', () => {
+      expect(Helpers.isEmpty(0)).toBe(false);
+    });
+
+    it('should return false when object is false', () => {
+      expect(Helpers.isEmpty(false)).toBe(false);
+    });
+
+    it('should return false when object is an empty object', () => {
+      expect(Helpers.isEmpty({})).toBe(false);
+    });
+
+    it('should return false when object is a non-empty string', () => {
+      expect(Helpers.isEmpty('test')).toBe(false);
+    });
+
+    it('should return false when object is a number', () => {
+      expect(Helpers.isEmpty(13)).toBe(false);
+    });
+
+    it('should return false when object is an array with elements', () => {
+      expect(Helpers.isEmpty([1, 2, 3])).toBe(false);
+    });
+
+    it('should return false when object is an object with properties', () => {
+      expect(Helpers.isEmpty({ key: 'value' })).toBe(false);
+    });
+
+    it('should return false when object is an array with one element', () => {
+      expect(Helpers.isEmpty(['item'])).toBe(false);
+    });
+  });
 });
