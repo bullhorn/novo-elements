@@ -2,9 +2,9 @@ import fs from 'fs';
 import { sync as glob } from 'glob';
 import path from 'path';
 
-const srcPath = path.join('./demo/', 'app/pages/elements');
+const srcPath = path.posix.join('./demo/', 'app/pages/elements');
 /** Path to find the examples */
-const examplesPath = path.join('./projects/', 'novo-examples/src');
+const examplesPath = path.posix.join('./projects/', 'novo-examples/src');
 
 /**
  * Builds the template for the examples module
@@ -96,33 +96,33 @@ const task = () => {
   const example = process.argv[2];
   console.log(example);
 
-  const matchedFiles = glob(path.join(srcPath, example, 'templates/**/*.html'));
+  const matchedFiles = glob(path.posix.join(srcPath, example, 'templates/**/*.html'), { posix: true });
 
-  const dir = path.join(examplesPath, example);
+  const dir = path.posix.join(examplesPath, example);
   fs.mkdirSync(dir);
 
   const mdTmp = generateMDTemplate(example);
-  const mdOutputFile = path.join(dir, `${example}.md`);
+  const mdOutputFile = path.posix.join(dir, `${example}.md`);
   fs.writeFileSync(mdOutputFile, mdTmp);
 
   for (const sourcePath of matchedFiles) {
     console.log('source', sourcePath);
     const fileName = path.basename(sourcePath, '.html');
     const name = convertToDashCase(fileName.replace('Demo', ''));
-    const exdir = path.join(dir, `${name}`);
+    const exdir = path.posix.join(dir, `${name}`);
     fs.mkdirSync(exdir);
 
     const selector = `${name}-example`;
     const tsTmp = generateTSTemplate(selector);
-    const tsOutputFile = path.join(exdir, `${selector}.ts`);
+    const tsOutputFile = path.posix.join(exdir, `${selector}.ts`);
     fs.writeFileSync(tsOutputFile, tsTmp);
 
     const cssTmp = generateCSSTemplate(selector);
-    const cssOutputFile = path.join(exdir, `${selector}.css`);
+    const cssOutputFile = path.posix.join(exdir, `${selector}.css`);
     fs.writeFileSync(cssOutputFile, cssTmp);
 
     const htmlTmp = fs.readFileSync(sourcePath, 'utf-8');
-    const htmlOutputFile = path.join(exdir, `${selector}.html`);
+    const htmlOutputFile = path.posix.join(exdir, `${selector}.html`);
     fs.writeFileSync(htmlOutputFile, htmlTmp);
   }
 };
