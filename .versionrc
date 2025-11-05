@@ -5,15 +5,11 @@
       "type": "json"
     },
     {
-      "filename": "projects/chomsky/package.json",
-      "type": "json"
-    },
-    {
       "filename": "projects/novo-examples/package.json",
       "type": "json"
     },
     {
-      "filename": "projects/novo-elements/package.json",
+      "filename": "projects/novo-elements/src/package.json",
       "type": "json"
     }
   ]
