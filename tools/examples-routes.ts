@@ -11,6 +11,21 @@ import { Application, TSConfigReader } from 'typedoc';
 import { BullhornFlavoredMarkdownPlugin } from './markdown/bfm-blocks';
 import { DoListPlugin } from './markdown/dos-list';
 
+// A note on usage of the 'glob' and 'path' libraries:
+// Because we want this utility to generate equivalent relative paths on any build machine that creates it,
+// and because the "glob" utility needs the use of backslashes (\) for escaping wildcards and other special
+// characters, we use the "posix" options for both libraries to ensure that all path strings look like this:
+// GOOD: "./projects/novo-examples/src/components/data-table/data-table-rows/data-table-rows-example.ts"
+// BAD: ".\\projects\\novo-examples\\src\\components\\data-table\\data-table-rows\\data-table-rows-example.ts"
+// BAD: "C:\\Users\developer\\projects\\novo-elements\\projects\\novo-examples\\src\\components\\data-table\\data-table-rows\\data-table-rows-example.ts"
+// Default usage of path.join will generate Windows-style paths, which work correctly for basic file operation calls,
+// but do not generate equivalence. So, all our calls to these utilities are adjusted by default as follows.
+// Example for path.join:
+// projects = path.posix.join('./', 'projects');
+// Example for generating glob output:
+// paths = glob(projects, { posix: true })
+// If you are changing these utilities on a Mac/Unix system, please ask a colleague on Windows to try to run your builds to ensure they get equivalent output.
+
 // Typedefs are not valid
 const hljs = HLJS as unknown as HLJSApi;
 
@@ -124,12 +139,12 @@ md.use(Container, 'dont', {
 });
 
 /** Path to find the elements */
-const elementsPath = path.join('./projects/', 'novo-elements', 'src');
+const elementsPath = path.posix.join('./projects/', 'novo-elements', 'src');
 /** Path to find the examples */
-const examplesPath = path.join('./projects/', 'novo-examples', 'src');
+const examplesPath = path.posix.join('./projects/', 'novo-examples', 'src');
 
 /** Output path of the module that is being created */
-const outputSourceFilename = path.join(examplesPath, 'examples.routes.ts');
+const outputSourceFilename = path.posix.join(examplesPath, 'examples.routes.ts');
 
 let _pageOrder = 0;
 
@@ -298,8 +313,8 @@ async function generateApiDocs() {
   const app = await Application.bootstrap({
     // typedoc options here
     entryPoints: [`${elementsPath}/index.ts`],
-    excludeExternals: 'true',
-    excludePrivate: 'true',
+    excludeExternals: true,
+    excludePrivate: true,
   }, [new TSConfigReader()]);
 
   const project = await app.convert();
@@ -336,7 +351,7 @@ const task = async () => {
   await generateApiDocs();
 
   const results: PageMetadata[] = [];
-  const matchedFiles = glob(path.join(examplesPath, '**/*.md'));
+  const matchedFiles = glob(path.posix.join(examplesPath, '**/*.md'), { posix: true });
 
   for (const sourcePath of matchedFiles) {
     const sourceContent = fs.readFileSync(sourcePath, 'utf-8');
