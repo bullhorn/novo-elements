@@ -7,8 +7,6 @@ order: 1
 Novo Elements, Bullhorn's design system
 ============
 
-> Version 6.0 is now available! Read about the new features and fixes [here](#/updates/v6).
-
 Crafted amid Complexity
 -----------------------
 
