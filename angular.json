@@ -63,7 +63,8 @@
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": {
-              "base": "dist/demo"
+              "base": "docs",
+              "browser": "."
             },
             "index": "projects/demo/index.html",
             "polyfills": [
