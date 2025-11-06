@@ -14,5 +14,5 @@ sonarqube-check:
     paths:
       - .sonar/cache
   script:
-    - sonar-scanner
+    - sonar-scanner -Dsonar.projectKey=bullhorn_novo-elements_0c870ed7-bee8-451a-b491-29786142ad1c
   allow_failure: true
