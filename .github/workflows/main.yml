@@ -42,5 +42,5 @@ jobs:
           path: dist
       - env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-          CURRENT_BRANCH: ${{ github.ref_name }}
+          CURRENT_BRANCH: ${{ github.head_ref }}
         run: sh snapshot-publish
