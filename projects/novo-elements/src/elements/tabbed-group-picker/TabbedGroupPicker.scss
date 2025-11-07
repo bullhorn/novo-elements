@@ -30,6 +30,9 @@
       box-sizing: content-box;
       transition: all 300ms;
       color: $dark;
+      &.chip-list-input {
+        flex: 1 0 20px;
+      }
       &::placeholder {
         color: var(--form-placeholder);
       }
@@ -45,6 +48,12 @@
     }
     i.bhi-times {
       cursor: pointer;
+    }
+    .hidden-chips-toggle {
+      cursor: pointer;
+    }
+    &.use-chips {
+      max-width: 500px;
     }
   }
 
