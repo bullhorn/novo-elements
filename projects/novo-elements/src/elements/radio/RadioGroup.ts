@@ -78,7 +78,6 @@ export class NovoRadioGroup extends NovoRadioGroupMixins implements NovoFieldCon
 
   @Output() change = new EventEmitter();
   @Output() blur = new EventEmitter();
-  // @Output() focused = new EventEmitter();
 
   @ContentChildren(forwardRef(() => NovoRadioElement), { descendants: true })
   _radios: QueryList<NovoRadioElement>;

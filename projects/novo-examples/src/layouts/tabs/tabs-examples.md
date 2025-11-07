@@ -37,8 +37,6 @@ Vertical tabs get a direction attribute `direction="vertical"`
 
 Tabbed Button Bars get a similar style treatment to the `"header"` theme button.
 
-<!-- <code-example example="tabs-condensed"></code-example> -->
-
 ## As Application Routing Mechanism
 
 Follows the same color/white theme as above, but doesn't use the "novo\-tabs" tag and you have to add the classes and html accordingly. The header will now control and route your application and put the content in the "router\-outlet" and look/feel like our tabs component.

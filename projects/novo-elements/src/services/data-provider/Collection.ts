@@ -62,17 +62,6 @@ export interface Collection<T> {
    */
   getItemIndex(item: T): number;
 
-  /**
-   *  Notifies the view that an item has been updated.
-   *  This is useful if the contents of the view do not implement
-   *  If a property is specified the view may be able to optimize its
-   *  notification mechanism.
-   *  Otherwise it may choose to simply refresh the whole view.
-   *
-   *  @param item The item within the view that was updated.
-   */
-  // itemUpdated(item: Object, property?: Object, oldValue?: Object, newValue?: Object): void;
-
   removeItem(item: T): boolean;
   /**
    *  Removes all items from the list.

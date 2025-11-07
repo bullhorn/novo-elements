@@ -36,7 +36,6 @@ describe('Elements: PopOverContent', () => {
   describe('Method: toggle()', () => {
     it('should be defined.', () => {
       expect(component.toggle).toBeDefined();
-      // component.toggle();
     });
   });
 
@@ -50,7 +49,6 @@ describe('Elements: PopOverContent', () => {
   describe('Method: hide()', () => {
     it('should be defined.', () => {
       expect(component.hide).toBeDefined();
-      // component.hide();
     });
   });
 
@@ -64,42 +62,36 @@ describe('Elements: PopOverContent', () => {
   describe('Method: positionElements()', () => {
     it('should be defined.', () => {
       expect(component.positionElements).toBeDefined();
-      // component.positionElements();
     });
   });
 
   describe('Method: position()', () => {
     it('should be defined.', () => {
       expect(component.position).toBeDefined();
-      // component.position();
     });
   });
 
   describe('Method: offset()', () => {
     it('should be defined.', () => {
       expect(component.offset).toBeDefined();
-      // component.offset();
     });
   });
 
   describe('Method: getStyle()', () => {
     it('should be defined.', () => {
       expect(component.getStyle).toBeDefined();
-      // component.getStyle();
     });
   });
 
   describe('Method: isStaticPositioned()', () => {
     it('should be defined.', () => {
       expect(component.isStaticPositioned).toBeDefined();
-      // component.isStaticPositioned();
     });
   });
 
   describe('Method: parentOffsetEl()', () => {
     it('should be defined.', () => {
       expect(component.parentOffsetEl).toBeDefined();
-      // component.parentOffsetEl();
     });
   });
 });

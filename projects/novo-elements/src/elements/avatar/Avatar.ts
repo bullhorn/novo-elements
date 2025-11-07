@@ -42,7 +42,6 @@ export class NovoAvatarElement implements OnInit {
     let src: any;
     if ((this.source && this.source !== '') || this.label) {
       if (this.source.profileImage) {
-        // this.src = this.source.profileImage;
         return;
       } else if (this.source.logo) {
         src = this.source.logo;
@@ -147,7 +146,6 @@ export class NovoAvatarElement implements OnInit {
         svg.setAttribute('width', settings.width);
         svg.setAttribute('height', settings.height);
 
-        // this.setPrefixedValue(svg, 'background', colors[colorIndex]);
         this.setPrefixedValue(svg, 'background', `linear-gradient(-45deg, ${colors[colorIndex]} 0%, ${lighterColors[colorIndex]} 100%)`);
 
         svg.style.width = `${settings.width}px`;

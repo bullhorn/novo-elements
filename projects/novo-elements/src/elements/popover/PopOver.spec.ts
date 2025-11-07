@@ -43,21 +43,18 @@ describe('Elements: PopOverDirective', () => {
       describe('Method: ngOnChanges()', () => {
         it('should be defined.', () => {
           expect(component.ngOnChanges).toBeDefined();
-          // component.ngOnChanges();
         });
       });
 
       describe('Method: toggle()', () => {
         it('should be defined.', () => {
           expect(component.toggle).toBeDefined();
-          // component.toggle();
         });
       });
 
       describe('Method: show()', () => {
         it('should be defined.', () => {
           expect(component.show).toBeDefined();
-          // component.show();
         });
       });
 

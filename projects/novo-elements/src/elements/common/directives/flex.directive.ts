@@ -6,18 +6,6 @@ import { Directive, ElementRef, HostBinding, Input, Renderer2 } from '@angular/c
     standalone: false
 })
 export class FlexDirective {
-  // @HostBinding('style.align-items')
-  // @Input()
-  // align: string = 'center';
-
-  // @HostBinding('style.justify-content')
-  // @Input()
-  // justify: string = 'flex-start';
-
-  // @HostBinding('style.flex-flow')
-  // @Input()
-  // flow: string = 'row nowrap';
-
   private _flex: string;
 
   @HostBinding('style.flex')
@@ -35,6 +23,5 @@ export class FlexDirective {
   }
 
   constructor(private readonly el: ElementRef, private readonly renderer: Renderer2) {
-    // this.renderer.setStyle(this.el.nativeElement, 'display', 'flex');
   }
 }

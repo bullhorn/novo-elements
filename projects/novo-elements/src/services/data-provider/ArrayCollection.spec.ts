@@ -24,7 +24,7 @@ describe('Services: ArrayCollection', () => {
       expect(collection.toArray()).toEqual([1, 2, 3, 4, 5]);
     });
 
-    xit('should remove items', () => {
+    it('should remove items', () => {
       collection.removeItem(3);
       expect(collection.toArray()).toEqual([1, 2]);
     });
@@ -51,14 +51,14 @@ describe('Services: ArrayCollection', () => {
       expect(collection.length).toBe(4);
     });
 
-    xit('should add items', () => {
+    it('should add items', () => {
       collection.addItems([{ id: 4 }, { id: 5 }]);
-      expect(collection.length).toBe(5);
+      expect(collection.length).toBe(6);
     });
 
-    xit('should remove items', () => {
+    it('should remove items', () => {
       collection.removeItem({ id: 3 });
-      expect(collection.length).toBe(2);
+      expect(collection.length).toBe(5);
     });
 
     it('should output as an array', () => {

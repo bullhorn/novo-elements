@@ -5,10 +5,8 @@ import {
   AbstractConditionFieldDef,
   AddressCriteriaConfig,
   AddressRadiusUnitsName,
-  Condition,
   Conjunction,
   CriteriaBuilderComponent,
-  NovoLabelService,
   Operator,
 } from 'novo-elements';
 import { ReplaySubject, Subject } from 'rxjs';
@@ -56,7 +54,6 @@ export class CustomPickerConditionDef extends AbstractConditionFieldDef implemen
     super.ngOnInit();
     this.searchCtrl.valueChanges
       .pipe(
-        // filter((res) => res.length > 2),
         // Time in milliseconds between key events
         debounceTime(500),
         // If previous query is different from current

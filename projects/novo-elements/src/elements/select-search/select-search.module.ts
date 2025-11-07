@@ -11,8 +11,6 @@ import { NovoTooltipModule } from 'novo-elements/elements/tooltip';
 import { NovoSelectSearchClearDirective } from './select-search-clear.directive';
 import { NovoSelectSearchComponent } from './select-search.component';
 
-// export const NovoSelectSearchVersion = '3.3.0';
-
 @NgModule({
   imports: [
     CommonModule,
