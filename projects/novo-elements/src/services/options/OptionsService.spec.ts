@@ -37,5 +37,8 @@ describe('Element: OptionsService', () => {
       };
       expect(service.getOptionsConfig(http, field, {}).format).toEqual('$label');
     });
+    it('does not do anything', () => {
+      const x = 0;
+    });
   });
 });
