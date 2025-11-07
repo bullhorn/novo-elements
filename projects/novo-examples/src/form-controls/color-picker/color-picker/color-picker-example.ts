@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
  * @title Color Picker Example
  */
 @Component({
-  selector: 'color-picker-example',
-  templateUrl: 'color-picker-example.html',
-  styleUrls: ['color-picker-example.css'],
+    selector: 'color-picker-example',
+    templateUrl: 'color-picker-example.html',
+    styleUrls: ['color-picker-example.css'],
+    standalone: false
 })
 export class ColorPickerExample {
   hex: string = '#4A89DC';

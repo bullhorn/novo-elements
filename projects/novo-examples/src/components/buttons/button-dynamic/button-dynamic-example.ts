@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
  * @title Dynamic buttons
  */
 @Component({
-  selector: 'button-dynamic-example',
-  templateUrl: 'button-dynamic-example.html',
-  styleUrls: ['button-dynamic-example.css'],
+    selector: 'button-dynamic-example',
+    templateUrl: 'button-dynamic-example.html',
+    styleUrls: ['button-dynamic-example.css'],
+    standalone: false
 })
 export class ButtonDynamicExample {
   theme: string = 'primary';

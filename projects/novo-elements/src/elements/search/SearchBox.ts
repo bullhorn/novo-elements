@@ -28,10 +28,10 @@ const SEARCH_VALUE_ACCESSOR = {
 };
 
 @Component({
-  selector: 'novo-search',
-  providers: [SEARCH_VALUE_ACCESSOR],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
+    selector: 'novo-search',
+    providers: [SEARCH_VALUE_ACCESSOR],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    template: `
     <!-- SEARCH ICON -->
     <novo-icon (click)="showSearch($event)" [tooltip]="hint" tooltipPosition="bottom">{{ icon }}</novo-icon>
     <!-- SEARCH INPUT -->
@@ -59,7 +59,8 @@ const SEARCH_VALUE_ACCESSOR = {
       <ng-content></ng-content>
     </novo-overlay-template>
   `,
-  styleUrls: ['./SearchBox.scss'],
+    styleUrls: ['./SearchBox.scss'],
+    standalone: false
 })
 export class NovoSearchBoxElement implements ControlValueAccessor, OnInit {
   @Input()

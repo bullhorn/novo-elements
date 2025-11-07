@@ -34,8 +34,8 @@ import { NovoDataTableSortFilter } from '../sort-filter/sort-filter.directive';
 import { DataTableState } from '../state/data-table-state.service';
 
 @Component({
-  selector: '[novo-data-table-cell-config]',
-  template: `
+    selector: '[novo-data-table-cell-config]',
+    template: `
     <i class="bhi-{{ labelIcon }} label-icon" *ngIf="labelIcon" data-automation-id="novo-data-table-header-icon"></i>
     <label data-automation-id="novo-data-table-label">{{ label }}</label>
     <div>
@@ -197,7 +197,8 @@ import { DataTableState } from '../state/data-table-state.service';
     <div class="spacer"></div>
     <div class="data-table-header-resizable" *ngIf="config.resizable"><span (mousedown)="startResize($event)">&nbsp;</span></div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit, OnDestroy {
   @ViewChild('filterInput')

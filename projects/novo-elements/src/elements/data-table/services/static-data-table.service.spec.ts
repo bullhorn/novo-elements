@@ -1,5 +1,5 @@
 // NG2
-import { async } from '@angular/core/testing';
+import { waitForAsync } from '@angular/core/testing';
 import { subDays } from 'date-fns';
 // APP
 import { StaticDataTableService } from './static-data-table.service';
@@ -7,7 +7,7 @@ import { StaticDataTableService } from './static-data-table.service';
 describe('StaticDataTableService', () => {
   let service;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     const staticDataSet1 = [];
     for (let i = 0; i < 100; i++) {
       const day = subDays(new Date(), i);

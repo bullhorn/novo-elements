@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
  * @title Basic Quick Note Example
  */
 @Component({
-  selector: 'basic-quick-note-example',
-  templateUrl: 'basic-quick-note-example.html',
-  styleUrls: ['basic-quick-note-example.css'],
+    selector: 'basic-quick-note-example',
+    templateUrl: 'basic-quick-note-example.html',
+    styleUrls: ['basic-quick-note-example.css'],
+    standalone: false
 })
 export class BasicQuickNoteExample {
   public note: any;

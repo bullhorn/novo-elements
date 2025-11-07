@@ -1,5 +1,5 @@
 // NG2
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { ComponentUtils, NovoLabelService } from 'novo-elements/services';
 // App
@@ -11,7 +11,7 @@ describe('Elements: NovoChipsElement', () => {
   let fixture: ComponentFixture<NovoChipsElement>;
   let component: NovoChipsElement;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [FormsModule, NovoChipsModule],
       providers: [

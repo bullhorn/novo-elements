@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  template: `
+    template: `
     <header [title]="title" [icon]="entityIcon" [theme]="entityTheme" data-automation-id="fast-add-header">
       <utils>
         <util-action icon="times" (click)="close()" data-automation-id="fast-add-close"></util-action>
@@ -13,11 +13,12 @@ import { Component } from '@angular/core';
       }
     </style>
   `,
+    standalone: false
 })
 class B {}
 
 @Component({
-  template: `
+    template: `
     <div class="calendar-container" (mouseleave)="processEvents()">
       <novo-loading *ngIf="loading"></novo-loading>
       <novo-calendar-month
@@ -30,18 +31,19 @@ class B {}
       ></novo-calendar-month>
     </div>
   `,
-  styles: [
-    `
+    styles: [
+        `
       novo-calendar-month[theme] {
         border: red 1px solid;
       }
     `,
-  ],
+    ],
+    standalone: false
 })
 class C {}
 
 @Component({
-  template: `
+    template: `
     <novo-dropdown side="bottom-right">
       <button type="button" theme="secondary" (click)="filterItems()" icon="collapse" inverse>BUTTON</button>
       <list class="primary-category-list">
@@ -74,5 +76,6 @@ class C {}
       </list>
     </novo-dropdown>
   `,
+    standalone: false
 })
 class D {}

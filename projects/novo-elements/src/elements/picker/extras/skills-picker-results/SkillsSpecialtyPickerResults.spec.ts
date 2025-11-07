@@ -1,6 +1,6 @@
 // NG2
 import { ElementRef } from '@angular/core';
-import { async, TestBed } from '@angular/core/testing';
+import { waitForAsync, TestBed } from '@angular/core/testing';
 // App
 import { NovoListModule } from 'novo-elements/elements/list';
 import { NovoLoadingModule } from 'novo-elements/elements/loading';
@@ -11,7 +11,7 @@ describe('Components: SkillsSpecialtyPickerResults', () => {
   let fixture: any;
   let component: any;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [SkillsSpecialtyPickerResults],
       providers: [

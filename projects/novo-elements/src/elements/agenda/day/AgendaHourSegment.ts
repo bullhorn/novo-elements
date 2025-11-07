@@ -2,8 +2,8 @@ import { Component, Input, TemplateRef } from '@angular/core';
 import { DayViewHourSegment } from 'novo-elements/utils';
 
 @Component({
-  selector: 'novo-agenda-day-hour-segment',
-  template: `
+    selector: 'novo-agenda-day-hour-segment',
+    template: `
     <ng-template #defaultTemplate>
       <div
         class="cal-hour-segment"
@@ -25,6 +25,7 @@ import { DayViewHourSegment } from 'novo-elements/utils';
     >
     </ng-template>
   `,
+    standalone: false
 })
 export class NovoAgendaHourSegmentElement {
   @Input()

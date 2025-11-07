@@ -68,8 +68,9 @@ const NovoChipMixinBase: CanSizeCtor & CanColorCtor & HasTabIndexCtor & typeof N
  * @docs-private
  */
 @Directive({
-  selector: 'novo-chip-avatar, [novoChipAvatar]',
-  host: { class: 'novo-chip-avatar' },
+    selector: 'novo-chip-avatar, [novoChipAvatar]',
+    host: { class: 'novo-chip-avatar' },
+    standalone: false
 })
 export class NovoChipAvatar {}
 
@@ -85,11 +86,12 @@ export class NovoChipAvatar {}
  * styles to properly center the icon within the chip.
  */
 @Directive({
-  selector: '[novoChipRemove]',
-  host: {
-    class: 'novo-chip-remove',
-    '(click)': '_handleClick($event)',
-  },
+    selector: '[novoChipRemove]',
+    host: {
+        class: 'novo-chip-remove',
+        '(click)': '_handleClick($event)',
+    },
+    standalone: false
 })
 export class NovoChipRemove {
   constructor(@Inject(REMOVABLE_REF) private _parentChip: IRemovable, elementRef: ElementRef<HTMLElement>) {
@@ -118,32 +120,33 @@ export class NovoChipRemove {
  * Chip component. Used inside the NovoChipList component.
  */
 @Component({
-  selector: `novo-chip, [novo-chip]`,
-  template: `<ng-content></ng-content>`,
-  styleUrls: ['./Chip.scss'],
-  encapsulation: ViewEncapsulation.None,
-  inputs: ['color', 'tabIndex', 'size'],
-  providers: [{ provide: REMOVABLE_REF, useExisting: NovoChipElement }],
-  host: {
-    class: 'novo-chip novo-focus-indicator',
-    role: 'option',
-    '[class.novo-chip-selectable]': 'selectable',
-    '[class.novo-chip-selected]': 'selected',
-    '[class.novo-chip-with-avatar]': 'avatar',
-    '[class.novo-chip-with-trailing-icon]': 'removeIcon',
-    '[class.novo-chip-disabled]': 'disabled',
-    '[class._novo-animation-noopable]': '_animationsDisabled',
-    '[attr.tabindex]': 'disabled ? null : tabIndex',
-    '[attr.disabled]': 'disabled || null',
-    '[attr.aria-disabled]': 'disabled.toString()',
-    '[attr.aria-selected]': 'ariaSelected',
-    '(click)': '_handleClick($event)',
-    // '(mouseenter)': '_handleActivate($event)',
-    // '(mouseleave)': '_handleDeactivate($event)',
-    '(keydown)': '_handleKeydown($event)',
-    '(focus)': 'focus()',
-    '(blur)': '_blur()',
-  },
+    selector: `novo-chip, [novo-chip]`,
+    template: `<ng-content></ng-content>`,
+    styleUrls: ['./Chip.scss'],
+    encapsulation: ViewEncapsulation.None,
+    inputs: ['color', 'tabIndex', 'size'],
+    providers: [{ provide: REMOVABLE_REF, useExisting: NovoChipElement }],
+    host: {
+        class: 'novo-chip novo-focus-indicator',
+        role: 'option',
+        '[class.novo-chip-selectable]': 'selectable',
+        '[class.novo-chip-selected]': 'selected',
+        '[class.novo-chip-with-avatar]': 'avatar',
+        '[class.novo-chip-with-trailing-icon]': 'removeIcon',
+        '[class.novo-chip-disabled]': 'disabled',
+        '[class._novo-animation-noopable]': '_animationsDisabled',
+        '[attr.tabindex]': 'disabled ? null : tabIndex',
+        '[attr.disabled]': 'disabled || null',
+        '[attr.aria-disabled]': 'disabled.toString()',
+        '[attr.aria-selected]': 'ariaSelected',
+        '(click)': '_handleClick($event)',
+        // '(mouseenter)': '_handleActivate($event)',
+        // '(mouseleave)': '_handleDeactivate($event)',
+        '(keydown)': '_handleKeydown($event)',
+        '(focus)': 'focus()',
+        '(blur)': '_blur()',
+    },
+    standalone: false
 })
 export class NovoChipElement extends NovoChipMixinBase implements FocusableOption, OnDestroy, CanColor, HasTabIndex {
   /** Whether the chip has focus. */
@@ -154,6 +157,9 @@ export class NovoChipElement extends NovoChipMixinBase implements FocusableOptio
 
   /** Whether the chip list is selectable */
   _chipListSelectable: boolean = true;
+
+  /** Whether the chip list allows toggling */
+  _chipListToggleable: boolean = true;
 
   /** Whether the chip list is in multi-selection mode. */
   _chipListMultiple: boolean = false;
@@ -334,7 +340,9 @@ export class NovoChipElement extends NovoChipMixinBase implements FocusableOptio
     } else {
       event.stopPropagation();
     }
-    this.toggleSelected(true);
+    if (this._chipListToggleable) {
+      this.toggleSelected(true);
+    }
   }
 
   /** Handle custom key presses. */

@@ -2,7 +2,8 @@
 import { Directive, ElementRef, HostBinding, Input } from '@angular/core';
 
 @Directive({
-  selector: '[theme]',
+    selector: '[theme]',
+    standalone: false
 })
 export class ThemeColorDirective {
   @Input() theme: string;

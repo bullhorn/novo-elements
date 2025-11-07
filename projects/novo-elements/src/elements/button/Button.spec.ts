@@ -34,6 +34,7 @@ describe('Elements: NovoButtonElement', () => {
 @Component({
   template: '<button theme="dialogue" [disabled]="disableButton"></button>',
   selector: 'test-button-component',
+  standalone: false,
 })
 class TestButtonContainer {
   @Input() disableButton = false;

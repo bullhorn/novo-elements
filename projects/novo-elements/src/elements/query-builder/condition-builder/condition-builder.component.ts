@@ -26,13 +26,16 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { BaseConditionFieldDef } from '../query-builder.directives';
 import { QueryBuilderConfig, QueryBuilderService } from '../query-builder.service';
 import { NOVO_CONDITION_BUILDER } from '../query-builder.tokens';
-import { AddressCriteriaConfig, BaseFieldDef, FieldConfig, QueryFilterOutlet } from '../query-builder.types';
+import { AddressCriteriaConfig, BaseFieldDef, DateCriteriaConfig, FieldConfig, QueryFilterOutlet } from '../query-builder.types';
 
 /**
  * Provides a handle for the table to grab the view container's ng-container to insert data rows.
  * @docs-private
  */
-@Directive({ selector: '[conditionInputOutlet]' })
+@Directive({
+    selector: '[conditionInputOutlet]',
+    standalone: false
+})
 export class ConditionInputOutlet implements QueryFilterOutlet {
   constructor(public viewContainer: ViewContainerRef, public elementRef: ElementRef) {}
 }
@@ -41,28 +44,32 @@ export class ConditionInputOutlet implements QueryFilterOutlet {
  * Provides a handle for the table to grab the view container's ng-container to insert data rows.
  * @docs-private
  */
-@Directive({ selector: '[conditionOperatorOutlet]' })
+@Directive({
+    selector: '[conditionOperatorOutlet]',
+    standalone: false
+})
 export class ConditionOperatorOutlet implements QueryFilterOutlet {
   constructor(public viewContainer: ViewContainerRef, public elementRef: ElementRef) {}
 }
 
 @Component({
-  selector: 'novo-condition-builder',
-  templateUrl: './condition-builder.component.html',
-  styleUrls: ['./condition-builder.component.scss'],
-  providers: [{ provide: NOVO_CONDITION_BUILDER, useExisting: ConditionBuilderComponent },
-    {
-      provide: QueryBuilderService,
-      deps: [NovoLabelService, [new SkipSelf(), new Optional(), QueryBuilderService]],
-      useFactory: (labelService: NovoLabelService, queryBuilderService?: QueryBuilderService) => {
-        if (!queryBuilderService) {
-          queryBuilderService = new QueryBuilderService(labelService);
+    selector: 'novo-condition-builder',
+    templateUrl: './condition-builder.component.html',
+    styleUrls: ['./condition-builder.component.scss'],
+    providers: [{ provide: NOVO_CONDITION_BUILDER, useExisting: ConditionBuilderComponent },
+        {
+            provide: QueryBuilderService,
+            deps: [NovoLabelService, [new SkipSelf(), new Optional(), QueryBuilderService]],
+            useFactory: (labelService: NovoLabelService, queryBuilderService?: QueryBuilderService) => {
+                if (!queryBuilderService) {
+                    queryBuilderService = new QueryBuilderService(labelService);
+                }
+                return queryBuilderService;
+            }
         }
-        return queryBuilderService;
-      }
-    }
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class ConditionBuilderComponent implements OnInit, OnChanges, AfterContentInit, AfterViewInit, OnDestroy {
   @ViewChild(ConditionOperatorOutlet, { static: true }) _operatorOutlet: ConditionOperatorOutlet;
@@ -73,6 +80,7 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
   @Input() andIndex: number;
   @Input() groupIndex: number;
   @Input() addressConfig: AddressCriteriaConfig;
+  @Input() dateConfig: DateCriteriaConfig;
   hideOperator = input(true);
   conditionType = input();
 

@@ -4,7 +4,8 @@ import { Subscription } from 'rxjs';
 import { NovoTheme, ThemeChangeEvent } from '../theme/theme-options';
 
 @Directive({
-  selector: '[accent]',
+    selector: '[accent]',
+    standalone: false
 })
 export class AccentColorDirective implements OnDestroy {
   private subscription: Subscription;

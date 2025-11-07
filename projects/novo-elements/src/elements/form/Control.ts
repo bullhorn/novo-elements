@@ -31,7 +31,8 @@ export interface IMaskOptions {
 }
 
 @Directive({
-  selector: 'textarea[autosize]',
+    selector: 'textarea[autosize]',
+    standalone: false
 })
 export class NovoAutoSize implements AfterContentInit {
   @HostListener('input', ['$event.target'])
@@ -55,8 +56,8 @@ export class NovoAutoSize implements AfterContentInit {
 }
 // undo all template context references!
 @Component({
-  selector: 'novo-control',
-  template: `
+    selector: 'novo-control',
+    template: `
     <div
       class="novo-control-container"
       [hidden]="
@@ -239,15 +240,16 @@ export class NovoAutoSize implements AfterContentInit {
       </div>
     </div>
   `,
-  host: {
-    '[class]': 'form.controls[control.key].controlType',
-    '[attr.data-control-type]': 'form.controls[control.key].controlType',
-    '[class.disabled]': 'form.controls[control.key].readOnly',
-    '[class.hidden]': 'form.controls[control.key].hidden',
-    '[attr.data-control-key]': 'control.key',
-    '[class.inline-embedded]': 'control.isInlineEmbedded',
-    '[class.embedded]': 'control.isEmbedded',
-  },
+    host: {
+        '[class]': 'form.controls[control.key].controlType',
+        '[attr.data-control-type]': 'form.controls[control.key].controlType',
+        '[class.disabled]': 'form.controls[control.key].readOnly',
+        '[class.hidden]': 'form.controls[control.key].hidden',
+        '[attr.data-control-key]': 'control.key',
+        '[class.inline-embedded]': 'control.isInlineEmbedded',
+        '[class.embedded]': 'control.isEmbedded',
+    },
+    standalone: false
 })
 export class NovoControlElement extends OutsideClick implements OnInit, OnDestroy, AfterViewInit, AfterContentInit {
   @Input()

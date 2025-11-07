@@ -3,9 +3,9 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 import { Helpers } from 'novo-elements/utils';
 
 @Component({
-  selector: 'novo-entity-list',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
+    selector: 'novo-entity-list',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    template: `
     <div *ngFor="let entity of data.data" class="entity">
       <a *ngIf="entity.isLinkable" (click)="openLink(entity)">
         <i class="bhi-circle {{ entity.class }}"></i>{{ entity | render: metaDisplay }}
@@ -18,6 +18,7 @@ import { Helpers } from 'novo-elements/utils';
       </span>
     </div>
   `,
+    standalone: false
 })
 export class EntityList implements OnInit {
   @Input()

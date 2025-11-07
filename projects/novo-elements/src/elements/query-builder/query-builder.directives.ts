@@ -10,7 +10,10 @@ export interface ConditionDef {
  * Contained within a novoConditionField definition describing what input should be
  * used to capture the compare value of the Condtion
  */
-@Directive({ selector: '[novoConditionInputDef]' })
+@Directive({
+    selector: '[novoConditionInputDef]',
+    standalone: false
+})
 export class NovoConditionInputDef implements ConditionDef {
   constructor(/** @docs-private */ public template: TemplateRef<any>) {}
 }
@@ -18,7 +21,10 @@ export class NovoConditionInputDef implements ConditionDef {
 /**
  * Contained within a novoConditionField definition describing what operators should be available.
  */
-@Directive({ selector: '[novoConditionOperatorsDef]' })
+@Directive({
+    selector: '[novoConditionOperatorsDef]',
+    standalone: false
+})
 export class NovoConditionOperatorsDef implements ConditionDef {
   constructor(/** @docs-private */ public template: TemplateRef<any>) {}
 }
@@ -77,7 +83,8 @@ export class BaseConditionFieldDef {
 }
 
 @Directive({
-  selector: '[novoConditionFieldDef]',
+    selector: '[novoConditionFieldDef]',
+    standalone: false
 })
 export class NovoConditionFieldDef extends BaseConditionFieldDef {
   constructor(private qbs: QueryBuilderService) {

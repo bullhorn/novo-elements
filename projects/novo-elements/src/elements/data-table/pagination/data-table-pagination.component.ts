@@ -17,8 +17,8 @@ import { DataTableState } from '../state/data-table-state.service';
 const MAX_PAGES_DISPLAYED = 5;
 
 @Component({
-  selector: 'novo-data-table-pagination',
-  template: `
+    selector: 'novo-data-table-pagination',
+    template: `
     <ng-container *ngIf="theme === 'basic' || theme === 'basic-wide'">
       <div class="novo-data-table-pagination-size">
         <novo-tiles
@@ -99,8 +99,9 @@ const MAX_PAGES_DISPLAYED = 5;
               (click)="paginationRefreshSubject.next()">{{ labels.refreshPagination }}</button>
     </ng-container>
   `,
-  styleUrls: ['./data-table-pagination.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    styleUrls: ['./data-table-pagination.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NovoDataTablePagination<T> implements OnInit, OnDestroy {
   @HostBinding('class')

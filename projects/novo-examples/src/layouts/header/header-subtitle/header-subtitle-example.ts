@@ -8,9 +8,10 @@ const HEADER_ICONS = ['company', 'job', 'candidate', 'person', 'opportunity', 'l
  * @title Header with Subtitle Example
  */
 @Component({
-  selector: 'header-subtitle-example',
-  templateUrl: 'header-subtitle-example.html',
-  styleUrls: ['header-subtitle-example.css'],
+    selector: 'header-subtitle-example',
+    templateUrl: 'header-subtitle-example.html',
+    styleUrls: ['header-subtitle-example.css'],
+    standalone: false
 })
 export class HeaderSubtitleExample {
   public theme: string = 'company';

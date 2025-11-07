@@ -1,6 +1,6 @@
 // NG2
 import { Renderer2 } from '@angular/core';
-import { async, TestBed } from '@angular/core/testing';
+import { waitForAsync, TestBed } from '@angular/core/testing';
 // App
 import { NovoCKEditorElement } from './CKEditor';
 
@@ -8,7 +8,7 @@ describe('Elements: NovoCKEditorElement', () => {
   let fixture;
   let component;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [NovoCKEditorElement],
       providers: [{ provide: Renderer2, useClass: Renderer2 }],

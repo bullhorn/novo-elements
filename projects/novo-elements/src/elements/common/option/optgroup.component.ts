@@ -53,21 +53,22 @@ export const NOVO_OPTGROUP = new InjectionToken<NovoOptgroup>('NovoOptgroup');
  * Component that is used to group instances of `novo-option`.
  */
 @Component({
-  selector: 'novo-optgroup',
-  exportAs: 'novoOptgroup',
-  templateUrl: 'optgroup.component.html',
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  inputs: ['disabled', 'label'],
-  styleUrls: ['optgroup.component.scss'],
-  host: {
-    class: 'novo-optgroup',
-    '[attr.role]': '_novoInert ? null : "group"',
-    '[attr.aria-disabled]': '_novoInert ? null : disabled.toString()',
-    '[attr.aria-labelledby]': '_novoInert ? null : _labelId',
-    '[class.novo-optgroup-disabled]': 'disabled',
-  },
-  providers: [{ provide: NOVO_OPTGROUP, useExisting: NovoOptgroup }],
+    selector: 'novo-optgroup',
+    exportAs: 'novoOptgroup',
+    templateUrl: 'optgroup.component.html',
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    inputs: ['disabled', 'label'],
+    styleUrls: ['optgroup.component.scss'],
+    host: {
+        class: 'novo-optgroup',
+        '[attr.role]': '_novoInert ? null : "group"',
+        '[attr.aria-disabled]': '_novoInert ? null : disabled.toString()',
+        '[attr.aria-labelledby]': '_novoInert ? null : _labelId',
+        '[class.novo-optgroup-disabled]': 'disabled',
+    },
+    providers: [{ provide: NOVO_OPTGROUP, useExisting: NovoOptgroup }],
+    standalone: false
 })
 export class NovoOptgroup extends NovoOptgroupMixinBase {
   constructor(@Inject(NOVO_OPTION_PARENT_COMPONENT) @Optional() parent?: NovoOptionParentComponent) {

@@ -9,11 +9,12 @@ export type NovoAccordionDisplayMode = 'default' | 'flat';
  * Directive for a Material Design Accordion.
  */
 @Directive({
-  selector: 'novo-accordion',
-  exportAs: 'novoAccordion',
-  host: {
-    class: 'novo-accordion',
-  },
+    selector: 'novo-accordion',
+    exportAs: 'novoAccordion',
+    host: {
+        class: 'novo-accordion',
+    },
+    standalone: false
 })
 export class NovoAccordion extends CdkAccordion {
   /** Whether the expansion indicator should be hidden. */

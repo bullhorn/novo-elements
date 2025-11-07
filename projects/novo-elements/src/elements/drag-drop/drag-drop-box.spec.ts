@@ -7,32 +7,36 @@ import { NovoDragBoxParent } from './drag-drop-box';
 import { NovoDragDropModule } from './drag-drop.module';
 
 @Component({
-    selector: 'test-drag-drop',
-    template: `<div [novoDragDrop]="items">
-        <button *ngFor="let item of items">
-          <span class="novo-drag-target">{{item}}</span>
-          <span class="non-draggable-region"></span>
-        </button>
+  selector: 'test-drag-drop',
+  template: `
+    <div [novoDragDrop]="items">
+      <button *ngFor="let item of items">
+        <span class="novo-drag-target">{{ item }}</span>
+        <span class="non-draggable-region"></span>
+      </button>
     </div>`,
-    styles: []
+  styles: [],
+  standalone: false,
 })
 class DragDropTestComponent {
-    items = [1,2,3,4,5];
+  items = [1, 2, 3, 4, 5];
 }
 
 class FakeEvent {
-    constructor(public target: HTMLElement, public currentTarget?: HTMLElement, other?: any) {
-        if (other) {
-            Object.assign(this, other);
-        }
+  constructor(public target: HTMLElement, public currentTarget?: HTMLElement, other?: any) {
+    if (other) {
+      Object.assign(this, other);
     }
-    preventDefault() {}
-    stopPropagation() {}
+  }
 
-    dataTransfer = {
-      effectAllowed: 'none',
-      dropEffect: 'undefined'
-    }
+  preventDefault() {}
+
+  stopPropagation() {}
+
+  dataTransfer = {
+    effectAllowed: 'none',
+    dropEffect: 'undefined'
+  }
 }
 
 describe('Elements: NovoDragDropParent', () => {
@@ -44,8 +48,8 @@ describe('Elements: NovoDragDropParent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-        declarations: [DragDropTestComponent],
-        imports: [NovoDragDropModule]
+      declarations: [DragDropTestComponent],
+      imports: [NovoDragDropModule]
     }).compileComponents();
     fixture = TestBed.createComponent(DragDropTestComponent);
     directive = fixture.debugElement.queryAllNodes(By.directive(NovoDragBoxParent))[0].injector.get(NovoDragBoxParent);
@@ -78,9 +82,9 @@ describe('Elements: NovoDragDropParent', () => {
     expect(startEvt.preventDefault).not.toHaveBeenCalled();
     directive.onDragOver(new FakeEvent(itemFour.nativeElement) as any);
     itemOne.triggerEventHandler('drop', new FakeEvent(itemOne.nativeElement, itemFour.nativeElement));
-    expect(itemTextOrder()).toEqual(['2','3','4','1','5']);
+    expect(itemTextOrder()).toEqual(['2', '3', '4', '1', '5']);
     expect(itemsAfterFinish).toBeDefined();
-    expect(itemsAfterFinish).toEqual([2,3,4,1,5]);
+    expect(itemsAfterFinish).toEqual([2, 3, 4, 1, 5]);
   });
 
   it('should move fourth item to first position', () => {
@@ -98,9 +102,9 @@ describe('Elements: NovoDragDropParent', () => {
     expect(startEvt.preventDefault).not.toHaveBeenCalled();
     directive.onDragOver(new FakeEvent(itemOne.nativeElement) as any);
     itemFour.triggerEventHandler('drop', new FakeEvent(itemFour.nativeElement, itemOne.nativeElement));
-    expect(itemTextOrder()).toEqual(['4','1','2','3','5']);
+    expect(itemTextOrder()).toEqual(['4', '1', '2', '3', '5']);
     expect(itemsAfterFinish).toBeDefined();
-    expect(itemsAfterFinish).toEqual([4,1,2,3,5]);
+    expect(itemsAfterFinish).toEqual([4, 1, 2, 3, 5]);
   });
 
   it('should reject drag if it is outside the draggable region', () => {
@@ -154,16 +158,16 @@ describe('Elements: NovoDragDropParent', () => {
     itemOne.triggerEventHandler('dragstart', startEvt);
     expect(startEvt.preventDefault).not.toHaveBeenCalled();
     directive.onDragOver(new FakeEvent(itemFour.nativeElement) as any);
-    expect(itemTextOrder()).toEqual(['2','3','4','1','5']);
+    expect(itemTextOrder()).toEqual(['2', '3', '4', '1', '5']);
 
     // fixture element is not inside the drag box, so this should count as a drag out
     const dragEvent = new FakeEvent(fixture.debugElement.nativeElement) as any;
     directive.onDragOver(dragEvent);
     fixture.debugElement.query(By.directive(NovoDragBoxParent)).triggerEventHandler('dragover', dragEvent);
     itemOne.triggerEventHandler('dragend', new FakeEvent(itemOne.nativeElement));
-    
+
     // drag event sees we are not within bounds, and resets the order
-    expect(itemTextOrder()).toEqual(['1','2','3','4','5']);
+    expect(itemTextOrder()).toEqual(['1', '2', '3', '4', '5']);
     expect(dragEvent.dataTransfer.dropEffect).toBe('none');
   });
 
@@ -181,9 +185,9 @@ describe('Elements: NovoDragDropParent', () => {
     // fixture element is not inside the drag box, so this should count as a drag out
     const dragEvent = new FakeEvent(itemFour.query(By.css('.non-draggable-region')).nativeElement) as any;
     directive.onDragOver(dragEvent);
-    
+
     // drag event sees the target is inside item 4, and processes the move
-    expect(itemTextOrder()).toEqual(['2','3','4','1','5']);
+    expect(itemTextOrder()).toEqual(['2', '3', '4', '1', '5']);
     expect(dragEvent.dataTransfer.dropEffect).toBe('move');
   });
 
@@ -191,8 +195,8 @@ describe('Elements: NovoDragDropParent', () => {
     component.items.pop();
     fixture.detectChanges();
     await fixture.whenStable();
-    expect(itemTextOrder()).toEqual(['1','2','3','4']);
-    expect(directive.itemsReordered).toEqual([1,2,3,4]);
+    expect(itemTextOrder()).toEqual(['1', '2', '3', '4']);
+    expect(directive.itemsReordered).toEqual([1, 2, 3, 4]);
   });
 
   it('should automatically update if the component externally adds data', async () => {
@@ -201,7 +205,7 @@ describe('Elements: NovoDragDropParent', () => {
     fixture.detectChanges();
     await fixture.whenStable();
 
-    expect(itemTextOrder()).toEqual(['1','2','3','4','5','6']);
-    expect(directive.itemsReordered).toEqual([1,2,3,4,5,6]);
+    expect(itemTextOrder()).toEqual(['1', '2', '3', '4', '5', '6']);
+    expect(directive.itemsReordered).toEqual([1, 2, 3, 4, 5, 6]);
   });
 });

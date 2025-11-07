@@ -1,5 +1,5 @@
 name: Release GhPages
-on: 
+on:
   workflow_dispatch:
 
 jobs:
@@ -22,12 +22,29 @@ jobs:
       - name: Install Dependencies
         run: |
           npm ci
-      - name: Bump And Release
-        uses: bvkimball/bump-and-release@main
+      - name: Build Demo
+        run: |
+          npm run build
+          npm run build:demo
+      - name: Create root redirect
+        if: github.ref == 'refs/heads/master'
+        run: |
+          mkdir -p dist
+          echo '<!DOCTYPE html><html><head><meta http-equiv="refresh" content="0; url=/novo-elements/docs/"></head></html>' > dist/index.html
+      - name: Deploy to GitHub Pages (docs)
+        if: github.ref == 'refs/heads/master'
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          git-user-email: 'bvkimball@users.noreply.github.com'
-          skip-bump: true
-          skip-docs: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
+          destination_dir: docs
+          clean: true
+          clean_exclude: |
+            .nojekyll
+      - name: Deploy root redirect
+        if: github.ref == 'refs/heads/master'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: dist
+          keep_files: true

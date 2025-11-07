@@ -5,9 +5,10 @@ import { NOVO_VALUE_THEME } from 'novo-elements';
  * @title Entity List Value Example
  */
 @Component({
-  selector: 'entity-list-value-example',
-  templateUrl: 'entity-list-value-example.html',
-  styleUrls: ['entity-list-value-example.css'],
+    selector: 'entity-list-value-example',
+    templateUrl: 'entity-list-value-example.html',
+    styleUrls: ['entity-list-value-example.css'],
+    standalone: false
 })
 export class EntityListValueExample {
   public theme = NOVO_VALUE_THEME.DEFAULT;

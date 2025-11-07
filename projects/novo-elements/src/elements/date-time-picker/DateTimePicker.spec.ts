@@ -1,5 +1,5 @@
 // NG2
-import { async, TestBed } from '@angular/core/testing';
+import { waitForAsync, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 // APP
 import { NovoLabelService } from 'novo-elements/services';
@@ -11,7 +11,7 @@ xdescribe('Elements: NovoDateTimePickerElement', () => {
   let fixture;
   let component: NovoDateTimePickerElement;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [NovoDateTimePickerElement],
       providers: [{ provide: NovoLabelService, useClass: NovoLabelService }],

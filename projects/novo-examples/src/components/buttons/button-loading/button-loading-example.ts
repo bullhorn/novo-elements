@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
  * @title Loading buttons
  */
 @Component({
-  selector: 'button-loading-example',
-  templateUrl: 'button-loading-example.html',
-  styleUrls: ['button-loading-example.css'],
+    selector: 'button-loading-example',
+    templateUrl: 'button-loading-example.html',
+    styleUrls: ['button-loading-example.css'],
+    standalone: false
 })
 export class ButtonLoadingExample {
   loading: boolean = false;

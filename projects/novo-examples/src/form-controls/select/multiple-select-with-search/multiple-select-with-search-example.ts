@@ -9,9 +9,10 @@ import { State, STATES } from '../states.data';
  * @title Multiple Select With Search Example
  */
 @Component({
-  selector: 'multiple-select-with-search-example',
-  templateUrl: 'multiple-select-with-search-example.html',
-  styleUrls: ['multiple-select-with-search-example.css'],
+    selector: 'multiple-select-with-search-example',
+    templateUrl: 'multiple-select-with-search-example.html',
+    styleUrls: ['multiple-select-with-search-example.css'],
+    standalone: false
 })
 export class MultipleSelectWithSearchExample implements OnInit, AfterViewInit, OnDestroy {
   /** list of states */

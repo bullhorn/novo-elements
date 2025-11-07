@@ -48,6 +48,7 @@ export interface Condition {
   scope?: string;
   value: any;
   supportingValue?: any;
+  entity?: string,
 }
 
 export interface Criteria {
@@ -132,6 +133,11 @@ export type AddressRadiusUnitsName = keyof typeof RadiusUnits;
 export type AddressCriteriaConfig = {
   radiusEnabled?: boolean;
   radiusUnits?: AddressRadiusUnitsName;
+}
+
+/** All options that can be used to configure date pickers */
+export type DateCriteriaConfig = {
+  weekStart?: Day;
 }
 
 /** Interface used to provide an outlet for rows to be inserted into. */

@@ -15,9 +15,10 @@ import {
  * @title Custom Template Example
  */
 @Component({
-  selector: 'custom-template-example',
-  templateUrl: 'custom-template-example.html',
-  styleUrls: ['custom-template-example.css'],
+    selector: 'custom-template-example',
+    templateUrl: 'custom-template-example.html',
+    styleUrls: ['custom-template-example.css'],
+    standalone: false
 })
 export class CustomTemplateExample {
   public formGroup: NovoFormGroup;

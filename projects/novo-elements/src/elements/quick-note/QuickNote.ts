@@ -29,10 +29,11 @@ const QUICK_NOTE_VALUE_ACCESSOR = {
 declare var CKEDITOR: any;
 
 @Component({
-  selector: 'novo-quick-note',
-  providers: [QUICK_NOTE_VALUE_ACCESSOR],
-  template: ` <div class="quick-note-wrapper" #wrapper><textarea #host></textarea> <span #results></span></div> `,
-  styleUrls: ['./QuickNote.scss'],
+    selector: 'novo-quick-note',
+    providers: [QUICK_NOTE_VALUE_ACCESSOR],
+    template: ` <div class="quick-note-wrapper" #wrapper><textarea #host></textarea> <span #results></span></div> `,
+    styleUrls: ['./QuickNote.scss'],
+    standalone: false
 })
 export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('wrapper', { static: true })

@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
  * @title Hide Chips Example
  */
 @Component({
-  selector: 'hide-chips-example',
-  templateUrl: 'hide-chips-example.html',
-  styleUrls: ['hide-chips-example.css'],
+    selector: 'hide-chips-example',
+    templateUrl: 'hide-chips-example.html',
+    styleUrls: ['hide-chips-example.css'],
+    standalone: false
 })
 export class HideChipsExample {
   public placeholder: string = 'Select...';

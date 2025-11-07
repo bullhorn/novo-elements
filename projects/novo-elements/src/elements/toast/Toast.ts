@@ -4,18 +4,18 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Deferred, DeferredPromise } from 'novo-elements/utils';
 
 @Component({
-  selector: 'novo-toast',
-  host: {
-    '[class]': 'alertTheme',
-    '[class.growl]': 'appearance == "growl"',
-    '[class.banner]': 'appearance == "banner"',
-    '[class.show]': 'show',
-    '[class.animate]': 'animate',
-    '[class.embedded]': 'embedded',
-    '[attr.theme]': 'theme',
-    '(click)': '!isCloseable && clickHandler($event)',
-  },
-  template: `
+    selector: 'novo-toast',
+    host: {
+        '[class]': 'alertTheme',
+        '[class.growl]': 'appearance == "growl"',
+        '[class.banner]': 'appearance == "banner"',
+        '[class.show]': 'show',
+        '[class.animate]': 'animate',
+        '[class.embedded]': 'embedded',
+        '[attr.theme]': 'theme',
+        '(click)': '!isCloseable && clickHandler($event)',
+    },
+    template: `
     <div class="toast-icon">
       <i [ngClass]="iconClass"></i>
     </div>
@@ -36,7 +36,8 @@ import { Deferred, DeferredPromise } from 'novo-elements/utils';
       <i class="bhi-times"></i>
     </div>
   `,
-  styleUrls: ['./Toast.scss'],
+    styleUrls: ['./Toast.scss'],
+    standalone: false
 })
 export class NovoToastElement implements OnInit, OnChanges {
   @Input()

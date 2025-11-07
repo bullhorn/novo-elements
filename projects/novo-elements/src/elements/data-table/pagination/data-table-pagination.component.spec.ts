@@ -1,6 +1,6 @@
 // NG2
 import { ChangeDetectorRef } from '@angular/core';
-import { async, TestBed } from '@angular/core/testing';
+import { waitForAsync, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { NovoSelectModule } from 'novo-elements/elements/select';
 import { NovoTilesModule } from 'novo-elements/elements/tiles';
@@ -14,7 +14,7 @@ describe('Elements: NovoDataTablePagination', () => {
   let fixture;
   let component;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [NovoDataTablePagination],
       imports: [FormsModule, NovoTilesModule, NovoSelectModule],

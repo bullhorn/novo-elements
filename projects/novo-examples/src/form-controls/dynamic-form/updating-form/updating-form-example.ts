@@ -6,9 +6,10 @@ import { CheckboxControl, FileControl, FormUtils, PickerControl, TextBoxControl 
  * @title Updating Form Example
  */
 @Component({
-  selector: 'updating-form-example',
-  templateUrl: 'updating-form-example.html',
-  styleUrls: ['updating-form-example.css'],
+    selector: 'updating-form-example',
+    templateUrl: 'updating-form-example.html',
+    styleUrls: ['updating-form-example.css'],
+    standalone: false
 })
 export class UpdatingFormExample {
   public textControl: any;

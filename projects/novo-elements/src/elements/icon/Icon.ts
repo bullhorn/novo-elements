@@ -3,17 +3,18 @@ import { BooleanInput } from 'novo-elements/utils';
 import { TypographySize } from 'novo-elements/elements/common';
 
 @Component({
-  selector: 'novo-icon',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
+    selector: 'novo-icon',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    template: `
     <i [class]="iconName"
       ><span (cdkObserveContent)="projectContentChanged($event)"><ng-content></ng-content></span
     ></i>
   `,
-  styleUrls: ['./Icon.scss'],
-  host: {
-    class: 'novo-icon',
-  },
+    styleUrls: ['./Icon.scss'],
+    host: {
+        class: 'novo-icon',
+    },
+    standalone: false
 })
 export class NovoIconComponent implements AfterViewInit {
   @HostBinding('class.novo-icon-raised')

@@ -110,17 +110,18 @@ let autoIncrement = 1;
  * }
  */
 @Component({
-  selector: 'novo-select-search',
-  templateUrl: './select-search.component.html',
-  styleUrls: ['./select-search.component.scss'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => NovoSelectSearchComponent),
-      multi: true,
-    },
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'novo-select-search',
+    templateUrl: './select-search.component.html',
+    styleUrls: ['./select-search.component.scss'],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => NovoSelectSearchComponent),
+            multi: true,
+        },
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NovoSelectSearchComponent implements OnInit, OnDestroy, ControlValueAccessor {
   @Input() name = 'select-search-' + autoIncrement++;
@@ -233,7 +234,7 @@ export class NovoSelectSearchComponent implements OnInit, OnDestroy, ControlValu
   private _filterFinishedRerender = this._formControl.valueChanges.pipe(debounceTime(1));
 
   private optionsList$: Observable<NovoOption[]> = this._options$.pipe(
-    switchMap((_options) => 
+    switchMap((_options) =>
       _options
         ? combineLatest([_options.changes, this._filterFinishedRerender]).pipe(
             map(([options,]) => options.toArray().filter(option => !(option._getHostElement()?.classList.contains('add-option') || option._getHostElement().hidden))),

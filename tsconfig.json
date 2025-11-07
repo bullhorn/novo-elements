@@ -8,8 +8,9 @@
     "target": "ES2022",
     "module": "esnext",
     "lib": ["es2020", "dom"],
-    "typeRoots": ["node_modules/@types"],
-    "downlevelIteration": true,
+    "typeRoots": [
+      "node_modules/@types"
+    ],
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",

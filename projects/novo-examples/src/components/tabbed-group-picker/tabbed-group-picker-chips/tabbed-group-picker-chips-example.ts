@@ -8,6 +8,7 @@ import { ChildTab, TabbedGroupPickerTab } from 'novo-elements';
   selector: 'tabbed-group-picker-chips-example',
   templateUrl: 'tabbed-group-picker-chips-example.html',
   styleUrls: ['../tabbed-group-picker-example.scss'],
+  standalone: false,
 })
 export class TabbedGroupPickerChipsExample implements OnInit {
   getAnimals = (): { animalId: number; name: string }[] =>

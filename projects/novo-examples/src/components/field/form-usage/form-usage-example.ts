@@ -5,9 +5,10 @@ import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } 
  * @title Form Usage Example
  */
 @Component({
-  selector: 'form-usage-example',
-  templateUrl: 'form-usage-example.html',
-  styleUrls: ['form-usage-example.css'],
+    selector: 'form-usage-example',
+    templateUrl: 'form-usage-example.html',
+    styleUrls: ['form-usage-example.css'],
+    standalone: false
 })
 export class FormUsageExample {
   options: UntypedFormGroup;

@@ -42,6 +42,7 @@ interface CustomParams {
     '[style.display]': "'block'",
     '[style.width.%]': "'100'",
   },
+  standalone: false,
 })
 export class AsideWidgetDemo {
   public values = [
@@ -70,6 +71,7 @@ export class AsideWidgetDemo {
   selector: 'aside-widget-example',
   templateUrl: 'aside-widget-example.html',
   styleUrls: ['aside-widget-example.css'],
+  standalone: false,
 })
 export class AsideWidgetExample {
   asideRef;

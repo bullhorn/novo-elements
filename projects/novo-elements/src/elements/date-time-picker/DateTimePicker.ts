@@ -16,71 +16,47 @@ const DATE_TIME_PICKER_VALUE_ACCESSOR = {
 };
 
 @Component({
-  selector: 'novo-date-time-picker',
-  providers: [DATE_TIME_PICKER_VALUE_ACCESSOR],
-  animations: [
-    trigger('dateTextState', [
-      state(
-        'date',
-        style({
-          opacity: '1.0',
-        }),
-      ),
-      state(
-        'time',
-        style({
-          opacity: '0.6',
-        }),
-      ),
-      transition('date <=> time', animate('200ms ease-in')),
-    ]),
-    trigger('timeTextState', [
-      state(
-        'date',
-        style({
-          opacity: '0.6',
-        }),
-      ),
-      state(
-        'time',
-        style({
-          opacity: '1.0',
-        }),
-      ),
-      transition('date <=> time', animate('200ms ease-in')),
-    ]),
-    trigger('indicatorState', [
-      state(
-        'date',
-        style({
-          transform: 'translateX(0%)',
-        }),
-      ),
-      state(
-        'time',
-        style({
-          transform: 'translateX(100%)',
-        }),
-      ),
-      transition('date <=> time', animate('200ms ease-in')),
-    ]),
-    trigger('containerState', [
-      state(
-        'date',
-        style({
-          transform: 'translateX(0%)',
-        }),
-      ),
-      state(
-        'time',
-        style({
-          transform: 'translateX(-100%)',
-        }),
-      ),
-      transition('date <=> time', animate('200ms ease-in')),
-    ]),
-  ],
-  template: `
+    selector: 'novo-date-time-picker',
+    providers: [DATE_TIME_PICKER_VALUE_ACCESSOR],
+    animations: [
+        trigger('dateTextState', [
+            state('date', style({
+                opacity: '1.0',
+            })),
+            state('time', style({
+                opacity: '0.6',
+            })),
+            transition('date <=> time', animate('200ms ease-in')),
+        ]),
+        trigger('timeTextState', [
+            state('date', style({
+                opacity: '0.6',
+            })),
+            state('time', style({
+                opacity: '1.0',
+            })),
+            transition('date <=> time', animate('200ms ease-in')),
+        ]),
+        trigger('indicatorState', [
+            state('date', style({
+                transform: 'translateX(0%)',
+            })),
+            state('time', style({
+                transform: 'translateX(100%)',
+            })),
+            transition('date <=> time', animate('200ms ease-in')),
+        ]),
+        trigger('containerState', [
+            state('date', style({
+                transform: 'translateX(0%)',
+            })),
+            state('time', style({
+                transform: 'translateX(-100%)',
+            })),
+            transition('date <=> time', animate('200ms ease-in')),
+        ]),
+    ],
+    template: `
     <div class="date-time-container">
       <div class="date-time-tabs">
         <span
@@ -122,7 +98,8 @@ const DATE_TIME_PICKER_VALUE_ACCESSOR = {
       </div>
     </div>
   `,
-  styleUrls: ['./_DateTimePicker.scss'],
+    styleUrls: ['./_DateTimePicker.scss'],
+    standalone: false
 })
 export class NovoDateTimePickerElement implements ControlValueAccessor {
   @Input()

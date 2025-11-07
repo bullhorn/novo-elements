@@ -15,9 +15,10 @@ const DATA = {
  * @title Custom Quick Note Example
  */
 @Component({
-  selector: 'custom-quick-note-example',
-  templateUrl: 'custom-quick-note-example.html',
-  styleUrls: ['custom-quick-note-example.css'],
+    selector: 'custom-quick-note-example',
+    templateUrl: 'custom-quick-note-example.html',
+    styleUrls: ['custom-quick-note-example.css'],
+    standalone: false
 })
 export class CustomQuickNoteExample {
   public note: any;

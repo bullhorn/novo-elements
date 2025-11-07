@@ -96,13 +96,13 @@ const NovoSelectMixins: HasOverlayCtor &
 let nextId = 0;
 
 @Component({
-  selector: 'novo-select',
-  inputs: ['disabled', 'required', 'tabIndex'],
-  providers: [
-    { provide: NovoFieldControl, useExisting: NovoSelectElement },
-    { provide: NOVO_OPTION_PARENT_COMPONENT, useExisting: NovoSelectElement },
-  ],
-  template: `
+    selector: 'novo-select',
+    inputs: ['disabled', 'required', 'tabIndex'],
+    providers: [
+        { provide: NovoFieldControl, useExisting: NovoSelectElement },
+        { provide: NOVO_OPTION_PARENT_COMPONENT, useExisting: NovoSelectElement },
+    ],
+    template: `
     <div class="novo-select-trigger">
       <span class="novo-select-placeholder" *ngIf="empty">{{ placeholder }}</span>
       <span class="text-ellipsis" *ngIf="!empty"><novo-icon size="sm" style="margin: 0 0 .25rem .1rem" *ngIf="displayIcon">{{ displayIcon }}</novo-icon> {{ displayValue }}</span>
@@ -161,28 +161,29 @@ let nextId = 0;
       </div>
     </novo-overlay-template>
   `,
-  styleUrls: ['./Select.scss'],
-  host: {
-    class: 'novo-select',
-    role: 'combobox',
-    'aria-autocomplete': 'none',
-    'aria-haspopup': 'true',
-    '[attr.id]': 'id',
-    '[attr.aria-controls]': 'panelOpen ? id + "-panel" : null',
-    '[attr.aria-expanded]': 'panelOpen',
-    '[attr.aria-required]': 'required.toString()',
-    '[attr.aria-disabled]': 'disabled.toString()',
-    '[attr.aria-invalid]': 'errorState',
-    '[attr.aria-labelledby]': '_ariaLabelledBy || null',
-    '[attr.aria-describedby]': '_ariaDescribedby || null',
-    '[attr.aria-activedescendant]': '_getAriaActiveDescendant()',
-    '[class.novo-select-disabled]': 'disabled',
-    '[class.novo-select-invalid]': 'errorState',
-    '[class.novo-select-required]': 'required',
-    '[class.novo-select-empty]': 'empty',
-    '[class.novo-select-multiple]': 'multiple',
-    '[tabindex]': 'disabled ? -1 : 0'
-  },
+    styleUrls: ['./Select.scss'],
+    host: {
+        class: 'novo-select',
+        role: 'combobox',
+        'aria-autocomplete': 'none',
+        'aria-haspopup': 'true',
+        '[attr.id]': 'id',
+        '[attr.aria-controls]': 'panelOpen ? id + "-panel" : null',
+        '[attr.aria-expanded]': 'panelOpen',
+        '[attr.aria-required]': 'required.toString()',
+        '[attr.aria-disabled]': 'disabled.toString()',
+        '[attr.aria-invalid]': 'errorState',
+        '[attr.aria-labelledby]': '_ariaLabelledBy || null',
+        '[attr.aria-describedby]': '_ariaDescribedby || null',
+        '[attr.aria-activedescendant]': '_getAriaActiveDescendant()',
+        '[class.novo-select-disabled]': 'disabled',
+        '[class.novo-select-invalid]': 'errorState',
+        '[class.novo-select-required]': 'required',
+        '[class.novo-select-empty]': 'empty',
+        '[class.novo-select-multiple]': 'multiple',
+        '[tabindex]': 'disabled ? -1 : 0'
+    },
+    standalone: false
 })
 export class NovoSelectElement
   extends NovoSelectMixins

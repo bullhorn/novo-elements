@@ -31,22 +31,23 @@ import { NovoRailComponent } from '../rail/rail.component';
 import { NovoSidenavComponent } from '../sidenav/sidenav.component';
 
 @Component({
-  selector: 'novo-layout-container',
-  exportAs: 'novoLayoutContainer',
-  templateUrl: './layout-container.component.html',
-  styleUrls: ['./layout-container.component.scss'],
-  host: {
-    class: 'novo-layout-container',
-    '[class.novo-layout-container-explicit-backdrop]': '_backdropOverride',
-  },
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  providers: [
-    {
-      provide: NOVO_LAYOUT_CONTAINER,
-      useExisting: NovoLayoutContainer,
+    selector: 'novo-layout-container',
+    exportAs: 'novoLayoutContainer',
+    templateUrl: './layout-container.component.html',
+    styleUrls: ['./layout-container.component.scss'],
+    host: {
+        class: 'novo-layout-container',
+        '[class.novo-layout-container-explicit-backdrop]': '_backdropOverride',
     },
-  ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    providers: [
+        {
+            provide: NOVO_LAYOUT_CONTAINER,
+            useExisting: NovoLayoutContainer,
+        },
+    ],
+    standalone: false
 })
 export class NovoLayoutContainer implements AfterContentInit, DoCheck, OnDestroy {
   @ContentChildren(NovoSidenavComponent, {

@@ -6,7 +6,7 @@
 
 ## Dependencies
 
-- [NodeJS v18.3+](https://nodejs.org/en/)
+- [NodeJS v20+](https://nodejs.org/en/)
 
 ## Quick Start
 
@@ -84,12 +84,6 @@ There are many ways to **[contribute](https://github.com/bullhorn/novo-elements/
 - **[Contribute bug fixes](https://github.com/bullhorn/novo-elements/blob/master/CONTRIBUTING.md)**.
 
 > TL;DR: Fork this repository, make any required change and then submit a PR :)
-
-### Contributors
-
-<object type="image/svg+xml" data="contributors.svg">
-  <img src="contributors.svg" />
-</object>
 
 # License
 

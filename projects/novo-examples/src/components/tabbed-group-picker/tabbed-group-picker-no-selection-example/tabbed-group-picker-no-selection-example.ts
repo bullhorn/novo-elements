@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
  * @title Tabbed Group Picker - Basic Example
  */
 @Component({
-  selector: 'tabbed-group-picker-no-selection-example',
-  templateUrl: 'tabbed-group-picker-no-selection-example.html',
-  styleUrls: ['../tabbed-group-picker-example.scss'],
+    selector: 'tabbed-group-picker-no-selection-example',
+    templateUrl: 'tabbed-group-picker-no-selection-example.html',
+    styleUrls: ['../tabbed-group-picker-example.scss'],
+    standalone: false
 })
 export class TabbedGroupPickerNoSelectionExample {
   getActions = (): { actionId: number; name: string }[] =>

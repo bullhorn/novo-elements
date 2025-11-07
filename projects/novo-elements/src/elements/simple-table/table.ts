@@ -23,45 +23,51 @@ import { NovoActivityTableState } from './state';
 import { ActivityTableDataSource, ActivityTableService } from './table-source';
 
 @Component({
-  selector: 'novo-simple-table',
-  template: CDK_TABLE_TEMPLATE,
-  styleUrls: ['./table.scss'],
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [{ provide: CDK_TABLE, useExisting: NovoTable }],
+    selector: 'novo-simple-table',
+    template: CDK_TABLE_TEMPLATE,
+    styleUrls: ['./table.scss'],
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [{ provide: CDK_TABLE, useExisting: NovoTable }],
+    standalone: false
 })
 export class NovoTable<T> extends CdkTable<T> {
   // TODO: add explicit constructor
 }
 
 @Directive({
-  selector: 'novo-activity-table-actions',
+    selector: 'novo-activity-table-actions',
+    standalone: false
 })
 export class NovoActivityTableActions {}
 
 @Directive({
-  selector: 'novo-activity-table-custom-header',
+    selector: 'novo-activity-table-custom-header',
+    standalone: false
 })
 export class NovoActivityTableCustomHeader {}
 
 @Directive({
-  selector: 'novo-activity-table-custom-filter',
+    selector: 'novo-activity-table-custom-filter',
+    standalone: false
 })
 export class NovoActivityTableCustomFilter {}
 
 @Directive({
-  selector: 'novo-activity-table-empty-message',
+    selector: 'novo-activity-table-empty-message',
+    standalone: false
 })
 export class NovoActivityTableEmptyMessage {}
 
 @Directive({
-  selector: 'novo-activity-table-no-results-message',
+    selector: 'novo-activity-table-no-results-message',
+    standalone: false
 })
 export class NovoActivityTableNoResultsMessage {}
 
 @Component({
-  selector: 'novo-activity-table',
-  template: `
+    selector: 'novo-activity-table',
+    template: `
     <div *ngIf="debug">
       <p>Total: {{ dataSource?.total }}</p>
       <p>Current: {{ dataSource?.current }}</p>
@@ -155,14 +161,15 @@ export class NovoActivityTableNoResultsMessage {}
       </div>
     </div>
   `,
-  styleUrls: ['./table.scss'],
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    NovoActivityTableState,
-    { provide: _VIEW_REPEATER_STRATEGY, useClass: _DisposeViewRepeaterStrategy },
-    { provide: _COALESCED_STYLE_SCHEDULER, useClass: _CoalescedStyleScheduler },
-  ],
+    styleUrls: ['./table.scss'],
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        NovoActivityTableState,
+        { provide: _VIEW_REPEATER_STRATEGY, useClass: _DisposeViewRepeaterStrategy },
+        { provide: _COALESCED_STYLE_SCHEDULER, useClass: _CoalescedStyleScheduler },
+    ],
+    standalone: false
 })
 export class NovoActivityTable<T> implements AfterContentInit, OnChanges, OnDestroy {
   @HostBinding('class.global-search-hidden')

@@ -6,9 +6,10 @@ import { CheckboxControl, FieldInteractionApi, FormUtils, TextBoxControl } from 
  * @title Fi Enable Disable Example
  */
 @Component({
-  selector: 'fi-enable-disable-example',
-  templateUrl: 'fi-enable-disable-example.html',
-  styleUrls: ['fi-enable-disable-example.css'],
+    selector: 'fi-enable-disable-example',
+    templateUrl: 'fi-enable-disable-example.html',
+    styleUrls: ['fi-enable-disable-example.css'],
+    standalone: false
 })
 export class FiEnableDisableExample {
   public form: any;
