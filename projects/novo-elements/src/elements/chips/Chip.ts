@@ -358,6 +358,7 @@ export class NovoChipElement extends NovoChipMixinBase implements FocusableOptio
         this.remove();
         // Always prevent so page navigation does not occur
         event.preventDefault();
+      default:
         break;
       case Key.Space:
         // If we are selectable, toggle the focused chip
