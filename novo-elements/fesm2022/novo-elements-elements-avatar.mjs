@@ -23,7 +23,6 @@ class NovoAvatarElement {
         let src;
         if ((this.source && this.source !== '') || this.label) {
             if (this.source.profileImage) {
-                // this.src = this.source.profileImage;
                 return;
             }
             else if (this.source.logo) {
@@ -123,7 +122,6 @@ class NovoAvatarElement {
                 svg.setAttribute('pointer-events', 'none');
                 svg.setAttribute('width', settings.width);
                 svg.setAttribute('height', settings.height);
-                // this.setPrefixedValue(svg, 'background', colors[colorIndex]);
                 this.setPrefixedValue(svg, 'background', `linear-gradient(-45deg, ${colors[colorIndex]} 0%, ${lighterColors[colorIndex]} 100%)`);
                 svg.style.width = `${settings.width}px`;
                 svg.style.height = `${settings.height}px`;

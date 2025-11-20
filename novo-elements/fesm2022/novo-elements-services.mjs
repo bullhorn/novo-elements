@@ -203,18 +203,6 @@ class ArrayCollection {
         this.onDataChange(new CollectionEvent(CollectionEvent.INVALIDATE_ALL));
     }
     /**
-     * Invalidates the specified item.
-     *
-     * @memberOf ArrayCollection
-     */
-    // invalidateItem(item:any):void {}
-    /**
-     * Invalidates the item at the specified index.
-     *
-     * @memberOf ArrayCollection
-     */
-    // invalidateItemAt(index:number):void {}
-    /**
      * Appends the specified data into the data that the data provider contains and removes any duplicate items.
      *
      * @memberOf ArrayCollection
@@ -1079,7 +1067,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
 class NodeGlobalRef extends GlobalRef {
     get nativeGlobal() {
         throw new Error(`global doesn't compile for some reason`);
-        // return global as Global;
     }
     get nativeWindow() {
         throw new Error('Node does not have a window object');

@@ -148,7 +148,6 @@ class NovoDatePickerElement {
         this.activeDate = new Date(value);
     }
     updateSelection(selected, fireEvents = true) {
-        // Helpers.swallowEvent(event);
         this.selection = selected;
         this.startDateLabel = this.labels.formatDateWithFormat(this.selection[0], {
             month: 'short',
@@ -658,7 +657,7 @@ class NovoDatePickerInputElement {
         this.disabled = disabled;
     }
     handleInvalidDate(fromPanelClose = false) {
-        if (this.isInvalidDate) { //} && this.value) {
+        if (this.isInvalidDate) {
             this.showInvalidDateError = true;
             this.clearValue();
             if (!fromPanelClose) {
@@ -1424,7 +1423,6 @@ class NovoMultiDateInputElement {
             this.value = event;
             this.change.emit(this.value);
         }
-        // this.closePanel();
     }
     /**
      * Clear any previous selected option and emit a selection change event for this option
@@ -1444,11 +1442,6 @@ class NovoMultiDateInputElement {
         <novo-icon novoChipRemove>close</novo-icon>
       </novo-chip>
     </novo-chip-list>
-    <!-- <div *ngIf="value.length > chipsCount">
-      <ul class="summary">
-        <li *ngFor="let type of notShown">+ {{ type.count }} {{ labels.more }} {{ type.type }}</li>
-      </ul>
-    </div> -->
     <div class="chip-input-container" (click)="_handleFocus($event)">
       <span class="placeholder" *ngIf="!value.length" data-automation-id="multi-date-input">{{ placeholder }}</span>
     </div>
@@ -1476,11 +1469,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
         <novo-icon novoChipRemove>close</novo-icon>
       </novo-chip>
     </novo-chip-list>
-    <!-- <div *ngIf="value.length > chipsCount">
-      <ul class="summary">
-        <li *ngFor="let type of notShown">+ {{ type.count }} {{ labels.more }} {{ type.type }}</li>
-      </ul>
-    </div> -->
     <div class="chip-input-container" (click)="_handleFocus($event)">
       <span class="placeholder" *ngIf="!value.length" data-automation-id="multi-date-input">{{ placeholder }}</span>
     </div>

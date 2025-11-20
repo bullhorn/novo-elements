@@ -241,9 +241,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
  * This component corresponds to the header element of an `<novo-expansion-panel>`.
  */
 class NovoExpansionPanelHeader {
-    constructor(panel, _element, 
-    // private _focusMonitor: FocusMonitor,
-    _changeDetectorRef) {
+    constructor(panel, _element, _changeDetectorRef) {
         this.panel = panel;
         this._element = _element;
         this._changeDetectorRef = _changeDetectorRef;
@@ -255,7 +253,6 @@ class NovoExpansionPanelHeader {
         // Since the toggle state depends on an @Input on the panel, we
         // need to  subscribe and trigger change detection manually.
         this._parentChangeSubscription = merge(panel.opened, panel.closed, panel._inputChanges.pipe(filter((changes) => !!(changes.hideToggle || changes.disabled)))).subscribe(() => this._changeDetectorRef.markForCheck());
-        // _focusMonitor.monitor(_element.nativeElement);
     }
     /** Toggles the expanded state of the panel. */
     _toggle() {
@@ -292,7 +289,6 @@ class NovoExpansionPanelHeader {
     }
     ngOnDestroy() {
         this._parentChangeSubscription.unsubscribe();
-        // this._focusMonitor.stopMonitoring(this._element.nativeElement);
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoExpansionPanelHeader, deps: [{ token: NovoExpansionPanel, host: true }, { token: i0.ElementRef }, { token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Component }); }
     static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "19.2.15", type: NovoExpansionPanelHeader, isStandalone: false, selector: "novo-expansion-panel-header", inputs: { expandedHeight: "expandedHeight", collapsedHeight: "collapsedHeight" }, host: { attributes: { "role": "button" }, listeners: { "click": "_toggle()", "keydown": "_keydown($event)" }, properties: { "attr.id": "panel._headerId", "attr.tabindex": "panel.disabled ? -1 : 0", "attr.aria-controls": "_getPanelId()", "attr.aria-expanded": "_isExpanded()", "attr.aria-disabled": "panel.disabled", "class.novo-expanded": "_isExpanded()", "@expansionHeight": "{\n        value: _getExpandedState(),\n        params: {\n          collapsedHeight: collapsedHeight,\n          expandedHeight: expandedHeight\n        }\n    }" }, classAttribute: "novo-expansion-panel-header" }, ngImport: i0, template: "<span [@indicatorRotate]=\"_getExpandedState()\" *ngIf=\"_showToggle()\"\n      class=\"novo-expansion-indicator\" size=\"lg\"></span>\n<span class=\"novo-content\">\n  <ng-content select=\"novo-panel-title\"></ng-content>\n  <ng-content select=\"novo-panel-description\"></ng-content>\n  <ng-content></ng-content>\n</span>\n", styles: [".novo-expansion-panel-header{display:flex;flex-direction:row;align-items:center;padding:0 24px}.novo-expansion-panel-header:focus,.novo-expansion-panel-header:hover{outline:none}.novo-expansion-panel-header.novo-expanded:focus,.novo-expansion-panel-header.novo-expanded:hover{background:inherit}.novo-expansion-panel-header:not([aria-disabled=true]){cursor:pointer}.novo-content{display:flex;flex:1;flex-direction:row;overflow:hidden}.novo-expansion-panel-header-title,.novo-expansion-panel-header-description{display:flex;flex-grow:1;margin-right:16px;align-items:center;gap:1rem}[dir=rtl] .novo-expansion-panel-header-title,[dir=rtl] .novo-expansion-panel-header-description{margin-right:0;margin-left:16px}.novo-expansion-panel-header-description{flex-grow:2}.novo-expansion-indicator{margin-right:10px}.novo-expansion-indicator:after{border-style:solid;border-width:0 2px 2px 0;content:\"\";display:inline-block;padding:3px;transform:rotate(-45deg);vertical-align:middle}\n"], dependencies: [{ kind: "directive", type: i2$1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }], animations: [novoExpansionAnimations.indicatorRotate, novoExpansionAnimations.expansionHeaderHeight], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None }); }

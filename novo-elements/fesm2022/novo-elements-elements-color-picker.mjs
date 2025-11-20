@@ -144,7 +144,6 @@ class NovoColorPickerComponent {
     }
     handleBlockChange({ hex, $event }) {
         if (Color.isValidHex(hex)) {
-            // this.hex = hex;
             this.handleChange({ hex, source: 'hex' }, $event);
         }
     }
@@ -302,9 +301,6 @@ class NovoColorInputElement {
         }
     }
     _handleInput(event) {
-        if (document.activeElement === event.target) {
-            // this._handleEvent(event, false);
-        }
     }
     _handleBlur(event) {
         this.blurEvent.emit(event);

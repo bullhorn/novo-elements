@@ -1571,7 +1571,7 @@ function getWeekView({ events = [], viewDate, weekStartsOn, excluded = [], hourS
     const eventsMapped = getEventsInTimeRange(getEventsInPeriod({ events, periodStart: startOfViewWeek, periodEnd: endOfViewWeek }), dayStart, dayEnd)
         .map((event) => {
         const offset = getWeekViewEventOffset({ event, startOfWeek: startOfViewWeek, excluded });
-        const span = 1; // getWeekViewEventSpan({ event, offset, startOfWeek: startOfViewWeek, excluded });
+        const span = 1;
         return { event, offset, span };
     })
         .filter((e) => e.offset < maxRange)
@@ -1786,7 +1786,6 @@ class Color {
     constructor(value) {
         this.isValid = true;
         if (Color.isHSL(value)) {
-            // let { h, s, l, a = 1 } = value as HSLA;
             this.source = rgbToHex(hslToRgb(value));
         }
         else if (Color.isHSV(value)) {
@@ -21588,15 +21587,6 @@ class Helpers {
         if (this.isDate(props)) {
             props = this.dateToObject(props);
         }
-        // else {
-        //   props = Object.entries(props).reduce((obj, [key, value]) => {
-        //     const res = { ...obj, [key]: value };
-        //     if (this.isIsoDate(value as string)) {
-        //       res[`${key}Parts`] = this.dateToObject(new Date(value as string));
-        //     }
-        //     return res;
-        //   }, {});
-        // }
         return str.replace(/\$([\w\.]+)/g, (original, key) => {
             const keys = key.split('.');
             let value = props[keys.shift()];
@@ -21684,13 +21674,19 @@ class Helpers {
         }
     }
     /**
-     * Checks to see if the object is a undefined or null
+     * Checks to see if the object is undefined or null
      */
     static isBlank(obj) {
+        return Helpers.isNullOrUndefined(obj);
+    }
+    /**
+     * Checks to see if the object is null or undefined
+     */
+    static isNullOrUndefined(obj) {
         return obj === undefined || obj === null;
     }
     /**
-     * Checks to see if the object is a undefined or null
+     * Checks to see if the object is undefined, null, an empty string, or an empty array
      */
     static isEmpty(obj) {
         return Helpers.isBlank(obj) || obj === '' || (Array.isArray(obj) && obj.length === 0);

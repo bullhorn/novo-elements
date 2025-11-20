@@ -227,19 +227,6 @@ class NovoSelectSearchComponent {
         this.novoSelect.hideLegacyOptionsForSearch.set(true);
     }
     ngOnInit() {
-        // set custom panel class
-        // const panelClass = 'novo-select-search-panel';
-        // if (this.novoSelect.panelClass) {
-        //   if (Array.isArray(this.novoSelect.panelClass)) {
-        //     (<string[]>this.novoSelect.panelClass).push(panelClass);
-        //   } else if (typeof this.novoSelect.panelClass === 'string') {
-        //     this.novoSelect.panelClass = [this.novoSelect.panelClass, panelClass];
-        //   } else if (typeof this.novoSelect.panelClass === 'object') {
-        //     this.novoSelect.panelClass[panelClass] = true;
-        //   }
-        // } else {
-        //   this.novoSelect.panelClass = panelClass;
-        // }
         // set custom novo-option class if the component was placed inside a novo-option
         if (this.novoOption) {
             this.novoOption.novoInert = true;
@@ -656,7 +643,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
                 args: ['class.novo-select-search-inside-novo-option']
             }] } });
 
-// export const NovoSelectSearchVersion = '3.3.0';
 class NovoSelectSearchModule {
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoSelectSearchModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
     static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "19.2.15", ngImport: i0, type: NovoSelectSearchModule, declarations: [NovoSelectSearchComponent, NovoSelectSearchClearDirective], imports: [CommonModule,

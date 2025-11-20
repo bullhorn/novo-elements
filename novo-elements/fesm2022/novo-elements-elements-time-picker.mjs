@@ -158,14 +158,12 @@ class NovoTimePickerElement {
         this.model = model;
         if (Helpers.isDate(model)) {
             this.init(model, false);
-            // this.dispatchChange();
         }
         if (Helpers.isString(model)) {
             const time = this.military ? model : this.convertTime12to24(model);
             const date = DateUtil.parse(`${DateUtil.format(Date.now(), 'YYYY-MM-DD')}T${time}`);
             if (isValid(date)) {
                 this.init(date, false);
-                // this.dispatchChange();
             }
         }
     }
@@ -195,24 +193,6 @@ class NovoTimePickerElement {
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoTimePickerElement, deps: [{ token: i0.ElementRef }, { token: i1.NovoLabelService }, { token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Component }); }
     static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "19.2.15", type: NovoTimePickerElement, isStandalone: false, selector: "novo-time-picker", inputs: { military: "military", analog: "analog", inline: "inline", step: "step", hasButtons: "hasButtons", saveDisabled: "saveDisabled" }, outputs: { onSelect: "onSelect", onSave: "onSave", onCancel: "onCancel" }, host: { properties: { "class.military": "military" }, classAttribute: "novo-time-picker" }, providers: [TIME_PICKER_VALUE_ACCESSOR], usesOnChanges: true, ngImport: i0, template: `
-    <!-- <div class="digital" [class.inline]="inline" [class.military]="military" *ngIf="inline">
-      <div class="digital--inner">
-        <span class="digital--clock" *ngIf="analog">
-          <span class="hours" data-automation-id="novo-time-picker-hours">{{ hours }}</span
-          >:<span class="minutes" data-automation-id="novo-time-picker-minutes">{{ minutes }}</span>
-        </span>
-        <div class="control-block" *ngIf="!military && analog">
-          <span
-            *ngFor="let period of MERIDIANS"
-            class="digital--period"
-            [class.active]="meridian == period"
-            (click)="setPeriod($event, period, true)"
-            [attr.data-automation-id]="period"
-            >{{ period }}</span
-          >
-        </div>
-      </div>
-    </div> -->
     <div class="increments" *ngIf="!analog">
       <novo-list class="increments--hours" direction="vertical" data-automation-id="novo-time-picker-hours">
         <novo-list-item
@@ -300,24 +280,6 @@ class NovoTimePickerElement {
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoTimePickerElement, decorators: [{
             type: Component,
             args: [{ selector: 'novo-time-picker', providers: [TIME_PICKER_VALUE_ACCESSOR], template: `
-    <!-- <div class="digital" [class.inline]="inline" [class.military]="military" *ngIf="inline">
-      <div class="digital--inner">
-        <span class="digital--clock" *ngIf="analog">
-          <span class="hours" data-automation-id="novo-time-picker-hours">{{ hours }}</span
-          >:<span class="minutes" data-automation-id="novo-time-picker-minutes">{{ minutes }}</span>
-        </span>
-        <div class="control-block" *ngIf="!military && analog">
-          <span
-            *ngFor="let period of MERIDIANS"
-            class="digital--period"
-            [class.active]="meridian == period"
-            (click)="setPeriod($event, period, true)"
-            [attr.data-automation-id]="period"
-            >{{ period }}</span
-          >
-        </div>
-      </div>
-    </div> -->
     <div class="increments" *ngIf="!analog">
       <novo-list class="increments--hours" direction="vertical" data-automation-id="novo-time-picker-hours">
         <novo-list-item

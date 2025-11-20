@@ -346,17 +346,7 @@ class NovoSimpleCell extends _NovoCell {
             this.renderer.setStyle(this.elementRef.nativeElement, 'min-width', `${this.column.width}px`);
             this.renderer.setStyle(this.elementRef.nativeElement, 'max-width', `${this.column.width}px`);
             this.renderer.setStyle(this.elementRef.nativeElement, 'width', `${this.column.width}px`);
-            // TODO - this inhibits resizing the page after the initial load -- but do we care?!?!
-            // this.renderer.setStyle(this.spanElement.nativeElement, 'min-width', `${this.column.width - 20}px`);
-            // this.renderer.setStyle(this.spanElement.nativeElement, 'max-width', `${this.column.width - 20}px`);
-            // this.renderer.setStyle(this.spanElement.nativeElement, 'width', `${this.column.width - 20}px`);
         }
-        // else {
-        //     // TODO - this inhibits resizing the page after the initial load -- but do we care?!?!
-        //     this.renderer.setStyle(this.spanElement.nativeElement, 'min-width', `${this.elementRef.nativeElement.offsetWidth - 20}px`);
-        //     this.renderer.setStyle(this.spanElement.nativeElement, 'max-width', `${this.elementRef.nativeElement.offsetWidth - 20}px`);
-        //     this.renderer.setStyle(this.spanElement.nativeElement, 'width', `${this.elementRef.nativeElement.offsetWidth - 20}px`);
-        // }
     }
     onClick(event) {
         Helpers.swallowEvent(event);

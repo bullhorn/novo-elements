@@ -105,16 +105,6 @@ export declare class ArrayCollection<T> implements Collection<T> {
      */
     invalidate(): void;
     /**
-     * Invalidates the specified item.
-     *
-     * @memberOf ArrayCollection
-     */
-    /**
-     * Invalidates the item at the specified index.
-     *
-     * @memberOf ArrayCollection
-     */
-    /**
      * Appends the specified data into the data that the data provider contains and removes any duplicate items.
      *
      * @memberOf ArrayCollection

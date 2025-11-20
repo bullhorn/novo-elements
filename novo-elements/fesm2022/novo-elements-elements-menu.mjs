@@ -16,12 +16,9 @@ class MenuContentComponent {
     constructor() {
         this.menuItems = [];
         this.isLeaf = false;
-        ///
         this.openSubMenu = new EventEmitter();
         this.closeLeafMenu = new EventEmitter();
         this.closeAllMenus = new EventEmitter();
-        // @ViewChild('menu') public menuElement: ElementRef;
-        // @ViewChildren('li') public menuItemElements: QueryList<ElementRef>;
         this.autoFocus = false;
         this.subscription = new Subscription();
     }
@@ -36,11 +33,7 @@ class MenuContentComponent {
     ngOnDestroy() {
         this.subscription.unsubscribe();
     }
-    focus() {
-        if (this.autoFocus) {
-            // this.menuElement.nativeElement.focus();
-        }
-    }
+    focus() { }
     stopEvent($event) {
         $event.stopPropagation();
     }
@@ -83,9 +76,6 @@ class MenuContentComponent {
         const menuItem = this.menuItems[this._keyManager.activeItemIndex];
         const option = this._keyManager.activeItem;
         option._clickViaInteraction();
-        // if (menuItem) {
-        //   this.onMenuItemSelect(menuItem, event);
-        // }
     }
     onCloseLeafMenu(event) {
         if (!this.isLeaf) {
@@ -94,7 +84,6 @@ class MenuContentComponent {
         this.cancelEvent(event);
         this.closeLeafMenu.emit({ exceptRootMenu: event.key === "ArrowLeft" /* Key.ArrowLeft */, event });
     }
-    // @HostListener('document:contextmenu', ['$event'])
     closeMenu(event) {
         if (event.type === 'click' && event.button === 2) {
             return;
@@ -106,24 +95,11 @@ class MenuContentComponent {
             this.closeLeafMenu.emit({ exceptRootMenu: true, event });
         }
     }
-    onOpenSubMenu(menuItem, event) {
-        // const anchorElementRef = this.menuItemElements.toArray()[this._keyManager.activeItemIndex];
-        // const anchorElement = anchorElementRef && anchorElementRef.nativeElement;
-        // this.openSubMenu.emit({
-        //   anchorElement,
-        //   menu: menuItem.subMenu,
-        //   event,
-        //   item: this.item,
-        //   // parentMenu: this,
-        // });
-    }
+    onOpenSubMenu(menuItem, event) { }
     onMenuItemSelect(menuItem, event) {
         event.preventDefault();
         event.stopPropagation();
         this.onOpenSubMenu(menuItem, event);
-        // if (!menuItem.subMenu) {
-        //   menuItem.triggerExecute(this.item, event);
-        // }
     }
     cancelEvent(event) {
         if (!event) {
@@ -141,7 +117,6 @@ class MenuContentComponent {
     <ul #menu class="menu" style="position: static; float: none;" tabindex="0">
       <ng-container *ngFor="let menuItem of menuItems; let i = index">
         <ng-template [ngTemplateOutlet]="menuItem.template" [ngTemplateOutletContext]="{ $implicit: item }"></ng-template>
-        <!-- <novo-icon class="sub-menu-caret" suffix *ngIf="!!menuItem.subMenu" size="small" color="ash">expand</novo-icon> -->
       </ng-container>
     </ul>
   </div> `, isInline: true, styles: [":host .passive{display:block;padding:3px 20px;clear:both;font-weight:400;white-space:nowrap}:host .menu-container{width:180px}:host .menu-container .menu{cursor:default;list-style:none;background-color:var(--background-bright);padding-inline-start:0px!important;box-shadow:0 -1px 3px -2px #0003,0 2px 2px #00000024,0 1px 5px #0000001f}:host .menu-container .menu :hover{background:#4a89dc1a;color:#3d464d}:host .menu-container .menu :active{background:#4a89dc66}:host .menu-container .menu .menu-item-container{display:flex;align-items:center;position:relative}:host .menu-container .menu .menu-item-container .sub-menu-caret{position:absolute;right:.5rem}:host .menu-container .menu .menu-item{display:inline;font-weight:400;color:inherit;font-size:var(--font-size-text);transition:color .2s ease-out,opacity .2s ease-out;vertical-align:middle;cursor:pointer;margin:0;padding:1rem 1rem 1rem 1.25rem;box-sizing:border-box;display:flex;align-items:center;gap:1rem;flex:1}:host .menu-container .menu .menu-item.text-capitalize{text-transform:capitalize}:host .menu-container .menu .menu-item.text-uppercase{text-transform:uppercase}:host .menu-container .menu .menu-item.text-nowrap{white-space:nowrap}:host .menu-container .menu .menu-item.text-ellipsis{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}:host .menu-container .menu .menu-item.text-size-default{font-size:inherit}:host .menu-container .menu .menu-item.text-size-body{font-size:1.3rem}:host .menu-container .menu .menu-item.text-size-xs{font-size:1rem}:host .menu-container .menu .menu-item.text-size-sm{font-size:1.2rem}:host .menu-container .menu .menu-item.text-size-md{font-size:1.3rem}:host .menu-container .menu .menu-item.text-size-lg{font-size:1.6rem}:host .menu-container .menu .menu-item.text-size-xl{font-size:2rem}:host .menu-container .menu .menu-item.text-size-2xl{font-size:2.6rem}:host .menu-container .menu .menu-item.text-size-3xl{font-size:3.2rem}:host .menu-container .menu .menu-item.text-size-smaller{font-size:.8em}:host .menu-container .menu .menu-item.text-size-larger{font-size:1.2em}:host .menu-container .menu .menu-item.text-color-black{color:#000}:host .menu-container .menu .menu-item.text-color-white{color:#fff}:host .menu-container .menu .menu-item.text-color-gray{color:#9e9e9e}:host .menu-container .menu .menu-item.text-color-grey{color:#9e9e9e}:host .menu-container .menu .menu-item.text-color-offWhite{color:#f7f7f7}:host .menu-container .menu .menu-item.text-color-bright{color:#f7f7f7}:host .menu-container .menu .menu-item.text-color-light{color:#dbdbdb}:host .menu-container .menu .menu-item.text-color-neutral{color:#4f5361}:host .menu-container .menu .menu-item.text-color-dark{color:#3d464d}:host .menu-container .menu .menu-item.text-color-orange{color:#ff6900}:host .menu-container .menu .menu-item.text-color-navigation{color:#202945}:host .menu-container .menu .menu-item.text-color-skyBlue{color:#009bdf}:host .menu-container .menu .menu-item.text-color-steel{color:#5b6770}:host .menu-container .menu .menu-item.text-color-metal{color:#637893}:host .menu-container .menu .menu-item.text-color-sand{color:#f4f4f4}:host .menu-container .menu .menu-item.text-color-silver{color:#e2e2e2}:host .menu-container .menu .menu-item.text-color-stone{color:#bebebe}:host .menu-container .menu .menu-item.text-color-ash{color:#a0a0a0}:host .menu-container .menu .menu-item.text-color-slate{color:#707070}:host .menu-container .menu .menu-item.text-color-onyx{color:#526980}:host .menu-container .menu .menu-item.text-color-charcoal{color:#282828}:host .menu-container .menu .menu-item.text-color-moonlight{color:#1a242f}:host .menu-container .menu .menu-item.text-color-midnight{color:#202945}:host .menu-container .menu .menu-item.text-color-darkness{color:#161f27}:host .menu-container .menu .menu-item.text-color-navy{color:#0d2d42}:host .menu-container .menu .menu-item.text-color-aqua{color:#3bafda}:host .menu-container .menu .menu-item.text-color-ocean{color:#4a89dc}:host .menu-container .menu .menu-item.text-color-mint{color:#37bc9b}:host .menu-container .menu .menu-item.text-color-grass{color:#8cc152}:host .menu-container .menu .menu-item.text-color-sunflower{color:#f6b042}:host .menu-container .menu .menu-item.text-color-bittersweet{color:#eb6845}:host .menu-container .menu .menu-item.text-color-grapefruit{color:#da4453}:host .menu-container .menu .menu-item.text-color-carnation{color:#d770ad}:host .menu-container .menu .menu-item.text-color-lavender{color:#967adc}:host .menu-container .menu .menu-item.text-color-mountain{color:#9678b6}:host .menu-container .menu .menu-item.text-color-info{color:#4a89dc}:host .menu-container .menu .menu-item.text-color-positive{color:#4a89dc}:host .menu-container .menu .menu-item.text-color-success{color:#8cc152}:host .menu-container .menu .menu-item.text-color-negative{color:#da4453}:host .menu-container .menu .menu-item.text-color-danger{color:#da4453}:host .menu-container .menu .menu-item.text-color-error{color:#da4453}:host .menu-container .menu .menu-item.text-color-warning{color:#f6b042}:host .menu-container .menu .menu-item.text-color-empty{color:#cccdcc}:host .menu-container .menu .menu-item.text-color-disabled{color:#bebebe}:host .menu-container .menu .menu-item.text-color-background{color:#f7f7f7}:host .menu-container .menu .menu-item.text-color-backgroundDark{color:#e2e2e2}:host .menu-container .menu .menu-item.text-color-presentation{color:#5b6770}:host .menu-container .menu .menu-item.text-color-bullhorn{color:#ff6900}:host .menu-container .menu .menu-item.text-color-pulse{color:#3bafda}:host .menu-container .menu .menu-item.text-color-company{color:#39d}:host .menu-container .menu .menu-item.text-color-candidate{color:#4b7}:host .menu-container .menu .menu-item.text-color-lead{color:#a69}:host .menu-container .menu .menu-item.text-color-contact{color:#fa4}:host .menu-container .menu .menu-item.text-color-clientcontact{color:#fa4}:host .menu-container .menu .menu-item.text-color-opportunity{color:#625}:host .menu-container .menu .menu-item.text-color-job{color:#b56}:host .menu-container .menu .menu-item.text-color-joborder{color:#b56}:host .menu-container .menu .menu-item.text-color-submission{color:#a9adbb}:host .menu-container .menu .menu-item.text-color-sendout{color:#747884}:host .menu-container .menu .menu-item.text-color-placement{color:#0b344f}:host .menu-container .menu .menu-item.text-color-note{color:#747884}:host .menu-container .menu .menu-item.text-color-contract{color:#454ea0}:host .menu-container .menu .menu-item.text-color-task{color:#4f5361}:host .menu-container .menu .menu-item.text-color-jobCode{color:#696d79}:host .menu-container .menu .menu-item.text-color-earnCode{color:#696d79}:host .menu-container .menu .menu-item.text-color-invoiceStatement{color:#696d79}:host .menu-container .menu .menu-item.text-color-billableCharge{color:#696d79}:host .menu-container .menu .menu-item.text-color-payableCharge{color:#696d79}:host .menu-container .menu .menu-item.text-color-user{color:#696d79}:host .menu-container .menu .menu-item.text-color-corporateUser{color:#696d79}:host .menu-container .menu .menu-item.text-color-distributionList{color:#696d79}:host .menu-container .menu .menu-item.text-color-credential{color:#696d79}:host .menu-container .menu .menu-item.text-color-person{color:#696d79}:host .menu-container .menu .menu-item.margin-before{margin-top:.4rem}:host .menu-container .menu .menu-item.margin-after{margin-bottom:.8rem}:host .menu-container .menu .menu-item.text-length-small{max-width:40ch}:host .menu-container .menu .menu-item.text-length-medium{max-width:55ch}:host .menu-container .menu .menu-item.text-length-large{max-width:70ch}:host .menu-container .menu .menu-item.text-weight-hairline{font-weight:100}:host .menu-container .menu .menu-item.text-weight-thin{font-weight:200}:host .menu-container .menu .menu-item.text-weight-light{font-weight:300}:host .menu-container .menu .menu-item.text-weight-normal{font-weight:400}:host .menu-container .menu .menu-item.text-weight-medium{font-weight:500}:host .menu-container .menu .menu-item.text-weight-semibold{font-weight:600}:host .menu-container .menu .menu-item.text-weight-bold{font-weight:700}:host .menu-container .menu .menu-item.text-weight-extrabold{font-weight:800}:host .menu-container .menu .menu-item.text-weight-heavy{font-weight:900}:host .menu-container .menu .menu-item.text-weight-lighter{font-weight:lighter}:host .menu-container .menu .menu-item.text-weight-bolder{font-weight:bolder}:host .menu-container .menu .divider{order:none;height:1px;background:#e2e2e2}:host .menu-container .menu a.disabled{color:#bebebe;cursor:not-allowed}\n"], dependencies: [{ kind: "directive", type: i1.NgClass, selector: "[ngClass]", inputs: ["class", "ngClass"] }, { kind: "directive", type: i1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i1.NgTemplateOutlet, selector: "[ngTemplateOutlet]", inputs: ["ngTemplateOutletContext", "ngTemplateOutlet", "ngTemplateOutletInjector"] }] }); }
@@ -152,7 +127,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
     <ul #menu class="menu" style="position: static; float: none;" tabindex="0">
       <ng-container *ngFor="let menuItem of menuItems; let i = index">
         <ng-template [ngTemplateOutlet]="menuItem.template" [ngTemplateOutletContext]="{ $implicit: item }"></ng-template>
-        <!-- <novo-icon class="sub-menu-caret" suffix *ngIf="!!menuItem.subMenu" size="small" color="ash">expand</novo-icon> -->
       </ng-container>
     </ul>
   </div> `, standalone: false, styles: [":host .passive{display:block;padding:3px 20px;clear:both;font-weight:400;white-space:nowrap}:host .menu-container{width:180px}:host .menu-container .menu{cursor:default;list-style:none;background-color:var(--background-bright);padding-inline-start:0px!important;box-shadow:0 -1px 3px -2px #0003,0 2px 2px #00000024,0 1px 5px #0000001f}:host .menu-container .menu :hover{background:#4a89dc1a;color:#3d464d}:host .menu-container .menu :active{background:#4a89dc66}:host .menu-container .menu .menu-item-container{display:flex;align-items:center;position:relative}:host .menu-container .menu .menu-item-container .sub-menu-caret{position:absolute;right:.5rem}:host .menu-container .menu .menu-item{display:inline;font-weight:400;color:inherit;font-size:var(--font-size-text);transition:color .2s ease-out,opacity .2s ease-out;vertical-align:middle;cursor:pointer;margin:0;padding:1rem 1rem 1rem 1.25rem;box-sizing:border-box;display:flex;align-items:center;gap:1rem;flex:1}:host .menu-container .menu .menu-item.text-capitalize{text-transform:capitalize}:host .menu-container .menu .menu-item.text-uppercase{text-transform:uppercase}:host .menu-container .menu .menu-item.text-nowrap{white-space:nowrap}:host .menu-container .menu .menu-item.text-ellipsis{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}:host .menu-container .menu .menu-item.text-size-default{font-size:inherit}:host .menu-container .menu .menu-item.text-size-body{font-size:1.3rem}:host .menu-container .menu .menu-item.text-size-xs{font-size:1rem}:host .menu-container .menu .menu-item.text-size-sm{font-size:1.2rem}:host .menu-container .menu .menu-item.text-size-md{font-size:1.3rem}:host .menu-container .menu .menu-item.text-size-lg{font-size:1.6rem}:host .menu-container .menu .menu-item.text-size-xl{font-size:2rem}:host .menu-container .menu .menu-item.text-size-2xl{font-size:2.6rem}:host .menu-container .menu .menu-item.text-size-3xl{font-size:3.2rem}:host .menu-container .menu .menu-item.text-size-smaller{font-size:.8em}:host .menu-container .menu .menu-item.text-size-larger{font-size:1.2em}:host .menu-container .menu .menu-item.text-color-black{color:#000}:host .menu-container .menu .menu-item.text-color-white{color:#fff}:host .menu-container .menu .menu-item.text-color-gray{color:#9e9e9e}:host .menu-container .menu .menu-item.text-color-grey{color:#9e9e9e}:host .menu-container .menu .menu-item.text-color-offWhite{color:#f7f7f7}:host .menu-container .menu .menu-item.text-color-bright{color:#f7f7f7}:host .menu-container .menu .menu-item.text-color-light{color:#dbdbdb}:host .menu-container .menu .menu-item.text-color-neutral{color:#4f5361}:host .menu-container .menu .menu-item.text-color-dark{color:#3d464d}:host .menu-container .menu .menu-item.text-color-orange{color:#ff6900}:host .menu-container .menu .menu-item.text-color-navigation{color:#202945}:host .menu-container .menu .menu-item.text-color-skyBlue{color:#009bdf}:host .menu-container .menu .menu-item.text-color-steel{color:#5b6770}:host .menu-container .menu .menu-item.text-color-metal{color:#637893}:host .menu-container .menu .menu-item.text-color-sand{color:#f4f4f4}:host .menu-container .menu .menu-item.text-color-silver{color:#e2e2e2}:host .menu-container .menu .menu-item.text-color-stone{color:#bebebe}:host .menu-container .menu .menu-item.text-color-ash{color:#a0a0a0}:host .menu-container .menu .menu-item.text-color-slate{color:#707070}:host .menu-container .menu .menu-item.text-color-onyx{color:#526980}:host .menu-container .menu .menu-item.text-color-charcoal{color:#282828}:host .menu-container .menu .menu-item.text-color-moonlight{color:#1a242f}:host .menu-container .menu .menu-item.text-color-midnight{color:#202945}:host .menu-container .menu .menu-item.text-color-darkness{color:#161f27}:host .menu-container .menu .menu-item.text-color-navy{color:#0d2d42}:host .menu-container .menu .menu-item.text-color-aqua{color:#3bafda}:host .menu-container .menu .menu-item.text-color-ocean{color:#4a89dc}:host .menu-container .menu .menu-item.text-color-mint{color:#37bc9b}:host .menu-container .menu .menu-item.text-color-grass{color:#8cc152}:host .menu-container .menu .menu-item.text-color-sunflower{color:#f6b042}:host .menu-container .menu .menu-item.text-color-bittersweet{color:#eb6845}:host .menu-container .menu .menu-item.text-color-grapefruit{color:#da4453}:host .menu-container .menu .menu-item.text-color-carnation{color:#d770ad}:host .menu-container .menu .menu-item.text-color-lavender{color:#967adc}:host .menu-container .menu .menu-item.text-color-mountain{color:#9678b6}:host .menu-container .menu .menu-item.text-color-info{color:#4a89dc}:host .menu-container .menu .menu-item.text-color-positive{color:#4a89dc}:host .menu-container .menu .menu-item.text-color-success{color:#8cc152}:host .menu-container .menu .menu-item.text-color-negative{color:#da4453}:host .menu-container .menu .menu-item.text-color-danger{color:#da4453}:host .menu-container .menu .menu-item.text-color-error{color:#da4453}:host .menu-container .menu .menu-item.text-color-warning{color:#f6b042}:host .menu-container .menu .menu-item.text-color-empty{color:#cccdcc}:host .menu-container .menu .menu-item.text-color-disabled{color:#bebebe}:host .menu-container .menu .menu-item.text-color-background{color:#f7f7f7}:host .menu-container .menu .menu-item.text-color-backgroundDark{color:#e2e2e2}:host .menu-container .menu .menu-item.text-color-presentation{color:#5b6770}:host .menu-container .menu .menu-item.text-color-bullhorn{color:#ff6900}:host .menu-container .menu .menu-item.text-color-pulse{color:#3bafda}:host .menu-container .menu .menu-item.text-color-company{color:#39d}:host .menu-container .menu .menu-item.text-color-candidate{color:#4b7}:host .menu-container .menu .menu-item.text-color-lead{color:#a69}:host .menu-container .menu .menu-item.text-color-contact{color:#fa4}:host .menu-container .menu .menu-item.text-color-clientcontact{color:#fa4}:host .menu-container .menu .menu-item.text-color-opportunity{color:#625}:host .menu-container .menu .menu-item.text-color-job{color:#b56}:host .menu-container .menu .menu-item.text-color-joborder{color:#b56}:host .menu-container .menu .menu-item.text-color-submission{color:#a9adbb}:host .menu-container .menu .menu-item.text-color-sendout{color:#747884}:host .menu-container .menu .menu-item.text-color-placement{color:#0b344f}:host .menu-container .menu .menu-item.text-color-note{color:#747884}:host .menu-container .menu .menu-item.text-color-contract{color:#454ea0}:host .menu-container .menu .menu-item.text-color-task{color:#4f5361}:host .menu-container .menu .menu-item.text-color-jobCode{color:#696d79}:host .menu-container .menu .menu-item.text-color-earnCode{color:#696d79}:host .menu-container .menu .menu-item.text-color-invoiceStatement{color:#696d79}:host .menu-container .menu .menu-item.text-color-billableCharge{color:#696d79}:host .menu-container .menu .menu-item.text-color-payableCharge{color:#696d79}:host .menu-container .menu .menu-item.text-color-user{color:#696d79}:host .menu-container .menu .menu-item.text-color-corporateUser{color:#696d79}:host .menu-container .menu .menu-item.text-color-distributionList{color:#696d79}:host .menu-container .menu .menu-item.text-color-credential{color:#696d79}:host .menu-container .menu .menu-item.text-color-person{color:#696d79}:host .menu-container .menu .menu-item.margin-before{margin-top:.4rem}:host .menu-container .menu .menu-item.margin-after{margin-bottom:.8rem}:host .menu-container .menu .menu-item.text-length-small{max-width:40ch}:host .menu-container .menu .menu-item.text-length-medium{max-width:55ch}:host .menu-container .menu .menu-item.text-length-large{max-width:70ch}:host .menu-container .menu .menu-item.text-weight-hairline{font-weight:100}:host .menu-container .menu .menu-item.text-weight-thin{font-weight:200}:host .menu-container .menu .menu-item.text-weight-light{font-weight:300}:host .menu-container .menu .menu-item.text-weight-normal{font-weight:400}:host .menu-container .menu .menu-item.text-weight-medium{font-weight:500}:host .menu-container .menu .menu-item.text-weight-semibold{font-weight:600}:host .menu-container .menu .menu-item.text-weight-bold{font-weight:700}:host .menu-container .menu .menu-item.text-weight-extrabold{font-weight:800}:host .menu-container .menu .menu-item.text-weight-heavy{font-weight:900}:host .menu-container .menu .menu-item.text-weight-lighter{font-weight:lighter}:host .menu-container .menu .menu-item.text-weight-bolder{font-weight:bolder}:host .menu-container .menu .divider{order:none;height:1px;background:#e2e2e2}:host .menu-container .menu a.disabled{color:#bebebe;cursor:not-allowed}\n"] }]
@@ -309,7 +283,6 @@ class NovoMenuService {
                 panelClass: 'novo-menu',
                 scrollStrategy: this.scrollStrategy.close(),
             });
-            // this.destroySubMenus(parentMenu);
             this.overlays = this.overlays.concat(newOverlay);
             this.attachMenu(newOverlay, context);
         }
@@ -329,11 +302,6 @@ class NovoMenuService {
             menuTrigger.menuContent = menuContent.instance;
         }
         const subscriptions = new Subscription();
-        // subscriptions.add(
-        //   menuContent.instance.execute
-        //     .asObservable()
-        //     .subscribe((executeEvent) => this.closeAllMenus({ eventType: 'execute', ...executeEvent })),
-        // );
         subscriptions.add(menuContent.instance.closeAllMenus
             .asObservable()
             .subscribe((closeAllEvent) => this.closeAllMenus({ eventType: 'cancel', ...closeAllEvent })));
@@ -348,7 +316,6 @@ class NovoMenuService {
             this.show.next(subMenuEvent);
         }));
         menuContent.onDestroy(() => {
-            // menuItems.forEach((menuItem) => (menuItem.isActive = false));
             subscriptions.unsubscribe();
         });
         menuContent.changeDetectorRef.detectChanges();

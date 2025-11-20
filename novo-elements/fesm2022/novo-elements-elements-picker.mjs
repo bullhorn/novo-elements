@@ -21,7 +21,6 @@ import * as i7 from 'novo-elements/elements/switch';
 import { NovoSwitchModule } from 'novo-elements/elements/switch';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
-// import { NovoControlConfig } from 'novo-elements/elements/form'; // actual type of the config property on this is any
 /**
  * @description This is the actual list of matches that gets injected into the DOM. It's also the piece that can be
  * overwritten if custom list options are needed.
@@ -131,7 +130,7 @@ class BasePickerResults {
             setTimeout(() => {
                 this.overlay.updatePosition();
                 this.addScrollListener();
-            }); // @bkimball: This was added for Dylan Schulte, 9.18.2017 4:14PM EST, you're welcome!
+            });
         }, (err) => {
             this.hasError = this.term && this.term.length !== 0;
             this.isLoading = false;
@@ -1944,8 +1943,6 @@ class NovoPickerElement {
         let debounceTimeInMilliSeconds = Number.isNaN(Number(this.config?.debounceTimeInMilliSeconds)) ? DEFAULT_DEBOUNCE_TIME : Number(this.config?.debounceTimeInMilliSeconds);
         // Custom results template
         this.resultsComponent = this.config.resultsTemplate || PickerResults;
-        // Get all distinct key up events from the input and only fire if long enough and distinct
-        // let input = this.element.nativeElement.querySelector('input');
         const pasteObserver = fromEvent(this.input.nativeElement, 'paste').pipe(debounceTime(debounceTimeInMilliSeconds), distinctUntilChanged());
         pasteObserver.subscribe((event) => this.onDebouncedKeyup(event), (err) => this.hideResults(err));
         const keyboardObserver = fromEvent(this.input.nativeElement, 'keyup').pipe(debounceTime(debounceTimeInMilliSeconds), distinctUntilChanged());

@@ -12,10 +12,12 @@ interface DemoButtonObject {
 export declare class DragDropExample implements OnChanges {
     objects: DemoButtonObject[];
     objects2: DemoButtonObject[];
+    objects3: DemoButtonObject[];
     ngOnChanges(changes: SimpleChanges): void;
     objectMoved?: DemoButtonObject;
     dragFinished(event: NovoDragFinishEvent<DemoButtonObject>): void;
     dragFinished2(event: NovoDragFinishEvent<DemoButtonObject>): void;
+    dragFinished3(event: NovoDragFinishEvent<DemoButtonObject>): void;
     addObject2(): void;
     removeObject(item: DemoButtonObject): void;
     removeObject2(item: DemoButtonObject): void;

@@ -123,15 +123,6 @@ function isValidColor$1(color) {
 
 // tslint:disable: directive-selector
 class BorderDirective {
-    // @HostBinding('style.borderStyle') get getBorderStyle() {
-    //   return this.border;
-    // }
-    // @HostBinding('style.borderWidth') get getBorderWidth() {
-    //   return this.width;
-    // }
-    // @HostBinding('style.borderColor') get getBorderColor() {
-    //   return this.borderColor;
-    // }
     get hb_border() {
         return `border-${this.border}`;
     }
@@ -283,7 +274,6 @@ class FlexDirective {
     constructor(el, renderer) {
         this.el = el;
         this.renderer = renderer;
-        // this.renderer.setStyle(this.el.nativeElement, 'display', 'flex');
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: FlexDirective, deps: [{ token: i0.ElementRef }, { token: i0.Renderer2 }], target: i0.ɵɵFactoryTarget.Directive }); }
     static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "19.2.15", type: FlexDirective, isStandalone: false, selector: "[flex]", inputs: { flex: "flex" }, host: { properties: { "style.flex": "this.flex" } }, ngImport: i0 }); }
@@ -347,9 +337,6 @@ const getSpacingToken = (value) => {
     return value;
 };
 class MarginDirective {
-    // @HostBinding('style.margin') get hb_margin() {
-    //   return getSpacingToken(this.margin || this.m);
-    // }
     get hb_margin() {
         return `margin-${this.margin || this.m}`;
     }
@@ -423,9 +410,6 @@ class PaddingDirective {
     get hb_padding() {
         return `padding-${this.padding || this.p}`;
     }
-    // @HostBinding('class') get hb_padding() {
-    //   return `padding-${this.padding || this.p}`;
-    // }
     get hb_padding_left() {
         return getSpacingToken(this.paddingLeft || this.pl || this.px || this.paddingX);
     }
@@ -706,7 +690,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
                 type: Input
             }] } });
 
-// import {NovoCommonModule} from '../common-behaviors/common-module';
 class NovoPseudoCheckboxModule {
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoPseudoCheckboxModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
     static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "19.2.15", ngImport: i0, type: NovoPseudoCheckboxModule, declarations: [NovoPseudoCheckbox], exports: [NovoPseudoCheckbox] }); }
@@ -907,7 +890,6 @@ class NovoOptionBase {
         if (!this._selected) {
             this._selected = true;
             this._changeDetectorRef.markForCheck();
-            // this._emitSelectionChangeEvent();
         }
     }
     /** Deselects the option. */
@@ -915,7 +897,6 @@ class NovoOptionBase {
         if (this._selected) {
             this._selected = false;
             this._changeDetectorRef.markForCheck();
-            // this._emitSelectionChangeEvent();
         }
     }
     /** Sets focus onto this option. */
@@ -1872,9 +1853,7 @@ class NovoOverlayTemplateComponent {
      * when an option is selected, on blur, and when TAB is pressed.
      */
     get panelClosingActions() {
-        return merge(
-        // this.overlayTemplate._keyManager.tabOut,
-        this.outsideClickStream);
+        return merge(this.outsideClickStream);
     }
     /** Stream of clicks outside of the panel. */
     get outsideClickStream() {
@@ -1905,7 +1884,6 @@ class NovoOverlayTemplateComponent {
      */
     subscribeToClosingActions() {
         const firstStable = this.zone.onStable.asObservable().pipe(first());
-        // const valueChanges = Observable.from(this.value);
         // When the zone is stable initially, and when the option list changes...
         return (merge(firstStable)
             .pipe(

@@ -37,8 +37,7 @@ function NOVO_LAYOUT_DEFAULT_AUTOSIZE_FACTORY() {
 }
 
 class NovoLayoutContent extends CdkScrollable {
-    constructor(_changeDetectorRef, _container, // NovoLayoutContainer
-    elementRef, scrollDispatcher, ngZone) {
+    constructor(_changeDetectorRef, _container, elementRef, scrollDispatcher, ngZone) {
         super(elementRef, scrollDispatcher, ngZone);
         this._changeDetectorRef = _changeDetectorRef;
         this._container = _container;
@@ -62,8 +61,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
                     template: '<ng-content></ng-content>',
                     host: {
                         class: 'novo-layout-content',
-                        // '[style.margin-left.px]': '_container._contentMargins.left',
-                        // '[style.margin-right.px]': '_container._contentMargins.right',
                     },
                     changeDetection: ChangeDetectionStrategy.OnPush,
                     encapsulation: ViewEncapsulation.None,
@@ -747,7 +744,6 @@ class NovoLayoutContainer {
             if (drawer.position === 'end') {
                 if (this._end != null) {
                     throw new Error('Duplication drawers at end');
-                    // throwMatDuplicatedDrawerError('end');
                 }
                 this._end = drawer;
             }

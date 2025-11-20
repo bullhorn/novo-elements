@@ -125,7 +125,6 @@ class NovoAsideService {
         return new PortalInjector(this.injector, injectionTokens);
     }
     getOverlayConfig(config) {
-        // const positionStrategy = this.overlay.position().global().centerHorizontally().centerVertically();
         const scrollStrategy = config.hasBackdrop ? this.overlay.scrollStrategies.block() : this.overlay.scrollStrategies.noop();
         return {
             scrollStrategy,

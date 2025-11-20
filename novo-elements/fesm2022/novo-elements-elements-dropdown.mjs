@@ -126,14 +126,7 @@ class NovoDropdownElement extends NovoDropdownMixins {
             return option.selected === true;
         });
     }
-    set items(items) {
-        // this._items = items;
-        // this.activeIndex = -1;
-        // // Get the innerText of all the items to allow for searching
-        // this._textItems = items.map((item: NovoItemElement) => {
-        //   return item.element.nativeElement.innerText;
-        // });
-    }
+    set items(items) { }
     /** Handles all keydown events on the dropdown. */
     _handleKeydown(event) {
         if (!this.disabled) {
@@ -198,7 +191,6 @@ class NovoDropdownElement extends NovoDropdownMixins {
         const selectionEvents = this.options ? merge(...this.options.map((option) => option.onSelectionChange)) : of();
         this._selectedOptionChanges.unsubscribe();
         this._selectedOptionChanges = selectionEvents.pipe(takeUntil(this._onDestroy)).subscribe((event) => {
-            // this.handleSelection(event.source, event.isUserInput);
             if (event.isUserInput && !this.multiple) {
                 this._clearPreviousSelectedOption(this._keyManager.activeItem);
                 event.source.select();
@@ -225,7 +217,6 @@ class NovoDropdownElement extends NovoDropdownMixins {
     /** Sets up a key manager to listen to keyboard events on the overlay panel. */
     _initKeyManager() {
         this._keyManager = new ActiveDescendantKeyManager(this.options).withTypeAhead(250).withHomeAndEnd();
-        // .withAllowedModifierKeys(['shiftKey']);
         this._keyManager.tabOut.pipe(takeUntil(this._onDestroy)).subscribe(() => {
             if (this.panelOpen) {
                 // Restore focus to the trigger before closing. Ensures that the focus

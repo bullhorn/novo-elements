@@ -84,7 +84,6 @@ class NovoCheckboxElement {
         this.onSelect = new EventEmitter();
         this.onModelChange = () => { };
         this.onModelTouched = () => { };
-        // this.color = this.defaultColor = this._options.color || defaults.color;
         this.tabIndex = parseInt(tabIndex, 10) || 0;
     }
     ngOnInit() {

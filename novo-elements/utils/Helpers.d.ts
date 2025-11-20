@@ -20,11 +20,15 @@ export declare class Helpers {
     static escapeString(obj: any): any;
     static isNumber(val: any, includeNegatives?: boolean): boolean;
     /**
-     * Checks to see if the object is a undefined or null
+     * Checks to see if the object is undefined or null
      */
     static isBlank(obj: any): boolean;
     /**
-     * Checks to see if the object is a undefined or null
+     * Checks to see if the object is null or undefined
+     */
+    static isNullOrUndefined(obj: any): boolean;
+    /**
+     * Checks to see if the object is undefined, null, an empty string, or an empty array
      */
     static isEmpty(obj: any): boolean;
     /**

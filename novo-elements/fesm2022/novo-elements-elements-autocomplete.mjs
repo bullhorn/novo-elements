@@ -165,7 +165,6 @@ class NovoAutocompleteElement extends NovoAutocompleteMixins {
             }
         }
         else {
-            // this._element.nativeElement.value = inputValue;
             console.warn(`AutoComplete only intended to be used within a NovoField`);
         }
         this._previousValue = optionValue;
@@ -195,9 +194,6 @@ class NovoAutocompleteElement extends NovoAutocompleteMixins {
             if (!this.multiple)
                 this._clearPreviousSelectedOption(event.source);
             this._setTriggerValue(event.source);
-            // this._onChange(event.source.value);
-            // this._element.nativeElement.focus();
-            // this._formField._control.focus();
             this._emitSelectEvent(event.source);
             this._watchSelectionEvents();
         }
@@ -240,7 +236,6 @@ class NovoAutocompleteElement extends NovoAutocompleteMixins {
         }
         if (this.activeOption && key === "Enter" /* Key.Enter */ && this.panelOpen) {
             this.activeOption._selectViaInteraction();
-            // this._resetActiveItem();
             event.preventDefault();
         }
         else {
@@ -252,9 +247,6 @@ class NovoAutocompleteElement extends NovoAutocompleteMixins {
             else if (isArrowKey && !this.overlay.panelOpen) {
                 this.openPanel();
             }
-            // if (isArrowKey || this.autocomplete._keyManager.activeItem !== prevActiveItem) {
-            //   this._scrollToOption(this.autocomplete._keyManager.activeItemIndex || 0);
-            // }
         }
     }
     checkSelectedOptions() {

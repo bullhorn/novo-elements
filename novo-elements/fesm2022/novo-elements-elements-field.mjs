@@ -207,12 +207,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
                         '[class.novo-field-invalid]': '_control.errorState',
                         '[class.novo-field-has-label]': '_hasLabel()',
                         '[class.novo-field-no-label]': '!_hasLabel()',
-                        // '[class.novo-field-hide-placeholder]': '_hideControlPlaceholder()',
                         '[class.novo-field-disabled]': '_control.disabled',
                         '[class.novo-field-autofilled]': '_control.autofilled',
                         '[class.novo-focused]': '_control.focused',
-                        // '[class.novo-accent]': 'color == "accent"',
-                        // '[class.novo-warn]': 'color == "warn"',
                         '[class.ng-untouched]': '_shouldForward("untouched")',
                         '[class.ng-touched]': '_shouldForward("touched")',
                         '[class.ng-pristine]': '_shouldForward("pristine")',
@@ -328,8 +325,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
                         '[class.novo-fieldset-appearance-fill]': 'appearance == "fill"',
                         '[class.novo-fieldset-appearance-outline]': 'appearance == "outline"',
                         '[class.novo-fieldset-appearance-list]': 'appearance == "list"',
-                        // '[class.novo-field-layout-horizontal]': 'layout=="horizontal"',
-                        // '[class.novo-field-layout-vertical]': 'layout=="vertical"',
                     }, standalone: false, template: "<ng-content></ng-content>", styles: [":host{display:grid;grid-gap:2.8rem 2rem}:host.novo-fieldset-appearance-list{grid-gap:0rem}:host.full-width::ng-deep novo-field.novo-field-layout-vertical{grid-template-columns:minmax(300px,1fr);width:-webkit-fill-available}:host.full-width::ng-deep novo-field.novo-field-layout-vertical .novo-input-element{width:100%}:host.full-width::ng-deep novo-field.novo-field-layout-horizontal{grid-template-columns:150px minmax(150px,1fr)}:host.full-width::ng-deep novo-field.novo-field-layout-horizontal .novo-input-element{width:100%}\n"] }]
         }], propDecorators: { _fields: [{
                 type: ContentChildren,
@@ -719,7 +714,6 @@ class NovoDateTimeFormatDirective extends IMaskDirective {
                 event.preventDefault();
                 const value = `0${dateTime[1]}`;
                 event.target.value = value;
-                // this.onChange(value);
             }
             if (!this.military) {
                 const input = dateTime[1].substr(5, 4).replace(/\-/g, '').trim().slice(0, 2);
@@ -891,7 +885,6 @@ class NovoTimeFormatDirective extends IMaskDirective {
         }
     }
     initFormatOptions() {
-        // const pattern = this.military ? 'HH:mm' : 'hh:mm A';
         const amFormat = this.labels.timeFormatAM.toUpperCase();
         const pmFormat = this.labels.timeFormatPM.toUpperCase();
         this.unmask = 'typed'; // typing is to work around angular-imask bug
@@ -947,7 +940,6 @@ class NovoTimeFormatDirective extends IMaskDirective {
                 event.preventDefault();
                 const value = `0${text}`;
                 event.target.value = value;
-                // this.onChange(value);
             }
             if (!this.military) {
                 const input = text.substr(5, 4).replace(/\-/g, '').trim().slice(0, 2);
@@ -1275,12 +1267,6 @@ class NovoInput extends NovoInputBase {
         }
     }
     ngDoCheck() {
-        if (this.ngControl) {
-            // We need to re-evaluate this on every change detection cycle, because there are some
-            // error triggers that we can't subscribe to (e.g. parent form submissions). This means
-            // that whatever logic is in here has to be super lean or we risk destroying the performance.
-            // this.updateErrorState();
-        }
         // We need to dirty-check the native element's value, because there are some cases where
         // we won't be notified when it changes (e.g. the consumer isn't using forms or they're
         // updating the value using `emitEvent: false`).
@@ -1585,7 +1571,7 @@ class NovoPickerToggleElement {
         });
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoPickerToggleElement, deps: [{ token: i0.ElementRef }, { token: i0.ChangeDetectorRef }, { token: 'tabindex', attribute: true }, { token: NOVO_FORM_FIELD, optional: true }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "19.2.15", type: NovoPickerToggleElement, isStandalone: false, selector: "novo-picker-toggle", inputs: { picker: ["for", "picker"], icon: "icon", tabIndex: "tabIndex", ariaLabel: ["aria-label", "ariaLabel"], triggerOnFocus: "triggerOnFocus", overlayId: "overlayId", width: "width", disabled: "disabled" }, host: { listeners: { "focus": "_button.focus()" }, properties: { "attr.tabindex": "disabled ? null : -1", "class.novo-toggle-active": "picker && picker.opened", "class.novo-accent": "picker && picker.color === \"accent\"", "class.novo-warn": "picker && picker.color === \"warn\"" }, classAttribute: "novo-picker-toggle" }, viewQueries: [{ propertyName: "_button", first: true, predicate: ["button"], descendants: true }, { propertyName: "overlay", first: true, predicate: NovoOverlayTemplateComponent, descendants: true }], exportAs: ["novoPickerToggle"], usesOnChanges: true, ngImport: i0, template: "<novo-button\n  #button\n  theme=\"icon\"\n  [icon]=\"icon\"\n  [attr.aria-haspopup]=\"'dialog'\"\n  [attr.tabindex]=\"disabled ? -1 : tabIndex\"\n  [disabled]=\"disabled\"\n  (click)=\"togglePanel($event)\"></novo-button>\n\n<novo-overlay-template [width]=\"width\" [parent]=\"element\" position=\"above-below\">\n  <ng-content></ng-content>\n</novo-overlay-template>", styles: [""], dependencies: [{ kind: "component", type: i1$4.NovoButtonElement, selector: "novo-button,button[theme]", inputs: ["color", "side", "size", "theme", "loading", "icon", "secondIcon", "disabled"] }, { kind: "component", type: i2$1.NovoOverlayTemplateComponent, selector: "novo-overlay-template", inputs: ["position", "scrollStrategy", "width", "minWidth", "height", "closeOnSelect", "hasBackdrop", "parent"], outputs: ["select", "opening", "closing", "backDropClicked"] }, { kind: "directive", type: i2$1.ThemeColorDirective, selector: "[theme]", inputs: ["theme"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "19.2.15", type: NovoPickerToggleElement, isStandalone: false, selector: "novo-picker-toggle", inputs: { picker: ["for", "picker"], icon: "icon", tabIndex: "tabIndex", ariaLabel: ["aria-label", "ariaLabel"], triggerOnFocus: "triggerOnFocus", overlayId: "overlayId", width: "width", disabled: "disabled" }, host: { listeners: { "focus": "_button.focus()" }, properties: { "attr.tabindex": "disabled ? null : -1", "class.novo-toggle-active": "picker && picker.opened", "class.novo-accent": "picker && picker.color === \"accent\"", "class.novo-warn": "picker && picker.color === \"warn\"" }, classAttribute: "novo-picker-toggle" }, viewQueries: [{ propertyName: "_button", first: true, predicate: ["button"], descendants: true }, { propertyName: "overlay", first: true, predicate: NovoOverlayTemplateComponent, descendants: true }], exportAs: ["novoPickerToggle"], usesOnChanges: true, ngImport: i0, template: "<novo-button\n  #button\n  theme=\"icon\"\n  [icon]=\"icon\"\n  [attr.aria-haspopup]=\"'dialog'\"\n  [attr.tabindex]=\"disabled ? -1 : tabIndex\"\n  [disabled]=\"disabled\"\n  (click)=\"togglePanel($event)\"></novo-button>\n\n<novo-overlay-template [width]=\"width\" [parent]=\"element\" position=\"above-below\">\n  <ng-content></ng-content>\n</novo-overlay-template>", dependencies: [{ kind: "component", type: i1$4.NovoButtonElement, selector: "novo-button,button[theme]", inputs: ["color", "side", "size", "theme", "loading", "icon", "secondIcon", "disabled"] }, { kind: "component", type: i2$1.NovoOverlayTemplateComponent, selector: "novo-overlay-template", inputs: ["position", "scrollStrategy", "width", "minWidth", "height", "closeOnSelect", "hasBackdrop", "parent"], outputs: ["select", "opening", "closing", "backDropClicked"] }, { kind: "directive", type: i2$1.ThemeColorDirective, selector: "[theme]", inputs: ["theme"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None }); }
 }
 __decorate([
     BooleanInput(),

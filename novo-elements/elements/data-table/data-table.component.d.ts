@@ -7,7 +7,12 @@ import { DataTableSource } from './data-table.source';
 import { IDataTableColumn, IDataTablePaginationOptions, IDataTablePreferences, IDataTableSearchOptions, IDataTableSelectionOption, IDataTableService } from './interfaces';
 import { ListInteractionDictionary, ListInteractionEvent } from './ListInteractionTypes';
 import { DataTableState } from './state/data-table-state.service';
+import { NovoDragFinishEvent } from 'novo-elements/elements/drag-drop';
 import * as i0 from "@angular/core";
+export type DataTablePreferenceUpdateSrc = 'columndrag' | 'input' | 'statesortchange' | 'pagination';
+export interface IDataTablePreferencesChangeEvent extends IDataTablePreferences {
+    eventSrc: DataTablePreferenceUpdateSrc;
+}
 export declare class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     labels: NovoLabelService;
     private ref;
@@ -43,6 +48,8 @@ export declare class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     allMatchingSelected: boolean;
     overrideTotal: number;
     paginationRefreshSubject: Subject<void>;
+    enableColumnDragging: boolean;
+    private dragEnabledByColumn;
     set dataTableService(service: IDataTableService<T>);
     set rows(rows: T[]);
     set outsideFilter(outsideFilter: EventEmitter<any>);
@@ -61,7 +68,7 @@ export declare class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     set hideGlobalSearch(v: boolean);
     get hideGlobalSearch(): boolean;
     private _hideGlobalSearch;
-    preferencesChanged: EventEmitter<IDataTablePreferences>;
+    preferencesChanged: EventEmitter<IDataTablePreferencesChangeEvent>;
     allSelected: EventEmitter<{
         allSelected: boolean;
         selectedCount: number;
@@ -107,10 +114,13 @@ export declare class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     selectRow(row: T, origin?: string): void;
     selectRows(selected: boolean): void;
     allCurrentRowsSelected(): boolean;
+    columnDragFilter: (columnName: string) => boolean;
+    columnDragged(event: NovoDragFinishEvent<string>): void;
     private configureLastDisplayedColumn;
     private configureColumns;
+    private updateDisplayedColumns;
     private scrollListener;
     performInteractions(event: ListInteractionEvent): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<NovoDataTable<any>, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<NovoDataTable<any>, "novo-data-table", never, { "displayedColumns": { "alias": "displayedColumns"; "required": false; }; "paginationOptions": { "alias": "paginationOptions"; "required": false; }; "searchOptions": { "alias": "searchOptions"; "required": false; }; "selectionOptions": { "alias": "selectionOptions"; "required": false; }; "defaultSort": { "alias": "defaultSort"; "required": false; }; "name": { "alias": "name"; "required": false; }; "allowMultipleFilters": { "alias": "allowMultipleFilters"; "required": false; }; "rowIdentifier": { "alias": "rowIdentifier"; "required": false; }; "activeRowIdentifier": { "alias": "activeRowIdentifier"; "required": false; }; "trackByFn": { "alias": "trackByFn"; "required": false; }; "templates": { "alias": "templates"; "required": false; }; "fixedHeader": { "alias": "fixedHeader"; "required": false; }; "paginatorDataFeatureId": { "alias": "paginatorDataFeatureId"; "required": false; }; "maxSelected": { "alias": "maxSelected"; "required": false; }; "canSelectAll": { "alias": "canSelectAll"; "required": false; }; "allMatchingSelected": { "alias": "allMatchingSelected"; "required": false; }; "overrideTotal": { "alias": "overrideTotal"; "required": false; }; "paginationRefreshSubject": { "alias": "paginationRefreshSubject"; "required": false; }; "dataTableService": { "alias": "dataTableService"; "required": false; }; "rows": { "alias": "rows"; "required": false; }; "outsideFilter": { "alias": "outsideFilter"; "required": false; }; "refreshSubject": { "alias": "refreshSubject"; "required": false; }; "columns": { "alias": "columns"; "required": false; }; "customFilter": { "alias": "customFilter"; "required": false; }; "hasExandedRows": { "alias": "hasExandedRows"; "required": false; }; "forceShowHeader": { "alias": "forceShowHeader"; "required": false; }; "hideGlobalSearch": { "alias": "hideGlobalSearch"; "required": false; }; "listInteractions": { "alias": "listInteractions"; "required": false; }; }, { "resized": "resized"; "preferencesChanged": "preferencesChanged"; "allSelected": "allSelected"; "toggledFilter": "toggledFilter"; }, ["customTemplates"], ["*"], false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<NovoDataTable<any>, "novo-data-table", never, { "displayedColumns": { "alias": "displayedColumns"; "required": false; }; "paginationOptions": { "alias": "paginationOptions"; "required": false; }; "searchOptions": { "alias": "searchOptions"; "required": false; }; "selectionOptions": { "alias": "selectionOptions"; "required": false; }; "defaultSort": { "alias": "defaultSort"; "required": false; }; "name": { "alias": "name"; "required": false; }; "allowMultipleFilters": { "alias": "allowMultipleFilters"; "required": false; }; "rowIdentifier": { "alias": "rowIdentifier"; "required": false; }; "activeRowIdentifier": { "alias": "activeRowIdentifier"; "required": false; }; "trackByFn": { "alias": "trackByFn"; "required": false; }; "templates": { "alias": "templates"; "required": false; }; "fixedHeader": { "alias": "fixedHeader"; "required": false; }; "paginatorDataFeatureId": { "alias": "paginatorDataFeatureId"; "required": false; }; "maxSelected": { "alias": "maxSelected"; "required": false; }; "canSelectAll": { "alias": "canSelectAll"; "required": false; }; "allMatchingSelected": { "alias": "allMatchingSelected"; "required": false; }; "overrideTotal": { "alias": "overrideTotal"; "required": false; }; "paginationRefreshSubject": { "alias": "paginationRefreshSubject"; "required": false; }; "enableColumnDragging": { "alias": "enableColumnDragging"; "required": false; }; "dataTableService": { "alias": "dataTableService"; "required": false; }; "rows": { "alias": "rows"; "required": false; }; "outsideFilter": { "alias": "outsideFilter"; "required": false; }; "refreshSubject": { "alias": "refreshSubject"; "required": false; }; "columns": { "alias": "columns"; "required": false; }; "customFilter": { "alias": "customFilter"; "required": false; }; "hasExandedRows": { "alias": "hasExandedRows"; "required": false; }; "forceShowHeader": { "alias": "forceShowHeader"; "required": false; }; "hideGlobalSearch": { "alias": "hideGlobalSearch"; "required": false; }; "listInteractions": { "alias": "listInteractions"; "required": false; }; }, { "resized": "resized"; "preferencesChanged": "preferencesChanged"; "allSelected": "allSelected"; "toggledFilter": "toggledFilter"; }, ["customTemplates"], ["*"], false, never>;
 }
