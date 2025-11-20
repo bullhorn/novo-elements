@@ -23,18 +23,6 @@ export class BorderDirective {
   @Input() borderY: string;
   @Input() by: string;
 
-  // @HostBinding('style.borderStyle') get getBorderStyle() {
-  //   return this.border;
-  // }
-
-  // @HostBinding('style.borderWidth') get getBorderWidth() {
-  //   return this.width;
-  // }
-
-  // @HostBinding('style.borderColor') get getBorderColor() {
-  //   return this.borderColor;
-  // }
-
   @HostBinding('class') get hb_border() {
     return `border-${this.border}`;
   }

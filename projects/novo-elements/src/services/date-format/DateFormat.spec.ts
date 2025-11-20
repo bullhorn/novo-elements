@@ -95,15 +95,14 @@ describe('Service: DateFormatService', () => {
         imask.rawInputValue = timeString;
         expect(imask.rawInputValue).toEqual(timeString);
       });
-      // Could not seem to get these tests to work - no instance of time input fields appears to respect the "A.M." formatting
-      xit('should work for 1:23 A.M.', () => {
+      it('should work for 1:23 A.M.', () => {
         labelService.timeFormatPlaceholderAM = 'hh:mm A.M.';
         imask = service.getTimeMask(false);
         const timeString = '1:23 A.M.';
         imask.rawInputValue = timeString;
         expect(imask.rawInputValue).toEqual(timeString);
       });
-      xit('should work for 1:23 P.M.', () => {
+      it('should work for 1:23 P.M.', () => {
         labelService.timeFormatPlaceholderAM = 'hh:mm A.M.';
         imask = service.getTimeMask(false);
         const timeString = '1:23 P.M.';

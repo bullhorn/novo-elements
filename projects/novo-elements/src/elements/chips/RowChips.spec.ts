@@ -6,19 +6,6 @@ import { NovoChipsModule } from './Chips.module';
 // App
 import { NovoRowChipsElement } from './RowChips';
 
-// describe('Elements: NovoRowChipElement', () => {
-//   let fixture;
-//   let component;
-
-//   beforeEach(waitForAsync(() => {
-//     TestBed.configureTestingModule({
-//       imports: [FormsModule, NovoChipsModule],
-//     }).compileComponents();
-//     fixture = TestBed.createComponent(NovoRowChipElement);
-//     component = fixture.debugElement.componentInstance;
-//   }));
-// });
-
 describe('Elements: NovoRowChipsElement', () => {
   let fixture;
   let component;

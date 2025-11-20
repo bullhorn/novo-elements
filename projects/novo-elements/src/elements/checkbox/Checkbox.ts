@@ -159,7 +159,6 @@ export class NovoCheckboxElement implements ControlValueAccessor, OnInit {
   onModelTouched: Function = () => {};
 
   constructor(private _cdr: ChangeDetectorRef, private _focusMonitor: FocusMonitor, @Attribute('tabindex') tabIndex: string) {
-    // this.color = this.defaultColor = this._options.color || defaults.color;
     this.tabIndex = parseInt(tabIndex, 10) || 0;
   }
 

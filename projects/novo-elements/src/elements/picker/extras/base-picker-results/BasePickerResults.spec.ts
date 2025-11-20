@@ -22,35 +22,30 @@ describe('Elements: BasePickerResults', () => {
   describe('Method: onScrollDown()', () => {
     it('should be defined.', () => {
       expect(component.onScrollDown).toBeDefined();
-      // component.onScrollDown();
     });
   });
 
-  xdescribe('Method: processSearch()', () => {
+  describe('Method: processSearch()', () => {
     it('should be defined.', () => {
       expect(component.processSearch).toBeDefined();
-      component.processSearch();
     });
   });
 
   describe('Method: search()', () => {
     it('should be defined.', () => {
       expect(component.search).toBeDefined();
-      // component.search();
     });
   });
 
   describe('Method: structureArray()', () => {
     it('should be defined.', () => {
       expect(component.structureArray).toBeDefined();
-      // component.structureArray();
     });
   });
 
   describe('Method: filterData()', () => {
     it('should be defined.', () => {
       expect(component.filterData).toBeDefined();
-      // component.filterData();
     });
   });
 
@@ -94,14 +89,12 @@ describe('Elements: BasePickerResults', () => {
   describe('Method: selectActive()', () => {
     it('should be defined.', () => {
       expect(component.selectActive).toBeDefined();
-      // component.selectActive();
     });
   });
 
   describe('Method: isActive()', () => {
     it('should be defined.', () => {
       expect(component.isActive).toBeDefined();
-      // component.isActive();
     });
   });
 
@@ -139,7 +132,6 @@ describe('Elements: BasePickerResults', () => {
   describe('Method: escapeRegexp()', () => {
     it('should be defined.', () => {
       expect(component.escapeRegexp).toBeDefined();
-      // component.escapeRegexp();
     });
   });
 
@@ -157,7 +149,6 @@ describe('Elements: BasePickerResults', () => {
     });
     it('should be defined.', () => {
       expect(component.preselected).toBeDefined();
-      // component.preselected();
     });
     it('should match by id when applicable', () => {
       component.selected = [
