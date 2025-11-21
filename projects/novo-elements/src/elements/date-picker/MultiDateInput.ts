@@ -25,20 +25,26 @@ const MULTI_DATE_VALUE_ACCESSOR = {
 };
 
 @Component({
-    selector: 'novo-multi-date-input',
-    providers: [MULTI_DATE_VALUE_ACCESSOR],
-    template: `
+  selector: 'novo-multi-date-input',
+  providers: [MULTI_DATE_VALUE_ACCESSOR],
+  template: `
     <novo-chip-list>
-      <novo-chip *ngFor="let date of value | default: []" (removed)="remove($event, date)">
-        {{ date | date: format }}
-        <novo-icon novoChipRemove>close</novo-icon>
-      </novo-chip>
+      @for (date of value | default: []; track date) {
+        <novo-chip (removed)="remove($event, date)">
+          {{ date | date: format }}
+          <novo-icon novoChipRemove>close</novo-icon>
+        </novo-chip>
+      }
     </novo-chip-list>
     <div class="chip-input-container" (click)="_handleFocus($event)">
-      <span class="placeholder" *ngIf="!value.length" data-automation-id="multi-date-input">{{ placeholder }}</span>
+      @if (!value.length) {
+        <span class="placeholder" data-automation-id="multi-date-input">{{ placeholder }}</span>
+      }
     </div>
     <novo-icon class="panel-toggle" [class.selected]="panelOpen" (click)="openPanel()">calendar</novo-icon>
-    <label class="clear-all" *ngIf="value.length" (click)="clearValue()">{{ labels.clearAll }} <i class="bhi-times"></i></label>
+    @if (value.length) {
+      <label class="clear-all" (click)="clearValue()">{{ labels.clearAll }} <i class="bhi-times"></i></label>
+    }
     <novo-overlay-template [parent]="element" position="above-below">
       <novo-date-picker
         [start]="start"
@@ -51,8 +57,8 @@ const MULTI_DATE_VALUE_ACCESSOR = {
       ></novo-date-picker>
     </novo-overlay-template>
   `,
-    styleUrls: ['./MultiDateInput.scss'],
-    standalone: false
+  styleUrls: ['./MultiDateInput.scss'],
+  standalone: false
 })
 export class NovoMultiDateInputElement implements OnInit, ControlValueAccessor {
   public formattedStartDate: string = '';

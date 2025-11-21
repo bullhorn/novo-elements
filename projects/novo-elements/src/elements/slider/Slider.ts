@@ -5,25 +5,33 @@ import { NovoLabelService } from 'novo-elements/services';
 import { Key } from 'novo-elements/utils';
 
 @Component({
-    selector: 'novo-slider',
-    template: `
+  selector: 'novo-slider',
+  template: `
     <section class="slides">
       <ng-content select="div[slide]"></ng-content>
     </section>
     <div class="controls">
-      <button *ngIf="!start" theme="icon" icon="previous" (click)="changeSlide('back')"></button>
+      @if (!start) {
+        <button theme="icon" icon="previous" (click)="changeSlide('back')"></button>
+      }
       <div class="indicators">
-        <div class="indicator-circle" *ngFor="let indicator of currSlides; let i = index" [ngClass]="indicator"></div>
+        @for (indicator of currSlides; track indicator; let i = $index) {
+          <div class="indicator-circle" [ngClass]="indicator"></div>
+        }
       </div>
-      <button *ngIf="!end" theme="primary" icon="next" (click)="changeSlide('next')">{{ labels.next }}</button>
-      <ng-content select="button" *ngIf="end"></ng-content>
+      @if (!end) {
+        <button theme="primary" icon="next" (click)="changeSlide('next')">{{ labels.next }}</button>
+      }
+      @else {
+        <ng-content select="button"></ng-content>
+      }
     </div>
   `,
-    styleUrls: ['./Slider.scss'],
-    host: {
-        '[class]': 'currentClass',
-    },
-    standalone: false
+  styleUrls: ['./Slider.scss'],
+  host: {
+    '[class]': 'currentClass',
+  },
+  standalone: false
 })
 export class NovoSliderElement implements OnInit, OnDestroy {
   @Input()

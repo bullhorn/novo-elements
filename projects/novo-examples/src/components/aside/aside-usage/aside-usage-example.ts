@@ -7,8 +7,8 @@ interface CustomParams {
 }
 
 @Component({
-    selector: 'aside-custom-demo',
-    template: `
+  selector: 'aside-custom-demo',
+  template: `
     <novo-toolbar>
       <novo-toolbar-row accent="candidate" gap="md">
         <novo-icon>candidate</novo-icon>
@@ -36,7 +36,9 @@ interface CustomParams {
             </novo-card-header>
             <novo-card-content condensed>
               <novo-list class="bgc-off-white-striped" direction="vertical">
-                <novo-value row *ngFor="let value of values" [label]="value.label" [data]="value.data"></novo-value>
+                @for (value of values; track value) {
+                  <novo-value row [label]="value.label" [data]="value.data"></novo-value>
+                }
               </novo-list>
             </novo-card-content>
           </novo-card>
@@ -47,11 +49,11 @@ interface CustomParams {
       </novo-nav-outlet>
     </section>
   `,
-    host: {
-        '[style.display]': "'block'",
-        '[style.width.%]': "'100'",
-    },
-    standalone: false
+  host: {
+    '[style.display]': "'block'",
+    '[style.width.%]': "'100'",
+  },
+  standalone: false
 })
 export class AsideCustomDemo {
   public values = [

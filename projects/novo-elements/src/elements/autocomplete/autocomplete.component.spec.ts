@@ -22,20 +22,18 @@ interface MockOption {
     <novo-field>
       <novo-label>Favorite fruits</novo-label>
       <novo-chip-list #chipList [formControl]="chipsControl">
-        <novo-chip
-          *ngFor="let chip of chipList.value"
-          [value]="chip">
-          {{ chip.label }}
-        </novo-chip>
+        @for (chip of chipList.value; track chip) {
+          <novo-chip [value]="chip">{{ chip.label }}</novo-chip>
+        }
         <input
           #chipInput
           novoChipInput
           [formControl]="textCtrl"/>
       </novo-chip-list>
       <novo-autocomplete [makeFirstItemActive]="makeFirstItemActive" (optionSelected)="selected($event)" [multiple]="multiple">
-        <novo-option *ngFor="let option of options$ | async" [value]="option">
-          {{ option.label }}
-        </novo-option>
+        @for (option of options$ | async; track option) {
+          <novo-option [value]="option">{{ option.label }}</novo-option>
+        }
       </novo-autocomplete>
     </novo-field>
   `,

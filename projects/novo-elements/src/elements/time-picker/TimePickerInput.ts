@@ -27,9 +27,9 @@ const DATE_VALUE_ACCESSOR = {
 };
 
 @Component({
-    selector: 'novo-time-picker-input',
-    providers: [DATE_VALUE_ACCESSOR],
-    template: `
+  selector: 'novo-time-picker-input',
+  providers: [DATE_VALUE_ACCESSOR],
+  template: `
     <input
       type="text"
       [name]="name"
@@ -44,9 +44,13 @@ const DATE_VALUE_ACCESSOR = {
       (blur)="_handleBlur($event)"
       #input
       data-automation-id="time-input"
-      [disabled]="disabled"
-    />
-    <i *ngIf="!hasValue" (click)="openPanel()" class="bhi-clock"></i> <i *ngIf="hasValue" (click)="clearValue()" class="bhi-times"></i>
+      [disabled]="disabled" />
+    @if (!hasValue) {
+      <i (click)="openPanel()" class="bhi-clock"></i>
+    }
+    @else {
+      <i (click)="clearValue()" class="bhi-times"></i>
+    }
     <novo-overlay-template [parent]="overlayElement" position="above-below">
       <novo-time-picker
         [ngClass]="{ 'hasButtons': hasButtons }"
@@ -62,8 +66,8 @@ const DATE_VALUE_ACCESSOR = {
       ></novo-time-picker>
     </novo-overlay-template>
   `,
-    styleUrls: ['./TimePickerInput.scss'],
-    standalone: false
+  styleUrls: ['./TimePickerInput.scss'],
+  standalone: false
 })
 export class NovoTimePickerInputElement implements OnInit, OnChanges, ControlValueAccessor {
   public value: any;

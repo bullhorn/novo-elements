@@ -3,22 +3,30 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 import { Helpers } from 'novo-elements/utils';
 
 @Component({
-    selector: 'novo-entity-list',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    template: `
-    <div *ngFor="let entity of data.data" class="entity">
-      <a *ngIf="entity.isLinkable" (click)="openLink(entity)">
-        <i class="bhi-circle {{ entity.class }}"></i>{{ entity | render: metaDisplay }}
-      </a>
-      <span *ngIf="!entity.isLinkable && entity.personSubtype">
-        <i class="bhi-circle {{ entity.class }}"></i>{{ entity | render: metaDisplay }}
-      </span>
-      <span *ngIf="!entity.isLinkable && !entity.personSubtype">
-        {{ entity | render: metaDisplay }}
-      </span>
-    </div>
+  selector: 'novo-entity-list',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: `
+    @for (entity of data.data; track entity) {
+      <div class="entity">
+        @if (entity.isLinkable) {
+          <a (click)="openLink(entity)">
+            <i class="bhi-circle {{ entity.class }}"></i>{{ entity | render: metaDisplay }}
+          </a>
+        }
+        @if (!entity.isLinkable && entity.personSubtype) {
+          <span>
+            <i class="bhi-circle {{ entity.class }}"></i>{{ entity | render: metaDisplay }}
+          </span>
+        }
+        @if (!entity.isLinkable && !entity.personSubtype) {
+          <span>
+            {{ entity | render: metaDisplay }}
+          </span>
+        }
+      </div>
+    }
   `,
-    standalone: false
+  standalone: false
 })
 export class EntityList implements OnInit {
   @Input()

@@ -23,153 +23,166 @@ import { NovoActivityTableState } from './state';
 import { ActivityTableDataSource, ActivityTableService } from './table-source';
 
 @Component({
-    selector: 'novo-simple-table',
-    template: CDK_TABLE_TEMPLATE,
-    styleUrls: ['./table.scss'],
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [{ provide: CDK_TABLE, useExisting: NovoTable }],
-    standalone: false
+  selector: 'novo-simple-table',
+  template: CDK_TABLE_TEMPLATE,
+  styleUrls: ['./table.scss'],
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [{ provide: CDK_TABLE, useExisting: NovoTable }],
+  standalone: false
 })
 export class NovoTable<T> extends CdkTable<T> {
   // TODO: add explicit constructor
 }
 
 @Directive({
-    selector: 'novo-activity-table-actions',
-    standalone: false
+  selector: 'novo-activity-table-actions',
+  standalone: false
 })
 export class NovoActivityTableActions {}
 
 @Directive({
-    selector: 'novo-activity-table-custom-header',
-    standalone: false
+  selector: 'novo-activity-table-custom-header',
+  standalone: false
 })
 export class NovoActivityTableCustomHeader {}
 
 @Directive({
-    selector: 'novo-activity-table-custom-filter',
-    standalone: false
+  selector: 'novo-activity-table-custom-filter',
+  standalone: false
 })
 export class NovoActivityTableCustomFilter {}
 
 @Directive({
-    selector: 'novo-activity-table-empty-message',
-    standalone: false
+  selector: 'novo-activity-table-empty-message',
+  standalone: false
 })
 export class NovoActivityTableEmptyMessage {}
 
 @Directive({
-    selector: 'novo-activity-table-no-results-message',
-    standalone: false
+  selector: 'novo-activity-table-no-results-message',
+  standalone: false
 })
 export class NovoActivityTableNoResultsMessage {}
 
 @Component({
-    selector: 'novo-activity-table',
-    template: `
-    <div *ngIf="debug">
-      <p>Total: {{ dataSource?.total }}</p>
-      <p>Current: {{ dataSource?.current }}</p>
-      <p>Totally Empty: {{ dataSource?.totallyEmpty }}</p>
-      <p>Currently Empty: {{ dataSource?.currentlyEmpty }}</p>
-      <p>Loading (DataSource): {{ dataSource?.loading }}</p>
-      <p>User Filtered: {{ state.userFiltered }}</p>
-      <p>Loading (Table): {{ loading }}</p>
-    </div>
-    <header *ngIf="(!(dataSource?.totallyEmpty && !state.userFiltered) && !loading) || forceShowHeader">
-      <ng-content select="[novo-activity-table-custom-header]"></ng-content>
-      <novo-search
-        alwaysOpen="true"
-        (searchChanged)="onSearchChange($event)"
-        [(ngModel)]="state.globalSearch"
-        *ngIf="!hideGlobalSearch"
-        [placeholder]="searchOptions?.placeholder"
-        [hint]="searchOptions?.tooltip"
-      >
-      </novo-search>
-      <novo-simple-table-pagination
-        *ngIf="paginationOptions"
-        [length]="dataSource?.total"
-        [page]="paginationOptions.page"
-        [pageSize]="paginationOptions.pageSize"
-        [pageSizeOptions]="paginationOptions.pageSizeOptions"
-      >
-      </novo-simple-table-pagination>
-      <div class="novo-activity-table-actions">
-        <ng-content select="[novo-activity-table-actions]"></ng-content>
+  selector: 'novo-activity-table',
+  template: `
+    @if (debug) {
+      <div>
+        <p>Total: {{ dataSource?.total }}</p>
+        <p>Current: {{ dataSource?.current }}</p>
+        <p>Totally Empty: {{ dataSource?.totallyEmpty }}</p>
+        <p>Currently Empty: {{ dataSource?.currentlyEmpty }}</p>
+        <p>Loading (DataSource): {{ dataSource?.loading }}</p>
+        <p>User Filtered: {{ state.userFiltered }}</p>
+        <p>Loading (Table): {{ loading }}</p>
       </div>
-    </header>
-    <div class="novo-activity-table-loading-mask" *ngIf="dataSource?.loading || loading" data-automation-id="novo-activity-table-loading">
-      <novo-loading></novo-loading>
-    </div>
+    }
+    @if ((!(dataSource?.totallyEmpty && !state.userFiltered) && !loading) || forceShowHeader) {
+      <header>
+        <ng-content select="[novo-activity-table-custom-header]"></ng-content>
+        @if (!hideGlobalSearch) {
+          <novo-search
+            alwaysOpen="true"
+            (searchChanged)="onSearchChange($event)"
+            [(ngModel)]="state.globalSearch"
+            [placeholder]="searchOptions?.placeholder"
+            [hint]="searchOptions?.tooltip">
+          </novo-search>
+        }
+        @if (paginationOptions) {
+          <novo-simple-table-pagination
+            [length]="dataSource?.total"
+            [page]="paginationOptions.page"
+            [pageSize]="paginationOptions.pageSize"
+            [pageSizeOptions]="paginationOptions.pageSizeOptions">
+          </novo-simple-table-pagination>
+        }
+        <div class="novo-activity-table-actions">
+          <ng-content select="[novo-activity-table-actions]"></ng-content>
+        </div>
+      </header>
+    }
+    @if (dataSource?.loading || loading) {
+      <div class="novo-activity-table-loading-mask" data-automation-id="novo-activity-table-loading">
+        <novo-loading></novo-loading>
+      </div>
+    }
     <div class="novo-activity-table-filter-container">
-      <div class="novo-activity-table-custom-filter" *ngIf="customFilter">
-        <ng-content select="[novo-activity-table-custom-filter]"></ng-content>
-      </div>
+      @if (customFilter) {
+        <div class="novo-activity-table-custom-filter">
+          <ng-content select="[novo-activity-table-custom-filter]"></ng-content>
+        </div>
+      }
       <div class="novo-activity-table-container">
-        <novo-simple-table
-          *ngIf="columns?.length > 0"
-          [dataSource]="dataSource"
-          novoSortFilter
-          novoSelection
-          [class.empty]="dataSource?.currentlyEmpty && state.userFiltered"
-          [hidden]="dataSource?.totallyEmpty && !state.userFiltered">
-          <ng-content></ng-content>
-          <ng-container novoSimpleColumnDef="selection">
-            <novo-simple-checkbox-header-cell *novoSimpleHeaderCellDef></novo-simple-checkbox-header-cell>
-            <novo-simple-checkbox-cell *novoSimpleCellDef="let row; let i = index" [row]="row" [index]="i"></novo-simple-checkbox-cell>
-          </ng-container>
-          <ng-container *ngFor="let column of actionColumns" [novoSimpleColumnDef]="column.id">
-            <novo-simple-empty-header-cell
-              [class.button-header-cell]="!column.options"
-              [class.dropdown-header-cell]="column.options"
-              *novoSimpleHeaderCellDef
-            ></novo-simple-empty-header-cell>
-            <novo-simple-action-cell *novoSimpleCellDef="let row; let i = index" [row]="row" [column]="column"></novo-simple-action-cell>
-          </ng-container>
-          <ng-container *ngFor="let column of columns" [novoSimpleColumnDef]="column.id">
-            <novo-simple-header-cell
-              *novoSimpleHeaderCellDef
-              [column]="column"
-              [novo-simple-cell-config]="column.config"
-              [defaultSort]="defaultSort"
-              >{{ column.label }}</novo-simple-header-cell>
-            <novo-simple-cell *novoSimpleCellDef="let row" [column]="column" [row]="row"></novo-simple-cell>
-          </ng-container>
-          <novo-simple-header-row *novoSimpleHeaderRowDef="displayedColumns"></novo-simple-header-row>
-          <novo-simple-row *novoSimpleRowDef="let row; columns: displayedColumns"></novo-simple-row>
-        </novo-simple-table>
-        <div
-          class="novo-activity-table-no-results-container"
-          *ngIf="dataSource?.currentlyEmpty && state.userFiltered && !dataSource?.loading && !loading && !dataSource.pristine"
-        >
-          <div #filtered><ng-content select="[novo-activity-table-no-results-message]"></ng-content></div>
-          <div class="novo-activity-table-empty-message" *ngIf="filtered.childNodes.length == 0">
-            <h4><i class="bhi-search-question"></i> {{ labels.noMatchingRecordsMessage }}</h4>
+        @if (columns?.length > 0) {
+          <novo-simple-table
+            [dataSource]="dataSource"
+            novoSortFilter
+            novoSelection
+            [class.empty]="dataSource?.currentlyEmpty && state.userFiltered"
+            [hidden]="dataSource?.totallyEmpty && !state.userFiltered">
+            <ng-content></ng-content>
+            <ng-container novoSimpleColumnDef="selection">
+              <novo-simple-checkbox-header-cell *novoSimpleHeaderCellDef></novo-simple-checkbox-header-cell>
+              <novo-simple-checkbox-cell *novoSimpleCellDef="let row; let i = index" [row]="row" [index]="i"></novo-simple-checkbox-cell>
+            </ng-container>
+            @for (column of actionColumns; track column) {
+              <ng-container [novoSimpleColumnDef]="column.id">
+                <novo-simple-empty-header-cell
+                  [class.button-header-cell]="!column.options"
+                  [class.dropdown-header-cell]="column.options"
+                  *novoSimpleHeaderCellDef></novo-simple-empty-header-cell>
+                <novo-simple-action-cell *novoSimpleCellDef="let row; let i = index" [row]="row" [column]="column"></novo-simple-action-cell>
+              </ng-container>
+            }
+            @for (column of columns; track column) {
+              <ng-container [novoSimpleColumnDef]="column.id">
+                <novo-simple-header-cell
+                  *novoSimpleHeaderCellDef
+                  [column]="column"
+                  [novo-simple-cell-config]="column.config"
+                  [defaultSort]="defaultSort">{{ column.label }}</novo-simple-header-cell>
+                <novo-simple-cell *novoSimpleCellDef="let row" [column]="column" [row]="row"></novo-simple-cell>
+              </ng-container>
+            }
+            <novo-simple-header-row *novoSimpleHeaderRowDef="displayedColumns"></novo-simple-header-row>
+            <novo-simple-row *novoSimpleRowDef="let row; columns: displayedColumns"></novo-simple-row>
+          </novo-simple-table>
+        }
+        @if (dataSource?.currentlyEmpty && state.userFiltered && !dataSource?.loading && !loading && !dataSource.pristine) {
+          <div class="novo-activity-table-no-results-container">
+            <div #filtered><ng-content select="[novo-activity-table-no-results-message]"></ng-content></div>
+            @if (filtered.childNodes.length == 0) {
+              <div class="novo-activity-table-empty-message">
+                <h4><i class="bhi-search-question"></i> {{ labels.noMatchingRecordsMessage }}</h4>
+              </div>
+            }
           </div>
-        </div>
-        <div
-          class="novo-activity-table-empty-container"
-          *ngIf="dataSource?.totallyEmpty && !dataSource?.loading && !loading && !state.userFiltered && !dataSource.pristine"
-        >
-          <div #empty><ng-content select="[novo-activity-table-empty-message]"></ng-content></div>
-          <div class="novo-activity-table-empty-message" *ngIf="empty.childNodes.length == 0">
-            <h4><i class="bhi-search-question"></i> {{ labels.emptyTableMessage }}</h4>
+        }
+        @if (dataSource?.totallyEmpty && !dataSource?.loading && !loading && !state.userFiltered && !dataSource.pristine) {
+          <div class="novo-activity-table-empty-container">
+            <div #empty><ng-content select="[novo-activity-table-empty-message]"></ng-content></div>
+            @if (empty.childNodes.length == 0) {
+              <div class="novo-activity-table-empty-message">
+                <h4><i class="bhi-search-question"></i> {{ labels.emptyTableMessage }}</h4>
+              </div>
+            }
           </div>
-        </div>
+        }
       </div>
     </div>
   `,
-    styleUrls: ['./table.scss'],
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [
-        NovoActivityTableState,
-        { provide: _VIEW_REPEATER_STRATEGY, useClass: _DisposeViewRepeaterStrategy },
-        { provide: _COALESCED_STYLE_SCHEDULER, useClass: _CoalescedStyleScheduler },
-    ],
-    standalone: false
+  styleUrls: ['./table.scss'],
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    NovoActivityTableState,
+    { provide: _VIEW_REPEATER_STRATEGY, useClass: _DisposeViewRepeaterStrategy },
+    { provide: _COALESCED_STYLE_SCHEDULER, useClass: _CoalescedStyleScheduler },
+  ],
+  standalone: false
 })
 export class NovoActivityTable<T> implements AfterContentInit, OnChanges, OnDestroy {
   @HostBinding('class.global-search-hidden')

@@ -25,9 +25,9 @@ const COLOR_VALUE_ACCESSOR = {
 };
 
 @Component({
-    selector: 'novo-color-input',
-    providers: [COLOR_VALUE_ACCESSOR],
-    template: `
+  selector: 'novo-color-input',
+  providers: [COLOR_VALUE_ACCESSOR],
+  template: `
     <novo-field>
       <input
         novoInput
@@ -42,15 +42,19 @@ const COLOR_VALUE_ACCESSOR = {
         (blur)="_handleBlur($event)"
         [(ngModel)]="value"
         #input
-      />
-      <novo-icon *ngIf="!hasValue" (click)="openPanel()">complex</novo-icon>
-      <novo-icon *ngIf="hasValue" smaller (click)="clearValue()">x</novo-icon>
+        />
+      @if (!hasValue) {
+        <novo-icon (click)="openPanel()">complex</novo-icon>
+      }
+      @else {
+        <novo-icon smaller (click)="clearValue()">x</novo-icon>
+      }
     </novo-field>
     <novo-overlay-template [parent]="element" position="above-below">
       <novo-color-picker [(color)]="value" (onChange)="setValueAndClose($event)"></novo-color-picker>
     </novo-overlay-template>
   `,
-    standalone: false
+  standalone: false
 })
 export class NovoColorInputElement implements OnInit, ControlValueAccessor {
   @Input()

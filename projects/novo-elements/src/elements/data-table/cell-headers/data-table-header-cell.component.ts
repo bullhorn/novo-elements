@@ -34,171 +34,197 @@ import { NovoDataTableSortFilter } from '../sort-filter/sort-filter.directive';
 import { DataTableState } from '../state/data-table-state.service';
 
 @Component({
-    selector: '[novo-data-table-cell-config]',
-    template: `
-    <i class="bhi-{{ labelIcon }} label-icon" *ngIf="labelIcon" data-automation-id="novo-data-table-header-icon"></i>
+  selector: '[novo-data-table-cell-config]',
+  template: `
+    @if (labelIcon) {
+      <i class="bhi-{{ labelIcon }} label-icon" data-automation-id="novo-data-table-header-icon"></i>
+    }
     <label data-automation-id="novo-data-table-label">{{ label }}</label>
     <div>
-      <novo-sort-button
-        *ngIf="config.sortable"
-        data-automation-id="novo-data-table-sort"
-        tooltipPosition="left"
-        [tooltip]="labels.sort"
-        [attr.data-feature-id]="'novo-data-table-sort-' + this.id"
-        (sortChange)="sort()"
+      @if (config.sortable) {
+        <novo-sort-button
+          data-automation-id="novo-data-table-sort"
+          tooltipPosition="left"
+          [tooltip]="labels.sort"
+          [attr.data-feature-id]="'novo-data-table-sort-' + this.id"
+          (sortChange)="sort()"
         [value]="sortValue"></novo-sort-button>
-      <novo-dropdown
-        *ngIf="config.filterable"
-        side="left"
-        parentScrollSelector=".novo-data-table-container"
-        containerClass="data-table-dropdown"
-        data-automation-id="novo-data-table-filter"
-        [multiple]="multiSelect">
-        <novo-icon
-          dropdownTrigger
-          class="filter-button"
-          [class.filter-active]="filterActive"
-          [tooltip]="labels.filters"
-          tooltipPosition="right"
-          [attr.data-feature-id]="'novo-data-table-filter-' + this.id"
-          (click)="clickedFilter($event)">filter</novo-icon>
-        <ng-container [ngSwitch]="config.filterConfig.type">
-          <ng-container *ngSwitchCase="'date'" (keydown.escape)="handleEscapeKeydown($event)">
-            <novo-data-table-cell-filter-header [filter]="filter" (clearFilter)="clearFilter()"></novo-data-table-cell-filter-header>
-            <div class="optgroup-container">
-              <novo-optgroup>
-                <ng-container *ngIf="!showCustomRange">
-                  <novo-option
-                    [class.active]="activeDateFilter === option.label"
-                    *ngFor="let option of config.filterConfig.options"
-                    (click)="filterData(option)"
-                    [attr.data-automation-id]="'novo-data-table-filter-' + option.label">
-                    <span>{{ option.label }}</span>
-                    <novo-icon novoSuffix color="positive" *ngIf="activeDateFilter === option.label">check</novo-icon>
-                  </novo-option>
-                </ng-container>
-                <novo-option
-                  [class.active]="labels.customDateRange === activeDateFilter"
-                  (click)="toggleCustomRange($event, true)"
-                  *ngIf="config.filterConfig.allowCustomRange && !showCustomRange">
-                  <span>{{ labels.customDateRange }}</span>
-                  <novo-icon novoSuffix color="positive" *ngIf="labels.customDateRange === activeDateFilter">check</novo-icon>
-                </novo-option>
-                <novo-option class="calendar-container" *ngIf="showCustomRange" keepOpen>
-                  <novo-stack>
-                    <div class="back-link" (click)="toggleCustomRange($event, false)">
-                      <i class="bhi-previous"></i>
-                      {{ labels.backToPresetFilters }}
-                    </div>
-                    <novo-date-picker
-                      (onSelect)="filterData($event)"
-                      [(ngModel)]="filter"
-                      range="true"
-                      (keydown.escape)="handleEscapeKeydown($event)"></novo-date-picker>
-                  </novo-stack>
-                </novo-option>
-              </novo-optgroup>
-            </div>
-          </ng-container>
-          <ng-container *ngSwitchCase="'select'">
-            <novo-data-table-cell-filter-header [filter]="filter" (clearFilter)="clearFilter()"></novo-data-table-cell-filter-header>
-            <div class="optgroup-container">
-              <novo-optgroup>
-                <novo-option
-                  [class.active]="filter === option"
-                  *ngFor="let option of config.filterConfig.options"
-                  (click)="filterData(option)"
-                  [attr.data-automation-id]="'novo-data-table-filter-' + (option?.label || option)">
-                  <span>{{ option?.label || option }}</span>
-                  <novo-icon novoSuffix color="positive" *ngIf="option.hasOwnProperty('value') ? filter === option.value : filter === option">
-                    check</novo-icon>
-                </novo-option>
-              </novo-optgroup>
-            </div>
-          </ng-container>
-          <ng-container *ngSwitchCase="'multi-select'">
-            <novo-data-table-cell-filter-header [filter]="filter" (clearFilter)="clearFilter()"></novo-data-table-cell-filter-header>
-            <div class="optgroup-container">
-              <novo-optgroup class="dropdown-list-filter" (keydown)="multiSelectOptionFilterHandleKeydown($event)">
-                <novo-option class="filter-search" novoInert>
-                  <novo-field flex>
-                    <input
-                      novoInput
-                      [(ngModel)]="optionFilter"
-                      (ngModelChange)="multiSelectOptionFilter($event)"
-                      #optionFilterInput
-                      data-automation-id="novo-data-table-multi-select-option-filter-input"
-                      (keydown.enter)="multiSelectOptionFilterHandleKeydown($event)" />
-                    <novo-icon novoSuffix>search</novo-icon>
-                    <novo-error class="error-text" [hidden]="!error || !multiSelectHasVisibleOptions()">
-                      {{ labels.selectFilterOptions }}
-                    </novo-error>
-                  </novo-field>
-                </novo-option>
-              </novo-optgroup>
-              <novo-optgroup class="dropdown-list-options" (keydown.escape)="handleEscapeKeydown($event)">
-                <novo-option
-                  *ngFor="let option of config.filterConfig.options"
-                  [hidden]="multiSelectOptionIsHidden(option)"
-                  (click)="toggleSelection(option)"
-                  [attr.data-automation-id]="'novo-data-table-filter-' + (option?.label || option)">
-                  <span>{{ option?.label || option }}</span>
-                  <novo-icon novoSuffix color="positive">
-                    {{ isSelected(option, multiSelectedOptions) ? 'checkbox-filled' : 'checkbox-empty' }}
-                  </novo-icon>
-                </novo-option>
-              </novo-optgroup>
-              <novo-option class="filter-null-results" [hidden]="multiSelectHasVisibleOptions()">{{ labels.pickerEmpty }}</novo-option>
-            </div>
-          </ng-container>
-          <ng-container *ngSwitchCase="'custom'">
-            <ng-container *ngIf="dropdown">
-              <novo-data-table-cell-filter-header *ngIf="!config.filterConfig?.useCustomHeader" [filter]="filter" (clearFilter)="clearFilter()"></novo-data-table-cell-filter-header>
+      }
+      @if (config.filterable) {
+        <novo-dropdown
+          side="left"
+          parentScrollSelector=".novo-data-table-container"
+          containerClass="data-table-dropdown"
+          data-automation-id="novo-data-table-filter"
+          [multiple]="multiSelect">
+          <novo-icon
+            dropdownTrigger
+            class="filter-button"
+            [class.filter-active]="filterActive"
+            [tooltip]="labels.filters"
+            tooltipPosition="right"
+            [attr.data-feature-id]="'novo-data-table-filter-' + this.id"
+            (click)="clickedFilter($event)">filter</novo-icon>
+          @switch (config.filterConfig.type) {
+            @case ('date') {
+              <ng-container (keydown.escape)="handleEscapeKeydown($event)">
+                <novo-data-table-cell-filter-header [filter]="filter" (clearFilter)="clearFilter()"></novo-data-table-cell-filter-header>
+                <div class="optgroup-container">
+                  <novo-optgroup>
+                    @if (!showCustomRange) {
+                      @for (option of config.filterConfig.options; track option) {
+                        <novo-option
+                          [class.active]="activeDateFilter === $any(option).label"
+                          (click)="filterData(option)"
+                          [attr.data-automation-id]="'novo-data-table-filter-' + $any(option).label">
+                          <span>{{ $any(option).label }}</span>
+                          @if (activeDateFilter === $any(option).label) {
+                            <novo-icon novoSuffix color="positive">check</novo-icon>
+                          }
+                        </novo-option>
+                      }
+                    }
+                    @if (config.filterConfig.allowCustomRange && !showCustomRange) {
+                      <novo-option
+                        [class.active]="labels.customDateRange === activeDateFilter"
+                        (click)="toggleCustomRange($event, true)"
+                        >
+                        <span>{{ labels.customDateRange }}</span>
+                        @if (labels.customDateRange === activeDateFilter) {
+                          <novo-icon novoSuffix color="positive">check</novo-icon>
+                        }
+                      </novo-option>
+                    }
+                    @if (showCustomRange) {
+                      <novo-option class="calendar-container" keepOpen>
+                        <novo-stack>
+                          <div class="back-link" (click)="toggleCustomRange($event, false)">
+                            <i class="bhi-previous"></i>
+                            {{ labels.backToPresetFilters }}
+                          </div>
+                          <novo-date-picker
+                            (onSelect)="filterData($event)"
+                            [(ngModel)]="filter"
+                            range="true"
+                            (keydown.escape)="handleEscapeKeydown($event)"></novo-date-picker>
+                        </novo-stack>
+                      </novo-option>
+                    }
+                  </novo-optgroup>
+                </div>
+              </ng-container>
+            }
+            @case ('select') {
+              <novo-data-table-cell-filter-header [filter]="filter" (clearFilter)="clearFilter()"></novo-data-table-cell-filter-header>
               <div class="optgroup-container">
-                <ng-container *ngTemplateOutlet="filterTemplate; context: { $implicit: config, column, dropdown, filter }"></ng-container>
+                <novo-optgroup>
+                  @for (option of config.filterConfig.options; track option) {
+                    <novo-option
+                      [class.active]="filter === option"
+                      (click)="filterData(option)"
+                      [attr.data-automation-id]="'novo-data-table-filter-' + ($any(option)?.label || option)">
+                      <span>{{ $any(option)?.label || option }}</span>
+                      @if (option.hasOwnProperty('value') ? filter === $any(option).value : filter === option) {
+                        <novo-icon novoSuffix color="positive">check</novo-icon>
+                      }
+                    </novo-option>
+                  }
+                </novo-optgroup>
               </div>
-            </ng-container>
-          </ng-container>
-          <ng-container *ngSwitchDefault (keydown.escape)="handleEscapeKeydown($event)">
-            <novo-data-table-cell-filter-header [filter]="filter" (clearFilter)="clearFilter()"></novo-data-table-cell-filter-header>
-            <div class="optgroup-container">
-              <novo-optgroup>
-                <novo-option class="filter-search" novoInert>
-                  <novo-field flex fullWidth>
-                    <input
-                      novoInput
-                      [type]="config.filterConfig.type"
-                      [(ngModel)]="filter"
-                      (ngModelChange)="filterData($event)"
-                      #filterInput
-                      data-automation-id="novo-data-table-filter-input"
-                      (keydown.escape)="handleEscapeKeydown($event)" />
-                    <novo-icon novoSuffix>search</novo-icon>
-                  </novo-field>
-                </novo-option>
-              </novo-optgroup>
+            }
+            @case ('multi-select') {
+              <novo-data-table-cell-filter-header [filter]="filter" (clearFilter)="clearFilter()"></novo-data-table-cell-filter-header>
+              <div class="optgroup-container">
+                <novo-optgroup class="dropdown-list-filter" (keydown)="multiSelectOptionFilterHandleKeydown($event)">
+                  <novo-option class="filter-search" novoInert>
+                    <novo-field flex>
+                      <input
+                        novoInput
+                        [(ngModel)]="optionFilter"
+                        (ngModelChange)="multiSelectOptionFilter($event)"
+                        #optionFilterInput
+                        data-automation-id="novo-data-table-multi-select-option-filter-input"
+                        (keydown.enter)="multiSelectOptionFilterHandleKeydown($event)" />
+                      <novo-icon novoSuffix>search</novo-icon>
+                      <novo-error class="error-text" [hidden]="!error || !multiSelectHasVisibleOptions()">
+                        {{ labels.selectFilterOptions }}
+                      </novo-error>
+                    </novo-field>
+                  </novo-option>
+                </novo-optgroup>
+                <novo-optgroup class="dropdown-list-options" (keydown.escape)="handleEscapeKeydown($event)">
+                  @for (option of config.filterConfig.options; track option) {
+                    <novo-option
+                      [hidden]="multiSelectOptionIsHidden(option)"
+                      (click)="toggleSelection(option)"
+                      [attr.data-automation-id]="'novo-data-table-filter-' + ($any(option)?.label || option)">
+                      <span>{{ $any(option)?.label || option }}</span>
+                      <novo-icon novoSuffix color="positive">
+                        {{ isSelected(option, multiSelectedOptions) ? 'checkbox-filled' : 'checkbox-empty' }}
+                      </novo-icon>
+                    </novo-option>
+                  }
+                </novo-optgroup>
+                <novo-option class="filter-null-results" [hidden]="multiSelectHasVisibleOptions()">{{ labels.pickerEmpty }}</novo-option>
+              </div>
+            }
+            @case ('custom') {
+              @if (dropdown) {
+                @if (!config.filterConfig?.useCustomHeader) {
+                  <novo-data-table-cell-filter-header [filter]="filter" (clearFilter)="clearFilter()"></novo-data-table-cell-filter-header>
+                }
+                <div class="optgroup-container">
+                  <ng-container *ngTemplateOutlet="filterTemplate; context: { $implicit: config, column, dropdown, filter }"></ng-container>
+                </div>
+              }
+            }
+            @default {
+              <ng-container (keydown.escape)="handleEscapeKeydown($event)">
+                <novo-data-table-cell-filter-header [filter]="filter" (clearFilter)="clearFilter()"></novo-data-table-cell-filter-header>
+                <div class="optgroup-container">
+                  <novo-optgroup>
+                    <novo-option class="filter-search" novoInert>
+                      <novo-field flex fullWidth>
+                        <input
+                          novoInput
+                          [type]="config.filterConfig.type"
+                          [(ngModel)]="filter"
+                          (ngModelChange)="filterData($event)"
+                          #filterInput
+                          data-automation-id="novo-data-table-filter-input"
+                          (keydown.escape)="handleEscapeKeydown($event)" />
+                        <novo-icon novoSuffix>search</novo-icon>
+                      </novo-field>
+                    </novo-option>
+                  </novo-optgroup>
+                </div>
+              </ng-container>
+            }
+          }
+          @if (multiSelect) {
+            <div class="footer">
+              <novo-button theme="dialogue" color="dark" (click)="cancel()" data-automation-id="novo-data-table-multi-select-cancel">
+                {{ labels.cancel }}
+              </novo-button>
+              <novo-button
+                theme="dialogue"
+                color="positive"
+                (click)="filterMultiSelect()"
+                data-automation-id="novo-data-table-multi-select-filter">
+                {{ labels.filters }}
+              </novo-button>
             </div>
-          </ng-container>
-        </ng-container>
-        <div class="footer" *ngIf="multiSelect">
-          <novo-button theme="dialogue" color="dark" (click)="cancel()" data-automation-id="novo-data-table-multi-select-cancel">
-            {{ labels.cancel }}
-          </novo-button>
-          <novo-button
-            theme="dialogue"
-            color="positive"
-            (click)="filterMultiSelect()"
-            data-automation-id="novo-data-table-multi-select-filter">
-            {{ labels.filters }}
-          </novo-button>
-        </div>
-      </novo-dropdown>
+          }
+        </novo-dropdown>
+      }
     </div>
     <div class="spacer"></div>
-    <div class="data-table-header-resizable" *ngIf="config.resizable"><span (mousedown)="startResize($event)">&nbsp;</span></div>
+    @if (config.resizable) {
+      <div class="data-table-header-resizable"><span (mousedown)="startResize($event)">&nbsp;</span></div>
+    }
   `,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit, OnDestroy {
   @ViewChild('filterInput')

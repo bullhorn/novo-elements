@@ -2,37 +2,38 @@ import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/co
 import { CalendarEvent, WeekDay } from 'novo-elements/utils';
 
 @Component({
-    selector: 'novo-agenda-week-header',
-    template: `
+  selector: 'novo-agenda-week-header',
+  template: `
     <ng-template #defaultTemplate>
       <div class="cal-day-headers">
-        <div
-          class="cal-header"
-          *ngFor="let day of days"
-          [class.cal-past]="day.isPast"
-          [class.cal-today]="day.isToday"
-          [class.cal-future]="day.isFuture"
-          [class.cal-weekend]="day.isWeekend"
-          [class.cal-drag-over]="day.dragOver"
-          (click)="dayClicked.emit({ date: day.date })"
-          mwlDroppable
-          (dragEnter)="day.dragOver = true"
-          (dragLeave)="day.dragOver = false"
-          (drop)="day.dragOver = false; eventDropped.emit({ event: $event.dropData.event, newStart: day.date })"
-        >
-          <b>{{ day.date | weekday: locale:'long' }}</b
-          ><br />
-          <span>{{ day.date | monthday: locale }}</span>
+        @for (day of days; track day) {
+          <div
+            class="cal-header"
+            [class.cal-past]="day.isPast"
+            [class.cal-today]="day.isToday"
+            [class.cal-future]="day.isFuture"
+            [class.cal-weekend]="day.isWeekend"
+            [class.cal-drag-over]="$any(day).dragOver"
+            (click)="dayClicked.emit({ date: day.date })"
+            mwlDroppable
+            (dragEnter)="$any(day).dragOver = true"
+            (dragLeave)="$any(day).dragOver = false"
+            (drop)="$any(day).dragOver = false; eventDropped.emit({ event: $event.dropData.event, newStart: day.date })"
+            >
+            <b>{{ day.date | weekday: locale:'long' }}</b
+              ><br />
+              <span>{{ day.date | monthday: locale }}</span>
+            </div>
+          }
         </div>
-      </div>
-    </ng-template>
-    <ng-template
-      [ngTemplateOutlet]="customTemplate || defaultTemplate"
-      [ngTemplateOutletContext]="{ days: days, locale: locale, dayClicked: dayClicked, eventDropped: eventDropped }"
-    >
-    </ng-template>
+      </ng-template>
+      <ng-template
+        [ngTemplateOutlet]="customTemplate || defaultTemplate"
+        [ngTemplateOutletContext]="{ days: days, locale: locale, dayClicked: dayClicked, eventDropped: eventDropped }"
+        >
+      </ng-template>
   `,
-    standalone: false
+  standalone: false
 })
 export class NovoAgendaWeekHeaderElement {
   @Input()

@@ -43,44 +43,50 @@ const MINUTES_IN_HOUR: number = 60;
  * ```
  */
 @Component({
-    selector: 'novo-agenda-week',
-    template: `
+  selector: 'novo-agenda-week',
+  template: `
     <div class="cal-week-view" #weekViewContainer>
       <novo-agenda-week-header [days]="days" [locale]="locale" [customTemplate]="headerTemplate" (dayClicked)="dayClicked.emit($event)">
       </novo-agenda-week-header>
-      <div *ngFor="let eventRow of eventRows" #eventRowContainer>
-        <div
-          class="cal-event-container"
-          #event
-          *ngFor="let weekEvent of eventRow.row"
-          [style.width]="(100 / days.length) * weekEvent.span + '%'"
-          [style.marginTop.px]="weekEvent.top"
-          [style.height.px]="weekEvent.height"
-          [style.marginLeft]="(100 / days.length) * weekEvent.offset + '%'"
-        >
-          <novo-agenda-week-event
-            [weekEvent]="weekEvent"
-            [tooltipPosition]="tooltipPosition"
-            [customTemplate]="eventTemplate"
-            (eventClicked)="eventClicked.emit($event)"
-          >
-          </novo-agenda-week-event>
+      @for (eventRow of eventRows; track eventRow) {
+        <div #eventRowContainer>
+          @for (weekEvent of eventRow.row; track weekEvent) {
+            <div
+              class="cal-event-container"
+              #event
+              [style.width]="(100 / days.length) * weekEvent.span + '%'"
+              [style.marginTop.px]="weekEvent.top"
+              [style.height.px]="weekEvent.height"
+              [style.marginLeft]="(100 / days.length) * weekEvent.offset + '%'"
+              >
+              <novo-agenda-week-event
+                [weekEvent]="weekEvent"
+                [tooltipPosition]="tooltipPosition"
+                [customTemplate]="eventTemplate"
+                (eventClicked)="eventClicked.emit($event)"
+                >
+              </novo-agenda-week-event>
+            </div>
+          }
         </div>
-      </div>
-      <div class="cal-hour" *ngFor="let hour of hours" [style.minWidth.px]="70">
-        <novo-agenda-day-hour-segment
-          *ngFor="let segment of hour.segments"
-          [segment]="segment"
-          [locale]="locale"
-          [customTemplate]="hourSegmentTemplate"
-          (click)="hourSegmentClicked.emit({ date: segment.date })"
-        >
-        </novo-agenda-day-hour-segment>
-      </div>
+      }
+      @for (hour of hours; track hour) {
+        <div class="cal-hour" [style.minWidth.px]="70">
+          @for (segment of hour.segments; track segment) {
+            <novo-agenda-day-hour-segment
+              [segment]="segment"
+              [locale]="locale"
+              [customTemplate]="hourSegmentTemplate"
+              (click)="hourSegmentClicked.emit({ date: segment.date })"
+              >
+            </novo-agenda-day-hour-segment>
+          }
+        </div>
+      }
     </div>
   `,
-    styleUrls: ['./AgendaWeekView.scss', '../common/AgendaHoursLayout.scss'],
-    standalone: false
+  styleUrls: ['./AgendaWeekView.scss', '../common/AgendaHoursLayout.scss'],
+  standalone: false
 })
 export class NovoAgendaWeekViewElement implements OnChanges, OnInit, OnDestroy {
   /**

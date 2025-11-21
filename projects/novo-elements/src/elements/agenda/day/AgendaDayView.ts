@@ -42,51 +42,56 @@ const MINUTES_IN_HOUR: number = 60;
  * ```
  */
 @Component({
-    selector: 'novo-agenda-day',
-    template: `
+  selector: 'novo-agenda-day',
+  template: `
     <div class="cal-day-view" #dayViewContainer>
-      <novo-agenda-all-day-event
-        *ngFor="let event of view.allDayEvents"
-        [event]="event"
-        [customTemplate]="allDayEventTemplate"
-        (eventClicked)="eventClicked.emit({ event: event })"
-      >
-      </novo-agenda-all-day-event>
+      @for (event of view.allDayEvents; track event) {
+        <novo-agenda-all-day-event
+          [event]="event"
+          [customTemplate]="allDayEventTemplate"
+          (eventClicked)="eventClicked.emit({ event: event })"
+          >
+        </novo-agenda-all-day-event>
+      }
       <div class="cal-hour-rows">
         <div class="cal-events">
-          <div
-            #event
-            *ngFor="let dayEvent of view?.events"
-            class="cal-event-container"
-            [style.marginTop.px]="dayEvent.top"
-            [style.height.px]="dayEvent.height"
-            [style.marginLeft.px]="dayEvent.left + 70"
-            [style.width.px]="dayEvent.width - 1"
-          >
-            <novo-agenda-day-event
-              [dayEvent]="dayEvent"
-              [tooltipPosition]="tooltipPosition"
-              [customTemplate]="eventTemplate"
-              (eventClicked)="eventClicked.emit($event)"
-            >
-            </novo-agenda-day-event>
+          @for (dayEvent of view?.events; track dayEvent) {
+            <div
+              #event
+              class="cal-event-container"
+              [style.marginTop.px]="dayEvent.top"
+              [style.height.px]="dayEvent.height"
+              [style.marginLeft.px]="dayEvent.left + 70"
+              [style.width.px]="dayEvent.width - 1"
+              >
+              <novo-agenda-day-event
+                [dayEvent]="dayEvent"
+                [tooltipPosition]="tooltipPosition"
+                [customTemplate]="eventTemplate"
+                (eventClicked)="eventClicked.emit($event)"
+                >
+              </novo-agenda-day-event>
+            </div>
+          }
+        </div>
+        @for (hour of hours; track hour) {
+          <div class="cal-hour" [style.minWidth.px]="view?.width + 70">
+            @for (segment of hour.segments; track segment) {
+              <novo-agenda-day-hour-segment
+                [segment]="segment"
+                [locale]="locale"
+                [customTemplate]="hourSegmentTemplate"
+                (click)="hourSegmentClicked.emit({ date: segment.date })"
+                >
+              </novo-agenda-day-hour-segment>
+            }
           </div>
-        </div>
-        <div class="cal-hour" *ngFor="let hour of hours" [style.minWidth.px]="view?.width + 70">
-          <novo-agenda-day-hour-segment
-            *ngFor="let segment of hour.segments"
-            [segment]="segment"
-            [locale]="locale"
-            [customTemplate]="hourSegmentTemplate"
-            (click)="hourSegmentClicked.emit({ date: segment.date })"
-          >
-          </novo-agenda-day-hour-segment>
-        </div>
+        }
       </div>
     </div>
   `,
-    styleUrls: ['./AgendaDayView.scss', '../common/AgendaHoursLayout.scss'],
-    standalone: false
+  styleUrls: ['./AgendaDayView.scss', '../common/AgendaHoursLayout.scss'],
+  standalone: false
 })
 export class NovoAgendaDayViewElement implements OnChanges, OnInit, OnDestroy {
   /**

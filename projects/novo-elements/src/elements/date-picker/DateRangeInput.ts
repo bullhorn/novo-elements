@@ -29,9 +29,9 @@ const DATE_VALUE_ACCESSOR = {
 };
 
 @Component({
-    selector: 'novo-date-range-input',
-    providers: [DATE_VALUE_ACCESSOR],
-    template: `
+  selector: 'novo-date-range-input',
+  providers: [DATE_VALUE_ACCESSOR],
+  template: `
     <div class="date-range-input-container">
       <input
         type="text"
@@ -46,9 +46,13 @@ const DATE_VALUE_ACCESSOR = {
         #startDate
         data-automation-id="date-range-input-start"
         [disabled]="disabled"
-      />
-      <novo-icon *ngIf="!hasStartValue" (click)="openPanel()">calendar</novo-icon>
-      <novo-icon *ngIf="hasStartValue" (click)="clearStartValue()">x</novo-icon>
+        />
+      @if (!hasStartValue) {
+        <novo-icon (click)="openPanel()">calendar</novo-icon>
+      }
+      @else {
+        <novo-icon (click)="clearStartValue()">x</novo-icon>
+      }
     </div>
     <div class="date-range-input-divider">-</div>
     <div class="date-range-input-container">
@@ -64,10 +68,13 @@ const DATE_VALUE_ACCESSOR = {
         (blur)="_handleBlur($event)"
         #endDate
         data-automation-id="date-range-input-end"
-        [disabled]="disabled"
-      />
-      <novo-icon *ngIf="!hasEndValue" (click)="openPanel()">calendar</novo-icon>
-      <novo-icon *ngIf="hasEndValue" (click)="clearEndValue()">x</novo-icon>
+        [disabled]="disabled" />
+      @if (!hasEndValue) {
+        <novo-icon (click)="openPanel()">calendar</novo-icon>
+      }
+      @else {
+        <novo-icon (click)="clearEndValue()">x</novo-icon>
+      }
     </div>
     <novo-overlay-template [parent]="element" position="above-below">
       <novo-date-picker
@@ -82,8 +89,8 @@ const DATE_VALUE_ACCESSOR = {
       ></novo-date-picker>
     </novo-overlay-template>
   `,
-    styleUrls: ['./DateRangeInput.scss'],
-    standalone: false
+  styleUrls: ['./DateRangeInput.scss'],
+  standalone: false
 })
 export class NovoDateRangeInputElement implements OnInit, OnChanges, ControlValueAccessor {
   public formattedStartDate: string = '';

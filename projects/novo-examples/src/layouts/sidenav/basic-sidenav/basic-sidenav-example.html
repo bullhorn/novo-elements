@@ -15,20 +15,24 @@
 
   <novo-layout-container>
     <novo-rail [class.expanded]="!collapsed">
-      <ng-container *ngFor="let win of openWindows">
-        <ng-container [ngSwitch]="win.type">
-          <novo-option *ngSwitchCase="'record'" [accent]="win.accent">
-            <novo-icon>{{win.accent}}</novo-icon>
-            <novo-text>{{win.label}}</novo-text>
-            <novo-action icon="x"></novo-action>
-          </novo-option>
-          <novo-option *ngSwitchCase="'list'" [fill]="win.accent">
-            <novo-icon>{{win.accent}}</novo-icon>
-            <novo-text>{{win.label}}</novo-text>
-            <novo-action icon="x"></novo-action>
-          </novo-option>
-        </ng-container>
-      </ng-container>
+      @for (win of openWindows; track win) {
+        @switch (win.type) {
+          @case ('record') {
+            <novo-option [accent]="win.accent">
+              <novo-icon>{{win.accent}}</novo-icon>
+              <novo-text>{{win.label}}</novo-text>
+              <novo-action icon="x"></novo-action>
+            </novo-option>
+          }
+          @case ('list') {
+            <novo-option [fill]="win.accent">
+              <novo-icon>{{win.accent}}</novo-icon>
+              <novo-text>{{win.label}}</novo-text>
+              <novo-action icon="x"></novo-action>
+            </novo-option>
+          }
+        }
+      }
       <novo-option (click)="collapsed=!collapsed">
         <novo-icon>{{collapsed ? 'arrow-right' : 'arrow-left'}}</novo-icon>
         <novo-text>Collapse All</novo-text>

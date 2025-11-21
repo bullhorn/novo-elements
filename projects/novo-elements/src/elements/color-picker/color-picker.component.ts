@@ -4,27 +4,28 @@ import { debounceTime } from 'rxjs/operators';
 import { Color, HSL, HSLA, HSV, HSVA, RGB, RGBA } from 'novo-elements/utils';
 
 @Component({
-    selector: 'novo-color-picker',
-    template: `
+  selector: 'novo-color-picker',
+  template: `
     <div class="novo-color-preview" [style.backgroundColor]="currentColor.hex">
       <div class="novo-color-preview-text">{{ hex }}</div>
     </div>
     <div class="novo-color-swatches">
-      <novo-color-swatch
-        *ngFor="let color of colors"
-        [color]="color"
-        (onClick)="handleBlockChange($event)"
-        (onHover)="handleSwatchHover($event)"
-      ></novo-color-swatch>
+      @for (color of colors; track color) {
+        <novo-color-swatch
+          [color]="color"
+          (onClick)="handleBlockChange($event)"
+          (onHover)="handleSwatchHover($event)"
+        ></novo-color-swatch>
+      }
     </div>
     <div class="novo-color-input">
       <input [value]="hex.replace('#', '')" (onChange)="handleValueChange($event)" />
     </div>
   `,
-    styleUrls: ['./color-picker.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    preserveWhitespaces: false,
-    standalone: false
+  styleUrls: ['./color-picker.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  preserveWhitespaces: false,
+  standalone: false
 })
 export class NovoColorPickerComponent implements OnInit, OnChanges, OnDestroy {
   /** Pixel value for picker width */

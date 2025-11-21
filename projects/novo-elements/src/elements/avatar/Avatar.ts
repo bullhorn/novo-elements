@@ -5,7 +5,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 @Component({
     selector: 'novo-avatar',
     styleUrls: ['./Avatar.scss'],
-    template: '<img *ngIf="src" [src]="src"/>',
+    template: '@if (src) {<img [src]="src"/>}',
     standalone: false
 })
 export class NovoAvatarElement implements OnInit {

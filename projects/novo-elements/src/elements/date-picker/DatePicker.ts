@@ -17,78 +17,72 @@ const DATE_PICKER_VALUE_ACCESSOR = {
 };
 
 @Component({
-    selector: 'novo-date-picker',
-    providers: [DATE_PICKER_VALUE_ACCESSOR],
-    animations: [
-        trigger('startDateTextState', [
-            state('startDate', style({
-                opacity: '1.0',
-            })),
-            state('endDate', style({
-                opacity: '0.6',
-            })),
-            transition('startDate <=> endDate', animate('200ms ease-in')),
-        ]),
-        trigger('endDateTextState', [
-            state('startDate', style({
-                opacity: '0.6',
-            })),
-            state('endDate', style({
-                opacity: '1.0',
-            })),
-            transition('startDate <=> endDate', animate('200ms ease-in')),
-        ]),
-        trigger('indicatorState', [
-            state('startDate', style({
-                transform: 'translateX(0%)',
-            })),
-            state('endDate', style({
-                transform: 'translateX(100%)',
-            })),
-            transition('startDate <=> endDate', animate('200ms ease-in')),
-        ]),
-    ],
-    template: `
+  selector: 'novo-date-picker',
+  providers: [DATE_PICKER_VALUE_ACCESSOR],
+  animations: [
+    trigger('startDateTextState', [
+      state('startDate', style({
+        opacity: '1.0',
+      })),
+      state('endDate', style({
+        opacity: '0.6',
+      })),
+      transition('startDate <=> endDate', animate('200ms ease-in')),
+    ]),
+    trigger('endDateTextState', [
+      state('startDate', style({
+        opacity: '0.6',
+      })),
+      state('endDate', style({
+        opacity: '1.0',
+      })),
+      transition('startDate <=> endDate', animate('200ms ease-in')),
+    ]),
+    trigger('indicatorState', [
+      state('startDate', style({
+        transform: 'translateX(0%)',
+      })),
+      state('endDate', style({
+        transform: 'translateX(100%)',
+      })),
+      transition('startDate <=> endDate', animate('200ms ease-in')),
+    ]),
+  ],
+  template: `
     <div class="date-picker-container">
-      <div class="date-range-tabs" *ngIf="range" [class.week-select-mode]="weekRangeSelect">
-        <span
-          class="range-tab"
-          (click)="toggleRangeSelect('startDate')"
-          [@startDateTextState]="rangeSelectMode"
-          data-automation-id="calendar-start-date"
-          >{{ startDateLabel }}</span
-        >
-        <span
-          class="range-tab"
-          (click)="toggleRangeSelect('endDate')"
-          [@endDateTextState]="rangeSelectMode"
-          data-automation-id="calendar-end-date"
-          >{{ endDateLabel }}</span
-        >
-        <i class="indicator" [@indicatorState]="rangeSelectMode"></i>
-      </div>
+      @if (range) {
+        <div class="date-range-tabs" [class.week-select-mode]="weekRangeSelect">
+          <span class="range-tab"
+            (click)="toggleRangeSelect('startDate')"
+            [@startDateTextState]="rangeSelectMode"
+            data-automation-id="calendar-start-date">{{ startDateLabel }}</span>
+            <span class="range-tab"
+              (click)="toggleRangeSelect('endDate')"
+              [@endDateTextState]="rangeSelectMode"
+              data-automation-id="calendar-end-date">{{ endDateLabel }}</span>
+              <i class="indicator" [@indicatorState]="rangeSelectMode"></i>
+            </div>
+          }
 
-      <novo-calendar
-        [activeDate]="activeDate"
-        [(selected)]="selection"
-        (selectedChange)="updateSelection($event)"
-        [mode]="mode"
-        [numberOfMonths]="numberOfMonths"
-        [weekStartsOn]="weekStart"
-        [disabledDateMessage]="disabledDateMessage"
-        [minDate]="start"
-        [maxDate]="end"
-      ></novo-calendar>
+          <novo-calendar
+            [activeDate]="activeDate"
+            [(selected)]="selection"
+            (selectedChange)="updateSelection($event)"
+            [mode]="mode"
+            [numberOfMonths]="numberOfMonths"
+            [weekStartsOn]="weekStart"
+            [disabledDateMessage]="disabledDateMessage"
+            [minDate]="start"
+            [maxDate]="end"></novo-calendar>
 
-      <div class="calendar-footer" [hidden]="hideFooter">
-
-        <novo-button [hidden]="hideToday" (click)="setToday()" class="today" size="small" data-automation-id="calendar-today">{{ labels.today }}</novo-button>
-        <ng-content select=".footer-content"></ng-content>
-      </div>
-    </div>
+          <div class="calendar-footer" [hidden]="hideFooter">
+            <novo-button [hidden]="hideToday" (click)="setToday()" class="today" size="small" data-automation-id="calendar-today">{{ labels.today }}</novo-button>
+            <ng-content select=".footer-content"></ng-content>
+          </div>
+        </div>
   `,
-    styleUrls: ['./DatePicker.scss'],
-    standalone: false
+  styleUrls: ['./DatePicker.scss'],
+  standalone: false
 })
 export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
   /**

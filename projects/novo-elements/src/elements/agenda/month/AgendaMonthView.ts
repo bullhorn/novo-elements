@@ -34,8 +34,8 @@ import {
  * ```
  */
 @Component({
-    selector: 'novo-agenda-month',
-    template: `
+  selector: 'novo-agenda-month',
+  template: `
     <div class="agenda-month-view">
       <novo-agenda-month-header
         [(viewDate)]="viewDate"
@@ -43,27 +43,30 @@ import {
         [locale]="locale"
         [customTemplate]="headerTemplate"
         (viewDateChange)="refreshAll()"
-      >
+        >
       </novo-agenda-month-header>
       <div class="agenda-days">
-        <div *ngFor="let rowIndex of view.rowOffsets">
-          <div class="agenda-cell-row">
-            <novo-agenda-month-day
-              *ngFor="let day of view.days | slice: rowIndex:rowIndex + view.totalDaysVisibleInWeek"
-              [day]="day"
-              [locale]="locale"
-              [customTemplate]="cellTemplate"
-              (click)="dayClicked.emit({ day: day })"
-              (eventClicked)="eventClicked.emit({ day: day, event: $event.event })"
-            >
-            </novo-agenda-month-day>
+        @for (rowIndex of view.rowOffsets; track rowIndex) {
+          <div>
+            <div class="agenda-cell-row">
+              @for (day of view.days | slice: rowIndex:rowIndex + view.totalDaysVisibleInWeek; track day) {
+                <novo-agenda-month-day
+                  [day]="day"
+                  [locale]="locale"
+                  [customTemplate]="cellTemplate"
+                  (click)="dayClicked.emit({ day: day })"
+                  (eventClicked)="eventClicked.emit({ day: day, event: $event.event })"
+                  >
+                </novo-agenda-month-day>
+              }
+            </div>
           </div>
-        </div>
+        }
       </div>
     </div>
   `,
-    styleUrls: ['./AgendaMonthView.scss'],
-    standalone: false
+  styleUrls: ['./AgendaMonthView.scss'],
+  standalone: false
 })
 export class NovoAgendaMonthViewElement implements OnChanges, OnInit, OnDestroy {
   /**

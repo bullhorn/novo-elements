@@ -1,6 +1,14 @@
 <div class="novo-stepper-status-line" [ngClass]="state"></div>
-<div [ngSwitch]="state" class="novo-stepper-status-icon">
-  <novo-icon color="positive" *ngSwitchCase="'edit'">check-circle</novo-icon>
-  <novo-icon color="positive" *ngSwitchCase="'done'">check-circle-filled</novo-icon>
-  <novo-icon color="positive" *ngSwitchDefault>circle-o</novo-icon>
+<div class="novo-stepper-status-icon">
+  @switch (state) {
+    @case ('edit') {
+      <novo-icon color="positive">check-circle</novo-icon>
+    }
+    @case ('done') {
+      <novo-icon color="positive">check-circle-filled</novo-icon>
+    }
+    @default {
+      <novo-icon color="positive">circle-o</novo-icon>
+    }
+  }
 </div>

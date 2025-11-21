@@ -5,14 +5,18 @@ import { NovoModalParams, NovoModalRef } from 'novo-elements/elements/modal';
 import { NovoLabelService } from 'novo-elements/services';
 
 @Component({
-    selector: 'control-confirm-modal',
-    template: `
+  selector: 'control-confirm-modal',
+  template: `
     <novo-notification type="warning" [attr.data-automation-id]="'field-interaction-modal-' + params['key']">
       <h1>{{ labels.confirmChangesModalMessage }}</h1>
-      <h2 *ngIf="!params['message']">
-        <label>{{ params['label'] }}:</label> {{ params['oldValue'] }} <i class="bhi-arrow-right"></i> {{ params['newValue'] }}
-      </h2>
-      <h2 *ngIf="params['message']">{{ params['message'] }}</h2>
+      @if (!params['message']) {
+        <h2>
+          <label>{{ params['label'] }}:</label> {{ params['oldValue'] }} <i class="bhi-arrow-right"></i> {{ params['newValue'] }}
+        </h2>
+      }
+      @else {
+        <h2>{{ params['message'] }}</h2>
+      }
       <novo-button theme="standard" (click)="close(false)" [attr.data-automation-id]="'field-interaction-modal-cancel' + params['key']">
         {{ labels.cancel }}
       </novo-button>
@@ -21,13 +25,12 @@ import { NovoLabelService } from 'novo-elements/services';
         icon="check"
         (click)="close(true)"
         autofocus
-        [attr.data-automation-id]="'field-interaction-modal-save-' + params['key']"
-      >
+        [attr.data-automation-id]="'field-interaction-modal-save-' + params['key']">
         {{ labels.save }}
       </novo-button>
     </novo-notification>
   `,
-    standalone: false
+  standalone: false
 })
 export class ControlConfirmModal {
   constructor(private modalRef: NovoModalRef, public params: NovoModalParams, public labels: NovoLabelService) {}
@@ -38,11 +41,13 @@ export class ControlConfirmModal {
 }
 
 @Component({
-    selector: 'control-prompt-modal',
-    template: `
+  selector: 'control-prompt-modal',
+  template: `
     <novo-notification type="warning" [attr.data-automation-id]="'field-interaction-modal-' + params['key']">
       <h1>{{ labels.promptModalMessage }}</h1>
-      <p *ngFor="let change of params['changes']">{{ change }}</p>
+      @for (change of params['changes']; track change) {
+        <p>{{ change }}</p>
+      }
       <novo-button theme="standard" (click)="close(false)" [attr.data-automation-id]="'field-interaction-modal-cancel' + params['key']">
         {{ labels.cancel }}
       </novo-button>
@@ -51,13 +56,12 @@ export class ControlConfirmModal {
         icon="check"
         (click)="close(true)"
         autofocus
-        [attr.data-automation-id]="'field-interaction-modal-yes-' + params['key']"
-      >
+        [attr.data-automation-id]="'field-interaction-modal-yes-' + params['key']">
         {{ labels.yes }}
       </novo-button>
     </novo-notification>
   `,
-    standalone: false
+  standalone: false
 })
 export class ControlPromptModal {
   constructor(private modalRef: NovoModalRef, public params: NovoModalParams, public labels: NovoLabelService) {}

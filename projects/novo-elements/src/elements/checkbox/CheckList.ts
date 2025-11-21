@@ -12,33 +12,34 @@ const CHECKLIST_VALUE_ACCESSOR = {
 };
 
 @Component({
-    selector: 'novo-check-list',
-    styleUrls: ['./CheckList.scss'],
-    providers: [CHECKLIST_VALUE_ACCESSOR],
-    template: `
-    <div
-      class="novo-checkbox-group"
-      *ngFor="let option of _options; let i = index"
-      [ngClass]="{ checked: option.checked }"
-      [class.disabled]="disabled"
-      [attr.data-automation-id]="option.label"
-    >
-      <input
-        [name]="name"
-        type="checkbox"
-        [ngModel]="option.checked"
-        [attr.id]="name + i"
-        [value]="option.checked"
-        (change)="select($event, option)"
-        [disabled]="disabled"
-      />
-      <label [attr.for]="name + i" (click)="select($event, option)">
-        <i [ngClass]="{ 'bhi-checkbox-empty': !option.checked, 'bhi-checkbox-filled': option.checked }"></i>
-        <span>{{ option.label }}</span>
-      </label>
-    </div>
+  selector: 'novo-check-list',
+  styleUrls: ['./CheckList.scss'],
+  providers: [CHECKLIST_VALUE_ACCESSOR],
+  template: `
+    @for (option of _options; track option; let i = $index) {
+      <div
+        class="novo-checkbox-group"
+        [ngClass]="{ checked: option.checked }"
+        [class.disabled]="disabled"
+        [attr.data-automation-id]="option.label"
+        >
+        <input
+          [name]="name"
+          type="checkbox"
+          [ngModel]="option.checked"
+          [attr.id]="name + i"
+          [value]="option.checked"
+          (change)="select($event, option)"
+          [disabled]="disabled"
+          />
+        <label [attr.for]="name + i" (click)="select($event, option)">
+          <i [ngClass]="{ 'bhi-checkbox-empty': !option.checked, 'bhi-checkbox-filled': option.checked }"></i>
+          <span>{{ option.label }}</span>
+        </label>
+      </div>
+    }
   `,
-    standalone: false
+  standalone: false
 })
 export class NovoCheckListElement implements ControlValueAccessor, OnInit {
   @Input() name: string;

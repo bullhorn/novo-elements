@@ -41,21 +41,23 @@ const PLACES_VALUE_ACCESSOR = {
 };
 
 @Component({
-    selector: 'google-places-list',
-    providers: [PLACES_VALUE_ACCESSOR],
-    template: `
+  selector: 'google-places-list',
+  providers: [PLACES_VALUE_ACCESSOR],
+  template: `
     <novo-list direction="vertical">
-      <novo-list-item *ngFor="let data of matches; let $index = index" (click)="selectedListNode($event, $index)" [ngClass]="{ active: data === activeMatch }">
-        <item-header>
-          <item-avatar icon="location"></item-avatar>
-          <item-title>{{ data.structured_formatting?.main_text ? data.structured_formatting.main_text : data.description }}</item-title>
-        </item-header>
-        <item-content>{{ data.structured_formatting?.secondary_text }}</item-content>
-      </novo-list-item>
+      @for (data of matches; track data) {
+        <novo-list-item (click)="selectedListNode($event, $index)" [ngClass]="{ active: data === activeMatch }">
+          <item-header>
+            <item-avatar icon="location"></item-avatar>
+            <item-title>{{ data.structured_formatting?.main_text ? data.structured_formatting.main_text : data.description }}</item-title>
+          </item-header>
+          <item-content>{{ data.structured_formatting?.secondary_text }}</item-content>
+        </novo-list-item>
+      }
     </novo-list>
   `,
-    styleUrls: ['./places.component.scss'],
-    standalone: false
+  styleUrls: ['./places.component.scss'],
+  standalone: false
 })
 export class PlacesListComponent extends BasePickerResults implements OnInit, OnChanges, ControlValueAccessor {
   @Input()

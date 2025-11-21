@@ -15,11 +15,14 @@ import { Component, viewChild } from '@angular/core';
 @Component({
   selector: 'test-select-component',
   template: `
-  <novo-select [value]="value">
-    <novo-option *ngFor="let option of options" [value]="option.value">
-      {{ option.label }}
-    </novo-option>
-  </novo-select>`,
+    <novo-select [value]="value">
+      @for (option of options; track option) {
+        <novo-option [value]="option.value">
+          {{ option.label }}
+        </novo-option>
+      }
+    </novo-select>
+  `,
   standalone: false,
 })
 class TestSelectComponent {
@@ -323,19 +326,19 @@ describe('Elements: NovoSelectElement', () => {
       fixture.componentRef.setInput('options', options);
       fixture.detectChanges();
       tick();
-      
+
       comp.openPanel();
       fixture.detectChanges();
-      
+
       const mockEvent: any = {
         key: 'b',
         preventDefault: jest.fn(),
       };
-      
+
       comp._handleKeydown(mockEvent);
       tick(250); // Wait for typeahead delay
       fixture.detectChanges();
-      
+
       expect(keyManager.activeItem).toBeDefined();
       expect(keyManager.activeItem.value).toBe('banana');
     }));
@@ -350,26 +353,26 @@ describe('Elements: NovoSelectElement', () => {
       fixture.componentRef.setInput('options', options);
       fixture.detectChanges();
       tick();
-      
+
       comp.openPanel();
       comp.writeValue(null);
       fixture.detectChanges();
-      
+
       const mockEvent: any = {
         key: 'c',
         preventDefault: jest.fn(),
       };
-      
+
       comp._handleKeydown(mockEvent);
       tick(250);
       fixture.detectChanges();
-      
+
       expect(keyManager.activeItem.value).toBe('cantelope');
-      
+
       comp._handleKeydown(mockEvent);
       tick(250);
       fixture.detectChanges();
-      
+
       expect(keyManager.activeItem.value).toBe('coconut');
     }));
   });

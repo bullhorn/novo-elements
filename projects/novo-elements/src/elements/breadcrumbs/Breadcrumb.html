@@ -1,13 +1,19 @@
-<ng-container *ngIf="source && source.length">
-  <novo-breadcrumb-item *ngFor="let item of source" [showMenu]="item.showMenu" [isSearch]="item.isSearch"
-    [menuList]="item.menuList" [customMenuTemplate]="item.customMenuTemplate">
-    <a *ngIf="!item.noNavigation && (!item.linkType || item.linkType === 'hrefLink')" rel="noopener" [href]="item.link"
-      [target]="item.target ? item.target : '_self'">{{ item.title }}</a>
-    <a *ngIf="!item.noNavigation && item.linkType === 'routerLink'" rel="noopener" [target]="item.target"
-      [href]="item.link" (click)="navigateTo($event, item)">{{ item.title }}</a>
-    <span *ngIf="item.noNavigation">{{ item.title }}</span>
-  </novo-breadcrumb-item>
-</ng-container>
-<ng-container *ngIf="!(source && source.length)">
+@if (source && source.length) {
+  @for (item of source; track item) {
+    <novo-breadcrumb-item [showMenu]="item.showMenu" [isSearch]="item.isSearch"
+      [menuList]="item.menuList" [customMenuTemplate]="item.customMenuTemplate">
+      @if (!item.noNavigation && (!item.linkType || item.linkType === 'hrefLink')) {
+        <a rel="noopener" [href]="item.link" [target]="item.target ? item.target : '_self'">{{ item.title }}</a>
+      }
+      @if (!item.noNavigation && item.linkType === 'routerLink') {
+        <a rel="noopener" [target]="item.target" [href]="item.link" (click)="navigateTo($event, item)">{{ item.title }}</a>
+      }
+      @if (item.noNavigation) {
+        <span>{{ item.title }}</span>
+      }
+    </novo-breadcrumb-item>
+  }
+}
+@else {
   <ng-content></ng-content>
-</ng-container>
+}

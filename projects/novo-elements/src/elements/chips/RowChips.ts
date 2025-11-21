@@ -14,29 +14,31 @@ const CHIPS_VALUE_ACCESSOR = {
 };
 
 @Component({
-    selector: 'novo-row-chip',
-    template: `
+  selector: 'novo-row-chip',
+  template: `
     <div class="novo-row-chips-columns">
       <ng-content></ng-content>
-      <i class="bhi-delete-o" *ngIf="!disabled" (click)="remove()"></i>
+      @if (!disabled) {
+        <i class="bhi-delete-o" (click)="remove()"></i>
+      }
     </div>
   `,
-    host: {
-        class: 'novo-row-chip novo-focus-indicator',
-        '[attr.tabindex]': 'disabled ? null : tabIndex',
-        role: 'option',
-        '[class.novo-row-chip-selected]': 'selected',
-        '[class.novo-row-chip-with-trailing-icon]': 'removeIcon',
-        '[class.novo-row-chip-disabled]': 'disabled',
-        '[attr.disabled]': 'disabled || null',
-        '[attr.aria-disabled]': 'disabled.toString()',
-        '[attr.aria-selected]': 'ariaSelected',
-        '(click)': '_handleClick($event)',
-        '(keydown)': '_handleKeydown($event)',
-        '(focus)': 'focus()',
-        '(blur)': '_blur()',
-    },
-    standalone: false
+  host: {
+    class: 'novo-row-chip novo-focus-indicator',
+    '[attr.tabindex]': 'disabled ? null : tabIndex',
+    role: 'option',
+    '[class.novo-row-chip-selected]': 'selected',
+    '[class.novo-row-chip-with-trailing-icon]': 'removeIcon',
+    '[class.novo-row-chip-disabled]': 'disabled',
+    '[attr.disabled]': 'disabled || null',
+    '[attr.aria-disabled]': 'disabled.toString()',
+    '[attr.aria-selected]': 'ariaSelected',
+    '(click)': '_handleClick($event)',
+    '(keydown)': '_handleKeydown($event)',
+    '(focus)': 'focus()',
+    '(blur)': '_blur()',
+  },
+  standalone: false
 })
 export class NovoRowChipElement extends NovoChipElement {
   onSelect(e) {
@@ -51,59 +53,72 @@ export class NovoRowChipElement extends NovoChipElement {
         '[class.with-value]': 'items.length > 0',
     },
     template: `
-    <div class="novo-row-chips-columns" *ngIf="items.length > 0">
-      <div class="column-label" [style.flexBasis.px]="column.width || 200" *ngFor="let column of source.columns">{{ column.label }}</div>
-    </div>
-    <div class="novo-row-chips-empty-message" *ngIf="source.emptyReadOnlyMessage && disablePickerInput && items.length === 0">
-      {{ source.emptyReadOnlyMessage }}
-    </div>
-    <novo-row-chip
-      *ngFor="let item of _items | async"
-      [type]="type || item?.value?.searchEntity"
-      [class.selected]="item == selected"
-      [disabled]="disablePickerInput"
-      (removed)="remove($event, item)"
-      (selectionChange)="select($event, item)"
-    >
-      <div
-        class="column-data"
-        [class.show-overflow]="column.showOverflow"
-        [class.editable]="column.editable"
-        [style.flexBasis.px]="column.width || 200"
-        *ngFor="let column of source.columns"
-      >
-        <ng-container *ngIf="column.editable">
-          <novo-checkbox *ngIf="column.type === 'checkbox'" [(ngModel)]="item.value[column.name]" [disabled]="!column.editable"></novo-checkbox>
-          <novo-field *ngIf="column.type !== 'checkbox'">
-            <input novoInput [type]="column.type || 'text'" [(ngModel)]="item.value[column.name]" />
-          </novo-field>
-        </ng-container>
-        <ng-container *ngIf="!column.editable">
-          <span>{{ column.data(item) }}</span>
-        </ng-container>
+    @if (items.length > 0) {
+      <div class="novo-row-chips-columns">
+        @for (column of source.columns; track column) {
+          <div class="column-label" [style.flexBasis.px]="column.width || 200">{{ column.label }}</div>
+        }
       </div>
-    </novo-row-chip>
-    <novo-picker
-      clearValueOnSelect="true"
-      [closeOnSelect]="closeOnSelect"
-      [config]="source"
-      [disablePickerInput]="disablePickerInput"
-      [hidden]="disablePickerInput"
-      [placeholder]="placeholder"
-      [(ngModel)]="itemToAdd"
-      (select)="add($event)"
-      (keydown)="onKeyDown($event)"
-      (focus)="onFocus($event)"
-      (typing)="onTyping($event)"
-      (blur)="onTouched($event)"
-      [selected]="items"
-      *ngIf="!maxlength || (maxlength && items.length < maxlength)"
-    >
-    </novo-picker>
+    }
+    @if (source.emptyReadOnlyMessage && disablePickerInput && items.length === 0) {
+      <div class="novo-row-chips-empty-message">
+        {{ source.emptyReadOnlyMessage }}
+      </div>
+    }
+    @for (item of _items | async; track item) {
+      <novo-row-chip
+        [type]="type || item?.value?.searchEntity"
+        [class.selected]="item == selected"
+        [disabled]="disablePickerInput"
+        (removed)="remove($event, item)"
+        (selectionChange)="select($event, item)"
+        >
+        @for (column of source.columns; track column) {
+          <div
+            class="column-data"
+            [class.show-overflow]="column.showOverflow"
+            [class.editable]="column.editable"
+            [style.flexBasis.px]="column.width || 200"
+            >
+            @if (column.editable) {
+              @if (column.type === 'checkbox') {
+                <novo-checkbox [(ngModel)]="item.value[column.name]" [disabled]="!column.editable"></novo-checkbox>
+              }
+              @if (column.type !== 'checkbox') {
+                <novo-field>
+                  <input novoInput [type]="column.type || 'text'" [(ngModel)]="item.value[column.name]" />
+                </novo-field>
+              }
+            }
+            @if (!column.editable) {
+              <span>{{ column.data(item) }}</span>
+            }
+          </div>
+        }
+      </novo-row-chip>
+    }
+    @if (!maxlength || (maxlength && items.length < maxlength)) {
+      <novo-picker
+        clearValueOnSelect="true"
+        [closeOnSelect]="closeOnSelect"
+        [config]="source"
+        [disablePickerInput]="disablePickerInput"
+        [hidden]="disablePickerInput"
+        [placeholder]="placeholder"
+        [(ngModel)]="itemToAdd"
+        (select)="add($event)"
+        (keydown)="onKeyDown($event)"
+        (focus)="onFocus($event)"
+        (typing)="onTyping($event)"
+        (blur)="onTouched($event)"
+        [selected]="items"
+        >
+      </novo-picker>
+    }
     <div class="preview-container">
       <span #preview></span>
     </div>
-  `,
+    `,
     styleUrls: ['./RowChips.scss'],
     standalone: false
 })

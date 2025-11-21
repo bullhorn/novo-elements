@@ -24,39 +24,39 @@ const TILES_VALUE_ACCESSOR = {
 };
 
 @Component({
-    selector: 'novo-tiles',
-    providers: [TILES_VALUE_ACCESSOR],
-    template: `
+  selector: 'novo-tiles',
+  providers: [TILES_VALUE_ACCESSOR],
+  template: `
     <div class="tile-container" [class.active]="focused" [class.disabled]="disabled">
-      <button class="tile" type="button"
-        *ngFor="let option of _options; let i = index"
-        [ngClass]="{ defaultColor: !option.color, active: option.checked, disabled: option.disabled }"
-        [theme]="option.checked ? 'primary' : 'dialogue'"
-        [color]="option.checked ? option.color || 'darken($ocean, 20%)' : 'dark'"
-        [icon]="option.icon"
-        [side]="option.iconSide || 'left'"
-        (click)="select($event, option)"
-        [attr.data-automation-id]="option.label || option">
-        <input
-          class="tiles-input"
-          [name]="name"
-          type="radio"
-          [value]="option.checked || option.value || option"
-          [attr.id]="name + i"
-          (change)="select($event, option)"
-          (focus)="setFocus(true)"
-          (blur)="setFocus(false)"
-          [disabled]="disabled"
-        />
-        <label [attr.for]="name + i" [attr.data-automation-id]="option.label || option">
-          {{ option.label || option }}
-        </label>
-      </button>
+      @for (option of _options; track option; let i = $index) {
+        <button class="tile" type="button"
+          [ngClass]="{ defaultColor: !option.color, active: option.checked, disabled: option.disabled }"
+          [theme]="option.checked ? 'primary' : 'dialogue'"
+          [color]="option.checked ? option.color || 'darken($ocean, 20%)' : 'dark'"
+          [icon]="option.icon"
+          [side]="option.iconSide || 'left'"
+          (click)="select($event, option)"
+          [attr.data-automation-id]="option.label || option">
+          <input
+            class="tiles-input"
+            [name]="name"
+            type="radio"
+            [value]="option.checked || option.value || option"
+            [attr.id]="name + i"
+            (change)="select($event, option)"
+            (focus)="setFocus(true)"
+            (blur)="setFocus(false)"
+            [disabled]="disabled" />
+          <label [attr.for]="name + i" [attr.data-automation-id]="option.label || option">
+            {{ option.label || option }}
+          </label>
+        </button>
+      }
     </div>
   `,
-    styleUrls: ['./Tiles.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  styleUrls: ['./Tiles.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class NovoTilesElement implements ControlValueAccessor, AfterContentInit, OnChanges {
   @Input()

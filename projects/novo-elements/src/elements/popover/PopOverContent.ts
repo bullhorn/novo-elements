@@ -2,8 +2,8 @@ import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, 
 import { PopOverDirective } from './PopOver';
 
 @Component({
-    selector: 'popover-content',
-    template: `
+  selector: 'popover-content',
+  template: `
     <div
       #popoverDiv
       class="popover {{ effectivePlacement }}"
@@ -11,19 +11,22 @@ import { PopOverDirective } from './PopOver';
       [style.left]="left + 'px'"
       [class.fade]="animation"
       style="display: block"
-      role="popover"
-    >
+      role="popover">
       <div class="arrow {{ effectiveAlignment }}"></div>
       <div class="popover-title" [hidden]="!title">{{ title }}</div>
       <div class="popover-content">
         <ng-content></ng-content>
-        <div *ngIf="htmlContent" class="popover-content-text" [innerHTML]="htmlContent"></div>
-        <div *ngIf="!htmlContent" class="popover-content-text">{{ content }}</div>
+        @if (htmlContent) {
+          <div class="popover-content-text" [innerHTML]="htmlContent"></div>
+        }
+        @else {
+          <div class="popover-content-text">{{ content }}</div>
+        }
       </div>
     </div>
   `,
-    styleUrls: ['./PopOver.scss'],
-    standalone: false
+  styleUrls: ['./PopOver.scss'],
+  standalone: false
 })
 export class PopOverContent implements AfterViewInit {
   @Input()

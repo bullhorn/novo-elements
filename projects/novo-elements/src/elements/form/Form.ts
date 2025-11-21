@@ -7,23 +7,25 @@ import { NovoTemplate } from 'novo-elements/elements/common';
 import { NovoFormGroup } from './NovoFormGroup';
 
 @Component({
-    selector: 'novo-form',
-    template: `
+  selector: 'novo-form',
+  template: `
     <novo-control-templates></novo-control-templates>
     <div class="novo-form-container">
-      <header *ngIf="!hideHeader">
-        <ng-content select="form-title"></ng-content>
-        <ng-content select="form-subtitle"></ng-content>
-      </header>
+      @if (!hideHeader) {
+        <header>
+          <ng-content select="form-title"></ng-content>
+          <ng-content select="form-subtitle"></ng-content>
+        </header>
+      }
       <form class="novo-form" [formGroup]="form">
         <ng-content></ng-content>
       </form>
     </div>
   `,
-    styleUrls: ['./Form.scss'],
-    encapsulation: ViewEncapsulation.None,
-    providers: [NovoTemplateService],
-    standalone: false
+  styleUrls: ['./Form.scss'],
+  encapsulation: ViewEncapsulation.None,
+  providers: [NovoTemplateService],
+  standalone: false
 })
 export class NovoFormElement implements AfterContentInit, OnInit {
   @Input()

@@ -17,16 +17,16 @@ export class NovoHeaderSpacer {}
 export class NovoUtilsComponent {}
 
 @Component({
-    selector: 'util-action, novo-action',
-    template: `
+  selector: 'util-action, novo-action',
+  template: `
     <novo-button theme="icon" [icon]="icon" [size]="size" [attr.inverse]="inverse" [disabled]="disabled">
       <ng-content></ng-content>
     </novo-button>
   `,
-    host: {
-        class: 'novo-action',
-    },
-    standalone: false
+  host: {
+    class: 'novo-action',
+  },
+  standalone: false
 })
 export class NovoUtilActionComponent {
   @Input()
@@ -40,24 +40,28 @@ export class NovoUtilActionComponent {
 }
 
 @Component({
-    selector: 'novo-header,header[theme],header[accent]',
-    template: `
+  selector: 'novo-header,header[theme],header[accent]',
+  template: `
     <section>
       <div class="header-title">
         <ng-content select="[prefix]"></ng-content>
-        <ng-container *ngIf="title">
-          <novo-icon class="header-icon" *ngIf="icon">{{ icon }}</novo-icon>
+        @if (title) {
+          @if (icon) {
+            <novo-icon class="header-icon">{{ icon }}</novo-icon>
+          }
           <div class="header-titles">
             <novo-title size="xl">{{ title }}</novo-title>
-            <novo-title size="md" *ngIf="subTitle">{{ subTitle }}</novo-title>
+            @if (subTitle) {
+              <novo-title size="md">{{ subTitle }}</novo-title>
+            }
           </div>
-        </ng-container>
-        <ng-container *ngIf="!title">
+        }
+        @if (!title) {
           <ng-content select="novo-icon, [novo-icon]"></ng-content>
           <div class="header-titles">
             <ng-content select="h1, h2, h3, h4, h5, h6, small, novo-title, [novo-title], [novo-subtitle]"></ng-content>
           </div>
-        </ng-container>
+        }
       </div>
       <ng-content select="section"></ng-content>
       <span class="spacer"></span>
@@ -69,8 +73,8 @@ export class NovoUtilActionComponent {
     </section>
     <ng-content></ng-content>
   `,
-    styleUrls: ['./Header.scss'],
-    standalone: false
+  styleUrls: ['./Header.scss'],
+  standalone: false
 })
 export class NovoHeaderComponent {
   @HostBinding('attr.role')

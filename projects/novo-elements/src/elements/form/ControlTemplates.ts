@@ -2,8 +2,8 @@ import { AfterViewInit, Component, QueryList, ViewChildren } from '@angular/core
 import { NovoTemplate } from 'novo-elements/elements/common';
 import { NovoTemplateService } from 'novo-elements/services';
 @Component({
-    selector: 'novo-control-templates',
-    template: `
+  selector: 'novo-control-templates',
+  template: `
     <!---Readonly--->
     <ng-template novoTemplate="read-only" let-form="form" let-control>
       <div>{{ form.getRawValue()[control.key] }}</div>
@@ -27,68 +27,71 @@ import { NovoTemplateService } from 'novo-elements/services';
         [popoverAlways]="control.popoverAlways"
         [popoverDisabled]="control.popoverDisabled"
         [popoverAnimation]="control.popoverAnimation"
-        [popoverDismissTimeout]="control.popoverDismissTimeout"
-      >
-        <input
-          *ngIf="control?.type !== 'number' && control?.textMaskEnabled"
-          [imask]="control.maskOptions"
-          [formControlName]="control.key"
-          [id]="control.key"
-          [type]="control?.type"
-          [placeholder]="control?.placeholder"
-          (accept)="methods.handleAccept($event)"
-          (focus)="methods.handleFocus($event)"
-          (blur)="methods.handleBlur($event)"
-          autocomplete
-        />
-        <input
-          *ngIf="control?.type !== 'number' && !control?.textMaskEnabled"
-          [class.maxlength-error]="errors?.maxlength"
-          [formControlName]="control.key"
-          [id]="control.key"
-          [type]="control?.type"
-          [placeholder]="control?.placeholder"
-          (input)="methods.emitChange($event)"
-          [maxlength]="control?.maxlength"
-          (focus)="methods.handleFocus($event)"
-          (blur)="methods.handleBlur($event)"
-          autocomplete
-        />
-        <input
-          *ngIf="control?.type === 'number' && control?.subType !== 'percentage'"
-          [class.maxlength-error]="errors?.maxlength"
-          [formControlName]="control.key"
-          [id]="control.key"
-          [type]="control?.type"
-          [placeholder]="control?.placeholder"
-          (keydown)="methods.restrictKeys($event)"
-          (input)="methods.emitChange($event)"
-          [maxlength]="control?.maxlength"
-          (focus)="methods.handleFocus($event)"
-          (blur)="methods.handleBlur($event)"
-          step="any"
-          (mousewheel)="numberInput.blur()"
-          #numberInput
-        />
+        [popoverDismissTimeout]="control.popoverDismissTimeout">
+        @if (control?.type !== 'number' && control?.textMaskEnabled) {
+          <input
+            [imask]="control.maskOptions"
+            [formControlName]="control.key"
+            [id]="control.key"
+            [type]="control?.type"
+            [placeholder]="control?.placeholder"
+            (accept)="methods.handleAccept($event)"
+            (focus)="methods.handleFocus($event)"
+            (blur)="methods.handleBlur($event)"
+            autocomplete />
+        }
+        @if (control?.type !== 'number' && !control?.textMaskEnabled) {
+          <input
+            [class.maxlength-error]="errors?.maxlength"
+            [formControlName]="control.key"
+            [id]="control.key"
+            [type]="control?.type"
+            [placeholder]="control?.placeholder"
+            (input)="methods.emitChange($event)"
+            [maxlength]="control?.maxlength"
+            (focus)="methods.handleFocus($event)"
+            (blur)="methods.handleBlur($event)"
+            autocomplete />
+        }
+        @if (control?.type === 'number' && control?.subType !== 'percentage') {
+          <input
+            [class.maxlength-error]="errors?.maxlength"
+            [formControlName]="control.key"
+            [id]="control.key"
+            [type]="control?.type"
+            [placeholder]="control?.placeholder"
+            (keydown)="methods.restrictKeys($event)"
+            (input)="methods.emitChange($event)"
+            [maxlength]="control?.maxlength"
+            (focus)="methods.handleFocus($event)"
+            (blur)="methods.handleBlur($event)"
+            step="any"
+            (mousewheel)="numberInput.blur()"
+            #numberInput />
+        }
         <!-- the percentage input does not use formControlName like a normal reactive input because instead of
-          setting the floating point value directly, it is multiplied by 100 into a percentage value -->
-        <input
-          *ngIf="control?.type === 'number' && control?.subType === 'percentage'"
-          [id]="control.key"
-          [type]="control?.type"
-          [placeholder]="control?.placeholder"
-          (keydown)="methods.restrictKeys($event)"
-          [value]="control?.percentValue"
-          [disabled]="control?.readOnly"
-          (input)="methods.handlePercentChange($event)"
-          (focus)="methods.handleFocus($event)"
-          (blur)="methods.handleBlur($event)"
-          step="any"
-          (mousewheel)="percentInput.blur()"
-          #percentInput
-        />
-        <label class="input-label" *ngIf="control?.subType === 'currency'">{{ control.currencyFormat }}</label>
-        <label class="input-label" *ngIf="control?.subType === 'percentage'">%</label>
+        setting the floating point value directly, it is multiplied by 100 into a percentage value -->
+        @if (control?.type === 'number' && control?.subType === 'percentage') {
+          <input
+            [id]="control.key"
+            [type]="control?.type"
+            [placeholder]="control?.placeholder"
+            (keydown)="methods.restrictKeys($event)"
+            [value]="control?.percentValue"
+            [disabled]="control?.readOnly"
+            (input)="methods.handlePercentChange($event)"
+            (focus)="methods.handleFocus($event)"
+            (blur)="methods.handleBlur($event)"
+            step="any"
+            (mousewheel)="percentInput.blur()"
+            #percentInput />
+        }
+        @if (control?.subType === 'currency') {
+          <label class="input-label">{{ control.currencyFormat }}</label>
+        }
+        @if (control?.subType === 'percentage') {
+          <label class="input-label">%</label>
+        }
       </div>
     </ng-template>
 
@@ -111,8 +114,7 @@ import { NovoTemplateService } from 'novo-elements/services';
         [popoverAlways]="control.popoverAlways"
         [popoverDisabled]="control.popoverDisabled"
         [popoverAnimation]="control.popoverAnimation"
-        [popoverDismissTimeout]="control.popoverDismissTimeout"
-      >
+        [popoverDismissTimeout]="control.popoverDismissTimeout">
         <textarea
           [class.maxlength-error]="errors?.maxlength"
           [name]="control.key"
@@ -123,8 +125,7 @@ import { NovoTemplateService } from 'novo-elements/services';
           (input)="methods.handleTextAreaInput($event)"
           (focus)="methods.handleFocus($event)"
           (blur)="methods.handleBlur($event)"
-          [maxlength]="control?.maxlength"
-        ></textarea>
+          [maxlength]="control?.maxlength"></textarea>
       </div>
     </ng-template>
 
@@ -139,8 +140,7 @@ import { NovoTemplateService } from 'novo-elements/services';
           [fileBrowserImageUploadUrl]="control.fileBrowserImageUploadUrl"
           (focus)="methods.handleFocus($event)"
           (blur)="methods.handleBlur($event)"
-          [config]="control.config"
-        ></novo-editor>
+          [config]="control.config"></novo-editor>
       </div>
     </ng-template>
 
@@ -151,8 +151,7 @@ import { NovoTemplateService } from 'novo-elements/services';
           [name]="control.key"
           [formControlName]="control.key"
           (focus)="methods.handleFocus($event)"
-          (blur)="methods.handleBlur($event)"
-        ></novo-ace-editor>
+          (blur)="methods.handleBlur($event)"></novo-ace-editor>
       </div>
     </ng-template>
 
@@ -163,8 +162,7 @@ import { NovoTemplateService } from 'novo-elements/services';
           [name]="control.key"
           [formControlName]="control.key"
           (focus)="methods.handleFocus($event)"
-          (blur)="methods.handleBlur($event)"
-        ></novo-code-editor>
+          (blur)="methods.handleBlur($event)"></novo-code-editor>
       </div>
     </ng-template>
 
@@ -188,10 +186,13 @@ import { NovoTemplateService } from 'novo-elements/services';
           [popoverAlways]="control.popoverAlways"
           [popoverDisabled]="control.popoverDisabled"
           [popoverAnimation]="control.popoverAnimation"
-          [popoverDismissTimeout]="control.popoverDismissTimeout"
-        >
-          <option *ngIf="control.placeholder" value="" disabled selected hidden>{{ control.placeholder }}</option>
-          <option *ngFor="let opt of control.options" [value]="opt.key">{{ opt.value }}</option>
+          [popoverDismissTimeout]="control.popoverDismissTimeout">
+          @if (control.placeholder) {
+            <option value="" disabled selected hidden>{{ control.placeholder }}</option>
+          }
+          @for (opt of control.options; track opt) {
+            <option [value]="opt.key">{{ opt.value }}</option>
+          }
         </select>
       </div>
     </ng-template>
@@ -225,8 +226,7 @@ import { NovoTemplateService } from 'novo-elements/services';
           (edit)="methods.handleEdit($event)"
           (save)="methods.handleSave($event)"
           (delete)="methods.handleDelete($event)"
-          (upload)="methods.handleUpload($event)"
-        ></novo-file-input>
+          (upload)="methods.handleUpload($event)"></novo-file-input>
       </div>
     </ng-template>
 
@@ -252,99 +252,98 @@ import { NovoTemplateService } from 'novo-elements/services';
           [popoverDisabled]="control.popoverDisabled"
           [popoverAnimation]="control.popoverAnimation"
           [popoverDismissTimeout]="control.popoverDismissTimeout"
-          [controlDisabled]="control.disabled"
-        ></novo-tiles>
+          [controlDisabled]="control.disabled"></novo-tiles>
       </div>
     </ng-template>
 
     <!--Picker-->
     <ng-template novoTemplate="picker" let-control let-form="form" let-errors="errors" let-methods="methods">
       <div [formGroup]="form" class="novo-control-input-container">
-        <novo-picker
-          [config]="control.config"
-          [formControlName]="control.key"
-          [placeholder]="control.placeholder"
-          [parentScrollSelector]="control.parentScrollSelector"
-          [allowCustomValues]="control.config.allowCustomValues"
-          *ngIf="!control.multiple"
-          (select)="methods.modelChange($event)"
-          (changed)="methods.modelChangeWithRaw($event)"
-          (typing)="methods.handleTyping($event)"
-          (focus)="methods.handleFocus($event)"
-          (blur)="methods.handleBlur($event)"
-          [tooltip]="control.tooltip"
-          [tooltipPosition]="control.tooltipPosition"
-          [tooltipSize]="control?.tooltipSize"
-          [tooltipPreline]="control?.tooltipPreline"
-          [removeTooltipArrow]="control?.removeTooltipArrow"
-          [tooltipAutoPosition]="control?.tooltipAutoPosition"
-          [novoPopover]="control.popoverContent"
-          [popoverHtmlContent]="control.popoverHtmlContent"
-          [popoverTitle]="control.popoverTitle"
-          [popoverPlacement]="control.popoverPlacement"
-          [popoverOnHover]="control.popoverOnHover"
-          [popoverAlways]="control.popoverAlways"
-          [popoverDisabled]="control.popoverDisabled"
-          [popoverAnimation]="control.popoverAnimation"
-          [popoverDismissTimeout]="control.popoverDismissTimeout"
-        ></novo-picker>
-        <novo-chips
-          [source]="control.config"
-          [type]="control.config.type"
-          [formControlName]="control.key"
-          [placeholder]="control.placeholder"
-          [maxlength]="control?.maxlength"
-          [allowCustomValues]="control.config.allowCustomValues"
-          *ngIf="control.multiple && !control.config.columns"
-          [closeOnSelect]="control.closeOnSelect"
-          (changed)="methods.modelChangeWithRaw($event)"
-          (typing)="methods.handleTyping($event)"
-          (focus)="methods.handleFocus($event)"
-          (blur)="methods.handleBlur($event)"
-          [tooltip]="control.tooltip"
-          [tooltipPosition]="control.tooltipPosition"
-          [tooltipSize]="control?.tooltipSize"
-          [tooltipPreline]="control?.tooltipPreline"
-          [removeTooltipArrow]="control?.removeTooltipArrow"
-          [tooltipAutoPosition]="control?.tooltipAutoPosition"
-          [novoPopover]="control.popoverContent"
-          [popoverHtmlContent]="control.popoverHtmlContent"
-          [popoverTitle]="control.popoverTitle"
-          [popoverPlacement]="control.popoverPlacement"
-          [popoverOnHover]="control.popoverOnHover"
-          [popoverAlways]="control.popoverAlways"
-          [popoverDisabled]="control.popoverDisabled"
-          [popoverAnimation]="control.popoverAnimation"
-          [popoverDismissTimeout]="control.popoverDismissTimeout"
-        ></novo-chips>
-        <novo-row-chips
-          [source]="control.config"
-          [type]="control.config.type"
-          [formControlName]="control.key"
-          [placeholder]="control.placeholder"
-          [maxlength]="control?.maxlength"
-          *ngIf="control.multiple && control.config.columns"
-          [closeOnSelect]="control.closeOnSelect"
-          (changed)="methods.modelChangeWithRaw($event)"
-          (typing)="methods.handleTyping($event)"
-          (focus)="methods.handleFocus($event)"
-          (blur)="methods.handleBlur($event)"
-          [tooltip]="control.tooltip"
-          [tooltipPosition]="control.tooltipPosition"
-          [tooltipSize]="control?.tooltipSize"
-          [tooltipPreline]="control?.tooltipPreline"
-          [removeTooltipArrow]="control?.removeTooltipArrow"
-          [tooltipAutoPosition]="control?.tooltipAutoPosition"
-          [novoPopover]="control.popoverContent"
-          [popoverHtmlContent]="control.popoverHtmlContent"
-          [popoverTitle]="control.popoverTitle"
-          [popoverPlacement]="control.popoverPlacement"
-          [popoverOnHover]="control.popoverOnHover"
-          [popoverAlways]="control.popoverAlways"
-          [popoverDisabled]="control.popoverDisabled"
-          [popoverAnimation]="control.popoverAnimation"
-          [popoverDismissTimeout]="control.popoverDismissTimeout"
-        ></novo-row-chips>
+        @if (!control.multiple) {
+          <novo-picker
+            [config]="control.config"
+            [formControlName]="control.key"
+            [placeholder]="control.placeholder"
+            [parentScrollSelector]="control.parentScrollSelector"
+            [allowCustomValues]="control.config.allowCustomValues"
+            (select)="methods.modelChange($event)"
+            (changed)="methods.modelChangeWithRaw($event)"
+            (typing)="methods.handleTyping($event)"
+            (focus)="methods.handleFocus($event)"
+            (blur)="methods.handleBlur($event)"
+            [tooltip]="control.tooltip"
+            [tooltipPosition]="control.tooltipPosition"
+            [tooltipSize]="control?.tooltipSize"
+            [tooltipPreline]="control?.tooltipPreline"
+            [removeTooltipArrow]="control?.removeTooltipArrow"
+            [tooltipAutoPosition]="control?.tooltipAutoPosition"
+            [novoPopover]="control.popoverContent"
+            [popoverHtmlContent]="control.popoverHtmlContent"
+            [popoverTitle]="control.popoverTitle"
+            [popoverPlacement]="control.popoverPlacement"
+            [popoverOnHover]="control.popoverOnHover"
+            [popoverAlways]="control.popoverAlways"
+            [popoverDisabled]="control.popoverDisabled"
+            [popoverAnimation]="control.popoverAnimation"
+            [popoverDismissTimeout]="control.popoverDismissTimeout"></novo-picker>
+        }
+        @if (control.multiple && !control.config.columns) {
+          <novo-chips
+            [source]="control.config"
+            [type]="control.config.type"
+            [formControlName]="control.key"
+            [placeholder]="control.placeholder"
+            [maxlength]="control?.maxlength"
+            [allowCustomValues]="control.config.allowCustomValues"
+            [closeOnSelect]="control.closeOnSelect"
+            (changed)="methods.modelChangeWithRaw($event)"
+            (typing)="methods.handleTyping($event)"
+            (focus)="methods.handleFocus($event)"
+            (blur)="methods.handleBlur($event)"
+            [tooltip]="control.tooltip"
+            [tooltipPosition]="control.tooltipPosition"
+            [tooltipSize]="control?.tooltipSize"
+            [tooltipPreline]="control?.tooltipPreline"
+            [removeTooltipArrow]="control?.removeTooltipArrow"
+            [tooltipAutoPosition]="control?.tooltipAutoPosition"
+            [novoPopover]="control.popoverContent"
+            [popoverHtmlContent]="control.popoverHtmlContent"
+            [popoverTitle]="control.popoverTitle"
+            [popoverPlacement]="control.popoverPlacement"
+            [popoverOnHover]="control.popoverOnHover"
+            [popoverAlways]="control.popoverAlways"
+            [popoverDisabled]="control.popoverDisabled"
+            [popoverAnimation]="control.popoverAnimation"
+            [popoverDismissTimeout]="control.popoverDismissTimeout"></novo-chips>
+        }
+        @if (control.multiple && control.config.columns) {
+          <novo-row-chips
+            [source]="control.config"
+            [type]="control.config.type"
+            [formControlName]="control.key"
+            [placeholder]="control.placeholder"
+            [maxlength]="control?.maxlength"
+            [closeOnSelect]="control.closeOnSelect"
+            (changed)="methods.modelChangeWithRaw($event)"
+            (typing)="methods.handleTyping($event)"
+            (focus)="methods.handleFocus($event)"
+            (blur)="methods.handleBlur($event)"
+            [tooltip]="control.tooltip"
+            [tooltipPosition]="control.tooltipPosition"
+            [tooltipSize]="control?.tooltipSize"
+            [tooltipPreline]="control?.tooltipPreline"
+            [removeTooltipArrow]="control?.removeTooltipArrow"
+            [tooltipAutoPosition]="control?.tooltipAutoPosition"
+            [novoPopover]="control.popoverContent"
+            [popoverHtmlContent]="control.popoverHtmlContent"
+            [popoverTitle]="control.popoverTitle"
+            [popoverPlacement]="control.popoverPlacement"
+            [popoverOnHover]="control.popoverOnHover"
+            [popoverAlways]="control.popoverAlways"
+            [popoverDisabled]="control.popoverDisabled"
+            [popoverAnimation]="control.popoverAnimation"
+            [popoverDismissTimeout]="control.popoverDismissTimeout"></novo-row-chips>
+        }
       </div>
     </ng-template>
 
@@ -371,8 +370,7 @@ import { NovoTemplateService } from 'novo-elements/services';
           [popoverDisabled]="control.popoverDisabled"
           [popoverAnimation]="control.popoverAnimation"
           [popoverDismissTimeout]="control.popoverDismissTimeout"
-          (onSelect)="methods.modelChange($event)"
-        ></novo-select>
+          (onSelect)="methods.modelChange($event)"></novo-select>
       </div>
     </ng-template>
 
@@ -400,8 +398,7 @@ import { NovoTemplateService } from 'novo-elements/services';
           [popoverAnimation]="control.popoverAnimation"
           [popoverDismissTimeout]="control.popoverDismissTimeout"
           position="bottom"
-          (onSelect)="methods.modelChange($event)"
-        ></novo-select>
+          (onSelect)="methods.modelChange($event)"></novo-select>
       </div>
     </ng-template>
 
@@ -409,35 +406,36 @@ import { NovoTemplateService } from 'novo-elements/services';
     <ng-template novoTemplate="radio" let-control let-form="form" let-errors="errors" let-methods="methods">
       <div [formGroup]="form" class="novo-control-input-container">
         <novo-radio-group [name]="control.key" [formControlName]="control.key" [disabled]="control.disabled">
-          <novo-radio
-            *ngFor="let option of control.options"
-            [value]="option.value"
-            [label]="option.label"
-            [checked]="
-              option.value === form.getRawValue()[control.key] ||
-              (form.getRawValue()[control.key] && option.value === form.getRawValue()[control.key].id)
-            "
-            [tooltip]="control.tooltip"
-            [tooltipPosition]="control.tooltipPosition"
-            [tooltipSize]="control?.tooltipSize"
-            [tooltipPreline]="control?.tooltipPreline"
-            [removeTooltipArrow]="control?.removeTooltipArrow"
-            [tooltipAutoPosition]="control?.tooltipAutoPosition"
-            [novoPopover]="control.popoverContent"
-            [popoverHtmlContent]="control.popoverHtmlContent"
-            [popoverTitle]="control.popoverTitle"
-            [popoverPlacement]="control.popoverPlacement"
-            [popoverOnHover]="control.popoverOnHover"
-            [popoverAlways]="control.popoverAlways"
-            [popoverDisabled]="control.popoverDisabled"
-            [popoverAnimation]="control.popoverAnimation"
-            [popoverDismissTimeout]="control.popoverDismissTimeout"
-            [button]="!!option.icon"
-            [icon]="option.icon"
-            [color]="option.color"
-            [theme]="!!option.icon && !option.label ? 'icon' : 'secondary'"
-            [attr.data-automation-id]="control.key + '-' + (option?.label || option?.value)"
-          ></novo-radio>
+          @for (option of control.options; track option) {
+            <novo-radio
+              [value]="option.value"
+              [label]="option.label"
+              [checked]="
+                option.value === form.getRawValue()[control.key] ||
+                (form.getRawValue()[control.key] && option.value === form.getRawValue()[control.key].id)
+              "
+              [tooltip]="control.tooltip"
+              [tooltipPosition]="control.tooltipPosition"
+              [tooltipSize]="control?.tooltipSize"
+              [tooltipPreline]="control?.tooltipPreline"
+              [removeTooltipArrow]="control?.removeTooltipArrow"
+              [tooltipAutoPosition]="control?.tooltipAutoPosition"
+              [novoPopover]="control.popoverContent"
+              [popoverHtmlContent]="control.popoverHtmlContent"
+              [popoverTitle]="control.popoverTitle"
+              [popoverPlacement]="control.popoverPlacement"
+              [popoverOnHover]="control.popoverOnHover"
+              [popoverAlways]="control.popoverAlways"
+              [popoverDisabled]="control.popoverDisabled"
+              [popoverAnimation]="control.popoverAnimation"
+              [popoverDismissTimeout]="control.popoverDismissTimeout"
+              [button]="!!option.icon"
+              [icon]="option.icon"
+              [color]="option.color"
+              [theme]="!!option.icon && !option.label ? 'icon' : 'secondary'"
+              [attr.data-automation-id]="control.key + '-' + (option?.label || option?.value)"
+            ></novo-radio>
+          }
         </novo-radio-group>
       </div>
     </ng-template>
@@ -461,15 +459,13 @@ import { NovoTemplateService } from 'novo-elements/services';
         [popoverAlways]="control.popoverAlways"
         [popoverDisabled]="control.popoverDisabled"
         [popoverAnimation]="control.popoverAnimation"
-        [popoverDismissTimeout]="control.popoverDismissTimeout"
-      >
+        [popoverDismissTimeout]="control.popoverDismissTimeout">
         <novo-time-picker-input
           [attr.id]="control.key"
           [name]="control.key"
           [formControlName]="control.key"
           [placeholder]="control.placeholder"
-          [military]="control.military"
-        ></novo-time-picker-input>
+          [military]="control.military"></novo-time-picker-input>
       </div>
     </ng-template>
 
@@ -492,8 +488,7 @@ import { NovoTemplateService } from 'novo-elements/services';
         [popoverAlways]="control.popoverAlways"
         [popoverDisabled]="control.popoverDisabled"
         [popoverAnimation]="control.popoverAnimation"
-        [popoverDismissTimeout]="control.popoverDismissTimeout"
-      >
+        [popoverDismissTimeout]="control.popoverDismissTimeout">
         <input
           [formControlName]="control.key"
           [id]="control.key"
@@ -501,8 +496,7 @@ import { NovoTemplateService } from 'novo-elements/services';
           [placeholder]="control?.placeholder"
           (input)="methods.emitChange($event)"
           (focus)="methods.handleFocus($event)"
-          (blur)="methods.handleBlur($event)"
-        />
+          (blur)="methods.handleBlur($event)" />
       </div>
     </ng-template>
 
@@ -525,8 +519,7 @@ import { NovoTemplateService } from 'novo-elements/services';
         [popoverAlways]="control.popoverAlways"
         [popoverDisabled]="control.popoverDisabled"
         [popoverAnimation]="control.popoverAnimation"
-        [popoverDismissTimeout]="control.popoverDismissTimeout"
-      >
+        [popoverDismissTimeout]="control.popoverDismissTimeout">
         <novo-date-picker-input
           [attr.id]="control.key"
           [name]="control.key"
@@ -541,8 +534,7 @@ import { NovoTemplateService } from 'novo-elements/services';
           [disabledDateMessage]="control.disabledDateMessage"
           (focusEvent)="methods.handleFocus($event)"
           (blurEvent)="methods.handleBlur($event)"
-          (changeEvent)="methods.emitChange($event)"
-        ></novo-date-picker-input>
+          (changeEvent)="methods.emitChange($event)"></novo-date-picker-input>
       </div>
     </ng-template>
 
@@ -565,8 +557,7 @@ import { NovoTemplateService } from 'novo-elements/services';
         [popoverAlways]="control.popoverAlways"
         [popoverDisabled]="control.popoverDisabled"
         [popoverAnimation]="control.popoverAnimation"
-        [popoverDismissTimeout]="control.popoverDismissTimeout"
-      >
+        [popoverDismissTimeout]="control.popoverDismissTimeout">
         <novo-date-time-picker-input
           [attr.id]="control.key"
           [name]="control.key"
@@ -578,8 +569,7 @@ import { NovoTemplateService } from 'novo-elements/services';
           [weekStart]="control.weekStart"
           (focusEvent)="methods.handleFocus($event)"
           (blurEvent)="methods.handleBlur($event)"
-          (changeEvent)="methods.emitChange($event)"
-        ></novo-date-time-picker-input>
+          (changeEvent)="methods.emitChange($event)"></novo-date-time-picker-input>
       </div>
     </ng-template>
 
@@ -593,8 +583,7 @@ import { NovoTemplateService } from 'novo-elements/services';
           (change)="methods.handleAddressChange($event)"
           (focus)="methods.handleFocus($event.event, $event.field)"
           (blur)="methods.handleBlur($event.event, $event.field)"
-          (validityChange)="methods.updateValidity()"
-        ></novo-address>
+          (validityChange)="methods.updateValidity()"></novo-address>
       </div>
     </ng-template>
 
@@ -620,8 +609,7 @@ import { NovoTemplateService } from 'novo-elements/services';
           [popoverDisabled]="control.popoverDisabled"
           [popoverAnimation]="control.popoverAnimation"
           [popoverDismissTimeout]="control.popoverDismissTimeout"
-          [layoutOptions]="control?.layoutOptions"
-        ></novo-checkbox>
+          [layoutOptions]="control?.layoutOptions"></novo-checkbox>
       </div>
     </ng-template>
 
@@ -645,8 +633,7 @@ import { NovoTemplateService } from 'novo-elements/services';
           [popoverDisabled]="control.popoverDisabled"
           [popoverAnimation]="control.popoverAnimation"
           [popoverDismissTimeout]="control.popoverDismissTimeout"
-          (onChange)="methods.modelChange($event)"
-        ></novo-switch>
+          (onChange)="methods.modelChange($event)"></novo-switch>
       </div>
     </ng-template>
 
@@ -672,8 +659,7 @@ import { NovoTemplateService } from 'novo-elements/services';
           [popoverDisabled]="control.popoverDisabled"
           [popoverAnimation]="control.popoverAnimation"
           [popoverDismissTimeout]="control.popoverDismissTimeout"
-          (onSelect)="methods.modelChange($event)"
-        ></novo-check-list>
+          (onSelect)="methods.modelChange($event)"></novo-check-list>
       </div>
     </ng-template>
 
@@ -700,12 +686,11 @@ import { NovoTemplateService } from 'novo-elements/services';
           [popoverAlways]="control.popoverAlways"
           [popoverDisabled]="control.popoverDisabled"
           [popoverAnimation]="control.popoverAnimation"
-          [popoverDismissTimeout]="control.popoverDismissTimeout"
-        ></novo-quick-note>
+          [popoverDismissTimeout]="control.popoverDismissTimeout"></novo-quick-note>
       </div>
     </ng-template>
   `,
-    standalone: false
+  standalone: false
 })
 export class NovoControlTemplates implements AfterViewInit {
   @ViewChildren(NovoTemplate)

@@ -30,9 +30,9 @@ const DATE_VALUE_ACCESSOR = {
 };
 
 @Component({
-    selector: 'novo-date-picker-input',
-    providers: [DATE_VALUE_ACCESSOR],
-    template: `
+  selector: 'novo-date-picker-input',
+  providers: [DATE_VALUE_ACCESSOR],
+  template: `
     <input
       type="text"
       [name]="name"
@@ -46,11 +46,16 @@ const DATE_VALUE_ACCESSOR = {
       (accept)="handleMaskAccept($event)"
       #input
       data-automation-id="date-input"
-      [disabled]="disabled"
-    />
-    <span class="error-text" *ngIf="showInvalidDateError">{{ invalidDateErrorMessage }}</span>
-    <i *ngIf="!hasValue" (click)="openPanel()" class="bhi-calendar"></i>
-    <i *ngIf="hasValue" (click)="clearAction()" class="bhi-times"></i>
+      [disabled]="disabled" />
+    @if (showInvalidDateError) {
+      <span class="error-text">{{ invalidDateErrorMessage }}</span>
+    }
+    @if (!hasValue) {
+      <i (click)="openPanel()" class="bhi-calendar"></i>
+    }
+    @else {
+      <i (click)="clearAction()" class="bhi-times"></i>
+    }
     <novo-overlay-template [parent]="overlayElement" position="above-below">
       <novo-date-picker
         [start]="start"
@@ -63,26 +68,28 @@ const DATE_VALUE_ACCESSOR = {
         [hideFooter]="hideFooter"
         [hideToday]="hideToday"
         [dateForInitialView]="dateForInitialView">
-        <div *ngIf="hasButtons" class="footer-content">
-          <novo-button
-            class="cancel-button"
-            data-automation-id="date-picker-cancel"
-            theme="dialogue"
-            size="small"
-            (click)="cancel()">{{ labels.cancel }}</novo-button>
-          <novo-button
-            class="save-button"
-            data-automation-id="date-picker-save"
-            theme="primary"
-            color="primary"
-            size="small"
-            (click)="save()">{{ labels.save }}</novo-button>
-        </div>
+        @if (hasButtons) {
+          <div class="footer-content">
+            <novo-button
+              class="cancel-button"
+              data-automation-id="date-picker-cancel"
+              theme="dialogue"
+              size="small"
+              (click)="cancel()">{{ labels.cancel }}</novo-button>
+            <novo-button
+              class="save-button"
+              data-automation-id="date-picker-save"
+              theme="primary"
+              color="primary"
+              size="small"
+              (click)="save()">{{ labels.save }}</novo-button>
+          </div>
+        }
       </novo-date-picker>
     </novo-overlay-template>
   `,
-    styleUrls: ['./DatePickerInput.scss'],
-    standalone: false
+  styleUrls: ['./DatePickerInput.scss'],
+  standalone: false
 })
 export class NovoDatePickerInputElement implements OnInit, OnChanges, AfterViewInit, ControlValueAccessor {
   public value: any;

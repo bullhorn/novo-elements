@@ -10,10 +10,12 @@ import { NovoDragDropModule } from './drag-drop.module';
   selector: 'test-drag-drop',
   template: `
     <div [novoDragDrop]="items">
-      <button *ngFor="let item of items">
-        <span class="novo-drag-target">{{ item }}</span>
-        <span class="non-draggable-region"></span>
-      </button>
+      @for (item of items; track item) {
+        <button>
+          <span class="novo-drag-target">{{ item }}</span>
+          <span class="non-draggable-region"></span>
+        </button>
+      }
     </div>`,
   styles: [],
   standalone: false,

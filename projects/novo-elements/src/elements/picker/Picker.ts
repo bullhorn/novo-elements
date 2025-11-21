@@ -37,11 +37,15 @@ const DEFAULT_DEBOUNCE_TIME = 250;
  * dynamically populate.
  */
 @Component({
-    selector: 'novo-picker',
-    providers: [PICKER_VALUE_ACCESSOR],
-    template: `
-    <i class="bhi-more" *ngIf="config?.entityIcon && !_value"></i>
-    <i class="bhi-{{ config?.entityIcon }} entity-icon {{ config?.entityIcon }}" *ngIf="config?.entityIcon && _value"></i>
+  selector: 'novo-picker',
+  providers: [PICKER_VALUE_ACCESSOR],
+  template: `
+    @if (config?.entityIcon && !_value) {
+      <i class="bhi-more"></i>
+    }
+    @if (config?.entityIcon && _value) {
+      <i class="bhi-{{ config?.entityIcon }} entity-icon {{ config?.entityIcon }}"></i>
+    }
     <input
       type="text"
       class="picker-input"
@@ -57,23 +61,24 @@ const DEFAULT_DEBOUNCE_TIME = 250;
       [maxlength]="maxlength"
       autocomplete="off"
       #input
-      [disabled]="disablePickerInput"
-    />
-    <i class="bhi-search" *ngIf="(!_value || clearValueOnSelect) && !disablePickerInput"></i>
-    <i
-      class="bhi-times"
-      [class.entity-selected]="config?.entityIcon && _value"
-      *ngIf="_value && !clearValueOnSelect && !disablePickerInput"
-      (click)="clearValue(true)"
-    ></i>
+      [disabled]="disablePickerInput" />
+    @if ((!_value || clearValueOnSelect) && !disablePickerInput) {
+      <i class="bhi-search"></i>
+    }
+    @if (_value && !clearValueOnSelect && !disablePickerInput) {
+      <i
+        class="bhi-times"
+        [class.entity-selected]="config?.entityIcon && _value"
+        (click)="clearValue(true)"></i>
+    }
     <novo-overlay-template class="picker-results-container" [parent]="element" [width]="width" [minWidth]="minWidth" position="above-below" (closing)="onOverlayClosed()">
       <span #results></span>
       <ng-content></ng-content>
     </novo-overlay-template>
   `,
-    styleUrls: ['./Picker.scss'],
-    encapsulation: ViewEncapsulation.None,
-    standalone: false
+  styleUrls: ['./Picker.scss'],
+  encapsulation: ViewEncapsulation.None,
+  standalone: false
 })
 export class NovoPickerElement implements OnInit {
   // Container for the results

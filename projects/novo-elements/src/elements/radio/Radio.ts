@@ -24,9 +24,9 @@ const RADIO_VALUE_ACCESSOR = {
 };
 
 @Component({
-    selector: 'novo-radio',
-    providers: [RADIO_VALUE_ACCESSOR],
-    template: `
+  selector: 'novo-radio',
+  providers: [RADIO_VALUE_ACCESSOR],
+  template: `
     <input
       type="radio"
       [id]="id"
@@ -36,31 +36,33 @@ const RADIO_VALUE_ACCESSOR = {
       [disabled]="disabled"
       (focus)="focus.emit($event)"
       (blur)="blur.emit($event)"
-      (change)="_onInputChange($event)"
-    />
+      (change)="_onInputChange($event)" />
     <label [attr.for]="id" [class.disabled]="disabled">
-      <novo-button
-        *ngIf="button"
-        [ngClass]="{ unchecked: !_checked, checked: _checked, 'has-icon': !!icon }"
-        [theme]="theme"
-        [color]="_checked ? color : null"
-        [icon]="icon"
-        [size]="size"
-      >
-        {{ label }}
-      </novo-button>
-      <div *ngIf="!button" class="novo-radio-button-label">
-        <i [ngClass]="{ 'bhi-radio-empty': !_checked, 'bhi-radio-filled': _checked }"></i>
-        {{ label }}
-        <ng-content></ng-content>
-      </div>
+      @if (button) {
+        <novo-button
+          [ngClass]="{ unchecked: !_checked, checked: _checked, 'has-icon': !!icon }"
+          [theme]="theme"
+          [color]="_checked ? color : null"
+          [icon]="icon"
+          [size]="size"
+          >
+          {{ label }}
+        </novo-button>
+      }
+      @else {
+        <div class="novo-radio-button-label">
+          <i [ngClass]="{ 'bhi-radio-empty': !_checked, 'bhi-radio-filled': _checked }"></i>
+          {{ label }}
+          <ng-content></ng-content>
+        </div>
+      }
     </label>
   `,
-    styleUrls: ['./Radio.scss'],
-    host: {
-        '[class.vertical]': 'vertical',
-    },
-    standalone: false
+  styleUrls: ['./Radio.scss'],
+  host: {
+    '[class.vertical]': 'vertical',
+  },
+  standalone: false
 })
 export class NovoRadioElement implements ControlValueAccessor, OnInit {
   private _uniqueId: string = `novo-radio-${++nextId}`;

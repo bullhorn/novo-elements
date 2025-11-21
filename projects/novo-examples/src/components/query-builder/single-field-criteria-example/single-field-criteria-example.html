@@ -10,7 +10,9 @@
   <novo-label>Choose single field to auto-select for criteria</novo-label>
   <novo-select placeholder="Single field" [ngModel]="config.staticFieldSelection" (ngModelChange)="updateConfig({ staticFieldSelection: $event })">
     <novo-option value="">Show All Fields</novo-option>
-    <novo-option *ngFor="let field of mockMetaFields" [value]="field.name">{{ field.label || field.name }}</novo-option>
+    @for (field of mockMetaFields; track field) {
+      <novo-option [value]="field.name">{{ field.label || field.name }}</novo-option>
+    }
   </novo-select>
 </novo-field>
 

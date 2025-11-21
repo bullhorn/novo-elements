@@ -46,15 +46,21 @@ Selection retention can be configured to keep records selected across pagination
     </ng-template>
     <!-- Custom Actions -->
     <ng-template novoTemplate="customActions">
-      <novo-data-table-clear-button *ngIf="basic.state.userFiltered"></novo-data-table-clear-button>
+      @if (basic.state.userFiltered) {
+        <novo-data-table-clear-button></novo-data-table-clear-button>
+      }
       <button theme="secondary"
         (click)="refresh()">Refresh</button>
       <novo-dropdown side="right">
         <button theme="primary"
           icon="collapse"
           inverse>
-          <span *ngIf="basic.state.selected.length === 0">Actions</span>
-          <span *ngIf="basic.state.selected.length !== 0">{{ basic.state.selected.length }}!</span>
+          @if (basic.state.selected.length === 0) {
+            <span>Actions</span>
+          }
+          @else {
+            <span>{{ basic.state.selected.length }}!</span>
+          }
         </button>
         <list>
           <item>Action 1</item>

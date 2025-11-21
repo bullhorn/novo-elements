@@ -6,9 +6,11 @@ import { NovoAvatarElement } from './Avatar';
     selector: 'novo-avatar-stack',
     styleUrls: ['./AvatarStack.scss'],
     template: `
-    <ng-content></ng-content>
-    <novo-avatar *ngIf="showTotal" label="+5"></novo-avatar>
-  `,
+      <ng-content></ng-content>
+      @if (showTotal) {
+        <novo-avatar label="+5"></novo-avatar>
+      }
+    `,
     standalone: false
 })
 export class NovoAvatarStackElement implements AfterViewInit {

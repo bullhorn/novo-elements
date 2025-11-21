@@ -30,98 +30,104 @@ export enum TIME_VALUE_FORMATS {
 }
 
 @Component({
-    selector: 'novo-time-picker',
-    providers: [TIME_PICKER_VALUE_ACCESSOR],
-    template: `
-    <div class="increments" *ngIf="!analog">
-      <novo-list class="increments--hours" direction="vertical" data-automation-id="novo-time-picker-hours">
-        <novo-list-item
-          class="increments--hour"
-          *ngFor="let increment of HOURS"
-          (click)="setHours($event, increment, true)"
-          [class.active]="increment == activeHour"
-          [attr.data-automation-id]="increment"
-        >
-          <item-content>{{ increment }}</item-content>
-        </novo-list-item>
-      </novo-list>
-      <novo-list class="increments--minutes" direction="vertical" data-automation-id="novo-time-picker-minutes">
-        <novo-list-item
-          class="increments--minute"
-          *ngFor="let increment of MINUTES"
-          (click)="setMinutes($event, increment, true)"
-          [class.active]="increment == activeMinute"
-          [attr.data-automation-id]="increment"
-        >
-          <item-content>{{ increment }}</item-content>
-        </novo-list-item>
-      </novo-list>
-      <novo-list class="increments--meridians" direction="vertical" *ngIf="!military" data-automation-id="novo-time-picker-meridians">
-        <novo-list-item
-          class="increments--meridian"
-          *ngFor="let period of MERIDIANS"
-          (click)="setPeriod($event, period, true)"
-          [class.active]="meridian == period"
-          [attr.data-automation-id]="period"
-        >
-          <item-content>{{ period }}</item-content>
-        </novo-list-item>
-      </novo-list>
-    </div>
-    <div class="analog" *ngIf="analog">
-      <div class="analog--inner">
-        <div class="analog--face">
-          <span class="analog--center"></span>
-          <span class="analog--hand--hours" [ngClass]="hoursClass">
-            <span class="analog--ball"></span>
-          </span>
-          <span class="analog--hand--minutes" [ngClass]="minutesClass">
-            <span class="analog--ball" [ngClass]="{ between: inBetween }"></span>
-          </span>
-        </div>
-        <div class="analog--hours">
-          <span
-            *ngFor="let hour of HOURS"
-            class="analog--hour"
-            [ngClass]="{ active: activeHour == hour }"
-            (click)="setHours($event, hour, true)"
-            [attr.data-automation-id]="hour"
-            >{{ hour }}</span
-          >
-        </div>
-        <div class="analog--minutes">
-          <span
-            *ngFor="let minute of MINUTES"
-            class="analog--minute"
-            [ngClass]="{ active: activeMinute == minute }"
-            (click)="setMinutes($event, minute, true)"
-            [attr.data-automation-id]="minute"
-            >{{ minute }}</span
-          >
+  selector: 'novo-time-picker',
+  providers: [TIME_PICKER_VALUE_ACCESSOR],
+  template: `
+    @if (!analog) {
+      <div class="increments">
+        <novo-list class="increments--hours" direction="vertical" data-automation-id="novo-time-picker-hours">
+          @for (increment of HOURS; track increment) {
+            <novo-list-item
+              class="increments--hour"
+              (click)="setHours($event, increment, true)"
+              [class.active]="increment == activeHour"
+              [attr.data-automation-id]="increment">
+              <item-content>{{ increment }}</item-content>
+            </novo-list-item>
+          }
+        </novo-list>
+        <novo-list class="increments--minutes" direction="vertical" data-automation-id="novo-time-picker-minutes">
+          @for (increment of MINUTES; track increment) {
+            <novo-list-item
+              class="increments--minute"
+              (click)="setMinutes($event, increment, true)"
+              [class.active]="increment == activeMinute"
+              [attr.data-automation-id]="increment">
+              <item-content>{{ increment }}</item-content>
+            </novo-list-item>
+          }
+        </novo-list>
+        @if (!military) {
+          <novo-list class="increments--meridians" direction="vertical" data-automation-id="novo-time-picker-meridians">
+            @for (period of MERIDIANS; track period) {
+              <novo-list-item
+                class="increments--meridian"
+                (click)="setPeriod($event, period, true)"
+                [class.active]="meridian == period"
+                [attr.data-automation-id]="period">
+                <item-content>{{ period }}</item-content>
+              </novo-list-item>
+            }
+          </novo-list>
+        }
+      </div>
+    }
+    @else {
+      <div class="analog">
+        <div class="analog--inner">
+          <div class="analog--face">
+            <span class="analog--center"></span>
+            <span class="analog--hand--hours" [ngClass]="hoursClass">
+              <span class="analog--ball"></span>
+            </span>
+            <span class="analog--hand--minutes" [ngClass]="minutesClass">
+              <span class="analog--ball" [ngClass]="{ between: inBetween }"></span>
+            </span>
+          </div>
+          <div class="analog--hours">
+            @for (hour of HOURS; track hour) {
+              <span
+                class="analog--hour"
+                [ngClass]="{ active: activeHour == hour }"
+                (click)="setHours($event, hour, true)"
+                [attr.data-automation-id]="hour">{{ hour }}</span>
+            }
+          </div>
+          <div class="analog--minutes">
+            @for (minute of MINUTES; track minute) {
+              <span
+                class="analog--minute"
+                [ngClass]="{ active: activeMinute == minute }"
+                (click)="setMinutes($event, minute, true)"
+                [attr.data-automation-id]="minute">{{ minute }}</span>
+            }
+          </div>
         </div>
       </div>
-    </div>
-    <div class="save-cancel-buttons" *ngIf="hasButtons">
-      <novo-button
+    }
+    @if (hasButtons) {
+      <div class="save-cancel-buttons">
+        <novo-button
           class="cancel-button"
           theme="dialogue"
           size="small"
           (click)="cancel()">{{ labels.cancel }}</novo-button>
-      <novo-button
+        <novo-button
           class="save-button"
           theme="primary"
           color="primary"
           size="small"
           [disabled]="saveDisabled"
           (click)="save()">{{ labels.save }}</novo-button>
-    </div>
+      </div>
+    }
   `,
-    styleUrls: ['./TimePicker.scss'],
-    host: {
-        class: 'novo-time-picker',
-        '[class.military]': 'military',
-    },
-    standalone: false
+  styleUrls: ['./TimePicker.scss'],
+  host: {
+    class: 'novo-time-picker',
+    '[class.military]': 'military',
+  },
+  standalone: false
 })
 export class NovoTimePickerElement implements ControlValueAccessor, OnInit, OnChanges {
   @Input()

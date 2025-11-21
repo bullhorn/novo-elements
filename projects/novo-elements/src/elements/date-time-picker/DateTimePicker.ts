@@ -16,65 +16,61 @@ const DATE_TIME_PICKER_VALUE_ACCESSOR = {
 };
 
 @Component({
-    selector: 'novo-date-time-picker',
-    providers: [DATE_TIME_PICKER_VALUE_ACCESSOR],
-    animations: [
-        trigger('dateTextState', [
-            state('date', style({
-                opacity: '1.0',
-            })),
-            state('time', style({
-                opacity: '0.6',
-            })),
-            transition('date <=> time', animate('200ms ease-in')),
-        ]),
-        trigger('timeTextState', [
-            state('date', style({
-                opacity: '0.6',
-            })),
-            state('time', style({
-                opacity: '1.0',
-            })),
-            transition('date <=> time', animate('200ms ease-in')),
-        ]),
-        trigger('indicatorState', [
-            state('date', style({
-                transform: 'translateX(0%)',
-            })),
-            state('time', style({
-                transform: 'translateX(100%)',
-            })),
-            transition('date <=> time', animate('200ms ease-in')),
-        ]),
-        trigger('containerState', [
-            state('date', style({
-                transform: 'translateX(0%)',
-            })),
-            state('time', style({
-                transform: 'translateX(-100%)',
-            })),
-            transition('date <=> time', animate('200ms ease-in')),
-        ]),
-    ],
-    template: `
+  selector: 'novo-date-time-picker',
+  providers: [DATE_TIME_PICKER_VALUE_ACCESSOR],
+  animations: [
+    trigger('dateTextState', [
+      state('date', style({
+        opacity: '1.0',
+      })),
+      state('time', style({
+        opacity: '0.6',
+      })),
+      transition('date <=> time', animate('200ms ease-in')),
+    ]),
+    trigger('timeTextState', [
+      state('date', style({
+        opacity: '0.6',
+      })),
+      state('time', style({
+        opacity: '1.0',
+      })),
+      transition('date <=> time', animate('200ms ease-in')),
+    ]),
+    trigger('indicatorState', [
+      state('date', style({
+        transform: 'translateX(0%)',
+      })),
+      state('time', style({
+        transform: 'translateX(100%)',
+      })),
+      transition('date <=> time', animate('200ms ease-in')),
+    ]),
+    trigger('containerState', [
+      state('date', style({
+        transform: 'translateX(0%)',
+      })),
+      state('time', style({
+        transform: 'translateX(-100%)',
+      })),
+      transition('date <=> time', animate('200ms ease-in')),
+    ]),
+  ],
+  template: `
     <div class="date-time-container">
       <div class="date-time-tabs">
-        <span
-          class="date-tab"
+        <span class="date-tab"
           (click)="toggleView('date')"
           [@dateTextState]="componentTabState"
-          data-automation-id="novo-date-time-date-tab"
-          >{{ selectedLabel }}</span
-        >
-        <span
-          class="time-tab"
+          data-automation-id="novo-date-time-date-tab">{{ selectedLabel }}</span>
+        <span class="time-tab"
           (click)="toggleView('time')"
           [@timeTextState]="componentTabState"
-          data-automation-id="novo-date-time-time-tab"
-        >
-          <span class="hours" data-automation-id="novo-time-picker-hours">{{ hours }}</span
-          >:<span class="minutes" data-automation-id="novo-time-picker-minutes">{{ minutes }}</span>
-          <span *ngIf="!military" class="meridian"> {{ meridian }}</span>
+          data-automation-id="novo-date-time-time-tab">
+          <span class="hours" data-automation-id="novo-time-picker-hours">{{ hours }}</span>:<span class="minutes" data-automation-id="novo-time-picker-minutes">{{ minutes }}</span>
+          @if (!military) {
+            <span class="meridian"> {{ meridian }}</span>
+          }
         </span>
         <i class="date-time-indicator" [@indicatorState]="componentTabState"></i>
       </div>
@@ -98,8 +94,8 @@ const DATE_TIME_PICKER_VALUE_ACCESSOR = {
       </div>
     </div>
   `,
-    styleUrls: ['./_DateTimePicker.scss'],
-    standalone: false
+  styleUrls: ['./_DateTimePicker.scss'],
+  standalone: false
 })
 export class NovoDateTimePickerElement implements ControlValueAccessor {
   @Input()

@@ -10,9 +10,9 @@ interface Page {
   active: boolean;
 }
 @Component({
-    selector: 'novo-pagination',
-    template: `
-    <ng-container *ngIf="rowOptions.length > 1">
+  selector: 'novo-pagination',
+  template: `
+    @if (rowOptions.length > 1) {
       <h5 class="rows">{{ label }}</h5>
       <novo-select
         class="table-pagination-select"
@@ -20,31 +20,30 @@ interface Page {
         [placeholder]="labels.select"
         [(ngModel)]="itemsPerPage"
         (onSelect)="onPageSizeChanged($event)"
-        data-automation-id="pager-select"
-      ></novo-select>
+        data-automation-id="pager-select"></novo-select>
       <span class="spacer"></span>
-    </ng-container>
+    }
     <ul class="pager" data-automation-id="pager">
       <li class="page" (click)="selectPage(page - 1)" [ngClass]="{ disabled: noPrevious() }">
         <i class="bhi-previous" data-automation-id="pager-previous"></i>
       </li>
-      <li
-        class="page"
-        [ngClass]="{ active: p.active }"
-        [class.disabled]="disablePageSelection"
-        *ngFor="let p of pages"
-        (click)="selectPage(p.num, $event)"
-      >
-        {{ p.text }}
-      </li>
+      @for (p of pages; track p) {
+        <li
+          class="page"
+          [ngClass]="{ active: p.active }"
+          [class.disabled]="disablePageSelection"
+          (click)="selectPage(p.num, $event)">
+          {{ p.text }}
+        </li>
+      }
       <li class="page" (click)="selectPage(page + 1)" [ngClass]="{ disabled: noNext() }">
         <i class="bhi-next" data-automation-id="pager-next"></i>
       </li>
     </ul>
   `,
-    styleUrls: ['./PaginationOld.scss'],
-    encapsulation: ViewEncapsulation.None,
-    standalone: false
+  styleUrls: ['./PaginationOld.scss'],
+  encapsulation: ViewEncapsulation.None,
+  standalone: false
 })
 export class Pagination implements OnInit, OnChanges {
   @Input()

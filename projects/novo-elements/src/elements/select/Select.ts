@@ -89,16 +89,25 @@ const NovoSelectMixins: HasOverlayCtor &
 let nextId = 0;
 
 @Component({
-    selector: 'novo-select',
-    inputs: ['disabled', 'required', 'tabIndex'],
-    providers: [
-        { provide: NovoFieldControl, useExisting: NovoSelectElement },
-        { provide: NOVO_OPTION_PARENT_COMPONENT, useExisting: NovoSelectElement },
-    ],
-    template: `
+  selector: 'novo-select',
+  inputs: ['disabled', 'required', 'tabIndex'],
+  providers: [
+    { provide: NovoFieldControl, useExisting: NovoSelectElement },
+    { provide: NOVO_OPTION_PARENT_COMPONENT, useExisting: NovoSelectElement },
+  ],
+  template: `
     <div class="novo-select-trigger">
-      <span class="novo-select-placeholder" *ngIf="empty">{{ placeholder }}</span>
-      <span class="text-ellipsis" *ngIf="!empty"><novo-icon size="sm" style="margin: 0 0 .25rem .1rem" *ngIf="displayIcon">{{ displayIcon }}</novo-icon> {{ displayValue }}</span>
+      @if (empty) {
+        <span class="novo-select-placeholder">{{ placeholder }}</span>
+      }
+      @else {
+        <span class="text-ellipsis">
+          @if (displayIcon) {
+            <novo-icon size="sm" style="margin: 0 0 .25rem .1rem">{{ displayIcon }}</novo-icon>
+          }
+          {{ displayValue }}
+        </span>
+      }
       <i class="bhi-collapse"></i>
     </div>
     <novo-overlay-template
@@ -106,77 +115,85 @@ let nextId = 0;
       [position]="position"
       [width]="overlayWidth"
       [height]="overlayHeight"
-      (closing)="elementRef.nativeElement.focus()"
-    >
+      (closing)="elementRef.nativeElement.focus()">
       <div #panel class="novo-select-list" tabIndex="-1" [class.has-header]="headerConfig" [class.active]="panelOpen">
-        <novo-option *ngIf="headerConfig" class="select-header" [class.open]="header.open">
-          <novo-button *ngIf="!header.open" icon="add-thin" (click)="toggleHeader($event); (false)" tabIndex="-1" class="header">
-            {{ headerConfig.label }}
-          </novo-button>
-          <div *ngIf="header.open" [ngClass]="{ active: header.open }">
-            <input
-              autofocus
-              type="text"
-              [placeholder]="headerConfig.placeholder"
-              [attr.id]="name"
-              autocomplete="off"
-              [value]="header.value"
-              [ngClass]="{ invalid: !header.valid }"
-            />
-            <footer>
-              <novo-button (click)="toggleHeader($event, false)">{{ labels.cancel }}</novo-button>
-              <novo-button (click)="saveHeader()" class="primary">{{ labels.save }}</novo-button>
-            </footer>
-          </div>
-        </novo-option>
+        @if (headerConfig) {
+          <novo-option class="select-header" [class.open]="header.open">
+            @if (!header.open) {
+              <novo-button icon="add-thin" (click)="toggleHeader($event); (false)" tabIndex="-1" class="header">
+                {{ headerConfig.label }}
+              </novo-button>
+            }
+            @else {
+              <div [ngClass]="{ active: header.open }">
+                <input
+                  autofocus
+                  type="text"
+                  [placeholder]="headerConfig.placeholder"
+                  [attr.id]="name"
+                  autocomplete="off"
+                  [value]="header.value"
+                  [ngClass]="{ invalid: !header.valid }" />
+                <footer>
+                  <novo-button (click)="toggleHeader($event, false)">{{ labels.cancel }}</novo-button>
+                  <novo-button (click)="saveHeader()" class="primary">{{ labels.save }}</novo-button>
+                </footer>
+              </div>
+            }
+          </novo-option>
+        }
         <!-- Declarative Content Goes Here -->
         <ng-content></ng-content>
         <!-- Data Driven Content Goes Here -->
-        <ng-container *ngFor="let option of filteredOptions; let i = index">
-          <novo-option
-            *ngIf="!option.divider; else divider"
-            class="select-item"
-            [disabled]="option.disabled"
-            [class.active]="option.active"
-            [attr.data-automation-value]="option.label"
-            [value]="option.value"
-            [tooltip]="option.tooltip"
-            [tooltipPosition]="option.tooltipPosition || 'right'"
-          >
-            <span [innerHtml]="option.label | highlight:filterTerm"></span> <i *ngIf="option.active" class="bhi-check"></i>
-          </novo-option>
-          <ng-template #divider>
+        @for (option of filteredOptions; track option; let i = $index) {
+          @if (!option.divider) {
+            <novo-option
+              class="select-item"
+              [disabled]="option.disabled"
+              [class.active]="option.active"
+              [attr.data-automation-value]="option.label"
+              [value]="option.value"
+              [tooltip]="option.tooltip"
+              [tooltipPosition]="option.tooltipPosition || 'right'"
+              >
+              <span [innerHtml]="option.label | highlight:filterTerm"></span>
+              @if (option.active) {
+                <i class="bhi-check"></i>
+              }
+            </novo-option>
+          }
+          @else {
             <novo-divider class="select-item-divider" [class.with-label]="option.label" [class.without-label]="!option.label">
               {{ option?.label }}
             </novo-divider>
-          </ng-template>
-        </ng-container>
+          }
+        }
       </div>
     </novo-overlay-template>
   `,
-    styleUrls: ['./Select.scss'],
-    host: {
-        class: 'novo-select',
-        role: 'combobox',
-        'aria-autocomplete': 'none',
-        'aria-haspopup': 'true',
-        '[attr.id]': 'id',
-        '[attr.aria-controls]': 'panelOpen ? id + "-panel" : null',
-        '[attr.aria-expanded]': 'panelOpen',
-        '[attr.aria-required]': 'required.toString()',
-        '[attr.aria-disabled]': 'disabled.toString()',
-        '[attr.aria-invalid]': 'errorState',
-        '[attr.aria-labelledby]': '_ariaLabelledBy || null',
-        '[attr.aria-describedby]': '_ariaDescribedby || null',
-        '[attr.aria-activedescendant]': '_getAriaActiveDescendant()',
-        '[class.novo-select-disabled]': 'disabled',
-        '[class.novo-select-invalid]': 'errorState',
-        '[class.novo-select-required]': 'required',
-        '[class.novo-select-empty]': 'empty',
-        '[class.novo-select-multiple]': 'multiple',
-        '[tabindex]': 'disabled ? -1 : 0'
-    },
-    standalone: false
+  styleUrls: ['./Select.scss'],
+  host: {
+    class: 'novo-select',
+    role: 'combobox',
+    'aria-autocomplete': 'none',
+    'aria-haspopup': 'true',
+    '[attr.id]': 'id',
+    '[attr.aria-controls]': 'panelOpen ? id + "-panel" : null',
+    '[attr.aria-expanded]': 'panelOpen',
+    '[attr.aria-required]': 'required.toString()',
+    '[attr.aria-disabled]': 'disabled.toString()',
+    '[attr.aria-invalid]': 'errorState',
+    '[attr.aria-labelledby]': '_ariaLabelledBy || null',
+    '[attr.aria-describedby]': '_ariaDescribedby || null',
+    '[attr.aria-activedescendant]': '_getAriaActiveDescendant()',
+    '[class.novo-select-disabled]': 'disabled',
+    '[class.novo-select-invalid]': 'errorState',
+    '[class.novo-select-required]': 'required',
+    '[class.novo-select-empty]': 'empty',
+    '[class.novo-select-multiple]': 'multiple',
+    '[tabindex]': 'disabled ? -1 : 0'
+  },
+  standalone: false
 })
 export class NovoSelectElement
   extends NovoSelectMixins

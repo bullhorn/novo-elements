@@ -3,24 +3,25 @@ import { NovoLabelService } from 'novo-elements/services';
 import { Helpers } from 'novo-elements/utils';
 
 @Component({
-    selector: 'novo-data-table-cell-filter-header',
-    template: `
+  selector: 'novo-data-table-cell-filter-header',
+  template: `
     <div class="header">
       <novo-label>{{ label || labels.filters }}</novo-label>
-      <novo-button
-        theme="dialogue"
-        color="negative"
-        size="small"
-        icon="times"
-        (click)="clearFilter.emit()"
-        *ngIf="hasFilter"
-        data-automation-id="novo-data-table-filter-clear">
-        {{ labels.clear }}
-      </novo-button>
+      @if (hasFilter) {
+        <novo-button
+          theme="dialogue"
+          color="negative"
+          size="small"
+          icon="times"
+          (click)="clearFilter.emit()"
+          data-automation-id="novo-data-table-filter-clear">
+          {{ labels.clear }}
+        </novo-button>
+      }
     </div>
   `,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class NovoDataTableCellFilterHeader {
   @Input() label: string | number;

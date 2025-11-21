@@ -8,29 +8,37 @@ import { Helpers } from 'novo-elements/utils';
 import { PickerResults } from 'novo-elements/elements/picker';
 
 @Component({
-    selector: 'quick-note-results',
-    host: {
-        class: 'active',
-    },
-    template: `
-    <novo-loading theme="line" *ngIf="isLoading && !matches.length"></novo-loading>
-    <novo-list *ngIf="matches.length > 0">
-      <novo-list-item
-        *ngFor="let match of matches"
-        (click)="selectMatch($event)"
-        [class.active]="match === activeMatch"
-        (mouseenter)="selectActive(match)"
-      >
-        <item-content>
-          <p [innerHtml]="match.label | highlight:term"></p>
-        </item-content>
-      </novo-list-item>
-    </novo-list>
-    <p class="picker-error" *ngIf="hasError">{{ labels.quickNoteError }}</p>
-    <p class="picker-null" *ngIf="!isLoading && !matches.length && !hasError">{{ labels.quickNoteEmpty }}</p>
+  selector: 'quick-note-results',
+  host: {
+    class: 'active',
+  },
+  template: `
+    @if (isLoading && !matches.length) {
+      <novo-loading theme="line"></novo-loading>
+    }
+    @if (matches.length > 0) {
+      <novo-list>
+        @for (match of matches; track match) {
+          <novo-list-item
+            (click)="selectMatch($event)"
+            [class.active]="match === activeMatch"
+            (mouseenter)="selectActive(match)">
+            <item-content>
+              <p [innerHtml]="match.label | highlight:term"></p>
+            </item-content>
+          </novo-list-item>
+        }
+      </novo-list>
+    }
+    @if (hasError) {
+      <p class="picker-error">{{ labels.quickNoteError }}</p>
+    }
+    @if (!isLoading && !matches.length && !hasError) {
+      <p class="picker-null">{{ labels.quickNoteEmpty }}</p>
+    }
   `,
-    styleUrls: ['./QuickNoteResults.scss'],
-    standalone: false
+  styleUrls: ['./QuickNoteResults.scss'],
+  standalone: false
 })
 export class QuickNoteResults extends PickerResults {
   // Mode that the quick note is in for tagging

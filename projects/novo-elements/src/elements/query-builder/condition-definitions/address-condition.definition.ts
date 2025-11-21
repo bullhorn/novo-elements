@@ -34,39 +34,44 @@ import { NovoSelectElement } from 'novo-elements/elements/select';
  * Handle selection of field values when a list of options is provided.
  */
 @Component({
-    selector: 'novo-address-condition-def',
-    template: `
+  selector: 'novo-address-condition-def',
+  template: `
     <ng-container novoConditionFieldDef>
       <novo-field *novoConditionOperatorsDef="let formGroup" [formGroup]="formGroup">
         <novo-select [placeholder]="labels.operator" formControlName="operator" (onSelect)="onOperatorSelect(formGroup)">
           <novo-option value="includeAny">{{ labels.includeAny }}</novo-option>
           <novo-option value="excludeAny">{{ labels.exclude }}</novo-option>
-          <novo-option value="insideRadius" *ngIf="radiusEnabled()">{{ labels.insideRadius }}</novo-option>
-          <novo-option value="outsideRadius" *ngIf="radiusEnabled()">{{ labels.outsideRadius }}</novo-option>
+          @if (radiusEnabled()) {
+            <novo-option value="insideRadius">{{ labels.insideRadius }}</novo-option>
+            <novo-option value="outsideRadius">{{ labels.outsideRadius }}</novo-option>
+          }
         </novo-select>
       </novo-field>
       <ng-container *novoConditionInputDef="let formGroup; viewIndex as viewIndex; fieldMeta as meta" [formGroup]="formGroup">
         <novo-flex justify="space-between" align="end">
-          <novo-field #input *ngIf="['radius', 'insideRadius', 'outsideRadius'].includes(formGroup.value.operator)" class="address-radius">
-            <input
-              novoInput
-              paddingLeft="3px"
-              type="number"
-              min="1"
-              max="9999"
-              step="1"
-              formControlName="supportingValue"
-              #distanceInput
-              (input)="onRadiusSelect(formGroup, $event)"
-            />
-            <span marginLeft="2px" marginRight="4px" paddingTop="3px">{{ unitsLabel() }}</span>
-          </novo-field>
+          @if (['radius', 'insideRadius', 'outsideRadius'].includes(formGroup.value.operator)) {
+            <novo-field #input class="address-radius">
+              <input
+                novoInput
+                paddingLeft="3px"
+                type="number"
+                min="1"
+                max="9999"
+                step="1"
+                formControlName="supportingValue"
+                #distanceInput
+                (input)="onRadiusSelect(formGroup, $event)" />
+              <span marginLeft="2px" marginRight="4px" paddingTop="3px">{{ unitsLabel() }}</span>
+            </novo-field>
+          }
           <novo-field #novoField class="address-location">
             <novo-chip-list [(ngModel)]="chipListModel" [ngModelOptions]="{ standalone: true }" (click)="openPlacesList(viewIndex)">
-              <novo-chip *ngFor="let item of formGroup.get('value').value" (removed)="remove(item, formGroup, viewIndex)">
-                <novo-text ellipsis [tooltip]="item.formatted_address" tooltipOnOverflow>{{ item.formatted_address }}</novo-text>
-                <novo-icon novoChipRemove>close</novo-icon>
-              </novo-chip>
+              @for (item of formGroup.get('value').value; track item) {
+                <novo-chip (removed)="remove(item, formGroup, viewIndex)">
+                  <novo-text ellipsis [tooltip]="item.formatted_address" tooltipOnOverflow>{{ item.formatted_address }}</novo-text>
+                  <novo-icon novoChipRemove>close</novo-icon>
+                </novo-chip>
+              }
               <input
                 novoChipInput
                 [id]="viewIndex"
@@ -74,7 +79,7 @@ import { NovoSelectElement } from 'novo-elements/elements/select';
                 (keyup)="onKeyup($event, viewIndex)"
                 (keydown)="onKeydown($event, viewIndex)"
                 [picker]="placesPicker"
-                #addressInput/>
+                #addressInput />
             </novo-chip-list>
             <novo-picker-toggle [overlayId]="viewIndex" icon="location" novoSuffix>
               <google-places-list
@@ -88,9 +93,9 @@ import { NovoSelectElement } from 'novo-elements/elements/select';
       </ng-container>
     </ng-container>
   `,
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.Default,
-    standalone: false
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.Default,
+  standalone: false
 })
 export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef implements OnDestroy {
   @ViewChildren(NovoPickerToggleElement) overlayChildren: QueryList<NovoPickerToggleElement>;
