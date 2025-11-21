@@ -145,6 +145,44 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       expect(childOfAllosaurus).toBe(chicken);
     });
   });
+
+  describe('function: replaceChildrenWithReferences', () => {
+    it('should handle parent with null children gracefully', () => {
+      const parent = { children: null } as any;
+      const sortedData: any[] = [];
+      const compareFunction = (a: any, b: any): 0 | 1 | -1 => 0;
+      const warnFunction = jasmine.createSpy('warnFunction');
+
+      expect(() => {
+        component.replaceChildrenWithReferences(parent, sortedData, compareFunction, warnFunction);
+      }).not.toThrow();
+      expect(parent.children).toBeNull();
+    });
+
+    it('should handle parent with undefined children gracefully', () => {
+      const parent = { children: undefined } as any;
+      const sortedData: any[] = [];
+      const compareFunction = (a: any, b: any): 0 | 1 | -1 => 0;
+      const warnFunction = jasmine.createSpy('warnFunction');
+
+      expect(() => {
+        component.replaceChildrenWithReferences(parent, sortedData, compareFunction, warnFunction);
+      }).not.toThrow();
+      expect(parent.children).toBeUndefined();
+    });
+
+    it('should handle parent with non-array children gracefully', () => {
+      const parent = { children: 'not-an-array' } as any;
+      const sortedData: any[] = [];
+      const compareFunction = (a: any, b: any): 0 | 1 | -1 => 0;
+      const warnFunction = jasmine.createSpy('warnFunction');
+
+      expect(() => {
+        component.replaceChildrenWithReferences(parent, sortedData, compareFunction, warnFunction);
+      }).not.toThrow();
+      expect(parent.children).toEqual('not-an-array');
+    });
+  });
   describe('function: updateParentsAndQuickSelect', () => {
     it('should set parents to selected if their only child is selected', () => {
       component.tabs = [
@@ -259,6 +297,18 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
         { id: 2, name: 'Atticus' },
       ];
       const result = component.getSelectedState(childArray as any);
+      expect(result).toEqual(undefined);
+    });
+    it('should return undefined if input is null', () => {
+      const result = component.getSelectedState(null as any);
+      expect(result).toEqual(undefined);
+    });
+    it('should return undefined if input is undefined', () => {
+      const result = component.getSelectedState(undefined as any);
+      expect(result).toEqual(undefined);
+    });
+    it('should return undefined if input is not an array type', () => {
+      const result = component.getSelectedState('not-an-array' as any);
       expect(result).toEqual(undefined);
     });
   });
