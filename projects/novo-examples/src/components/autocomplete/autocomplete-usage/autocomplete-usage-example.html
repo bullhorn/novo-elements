@@ -7,9 +7,9 @@
       placeholder="Pick one"
       autocomplete="off" />
     <novo-autocomplete #auto>
-      <novo-option *ngFor="let option of filteredOptions | async" [value]="option">
-        {{option}}
-      </novo-option>
+      @for (option of filteredOptions | async; track option) {
+        <novo-option [value]="option">{{option}}</novo-option>
+      }
     </novo-autocomplete>
   </novo-field>
 </form>

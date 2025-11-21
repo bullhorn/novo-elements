@@ -3,8 +3,8 @@ import { addMonths, subMonths } from 'date-fns';
 import { WeekDay } from 'novo-elements/utils';
 
 @Component({
-    selector: 'novo-agenda-month-header',
-    template: `
+  selector: 'novo-agenda-month-header',
+  template: `
     <ng-template #defaultTemplate>
       <div class="agenda-header">
         <div class="agenda-header-top">
@@ -13,26 +13,27 @@ import { WeekDay } from 'novo-elements/utils';
           <novo-button theme="icon" icon="next" (click)="nextMonth($event)"></novo-button>
         </div>
         <div class="agenda-weekdays">
-          <div
-            class="agenda-weekday"
-            *ngFor="let day of days"
-            [class.agenda-past]="day.isPast"
-            [class.agenda-today]="day.isToday"
-            [class.agenda-future]="day.isFuture"
-            [class.agenda-weekend]="day.isWeekend"
-          >
-            {{ day.date | weekday: locale }}
-          </div>
+          @for (day of days; track day) {
+            <div
+              class="agenda-weekday"
+              [class.agenda-past]="day.isPast"
+              [class.agenda-today]="day.isToday"
+              [class.agenda-future]="day.isFuture"
+              [class.agenda-weekend]="day.isWeekend"
+              >
+              {{ day.date | weekday: locale }}
+            </div>
+          }
         </div>
       </div>
     </ng-template>
     <ng-template
       [ngTemplateOutlet]="customTemplate || defaultTemplate"
       [ngTemplateOutletContext]="{ days: days, locale: locale, viewDate: viewDate }"
-    >
+      >
     </ng-template>
   `,
-    standalone: false
+  standalone: false
 })
 export class NovoAgendaMonthHeaderElement {
   @Input()

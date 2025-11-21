@@ -5,26 +5,38 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { NovoLabelService } from 'novo-elements/services';
 
 @Component({
-    selector: 'novo-tip-well',
-    template: `
-    <div *ngIf="isActive">
+  selector: 'novo-tip-well',
+  template: `
+    @if (isActive) {
       <div>
-        <i class="bhi-{{ icon }}" *ngIf="icon" [attr.data-automation-id]="'novo-tip-well-icon-' + name"></i>
-        <ng-content select="novo-icon"></ng-content>
-        <p *ngIf="sanitize && tip.length" [attr.data-automation-id]="'novo-tip-well-tip-' + name">{{ tip }}</p>
-        <p *ngIf="!sanitize && tipWithStyles" [attr.data-automation-id]="'novo-tip-well-tip-' + name" [innerHTML]="tipWithStyles"></p>
-        <p *ngIf="(sanitize && !tip.length) || (!sanitize && !tipWithStyles)" [attr.data-automation-id]="'novo-tip-well-tip-' + name"><ng-content></ng-content></p>
+        <div>
+          @if (icon) {
+            <i class="bhi-{{ icon }}" [attr.data-automation-id]="'novo-tip-well-icon-' + name"></i>
+          }
+          <ng-content select="novo-icon"></ng-content>
+          @if (sanitize && tip.length) {
+            <p [attr.data-automation-id]="'novo-tip-well-tip-' + name">{{ tip }}</p>
+          }
+          @if (!sanitize && tipWithStyles) {
+            <p [attr.data-automation-id]="'novo-tip-well-tip-' + name" [innerHTML]="tipWithStyles"></p>
+          }
+          @if ((sanitize && !tip.length) || (!sanitize && !tipWithStyles)) {
+            <p [attr.data-automation-id]="'novo-tip-well-tip-' + name"><ng-content></ng-content></p>
+          }
+        </div>
+        @if (button) {
+          <button theme="dialogue" size="small" (click)="hideTip()" [attr.data-automation-id]="'novo-tip-well-button-' + name">
+            {{ buttonText }}
+          </button>
+        }
       </div>
-      <button theme="dialogue" size="small" (click)="hideTip()" *ngIf="button" [attr.data-automation-id]="'novo-tip-well-button-' + name">
-        {{ buttonText }}
-      </button>
-    </div>
+    }
   `,
-    styleUrls: ['./TipWell.scss'],
-    host: {
-        '[class.active]': 'isActive',
-    },
-    standalone: false
+  styleUrls: ['./TipWell.scss'],
+  host: {
+    '[class.active]': 'isActive',
+  },
+  standalone: false
 })
 export class NovoTipWellElement implements OnInit {
   @Input()

@@ -4,7 +4,8 @@
     icon="collapse"
     inverse>Lots of Data Points!</button>
   <novo-optgroup>
-    <novo-option *ngFor="let name of MOCK_WORDS"
-      (action)="clickMe(name)">{{ name }}</novo-option>
+    @for (name of MOCK_WORDS; track name) {
+      <novo-option (action)="clickMe(name)">{{ name }}</novo-option>
+    }
   </novo-optgroup>
 </novo-dropdown>

@@ -29,9 +29,11 @@ interface Bank {
       <novo-field>
         <novo-select [formControl]="bankCtrl" placeholder="Bank" #selectSingle>
           <ngx-novo-select-search [formControl]="bankFilterCtrl" #selectSearchSingle></ngx-novo-select-search>
-          <novo-option *ngFor="let bank of filteredBanks | async" [value]="bank">
-            {{ bank.name }}
-          </novo-option>
+          @for (bank of filteredBanks | async; track bank) {
+            <novo-option [value]="bank">
+              {{ bank.name }}
+            </novo-option>
+          }
         </novo-select>
       </novo-field>
     </p>
@@ -43,9 +45,11 @@ interface Bank {
           <novo-option>
             <ngx-novo-select-search [formControl]="bankFilterCtrlMatOption" #selectSearchSingleMatOption></ngx-novo-select-search>
           </novo-option>
-          <novo-option *ngFor="let bank of filteredBanksMatOption | async" [value]="bank">
-            {{ bank.name }}
-          </novo-option>
+          @for (bank of filteredBanksMatOption | async; track bank) {
+            <novo-option [value]="bank">
+              {{ bank.name }}
+            </novo-option>
+          }
         </novo-select>
       </novo-field>
     </p>
@@ -55,16 +59,20 @@ interface Bank {
       <novo-field>
         <novo-select [formControl]="bankMultiCtrl" placeholder="Banks" [multiple]="true" #selectMulti>
           <ngx-novo-select-search [formControl]="bankMultiFilterCtrl" #selectSearchMulti></ngx-novo-select-search>
-          <novo-option *ngFor="let bank of filteredBanksMulti | async" [value]="bank">
-            {{ bank.name }}
-          </novo-option>
+          @for (bank of filteredBanksMulti | async; track bank) {
+            <novo-option [value]="bank">
+              {{ bank.name }}
+            </novo-option>
+          }
         </novo-select>
       </novo-field>
     </p>
     <p>Selected Banks:</p>
-    <ul *ngFor="let bank of bankMultiCtrl?.value">
-      <li>{{ bank.name }}</li>
-    </ul>
+    @for (bank of bankMultiCtrl?.value; track bank) {
+      <ul>
+        <li>{{ bank.name }}</li>
+      </ul>
+    }
   `,
 })
 export class NovoSelectSearchTestComponent implements OnInit, OnDestroy, AfterViewInit {

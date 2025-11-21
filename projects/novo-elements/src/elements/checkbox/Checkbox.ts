@@ -34,10 +34,10 @@ export class NovoCheckboxChange {
 const LAYOUT_DEFAULTS = { iconStyle: 'box' };
 let nextId = 0;
 @Component({
-    selector: 'novo-checkbox',
-    providers: [CHECKBOX_VALUE_ACCESSOR],
-    styleUrls: ['./Checkbox.scss'],
-    template: `
+  selector: 'novo-checkbox',
+  providers: [CHECKBOX_VALUE_ACCESSOR],
+  styleUrls: ['./Checkbox.scss'],
+  template: `
     <div class="novo-checkbox-group" [class.checked]="checked" [class.disabled]="disabled">
       <input
         #input
@@ -55,7 +55,7 @@ let nextId = 0;
         [attr.aria-describedby]="ariaDescribedby"
         (change)="_onInteractionEvent($event)"
         (click)="_onInputClick($event)"
-      />
+        />
       <label [attr.for]="name" (click)="select($event)" [class.disabled]="disabled">
         <i
           [class.bhi-checkbox-empty]="!checked && !indeterminate && boxIcon"
@@ -65,16 +65,20 @@ let nextId = 0;
           [class.bhi-check]="checked && !indeterminate && !boxIcon"
           [class.bhi-circle]="indeterminate && !boxIcon"
         ></i>
-        <span *ngIf="label">{{ label }}</span>
-        <span *ngIf="!label" class="novo-checkbox-text"><ng-content></ng-content></span>
+        @if (label) {
+          <span>{{ label }}</span>
+        }
+        @if (!label) {
+          <span class="novo-checkbox-text"><ng-content></ng-content></span>
+        }
       </label>
     </div>
   `,
-    host: {
-        class: 'novo-checkbox',
-        '[class.has-label]': 'label',
-    },
-    standalone: false
+  host: {
+    class: 'novo-checkbox',
+    '[class.has-label]': 'label',
+  },
+  standalone: false
 })
 export class NovoCheckboxElement implements ControlValueAccessor, OnInit {
   /**

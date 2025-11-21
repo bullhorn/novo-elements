@@ -5,35 +5,44 @@ import { NovoLabelService } from 'novo-elements/services';
 import { BasePickerResults } from '../base-picker-results/BasePickerResults';
 
 @Component({
-    selector: 'skill-specialty-picker-results',
-    template: `
-    <section class="picker-loading" *ngIf="isLoading && !matches?.length"><novo-loading theme="line"></novo-loading></section>
-    <novo-list *ngIf="matches.length > 0" direction="vertical">
-      <novo-list-item
-        *ngFor="let match of matches"
-        (click)="selectMatch($event)"
-        [class.active]="match === activeMatch"
-        (mouseenter)="selectActive(match)"
-        [class.disabled]="preselected(match)"
-      >
-        <item-content>
-          <h6><span [innerHtml]="match.label | highlight:term"></span></h6>
-          <div class="category">
-            <i class="bhi-category-tags"></i
-            ><span [innerHtml]="match.data.categories || match.data.parentCategory.name | highlight:term"></span>
-          </div>
-        </item-content>
-      </novo-list-item>
-      <novo-list-item *ngIf="limitedTo"
-        ><div>{{ labels.showingXofXResults(limit, total) }}</div></novo-list-item
-      >
-      <novo-loading theme="line" *ngIf="isLoading && matches.length > 0"></novo-loading>
-    </novo-list>
-    <p class="picker-error" *ngIf="hasError">{{ labels.pickerError }}</p>
-    <p class="picker-null" *ngIf="!isLoading && !matches.length && !hasError">{{ labels.pickerEmpty }}</p>
+  selector: 'skill-specialty-picker-results',
+  template: `
+    @if (isLoading && !matches?.length) {
+      <section class="picker-loading"><novo-loading theme="line"></novo-loading></section>
+    }
+    @if (matches.length > 0) {
+      <novo-list direction="vertical">
+        @for (match of matches; track match) {
+          <novo-list-item
+            (click)="selectMatch($event)"
+            [class.active]="match === activeMatch"
+            (mouseenter)="selectActive(match)"
+            [class.disabled]="preselected(match)">
+            <item-content>
+              <h6><span [innerHtml]="match.label | highlight:term"></span></h6>
+              <div class="category">
+                <i class="bhi-category-tags"></i><span [innerHtml]="match.data.categories || match.data.parentCategory.name | highlight:term"></span>
+              </div>
+            </item-content>
+          </novo-list-item>
+        }
+        @if (limitedTo) {
+          <novo-list-item><div>{{ labels.showingXofXResults(limit, total) }}</div></novo-list-item>
+        }
+        @if (isLoading && matches.length > 0) {
+          <novo-loading theme="line"></novo-loading>
+        }
+      </novo-list>
+    }
+    @if (hasError) {
+      <p class="picker-error">{{ labels.pickerError }}</p>
+    }
+    @if (!isLoading && !matches.length && !hasError) {
+      <p class="picker-null">{{ labels.pickerEmpty }}</p>
+    }
   `,
-    styleUrls: ['./SkillsSpecialtyPickerResults.scss'],
-    standalone: false
+  styleUrls: ['./SkillsSpecialtyPickerResults.scss'],
+  standalone: false
 })
 export class SkillsSpecialtyPickerResults extends BasePickerResults {
   @HostBinding('class.active')

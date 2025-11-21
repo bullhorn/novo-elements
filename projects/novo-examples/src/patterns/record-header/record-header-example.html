@@ -17,14 +17,18 @@
   <novo-list class="bgc-off-white" direction="horizontal" [isLoading]="values">
     <novo-value *skeleton></novo-value>
     <novo-value *skeleton></novo-value>
-    <novo-value *ngFor="let value of values" [label]="value.label" [data]="value.data"></novo-value>
+    @for (value of values; track value) {
+      <novo-value [label]="value.label" [data]="value.data"></novo-value>
+    }
   </novo-list>
   <novo-nav direction="horizontal" [isLoading]="tabs">
     <novo-tab *skeleton></novo-tab>
     <novo-tab *skeleton></novo-tab>
     <novo-tab *skeleton></novo-tab>
-    <novo-tab *ngFor="let tab of tabs">
-      <span>{{tab}}</span>
-    </novo-tab>
+    @for (tab of tabs; track tab) {
+      <novo-tab>
+        <span>{{tab}}</span>
+      </novo-tab>
+    }
   </novo-nav>
 </header>

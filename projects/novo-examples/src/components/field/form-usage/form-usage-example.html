@@ -3,7 +3,9 @@
     <novo-field>
       <novo-label>Pick a Number?</novo-label>
       <input novoInput type="number" placeholder="Ex. 12" [formControl]="numberControl" min="10" />
-      <novo-error *ngIf="numberControl.invalid">Minimum: 10</novo-error>
+      @if (numberControl.invalid) {
+        <novo-error>Minimum: 10</novo-error>
+      }
     </novo-field>
 
     <novo-field>
@@ -30,8 +32,9 @@
       </novo-picker-toggle>
     </novo-field>
 
-    <button theme="primary" [disabled]="!options.valid" (click)="onSubmit(options.value)">Submit
-      Form</button>
+    <button theme="primary" [disabled]="!options.valid" (click)="onSubmit(options.value)">
+      Submit Form
+    </button>
   </novo-fields>
 </form>
 

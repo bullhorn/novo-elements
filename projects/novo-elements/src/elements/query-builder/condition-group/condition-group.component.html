@@ -1,35 +1,43 @@
 <div [formGroup]="parentForm" class="condition-group-container">
   <novo-stack [formArrayName]="controlName" gap="md">
-    <ng-container
-      *ngFor="let andGroup of root.controls; let andIndex = index; let isFirst = first;let isLast = last;">
+    @for (andGroup of root.controls; track andGroup; let andIndex = $index; let isFirst = $first; let isLast = $last) {
       <ng-container [formGroupName]="andIndex">
         <novo-flex class="condition-row" [ngClass]="{ isFirst: andIndex === 0 }" [class]="entity || scope" align="end" gap="sm" #flex>
-          <novo-dropdown *ngIf="(!isFirst || !hideFirstOperator) && qbs.allowedGroupings.length > 1; else labeledGroup" data-automation-id="groupings-dropdown">
-            <button theme="dialogue" icon="collapse" size="sm">{{qbs.getConjunctionLabel(controlName)}}</button>
-            <novo-optgroup>
-              <novo-option *ngFor="let c of qbs.allowedGroupings" (click)="updateControlName(c)" [attr.data-automation-id]="c">
-                {{qbs.getConjunctionLabel(c)}}</novo-option>
-            </novo-optgroup>
-          </novo-dropdown>
-          <ng-template #labeledGroup>
-            <novo-label *ngIf="!isFirst || !hideFirstOperator" color="ash" size="xs" uppercase padding="sm">
-              {{qbs.getConjunctionLabel(controlName)}}</novo-label>
-          </ng-template>
+          @if ((!isFirst || !hideFirstOperator) && qbs.allowedGroupings.length > 1) {
+            <novo-dropdown data-automation-id="groupings-dropdown">
+              <button theme="dialogue" icon="collapse" size="sm">{{qbs.getConjunctionLabel(controlName)}}</button>
+              <novo-optgroup>
+                @for (c of qbs.allowedGroupings; track c) {
+                  <novo-option (click)="updateControlName(c)" [attr.data-automation-id]="c">
+                    {{qbs.getConjunctionLabel(c)}}
+                  </novo-option>
+                }
+              </novo-optgroup>
+            </novo-dropdown>
+          } @else {
+            @if (!isFirst || !hideFirstOperator) {
+              <novo-label color="ash" size="xs" uppercase padding="sm">
+                {{qbs.getConjunctionLabel(controlName)}}
+              </novo-label>
+            }
+          }
           <novo-condition-builder [groupIndex]="groupIndex" [andIndex]="andIndex" [hideOperator]="isFirst && hideFirstOperator" [scope]="scope" [conditionType]="controlName"></novo-condition-builder>
           <novo-button class="delete-btn" theme="icon" icon="delete-o" color="negative" (click)="removeCondition(andIndex)">
           </novo-button>
         </novo-flex>
       </ng-container>
-    </ng-container>
-    <button
-      *ngIf="!qbs.hasMultipleScopes()"
-      theme="dialogue"
-      data-automation-id="add-advanced-search-condition"
-      icon="add-thin"
-      side="left"
-      size="sm"
-      uppercase
-      (click)="addCondition()">
-      {{ labels.addCondition }}</button>
+    }
+    @if (!qbs.hasMultipleScopes()) {
+      <button
+        theme="dialogue"
+        data-automation-id="add-advanced-search-condition"
+        icon="add-thin"
+        side="left"
+        size="sm"
+        uppercase
+        (click)="addCondition()">
+        {{ labels.addCondition }}
+      </button>
+    }
   </novo-stack>
 </div>

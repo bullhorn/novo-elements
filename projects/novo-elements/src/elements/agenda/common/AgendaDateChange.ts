@@ -2,24 +2,32 @@ import { Component, EventEmitter, Inject, Input, LOCALE_ID, Output } from '@angu
 import { DateUtil } from 'novo-elements/utils';
 
 @Component({
-    selector: 'novo-agenda-date-change',
-    template: `
+  selector: 'novo-agenda-date-change',
+  template: `
     <div class="cal-date-change">
       <i class="bhi-arrow-left" (click)="subtractDate()"></i>
-      <span [ngSwitch]="view">
-        <span *ngSwitchCase="'month'">{{ (viewDate | month: locale) + ' ' + (viewDate | year: locale) }}</span>
-        <span *ngSwitchCase="'week'">{{
-          (startOfWeek | monthday: locale:'long') + ' - ' + (endOfWeek | endofweekdisplay: startOfWeek:locale:'long')
-        }}</span>
-        <span *ngSwitchCase="'day'">{{
-          (viewDate | weekday: locale:'long') + ', ' + (viewDate | month: locale) + ' ' + (viewDate | dayofmonth: locale)
-        }}</span>
+      <span>
+        @switch (view) {
+          @case ('month') {
+            <span>{{ (viewDate | month: locale) + ' ' + (viewDate | year: locale) }}</span>
+          }
+          @case ('week') {
+            <span>{{
+              (startOfWeek | monthday: locale:'long') + ' - ' + (endOfWeek | endofweekdisplay: startOfWeek:locale:'long')
+            }}</span>
+          }
+          @case ('day') {
+            <span>{{
+              (viewDate | weekday: locale:'long') + ', ' + (viewDate | month: locale) + ' ' + (viewDate | dayofmonth: locale)
+            }}</span>
+          }
+        }
       </span>
       <i class="bhi-arrow-right" (click)="addDate()"></i>
     </div>
   `,
-    styleUrls: ['./AgendaDateChange.scss'],
-    standalone: false
+  styleUrls: ['./AgendaDateChange.scss'],
+  standalone: false
 })
 export class NovoAgendaDateChangeElement {
   /**

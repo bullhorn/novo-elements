@@ -20,23 +20,27 @@ interface Item {
 }
 
 @Component({
-    selector: 'multi-picker',
-    providers: [CHIPS_VALUE_ACCESSOR],
-    template: `
-    <novo-chip
-      *ngFor="let item of _items | async | slice: 0:chipsCount"
-      [type]="item.type"
-      [class.selected]="item == selected"
-      (removed)="removeFromDisplay($event, item)"
-      (selectionChange)="select($event, item)"
-    >
-      {{ item.label }}
-    </novo-chip>
-    <div *ngIf="items.length > chipsCount">
-      <ul class="summary">
-        <li *ngFor="let type of notShown">+ {{ type.count }} {{ labels.more }} {{ type.type }}</li>
-      </ul>
-    </div>
+  selector: 'multi-picker',
+  providers: [CHIPS_VALUE_ACCESSOR],
+  template: `
+    @for (item of _items | async | slice: 0:chipsCount; track item) {
+      <novo-chip
+        [type]="item.type"
+        [class.selected]="item == selected"
+        (removed)="removeFromDisplay($event, item)"
+        (selectionChange)="select($event, item)">
+        {{ item.label }}
+      </novo-chip>
+    }
+    @if (items.length > chipsCount) {
+      <div>
+        <ul class="summary">
+          @for (type of notShown; track type) {
+            <li>+ {{ type.count }} {{ labels.more }} {{ type.type }}</li>
+          }
+        </ul>
+      </div>
+    }
     <div class="chip-input-container">
       <novo-picker
         clearValueOnSelect="true"
@@ -46,18 +50,19 @@ interface Item {
         (keydown)="onKeyDown($event)"
         (focus)="onFocus($event)"
         (blur)="onTouched($event)"
-        [overrideElement]="element"
-      >
+        [overrideElement]="element">
       </novo-picker>
     </div>
     <i class="bhi-search" [class.has-value]="items.length"></i>
-    <label class="clear-all" *ngIf="items.length" (click)="clearValue()">{{ labels.clearAll }} <i class="bhi-times"></i></label>
+    @if (items.length) {
+      <label class="clear-all" (click)="clearValue()">{{ labels.clearAll }} <i class="bhi-times"></i></label>
+    }
   `,
-    styleUrls: ['./_MultiPicker.scss'],
-    host: {
-        '[class.with-value]': 'items.length > 0',
-    },
-    standalone: false
+  styleUrls: ['./_MultiPicker.scss'],
+  host: {
+      '[class.with-value]': 'items.length > 0',
+  },
+  standalone: false
 })
 export class NovoMultiPickerElement implements OnInit {
   @Input()

@@ -5,9 +5,9 @@ import { NovoLabelService } from 'novo-elements/services';
 import { BooleanInput } from 'novo-elements/utils';
 
 @Component({
-    selector: 'novo-card-actions',
-    template: '<ng-content></ng-content>',
-    standalone: false
+  selector: 'novo-card-actions',
+  template: '<ng-content></ng-content>',
+  standalone: false
 })
 export class CardActionsElement {}
 
@@ -15,11 +15,11 @@ export class CardActionsElement {}
  * Content of a card, needed as it's used as a selector in the API.
  */
 @Component({
-    selector: 'novo-card-content, [novo-card-content], [novoCardContent]',
-    host: { class: 'novo-card-content', '[class.condensed]': 'condensed' },
-    template: '<ng-content></ng-content>',
-    styleUrls: ['./CardContent.scss'],
-    standalone: false
+  selector: 'novo-card-content, [novo-card-content], [novoCardContent]',
+  host: { class: 'novo-card-content', '[class.condensed]': 'condensed' },
+  template: '<ng-content></ng-content>',
+  styleUrls: ['./CardContent.scss'],
+  standalone: false
 })
 export class CardContentElement {
   @Input() @BooleanInput() condensed: boolean = false;
@@ -29,9 +29,9 @@ export class CardContentElement {
  * Content of a card, needed as it's used as a selector in the API.
  */
 @Component({
-    selector: 'novo-card-header, [novo-card-header], [novoCardHeader]',
-    host: { class: 'novo-card-header' },
-    template: `
+  selector: 'novo-card-header, [novo-card-header], [novoCardHeader]',
+  host: { class: 'novo-card-header' },
+  template: `
     <ng-content select="novo-avatar, [novo-avatar], novo-icon"></ng-content>
     <div class="novo-card-header-text">
       <ng-content select="novo-title, [novo-title], novo-text, novo-label, novo-caption"></ng-content>
@@ -41,8 +41,8 @@ export class CardContentElement {
       <ng-content select="novo-action"></ng-content>
     </div>
   `,
-    styleUrls: ['./CardHeader.scss'],
-    standalone: false
+  styleUrls: ['./CardHeader.scss'],
+  standalone: false
 })
 export class CardHeaderElement {}
 
@@ -56,76 +56,87 @@ export class CardHeaderElement {}
 export class CardFooterElement {}
 
 @Component({
-    selector: 'novo-card',
-    host: {
-        class: 'novo-card',
-        '[attr.data-automation-id]': 'cardAutomationId',
-        '[class.loading]': 'loading || config.loading',
-    },
-    template: `
+  selector: 'novo-card',
+  host: {
+    class: 'novo-card',
+    '[attr.data-automation-id]': 'cardAutomationId',
+    '[class.loading]': 'loading || config.loading',
+  },
+  template: `
     <!--Loading-->
-    <div class="card-loading-container" *ngIf="loading || config.loading">
-      <novo-loading theme="line" [attr.data-automation-id]="cardAutomationId + '-loading'"></novo-loading>
-    </div>
+    @if (loading || config.loading) {
+      <div class="card-loading-container">
+        <novo-loading theme="line" [attr.data-automation-id]="cardAutomationId + '-loading'"></novo-loading>
+      </div>
+    }
     <!--Card Header-->
-    <header *ngIf="title || config.title">
-      <div class="title">
-        <!--Grabber Icon-->
-        <novo-icon
-          *ngIf="move || config.move"
-          tooltip="{{ labels.move }}"
-          tooltipPosition="bottom-right"
-          [attr.data-automation-id]="cardAutomationId + '-move'"
-          >move</novo-icon
-        >
-        <!--Card Title-->
-        <h3 [attr.data-automation-id]="cardAutomationId + '-title'">
-          <span [tooltip]="iconTooltip" tooltipPosition="right"><i *ngIf="icon" [ngClass]="iconClass"></i></span>
-          {{ title || config.title }}
-        </h3>
-      </div>
-      <!--Card Actions-->
-      <div class="actions" [attr.data-automation-id]="cardAutomationId + '-actions'">
-        <ng-content select="novo-card-actions"></ng-content>
-        <novo-button
-          theme="icon"
-          icon="refresh"
-          (click)="toggleRefresh()"
-          *ngIf="refresh || config.refresh"
-          [attr.data-automation-id]="cardAutomationId + '-refresh'"
-          tooltip="{{ labels.refresh }}"
-          tooltipPosition="bottom-left"
-        ></novo-button>
-
-        <novo-button
-          theme="icon"
-          icon="close-o"
-          (click)="toggleClose()"
-          *ngIf="close || config.close"
-          [attr.data-automation-id]="cardAutomationId + '-close'"
-          tooltip="{{ labels.close }}"
-          tooltipPosition="bottom-left"
-        ></novo-button>
-      </div>
-    </header>
-    <!--Content (transcluded)-->
-    <ng-content *ngIf="!(loading || config.loading) && !(message || config.message)"></ng-content>
-    <!--Error/Empty Message-->
-    <p
-      class="card-message"
-      *ngIf="!(loading || config.loading) && (message || config.message)"
-      [attr.data-automation-id]="cardAutomationId + '-message'"
-    >
-      <i *ngIf="messageIconClass" [ngClass]="messageIconClass"></i> <span [innerHtml]="message || config.message"></span>
-    </p>
-    <!--Card Footer-->
-    <ng-content
-      *ngIf="!(loading || config.loading) && !(message || config.message)"
-      select="footer,novo-card-footer,[novo-card-footer],[novoCardFooter]"
-    ></ng-content>
+    @if (title || config.title) {
+      <header>
+        <div class="title">
+          <!--Grabber Icon-->
+          @if (move || config.move) {
+            <novo-icon
+              tooltip="{{ labels.move }}"
+              tooltipPosition="bottom-right"
+              [attr.data-automation-id]="cardAutomationId + '-move'">move</novo-icon>
+            }
+            <!--Card Title-->
+            <h3 [attr.data-automation-id]="cardAutomationId + '-title'">
+              <span [tooltip]="iconTooltip" tooltipPosition="right">
+                @if (icon) {
+                  <i [ngClass]="iconClass"></i>
+                }
+              </span>
+              {{ title || config.title }}
+            </h3>
+          </div>
+          <!--Card Actions-->
+          <div class="actions" [attr.data-automation-id]="cardAutomationId + '-actions'">
+            <ng-content select="novo-card-actions"></ng-content>
+            @if (refresh || config.refresh) {
+              <novo-button
+                theme="icon"
+                icon="refresh"
+                (click)="toggleRefresh()"
+                [attr.data-automation-id]="cardAutomationId + '-refresh'"
+                tooltip="{{ labels.refresh }}"
+                tooltipPosition="bottom-left"
+              ></novo-button>
+            }
+            @if (close || config.close) {
+              <novo-button
+                theme="icon"
+                icon="close-o"
+                (click)="toggleClose()"
+                [attr.data-automation-id]="cardAutomationId + '-close'"
+                tooltip="{{ labels.close }}"
+                tooltipPosition="bottom-left"
+              ></novo-button>
+            }
+          </div>
+        </header>
+      }
+      <!--Content (transcluded)-->
+      @if (!(loading || config.loading) && !(message || config.message)) {
+        <ng-content></ng-content>
+      }
+      <!--Error/Empty Message-->
+      @if (!(loading || config.loading) && (message || config.message)) {
+        <p class="card-message"
+          [attr.data-automation-id]="cardAutomationId + '-message'">
+          @if (messageIconClass) {
+            <i [ngClass]="messageIconClass"></i>
+          }
+          <span [innerHtml]="message || config.message"></span>
+        </p>
+      }
+      <!--Card Footer-->
+      @if (!(loading || config.loading) && !(message || config.message)) {
+        <ng-content select="footer,novo-card-footer,[novo-card-footer],[novoCardFooter]"></ng-content>
+      }
   `,
-    styleUrls: ['./Card.scss'],
-    standalone: false
+  styleUrls: ['./Card.scss'],
+  standalone: false
 })
 export class CardElement implements OnChanges, OnInit {
   @Input()

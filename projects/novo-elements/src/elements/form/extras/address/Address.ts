@@ -34,158 +34,155 @@ export interface NovoAddressConfig {
 }
 
 @Component({
-    selector: 'novo-address',
-    providers: [ADDRESS_VALUE_ACCESSOR],
-    template: `
-    <span
-      *ngIf="!config?.address1?.hidden"
-      class="street-address"
-      [class.invalid]="invalid.address1"
-      [class.focus]="focused.address1"
-      [class.disabled]="disabled.address1"
-    >
-      <i
-        *ngIf="config.address1.required"
-        class="required-indicator address1"
-        [ngClass]="{ 'bhi-circle': !valid.address1, 'bhi-check': valid.address1 }"
-      >
-      </i>
-      <input
-        [class.maxlength-error]="invalidMaxlength.address1"
-        type="text"
-        id="address1"
-        name="address1"
-        [placeholder]="config.address1.label"
-        [maxlength]="config?.address1?.maxlength"
-        autocomplete="shipping street-address address-line-1"
-        [(ngModel)]="model.address1"
-        (ngModelChange)="updateControl()"
-        (focus)="isFocused($event, 'address1')"
-        (blur)="isBlurred($event, 'address1')"
-        (input)="onInput($event, 'address1')"
-        [disabled]="disabled.address1"
-      />
-    </span>
-    <span
-      *ngIf="!config?.address2?.hidden"
-      class="apt suite"
-      [class.invalid]="invalid.address2"
-      [class.focus]="focused.address2"
-      [class.disabled]="disabled.address2"
-    >
-      <i
-        *ngIf="config.address2.required"
-        class="required-indicator address2"
-        [ngClass]="{ 'bhi-circle': !valid.address2, 'bhi-check': valid.address2 }"
-      >
-      </i>
-      <input
-        [class.maxlength-error]="invalidMaxlength.address2"
-        type="text"
-        id="address2"
-        name="address2"
-        [placeholder]="config.address2.label"
-        [maxlength]="config?.address2?.maxlength"
-        autocomplete="shipping address-line-2"
-        [(ngModel)]="model.address2"
-        (ngModelChange)="updateControl()"
-        (focus)="isFocused($event, 'address2')"
-        (blur)="isBlurred($event, 'address2')"
-        (input)="onInput($event, 'address2')"
-        [disabled]="disabled.address2"
-      />
-    </span>
-    <span
-      *ngIf="!config?.city?.hidden"
-      class="city locality"
-      [class.invalid]="invalid.city"
-      [class.focus]="focused.city"
-      [class.disabled]="disabled.city"
-    >
-      <i *ngIf="config.city.required" class="required-indicator" [ngClass]="{ 'bhi-circle': !valid.city, 'bhi-check': valid.city }"> </i>
-      <input
-        [class.maxlength-error]="invalidMaxlength.city"
-        type="text"
-        id="city"
-        name="city"
-        [placeholder]="config.city.label"
-        autocomplete="shipping city locality"
-        [maxlength]="config?.city?.maxlength"
-        [(ngModel)]="model.city"
-        (ngModelChange)="updateControl()"
-        (focus)="isFocused($event, 'city')"
-        (blur)="isBlurred($event, 'city')"
-        (input)="onInput($event, 'city')"
-        [disabled]="disabled.city"
-      />
-    </span>
-    <span
-      *ngIf="!config?.state?.hidden"
-      class="state region"
-      [class.invalid]="invalid.state"
-      [class.focus]="focused.state"
-      [class.disabled]="disabled.state"
-      [tooltip]="tooltip.state"
-    >
-      <i *ngIf="config.state.required" class="required-indicator" [ngClass]="{ 'bhi-circle': !valid.state, 'bhi-check': valid.state }"> </i>
-      <novo-picker
-        [config]="config?.state?.pickerConfig"
-        [placeholder]="config?.state?.label"
-        (changed)="onStateChange($event)"
-        autocomplete="shipping region"
-        [(ngModel)]="model.state"
-        [disablePickerInput]="disabled.state"
-      ></novo-picker>
-    </span>
-    <span
-      *ngIf="!config?.zip?.hidden"
-      class="zip postal-code"
-      [class.invalid]="invalid.zip"
-      [class.focus]="focused.zip"
-      [class.disabled]="disabled.zip"
-    >
-      <i *ngIf="config.zip.required" class="required-indicator" [ngClass]="{ 'bhi-circle': !valid.zip, 'bhi-check': valid.zip }"> </i>
-      <input
-        [class.maxlength-error]="invalidMaxlength.zip"
-        type="text"
-        id="zip"
-        name="zip"
-        [placeholder]="config.zip.label"
-        autocomplete="shipping postal-code"
-        [maxlength]="config?.zip?.maxlength"
-        [(ngModel)]="model.zip"
-        (ngModelChange)="updateControl()"
-        (focus)="isFocused($event, 'zip')"
-        (blur)="isBlurred($event, 'zip')"
-        (input)="onInput($event, 'zip')"
-        [disabled]="disabled.zip"
-      />
-    </span>
-    <span
-      *ngIf="!config?.countryID?.hidden"
-      class="country-name"
-      [class.invalid]="invalid.countryID"
-      [class.focus]="focused.countryID"
-      [class.disabled]="disabled.countryID"
-    >
-      <i
-        *ngIf="config.countryID.required"
-        class="required-indicator"
-        [ngClass]="{ 'bhi-circle': !valid.countryID, 'bhi-check': valid.countryID }"
-      >
-      </i>
-      <novo-picker
-        [config]="config?.countryID?.pickerConfig"
-        [placeholder]="config.countryID.label"
-        (changed)="onCountryChange($event)"
-        autocomplete="shipping country"
-        [(ngModel)]="model.countryID"
-        [disablePickerInput]="disabled.countryID"
-      ></novo-picker>
-    </span>
+  selector: 'novo-address',
+  providers: [ADDRESS_VALUE_ACCESSOR],
+  template: `
+    @if (!config?.address1?.hidden) {
+      <span
+        class="street-address"
+        [class.invalid]="invalid.address1"
+        [class.focus]="focused.address1"
+        [class.disabled]="disabled.address1">
+        @if (config.address1.required) {
+          <i class="required-indicator address1"
+            [ngClass]="{ 'bhi-circle': !valid.address1, 'bhi-check': valid.address1 }">
+          </i>
+        }
+        <input
+          [class.maxlength-error]="invalidMaxlength.address1"
+          type="text"
+          id="address1"
+          name="address1"
+          [placeholder]="config.address1.label"
+          [maxlength]="config?.address1?.maxlength"
+          autocomplete="shipping street-address address-line-1"
+          [(ngModel)]="model.address1"
+          (ngModelChange)="updateControl()"
+          (focus)="isFocused($event, 'address1')"
+          (blur)="isBlurred($event, 'address1')"
+          (input)="onInput($event, 'address1')"
+          [disabled]="disabled.address1" />
+      </span>
+    }
+    @if (!config?.address2?.hidden) {
+      <span
+        class="apt suite"
+        [class.invalid]="invalid.address2"
+        [class.focus]="focused.address2"
+        [class.disabled]="disabled.address2">
+        @if (config.address2.required) {
+          <i class="required-indicator address2"
+            [ngClass]="{ 'bhi-circle': !valid.address2, 'bhi-check': valid.address2 }">
+          </i>
+        }
+        <input
+          [class.maxlength-error]="invalidMaxlength.address2"
+          type="text"
+          id="address2"
+          name="address2"
+          [placeholder]="config.address2.label"
+          [maxlength]="config?.address2?.maxlength"
+          autocomplete="shipping address-line-2"
+          [(ngModel)]="model.address2"
+          (ngModelChange)="updateControl()"
+          (focus)="isFocused($event, 'address2')"
+          (blur)="isBlurred($event, 'address2')"
+          (input)="onInput($event, 'address2')"
+          [disabled]="disabled.address2" />
+      </span>
+    }
+    @if (!config?.city?.hidden) {
+      <span
+        class="city locality"
+        [class.invalid]="invalid.city"
+        [class.focus]="focused.city"
+        [class.disabled]="disabled.city">
+        @if (config.city.required) {
+          <i class="required-indicator" [ngClass]="{ 'bhi-circle': !valid.city, 'bhi-check': valid.city }"> </i>
+        }
+        <input
+          [class.maxlength-error]="invalidMaxlength.city"
+          type="text"
+          id="city"
+          name="city"
+          [placeholder]="config.city.label"
+          autocomplete="shipping city locality"
+          [maxlength]="config?.city?.maxlength"
+          [(ngModel)]="model.city"
+          (ngModelChange)="updateControl()"
+          (focus)="isFocused($event, 'city')"
+          (blur)="isBlurred($event, 'city')"
+          (input)="onInput($event, 'city')"
+          [disabled]="disabled.city" />
+      </span>
+    }
+    @if (!config?.state?.hidden) {
+      <span
+        class="state region"
+        [class.invalid]="invalid.state"
+        [class.focus]="focused.state"
+        [class.disabled]="disabled.state"
+        [tooltip]="tooltip.state">
+        @if (config.state.required) {
+          <i class="required-indicator" [ngClass]="{ 'bhi-circle': !valid.state, 'bhi-check': valid.state }"> </i>
+        }
+        <novo-picker
+          [config]="config?.state?.pickerConfig"
+          [placeholder]="config?.state?.label"
+          (changed)="onStateChange($event)"
+          autocomplete="shipping region"
+          [(ngModel)]="model.state"
+          [disablePickerInput]="disabled.state"></novo-picker>
+      </span>
+    }
+    @if (!config?.zip?.hidden) {
+      <span
+        class="zip postal-code"
+        [class.invalid]="invalid.zip"
+        [class.focus]="focused.zip"
+        [class.disabled]="disabled.zip">
+        @if (config.zip.required) {
+          <i class="required-indicator" [ngClass]="{ 'bhi-circle': !valid.zip, 'bhi-check': valid.zip }"> </i>
+        }
+        <input
+          [class.maxlength-error]="invalidMaxlength.zip"
+          type="text"
+          id="zip"
+          name="zip"
+          [placeholder]="config.zip.label"
+          autocomplete="shipping postal-code"
+          [maxlength]="config?.zip?.maxlength"
+          [(ngModel)]="model.zip"
+          (ngModelChange)="updateControl()"
+          (focus)="isFocused($event, 'zip')"
+          (blur)="isBlurred($event, 'zip')"
+          (input)="onInput($event, 'zip')"
+          [disabled]="disabled.zip" />
+      </span>
+    }
+    @if (!config?.countryID?.hidden) {
+      <span
+        class="country-name"
+        [class.invalid]="invalid.countryID"
+        [class.focus]="focused.countryID"
+        [class.disabled]="disabled.countryID">
+        @if (config.countryID.required) {
+          <i class="required-indicator"
+            [ngClass]="{ 'bhi-circle': !valid.countryID, 'bhi-check': valid.countryID }">
+          </i>
+        }
+        <novo-picker
+          [config]="config?.countryID?.pickerConfig"
+          [placeholder]="config.countryID.label"
+          (changed)="onCountryChange($event)"
+          autocomplete="shipping country"
+          [(ngModel)]="model.countryID"
+          [disablePickerInput]="disabled.countryID"></novo-picker>
+      </span>
+    }
   `,
-    styleUrls: ['./Address.scss'],
-    standalone: false
+  styleUrls: ['./Address.scss'],
+  standalone: false
 })
 export class NovoAddressElement implements ControlValueAccessor, OnInit, DoCheck {
   @Input()

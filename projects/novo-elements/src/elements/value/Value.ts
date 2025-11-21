@@ -14,27 +14,43 @@ export enum NOVO_VALUE_THEME {
 }
 
 @Component({
-    selector: 'novo-value',
-    template: `
+  selector: 'novo-value',
+  template: `
     <div class="value-outer" [ngClass]="customClass">
       <novo-label>{{ meta.label }}</novo-label>
       <span class="value">
-        <i *ngIf="meta.showEntityIcon" class="bhi-circle {{ meta.entityIconClass }}"></i>
-        <novo-icon *ngIf="meta?.icon">{{ meta.icon }}</novo-icon>
-        <ng-container [ngSwitch]="_type">
-          <a *ngSwitchCase="NOVO_VALUE_TYPE.INTERNAL_LINK" (click)="openLink()" [innerHTML]="data | render: meta"></a>
-          <a *ngSwitchCase="NOVO_VALUE_TYPE.LINK" class="value" [href]="url" target="_blank" [innerHTML]="data | render: meta"></a>
-          <novo-entity-list *ngSwitchCase="NOVO_VALUE_TYPE.ENTITY_LIST" [data]="data" [meta]="meta"></novo-entity-list>
-          <novo-text *ngSwitchDefault [innerHTML]="data | render: meta"></novo-text>
-        </ng-container>
+        @if (meta.showEntityIcon) {
+          <i class="bhi-circle {{ meta.entityIconClass }}"></i>
+        }
+        @if (meta?.icon) {
+          <novo-icon>{{ meta.icon }}</novo-icon>
+        }
+        @switch (_type) {
+          @case (NOVO_VALUE_TYPE.INTERNAL_LINK) {
+            <a (click)="openLink()" [innerHTML]="data | render: meta"></a>
+          }
+          @case (NOVO_VALUE_TYPE.LINK) {
+            <a class="value" [href]="url" target="_blank" [innerHTML]="data | render: meta"></a>
+          }
+          @case (NOVO_VALUE_TYPE.ENTITY_LIST) {
+            <novo-entity-list [data]="data" [meta]="meta"></novo-entity-list>
+          }
+          @default {
+            <novo-text [innerHTML]="data | render: meta"></novo-text>
+          }
+        }
       </span>
     </div>
-    <div class="actions" *ngIf="showIcon">
-      <i *ngFor="let icon of meta.icons" [class]="iconClass(icon)" (click)="onValueClick(icon)"></i>
-    </div>
+    @if (showIcon) {
+      <div class="actions">
+        @for (icon of meta.icons; track icon) {
+          <i [class]="iconClass(icon)" (click)="onValueClick(icon)"></i>
+        }
+      </div>
+    }
   `,
-    styleUrls: ['./Value.scss'],
-    standalone: false
+  styleUrls: ['./Value.scss'],
+  standalone: false
 })
 export class NovoValueElement implements OnInit, OnChanges {
   @Input()

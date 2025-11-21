@@ -2,23 +2,26 @@ import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/co
 import { CalendarEvent, CalendarEventResponse, MonthViewDay } from 'novo-elements/utils';
 
 @Component({
-    selector: 'novo-agenda-month-day',
-    template: `
+  selector: 'novo-agenda-month-day',
+  template: `
     <ng-template #defaultTemplate>
       <div class="agenda-day-top">
-        <span class="agenda-day-badge" *ngIf="day.badgeTotal > 0">{{ day.badgeTotal }}</span>
+        @if (day.badgeTotal > 0) {
+          <span class="agenda-day-badge">{{ day.badgeTotal }}</span>
+        }
         <span class="agenda-day-number">{{ day.date | dayofmonth: locale }}</span>
       </div>
       <div class="agenda-events">
-        <div
-          class="agenda-event"
-          *ngFor="let type of day.events | groupBy: 'type'"
-          [style.backgroundColor]="type?.value[0]?.color.primary"
-          [ngClass]="type?.value[0]?.cssClass"
-          (click)="$event.stopPropagation(); eventClicked.emit({ event: type?.value[0] })"
-        >
-          {{ type?.value.length }}
-        </div>
+        @for (type of day.events | groupBy: 'type'; track type) {
+          <div
+            class="agenda-event"
+            [style.backgroundColor]="type?.value[0]?.color.primary"
+            [ngClass]="type?.value[0]?.cssClass"
+            (click)="$event.stopPropagation(); eventClicked.emit({ event: type?.value[0] })"
+            >
+            {{ type?.value.length }}
+          </div>
+        }
       </div>
     </ng-template>
     <ng-template
@@ -32,23 +35,23 @@ import { CalendarEvent, CalendarEventResponse, MonthViewDay } from 'novo-element
         rejected: rejected,
         maybes: maybes
       }"
-    >
+      >
     </ng-template>
   `,
-    host: {
-        '[class]': '"agenda-cell agenda-day-cell " + day?.cssClass',
-        '[class.agenda-day-accepted]': 'accepted.length',
-        '[class.agenda-day-rejected]': 'rejected.length',
-        '[class.agenda-past]': 'day.isPast',
-        '[class.agenda-today]': 'day.isToday',
-        '[class.agenda-future]': 'day.isFuture',
-        '[class.agenda-weekend]': 'day.isWeekend',
-        '[class.agenda-in-month]': 'day.inMonth',
-        '[class.agenda-out-month]': '!day.inMonth',
-        '[class.agenda-has-events]': 'day.events.length > 0',
-        '[style.backgroundColor]': 'day.backgroundColor',
-    },
-    standalone: false
+  host: {
+      '[class]': '"agenda-cell agenda-day-cell " + day?.cssClass',
+      '[class.agenda-day-accepted]': 'accepted.length',
+      '[class.agenda-day-rejected]': 'rejected.length',
+      '[class.agenda-past]': 'day.isPast',
+      '[class.agenda-today]': 'day.isToday',
+      '[class.agenda-future]': 'day.isFuture',
+      '[class.agenda-weekend]': 'day.isWeekend',
+      '[class.agenda-in-month]': 'day.inMonth',
+      '[class.agenda-out-month]': '!day.inMonth',
+      '[class.agenda-has-events]': 'day.events.length > 0',
+      '[style.backgroundColor]': 'day.backgroundColor',
+  },
+  standalone: false
 })
 export class NovoAgendaMonthDayElement {
   @Input()

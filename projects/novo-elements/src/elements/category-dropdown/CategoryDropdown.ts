@@ -7,48 +7,73 @@ import { Helpers, Key, OutsideClick } from 'novo-elements/utils';
     selector: 'novo-category-dropdown',
     template: `
     <ng-content select="button"></ng-content>
-    <div class="dropdown-container" *ngIf="active">
-      <div class="novo-category-dropdown-search" *ngIf="search" data-automation-id="novo-category-dropdown-search">
-        <input
-          type="text"
-          [placeholder]="search.placeholder || labels.search"
-          [value]="_query"
-          (input)="queryCategories($event.target.value)"
-        />
-        <i class="bhi-search" *ngIf="!_query"></i>
-        <i class="bhi-times" *ngIf="_query" (click)="clearQuery($event)"></i>
+    @if (active) {
+      <div class="dropdown-container">
+        @if (search) {
+          <div class="novo-category-dropdown-search" data-automation-id="novo-category-dropdown-search">
+            <input
+              type="text"
+              [placeholder]="search.placeholder || labels.search"
+              [value]="_query"
+              (input)="queryCategories($event.target.value)"
+              />
+            @if (!_query) {
+              <i class="bhi-search"></i>
+            }
+            @if (_query) {
+              <i class="bhi-times" (click)="clearQuery($event)"></i>
+            }
+          </div>
+        }
+        <novo-nav theme="white" [outlet]="novoCategoryDropdownOutlet" direction="vertical">
+          @for (category of _categories; track category) {
+            <novo-tab [attr.data-automation-id]="category" (activeChange)="onCategorySelected(category)">
+              <span>{{ category }} ({{ _categoryMap[category].length }})</span>
+            </novo-tab>
+          }
+        </novo-nav>
+        <novo-nav-outlet #novoCategoryDropdownOutlet>
+          @for (category of _categories; track category) {
+            <novo-nav-content>
+              <novo-list direction="vertical">
+                @for (item of _categoryMap[category]; track item) {
+                  <novo-list-item
+                    (click)="select($event, item)"
+                    [attr.data-automation-id]="item.label"
+                    >
+                    <item-content>{{ item.label }}</item-content>
+                    @if (item.hoverText && !item.selected) {
+                      <item-end class="novo-category-dropdown-hover">{{ item.hoverText }}</item-end>
+                    }
+                    @if (item.hoverIcon && !item.selected) {
+                      <item-end class="novo-category-dropdown-hover"
+                        ><i class="bhi-{{ item.hoverIcon }}"></i
+                      ></item-end>
+                    }
+                    @if (item.selected) {
+                      <item-end><i class="bhi-check"></i></item-end>
+                    }
+                  </novo-list-item>
+                }
+                @if (_categoryMap[category].length === 0 && search) {
+                  <novo-list-item class="novo-category-dropdown-empty-item">
+                    <item-content>{{ search.emptyMessage || labels.noItems }}</item-content>
+                  </novo-list-item>
+                }
+              </novo-list>
+            </novo-nav-content>
+          }
+        </novo-nav-outlet>
+        @if (footer) {
+          <footer class="novo-category-dropdown-footer-align-{{ footer.align || 'right' }}">
+            @for (link of footer.links; track link) {
+              <a (click)="executeClickCallback($event, link)">{{ link.label }}</a>
+            }
+          </footer>
+        }
       </div>
-      <novo-nav theme="white" [outlet]="novoCategoryDropdownOutlet" direction="vertical">
-        <novo-tab *ngFor="let category of _categories" [attr.data-automation-id]="category" (activeChange)="onCategorySelected(category)">
-          <span>{{ category }} ({{ _categoryMap[category].length }})</span>
-        </novo-tab>
-      </novo-nav>
-      <novo-nav-outlet #novoCategoryDropdownOutlet>
-        <novo-nav-content *ngFor="let category of _categories">
-          <novo-list direction="vertical">
-            <novo-list-item
-              *ngFor="let item of _categoryMap[category]"
-              (click)="select($event, item)"
-              [attr.data-automation-id]="item.label"
-            >
-              <item-content>{{ item.label }}</item-content>
-              <item-end class="novo-category-dropdown-hover" *ngIf="item.hoverText && !item.selected">{{ item.hoverText }}</item-end>
-              <item-end class="novo-category-dropdown-hover" *ngIf="item.hoverIcon && !item.selected"
-                ><i class="bhi-{{ item.hoverIcon }}"></i
-              ></item-end>
-              <item-end *ngIf="item.selected"><i class="bhi-check"></i></item-end>
-            </novo-list-item>
-            <novo-list-item *ngIf="_categoryMap[category].length === 0 && search" class="novo-category-dropdown-empty-item">
-              <item-content>{{ search.emptyMessage || labels.noItems }}</item-content>
-            </novo-list-item>
-          </novo-list>
-        </novo-nav-content>
-      </novo-nav-outlet>
-      <footer *ngIf="footer" class="novo-category-dropdown-footer-align-{{ footer.align || 'right' }}">
-        <a *ngFor="let link of footer.links" (click)="executeClickCallback($event, link)">{{ link.label }}</a>
-      </footer>
-    </div>
-  `,
+    }
+    `,
     styleUrls: ['./CategoryDropdown.scss'],
     host: {
         '(keydown)': 'onKeyDown($event)',

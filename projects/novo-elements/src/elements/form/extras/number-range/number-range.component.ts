@@ -6,8 +6,8 @@ import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 
 @Component({
-    selector: 'novo-number-range',
-    template: `
+  selector: 'novo-number-range',
+  template: `
     <form [formGroup]="rangeForm">
       <novo-flex justify='space-between' align='end' gap="1rem">
         <novo-field mr="sm">
@@ -17,19 +17,21 @@ import { filter, takeUntil } from 'rxjs/operators';
           <input formControlName="max" novoInput type='number' [placeholder]="labels.maximumPlaceholder"/>
         </novo-field>
       </novo-flex>
-      <novo-error *ngIf="rangeForm.hasError('minGreaterThanMax')" style="position: absolute">
-        {{ labels.minGreaterThanMax }}
-      </novo-error>
+      @if (rangeForm.hasError('minGreaterThanMax')) {
+        <novo-error style="position: absolute">
+          {{ labels.minGreaterThanMax }}
+        </novo-error>
+      }
     </form>
   `,
-    providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => NumberRangeComponent),
-            multi: true
-        }
-    ],
-    standalone: false
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => NumberRangeComponent),
+      multi: true
+    }
+  ],
+  standalone: false
 })
 export class NumberRangeComponent implements OnInit, OnDestroy, ControlValueAccessor {
   rangeForm: FormGroup;

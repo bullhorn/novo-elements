@@ -4,40 +4,50 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Deferred, DeferredPromise } from 'novo-elements/utils';
 
 @Component({
-    selector: 'novo-toast',
-    host: {
-        '[class]': 'alertTheme',
-        '[class.growl]': 'appearance == "growl"',
-        '[class.banner]': 'appearance == "banner"',
-        '[class.show]': 'show',
-        '[class.animate]': 'animate',
-        '[class.embedded]': 'embedded',
-        '[attr.theme]': 'theme',
-        '(click)': '!isCloseable && clickHandler($event)',
-    },
-    template: `
+  selector: 'novo-toast',
+  host: {
+    '[class]': 'alertTheme',
+    '[class.growl]': 'appearance == "growl"',
+    '[class.banner]': 'appearance == "banner"',
+    '[class.show]': 'show',
+    '[class.animate]': 'animate',
+    '[class.embedded]': 'embedded',
+    '[attr.theme]': 'theme',
+    '(click)': '!isCloseable && clickHandler($event)',
+  },
+  template: `
     <div class="toast-icon">
       <i [ngClass]="iconClass"></i>
     </div>
     <div class="toast-content">
-      <h5 *ngIf="title">{{ title }}</h5>
-      <p *ngIf="_message" [class.message-only]="!title" [innerHtml]="_message"></p>
-      <div *ngIf="link" class="link-generated">
-        <input type="text" [value]="link" onfocus="this.select();" />
-      </div>
+      @if (title) {
+        <h5>{{ title }}</h5>
+      }
+      @if (_message) {
+        <p [class.message-only]="!title" [innerHtml]="_message"></p>
+      }
+      @if (link) {
+        <div class="link-generated">
+          <input type="text" [value]="link" onfocus="this.select();" />
+        </div>
+      }
       <div class="dialogue">
         <ng-content></ng-content>
       </div>
-      <div *ngIf="action" class="action">
-        <button theme="dialogue" color="white" (click)="actionHandler($event)">{{ action }}</button>
+      @if (action) {
+        <div class="action">
+          <button theme="dialogue" color="white" (click)="actionHandler($event)">{{ action }}</button>
+        </div>
+      }
+    </div>
+    @if (isCloseable) {
+      <div class="close-icon" (click)="close($event)">
+        <i class="bhi-times"></i>
       </div>
-    </div>
-    <div class="close-icon" *ngIf="isCloseable" (click)="close($event)">
-      <i class="bhi-times"></i>
-    </div>
+    }
   `,
-    styleUrls: ['./Toast.scss'],
-    standalone: false
+  styleUrls: ['./Toast.scss'],
+  standalone: false
 })
 export class NovoToastElement implements OnInit, OnChanges {
   @Input()

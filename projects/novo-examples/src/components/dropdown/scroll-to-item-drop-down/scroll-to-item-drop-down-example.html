@@ -9,13 +9,15 @@
     </novo-row>
   </novo-stack>
   <novo-optgroup>
-    <novo-option *ngFor="let word of MOCK_WORDS; index as i"
-                 (click)="clickMe(word)">
-      <span class="value">{{ word }}</span>
-      <span class="value-active">
-        <i class="bhi-check ng-star-inserted"
-           [style.visibility]="word !== selectedWord ? 'hidden' : 'visible'"></i>
-      </span>
-    </novo-option>
+    @for (word of MOCK_WORDS; track word; let i = $index) {
+      <novo-option
+        (click)="clickMe(word)">
+        <span class="value">{{ word }}</span>
+        <span class="value-active">
+          <i class="bhi-check ng-star-inserted"
+          [style.visibility]="word !== selectedWord ? 'hidden' : 'visible'"></i>
+        </span>
+      </novo-option>
+    }
   </novo-optgroup>
 </novo-dropdown>

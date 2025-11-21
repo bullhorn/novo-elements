@@ -1,18 +1,20 @@
 <form [formGroup]="innerForm">
   <novo-stack [formArrayName]="controlName" class="criteria-builder-inner">
-    <ng-container
-      *ngFor="let andGroup of root.controls; let andIndex = index; let isFirst = first;let isLastAnd = last;">
-      <novo-label *ngIf="!isFirst" color="ash" size="xs" uppercase padding="sm">{{ qbs.hasMultipleScopes() ? conditionGroup.scope + ' ' + labels.filterss : qbs.getConjunctionLabel('and') }}</novo-label>
+    @for (andGroup of root.controls; track andGroup; let andIndex = $index; let isFirst = $first; let isLastAnd = $last) {
+      @if (!isFirst) {
+        <novo-label color="ash" size="xs" uppercase padding="sm">{{ qbs.hasMultipleScopes() ? conditionGroup.scope + ' ' + labels.filterss : qbs.getConjunctionLabel('and') }}</novo-label>
+      }
       <novo-condition-group [hideFirstOperator]="hideFirstOperator" [canBeEmpty]="canBeEmpty" [groupIndex]="andIndex" [formGroupName]="andIndex" #conditionGroup></novo-condition-group>
-    </ng-container>
+    }
   </novo-stack>
-  <novo-tabbed-group-picker
-    *ngIf="qbs.hasMultipleScopes()"
-    [tabs]="tabbedGroupPickerTabs()"
-    [selectionEnabled]="false"
-    [buttonConfig]="addButtonConfig"
-    (activation)="onFieldSelect($event)">
-  </novo-tabbed-group-picker>
+  @if (qbs.hasMultipleScopes()) {
+    <novo-tabbed-group-picker
+      [tabs]="tabbedGroupPickerTabs()"
+      [selectionEnabled]="false"
+      [buttonConfig]="addButtonConfig"
+      (activation)="onFieldSelect($event)">
+    </novo-tabbed-group-picker>
+  }
 </form>
 <novo-condition-templates [addressConfig]="addressConfig" [dateConfig]="dateConfig"/>
 
