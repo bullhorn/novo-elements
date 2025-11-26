@@ -1,7 +1,6 @@
 export class ActivityTableRenderers {
   static propertyRenderer<T>(prop: string): Function {
     const ret = (data: T): string => {
-      // TODO - allow for dots and sub props
       return data[prop];
     };
     return ret;

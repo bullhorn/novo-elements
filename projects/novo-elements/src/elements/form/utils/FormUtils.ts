@@ -184,13 +184,13 @@ export class FormUtils {
           type = dataSpecializationTypeMap[field.dataType];
         }
       } else if (this.hasAssociatedEntity(field)) {
-        type = 'entitypicker'; // TODO!
+        type = 'entitypicker';
       } else {
         type = 'picker';
       }
     } else if (field.optionsUrl && field.inputType === 'SELECT') {
       if (field.optionsType && ~this.ENTITY_PICKER_LIST.indexOf(field.optionsType)) {
-        type = 'entitypicker'; // TODO!
+        type = 'entitypicker';
       } else {
         type = 'picker';
       }
@@ -208,9 +208,7 @@ export class FormUtils {
       type = typeToTypeMap[field.type];
     } else if (Object.keys(numberDataTypeToTypeMap).indexOf(field.dataType) > -1) {
       type = numberDataTypeToTypeMap[field.dataType];
-    } /* else {
-            throw new Error('FormUtils: This field type is unsupported.');
-        }*/
+    }
     return type;
   }
 
@@ -315,26 +313,20 @@ export class FormUtils {
 
     switch (type) {
       case 'entitychips':
-        // TODO: This doesn't belong in this codebase
         controlConfig.multiple = true;
         controlConfig.config.resultsTemplate = overrideResultsTemplate || EntityPickerResults;
         controlConfig.config.previewTemplate = overridePreviewTemplate || EntityPickerResult;
-        // TODO: When appendToBody picker works better in table/form
         control = new PickerControl(controlConfig);
         break;
       case 'chips':
         controlConfig.multiple = true;
-        // TODO: When appendToBody picker works better in table/form
         control = new PickerControl(controlConfig);
         break;
       case 'entitypicker':
-        // TODO: This doesn't belong in this codebase
         controlConfig.config.resultsTemplate = overrideResultsTemplate || EntityPickerResults;
-        // TODO: When appendToBody picker works better in table/form
         control = new PickerControl(controlConfig);
         break;
       case 'picker':
-        // TODO: When appendToBody picker works better in table/form
         control = new PickerControl(controlConfig);
         break;
       case 'datetime':

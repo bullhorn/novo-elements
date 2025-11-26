@@ -30,18 +30,14 @@ export const _NovoCell = CdkCell;
     providers: [{ provide: CdkCellDef, useExisting: NovoSimpleCellDef }],
     standalone: false
 })
-export class NovoSimpleCellDef extends _NovoCellDef {
-  // TODO: add explicit constructor
-}
+export class NovoSimpleCellDef extends _NovoCellDef {}
 
 @Directive({
     selector: '[novoSimpleHeaderCellDef]',
     providers: [{ provide: CdkHeaderCellDef, useExisting: NovoSimpleHeaderCellDef }],
     standalone: false
 })
-export class NovoSimpleHeaderCellDef extends _NovoHeaderCellDef {
-  // TODO: add explicit constructor
-}
+export class NovoSimpleHeaderCellDef extends _NovoHeaderCellDef {}
 
 @Directive({
     selector: '[novoSimpleColumnDef]',

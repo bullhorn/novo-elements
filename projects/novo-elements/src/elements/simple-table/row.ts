@@ -13,8 +13,6 @@ export const _NovoRow = CdkRow;
     standalone: false
 })
 export class NovoSimpleHeaderRowDef extends _NovoHeaderRowDef {
-  // TODO: add explicit constructor
-
   @Input('novoSimpleHeaderRowDef')
   columns;
 }
@@ -25,8 +23,6 @@ export class NovoSimpleHeaderRowDef extends _NovoHeaderRowDef {
     standalone: false
 })
 export class NovoSimpleRowDef<T> extends _NovoCdkRowDef<T> {
-  // TODO: add explicit constructor
-
   @Input('novoSimpleRowDefColumns')
   columns;
 }

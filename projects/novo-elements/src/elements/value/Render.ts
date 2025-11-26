@@ -140,6 +140,43 @@ export class RenderPipe implements PipeTransform {
   }
 
   /**
+   * Determines the render type based on field metadata
+   * @param args - field metadata containing type information
+   * @return the determined type string
+   */
+  private determineRenderType(args: any): string {
+    if (args.type === 'TO_MANY') {
+      return 'ToMany';
+    } else if (args.type === 'TO_ONE') {
+      return args.associatedEntity.entity;
+    } else if (args.dataSpecialization === 'DATETIME') {
+      return 'DateTime';
+    } else if (args.dataSpecialization === 'YEAR') {
+      return 'Year';
+    } else if (args.dataSpecialization === 'TIME') {
+      return 'Time';
+    } else if (args.dataSpecialization === 'DATE' && args.dataType === 'Date') {
+      return 'Date';
+    } else if (args.dataType === 'Timestamp') {
+      return 'Timestamp';
+    } else if (['mobile', 'phone', 'phone1', 'phone2', 'phone3', 'workPhone'].indexOf(args.name) > -1) {
+      return 'Phone';
+    } else if (args.name && args.name.substring(0, 5) === 'email') {
+      return 'Email';
+    } else if ((args.name && args.name === 'address.countryID') || args.optionsType === 'Country') {
+      return 'Country';
+    } else if (args.optionsType === 'SkillText') {
+      return 'SkillText';
+    } else if (args.options || args.inputType === 'SELECT' || args.inputType === 'CHECKBOX') {
+      return 'Options';
+    } else if (['MONEY', 'PERCENTAGE', 'HTML', 'SSN'].indexOf(args.dataSpecialization) > -1) {
+      return this.capitalize(args.dataSpecialization.toLowerCase());
+    } else {
+      return args.dataType || 'default';
+    }
+  }
+
+  /**
    * Define the fields to set or retrieve for the given entity. Getter and Setter methods will automagically
    * be set up on the entity once the fields are defined.
    * @param args - fields can either be sent as a list of arguments or as an Array
@@ -162,37 +199,8 @@ export class RenderPipe implements PipeTransform {
     if (args.formatter && typeof args.formatter === 'function') {
       return args.formatter(value, args);
     }
-    // TODO move this to a service
-    // Determine TYPE because its not just 1 value that determines this.
-    if (args.type === 'TO_MANY') {
-      type = 'ToMany';
-    } else if (args.type === 'TO_ONE') {
-      type = args.associatedEntity.entity;
-    } else if (args.dataSpecialization === 'DATETIME') {
-      type = 'DateTime';
-    } else if (args.dataSpecialization === 'YEAR') {
-      type = 'Year';
-    } else if (args.dataSpecialization === 'TIME') {
-      type = 'Time';
-    } else if (args.dataSpecialization === 'DATE' && args.dataType === 'Date') {
-      type = 'Date';
-    } else if (args.dataType === 'Timestamp') {
-      type = 'Timestamp';
-    } else if (['mobile', 'phone', 'phone1', 'phone2', 'phone3', 'workPhone'].indexOf(args.name) > -1) {
-      type = 'Phone';
-    } else if (args.name && args.name.substring(0, 5) === 'email') {
-      type = 'Email';
-    } else if ((args.name && args.name === 'address.countryID') || args.optionsType === 'Country') {
-      type = 'Country';
-    } else if (args.optionsType === 'SkillText') {
-      type = 'SkillText';
-    } else if (args.options || args.inputType === 'SELECT' || args.inputType === 'CHECKBOX') {
-      type = 'Options';
-    } else if (['MONEY', 'PERCENTAGE', 'HTML', 'SSN'].indexOf(args.dataSpecialization) > -1) {
-      type = this.capitalize(args.dataSpecialization.toLowerCase());
-    } else {
-      type = args.dataType || 'default';
-    }
+
+    type = this.determineRenderType(args);
 
     // Transform data here
     try {

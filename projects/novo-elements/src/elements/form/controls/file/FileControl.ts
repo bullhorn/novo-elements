@@ -6,7 +6,6 @@ export class FileControl extends BaseControl {
 
   constructor(config: NovoControlConfig) {
     super('FileControl', config);
-    // TODO - translate
     this.placeholder = config.placeholder;
     this.multiple = config.multiple;
   }

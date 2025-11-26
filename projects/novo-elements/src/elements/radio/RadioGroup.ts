@@ -256,6 +256,5 @@ export class NovoRadioGroup extends NovoRadioGroupMixins implements NovoFieldCon
     if (this.disabled) {
       return;
     }
-    // TODO
   }
 }
