@@ -17,12 +17,12 @@ export class FiTooltipExample {
 
   constructor(private formUtils: FormUtils) {
     const tooltipFunction = (API: FieldInteractionApi) => {
-      console.log('[FieldInteractionDemo] - tooltipFunction'); // tslint:disable-line
+      console.info('[FieldInteractionDemo] - tooltipFunction');
       API.setTooltip(API.getActiveKey(), API.getActiveValue());
     };
 
     const tooltipUpdateFunction = (API: FieldInteractionApi) => {
-      console.log('[FieldInteractionDemo] - tooltipUpdateFunction'); // tslint:disable-line
+      console.info('[FieldInteractionDemo] - tooltipUpdateFunction');
       API.getControl(this.controls.tooltipControl.key).tooltipSize = API.getValue(this.controls.tooltipSizeControl.key);
       API.getControl(this.controls.tooltipControl.key).tooltipPreline = API.getValue(this.controls.tooltipPrelineControl.key);
     };

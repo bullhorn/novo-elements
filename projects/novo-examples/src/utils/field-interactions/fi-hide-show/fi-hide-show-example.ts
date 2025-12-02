@@ -17,7 +17,7 @@ export class FiHideShowExample {
 
   constructor(private formUtils: FormUtils) {
     const hideShowFunction = (API: FieldInteractionApi) => {
-      console.log('[FieldInteractionDemo] - hideShowFunction'); // tslint:disable-line
+      console.info('[FieldInteractionDemo] - hideShowFunction');
       const activeValue = API.getActiveValue();
       if (!activeValue) {
         API.show('text');

@@ -67,6 +67,6 @@ export class SingleFieldCriteriaExample implements OnInit {
   }
 
   onSubmit() {
-    console.log('Your form data : ', this.queryForm.value);
+    console.info('Your form data : ', this.queryForm.value);
   }
 }

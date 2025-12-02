@@ -17,7 +17,7 @@ export class FiConfirmExample {
 
   constructor(private formUtils: FormUtils) {
     const confirmFunction = (API: FieldInteractionApi) => {
-      console.log('[FieldInteractionDemo] - confirmFunction'); // tslint:disable-line
+      console.info('[FieldInteractionDemo] - confirmFunction');
       if (API.getActiveKey() === 'confirm1') {
         API.confirmChanges(API.getActiveKey());
       } else {

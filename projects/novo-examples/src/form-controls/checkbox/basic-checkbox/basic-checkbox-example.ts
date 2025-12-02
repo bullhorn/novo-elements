@@ -45,7 +45,7 @@ export class BasicCheckboxExample {
     },
   ];
   onChange(change: Event, item): void {
-    console.log('Checkbox Change:', change); // tslint:disable-line
+    console.info('Checkbox Change:', change);
     if (item.indeterminate) {
       item.indeterminate = false;
     }

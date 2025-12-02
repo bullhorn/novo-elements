@@ -11,10 +11,10 @@ import { Component } from '@angular/core';
 })
 export class TabsRouterExample {
   tabSelected() {
-    console.log('TAB SELECTED'); // tslint:disable-line
+    console.info('TAB SELECTED');
   }
 
   tabDeselected() {
-    console.log('TAB DESELECTED'); // tslint:disable-line
+    console.info('TAB DESELECTED');
   }
 }

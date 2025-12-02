@@ -20,7 +20,7 @@ export class FiDescriptionExample {
     const htmlDescription = '<span><b>BOLD</b> description with a <a target="_blank" href="https://www.google.com">Google</a> Link</span>';
 
     const descriptionFunction = (API: FieldInteractionApi) => {
-      console.log('[FieldInteractionDemo] - descriptionFunction'); // tslint:disable-line
+      console.info('[FieldInteractionDemo] - descriptionFunction');
       const activeValue = API.getActiveValue();
 
       if (activeValue) {

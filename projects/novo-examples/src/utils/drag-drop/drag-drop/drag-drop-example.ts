@@ -40,7 +40,7 @@ export class DragDropExample implements OnChanges {
   objects3: DemoButtonObject[] = [...this.objects];
 
   ngOnChanges(changes: SimpleChanges): void {
-      console.log('box processed changes', changes);
+      console.info('box processed changes', changes);
   }
 
   objectMoved?: DemoButtonObject;

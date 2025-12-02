@@ -73,7 +73,7 @@ export class AppBridge {
 
   private _trace(eventType, event) {
     if (this._tracing) {
-      console.log(`[${this.traceName || this.id}] "${eventType}"`, event); // tslint:disable-line
+      console.info(`[${this.traceName || this.id}] "${eventType}"`, event);
     }
   }
 
@@ -358,7 +358,7 @@ export class AppBridge {
         });
       } else {
         if (packet) {
-          console.info('[AppBridge] - close(packet) is deprecated! Please just use close()!'); // tslint:disable-line
+          console.info('[AppBridge] - close(packet) is deprecated! Please just use close()!');
         }
         const realPacket = { id: this.id, windowName: this.windowName };
         this.postRobot
@@ -393,7 +393,7 @@ export class AppBridge {
         });
       } else {
         if (packet) {
-          console.info('[AppBridge] - refresh(packet) is deprecated! Please just use refresh()!'); // tslint:disable-line
+          console.info('[AppBridge] - refresh(packet) is deprecated! Please just use refresh()!');
         }
         const realPacket = { id: this.id, windowName: this.windowName };
         this.postRobot
@@ -447,7 +447,7 @@ export class AppBridge {
         });
       } else {
         if (packet) {
-          console.info('[AppBridge] - pin(packet) is deprecated! Please just use pin()!'); // tslint:disable-line
+          console.info('[AppBridge] - pin(packet) is deprecated! Please just use pin()!');
         }
         const realPacket = { id: this.id, windowName: this.windowName };
         this.postRobot

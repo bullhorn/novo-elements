@@ -18,7 +18,7 @@ export class FiAddingRemovingExample {
 
   constructor(private formUtils: FormUtils) {
     const addingRemovingFunction = (API: FieldInteractionApi) => {
-      console.log('[FieldInteractionDemo] - addingRemovingFunction'); // tslint:disable-line
+      console.info('[FieldInteractionDemo] - addingRemovingFunction');
       // Control above field
       API.addControl(
         'cat',
@@ -68,7 +68,7 @@ export class FiAddingRemovingExample {
     };
 
     const removeAddOnChangeFunction = (API: FieldInteractionApi) => {
-      console.log('[FieldInteractionDemo] - removeAddOnChangeFunction'); // tslint:disable-line
+      console.info('[FieldInteractionDemo] - removeAddOnChangeFunction');
       // Select control with a field interaction on change event
       const currentValue = API.getActiveValue();
       if (currentValue === 'Yes') {
