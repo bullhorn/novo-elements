@@ -20,7 +20,11 @@ module.exports = [
       'unused-imports': unusedImportsPlugin
     },
     rules: {
-      'unused-imports/no-unused-imports': 'error'
+      'unused-imports/no-unused-imports': 'error',
+      'no-console': ['warn', { allow: ['warn', 'error', 'info'] }],
+      '@typescript-eslint/no-non-null-assertion': 'warn',
+      'no-fallthrough': 'error',
+      '@typescript-eslint/no-explicit-any': 'off'
     }
   }
 ];
