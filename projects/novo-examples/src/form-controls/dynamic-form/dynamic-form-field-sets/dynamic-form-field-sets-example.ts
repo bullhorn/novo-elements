@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormUtils } from 'novo-elements';
-import { MockMeta, MockMetaHeaders } from '../MockMeta';
+import { MockMetaHeaders } from '../MockMeta';
 
 /**
  * @title Dynamic Form Field Sets Example

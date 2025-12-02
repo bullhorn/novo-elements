@@ -1,13 +1,13 @@
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { hasModifierKey } from '@angular/cdk/keycodes';
-import { AfterViewInit, Directive, ElementRef, EventEmitter, forwardRef, Inject, Input, OnChanges, OnDestroy, Optional, Output, Self } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, forwardRef, Inject, Input, OnChanges, OnDestroy, Optional, Output, Self } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { Key, KeyCodes } from 'novo-elements/utils';
+import { Key } from 'novo-elements/utils';
 import { NovoChipsDefaultOptions, NOVO_CHIPS_DEFAULT_OPTIONS } from './ChipDefaults';
 import { NovoChipList } from './ChipList';
 import { NovoChipTextControl } from './ChipTextControl';
 import { NovoFieldElement } from 'novo-elements/elements/field';
-import { expand, first, firstValueFrom, fromEvent, merge, mergeMap, Subject, takeUntil } from 'rxjs';
+import { Subject } from 'rxjs';
 
 /** Represents an input event on a `novoChipInput`. */
 export interface NovoChipInputEvent {
