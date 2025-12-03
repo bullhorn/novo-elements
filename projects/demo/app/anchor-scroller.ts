@@ -80,7 +80,7 @@ export class AnchorViewportScroller implements ViewportScroller {
    * element (ex: `scrollIntoView`) leaves the element hidden behind the floating header.
    */
   private scrollToElement(el: HTMLElement): void {
-    console.log('Scrolling to ', el);
+    console.info('Scrolling to ', el);
     const rect = el.getBoundingClientRect();
     const left = rect.left + this.element.offsetLeft;
     const top = rect.top + this.element.offsetTop;

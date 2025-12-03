@@ -11,6 +11,6 @@ import { Component } from '@angular/core';
 })
 export class MultiDropDownExample {
   public clickMe(data: string): void {
-    console.log('CLICKED!', data); // tslint:disable-line
+    console.info('CLICKED!', data);
   }
 }

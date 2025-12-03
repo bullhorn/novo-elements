@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormUtils } from 'novo-elements';
-import { MockMeta, MockMetaHeaders } from '../MockMeta';
+import { MockMetaHeaders } from '../MockMeta';
 
 /**
  * @title Dynamic Form Field Sets Example
@@ -49,6 +49,6 @@ export class DynamicFormFieldSetsExample {
   }
 
   onChange(value) {
-    console.log('I changed!', value); // tslint:disable-line
+    console.info('I changed!', value);
   }
 }

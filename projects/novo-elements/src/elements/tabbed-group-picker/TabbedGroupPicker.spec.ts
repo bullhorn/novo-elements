@@ -457,10 +457,11 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       component.onItemToggled(chicken);
 
       const selectedItem = component.tabs[0].data[0];
-      const displayReference = component.displayTabs.find((tab) => tab.typeName === 'chickens')!.data[0];
+      const tabData = component.displayTabs.find((tab) => tab.typeName === 'chickens');
+      const displayReference = tabData?.data[0];
 
       expect(selectedItem.selected).toEqual(true);
-      expect(displayReference.selected).toEqual(true);
+      expect(displayReference?.selected).toEqual(true);
       expect(selectedItem).toEqual(displayReference);
     });
     it('should update the selected status of a group to indeterminate if an item in the group is selected but others are not', () => {

@@ -192,6 +192,6 @@ export class LargeDropDownExample {
   ];
 
   public clickMe(data: string): void {
-    console.log('CLICKED!', data); // tslint:disable-line
+    console.info('CLICKED!', data);
   }
 }

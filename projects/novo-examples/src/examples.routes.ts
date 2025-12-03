@@ -999,7 +999,7 @@ export class PatternsPage {
   Below is some code, you can copy it with <kbd>Ctrl-C</kbd>. Did you know,
   <code>alert(1)</code> can show an alert in JavaScript!
 </p>
-<pre><code>// This logs a message to the console and check out the scrollbar.<br>console.log('Hello, world!')</code></pre>
+<pre><code>// This logs a message to the console and check out the scrollbar.<br>console.info('Hello, world!')</code></pre>
 <h3 id="other">Other</h3>
 <p>Here's a horizontal rule and image because I don't know where else to put them.</p>
 <img src="https://placekitten.com/408/287" alt="Example kitten" />

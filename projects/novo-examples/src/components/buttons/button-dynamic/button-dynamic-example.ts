@@ -18,6 +18,6 @@ export class ButtonDynamicExample {
   changeTheme() {
     const i = Math.floor(Math.random() * 4);
     this.theme = ['primary', 'secondary', 'dialogue', 'standard', 'icon'][i];
-    console.log('changed theme to', this.theme);
+    console.info('changed theme to', this.theme);
   }
 }

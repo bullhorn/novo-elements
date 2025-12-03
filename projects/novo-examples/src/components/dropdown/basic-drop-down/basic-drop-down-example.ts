@@ -12,7 +12,7 @@ import { AfterContentInit, Component } from '@angular/core';
 export class BasicDropDownExample implements AfterContentInit {
   asyncItems: any[] = [];
   public clickMe(event?: string) {
-    console.log(event);
+    console.info(event);
   }
 
   async ngAfterContentInit() {

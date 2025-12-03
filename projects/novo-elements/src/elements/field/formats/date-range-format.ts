@@ -1,6 +1,6 @@
-import { Directive, ElementRef, EventEmitter, forwardRef, Inject, Input, Optional, Renderer2 } from '@angular/core';
-import { COMPOSITION_BUFFER_MODE, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { IMaskDirective, IMaskFactory } from 'angular-imask';
+import { Directive, EventEmitter, forwardRef, Input } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { IMaskDirective } from 'angular-imask';
 import { isValid } from 'date-fns';
 import { MaskedRange } from 'imask';
 import { DateFormatService, NovoLabelService } from 'novo-elements/services';

@@ -60,7 +60,8 @@ class MockPostrobot {
             source: from.mockSource,
             origin: from.mockOrigin
         };
-        return Promise.resolve(this.responders[msg]!(mockRobotEvent))
+        const responder = this.responders[msg];
+        return Promise.resolve(responder?.(mockRobotEvent))
             .then(replyData => ({ data: {...replyData } }));
     }
 
