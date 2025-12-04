@@ -12,7 +12,6 @@ import {
   Output,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-// import type { NovoProgressElement } from './Progress';
 import { NOVO_PROGRESS_CONTAINER, ProgressAppearance } from './ProgressConstants';
 
 // make radio-button-group ids unique

@@ -47,23 +47,83 @@ describe('Element: NovoMultiPickerElement', () => {
     });
   });
 
-  xdescribe('Method: setupOptions()', () => {
-    it('should correctly setup options', () => {
-      component.source = { options: [{ type: 'numbers', data: [1] }] };
+describe('setupOptions()', () => {
+    it('should initialize _options as empty array', () => {
+      component.source = { options: [] };
       component.setupOptions();
-      const data = [
-        {
-          value: 'ALL',
-          label: 'All numbers',
-          type: 'numbers',
-          checked: undefined,
-          isParentOf: undefined,
-          isChildOf: undefined,
-        },
-        { value: 1, label: '1', type: 'numbers', checked: undefined, isParentOf: undefined, isChildOf: undefined },
+      expect(component._options).toEqual([]);
+    });
+
+    it('should process single option from source', () => {
+      const option = {
+        type: 'Skills',
+        label: 'Skills',
+        data: [{ value: 'JavaScript', label: 'JavaScript' }],
+      };
+      component.source = { options: [option] };
+      jest.spyOn(component, 'setupOptionsByType').mockReturnValue(option as any);
+
+      component.setupOptions();
+
+      expect(component._options.length).toBe(1);
+      expect(component._options[0]).toBe(option);
+    });
+
+    it('should process multiple options from source', () => {
+      const options = [
+        { type: 'Skills', label: 'Skills', data: [] },
+        { type: 'Certifications', label: 'Certifications', data: [] },
       ];
-      const originalData = data;
-      expect(component._options).toEqual([{ type: 'numbers', data, originalData }]);
+      component.source = { options };
+      jest.spyOn(component, 'setupOptionsByType').mockImplementation((opt) => opt as any);
+
+      component.setupOptions();
+
+      expect(component._options.length).toBe(2);
+    });
+
+    it('should call setupOptionsByType for each option', () => {
+      const options = [
+        { type: 'Skills', label: 'Skills', data: [] },
+        { type: 'Certifications', label: 'Certifications', data: [] },
+      ];
+      component.source = { options };
+      const setupSpy = jest.spyOn(component, 'setupOptionsByType');
+
+      component.setupOptions();
+
+      expect(setupSpy).toHaveBeenCalledTimes(2);
+      expect(setupSpy).toHaveBeenNthCalledWith(1, options[0]);
+      expect(setupSpy).toHaveBeenNthCalledWith(2, options[1]);
+      setupSpy.mockRestore();
+    });
+
+    it('should assign _options back to source.options', () => {
+      const option = { type: 'Skills', label: 'Skills', data: [] };
+      component.source = { options: [option] };
+      jest.spyOn(component, 'setupOptionsByType').mockReturnValue(option as any);
+
+      component.setupOptions();
+
+      expect(component.source.options).toBe(component._options);
+    });
+
+    it('should handle null options in source', () => {
+      component.source = { options: null };
+      component.setupOptions();
+      expect(component._options).toEqual([]);
+    });
+
+    it('should handle undefined options in source', () => {
+      component.source = { options: undefined };
+      component.setupOptions();
+      expect(component._options).toEqual([]);
+    });
+
+    it('should handle empty options array', () => {
+      component.source = { options: [] };
+      component.setupOptions();
+      expect(component._options).toEqual([]);
       expect(component.source.options).toBe(component._options);
     });
   });
@@ -181,7 +241,7 @@ describe('Element: NovoMultiPickerElement', () => {
     });
   });
 
-  xdescribe('Method: select(event, item)', () => {
+  describe('Method: select(event, item)', () => {
     it('should select item', () => {
       component.selected = 'before';
       component.select(null, 'after');
@@ -189,7 +249,7 @@ describe('Element: NovoMultiPickerElement', () => {
     });
   });
 
-  xdescribe('Method: clickOption(event)', () => {
+  describe('Method: clickOption(event)', () => {
     it('should remove item if checked is false', () => {
       const item = { checked: false };
       jest.spyOn(component, 'remove').mockImplementation(() => {});
@@ -457,23 +517,6 @@ describe('Element: NovoMultiPickerElement', () => {
       expect(component.items[0].value).toBe('ALL');
     });
   });
-
-  // xdescribe('Method: handleRemoveItemIfAllSelected(item)', () => {
-  //     it('should correctly update value and items when removing an item AND ALL is currently selected', () => {
-  //         component.types = [{ value: 'cats' }];
-  //         let kitty = { value: 'Kitty', checked: false, type: 'cats' };
-  //         let allItem = { value: 'ALL', checked: true, type: 'cats' };
-  //         let tiger = { value: 'Tiger', checked: true, type: 'cats' };
-  //         let cat = { value: 'Cat', checked: true, type: 'cats' };
-  //         component._options = [{ type: 'cats', data: [allItem, kitty, tiger, cat], originalData: [allItem, kitty, tiger, cat] }];
-  //         component.value = { cats: [kitty, tiger, cat] };
-  //         component.items = [allItem];
-  //         component.handleRemoveItemIfAllSelected({ type: 'cats' });
-  //         expect(allItem.indeterminate).toBeTruthy();
-  //         expect(component.value.cats.length).toBe(2);
-  //         expect(component.items.length).toBe(2);
-  //     });
-  // });
 
   xdescribe('Method: setInitialValue(model)', () => {
     it('should correctly set intial value and items if a model is passed in to start', () => {

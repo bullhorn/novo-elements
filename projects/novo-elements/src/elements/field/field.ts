@@ -69,12 +69,9 @@ export const NOVO_FORM_FIELD = new InjectionToken<NovoFieldElement>('NovoFormFie
         '[class.novo-field-invalid]': '_control.errorState',
         '[class.novo-field-has-label]': '_hasLabel()',
         '[class.novo-field-no-label]': '!_hasLabel()',
-        // '[class.novo-field-hide-placeholder]': '_hideControlPlaceholder()',
         '[class.novo-field-disabled]': '_control.disabled',
         '[class.novo-field-autofilled]': '_control.autofilled',
         '[class.novo-focused]': '_control.focused',
-        // '[class.novo-accent]': 'color == "accent"',
-        // '[class.novo-warn]': 'color == "warn"',
         '[class.ng-untouched]': '_shouldForward("untouched")',
         '[class.ng-touched]': '_shouldForward("touched")',
         '[class.ng-pristine]': '_shouldForward("pristine")',
@@ -89,9 +86,7 @@ export const NOVO_FORM_FIELD = new InjectionToken<NovoFieldElement>('NovoFormFie
 export class NovoFieldElement implements AfterContentInit, OnDestroy {
   private _labelClicks = Subscription.EMPTY;
 
-  // @ViewChild('connectionContainer') _connectionContainerRef: ElementRef;
   @ViewChild('inputContainer') _inputContainerRef: ElementRef;
-  // @ViewChild('label') private _label: ElementRef<HTMLElement>;
 
   @ContentChild(NovoLabel) _labelElement: NovoLabel;
   @ContentChildren(NovoHintElement) _hintElements: QueryList<NovoHintElement>;

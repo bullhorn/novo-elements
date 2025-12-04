@@ -22,6 +22,7 @@ Selection retention can be configured to keep records selected across pagination
 <div class="fixedWindowSize">
   <novo-data-table [rows]="basicRows"
     [columns]="sharedColumns"
+    enableColumnDragging
     [allowMultipleFilters]="true"
     [hideGlobalSearch]="!globalSearchEnabled"
     [displayedColumns]="sharedDisplayColumns"

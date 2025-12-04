@@ -77,6 +77,7 @@ export interface IDataTableColumn<T> {
   sortable?: boolean | IDataTableColumnSortConfig;
   filterable?: boolean | IDataTableColumnFilterConfig;
   resizable?: boolean;
+  draggable?: boolean;
   action?: {
     icon?: string;
     tooltip?: string;

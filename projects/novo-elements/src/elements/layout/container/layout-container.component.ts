@@ -361,7 +361,6 @@ export class NovoLayoutContainer implements AfterContentInit, DoCheck, OnDestroy
       if (drawer.position === 'end') {
         if (this._end != null) {
           throw new Error('Duplication drawers at end');
-          // throwMatDuplicatedDrawerError('end');
         }
         this._end = drawer;
       } else {

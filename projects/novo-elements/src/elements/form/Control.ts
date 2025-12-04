@@ -519,9 +519,6 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     if (this.valueChangeSubscription) {
       this.valueChangeSubscription.unsubscribe();
     }
-    // if (this.dateChangeSubscription) {
-    //     this.dateChangeSubscription.unsubscribe();
-    // }
     if (this.forceClearSubscription) {
       // Un-listen for clear events
       this.forceClearSubscription.unsubscribe();

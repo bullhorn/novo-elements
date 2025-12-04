@@ -27,7 +27,6 @@ describe('Elements: QuickNoteResults', () => {
     describe('Method: search()', () => {
       it('should be defined.', () => {
         expect(component.search).toBeDefined();
-        // component.search();
       });
     });
 

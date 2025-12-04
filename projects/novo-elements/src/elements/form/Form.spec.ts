@@ -5,7 +5,8 @@ import { NovoTemplateService } from 'novo-elements/services';
 // App
 import { NovoFormElement } from './Form';
 import { NovoFormModule } from './Form.module';
-xdescribe('Elements: NovoFormElement', () => {
+
+describe('Elements: NovoFormElement', () => {
   let fixture;
   let component;
 

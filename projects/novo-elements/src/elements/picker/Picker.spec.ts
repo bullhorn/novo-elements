@@ -54,14 +54,12 @@ describe('Elements: NovoPickerElement', () => {
   describe('Method: onFocus()', () => {
     it('should be defined.', () => {
       expect(component.onFocus).toBeDefined();
-      // component.onFocus();
     });
   });
 
   describe('Method: showResults()', () => {
     it('should be defined.', () => {
       expect(component.showResults).toBeDefined();
-      // component.showResults();
     });
   });
 

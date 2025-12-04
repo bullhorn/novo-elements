@@ -59,13 +59,6 @@ import {
 import { NovoOverlayTemplateComponent } from 'novo-elements/elements/common';
 import { NOVO_FORM_FIELD, NovoFieldControl, NovoFieldElement } from 'novo-elements/elements/field';
 
-// Value accessor for the component (supports ngModel)
-// const SELECT_VALUE_ACCESSOR = {
-//   provide: NG_VALUE_ACCESSOR,
-//   useExisting: forwardRef(() => NovoSelectElement),
-//   multi: true,
-// };
-
 /** Change event object that is emitted when the select value has changed. */
 export class NovoSelectChange {
   constructor(
@@ -671,12 +664,6 @@ export class NovoSelectElement
       event.preventDefault(); // prevents the page from scrolling down when pressing space
       this.openPanel();
     }
-    // Allow changing value with arrow keys.
-    // else if (!this.multiple) {
-    //   const previouslySelectedOption = this.selected;
-    //   manager.onKeydown(event);
-    //   const selectedOption = this.selected;
-    // }
   }
 
   /** Handles keyboard events when the selected is open. */
@@ -803,7 +790,6 @@ export class NovoSelectElement
   /** Sets up a key manager to listen to keyboard events on the overlay panel. */
   private _initKeyManager() {
     this._keyManager = new ActiveDescendantKeyManager<NovoOption>(this._optionsComputed, this.injector).withTypeAhead(250).withHomeAndEnd();
-    // .withAllowedModifierKeys(['shiftKey']);
 
     this._keyManager.tabOut.pipe(takeUntil(this._destroy)).subscribe(() => {
       if (this.panelOpen) {

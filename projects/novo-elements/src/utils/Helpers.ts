@@ -23,15 +23,6 @@ export class Helpers {
     if (this.isDate(props)) {
       props = this.dateToObject(props);
     }
-    // else {
-    //   props = Object.entries(props).reduce((obj, [key, value]) => {
-    //     const res = { ...obj, [key]: value };
-    //     if (this.isIsoDate(value as string)) {
-    //       res[`${key}Parts`] = this.dateToObject(new Date(value as string));
-    //     }
-    //     return res;
-    //   }, {});
-    // }
 
     return str.replace(/\$([\w\.]+)/g, (original: string, key: string) => {
       const keys: string[] = key.split('.');
@@ -124,14 +115,21 @@ export class Helpers {
   }
 
   /**
-   * Checks to see if the object is a undefined or null
+   * Checks to see if the object is undefined or null
    */
   static isBlank(obj: any): boolean {
+    return Helpers.isNullOrUndefined(obj);
+  }
+
+  /**
+   * Checks to see if the object is null or undefined
+   */
+  static isNullOrUndefined(obj: any): boolean {
     return obj === undefined || obj === null;
   }
 
   /**
-   * Checks to see if the object is a undefined or null
+   * Checks to see if the object is undefined, null, an empty string, or an empty array
    */
   static isEmpty(obj: any): boolean {
     return Helpers.isBlank(obj) || obj === '' || (Array.isArray(obj) && obj.length === 0);
