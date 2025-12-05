@@ -17,7 +17,7 @@ import { AbstractControl, UntypedFormGroup } from '@angular/forms';
 import { NovoPickerToggleElement } from 'novo-elements/elements/field';
 import { PlacesListComponent } from 'novo-elements/elements/places';
 import { NovoLabelService } from 'novo-elements/services';
-import { Helpers, Key } from 'novo-elements/utils';
+import { Key } from 'novo-elements/utils';
 import { Subscription } from 'rxjs';
 import {
   AddressCriteriaConfig,

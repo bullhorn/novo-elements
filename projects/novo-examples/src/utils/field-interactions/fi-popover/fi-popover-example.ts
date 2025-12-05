@@ -18,7 +18,7 @@ export class FiPopoverExample {
   constructor(private formUtils: FormUtils) {
 
     const popoverUpdateFunction = (API: FieldInteractionApi) => {
-      console.log('[FieldInteractionDemo] - popoverUpdateFunction'); // tslint:disable-line
+      console.info('[FieldInteractionDemo] - popoverUpdateFunction');
       for (const key in this.controls) {
         API.setPopOver(this.controls[key].key, {
           title: API.getValue(this.controls.popoverTitleControl.key),

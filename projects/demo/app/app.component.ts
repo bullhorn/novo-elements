@@ -64,7 +64,7 @@ export class AppComponent implements AfterViewInit {
     this.router.events.pipe(filter((e) => e instanceof Scroll)).subscribe((e: Scroll) => {
       this.menuOpen = false;
       if (e.anchor) {
-        console.log('anchor', e.anchor);
+        console.info('anchor', e.anchor);
         // anchor navigation
         setTimeout(() => {
           viewportScroller.scrollToAnchor(e.anchor);

@@ -18,7 +18,7 @@ export class TitleExample {
   }
 
   changeIcon() {
-    console.log('changign icon', this.index);
+    console.info('changign icon', this.index);
     this.index++;
   }
 }

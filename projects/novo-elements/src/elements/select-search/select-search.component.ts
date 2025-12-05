@@ -304,7 +304,7 @@ export class NovoSelectSearchComponent implements OnInit, OnDestroy, ControlValu
             .pipe(takeUntil(this._onDestroy))
             .subscribe(() => this.adjustScrollTopToFitActiveOptionIntoView());
         } else {
-          console.log('_keyManager was not initialized.');
+          console.warn('_keyManager was not initialized.');
         }
 
         this._options = this.novoSelect.contentOptions;

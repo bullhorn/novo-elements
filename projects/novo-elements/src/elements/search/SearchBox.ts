@@ -1,5 +1,5 @@
 // NG2
-import { ENTER, ESCAPE, TAB } from '@angular/cdk/keycodes';
+import { ENTER } from '@angular/cdk/keycodes';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,

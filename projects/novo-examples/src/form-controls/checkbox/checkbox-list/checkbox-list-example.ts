@@ -35,6 +35,6 @@ export class CheckboxListExample {
     },
   ];
   onChange(change: Event): void {
-    console.log('Checkbox Change:', change); // tslint:disable-line
+    console.info('Checkbox Change:', change);
   }
 }

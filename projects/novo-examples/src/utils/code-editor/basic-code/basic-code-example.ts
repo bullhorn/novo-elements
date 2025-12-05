@@ -12,6 +12,6 @@ import { Component } from '@angular/core';
 export class BasicCodeExample {
 
   value = `function myFunction() {
-  console.log('Hello world!');
+  console.info('Hello world!');
 }`;
 }

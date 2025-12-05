@@ -413,7 +413,7 @@ export class DataTableRowsExample implements AfterViewInit {
   }
 
   public log(event: { originalEvent: MouseEvent; row: MockData }): void {
-    console.log('[DataTable] Event Triggered!', event); // tslint:disable-line
+    console.info('[DataTable] Event Triggered!', event);
   }
 
   public preview(event: { originalEvent: MouseEvent; row: MockData }): void {
@@ -438,11 +438,11 @@ export class DataTableRowsExample implements AfterViewInit {
   }
 
   public onPreferencesChanged(event: IDataTablePreferences): void {
-    console.log('Preferences changed (persist manually):', event); // tslint:disable-line
+    console.info('Preferences changed (persist manually):', event);
   }
 
   public resized(event): void {
-    console.log('Column Width changed (persist manually): ', event); // tslint:disable-line
+    console.info('Column Width changed (persist manually): ', event);
   }
 
   public refresh(): void {

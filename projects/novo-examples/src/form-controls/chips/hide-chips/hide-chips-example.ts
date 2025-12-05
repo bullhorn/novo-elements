@@ -153,6 +153,6 @@ export class HideChipsExample {
   }
 
   onChanged(event) {
-    console.log('EVENT', event);
+    console.info('EVENT', event);
   }
 }

@@ -21,7 +21,7 @@ export class FigureExample implements AfterViewInit {
   constructor(private element: ElementRef, private hljs: HighlightJS) {}
 
   ngAfterViewInit() {
-    console.log('View Init');
+    console.info('View Init');
     this.element.nativeElement.querySelectorAll('code').forEach((el) => {
       setTimeout(() => this.hljs.highlightBlock(el), 300);
     });
