@@ -214,8 +214,21 @@ export class GooglePlacesService {
     });
   }
 
+  /**
+   * Remove duplicate predictions while preserving order from Google Places API.
+   * Uses place_id as the unique identifier, keeping the first occurrence.
+   * This ensures that when multiple cities share the same postal code,
+   * they are all preserved in the order returned by Google.
+   */
   private getUniqueResults(arr: any): any {
-    return Array.from(arr.reduce((m, t) => m.set(t.place_id, t), new Map()).values());
+    const seen = new Set<string>();
+    return arr.filter((item: any) => {
+      if (seen.has(item.place_id)) {
+        return false;
+      }
+      seen.add(item.place_id);
+      return true;
+    });
   }
 
   private geoPredictionCall(placesService: any, queryInput: any): Promise<any> {
