@@ -7,5 +7,5 @@ export function notify(message: string): void {
     return;
   }
   notifications[message] = true;
-  console.warn(message); // tslint:disable-line
+  console.warn(message);
 }

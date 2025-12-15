@@ -55,7 +55,6 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
     // the bindings in this template will be evaluated _after_ the table's view is evaluated, which
     // means the template in the table's view will not have the updated value (and in fact will cause
     // an ExpressionChangedAfterItHasBeenCheckedError).
-    // tslint:disable-next-line:validate-decorators
     changeDetection: ChangeDetectionStrategy.Default,
     standalone: false
 })

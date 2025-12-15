@@ -1,7 +1,6 @@
 import { Directive, ElementRef, HostBinding, Input, Renderer2 } from '@angular/core';
 
 @Directive({
-    // tslint:disable-next-line: directive-selector
     selector: '[flex]',
     standalone: false
 })

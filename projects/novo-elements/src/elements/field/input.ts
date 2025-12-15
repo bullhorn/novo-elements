@@ -55,7 +55,6 @@ class NovoInputBase {
 }
 
 /** Directive that allows a native input to work inside a `NovoField`. */
-// tslint:disable: no-conflicting-lifecycle member-ordering
 @Directive({
     selector: `input[novoInput], textarea[novoInput], select[novoInput]`,
     host: {

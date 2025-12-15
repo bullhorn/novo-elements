@@ -1,4 +1,3 @@
-// tslint:disable: directive-selector
 import { Directive, HostBinding, Input } from '@angular/core';
 import * as tokens from 'novo-design-tokens';
 /*
@@ -48,7 +47,6 @@ export const getSpacingToken = (value: string) => {
 };
 
 @Directive({
-    // tslint:disable-next-line: max-line-length
     selector: '[m],[margin],[marginTop],[marginRight],[marginBottom],[marginLeft],[marginX],[marginY],[mt],[mr],[mb],[ml],[mx],[my]',
     standalone: false
 })
@@ -88,7 +86,6 @@ export class MarginDirective {
 }
 
 @Directive({
-    // tslint:disable-next-line: max-line-length
     selector: '[p],[padding],[paddingTop],[paddingRight],[paddingBottom],[paddingLeft],[paddingX],[paddingY],[pt],[pr],[pb],[pl],[px],[py]',
     standalone: false
 })
