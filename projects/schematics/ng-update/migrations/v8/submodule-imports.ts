@@ -148,7 +148,6 @@ function getDeclarationSymbolOfNode(node: ts.Node, checker: ts.TypeChecker): ts.
 
   // Symbols can be aliases of the declaration symbol. e.g. in named import specifiers.
   // We need to resolve the aliased symbol back to the declaration symbol.
-  // tslint:disable-next-line:no-bitwise
   if (symbol && (symbol.flags & ts.SymbolFlags.Alias) !== 0) {
     return checker.getAliasedSymbol(symbol);
   }

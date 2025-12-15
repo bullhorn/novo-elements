@@ -313,7 +313,7 @@ export class Helpers {
    * @returns The first matching ancestor element, or undefined if none found
    */
   static findAncestor(element: Element, selector: string): Element {
-    while ((element = element.parentElement) && !element.matches.call(element, selector)); // tslint:disable-line
+    while ((element = element.parentElement) && !element.matches.call(element, selector));
     return element;
   }
 
@@ -327,7 +327,6 @@ export class Helpers {
     if (Array.isArray(item)) {
       const newArr = [];
       for (let i = item.length; i-- > 0; ) {
-        // tslint:disable-line
         newArr[i] = Helpers.deepClone(item[i]);
       }
       return newArr;

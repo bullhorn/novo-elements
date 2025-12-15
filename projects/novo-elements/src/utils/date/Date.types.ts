@@ -1,7 +1,6 @@
 export type DateLike = Date | string | number;
 
 export class DateRange<D = DateLike> {
-  // tslint:disable-next-line:no-unused-variable
   private _disableStructuralEquivalency: never;
 
   constructor(

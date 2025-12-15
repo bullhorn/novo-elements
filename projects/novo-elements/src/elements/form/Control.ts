@@ -639,8 +639,8 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         try {
           interaction.script(this.fieldInteractionApi, this.control.key);
         } catch (err) {
-          console.info('Field Interaction Error!', this.control.key); // tslint:disable-line
-          console.error(err); // tslint:disable-line
+          console.info('Field Interaction Error!', this.control.key);
+          console.error(err);
         }
       });
     }
