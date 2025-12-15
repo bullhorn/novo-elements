@@ -19,7 +19,7 @@ export class AsideComponent {
   disableDrag = signal(true);
   component: Portal<any>;
 
-  constructor(private injector: Injector, private asideRef: NovoAsideRef) {
+  constructor(private injector: Injector, public asideRef: NovoAsideRef) {
     this.draggable = asideRef.draggable;
     this.disableDrag = asideRef.disableDrag;
     this.component = new ComponentPortal(asideRef.component, null, injector);
