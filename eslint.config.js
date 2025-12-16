@@ -35,6 +35,10 @@ module.exports = [
       'no-unused-labels': 'error',
       'no-undef-init': 'error',
       'no-trailing-spaces': 'error',
+      'no-throw-literal': 'error',
+      'no-redeclare': 'error',
+      'no-multiple-empty-lines': 'error',
+      'no-new-wrappers': 'error',
     }
   }
 ];

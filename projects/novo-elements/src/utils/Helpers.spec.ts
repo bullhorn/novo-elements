@@ -436,7 +436,7 @@ describe('Utils: Helpers', () => {
 
     it('should return false for String object (not primitive string)', () => {
       // String objects (created with new String()) are objects, not strings
-      expect(Helpers.isString(new String('hello'))).toBe(false);
+      expect(Helpers.isString(new String('hello'))).toBe(false); // eslint-disable-line
     });
   });
 
