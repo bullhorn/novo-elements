@@ -13,7 +13,7 @@ export class VisibleDirective {
 
   @HostBinding('class')
   get hb_visibility() {
-    return this.visible ? '' : `novo-visibility-hidden`;
+    return this.visible ? '' : 'novo-visibility-hidden';
   }
 
   constructor(private el: ElementRef) {}

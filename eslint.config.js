@@ -30,6 +30,7 @@ module.exports = [
       'use-isnan': 'error',
       'spaced-comment': ['error', 'always', { markers: ['/'] }],
       radix: 'error',
+      'quotes': ['error', 'single', { avoidEscape: true }]
     }
   }
 ];

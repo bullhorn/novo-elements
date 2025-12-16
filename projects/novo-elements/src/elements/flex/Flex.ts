@@ -3,7 +3,7 @@ import { Component, HostBinding, Input } from '@angular/core';
 
 @Component({
     selector: 'novo-flex,novo-row',
-    template: ` <ng-content></ng-content> `,
+    template: ' <ng-content></ng-content> ',
     standalone: false
 })
 export class NovoFlexElement {
@@ -35,7 +35,7 @@ export class NovoFlexElement {
 
 @Component({
     selector: 'novo-stack,novo-column',
-    template: ` <ng-content></ng-content> `,
+    template: ' <ng-content></ng-content> ',
     standalone: false
 })
 export class NovoStackElement extends NovoFlexElement {

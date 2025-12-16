@@ -242,7 +242,7 @@ export class NovoAutocompleteElement
         this._formField._control.value = valueToEmit;
       }
     } else {
-      console.warn(`AutoComplete only intended to be used within a NovoField`);
+      console.warn('AutoComplete only intended to be used within a NovoField');
     }
     this._previousValue = optionValue;
   }

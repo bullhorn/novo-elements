@@ -38,7 +38,7 @@ jest.mock('angular-imask', () => {
 
 @Component({
   selector: 'test-date-format',
-  template: `<input [formControl]="testControl" dateFormat="iso8601">`,
+  template: '<input [formControl]="testControl" dateFormat="iso8601">',
   standalone: false,
 })
 class DateFormatTestComponent {

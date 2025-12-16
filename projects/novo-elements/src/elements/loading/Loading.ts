@@ -31,7 +31,7 @@ export class NovoLoadingElement {
    **/
   @Input()
   set theme(value: string) {
-    console.warn(`'theme' property is deprecated, please use 'color'.`);
+    console.warn('\'theme\' property is deprecated, please use \'color\'.');
     this.color = value;
   }
   get theme(): string {
@@ -76,7 +76,7 @@ export class NovoSpinnerElement {
    **/
   @Input()
   set theme(value: string) {
-    console.warn(`'theme' property is deprecated, please use 'color'.`);
+    console.warn('\'theme\' property is deprecated, please use \'color\'.');
     this.color = value;
   }
   get theme(): string {

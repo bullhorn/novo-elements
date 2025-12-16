@@ -120,8 +120,8 @@ export class NovoChipRemove {
  * Chip component. Used inside the NovoChipList component.
  */
 @Component({
-    selector: `novo-chip, [novo-chip]`,
-    template: `<ng-content></ng-content>`,
+    selector: 'novo-chip, [novo-chip]',
+    template: '<ng-content></ng-content>',
     styleUrls: ['./Chip.scss'],
     encapsulation: ViewEncapsulation.None,
     inputs: ['color', 'tabIndex', 'size'],

@@ -20,7 +20,7 @@ jest.mock('angular-imask');
 
 @Component({
   selector: 'novo-auto-size-test-component',
-  template: ` <textarea autosize></textarea> `,
+  template: ' <textarea autosize></textarea> ',
   styles: [
     `
       textarea {
@@ -87,7 +87,7 @@ describe('Test Localization', () => {
 });
 
 @Component({
-  template: ` <div></div> `,
+  template: ' <div></div> ',
   standalone: false,
 })
 class TestComponent {}

@@ -10,5 +10,5 @@ import { Component } from '@angular/core';
     standalone: false
 })
 export class ProgressBarUsageExample {
-  public largeTooltip: string = `Lorem Ipsum\n\n is simply dummy text of the printing and typesetting industry. \n Learn more <a>here</a>`;
+  public largeTooltip: string = 'Lorem Ipsum\n\n is simply dummy text of the printing and typesetting industry. \n Learn more <a>here</a>';
 }

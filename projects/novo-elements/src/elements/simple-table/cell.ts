@@ -118,7 +118,7 @@ export class NovoSimpleEmptyHeaderCell extends _NovoHeaderCell {
 
 @Component({
     selector: 'novo-simple-checkbox-header-cell',
-    template: `<novo-checkbox [(ngModel)]="selectAll" (ngModelChange)="toggle($event)"></novo-checkbox>`,
+    template: '<novo-checkbox [(ngModel)]="selectAll" (ngModelChange)="toggle($event)"></novo-checkbox>',
     standalone: false
 })
 export class NovoSimpleCheckboxHeaderCell extends _NovoHeaderCell implements OnDestroy {
@@ -157,7 +157,7 @@ export class NovoSimpleCheckboxHeaderCell extends _NovoHeaderCell implements OnD
 
 @Component({
     selector: 'novo-simple-cell',
-    template: ` <span [class.clickable]="!!column.onClick" (click)="onClick($event)" #span>{{ column.renderer(row) }}</span> `,
+    template: ' <span [class.clickable]="!!column.onClick" (click)="onClick($event)" #span>{{ column.renderer(row) }}</span> ',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: false
 })
@@ -199,7 +199,7 @@ export class NovoSimpleCell<T> extends _NovoCell implements OnInit {
 
 @Component({
     selector: 'novo-simple-checkbox-cell',
-    template: ` <novo-checkbox [ngModel]="selected" (ngModelChange)="toggle($event)"></novo-checkbox> `,
+    template: ' <novo-checkbox [ngModel]="selected" (ngModelChange)="toggle($event)"></novo-checkbox> ',
     standalone: false
 })
 export class NovoSimpleCheckboxCell extends _NovoCell implements OnDestroy, OnInit {

@@ -56,7 +56,7 @@ class NovoInputBase {
 
 /** Directive that allows a native input to work inside a `NovoField`. */
 @Directive({
-    selector: `input[novoInput], textarea[novoInput], select[novoInput]`,
+    selector: 'input[novoInput], textarea[novoInput], select[novoInput]',
     host: {
         class: 'novo-input-element',
         '[attr.id]': 'id',

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
     selector: 'test-cmp',
-    template: ` <div bhUnless="false"></div> `,
+    template: ' <div bhUnless="false"></div> ',
     standalone: false
 })
 export class TestCmp {}

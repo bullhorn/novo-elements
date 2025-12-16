@@ -31,7 +31,7 @@ declare const CKEDITOR: any;
 @Component({
     selector: 'novo-quick-note',
     providers: [QUICK_NOTE_VALUE_ACCESSOR],
-    template: ` <div class="quick-note-wrapper" #wrapper><textarea #host></textarea> <span #results></span></div> `,
+    template: ' <div class="quick-note-wrapper" #wrapper><textarea #host></textarea> <span #results></span></div> ',
     styleUrls: ['./QuickNote.scss'],
     standalone: false
 })

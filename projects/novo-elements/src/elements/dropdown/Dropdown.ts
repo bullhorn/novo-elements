@@ -170,7 +170,7 @@ export class NovoDropdownElement extends NovoDropdownMixins implements OnInit, A
 
   public ngOnInit(): void {
     if (this.appendToBody) {
-      notify(`'appendToBody' has been deprecated. Please remove this attribute.`);
+      notify('\'appendToBody\' has been deprecated. Please remove this attribute.');
     }
   }
 
@@ -374,7 +374,7 @@ export class NovoItemElement {
   public active: boolean = false;
 
   constructor(private dropdown: NovoDropdownElement, public element: ElementRef) {
-    notify(`'item' element has been deprecated. Please use 'novo-option' and 'novo-optgroup'.`);
+    notify('\'item\' element has been deprecated. Please use \'novo-option\' and \'novo-optgroup\'.');
   }
 
   @HostListener('click', ['$event'])
@@ -401,7 +401,7 @@ export class NovoDropdownListElement implements AfterContentInit {
   public items: QueryList<NovoItemElement>;
 
   constructor(private dropdown: NovoDropdownElement) {
-    notify(`'list' element has been deprecated. Please use novo-option and novo-optgroup.`);
+    notify('\'list\' element has been deprecated. Please use novo-option and novo-optgroup.');
   }
 
   public ngAfterContentInit(): void {
@@ -419,6 +419,6 @@ export class NovoDropdownListElement implements AfterContentInit {
 })
 export class NovoDropDownItemHeaderElement {
   constructor() {
-    notify(`'dropdown-item-header' element has been deprecated. Please use novo-option and novo-optgroup.`);
+    notify('\'dropdown-item-header\' element has been deprecated. Please use novo-option and novo-optgroup.');
   }
 }

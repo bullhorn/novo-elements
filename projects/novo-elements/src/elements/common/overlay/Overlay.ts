@@ -30,7 +30,7 @@ import {
   ViewContainerRef
 } from '@angular/core';
 // Vendor
-import { Helpers } from "novo-elements/utils";
+import { Helpers } from 'novo-elements/utils';
 import { fromEvent, merge, Observable, of as observableOf, Subscription } from 'rxjs';
 import { filter, first, switchMap } from 'rxjs/operators';
 

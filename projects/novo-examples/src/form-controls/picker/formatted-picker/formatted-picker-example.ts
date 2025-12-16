@@ -40,7 +40,7 @@ export class FormattedPickerExample {
 
     this.formatted = {
       field: 'id',
-      format: `$firstName $lastName`,
+      format: '$firstName $lastName',
       options: collaborators,
     };
   }

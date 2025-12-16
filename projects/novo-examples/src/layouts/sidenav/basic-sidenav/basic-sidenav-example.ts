@@ -16,17 +16,17 @@ export class BasicSidenavExample {
     {
       type: 'record',
       accent: 'candidate',
-      label: `101 | Ferdinand del Toro`,
+      label: '101 | Ferdinand del Toro',
     },
     {
       type: 'record',
       accent: 'job',
-      label: `101 | Ferdinand del Toro`,
+      label: '101 | Ferdinand del Toro',
     },
     {
       type: 'list',
       accent: 'company',
-      label: `Companies`,
+      label: 'Companies',
     },
   ];
   constructor() {}

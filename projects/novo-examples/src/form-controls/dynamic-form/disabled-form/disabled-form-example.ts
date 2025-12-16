@@ -140,7 +140,7 @@ export class DisabledFormExample {
         countryCode: 'US',
       },
       file: [{ name: 'yourFile.pdf', loaded: true, link: 'www.google.com', description: 'file description' }],
-      htmlFieldFullEditor: `<h1>Disabled Editor</h1><br><ui><li>Disabled</li><li>Editor</li></ui>`,
+      htmlFieldFullEditor: '<h1>Disabled Editor</h1><br><ui><li>Disabled</li><li>Editor</li></ui>',
       picker: 'Disabled Picker',
       rowChips: [{ id: 1, value: 'Disabled Row Chip', description: 'This is a disabled Row Chip' }],
     });

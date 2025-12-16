@@ -77,7 +77,7 @@ export class NovoProgressBarElement implements ControlValueAccessor, OnInit {
   @HostBinding('style.width')
   get width() {
     if (this.appearance === ProgressAppearance.RADIAL) {
-      return `100%`;
+      return '100%';
     }
     return `${this._percent * 100}%`;
   }

@@ -15,7 +15,7 @@ import { NovoBaseTextElement } from '../base/base-text.component';
 
 @Component({
     selector: 'novo-caption,[novo-caption]',
-    template: ` <ng-content></ng-content> `,
+    template: ' <ng-content></ng-content> ',
     styleUrls: ['./caption.scss'],
     host: {
         class: 'novo-caption',

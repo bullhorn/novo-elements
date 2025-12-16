@@ -17,9 +17,9 @@ export class FiNestedExample {
   public maxPayRateControl: TextBoxControl;
   public controls: NovoControlConfig[];
   public initialValue = [
-    { selected: true, label: `First Shift`, multiplier: 1, payRate: 40 },
-    { selected: false, label: ``, multiplier: 1.5, payRate: 60 },
-    { selected: false, label: ``, multiplier: 2.0, payRate: 80 },
+    { selected: true, label: 'First Shift', multiplier: 1, payRate: 40 },
+    { selected: false, label: '', multiplier: 1.5, payRate: 60 },
+    { selected: false, label: '', multiplier: 2.0, payRate: 80 },
   ];
 
   constructor(private formUtils: FormUtils) {

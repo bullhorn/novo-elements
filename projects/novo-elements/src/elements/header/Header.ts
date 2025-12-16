@@ -3,7 +3,7 @@ import { BooleanInput } from 'novo-elements/utils';
 
 @Component({
     selector: 'header-spacer',
-    template: `<ng-content></ng-content>`,
+    template: '<ng-content></ng-content>',
     styleUrls: ['./HeaderSpacer.scss'],
     standalone: false
 })
@@ -11,7 +11,7 @@ export class NovoHeaderSpacer {}
 
 @Component({
     selector: 'utils',
-    template: `<ng-content></ng-content>`,
+    template: '<ng-content></ng-content>',
     standalone: false
 })
 export class NovoUtilsComponent {}
