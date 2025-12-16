@@ -47,6 +47,7 @@ module.exports = [
       'id-denylist': ['error', 'Number', 'String', 'string', 'Boolean', 'boolean', 'Undefined', 'undefined'],
       'id-match': 'error',
       eqeqeq: ['error', 'smart'],
+      'eol-last': 'error',
     }
   }
 ];
