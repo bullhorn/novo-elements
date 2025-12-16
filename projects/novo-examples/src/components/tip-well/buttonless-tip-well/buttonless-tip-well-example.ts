@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'buttonless-tip-well-example',
     templateUrl: 'buttonless-tip-well-example.html',
     styleUrls: ['buttonless-tip-well-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class ButtonlessTipWellExample {
   public demoTip: string =

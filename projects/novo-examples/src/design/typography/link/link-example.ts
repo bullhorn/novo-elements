@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
     selector: 'link-example',
     templateUrl: './link-example.html',
     styleUrls: ['./link-example.scss'],
-    standalone: false
+    standalone: false,
 })
 export class LinkExample {
   alert(message: string) {

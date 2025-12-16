@@ -121,7 +121,7 @@ export enum TIME_VALUE_FORMATS {
         class: 'novo-time-picker',
         '[class.military]': 'military',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoTimePickerElement implements ControlValueAccessor, OnInit, OnChanges {
   @Input()

@@ -22,7 +22,7 @@ import { BooleanInput } from 'novo-elements/utils';
     selector: 'novo-nav',
     template: '<ng-content></ng-content>',
     styleUrls: ['./tab-nav.scss'],
-    standalone: false
+    standalone: false,
 })
 export class NovoNavElement implements AfterContentChecked {
   @Input()
@@ -136,7 +136,7 @@ export class NovoNavElement implements AfterContentChecked {
   `,
     styleUrls: ['./tab.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    standalone: false,
 })
 export class NovoTabElement {
   @HostBinding('attr.role')
@@ -197,7 +197,7 @@ export class NovoTabElement {
     },
     template: '<ng-content></ng-content>',
     styleUrls: ['./tab-button.scss'],
-    standalone: false
+    standalone: false,
 })
 export class NovoTabButtonElement {
   @HostBinding('attr.role')
@@ -236,7 +236,7 @@ export class NovoTabButtonElement {
   `,
     styleUrls: ['./tab.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    standalone: false,
 })
 export class NovoTabLinkElement implements OnInit {
   @HostBinding('attr.role')
@@ -281,7 +281,7 @@ export class NovoTabLinkElement implements OnInit {
     template: '<ng-content></ng-content>',
     styleUrls: ['./tab-outlet.scss'],
     encapsulation: ViewEncapsulation.None,
-    standalone: false
+    standalone: false,
 })
 export class NovoNavOutletElement {
   items: Array<any> = [];
@@ -322,7 +322,7 @@ export class NovoNavOutletElement {
     template: '<ng-content></ng-content>',
     styleUrls: ['./tab-content.scss'],
     encapsulation: ViewEncapsulation.None,
-    standalone: false
+    standalone: false,
 })
 export class NovoNavContentElement {
   @Input()
@@ -341,7 +341,7 @@ export class NovoNavContentElement {
     },
     template: '<ng-content></ng-content>',
     styleUrls: ['./tab-header.scss'],
-    standalone: false
+    standalone: false,
 })
 export class NovoNavHeaderElement {
   @HostBinding('attr.role')

@@ -8,7 +8,7 @@ import { ChecklistPickerResults } from 'novo-elements';
     selector: 'basic-multi-picker-example',
     templateUrl: 'basic-multi-picker-example.html',
     styleUrls: ['basic-multi-picker-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class BasicMultiPickerExample {
   placeholder: string = 'Select...';

@@ -6,6 +6,6 @@ import { NovoCodeEditor } from './CodeEditor';
 @NgModule({
     imports: [CommonModule, FormsModule ],
     declarations: [NovoCodeEditor],
-    exports: [NovoCodeEditor]
+    exports: [NovoCodeEditor],
 })
 export class NovoCodeEditorModule {}

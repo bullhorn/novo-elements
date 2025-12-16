@@ -24,7 +24,7 @@ import { NovoLabelService } from 'novo-elements/services';
     host: {
         '[class.active]': 'isActive',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoTipWellElement implements OnInit {
   @Input()

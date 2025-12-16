@@ -3,7 +3,7 @@ import { BooleanInput } from 'novo-elements/utils';
 
 @Directive({
     selector: '[visible]',
-    standalone: false
+    standalone: false,
 })
 export class VisibleDirective {
   @BooleanInput()

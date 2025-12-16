@@ -6,18 +6,18 @@ const mockAdaptiveQuery: AdaptiveQuery = {
   criteria: {
     and: [{
       status: {
-        equalTo: 'New Lead'
-      }
+        equalTo: 'New Lead',
+      },
     }, {
       isDeleted: {
-        equalTo: 0
-      }
-    }]
+        equalTo: 0,
+      },
+    }],
   },
   orderBy: ['-id', 'name'],
   pagination: {
     page: 2,
-    pageSize: 100
+    pageSize: 100,
   },
 };
 

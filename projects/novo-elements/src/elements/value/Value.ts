@@ -34,7 +34,7 @@ export enum NOVO_VALUE_THEME {
     </div>
   `,
     styleUrls: ['./Value.scss'],
-    standalone: false
+    standalone: false,
 })
 export class NovoValueElement implements OnInit, OnChanges {
   @Input()

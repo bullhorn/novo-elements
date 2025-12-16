@@ -13,7 +13,7 @@ import { NOVO_PROGRESS_CONTAINER, ProgressAppearance } from './ProgressConstants
             useExisting: NovoProgressElement,
         },
     ],
-    standalone: false
+    standalone: false,
 })
 export class NovoProgressElement implements AfterContentInit {
   @Input()

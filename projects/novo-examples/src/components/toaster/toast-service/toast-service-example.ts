@@ -8,7 +8,7 @@ import { NovoToastService } from 'novo-elements';
     selector: 'toast-service-example',
     templateUrl: 'toast-service-example.html',
     styleUrls: ['toast-service-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class ToastServiceExample {
   public options: any = {
@@ -36,7 +36,7 @@ export class ToastServiceExample {
         accent: 'success',
         position: 'fixedTop',
         isCloseable: true,
-        hideDelay: -1
+        hideDelay: -1,
       };
     } else if (arg === 'bottom') {
       this.options = {

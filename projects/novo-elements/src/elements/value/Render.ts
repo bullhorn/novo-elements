@@ -34,7 +34,7 @@ import { findByCountryId } from 'novo-elements/utils';
 @Pipe({
     name: 'render',
     pure: false,
-    standalone: false
+    standalone: false,
 })
 @Injectable()
 export class RenderPipe implements PipeTransform {

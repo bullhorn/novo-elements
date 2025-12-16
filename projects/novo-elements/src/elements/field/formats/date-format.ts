@@ -19,7 +19,7 @@ export const DATEFORMAT_VALUE_ACCESSOR = {
         class: 'novo-date-format',
     },
     providers: [DATEFORMAT_VALUE_ACCESSOR, { provide: NOVO_INPUT_FORMAT, useExisting: NovoDateFormatDirective }],
-    standalone: false
+    standalone: false,
 })
 export class NovoDateFormatDirective extends IMaskDirective<any> {
   valueChange: EventEmitter<any> = new EventEmitter();

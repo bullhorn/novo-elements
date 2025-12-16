@@ -26,13 +26,13 @@ class TestSelectComponent {
   select = viewChild(NovoSelectElement);
   options = [{
     label: 'Option 1',
-    value: '111'
+    value: '111',
   }, {
     label: 'Option 2',
-    value: '222'
+    value: '222',
   }, {
     label: 'Option 3',
-    value: '333'
+    value: '333',
   }];
   value: any;
 }

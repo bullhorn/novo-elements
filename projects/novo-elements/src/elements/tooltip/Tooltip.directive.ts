@@ -11,7 +11,7 @@ import { BooleanInput } from 'novo-elements/utils';
     host: {
         '[attr.data-hint]': 'tooltip',
     },
-    standalone: false
+    standalone: false,
 })
 export class TooltipDirective implements OnDestroy, OnInit, AfterViewInit {
   @Input()

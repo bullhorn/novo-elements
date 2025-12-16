@@ -56,7 +56,7 @@ const TILES_VALUE_ACCESSOR = {
   `,
     styleUrls: ['./Tiles.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    standalone: false,
 })
 export class NovoTilesElement implements ControlValueAccessor, AfterContentInit, OnChanges {
   @Input()

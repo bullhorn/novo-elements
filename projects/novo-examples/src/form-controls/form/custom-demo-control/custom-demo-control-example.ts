@@ -8,7 +8,7 @@ import { Component, Input } from '@angular/core';
     template: `<div [formGroup]="form">
     My Custom Input <input [formControlName]="control.key" [id]="control.key" [type]="control.type" [placeholder]="control.placeholder" />
   </div>`,
-    standalone: false
+    standalone: false,
 })
 export class CustomDemoControlExample {
   @Input()

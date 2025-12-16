@@ -4,7 +4,7 @@ import { Component, HostBinding, Input } from '@angular/core';
 @Component({
     selector: 'novo-flex,novo-row',
     template: ' <ng-content></ng-content> ',
-    standalone: false
+    standalone: false,
 })
 export class NovoFlexElement {
   @HostBinding('style.display')
@@ -36,7 +36,7 @@ export class NovoFlexElement {
 @Component({
     selector: 'novo-stack,novo-column',
     template: ' <ng-content></ng-content> ',
-    standalone: false
+    standalone: false,
 })
 export class NovoStackElement extends NovoFlexElement {
   @HostBinding('style.flex-direction')

@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'activity-section-example',
     templateUrl: 'activity-section-example.html',
     styleUrls: ['activity-section-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class ActivitySectionExample {
   public isDisabled: boolean = true;

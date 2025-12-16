@@ -50,6 +50,8 @@ module.exports = [
       'eol-last': 'error',
       'default-case': 'error',
       curly: 'error',
+      'constructor-super': 'error',
+      'comma-dangle': ['error', 'always-multiline'],
     }
   }
 ];

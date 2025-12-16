@@ -76,7 +76,7 @@ const CHIPS_VALUE_ACCESSOR = {
         '[class.with-value]': 'items.length > 0',
         '[class.disabled]': 'disablePickerInput',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoChipsElement implements OnInit, ControlValueAccessor {
   readonly CHIPS_SHOWN_MAX = 999;

@@ -21,7 +21,7 @@ import { TypographyWeight } from '../text.types';
     host: {
         class: 'novo-title',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoTitle extends NovoBaseTextElement {
   weight: TypographyWeight = 'medium';

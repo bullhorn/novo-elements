@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'basic-sidenav-example',
     templateUrl: 'basic-sidenav-example.html',
     styleUrls: ['basic-sidenav-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class BasicSidenavExample {
   isMobile = false;

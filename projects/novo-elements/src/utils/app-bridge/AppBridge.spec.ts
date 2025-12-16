@@ -58,7 +58,7 @@ class MockPostrobot {
         const mockRobotEvent = {
             data: {...data},
             source: from.mockSource,
-            origin: from.mockOrigin
+            origin: from.mockOrigin,
         };
         const responder = this.responders[msg];
         return Promise.resolve(responder?.(mockRobotEvent))
@@ -185,7 +185,7 @@ describe('AppBridge', () => {
     it('opens a list', async () => {
         handleFn.mockReturnValue(true);
         frame1Bridge.openList({
-            criteria: 'small'
+            criteria: 'small',
         });
         expect(handleFn).toHaveBeenCalledWith(AppBridgeHandler.OPEN_LIST, jasmine.objectContaining({ criteria: 'small' }));
     });
@@ -195,7 +195,7 @@ describe('AppBridge', () => {
         handleFn.mockReturnValue(true);
         frame1Bridge.openList({
             criteria: 'small',
-            type: 'Candidate'
+            type: 'Candidate',
         });
         expect(handleFn).toHaveBeenCalledWith(AppBridgeHandler.OPEN_LIST, jasmine.objectContaining({ criteria: 'small', type: 'List', entityType: 'Candidate' }));
     });
@@ -228,7 +228,7 @@ describe('AppBridge', () => {
         it('updates app title', async () => {
             handleFn.mockReturnValue(true);
             await frame1Bridge.update({
-                title: 'x'
+                title: 'x',
             });
             expect(handleFn).toHaveBeenCalledWith(AppBridgeHandler.UPDATE, jasmine.objectContaining({title: 'x', id: frame1Bridge.id, windowName: 'terry' }));
         });
@@ -247,7 +247,7 @@ describe('AppBridge', () => {
             close: [],
             refresh: [],
             pin: [],
-            update: [{}]
+            update: [{}],
         };
         function expectFalseOnAllCalls(failureImplementation: (() => any) | 'enableGenericSendError', failTerm: string) {
             for (const cmd of Object.keys(cmdFunctionsWithArgs)) {
@@ -409,8 +409,8 @@ describe('AppBridge', () => {
             key: 'callbackTest',
             generic: false,
             options: {
-                switch: 'on'
-            }
+                switch: 'on',
+            },
         });
         expect(result).toBe(true);
     });
@@ -423,8 +423,8 @@ describe('AppBridge', () => {
                 key: 'callbackTest',
                 generic: false,
                 options: {
-                    switch: 'on'
-                }
+                    switch: 'on',
+                },
             });
             fail('Expected exception');
         } catch(succeed) {
@@ -439,8 +439,8 @@ describe('AppBridge', () => {
                 key: 'callbackTest',
                 generic: false,
                 options: {
-                    switch: 'on'
-                }
+                    switch: 'on',
+                },
             });
             fail('Expected exception');
         } catch(succeed) {

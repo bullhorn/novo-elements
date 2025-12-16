@@ -69,7 +69,7 @@ class NovoInputBase {
         '[attr.autocomplete]': "'off'",
     },
     providers: [{ provide: NovoFieldControl, useExisting: NovoInput }],
-    standalone: false
+    standalone: false,
 })
 export class NovoInput extends NovoInputBase implements NovoFieldControl<any>, OnChanges, OnDestroy, AfterViewInit, DoCheck {
   protected _uid = `novo-input-${nextUniqueId++}`;

@@ -22,7 +22,7 @@ import type { DateLike, Day, OverlayDate } from 'novo-elements/utils';
     templateUrl: './month-view.component.html',
     styleUrls: ['./month-view.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    standalone: false,
 })
 export class NovoMonthViewElement implements OnInit {
   @Input()

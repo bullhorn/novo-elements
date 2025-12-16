@@ -366,7 +366,7 @@ class Pluralize {
 
 @Pipe({
     name: 'plural',
-    standalone: false
+    standalone: false,
 })
 @Injectable()
 export class PluralPipe implements PipeTransform {

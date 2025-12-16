@@ -22,7 +22,7 @@ let nextId = 0;
     host: {
         class: 'novo-label',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoLabel extends NovoBaseTextElement implements OnInit{
   @HostBinding('attr.id')

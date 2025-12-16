@@ -43,7 +43,7 @@ const PROGRESS_BAR_VALUE_ACCESSOR = {
       />
     </svg>
   `,
-    standalone: false
+    standalone: false,
 })
 export class NovoProgressBarElement implements ControlValueAccessor, OnInit {
   private _uniqueId: string = `novo-progress-${++nextId}`;

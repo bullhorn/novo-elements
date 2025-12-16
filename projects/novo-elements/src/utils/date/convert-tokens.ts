@@ -54,7 +54,7 @@ const tokensMap: TokensMap = {
   Z: 'xxx',
   ZZ: 'xx',
   X: 't',
-  x: 'T'
+  x: 'T',
 }
 
 const v1tokens = Object.keys(tokensMap)
@@ -63,7 +63,7 @@ const v1tokens = Object.keys(tokensMap)
 
 const tokensRegExp = new RegExp(
   '(\\[[^\\[]*\\])|(\\\\)?' + '(' + v1tokens.join('|') + '|.)',
-  'g'
+  'g',
 )
 
 type TokensBuffer = {
@@ -98,7 +98,7 @@ export function convertTokens(format: string): string {
 
           return acc
         },
-        { formatBuffer: [], textBuffer: [] } as TokensBuffer
+        { formatBuffer: [], textBuffer: [] } as TokensBuffer,
       )
       .formatBuffer.join('')
   } else {

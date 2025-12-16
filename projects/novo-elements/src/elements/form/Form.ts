@@ -23,7 +23,7 @@ import { NovoFormGroup } from './NovoFormGroup';
     styleUrls: ['./Form.scss'],
     encapsulation: ViewEncapsulation.None,
     providers: [NovoTemplateService],
-    standalone: false
+    standalone: false,
 })
 export class NovoFormElement implements AfterContentInit, OnInit {
   @Input()

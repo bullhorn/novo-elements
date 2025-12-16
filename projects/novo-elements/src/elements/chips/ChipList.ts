@@ -93,7 +93,7 @@ export class NovoChipListChange {
     // styleUrls: ['./ChipList.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    standalone: false,
 })
 export class NovoChipList
   extends _NovoChipListMixinBase

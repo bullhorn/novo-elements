@@ -38,7 +38,7 @@ import { MockCandidateMeta, MockNoteMeta } from './MockMeta';
   `,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.Default,
-    standalone: false
+    standalone: false,
 })
 export class CustomPickerConditionDef extends AbstractConditionFieldDef implements OnInit {
   defaultOperator = Operator.includeAny;
@@ -77,7 +77,7 @@ export class CustomPickerConditionDef extends AbstractConditionFieldDef implemen
     selector: 'just-criteria-example',
     templateUrl: 'just-criteria-example.html',
     styleUrls: ['just-criteria-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class JustCriteriaExample implements OnInit {
   criteriaBuilder = viewChild(CriteriaBuilderComponent);
@@ -91,7 +91,7 @@ export class JustCriteriaExample implements OnInit {
 
   addressConfig: AddressCriteriaConfig = {
     radiusEnabled: true,
-    radiusUnits: 'miles'
+    radiusUnits: 'miles',
   };
   addressRadiusEnabled: boolean = false;
   addressRadiusEnabledOptions: { label: string, value: boolean }[] = [
@@ -102,19 +102,19 @@ export class JustCriteriaExample implements OnInit {
   useNoteMeta: boolean = false;
   useNoteMetaOptions = [
     { label: 'True', value: true },
-    { label: 'False', value: false }
+    { label: 'False', value: false },
   ];
 
   hideFirstOperator: boolean = true;
   hideFirstOperatorOptions = [
     { label: 'True', value: true },
-    { label: 'False', value: false }
+    { label: 'False', value: false },
   ];
 
   canBeEmpty: boolean = false;
   canBeEmptyOptions = [
     { label: 'True', value: true },
-    { label: 'False', value: false }
+    { label: 'False', value: false },
   ];
 
   editTypeFn = (field: any) => {
@@ -197,7 +197,7 @@ export class JustCriteriaExample implements OnInit {
             scope: 'Candidate',
             entity: 'Person',
             value: null,
-          }
+          },
         ],
       },
     ];

@@ -8,7 +8,7 @@ import { FormControl, FormGroup } from '@angular/forms';
     selector: 'number-range-control-example',
     templateUrl: 'number-range-control-example.html',
     styleUrls: ['number-range-control-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class NumberRangeControlExample {
   public exampleForm: FormGroup;
@@ -16,7 +16,7 @@ export class NumberRangeControlExample {
   constructor() {
     this.exampleForm = new FormGroup({
       numberRangeControl1: new FormControl(),
-      numberRangeControl2: new FormControl()
+      numberRangeControl2: new FormControl(),
     })
   }
 

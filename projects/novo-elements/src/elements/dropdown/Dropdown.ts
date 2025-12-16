@@ -46,7 +46,7 @@ import { BooleanInput, Key, notify } from 'novo-elements/utils';
     host: {
         class: 'novo-dropdown-trigger',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoDropDownTrigger {
   constructor(public element: ElementRef) {}
@@ -75,7 +75,7 @@ const NovoDropdownMixins: HasOverlayCtor & CanDisableCtor & HasTabIndexCtor & ty
     host: {
         '[attr.tabIndex]': 'disabled ? -1 : 0',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoDropdownElement extends NovoDropdownMixins implements OnInit, AfterContentInit, AfterViewInit, OnDestroy {
   @Input()
@@ -361,7 +361,7 @@ export class NovoDropdownElement extends NovoDropdownMixins implements OnInit, A
         '[class.disabled]': 'disabled',
         '[class.active]': 'active',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoItemElement {
   @Input()
@@ -394,7 +394,7 @@ export class NovoItemElement {
 @Component({
     selector: 'list',
     template: '<ng-content></ng-content>',
-    standalone: false
+    standalone: false,
 })
 export class NovoDropdownListElement implements AfterContentInit {
   @ContentChildren(NovoItemElement)
@@ -415,7 +415,7 @@ export class NovoDropdownListElement implements AfterContentInit {
 @Component({
     selector: 'dropdown-item-header',
     template: '<ng-content></ng-content>',
-    standalone: false
+    standalone: false,
 })
 export class NovoDropDownItemHeaderElement {
   constructor() {

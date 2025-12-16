@@ -71,12 +71,12 @@ const NovoAutocompleteMixins: HasOverlayCtor & CanDisableCtor & typeof NovoAutoc
     },
     providers: [
         { provide: NOVO_OPTION_PARENT_COMPONENT, useExisting: NovoAutocompleteElement },
-        { provide: NOVO_OVERLAY_CONTAINER, useExisting: NovoAutocompleteElement }
+        { provide: NOVO_OVERLAY_CONTAINER, useExisting: NovoAutocompleteElement },
     ],
     exportAs: 'novoAutocomplete',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    standalone: false,
 })
 export class NovoAutocompleteElement
   extends NovoAutocompleteMixins

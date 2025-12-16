@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'tooltip-sizes-example',
     templateUrl: 'tooltip-sizes-example.html',
     styleUrls: ['tooltip-sizes-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class TooltipSizesExample {
   public mediumTooltip: string = 'Lorem Ipsum\n\n is simply dummy text of the printing and typesetting industry.';

@@ -3,6 +3,6 @@ import { Component } from '@angular/core';
 @Component({
     selector: 'test-cmp',
     template: ' <div bhUnless="false"></div> ',
-    standalone: false
+    standalone: false,
 })
 export class TestCmp {}

@@ -47,7 +47,7 @@ import { NovoSidenavComponent } from '../sidenav/sidenav.component';
             useExisting: NovoLayoutContainer,
         },
     ],
-    standalone: false
+    standalone: false,
 })
 export class NovoLayoutContainer implements AfterContentInit, DoCheck, OnDestroy {
   @ContentChildren(NovoSidenavComponent, {

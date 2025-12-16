@@ -10,7 +10,7 @@ import { MockMetaForDisabledForm } from '../MockMeta';
     selector: 'disabled-form-example',
     templateUrl: 'disabled-form-example.html',
     styleUrls: ['disabled-form-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class DisabledFormExample {
   public disabledControls: any;

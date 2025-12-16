@@ -4,7 +4,7 @@ import { Component, HostBinding, Input } from '@angular/core';
 @Component({
     selector: 'novo-box',
     template: ' <ng-content></ng-content> ',
-    standalone: false
+    standalone: false,
 })
 export class NovoBoxElement {
   @HostBinding('style.display')

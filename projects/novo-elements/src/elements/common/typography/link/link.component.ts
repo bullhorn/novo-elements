@@ -21,7 +21,7 @@ import { NovoBaseTextElement } from '../base/base-text.component';
     host: {
         class: 'novo-link',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoLink extends NovoBaseTextElement {
   @Input()

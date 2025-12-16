@@ -8,7 +8,7 @@ import { HighlightJS } from '../highlight.service';
     styleUrls: ['./figure-example.scss'],
     host: { class: 'figure-example' },
     encapsulation: ViewEncapsulation.None,
-    standalone: false
+    standalone: false,
 })
 export class FigureExample implements AfterViewInit {
   @Input()

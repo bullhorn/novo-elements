@@ -21,7 +21,7 @@ import { PickerResults } from 'novo-elements';
     <p class="picker-error" *ngIf="hasError">Oops! An error occured.</p>
     <p class="picker-null" *ngIf="!isLoading && !matches.length && !hasError">No results to display...</p>
   `,
-    standalone: false
+    standalone: false,
 })
 export class CustomPickerResults extends PickerResults {}
 
@@ -32,7 +32,7 @@ export class CustomPickerResults extends PickerResults {}
     selector: 'custom-picker-results-example',
     templateUrl: 'custom-picker-results-example.html',
     styleUrls: ['custom-picker-results-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class CustomPickerResultsExample {
   public placeholder: string = 'Select...';

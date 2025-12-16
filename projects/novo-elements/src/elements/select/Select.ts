@@ -174,9 +174,9 @@ let nextId = 0;
         '[class.novo-select-required]': 'required',
         '[class.novo-select-empty]': 'empty',
         '[class.novo-select-multiple]': 'multiple',
-        '[tabindex]': 'disabled ? -1 : 0'
+        '[tabindex]': 'disabled ? -1 : 0',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoSelectElement
   extends NovoSelectMixins

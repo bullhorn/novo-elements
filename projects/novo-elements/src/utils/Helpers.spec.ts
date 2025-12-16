@@ -746,7 +746,7 @@ describe('Utils: Helpers', () => {
       const data = [
         { name: 'Charlie', age: 30 },
         { name: 'Alice', age: 25 },
-        { name: 'Bob', age: 35 }
+        { name: 'Bob', age: 35 },
       ];
       const sorted = data.sort(Helpers.sortByField('name'));
       expect(sorted[0].name).toBe('Alice');
@@ -758,7 +758,7 @@ describe('Utils: Helpers', () => {
       const data = [
         { name: 'Charlie', age: 30 },
         { name: 'Alice', age: 25 },
-        { name: 'Bob', age: 35 }
+        { name: 'Bob', age: 35 },
       ];
       const sorted = data.sort(Helpers.sortByField('name', true));
       expect(sorted[0].name).toBe('Charlie');
@@ -808,7 +808,7 @@ describe('Utils: Helpers', () => {
       const data = [
         { department: 'Sales', name: 'Charlie' },
         { department: 'Sales', name: 'Alice' },
-        { department: 'IT', name: 'Bob' }
+        { department: 'IT', name: 'Bob' },
       ];
       const sorted = data.sort(Helpers.sortByField(['department', 'name']));
       expect(sorted[0].department).toBe('IT');
@@ -832,7 +832,7 @@ describe('Utils: Helpers', () => {
       const data = [
         { name: 'Charlie', value: 10 },
         { value: 20 }, // missing name
-        { name: 'Alice', value: 30 }
+        { name: 'Alice', value: 30 },
       ];
       const sorted = data.sort(Helpers.sortByField('name'));
       // Items with missing fields should be treated as empty string or 0
@@ -842,7 +842,7 @@ describe('Utils: Helpers', () => {
     it('should return 0 when items are equal', () => {
       const data = [
         { name: 'Alice', age: 30 },
-        { name: 'Alice', age: 25 }
+        { name: 'Alice', age: 25 },
       ];
       const sorted = data.sort(Helpers.sortByField('name'));
       // When equal, should maintain or compare next
@@ -956,7 +956,7 @@ describe('Utils: Helpers', () => {
       const data = [
         { name: 'John' },
         { name: 'Jane' },
-        { name: 'John' }
+        { name: 'John' },
       ];
       const filtered = data.filter(Helpers.filterByField('name', 'John'));
       expect(filtered.length).toBe(2);
@@ -967,7 +967,7 @@ describe('Utils: Helpers', () => {
       const data = [
         { age: 25 },
         { age: 30 },
-        { age: 25 }
+        { age: 25 },
       ];
       const filtered = data.filter(Helpers.filterByField('age', 25));
       expect(filtered.length).toBe(2);
@@ -979,7 +979,7 @@ describe('Utils: Helpers', () => {
         { status: 'active' },
         { status: 'inactive' },
         { status: 'active' },
-        { status: 'pending' }
+        { status: 'pending' },
       ];
       const filtered = data.filter(Helpers.filterByField('status', ['active', 'pending']));
       expect(filtered.length).toBe(3);
@@ -989,7 +989,7 @@ describe('Utils: Helpers', () => {
       const data = [
         { age: 25 },
         { age: 30 },
-        { age: 35 }
+        { age: 35 },
       ];
       const filtered = data.filter(Helpers.filterByField('age', (val) => val > 28));
       expect(filtered.length).toBe(2);
@@ -1000,7 +1000,7 @@ describe('Utils: Helpers', () => {
       const data = [
         { price: 10 },
         { price: 25 },
-        { price: 50 }
+        { price: 50 },
       ];
       const filtered = data.filter(Helpers.filterByField('price', { min: 20 }));
       expect(filtered.length).toBe(2);
@@ -1010,7 +1010,7 @@ describe('Utils: Helpers', () => {
       const data = [
         { price: 10 },
         { price: 25 },
-        { price: 50 }
+        { price: 50 },
       ];
       const filtered = data.filter(Helpers.filterByField('price', { max: 30 }));
       expect(filtered.length).toBe(2);
@@ -1020,7 +1020,7 @@ describe('Utils: Helpers', () => {
       const data = [
         { price: 10 },
         { price: 25 },
-        { price: 50 }
+        { price: 50 },
       ];
       const filtered = data.filter(Helpers.filterByField('price', { min: 15, max: 40 }));
       expect(filtered.length).toBe(1);
@@ -1031,7 +1031,7 @@ describe('Utils: Helpers', () => {
       const data = [
         { tags: ['javascript', 'nodejs'] },
         { tags: ['python'] },
-        { tags: ['javascript', 'react'] }
+        { tags: ['javascript', 'react'] },
       ];
       const filtered = data.filter(Helpers.filterByField('tags', { any: ['javascript'] }));
       expect(filtered.length).toBe(2);
@@ -1041,7 +1041,7 @@ describe('Utils: Helpers', () => {
       const data = [
         { tags: ['javascript', 'nodejs', 'express'] },
         { tags: ['javascript', 'nodejs'] },
-        { tags: ['javascript'] }
+        { tags: ['javascript'] },
       ];
       const filtered = data.filter(Helpers.filterByField('tags', { all: ['javascript', 'nodejs'] }));
       expect(filtered.length).toBe(2);
@@ -1051,7 +1051,7 @@ describe('Utils: Helpers', () => {
       const data = [
         { status: 'active' },
         { status: 'inactive' },
-        { status: 'active' }
+        { status: 'active' },
       ];
       const filtered = data.filter(Helpers.filterByField('status', { not: 'inactive' }));
       expect(filtered.length).toBe(2);
@@ -1061,7 +1061,7 @@ describe('Utils: Helpers', () => {
       const data = [
         { email: 'john@example.com' },
         { email: 'jane@test.com' },
-        { email: 'bob@example.com' }
+        { email: 'bob@example.com' },
       ];
       const filtered = data.filter(Helpers.filterByField('email', 'example'));
       expect(filtered.length).toBe(2);
@@ -1071,7 +1071,7 @@ describe('Utils: Helpers', () => {
       const data = [
         { user: { name: 'John' } },
         { user: { name: 'Jane' } },
-        { user: { name: 'John' } }
+        { user: { name: 'John' } },
       ];
       const filtered = data.filter(Helpers.filterByField('user.name', 'John'));
       expect(filtered.length).toBe(2);
@@ -1084,7 +1084,7 @@ describe('Utils: Helpers', () => {
       const data = [
         { created: date1 },
         { created: date2 },
-        { created: date3 }
+        { created: date3 },
       ];
       const filtered = data.filter(Helpers.filterByField('created', { min: date2.getTime(), max: date3.getTime() }));
       expect(filtered.length).toBe(2);
@@ -1094,7 +1094,7 @@ describe('Utils: Helpers', () => {
       const data = [
         { tag: 'javascript' },
         { tag: 'python' },
-        { tag: 'javascript' }
+        { tag: 'javascript' },
       ];
       const filtered = data.filter(Helpers.filterByField('tag', { any: ['javascript'] }));
       expect(filtered.length).toBe(2);
@@ -1103,7 +1103,7 @@ describe('Utils: Helpers', () => {
     it('should filter using custom subkeys in filter object', () => {
       const data = [
         { user: { name: 'John', active: true } },
-        { user: { name: 'Jane', active: false } }
+        { user: { name: 'Jane', active: false } },
       ];
       const filtered = data.filter(Helpers.filterByField('user', { active: true }));
       expect(filtered.length).toBe(1);
@@ -1114,7 +1114,7 @@ describe('Utils: Helpers', () => {
       const data = [
         { price: 10 },
         { price: 25 },
-        { price: 50 }
+        { price: 50 },
       ];
       const filtered = data.filter(Helpers.filterByField('price', { min: 20 }));
       expect(filtered.length).toBe(2);
@@ -1124,7 +1124,7 @@ describe('Utils: Helpers', () => {
       const data = [
         { price: 10 },
         { price: 25 },
-        { price: 50 }
+        { price: 50 },
       ];
       const filtered = data.filter(Helpers.filterByField('price', { max: 30 }));
       expect(filtered.length).toBe(2);
@@ -1327,7 +1327,7 @@ describe('Utils: Helpers', () => {
 
     it('should deep clone nested object', () => {
       const original = {
-        user: { name: 'John', address: { city: 'NYC' } }
+        user: { name: 'John', address: { city: 'NYC' } },
       };
       const cloned = Helpers.deepClone(original);
       expect(cloned).toEqual(original);
@@ -1348,7 +1348,7 @@ describe('Utils: Helpers', () => {
     it('should clone array with objects', () => {
       const original = [
         { id: 1, name: 'Alice' },
-        { id: 2, name: 'Bob' }
+        { id: 2, name: 'Bob' },
       ];
       const cloned = Helpers.deepClone(original);
       expect(cloned).toEqual(original);
@@ -1359,7 +1359,7 @@ describe('Utils: Helpers', () => {
     it('should clone object with array values', () => {
       const original = {
         items: [1, 2, 3],
-        tags: ['a', 'b']
+        tags: ['a', 'b'],
       };
       const cloned = Helpers.deepClone(original);
       expect(cloned).toEqual(original);
@@ -1371,8 +1371,8 @@ describe('Utils: Helpers', () => {
       const original = {
         users: [
           { id: 1, profile: { age: 25, tags: ['admin', 'user'] } },
-          { id: 2, profile: { age: 30, tags: ['user'] } }
-        ]
+          { id: 2, profile: { age: 30, tags: ['user'] } },
+        ],
       };
       const cloned = Helpers.deepClone(original);
       cloned.users[0].profile.age = 50;
@@ -1465,17 +1465,17 @@ describe('Utils: Helpers', () => {
         config: {
           database: {
             host: 'localhost',
-            port: 5432
-          }
-        }
+            port: 5432,
+          },
+        },
       };
       const obj2 = {
         config: {
           database: {
             port: 3306,
-            user: 'root'
-          }
-        }
+            user: 'root',
+          },
+        },
       };
       const result = Helpers.deepAssign(obj1, obj2);
       expect(result.config.database.host).toBe('localhost');
@@ -1501,13 +1501,13 @@ describe('Utils: Helpers', () => {
     it('should merge complex data structures', () => {
       const obj1 = {
         users: [
-          { id: 1, name: 'Alice', tags: ['admin'] }
-        ]
+          { id: 1, name: 'Alice', tags: ['admin'] },
+        ],
       };
       const obj2 = {
         users: [
-          { id: 1, name: 'Alice', tags: ['admin', 'user'] }
-        ]
+          { id: 1, name: 'Alice', tags: ['admin', 'user'] },
+        ],
       };
       const result = Helpers.deepAssign(obj1, obj2);
       expect(result.users[0].tags).toEqual(['admin', 'user']);
@@ -1657,10 +1657,10 @@ describe('Utils: Helpers', () => {
         level1: {
           level2: {
             level3: {
-              level4: 'deep value'
-            }
-          }
-        }
+              level4: 'deep value',
+            },
+          },
+        },
       };
       const instance = can(obj);
       expect(instance.have('level1.level2.level3.level4')).toBe('deep value');
@@ -1700,9 +1700,9 @@ describe('Utils: Helpers', () => {
         array: [1, 2, 3],
         nested: {
           deep: {
-            value: 'found'
-          }
-        }
+            value: 'found',
+          },
+        },
       };
       const instance = can(obj);
       expect(instance.have('stringValue')).toBe('text');

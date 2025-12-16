@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
     name: 'avatarType',
-    standalone: false
+    standalone: false,
 })
 export class AvatarTypePipe implements PipeTransform {
   transform(item: any, type?: any): string {

@@ -24,7 +24,7 @@ const ACE_VALUE_ACCESSOR = {
     template: '',
     styleUrls: ['./AceEditor.scss'],
     providers: [ACE_VALUE_ACCESSOR],
-    standalone: false
+    standalone: false,
 })
 export class NovoAceEditor implements ControlValueAccessor, OnInit, OnDestroy {
   @Input()

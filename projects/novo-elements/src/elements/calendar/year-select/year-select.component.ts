@@ -8,7 +8,7 @@ import { DateUtil } from 'novo-elements/utils';
     templateUrl: './year-select.component.html',
     styleUrls: ['./year-select.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    standalone: false,
 })
 export class NovoYearSelectElement implements OnInit {
   @Input()

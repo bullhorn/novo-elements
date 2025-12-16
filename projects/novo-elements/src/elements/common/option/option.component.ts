@@ -315,7 +315,7 @@ export class NovoOptionBase implements FocusableOption, AfterViewChecked, OnDest
     templateUrl: 'option.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    standalone: false,
 })
 export class NovoOption extends NovoOptionBase {
   constructor(

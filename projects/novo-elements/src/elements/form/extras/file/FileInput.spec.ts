@@ -23,7 +23,7 @@ describe('Elements: NovoFileInputElement', () => {
       declarations: [NovoFileInputElement, NovoLoadingElement, DecodeURIPipe],
       providers: [
         { provide: NovoLabelService, useClass: NovoLabelService },
-        { provide: GlobalRef, useValue: mockGlobal }
+        { provide: GlobalRef, useValue: mockGlobal },
       ],
     }).compileComponents();
     fixture = TestBed.createComponent(NovoFileInputElement);

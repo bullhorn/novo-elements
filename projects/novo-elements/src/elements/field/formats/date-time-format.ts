@@ -22,7 +22,7 @@ export const DATETIMEFORMAT_VALUE_ACCESSOR = {
         '(keydown)': '_handleKeydown($event)',
     },
     providers: [DATETIMEFORMAT_VALUE_ACCESSOR, { provide: NOVO_INPUT_FORMAT, useExisting: NovoDateTimeFormatDirective }],
-    standalone: false
+    standalone: false,
 })
 export class NovoDateTimeFormatDirective extends IMaskDirective<any> implements NovoInputFormat, OnChanges {
   valueChange: EventEmitter<any> = new EventEmitter();

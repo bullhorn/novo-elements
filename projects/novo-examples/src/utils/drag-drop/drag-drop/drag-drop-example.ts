@@ -14,7 +14,7 @@ interface DemoButtonObject {
     selector: 'drag-drop-example',
     templateUrl: 'drag-drop-example.html',
     styleUrls: ['drag-drop-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class DragDropExample implements OnChanges {
   objects: DemoButtonObject[] = [
@@ -24,7 +24,7 @@ export class DragDropExample implements OnChanges {
     { name: 'Object 4', headerText: 'Item 4', bgClass: 'bgc-grass' },
     { name: 'Object 5', headerText: 'Item 5', bgClass: 'bgc-mint' },
     { name: 'Object 6', headerText: 'Item 6', bgClass: 'bgc-aqua' },
-    { name: 'Object 7', headerText: 'Item 7', bgClass: 'bgc-ocean' }
+    { name: 'Object 7', headerText: 'Item 7', bgClass: 'bgc-ocean' },
   ];
 
   objects2: DemoButtonObject[] = [
@@ -34,7 +34,7 @@ export class DragDropExample implements OnChanges {
     { name: 'Object 14', headerText: 'Item 14', bgClass: 'bgc-grass' },
     { name: 'Object 15', headerText: 'Item 15', bgClass: 'bgc-mint' },
     { name: 'Object 16', headerText: 'Item 16', bgClass: 'bgc-aqua' },
-    { name: 'Object 17', headerText: 'Item 17', bgClass: 'bgc-ocean' }
+    { name: 'Object 17', headerText: 'Item 17', bgClass: 'bgc-ocean' },
   ];
 
   objects3: DemoButtonObject[] = [...this.objects];

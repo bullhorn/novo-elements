@@ -33,7 +33,7 @@ declare const CKEDITOR: any;
     providers: [QUICK_NOTE_VALUE_ACCESSOR],
     template: ' <div class="quick-note-wrapper" #wrapper><textarea #host></textarea> <span #results></span></div> ',
     styleUrls: ['./QuickNote.scss'],
-    standalone: false
+    standalone: false,
 })
 export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('wrapper', { static: true })

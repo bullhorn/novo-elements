@@ -20,6 +20,6 @@ import { NovoBaseTextElement } from '../base/base-text.component';
     host: {
         class: 'novo-caption',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoCaption extends NovoBaseTextElement {}

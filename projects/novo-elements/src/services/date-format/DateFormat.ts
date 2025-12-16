@@ -70,7 +70,7 @@ export class DateFormatService {
 
   getDateMask(): MaskedOptions {
     return {
-      mask: /^((\d)(\d|\/|\.|\-){0,7})?(\d){0,2}$/
+      mask: /^((\d)(\d|\/|\.|\-){0,7})?(\d){0,2}$/,
     };
   }
 
@@ -95,7 +95,7 @@ export class DateFormatService {
     const [cleanDateString, cleanFormat] = this.removeNonstandardFormatCharacters(dateString, customFormat);
     try {
       date = parse(cleanDateString, cleanFormat, new Date(), {
-        useAdditionalWeekYearTokens: false
+        useAdditionalWeekYearTokens: false,
       });
       if (isNaN(date.getTime())) {
         date = null;

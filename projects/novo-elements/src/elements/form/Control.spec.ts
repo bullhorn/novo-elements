@@ -1196,7 +1196,7 @@ class ErrorNet extends ErrorHandler {
   `,
   providers: [{
     provide: ErrorHandler,
-    useClass: ErrorNet
+    useClass: ErrorNet,
   }],
   standalone: false,
 })
@@ -1232,12 +1232,12 @@ describe('Novo Control with Templates', () => {
         providers: [NovoTemplateService, FormUtils, NovoLabelService, OptionsService, DateFormatService,
           {
             provide: FieldInteractionApi,
-            useValue: fieldInteractionApiStub
+            useValue: fieldInteractionApiStub,
           },
           {
             provide: ErrorHandler,
-            useClass: ErrorNet
-          }
+            useClass: ErrorNet,
+          },
         ],
       }).compileComponents();
       fixture = TestBed.createComponent(TestComponent2);
@@ -1335,9 +1335,9 @@ describe('Novo Control with Templates', () => {
         maskOptions: {
           mask: /1?2?3?4?5?/,
           keepCharPositions: true,
-          guide: true
+          guide: true,
         },
-        textMaskEnabled: true
+        textMaskEnabled: true,
       }));
       inputDebug = fixture.debugElement.query(By.css('input'));
     }));
@@ -1378,8 +1378,8 @@ describe('Novo Control with Templates', () => {
         label: 'Chips Picker',
         multiple: true,
         config: {
-          options: ['a', 'b', 'c']
-        }
+          options: ['a', 'b', 'c'],
+        },
       }));
       chipsDebug = fixture.debugElement.query(By.css('novo-chips'));
     }));
@@ -1485,7 +1485,7 @@ describe('Novo Control with Templates', () => {
         key: 'native-input',
         template: 'native-input',
         type: 'native-input',
-        maxlength: 20
+        maxlength: 20,
       }));
       nativeInputDebug = fixture.debugElement.query(By.css('input'));
     }));

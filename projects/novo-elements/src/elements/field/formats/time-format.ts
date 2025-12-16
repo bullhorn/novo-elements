@@ -37,7 +37,7 @@ export enum TIME_FORMATS {
         '(keydown)': '_handleKeydown($event)',
     },
     providers: [TIMEFORMAT_VALUE_ACCESSOR, { provide: NOVO_INPUT_FORMAT, useExisting: NovoTimeFormatDirective }],
-    standalone: false
+    standalone: false,
 })
 export class NovoTimeFormatDirective extends IMaskDirective<any> implements NovoInputFormat, AfterViewInit, OnChanges {
   valueChange: EventEmitter<any> = new EventEmitter();

@@ -9,7 +9,7 @@ import { NovoSelectElement } from './Select';
  */
 @Directive({
     selector: 'novo-select[extupdatefix]',
-    standalone: false
+    standalone: false,
 })
 export class NovoSelectExtUpdateFix implements OnInit {
   control = inject(NgControl);

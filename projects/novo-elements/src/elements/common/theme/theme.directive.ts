@@ -4,7 +4,7 @@ import { Directive, ElementRef, Input, OnChanges } from '@angular/core';
 
 @Directive({
     selector: '[novoTheme]',
-    standalone: false
+    standalone: false,
 })
 export class ThemeDirective implements OnChanges {
   @Input('novoTheme') theme: { [prop: string]: string };

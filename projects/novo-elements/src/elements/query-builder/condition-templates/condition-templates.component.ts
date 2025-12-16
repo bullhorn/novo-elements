@@ -4,7 +4,7 @@ import { AddressCriteriaConfig, DateCriteriaConfig } from '../query-builder.type
 @Component({
     selector: 'novo-condition-templates',
     templateUrl: './condition-templates.component.html',
-    standalone: false
+    standalone: false,
 })
 export class NovoConditionTemplatesComponent {
   @Input() addressConfig: AddressCriteriaConfig;

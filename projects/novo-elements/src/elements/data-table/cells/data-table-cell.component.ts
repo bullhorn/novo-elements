@@ -18,7 +18,7 @@ import { IDataTableColumn } from '../interfaces';
     selector: 'novo-data-table-cell',
     template: ' <ng-container *ngTemplateOutlet="template; context: { $implicit: row, col: column }"></ng-container> ',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    standalone: false,
 })
 export class NovoDataTableCell<T> extends CdkCell implements OnInit, OnDestroy {
   @HostBinding('attr.role') role = 'gridcell';

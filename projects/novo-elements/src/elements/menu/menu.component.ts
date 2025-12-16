@@ -51,7 +51,7 @@ export interface MouseLocation {
     ],
     template: '',
     providers: [{ provide: PARENT_MENU, useExisting: MenuComponent }],
-    standalone: false
+    standalone: false,
 })
 export class MenuComponent implements OnDestroy {
   @Input() public menuClass = '';

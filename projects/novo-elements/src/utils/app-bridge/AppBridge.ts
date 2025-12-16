@@ -181,7 +181,7 @@ export class AppBridge {
             this.postRobot.send(frame.source, MESSAGE_TYPES.CUSTOM_EVENT, event.data);
           });
         }
-      }
+      },
     };
 
     Object.keys(defaultMsgHandlers).forEach(msgType => {

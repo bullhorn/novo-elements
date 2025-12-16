@@ -9,7 +9,7 @@ import { MockMetaHeaders } from '../MockMeta';
     selector: 'dynamic-form-field-sets-example',
     templateUrl: 'dynamic-form-field-sets-example.html',
     styleUrls: ['dynamic-form-field-sets-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class DynamicFormFieldSetsExample {
   public fieldsets: Array<any>;

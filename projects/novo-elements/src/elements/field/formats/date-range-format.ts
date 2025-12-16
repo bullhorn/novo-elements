@@ -24,7 +24,7 @@ type DateRange = {
         class: 'novo-date-range-format',
     },
     providers: [DATERANGEFORMAT_VALUE_ACCESSOR, { provide: NOVO_INPUT_FORMAT, useExisting: NovoDateRangeFormatDirective }],
-    standalone: false
+    standalone: false,
 })
 export class NovoDateRangeFormatDirective extends IMaskDirective<any> {
   valueChange: EventEmitter<any> = new EventEmitter();

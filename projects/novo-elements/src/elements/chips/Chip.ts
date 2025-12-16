@@ -70,7 +70,7 @@ const NovoChipMixinBase: CanSizeCtor & CanColorCtor & HasTabIndexCtor & typeof N
 @Directive({
     selector: 'novo-chip-avatar, [novoChipAvatar]',
     host: { class: 'novo-chip-avatar' },
-    standalone: false
+    standalone: false,
 })
 export class NovoChipAvatar {}
 
@@ -91,7 +91,7 @@ export class NovoChipAvatar {}
         class: 'novo-chip-remove',
         '(click)': '_handleClick($event)',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoChipRemove {
   constructor(@Inject(REMOVABLE_REF) private _parentChip: IRemovable, elementRef: ElementRef<HTMLElement>) {
@@ -146,7 +146,7 @@ export class NovoChipRemove {
         '(focus)': 'focus()',
         '(blur)': '_blur()',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoChipElement extends NovoChipMixinBase implements FocusableOption, OnDestroy, CanColor, HasTabIndex {
   /** Whether the chip has focus. */

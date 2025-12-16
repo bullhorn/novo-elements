@@ -73,7 +73,7 @@ const DEFAULT_DEBOUNCE_TIME = 250;
   `,
     styleUrls: ['./Picker.scss'],
     encapsulation: ViewEncapsulation.None,
-    standalone: false
+    standalone: false,
 })
 export class NovoPickerElement implements OnInit {
   // Container for the results

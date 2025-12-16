@@ -185,7 +185,7 @@ export interface NovoAddressConfig {
     </span>
   `,
     styleUrls: ['./Address.scss'],
-    standalone: false
+    standalone: false,
 })
 export class NovoAddressElement implements ControlValueAccessor, OnInit, DoCheck {
   @Input()

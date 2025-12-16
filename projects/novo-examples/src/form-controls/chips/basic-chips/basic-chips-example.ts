@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'basic-chips-example',
     templateUrl: 'basic-chips-example.html',
     styleUrls: ['basic-chips-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class BasicChipsExample {
   staticDemo = {

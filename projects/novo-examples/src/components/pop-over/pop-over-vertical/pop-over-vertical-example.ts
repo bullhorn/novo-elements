@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
     selector: 'pop-over-vertical-example',
     templateUrl: 'pop-over-vertical-example.html',
     styleUrls: ['pop-over-vertical-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class PopOverVerticalExample {}

@@ -18,7 +18,7 @@ import { NovoDataTableRef, NOVO_DATA_TABLE_REF } from '../data-table.token';
     selector: 'novo-data-table-expand-cell',
     template: ' <i class="bhi-next data-table-icon" novo-data-table-expander="true" [class.expanded]="expanded"></i> ',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    standalone: false,
 })
 export class NovoDataTableExpandCell<T> extends CdkCell implements OnInit, OnDestroy {
   @HostBinding('attr.role')

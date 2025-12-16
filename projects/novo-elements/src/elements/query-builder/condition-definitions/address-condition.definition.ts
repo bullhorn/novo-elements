@@ -90,7 +90,7 @@ import { NovoSelectElement } from 'novo-elements/elements/select';
   `,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.Default,
-    standalone: false
+    standalone: false,
 })
 export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef implements OnDestroy {
   @ViewChildren(NovoPickerToggleElement) overlayChildren: QueryList<NovoPickerToggleElement>;
@@ -105,13 +105,13 @@ export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef im
   };
   config: InputSignal<AddressCriteriaConfig> = input();
   radiusUnits: Signal<AddressRadiusUnitsName> = computed(() =>
-    this.config()?.radiusUnits || this.defaults.radiusUnits
+    this.config()?.radiusUnits || this.defaults.radiusUnits,
   );
   radiusEnabled: Signal<boolean> = computed(() =>
-    this.config()?.radiusEnabled || this.defaults.radiusEnabled
+    this.config()?.radiusEnabled || this.defaults.radiusEnabled,
   );
   unitsLabel: Signal<string> = computed(() =>
-    this.radiusUnits() === RadiusUnits.miles ? this.labels.miles : this.labels.km
+    this.radiusUnits() === RadiusUnits.miles ? this.labels.miles : this.labels.km,
   );
 
   defaultOperator = Operator.includeAny;

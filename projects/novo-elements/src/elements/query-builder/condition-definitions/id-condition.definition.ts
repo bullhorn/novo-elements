@@ -22,7 +22,7 @@ import { Operator } from '../query-builder.types';
   `,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.Default,
-    standalone: false
+    standalone: false,
 })
 export class NovoDefaultIdConditionDef extends AbstractConditionFieldDef {
   defaultOperator = Operator.equalTo;

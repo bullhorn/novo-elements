@@ -12,7 +12,7 @@ import {
   Output,
   SimpleChanges,
   ViewChild,
-  forwardRef
+  forwardRef,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // Vendor
@@ -82,7 +82,7 @@ const DATE_VALUE_ACCESSOR = {
     </novo-overlay-template>
   `,
     styleUrls: ['./DatePickerInput.scss'],
-    standalone: false
+    standalone: false,
 })
 export class NovoDatePickerInputElement implements OnInit, OnChanges, AfterViewInit, ControlValueAccessor {
   public value: any;

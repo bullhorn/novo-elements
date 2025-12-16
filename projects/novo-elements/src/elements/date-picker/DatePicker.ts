@@ -88,7 +88,7 @@ const DATE_PICKER_VALUE_ACCESSOR = {
     </div>
   `,
     styleUrls: ['./DatePicker.scss'],
-    standalone: false
+    standalone: false,
 })
 export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
   /**

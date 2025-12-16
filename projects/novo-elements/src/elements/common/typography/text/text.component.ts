@@ -22,7 +22,7 @@ import { NovoBaseTextElement } from '../base/base-text.component';
     host: {
         class: 'novo-text',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoText extends NovoBaseTextElement {
   @HostBinding('class.text-block')

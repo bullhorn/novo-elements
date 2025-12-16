@@ -664,7 +664,7 @@ describe('NovoTimePickerElement', () => {
           meridian: expect.any(String),
           date: expect.any(Date),
           text: expect.any(String),
-        })
+        }),
       );
     });
 
@@ -886,7 +886,7 @@ describe('NovoTimePickerElement', () => {
           hours: 14,
           minutes: 30,
           meridian: 'pm',
-        })
+        }),
       );
     });
 
@@ -1005,7 +1005,7 @@ describe('NovoTimePickerElement', () => {
           meridian: 'pm',
           date: expect.any(Date),
           text: expect.any(String),
-        })
+        }),
       );
     });
 

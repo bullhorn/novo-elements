@@ -2,7 +2,7 @@ import { Directive, ElementRef, HostBinding, Input } from '@angular/core';
 
 @Directive({
     selector: '[txc]',
-    standalone: false
+    standalone: false,
 })
 export class TextColorDirective {
   @Input() txc: string;

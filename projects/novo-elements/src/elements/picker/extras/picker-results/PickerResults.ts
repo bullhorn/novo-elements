@@ -29,7 +29,7 @@ import { BasePickerResults } from '../base-picker-results/BasePickerResults';
   `,
     styleUrls: ['./PickerResults.scss'],
     encapsulation: ViewEncapsulation.None,
-    standalone: false
+    standalone: false,
 })
 export class PickerResults extends BasePickerResults {
   constructor(element: ElementRef, public labels: NovoLabelService, ref: ChangeDetectorRef) {

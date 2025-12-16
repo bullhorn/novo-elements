@@ -32,7 +32,7 @@ jest.mock('angular-imask', () => {
       registerOnChange(fn: any): void {}
 
       registerOnTouched(fn: any): void {}
-    }
+    },
   };
 });
 
@@ -57,7 +57,7 @@ describe('NovoDateTimeFormatDirective', () => {
     TestBed.configureTestingModule({
       declarations: [NovoDateTimeFormatDirective, DateFormatTestComponent],
       imports: [FormsModule, ReactiveFormsModule],
-      providers: [NovoLabelService, DateFormatService]
+      providers: [NovoLabelService, DateFormatService],
     }).compileComponents();
     fixture = TestBed.createComponent(DateFormatTestComponent);
     labelService = TestBed.inject(NovoLabelService);

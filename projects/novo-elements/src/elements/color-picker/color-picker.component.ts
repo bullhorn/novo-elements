@@ -24,7 +24,7 @@ import { Color, HSL, HSLA, HSV, HSVA, RGB, RGBA } from 'novo-elements/utils';
     styleUrls: ['./color-picker.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     preserveWhitespaces: false,
-    standalone: false
+    standalone: false,
 })
 export class NovoColorPickerComponent implements OnInit, OnChanges, OnDestroy {
   /** Pixel value for picker width */

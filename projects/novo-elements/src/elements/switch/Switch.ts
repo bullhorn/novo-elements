@@ -36,7 +36,7 @@ const SWITCH_VALUE_ACCESSOR = {
         '(keydown)': 'onKeydown($event)',
         '[class]': 'theme',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoSwitchElement implements ControlValueAccessor {
   @Input()

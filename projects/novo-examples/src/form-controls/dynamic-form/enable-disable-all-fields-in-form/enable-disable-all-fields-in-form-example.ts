@@ -12,7 +12,7 @@ import { MockMetaForForm } from '../MockMeta';
     selector: 'enable-disable-all-fields-in-form-example',
     templateUrl: 'enable-disable-all-fields-in-form-example.html',
     styleUrls: ['enable-disable-all-fields-in-form-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class EnableDisableAllFieldsInFormExample {
   public controls: any;

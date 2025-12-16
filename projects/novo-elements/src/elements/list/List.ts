@@ -11,7 +11,7 @@ import { Component, ContentChild, ElementRef, Input, OnInit } from '@angular/cor
     },
     template: ' <ng-content></ng-content> ',
     styleUrls: ['./List.scss'],
-    standalone: false
+    standalone: false,
 })
 export class NovoListElement {
   @Input()
@@ -29,7 +29,7 @@ export class NovoListElement {
     host: {
         class: 'novo-item-avatar',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoItemAvatarElement {
   @Input()
@@ -45,7 +45,7 @@ export class NovoItemAvatarElement {
     host: {
         class: 'novo-item-title',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoItemTitleElement {}
 
@@ -62,7 +62,7 @@ export class NovoItemTitleElement {}
     host: {
         class: 'novo-item-header',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoItemHeaderElement {}
 
@@ -73,7 +73,7 @@ export class NovoItemHeaderElement {}
     host: {
         class: 'novo-item-header-end',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoItemDateElement {}
 
@@ -86,7 +86,7 @@ export class NovoItemDateElement {}
     },
     template: ' <ng-content></ng-content> ',
     styleUrls: ['./list-item-content.scss'],
-    standalone: false
+    standalone: false,
 })
 export class NovoItemContentElement {
   @Input()
@@ -100,7 +100,7 @@ export class NovoItemContentElement {
     host: {
         class: 'novo-item-end',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoItemEndElement {}
 
@@ -118,7 +118,7 @@ export class NovoItemEndElement {}
     host: {
         class: 'novo-list-item',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoListItemElement implements OnInit {
   avatar: boolean = false;

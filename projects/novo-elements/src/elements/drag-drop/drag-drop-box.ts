@@ -22,7 +22,7 @@ const SCROLL_DRAGGABLE_EVENT_AMT = 10;
     host: {
         class: 'novo-drag-container',
         '[class.dragging]': '!!pickedUp',
-    }
+    },
 })
 export class NovoDragBoxParent<T> implements AfterViewInit, OnDestroy {
 
@@ -98,7 +98,7 @@ export class NovoDragBoxParent<T> implements AfterViewInit, OnDestroy {
     private registerChild(element: HTMLElement, index: number) {
         const trackedItem: Partial<NovoDragItem<T>> = {
             item: this.items[index],
-            element
+            element,
         };
         if (this.dragFilter && !this.dragFilter(this.items[index])) {
             element.draggable = false;
@@ -107,7 +107,7 @@ export class NovoDragBoxParent<T> implements AfterViewInit, OnDestroy {
             const listeners = [
                 this.renderer.listen(element, 'dragstart', this.onDragStart.bind(this)),
                 this.renderer.listen(element, 'drop', this.onDragFinish.bind(this)),
-                this.renderer.listen(element, 'dragend', this.onDragStop.bind(this))
+                this.renderer.listen(element, 'dragend', this.onDragStop.bind(this)),
             ];
             element.draggable = true;
             trackedItem.removeListeners = () => listeners.forEach(cb => cb());
@@ -194,7 +194,7 @@ export class NovoDragBoxParent<T> implements AfterViewInit, OnDestroy {
         this.novoDragDropFinish.emit({
             draggedItem,
             allItems: this.itemsReordered,
-            event
+            event,
         });
 
     }

@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'custom-drop-down-example',
     templateUrl: 'custom-drop-down-example.html',
     styleUrls: ['custom-drop-down-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class CustomDropDownExample {
   public clickMe(event?: string) {

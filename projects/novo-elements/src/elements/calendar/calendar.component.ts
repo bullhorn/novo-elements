@@ -20,7 +20,7 @@ import { DefaultDateSelectionStrategy, MultiDateSelectionStrategy, RangeSelectio
     selector: 'novo-calendar',
     templateUrl: './calendar.component.html',
     styleUrls: ['./calendar.component.scss'],
-    standalone: false
+    standalone: false,
 })
 export class NovoCalendarElement implements OnInit {
   @Input()

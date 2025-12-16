@@ -9,7 +9,7 @@ import { NovoHorizontalStepper, NovoStep } from 'novo-elements';
     selector: 'stepper-horizontal-example',
     templateUrl: 'stepper-horizontal-example.html',
     styleUrls: ['stepper-horizontal-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class StepperHorizontalExample implements OnInit {
   isLinear = true;

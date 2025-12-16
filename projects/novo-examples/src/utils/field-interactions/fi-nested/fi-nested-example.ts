@@ -9,7 +9,7 @@ import { FieldInteractionApi, FormUtils, NovoControlConfig, NovoFormGroup, Radio
     selector: 'fi-nested-example',
     templateUrl: 'fi-nested-example.html',
     styleUrls: ['fi-nested-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class FiNestedExample {
   public form: NovoFormGroup;
