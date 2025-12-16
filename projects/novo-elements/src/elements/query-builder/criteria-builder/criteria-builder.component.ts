@@ -243,7 +243,7 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
   onFieldSelect(field) {
     this.scopedFieldPicker().dropdown.closePanel();
     const condition = { field: field.name, operator: null, scope: field.scope, value: null, entity: field.entity };
-    const group = this.conditionGroups().find((group) => group.scope === field.scope);
+    const group = this.conditionGroups().find((conditionGroup) => conditionGroup.scope === field.scope);
     if (group) {
       group.addCondition(condition);
     } else {

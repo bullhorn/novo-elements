@@ -568,7 +568,7 @@ describe('NovoDatePickerElement', () => {
 
   describe('eventData', () => {
     it('should return event data object', () => {
-      labels.formatDateWithFormat.mockImplementation((date, format) => {
+      labels.formatDateWithFormat.mockImplementation((dateArg, format) => {
         if (format.month === 'long') {
           return 'January';
         }

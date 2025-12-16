@@ -298,8 +298,8 @@ describe('AppBridge', () => {
 
     // Should this behavior change? Won't bother testing it for other HTTP actions
     it('should reject with null when postrobot transmission to parent fails', async () => {
-        const err = new Error('Something about postMessage isn\'t working');
-        spyOn(frame2Robot, 'sendToParent').and.returnValue(Promise.reject(err));
+        const error = new Error('Something about postMessage isn\'t working');
+        spyOn(frame2Robot, 'sendToParent').and.returnValue(Promise.reject(error));
         try {
             await frame2Bridge.httpGET('snack');
             fail('expected promise rejection');

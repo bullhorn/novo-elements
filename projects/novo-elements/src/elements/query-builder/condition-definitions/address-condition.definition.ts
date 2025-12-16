@@ -184,8 +184,8 @@ export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef im
     const updated: AddressData[] = Array.isArray(current) ? [...current, valueToAdd] : [valueToAdd];
     formGroup.get('value').setValue(this.updateRadiusInValues(formGroup, updated));
 
-    this.inputChildren.forEach(input => {
-      input.nativeElement.value = '';
+    this.inputChildren.forEach(inputChild => {
+      inputChild.nativeElement.value = '';
     })
     this.getCurrentInput(viewIndex)?.nativeElement.focus();
     this.closePlacesList(viewIndex);

@@ -119,11 +119,11 @@ export class DateFormatService {
     return [date, dateString, isInvalidDate];
   }
 
-  private dateFormatToImaskPattern(format: string): string {
+  private dateFormatToImaskPattern(formatString: string): string {
     const partsReg = /(\w)\1+|([\.\\/-])/g;
     let output: string = '';
     let match: RegExpExecArray;
-    while ((match = partsReg.exec(format)) != null) {
+    while ((match = partsReg.exec(formatString)) != null) {
       if (match[1]) {
         const matchLow = match[1].toLowerCase();
         if (matchLow === 'y') {
@@ -141,19 +141,19 @@ export class DateFormatService {
   /**
    * Certain date format characters are considered nonstandard. We can still use them, but remove them for date parsing to avoid errors
    * @param dateString
-   * @param format
+   * @param formatString
    * @returns date string and format in array, both having had their
    */
-  private removeNonstandardFormatCharacters(dateString: string, format: string): [string, string] {
+  private removeNonstandardFormatCharacters(dateString: string, formatString: string): [string, string] {
     const bannedChars = /[iIRoPp]+/;
     // remove quotes
-    format = format.replace(/['"]/g, '');
+    formatString = formatString.replace(/['"]/g, '');
     let match: RegExpExecArray = null;
-    while ((match = bannedChars.exec(format)) != null) {
-      format = format.substring(0, match.index) + format.substring(match.index + match[0].length);
+    while ((match = bannedChars.exec(formatString)) != null) {
+      formatString = formatString.substring(0, match.index) + formatString.substring(match.index + match[0].length);
       dateString = dateString.substring(0, match.index) + dateString.substring(match.index + match[0].length);
     }
-    return [dateString, format];
+    return [dateString, formatString];
   }
 
   parseDateString(dateString: string): [Date, string, boolean] {
@@ -289,10 +289,10 @@ export class DateFormatService {
     return `${hours}:${minutes}`;
   }
 
-  isValidDatePart(value: string, format: string): boolean {
+  isValidDatePart(value: string, formatString: string): boolean {
     const datePart = parseInt(value, 10);
-    return ((format.includes('m') && (datePart >= 2 || value.length === 2)) ||
-      (format.includes('d') && (datePart >= 4 || value.length === 2)) ||
-      (format.includes('y') && datePart >= 1000));
+    return ((formatString.includes('m') && (datePart >= 2 || value.length === 2)) ||
+      (formatString.includes('d') && (datePart >= 4 || value.length === 2)) ||
+      (formatString.includes('y') && datePart >= 1000));
   }
 }

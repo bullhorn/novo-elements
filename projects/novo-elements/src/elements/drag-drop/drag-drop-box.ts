@@ -185,7 +185,7 @@ export class NovoDragBoxParent<T> implements AfterViewInit, OnDestroy {
         }
         const draggedItem = this.trackedItems.find(item => item.element === this.pickedUp)?.item;
         this.trackedItems = Array.prototype.map.call(this.element.children, child => {
-            const item = this.trackedItems.find(item => item.element === child);
+            const item = this.trackedItems.find(trackedItem => trackedItem.element === child);
             if (!item) {
                 throw new Error('DragDrop: Error - could not reassociate an item post-drag');
             }
