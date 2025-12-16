@@ -194,6 +194,7 @@ export interface IDataTableService<T> {
   ): Observable<{ results: T[]; total: number }>;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface IDataTableCell<T> {}
 
 /**

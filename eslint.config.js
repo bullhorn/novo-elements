@@ -17,7 +17,7 @@ module.exports = [
     },
     plugins: {
       '@typescript-eslint': tsPlugin,
-      'unused-imports': unusedImportsPlugin
+      'unused-imports': unusedImportsPlugin,
     },
     rules: {
       'unused-imports/no-unused-imports': 'error',
@@ -26,6 +26,7 @@ module.exports = [
       'no-fallthrough': 'error',
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/unified-signatures': 'error',
+      '@typescript-eslint/no-empty-interface': 'error',
       '@typescript-eslint/no-misused-new': 'error',
       '@typescript-eslint/no-namespace': 'error',
       '@typescript-eslint/no-non-null-assertion': 'error',
