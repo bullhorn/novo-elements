@@ -1694,9 +1694,9 @@ describe('Utils: Helpers', () => {
 
     it('should work with mixed types in nested structure', () => {
       const obj = {
-        string: 'text',
+        stringValue: 'text',
         number: 42,
-        boolean: true,
+        booleanValue: true,
         array: [1, 2, 3],
         nested: {
           deep: {
@@ -1705,9 +1705,9 @@ describe('Utils: Helpers', () => {
         }
       };
       const instance = can(obj);
-      expect(instance.have('string')).toBe('text');
+      expect(instance.have('stringValue')).toBe('text');
       expect(instance.have('number')).toBe(42);
-      expect(instance.have('boolean')).toBe(true);
+      expect(instance.have('booleanValue')).toBe(true);
       expect(instance.have('array')).toEqual([1, 2, 3]);
       expect(instance.have('nested.deep.value')).toBe('found');
     });

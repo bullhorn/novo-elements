@@ -1243,7 +1243,7 @@ describe('Novo Control with Templates', () => {
       fixture = TestBed.createComponent(TestComponent2);
       testComponent = fixture.debugElement.componentInstance;
     } catch(err) {
-      debugger;
+      console.error(err);
     }
   });
 

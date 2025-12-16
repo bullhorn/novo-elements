@@ -39,6 +39,13 @@ module.exports = [
       'no-redeclare': 'error',
       'no-multiple-empty-lines': 'error',
       'no-new-wrappers': 'error',
+      'no-invalid-this': 'error',
+      'no-fallthrough': 'error',
+      'no-eval': 'error',
+      'no-debugger': 'error',
+      'no-caller': 'error',
+      'id-denylist': ['error', 'Number', 'String', 'string', 'Boolean', 'boolean', 'Undefined', 'undefined'],
+      'id-match': 'error',
     }
   }
 ];
