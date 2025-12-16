@@ -612,7 +612,7 @@ export class NovoSelectElement
     // Simply falling back to an empty string if the display value is falsy does not work properly.
     // The display value can also be the number zero and shouldn't fall back to an empty string.
     let displayValue = toDisplay != null ? toDisplay : '';
-    if (displayValue != '') {
+    if (displayValue != '') { // eslint-disable-line
       this._lingeringDisplayValue = displayValue;
     } else if (this._lingeringDisplayValue) {
       displayValue = this._lingeringDisplayValue;
@@ -824,7 +824,7 @@ export class NovoSelectElement
         this._keyManager.setFirstItemActive();
       } else {
         const options = this._getOptions();
-        const index = options.findIndex(option => option.value == this._value)
+        const index = options.findIndex(option => option.value == this._value) // eslint-disable-line
         this._keyManager.setActiveItem(index);
       }
     }

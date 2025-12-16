@@ -46,6 +46,7 @@ module.exports = [
       'no-caller': 'error',
       'id-denylist': ['error', 'Number', 'String', 'string', 'Boolean', 'boolean', 'Undefined', 'undefined'],
       'id-match': 'error',
+      eqeqeq: ['error', 'smart'],
     }
   }
 ];
