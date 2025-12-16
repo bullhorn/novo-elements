@@ -160,8 +160,6 @@ export class DateFormatService {
     let dateFormat: string = this.labels.dateFormatString();
     const dateFormatRegex = /(\w+)[\/|\.|\-](\w+)[\/|\.|\-](\w+)/gi;
     const dateValueRegex = /(\d+)[\/|\.|\-](\d+)[\/|\.|\-](\d+)/gi;
-    let dateFormatTokens: Array<string>;
-    let dateValueTokens: Array<string>;
     let year: number;
     let month: number;
     let day: number;
@@ -173,8 +171,8 @@ export class DateFormatService {
     } else {
       dateFormat = dateFormat.toLowerCase();
     }
-    dateFormatTokens = dateFormatRegex.exec(dateFormat);
-    dateValueTokens = dateValueRegex.exec(dateString);
+    const dateFormatTokens: Array<string> = dateFormatRegex.exec(dateFormat);
+    const dateValueTokens: Array<string> = dateValueRegex.exec(dateString);
     if (dateFormatTokens && dateFormatTokens.length === 4 && dateValueTokens && dateValueTokens.length === 4) {
       for (let i = 1; i < 4; i++) {
         if (dateFormatTokens[i].includes('m')) {
@@ -280,6 +278,7 @@ export class DateFormatService {
     const pmFormat = this.labels.timeFormatPM.toUpperCase();
 
     const [time, modifier] = time12h.split(' ');
+    // eslint-disable-next-line prefer-const
     let [hours, minutes] = time.split(':');
     if (hours === '12') {
       hours = '00';

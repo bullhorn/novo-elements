@@ -121,7 +121,7 @@ export class NovoDragBoxParent<T> implements AfterViewInit, OnDestroy {
         }
         const addedNodes = new Set<HTMLElement>();
         const removedNodes = new Set<HTMLElement>();
-        for (let mutation of mutations) {
+        for (const mutation of mutations) {
             mutation.addedNodes.forEach((a: HTMLElement) => {
                 if (!removedNodes.delete(a)) {
                     addedNodes.add(a);

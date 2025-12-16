@@ -22,7 +22,7 @@ const mockAdaptiveQuery: AdaptiveQuery = {
 };
 
 describe('Service: DataTableState', () => {
-  let service = new DataTableState();
+  const service = new DataTableState();
 
   describe('Method: reset', () => {
     beforeEach(() => {

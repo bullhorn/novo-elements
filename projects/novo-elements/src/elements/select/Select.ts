@@ -832,7 +832,7 @@ export class NovoSelectElement
 
   /** Calculates the height of the select's options. */
   private _getItemHeight(): number {
-    let [first] = this._getOptions();
+    const [first] = this._getOptions();
     if (first) {
       return first._getHostElement().offsetHeight;
     }

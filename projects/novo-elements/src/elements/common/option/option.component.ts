@@ -341,8 +341,8 @@ export function _countGroupLabelsBeforeOption(
   optionGroups: QueryList<NovoOptgroup>,
 ): number {
   if (optionGroups.length) {
-    let optionsArray = options.toArray();
-    let groups = optionGroups.toArray();
+    const optionsArray = options.toArray();
+    const groups = optionGroups.toArray();
     let groupCounter = 0;
 
     for (let i = 0; i < optionIndex + 1; i++) {

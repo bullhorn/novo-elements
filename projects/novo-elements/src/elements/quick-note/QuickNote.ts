@@ -26,7 +26,7 @@ const QUICK_NOTE_VALUE_ACCESSOR = {
   multi: true,
 };
 
-declare var CKEDITOR: any;
+declare const CKEDITOR: any;
 
 @Component({
     selector: 'novo-quick-note',

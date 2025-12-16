@@ -80,7 +80,7 @@ describe('Elements: NovoAutocompleteElement', () => {
 
   describe('Option expansion', () => {
 
-    let options = [
+    const options = [
       { id: '1', label: 'One' },
       { id: '2', label: 'Two' }
     ];

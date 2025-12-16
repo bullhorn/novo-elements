@@ -344,7 +344,7 @@ export class NovoDropdownElement extends NovoDropdownMixins implements OnInit, A
 
   /** Calculates the height of the select's options. */
   private _getItemHeight(): number {
-    let [first] = this.options;
+    const [first] = this.options;
     if (first) {
       return first._getHostElement().offsetHeight;
     }

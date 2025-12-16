@@ -167,7 +167,7 @@ export class NovoMonthViewElement implements OnInit {
 
   /** Returns whether a cell should be marked as an overlay. */
   _hasOverlayType(value: DateLike) {
-    let overlay = this.overlays && this.overlays.find((o) => DateUtil.isSameDay(o.date, value));
+    const overlay = this.overlays && this.overlays.find((o) => DateUtil.isSameDay(o.date, value));
     return overlay ? overlay.type : null;
   }
 

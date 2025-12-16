@@ -24,7 +24,9 @@ module.exports = [
       'no-console': ['warn', { allow: ['warn', 'error', 'info'] }],
       '@typescript-eslint/no-non-null-assertion': 'warn',
       'no-fallthrough': 'error',
-      '@typescript-eslint/no-explicit-any': 'off'
+      '@typescript-eslint/no-explicit-any': 'off',
+      'no-var': 'error',
+      'prefer-const': 'error',
     }
   }
 ];

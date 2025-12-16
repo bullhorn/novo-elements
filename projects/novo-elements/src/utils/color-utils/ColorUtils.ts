@@ -219,11 +219,10 @@ function rgbToHsv({ r, g, b }: RGB): HSV {
   const max = Math.max(r, g, b);
   const min = Math.min(r, g, b);
   let h;
-  let s;
   const v = max;
 
   const d = max - min;
-  s = max === 0 ? 0 : d / max;
+  const s = max === 0 ? 0 : d / max;
 
   if (max === min) {
     h = 0; // achromatic

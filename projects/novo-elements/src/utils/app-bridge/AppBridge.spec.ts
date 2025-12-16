@@ -8,7 +8,7 @@ import { TestBed} from '@angular/core/testing';
 // Crucially, this is similar to the extensive functionality/references of the Window object,
 // which we never want to send through PostRobot.
 function makeSelfReferentialObject() {
-    let circularObject: any = {};
+    const circularObject: any = {};
     circularObject.selfRef = circularObject;
     return circularObject;
 }
@@ -159,7 +159,7 @@ describe('AppBridge', () => {
         handleFn = jest.fn();
 
         // setup handlers
-        for (let handlerKey of (Object.values(AppBridgeHandler)) as AppBridgeHandler[]) {
+        for (const handlerKey of (Object.values(AppBridgeHandler)) as AppBridgeHandler[]) {
             hostBridge.handle(handlerKey, (event, cb) => {
                 try {
                     return cb(handleFn(handlerKey, event));
@@ -250,7 +250,7 @@ describe('AppBridge', () => {
             update: [{}]
         };
         function expectFalseOnAllCalls(failureImplementation: (() => any) | 'enableGenericSendError', failTerm: string) {
-            for (let cmd of Object.keys(cmdFunctionsWithArgs)) {
+            for (const cmd of Object.keys(cmdFunctionsWithArgs)) {
                 it(`should return false when ${cmd}() receives ${failTerm}`, async () => {
                     if (failureImplementation === 'enableGenericSendError') {
                         frame1Robot.enableGenericSendError = true;
@@ -487,8 +487,8 @@ describe('AppBridge', () => {
     });
 
     it('should fire custom events to registered neighbor frames', async () => {
-        let extraNeighborRobot = new MockPostrobot('localhost:888', hostRobot);
-        let extraNeighborBridge = new AppBridge('Jest neighbor frame', extraNeighborRobot);
+        const extraNeighborRobot = new MockPostrobot('localhost:888', hostRobot);
+        const extraNeighborBridge = new AppBridge('Jest neighbor frame', extraNeighborRobot);
         let receivedObj: any;
         extraNeighborBridge.addEventListener('custom', obj => {
             receivedObj = obj;

@@ -9,7 +9,7 @@ const CKEDITOR_CONTROL_VALUE_ACCESSOR = {
   multi: true,
 };
 
-declare var CKEDITOR: any;
+declare const CKEDITOR: any;
 declare global {
   interface Window {
     CKEDITOR: any;
