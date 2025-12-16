@@ -118,7 +118,9 @@ export class JustCriteriaExample implements OnInit {
   ];
 
   editTypeFn = (field: any) => {
-    if (field.optionsType === 'Brewery') return 'custom';
+    if (field.optionsType === 'Brewery') {
+      return 'custom';
+    }
     if (field.dataSpecialization === 'DATE') {
       return field.dataSpecialization;
     }

@@ -30,7 +30,9 @@ export class NovoAvatarElement implements OnInit {
 
   @HostBinding('style.backgroundImage')
   get background(): string {
-    if (!this.image && !this.source.profileImage) return;
+    if (!this.image && !this.source.profileImage) {
+      return;
+    }
     return `url(${this.image || this.source.profileImage})`;
   }
 

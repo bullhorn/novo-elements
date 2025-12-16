@@ -271,13 +271,17 @@ export class NovoAutocompleteElement
    */
   private _setValueAndClose(event: NovoOptionSelectionChange | null): void {
     if (event && event.source) {
-      if (!this.multiple) this._clearPreviousSelectedOption(event.source);
+      if (!this.multiple) {
+        this._clearPreviousSelectedOption(event.source);
+      }
       this._setTriggerValue(event.source);
       this._emitSelectEvent(event.source);
       this._watchSelectionEvents();
     }
 
-    if (!this.multiple) this.closePanel();
+    if (!this.multiple) {
+      this.closePanel();
+    }
   }
 
   private _watchSelectionEvents() {

@@ -88,7 +88,9 @@ export class NovoDateFormatDirective extends IMaskDirective<any> {
   }
 
   formatValue(value: any, options?: DateParseOptions): string {
-    if (value == null) return '';
+    if (value == null) {
+      return '';
+    }
     const dateFormat = this.labels.dateFormatString().toUpperCase();
     const date = DateUtil.parse(value, options);
     if (isValid(date)) {

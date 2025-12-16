@@ -70,7 +70,9 @@ export class NovoDateRangeFormatDirective extends IMaskDirective<any> {
   }
 
   formatAsIso(value: DateRange): string {
-    if (!value) return '';
+    if (!value) {
+      return '';
+    }
     const { startDate, endDate } = value;
     if (startDate && isValid(startDate) && endDate && isValid(endDate)) {
       const startIso = startDate.toISOString().slice(0, 10);
@@ -81,7 +83,9 @@ export class NovoDateRangeFormatDirective extends IMaskDirective<any> {
   }
 
   formatValue(value: DateRange): string {
-    if (!value) return '';
+    if (!value) {
+      return '';
+    }
     const { startDate, endDate } = value;
     return `${this.formatDate(startDate)} - ${this.formatDate(endDate)}`;
   }

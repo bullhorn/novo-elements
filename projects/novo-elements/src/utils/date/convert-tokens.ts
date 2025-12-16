@@ -94,7 +94,7 @@ export function convertTokens(format: string): string {
             acc.textBuffer = []
           }
 
-          if (v2token) acc.formatBuffer.push(v2token)
+          if (v2token) acc.formatBuffer.push(v2token) // eslint-disable-line
 
           return acc
         },

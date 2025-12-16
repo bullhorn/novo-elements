@@ -569,8 +569,12 @@ describe('NovoDatePickerElement', () => {
   describe('eventData', () => {
     it('should return event data object', () => {
       labels.formatDateWithFormat.mockImplementation((date, format) => {
-        if (format.month === 'long') return 'January';
-        if (format.weekday === 'long') return 'Sunday';
+        if (format.month === 'long') {
+          return 'January';
+        }
+        if (format.weekday === 'long') {
+          return 'Sunday';
+        }
         return '15';
       });
 

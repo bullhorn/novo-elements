@@ -213,7 +213,9 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
 
   getField() {
     const field = this.parentForm?.value?.field;
-    if (!field) return null;
+    if (!field) {
+      return null;
+    }
     return this.fieldConfig.find(field);
   }
 
@@ -255,7 +257,9 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
   }
 
   private findDefinitionForField(field) {
-    if (!field) return;
+    if (!field) {
+      return;
+    }
     const editType = this.editTypeFn()(field);
     // Don't look at dataSpecialization it is no good, this misses currency, and percent
     const { name } = field;

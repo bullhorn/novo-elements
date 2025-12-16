@@ -21,7 +21,9 @@ export class SingleFieldCriteriaExample implements OnInit {
   mockMetaFields = MockMeta.fields;
 
   editTypeFn = (field: any) => {
-    if (field.optionsType === 'Brewery') return 'custom';
+    if (field.optionsType === 'Brewery') {
+      return 'custom';
+    }
     return (field.inputType || field.dataType || field.type).toLowerCase();
   };
 

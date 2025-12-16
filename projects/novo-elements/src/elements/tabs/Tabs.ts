@@ -172,7 +172,9 @@ export class NovoTabElement {
     const tablink = el.nativeElement.querySelector('.novo-tab-link');
     if (tablink) {
       for (let i = 0; i < tablink.childNodes.length; i++) {
-        if (tablink.childNodes[i].nodeType !== Node.TEXT_NODE) this.onlyText = false;
+        if (tablink.childNodes[i].nodeType !== Node.TEXT_NODE) {
+          this.onlyText = false;
+        }
       }
     }
   }

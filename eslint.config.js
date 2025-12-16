@@ -49,6 +49,7 @@ module.exports = [
       eqeqeq: ['error', 'smart'],
       'eol-last': 'error',
       'default-case': 'error',
+      curly: 'error',
     }
   }
 ];

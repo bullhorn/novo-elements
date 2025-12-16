@@ -214,7 +214,9 @@ export class NovoDateTimeFormatDirective extends IMaskDirective<any> implements 
   }
 
   formatValue(value: Date | string, options?: DateParseOptions): string {
-    if (value == null) return '';
+    if (value == null) {
+      return '';
+    }
     // Use `parse` because it keeps dates in locale
     const date = DateUtil.parse(value, options);
     if (isValid(date)) {
