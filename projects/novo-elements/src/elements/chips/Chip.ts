@@ -367,6 +367,9 @@ export class NovoChipElement extends NovoChipMixinBase implements FocusableOptio
         // Always prevent space from scrolling the page since the list has focus
         event.preventDefault();
         break;
+      default:
+        // No default action for other keys
+        break;
     }
   }
 

@@ -48,6 +48,7 @@ module.exports = [
       'id-match': 'error',
       eqeqeq: ['error', 'smart'],
       'eol-last': 'error',
+      'default-case': 'error',
     }
   }
 ];

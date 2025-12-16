@@ -146,6 +146,9 @@ function rgbToHsl({ r, g, b }: RGB): HSL {
       case b:
         h = (r - g) / d + 4;
         break;
+      default:
+        // max is always one of r, g, or b; this should never be reached
+        break;
     }
     h /= 6;
   }
@@ -239,6 +242,9 @@ function rgbToHsv({ r, g, b }: RGB): HSV {
       case b:
         h = (r - g) / d + 4;
         break;
+      default:
+        // max is always one of r, g, or b; this should never be reached
+        break;
     }
     h /= 6;
   }
@@ -286,6 +292,9 @@ function hsvToRgb({ h, s, v }: HSV): RGB {
       break;
     case 5:
       (r = v), (g = p), (b = q);
+      break;
+    default:
+      // i % 6 is always 0-5; this should never be reached
       break;
   }
 
