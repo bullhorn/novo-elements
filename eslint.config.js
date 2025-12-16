@@ -27,6 +27,9 @@ module.exports = [
       '@typescript-eslint/no-explicit-any': 'off',
       'no-var': 'error',
       'prefer-const': 'error',
+      'use-isnan': 'error',
+      'spaced-comment': ['error', 'always', { markers: ['/'] }],
+      radix: 'error',
     }
   }
 ];

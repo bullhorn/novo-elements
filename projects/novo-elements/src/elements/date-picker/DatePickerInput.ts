@@ -273,7 +273,7 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, AfterViewI
   }
 
   _handleOverlayClickout(): void {
-    this.handleInvalidDate(/*fromPanelClose:*/true);
+    this.handleInvalidDate(/* fromPanelClose: */true);
     this.blurEvent.emit();
   }
 
