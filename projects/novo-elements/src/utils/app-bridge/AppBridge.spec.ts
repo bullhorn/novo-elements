@@ -96,14 +96,14 @@ describe('MockPostrobot', () => {
     let mockPostRobot1: MockPostrobot;
     let mockPostRobot2: MockPostrobot;
     let putReceive: any;
-    
+
     beforeEach(() => {
         complexObject = makeSelfReferentialObject();
         mockPostRobot1 = new MockPostrobot('localhost:1');
         mockPostRobot2 = new MockPostrobot('localhost:2', mockPostRobot1);
         mockPostRobot1.on('httpPUT', obj => putReceive = obj);
     });
-    
+
     it('accepts normal json-like messages', async () => {
         const testObj = { a: [ 1, 2, 3], str: 'test' };
         await mockPostRobot2.send(mockPostRobot1.mockSource, 'httpPUT', testObj);
@@ -212,7 +212,7 @@ describe('AppBridge', () => {
             await frame1Bridge.refresh();
             expect(handleFn).toHaveBeenCalledWith(AppBridgeHandler.REFRESH, jasmine.anything());
         });
-    
+
         it('pins a window', async () => {
             handleFn.mockReturnValue(true);
             await frame1Bridge.pin();
@@ -224,7 +224,7 @@ describe('AppBridge', () => {
             await frame1Bridge.close();
             expect(handleFn).toHaveBeenCalledWith(AppBridgeHandler.CLOSE, jasmine.objectContaining({ id: frame1Bridge.id, windowName: 'terry' }));
         });
-    
+
         it('updates app title', async () => {
             handleFn.mockReturnValue(true);
             await frame1Bridge.update({

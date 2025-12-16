@@ -32,6 +32,9 @@ module.exports = [
       radix: 'error',
       'quotes': ['error', 'single', { avoidEscape: true }],
       'one-var': ['error', 'never'],
+      'no-unused-labels': 'error',
+      'no-undef-init': 'error',
+      'no-trailing-spaces': 'error',
     }
   }
 ];

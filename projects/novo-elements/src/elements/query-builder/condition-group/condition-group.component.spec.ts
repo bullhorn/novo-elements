@@ -30,7 +30,7 @@ describe('ConditionGroupComponent', () => {
     fixture = TestBed.createComponent(ConditionGroupComponent);
     component = fixture.debugElement.componentInstance;
   });
-  
+
   it('should initialize correctly', () => {
     expect(component).toBeDefined();
   });
@@ -56,10 +56,10 @@ describe('ConditionGroupComponent', () => {
       const mockParentForm = {
         value: {
           '$and': [
-            { 
-              scope: 'testScope', 
+            {
+              scope: 'testScope',
               entity: 'testEntity',
-              field: 'testField' 
+              field: 'testField'
             }
           ]
         }
@@ -166,7 +166,7 @@ describe('ConditionGroupComponent', () => {
     it('should create and add new condition to FormArray', () => {
       const mockFormArray = { push: jest.fn(), value: [] };
       Object.defineProperty(component, 'root', { get: () => mockFormArray, configurable: true });
-      
+
       const mockFormGroup = {} as any;
       jest.spyOn(component, 'newCondition').mockReturnValue(mockFormGroup);
       jest.spyOn(component['cdr'], 'markForCheck').mockImplementation();
@@ -194,7 +194,7 @@ describe('ConditionGroupComponent', () => {
         get: () => mockFormArray,
         configurable: true
       });
-      
+
       jest.spyOn(component, 'cantRemoveRow').mockReturnValue(false);
       jest.spyOn(component.qbs as any, 'scopes').mockReturnValue(['primaryScope']);
 
@@ -212,7 +212,7 @@ describe('ConditionGroupComponent', () => {
         get: () => mockFormArray,
         configurable: true
       });
-      
+
       jest.spyOn(component, 'cantRemoveRow').mockReturnValue(true);
       jest.spyOn(component.qbs as any, 'scopes').mockReturnValue(['primaryScope']);
 
@@ -229,7 +229,7 @@ describe('ConditionGroupComponent', () => {
         get: () => mockFormArray,
         configurable: true
       });
-      
+
       jest.spyOn(component, 'cantRemoveRow').mockReturnValue(false);
       jest.spyOn(component.qbs as any, 'scopes').mockReturnValue(['primaryScope']);
       component.scope = 'primaryScope';
@@ -275,7 +275,7 @@ describe('ConditionGroupComponent', () => {
       const mockParentForm = {
         get: jest.fn().mockReturnValue(mockFormArray)
       };
-      
+
       component.parentForm = mockParentForm as any;
       component.controlName = '$and';
 

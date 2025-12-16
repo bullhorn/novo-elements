@@ -323,19 +323,19 @@ describe('Elements: NovoSelectElement', () => {
       fixture.componentRef.setInput('options', options);
       fixture.detectChanges();
       tick();
-      
+
       comp.openPanel();
       fixture.detectChanges();
-      
+
       const mockEvent: any = {
         key: 'b',
         preventDefault: jest.fn(),
       };
-      
+
       comp._handleKeydown(mockEvent);
       tick(250); // Wait for typeahead delay
       fixture.detectChanges();
-      
+
       expect(keyManager.activeItem).toBeDefined();
       expect(keyManager.activeItem.value).toBe('banana');
     }));
@@ -350,26 +350,26 @@ describe('Elements: NovoSelectElement', () => {
       fixture.componentRef.setInput('options', options);
       fixture.detectChanges();
       tick();
-      
+
       comp.openPanel();
       comp.writeValue(null);
       fixture.detectChanges();
-      
+
       const mockEvent: any = {
         key: 'c',
         preventDefault: jest.fn(),
       };
-      
+
       comp._handleKeydown(mockEvent);
       tick(250);
       fixture.detectChanges();
-      
+
       expect(keyManager.activeItem.value).toBe('cantelope');
-      
+
       comp._handleKeydown(mockEvent);
       tick(250);
       fixture.detectChanges();
-      
+
       expect(keyManager.activeItem.value).toBe('coconut');
     }));
   });

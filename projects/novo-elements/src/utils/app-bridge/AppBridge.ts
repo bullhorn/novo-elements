@@ -237,7 +237,7 @@ export class AppBridge {
     } else {
       return this.postRobot.sendToParent(msgType, echoPacket || packet);
     }
-    
+
   }
 
   /**
