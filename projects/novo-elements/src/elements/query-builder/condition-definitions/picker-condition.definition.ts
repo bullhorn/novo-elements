@@ -2,9 +2,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { NovoLabelService } from 'novo-elements/services';
 import { BaseFieldDef, Operator } from '../query-builder.types';
 import { AbstractConditionFieldDef } from './abstract-condition.definition';
-import { NovoSelectSearchComponent } from 'novo-elements/elements/select-search';
 import { NovoSelectElement } from 'novo-elements/elements/select';
-import { NovoOption } from 'novo-elements/elements/common';
 
 type FieldOption = BaseFieldDef['options'][number];
 /**

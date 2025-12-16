@@ -1,4 +1,3 @@
-// tslint:disable: directive-selector
 import { Directive, ElementRef, HostBinding, Input } from '@angular/core';
 import { BooleanInput } from 'novo-elements/utils';
 

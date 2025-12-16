@@ -94,6 +94,6 @@ export class EntityPickerExample {
   }
 
   onChanged(event) {
-    console.log('EVENT', event); // tslint:disable-line
+    console.info('EVENT', event);
   }
 }

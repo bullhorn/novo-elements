@@ -17,7 +17,7 @@ export class FiGlobalsExample {
 
   constructor(private formUtils: FormUtils) {
     const globalsFunction = (API: FieldInteractionApi) => {
-      console.log('[FieldInteractionDemo] - globalsFunction'); // tslint:disable-line
+      console.info('[FieldInteractionDemo] - globalsFunction');
       API.setProperty(API.getActiveKey(), 'label', `${API.getProperty(API.getActiveKey(), 'label')} -- ${API.globals.TEST}`);
     };
 

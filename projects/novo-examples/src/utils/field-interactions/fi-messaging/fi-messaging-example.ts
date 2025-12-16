@@ -17,7 +17,7 @@ export class FiMessagingExample {
 
   constructor(private formUtils: FormUtils) {
     const messagingFunction = (API: FieldInteractionApi) => {
-      console.log('[FieldInteractionDemo] - messagingFunction'); // tslint:disable-line
+      console.info('[FieldInteractionDemo] - messagingFunction');
       if (API.getActiveKey() === 'toast') {
         API.displayToast({
           title: 'New Value',
@@ -30,9 +30,9 @@ export class FiMessagingExample {
         API.promptUser(API.getActiveKey(), ['Update Fee Arrangement from Selected Company', 'Update DateLastModified to right now!']).then(
           function (result) {
             if (result) {
-              console.log('PERFORM'); // tslint:disable-line
+              console.info('PERFORM');
             } else {
-              console.log("DON'T PERFORM"); // tslint:disable-line
+              console.info("DON'T PERFORM");
             }
           },
         );

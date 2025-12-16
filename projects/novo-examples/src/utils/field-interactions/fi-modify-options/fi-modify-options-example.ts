@@ -17,7 +17,7 @@ export class FiModifyOptionsExample {
 
   constructor(private formUtils: FormUtils) {
     const modifyOptionsAddFunction = (API: FieldInteractionApi) => {
-      console.log('[FieldInteractionDemo] - modifyOptionsAddFunction'); // tslint:disable-line
+      console.info('[FieldInteractionDemo] - modifyOptionsAddFunction');
       const currentValue = API.getActiveValue();
       if (!currentValue) {
         API.removeStaticOption('select', 'NEW');
@@ -29,7 +29,7 @@ export class FiModifyOptionsExample {
       }
     };
     const modifyOptionsAsyncFunction = (API: FieldInteractionApi) => {
-      console.log('[FieldInteractionDemo] - modifyOptionsAsyncFunction'); // tslint:disable-line
+      console.info('[FieldInteractionDemo] - modifyOptionsAsyncFunction');
       const currentValue = API.getActiveValue();
       switch (currentValue) {
         case 1:

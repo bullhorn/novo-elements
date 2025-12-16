@@ -13,11 +13,11 @@ export class TabsColorExample {
   public selected = 1;
 
   tabSelected() {
-    console.log('TAB SELECTED'); // tslint:disable-line
+    console.info('TAB SELECTED');
   }
 
   tabDeselected() {
-    console.log('TAB DESELECTED'); // tslint:disable-line
+    console.info('TAB DESELECTED');
   }
 
   updateTabIndex(value: number) {

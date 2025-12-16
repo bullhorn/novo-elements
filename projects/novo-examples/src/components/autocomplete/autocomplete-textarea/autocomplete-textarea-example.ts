@@ -29,7 +29,7 @@ export class AutocompleteTextareaExample implements OnInit {
 
   public triggerFn() {
     return (control: NovoFieldControl<any>) => {
-      console.log('control', control.lastKeyValue === '$');
+      console.info('control', control.lastKeyValue === '$');
       return control.lastKeyValue === '$';
     };
   }

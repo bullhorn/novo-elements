@@ -11,7 +11,7 @@ const distFolder = path.posix.join(rootFolder, 'dist/novo-elements');
 async function copyScssFiles() {
   try {
     await _relativeCopy('**/*.scss', srcFolder, distFolder);
-    console.log('SCSS files copy succeeded.');
+    console.info('SCSS files copy succeeded.');
   } catch (error) {
     console.error('Build failed. See below for errors.\n');
     console.error(error);

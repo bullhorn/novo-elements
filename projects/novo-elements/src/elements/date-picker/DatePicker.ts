@@ -363,6 +363,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
       case 'range':
       case 'week':
         this.setRangeSelection();
+        break;
       case 'single':
       default:
         this.selection = [model as Date];

@@ -1,6 +1,5 @@
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { AfterViewInit, computed, Directive, ElementRef, EventEmitter, HostBinding, HostListener, inject, Input, OnDestroy, Output, Renderer2, signal } from '@angular/core';
-import { ReplaySubject } from 'rxjs';
 
 export interface NovoDragFinishEvent<T> {
     draggedItem: T;

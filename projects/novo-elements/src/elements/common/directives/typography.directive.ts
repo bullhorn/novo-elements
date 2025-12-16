@@ -2,7 +2,6 @@ import { Directive, ElementRef, HostBinding, Input, Renderer2 } from '@angular/c
 
 @Directive({
     selector:
-    // tslint:disable-next-line: directive-selector
     '[fontWeight],[lineHeight],[textAlign],[textAlign],[fontStyle],[textTransform]',
     standalone: false
 })

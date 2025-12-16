@@ -71,19 +71,19 @@ export class FileInputControlsExample {
   }
 
   public handleEdit(file) {
-    console.log('This is an Edit Action!', file); // tslint:disable-line
+    console.info('This is an Edit Action!', file);
   }
 
   public handleSave(file) {
-    console.log('This is a Save Action!', file); // tslint:disable-line
+    console.info('This is a Save Action!', file);
   }
 
   public handleDelete(file) {
-    console.log('This is a Delete Action!', file); // tslint:disable-line
+    console.info('This is a Delete Action!', file);
   }
 
   public handleUpload(files) {
-    console.log('This is an upload Action!', files); // tslint:disable-line
+    console.info('This is an upload Action!', files);
   }
 
   public checkFileSize(fileList): boolean {

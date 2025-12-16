@@ -59,6 +59,6 @@ export class CheckBoxControlsExample {
   }
 
   onChange(value) {
-    console.log('I changed!', value); // tslint:disable-line
+    console.info('I changed!', value);
   }
 }

@@ -176,7 +176,6 @@ export class NovoSidenavComponent implements AfterContentInit, AfterContentCheck
   // @HostBinding is used in the class as it is expected to be extended.  Since @Component decorator
   // metadata is not inherited by child classes, instead the host binding data is defined in a way
   // that can be inherited.
-  // tslint:disable:no-host-decorator-in-concrete
   @HostBinding('@transform')
   _animationState: 'open-instant' | 'open' | 'void' = 'void';
 
@@ -217,7 +216,6 @@ export class NovoSidenavComponent implements AfterContentInit, AfterContentCheck
   private readonly _destroyed = new Subject<void>();
 
   /** Event emitted when the drawer's position changes. */
-  // tslint:disable-next-line:no-output-on-prefix
   @Output('positionChanged') onPositionChanged: EventEmitter<void> = new EventEmitter<void>();
 
   /**

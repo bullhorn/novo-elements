@@ -17,7 +17,7 @@ export class FiEnableDisableExample {
 
   constructor(private formUtils: FormUtils) {
     const enableDisableFunction = (API: FieldInteractionApi) => {
-      console.log('[FieldInteractionDemo] - enableDisableFunction'); // tslint:disable-line
+      console.info('[FieldInteractionDemo] - enableDisableFunction');
       const currentValue = API.getActiveValue();
       if (!currentValue) {
         API.enable('text');
