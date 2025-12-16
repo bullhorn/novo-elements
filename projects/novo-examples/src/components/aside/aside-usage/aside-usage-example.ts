@@ -79,7 +79,7 @@ export class AsideUsageExample {
   showAside() {
     const ref = this.aside.open<string>(AsideCustomDemo, { id: 100, name: 'Ferdinand del Toro' });
     ref.onClosed.then((result) => {
-      console.log('Aside has been closed, with result:', result);
+      console.info('Aside has been closed, with result:', result);
     });
   }
 }

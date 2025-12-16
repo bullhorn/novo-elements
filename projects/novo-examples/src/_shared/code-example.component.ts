@@ -62,7 +62,7 @@ export class CodeExampleComponent {
       this.exampleData = EXAMPLE_COMPONENTS[example];
       this.selectedPortal = new ComponentPortal(this.exampleData.component);
     } else {
-      console.log('MISSING EXAMPLE: ', example);
+      console.warn('MISSING EXAMPLE: ', example);
     }
   }
 

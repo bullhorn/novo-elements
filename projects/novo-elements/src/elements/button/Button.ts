@@ -4,9 +4,8 @@ import {
   Component, computed,
   ElementRef,
   HostBinding,
-  HostListener, input,
+  HostListener,
   Input,
-  InputSignal,
   OnChanges, signal, Signal,
   SimpleChanges, WritableSignal,
 } from '@angular/core';

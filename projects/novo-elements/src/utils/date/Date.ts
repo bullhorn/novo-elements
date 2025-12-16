@@ -7,7 +7,7 @@ import {
     setHours, setMinutes, startOfDay, startOfMinute, startOfMonth, startOfWeek
 } from 'date-fns';
 import { convertTokens } from './convert-tokens';
-import { LegacyParseOptions, legacyParse, splitDateString } from './legacy-parse';
+import { LegacyParseOptions, legacyParse } from './legacy-parse';
 
 type DateLike = Date | string | number;
 

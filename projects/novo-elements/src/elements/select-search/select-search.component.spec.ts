@@ -14,8 +14,6 @@ import { NovoSelectElement, NovoSelectModule } from 'novo-elements/elements/sele
 import { NovoSelectSearchComponent } from './select-search.component';
 import { NovoSelectSearchModule } from './select-search.module';
 
-/* tslint:disable:component-selector */
-
 interface Bank {
   id: string;
   name: string;

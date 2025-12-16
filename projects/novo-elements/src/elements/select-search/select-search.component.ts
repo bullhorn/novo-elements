@@ -30,7 +30,6 @@ import { NovoSelectSearchClearDirective } from './select-search-clear.directive'
 /** The max height of the select's overlay panel. */
 const SELECT_PANEL_MAX_HEIGHT = 256;
 let autoIncrement = 1;
-/* tslint:disable:member-ordering component-selector */
 /**
  * Component providing an input field for searching NovoSelectElement options.
  *
@@ -304,7 +303,7 @@ export class NovoSelectSearchComponent implements OnInit, OnDestroy, ControlValu
             .pipe(takeUntil(this._onDestroy))
             .subscribe(() => this.adjustScrollTopToFitActiveOptionIntoView());
         } else {
-          console.log('_keyManager was not initialized.');
+          console.warn('_keyManager was not initialized.');
         }
 
         this._options = this.novoSelect.contentOptions;

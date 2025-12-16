@@ -81,7 +81,7 @@ export class CardFormExample {
   }
 
   selected(event: NovoOptionSelectedEvent): void {
-    console.log(event.option);
+    console.info(event.option);
     this.recipients.push(event.option.value);
     this.searchInput.nativeElement.value = '';
     this.recipientCtrl.setValue(null);

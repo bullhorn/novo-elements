@@ -46,19 +46,19 @@ export class CustomTemplateExample {
   }
 
   public onRemove(value: any) {
-    console.log('REMOVING', value); // tslint:disable-line
+    console.info('REMOVING', value);
   }
 
   public onEdit(value: any) {
-    console.log('EDITING', value); // tslint:disable-line
+    console.info('EDITING', value);
   }
 
   public canEdit(value: any, index: number) {
-    console.log('canEdit', value, index); // tslint:disable-line
+    console.info('canEdit', value, index);
     return index > 0;
   }
   public canRemove(value: any, index: number) {
-    console.log('canRemove', value, index); // tslint:disable-line
+    console.info('canRemove', value, index);
     return index === 0;
   }
 
@@ -71,13 +71,13 @@ export class CustomTemplateExample {
   }
 
   public customDelete(form: NovoFormGroup, key: string, index: number) {
-    console.log('DELETE', form, key, index); // tslint:disable-line
+    console.info('DELETE', form, key, index);
     const control: UntypedFormArray = form.controls[key] as UntypedFormArray;
     control.removeAt(index);
   }
 
   public customEdit(form: NovoFormGroup, key: string, index: number) {
-    console.log('EDIT', form, key, index); // tslint:disable-line
+    console.info('EDIT', form, key, index);
   }
 
   private setupGroupedFormDemo() {

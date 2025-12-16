@@ -98,7 +98,6 @@ export class NovoOptionBase implements FocusableOption, AfterViewChecked, OnDest
   }
 
   /** Event emitted when the option is selected or deselected. */
-  // tslint:disable-next-line:no-output-on-prefix
   @Output() readonly onSelectionChange = new EventEmitter<NovoOptionSelectionChange>();
 
   /** Emits when the state of the option changes and any parents have to be notified. */

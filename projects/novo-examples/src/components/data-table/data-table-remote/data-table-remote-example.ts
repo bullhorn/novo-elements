@@ -316,7 +316,7 @@ export class DataTableRemoteExample {
   }
 
   public log(event: { originalEvent: MouseEvent; row: MockData }): void {
-    console.log('[DataTable] Event Triggered!', event); // tslint:disable-line
+    console.info('[DataTable] Event Triggered!', event);
   }
 
   public checkDisabled(row: MockData): boolean {
@@ -336,7 +336,7 @@ export class DataTableRemoteExample {
   }
 
   public onPreferencesChanged(event: IDataTablePreferences): void {
-    console.log('Preferences changed (persist manually):', event); // tslint:disable-line
+    console.info('Preferences changed (persist manually):', event);
   }
 
   public refresh(): void {

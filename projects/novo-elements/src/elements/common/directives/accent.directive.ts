@@ -1,4 +1,3 @@
-// tslint:disable: directive-selector
 import { ChangeDetectorRef, Directive, HostBinding, Input, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NovoTheme, ThemeChangeEvent } from '../theme/theme-options';

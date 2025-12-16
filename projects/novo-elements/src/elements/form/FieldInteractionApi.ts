@@ -132,14 +132,14 @@ export class FieldInteractionApi {
 
   getFieldSet(key: string, otherForm?: NovoFormGroup): NovoFieldset {
     if (!key) {
-      console.error('[FieldInteractionAPI] - invalid or missing "key"'); // tslint:disable-line
+      console.error('[FieldInteractionAPI] - invalid or missing "key"');
       return null;
     }
 
     const form = otherForm || this.form;
     const fieldSet = form.fieldsets.find((fs: NovoFieldset) => fs.key && fs.key.toLowerCase() === key.toLowerCase());
     if (!fieldSet) {
-      console.error('[FieldInteractionAPI] - could not find a fieldset in the form by the key --', key); // tslint:disable-line
+      console.error('[FieldInteractionAPI] - could not find a fieldset in the form by the key --', key);
       return null;
     }
 
@@ -148,14 +148,14 @@ export class FieldInteractionApi {
 
   getControl(key: string, otherForm?: NovoFormGroup) {
     if (!key) {
-      console.error('[FieldInteractionAPI] - invalid or missing "key"'); // tslint:disable-line
+      console.error('[FieldInteractionAPI] - invalid or missing "key"');
       return null;
     }
 
     const form = otherForm || this.form;
     const control = form.controls[key] as NovoFormControl;
     if (!control) {
-      console.error('[FieldInteractionAPI] - could not find a control in the form by the key --', key); // tslint:disable-line
+      console.error('[FieldInteractionAPI] - could not find a control in the form by the key --', key);
       return null;
     }
 
@@ -164,14 +164,14 @@ export class FieldInteractionApi {
 
   getFormGroupArray(key: string, otherForm?: NovoFormGroup): NovoFormGroup[] {
     if (!key) {
-      console.error('[FieldInteractionAPI] - invalid or missing "key"'); // tslint:disable-line
+      console.error('[FieldInteractionAPI] - invalid or missing "key"');
       return null;
     }
 
     const form = otherForm || this.form;
     const formArray = form.controls[key] as FormArray;
     if (!formArray || !formArray.controls) {
-      console.error('[FieldInteractionAPI] - could not find a form array in the form by the key --', key); // tslint:disable-line
+      console.error('[FieldInteractionAPI] - could not find a form array in the form by the key --', key);
       return null;
     }
 
@@ -794,7 +794,7 @@ export class FieldInteractionApi {
     otherForm?: NovoFormGroup,
   ): void {
     if (!metaForNewField.key && !metaForNewField.name) {
-      console.error('[FieldInteractionAPI] - missing "key" in meta for new field'); // tslint:disable-line
+      console.error('[FieldInteractionAPI] - missing "key" in meta for new field');
       return null;
     }
 

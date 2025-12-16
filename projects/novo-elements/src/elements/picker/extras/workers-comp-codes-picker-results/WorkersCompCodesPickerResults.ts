@@ -1,5 +1,5 @@
 // NG2
-import { ChangeDetectorRef, Component, ElementRef, HostBinding } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NovoLabelService } from 'novo-elements/services';
 // Vendor

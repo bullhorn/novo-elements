@@ -264,9 +264,11 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
     compareFunction: (a, b) => 1 | -1 | 0,
     warnFunction: (child) => void,
   ): void {
-    parent.children = parent.children
-      .map((child) => binarySearch(child, sortedData, compareFunction) || warnFunction(child))
-      .filter(Boolean); // since map can return undefined, remove undefined elements
+    if (Array.isArray(parent?.children)) {
+      parent.children = parent.children
+        .map((child) => binarySearch(child, sortedData, compareFunction) || warnFunction(child))
+        .filter(Boolean); // since map can return undefined, remove undefined elements
+    }
   }
 
   makeWarningFunction(parentLabel: string, childLabel: string, childValueField): (child) => void {
@@ -394,6 +396,9 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
   }
 
   getSelectedState = (childArray: Option[]): 'selected' | 'indeterminate' | undefined => {
+    if (!Array.isArray(childArray)) {
+      return undefined;
+    }
     const numberOfSelectedItems = childArray.filter(({ selected }) => selected).length;
     if (!numberOfSelectedItems) {
       return undefined;

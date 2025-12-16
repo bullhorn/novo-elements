@@ -2,6 +2,11 @@ import { TemplateRef } from '@angular/core';
 
 // @dynamic
 export class Helpers {
+  /**
+   * Checks if the provided value is an Angular TemplateRef
+   * @param value - The value to check
+   * @returns true if the value is an instance of TemplateRef, false otherwise
+   */
   static isTemplateRef(value: any): boolean {
     return value instanceof TemplateRef;
   }
@@ -16,6 +21,13 @@ export class Helpers {
     }
   }
 
+  /**
+   * Interpolates a string or function with provided properties
+   * Replaces placeholders in the format $variableName with values from props
+   * @param str - The format string or function to interpolate
+   * @param props - The object containing values to replace placeholders
+   * @returns The interpolated string
+   */
   static interpolate(str: string | Function, props: any): string {
     if (typeof str === 'function') {
       return str(props);
@@ -35,6 +47,14 @@ export class Helpers {
     });
   }
 
+  /**
+   * Interpolates a format string (or array of strings) with provided data
+   * Attempts to replace all variables, returning the first successful interpolation
+   * or an empty string if all attempts fail
+   * @param formatString - A single format string or array of format strings to try
+   * @param data - The object containing values to replace placeholders
+   * @returns The first successfully interpolated string, or an empty string
+   */
   static interpolateWithFallback(formatString: string | string[], data: any): string {
     // Format string can be an array, it will attempt to interpolate each item
     // in the array, if there is a failure to replace it will mark it as such
@@ -87,6 +107,11 @@ export class Helpers {
     });
   }
 
+  /**
+   * Checks if the provided value is a plain object
+   * @param item - The value to check
+   * @returns true if the value is an object but not an array or null, false otherwise
+   */
   static isObject(item) {
     return item && typeof item === 'object' && !Array.isArray(item) && item !== null;
   }
@@ -98,6 +123,11 @@ export class Helpers {
     return typeof obj === 'string';
   }
 
+  /**
+   * Escapes special regex characters in a string
+   * @param obj - The value to escape (if it's a string)
+   * @returns The escaped string if input is a string, otherwise the original value
+   */
   static escapeString(obj: any): any {
     if (Helpers.isString(obj)) {
       return obj.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -105,6 +135,12 @@ export class Helpers {
     return obj;
   }
 
+  /**
+   * Checks if a value is a valid number (string or numeric type)
+   * @param val - The value to check
+   * @param includeNegatives - Whether to allow negative numbers (default: false)
+   * @returns true if the value is a valid number, false otherwise
+   */
   static isNumber(val: any, includeNegatives: boolean = false) {
     const numberRegex = includeNegatives ? /^-{0,1}\d*\.?\d*$/ : /^\d*\.?\d*$/;
     if (typeof val === 'string') {
@@ -149,6 +185,11 @@ export class Helpers {
     return obj instanceof Date;
   }
 
+  /**
+   * Checks if a string is a valid ISO 8601 date format
+   * @param str - The string to validate
+   * @returns true if the string is a valid ISO date, false otherwise
+   */
   static isIsoDate(str: string) {
     if (!/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/.test(str)) {
       return false;
@@ -157,6 +198,11 @@ export class Helpers {
     return d.toISOString() === str;
   }
 
+  /**
+   * Converts a value to an array
+   * @param obj - The value to convert
+   * @returns An empty array if undefined, the value wrapped in an array if not already an array, or the array as-is
+   */
   static convertToArray(obj: unknown) {
     if (obj === undefined) {
       return [];
@@ -166,6 +212,12 @@ export class Helpers {
     return obj;
   }
 
+  /**
+   * Creates a comparator function for sorting objects by specified fields
+   * @param fields - A field name, array of field names, or custom comparator function
+   * @param reverse - Whether to reverse the sort order (default: false for ascending)
+   * @returns A comparator function suitable for use with Array.sort()
+   */
   static sortByField(fields: any, reverse = false) {
     return (previous: any, current: any) => {
       if (Helpers.isFunction(fields)) {
@@ -203,6 +255,13 @@ export class Helpers {
     };
   }
 
+  /**
+   * Creates a filter function for filtering objects by field values
+   * Supports exact matching, arrays, ranges, and complex filter objects
+   * @param key - The field key to filter on (supports dot notation for nested properties)
+   * @param value - The filter value (can be a function, array, range object, or regex pattern string)
+   * @returns A filter function suitable for use with Array.filter()
+   */
   static filterByField(key, value) {
     return (item) => {
       const results = [];
@@ -247,16 +306,27 @@ export class Helpers {
     };
   }
 
+  /**
+   * Finds the first ancestor element that matches the provided CSS selector
+   * @param element - The starting element to search from
+   * @param selector - The CSS selector to match against
+   * @returns The first matching ancestor element, or undefined if none found
+   */
   static findAncestor(element: Element, selector: string): Element {
-    while ((element = element.parentElement) && !element.matches.call(element, selector)); // tslint:disable-line
+    while ((element = element.parentElement) && !element.matches.call(element, selector));
     return element;
   }
 
+  /**
+   * Creates a deep clone of an object or array
+   * Recursively clones all nested properties and array elements
+   * @param item - The item to clone
+   * @returns A deep clone of the provided item
+   */
   static deepClone(item: any): any {
     if (Array.isArray(item)) {
       const newArr = [];
       for (let i = item.length; i-- > 0; ) {
-        // tslint:disable-line
         newArr[i] = Helpers.deepClone(item[i]);
       }
       return newArr;
@@ -282,6 +352,13 @@ export class Helpers {
     return item;
   }
 
+  /**
+   * Recursively merges multiple objects into a single object
+   * Nested objects and arrays are merged deeply
+   * @param objs - Two or more objects to merge
+   * @returns A new object with all properties merged
+   * @throws Error if fewer than 2 objects are provided
+   */
   static deepAssign(...objs) {
     if (objs.length < 2) {
       throw new Error('Need two or more objects to merge');
@@ -346,6 +423,11 @@ export class Helpers {
     }
   }
 
+  /**
+   * Converts a Date object to an object with formatted date and time parts
+   * @param date - The Date object to convert
+   * @returns An object with date components (year, month, day, hour, minute, second, weekday, era, dayPeriod)
+   */
   static dateToObject(date: Date): {
     day: string;
     dayPeriod: string;
@@ -388,13 +470,25 @@ export class Helpers {
   }
 }
 
+/**
+ * Helper class for safe property access using dot notation
+ */
 export class Can {
   obj: Object;
 
+  /**
+   * Creates a new Can instance
+   * @param obj - The object to wrap for safe property access
+   */
   constructor(obj: Object) {
     this.obj = obj;
   }
 
+  /**
+   * Safely accesses a property using dot notation
+   * @param key - The property key (supports dot notation for nested properties)
+   * @returns The property value or undefined
+   */
   have(key: string): any {
     const props = key.split('.');
     let item: any = this.obj;
@@ -407,16 +501,34 @@ export class Can {
     return item;
   }
 
+  /**
+   * Checks if a value is defined (not undefined)
+   * @param thing - The value to check
+   * @returns true if the value is defined, false otherwise
+   */
   check(thing: any): boolean {
     return thing !== void 0;
   }
 }
 
+/**
+ * Factory function to create a Can instance for safe property access
+ * @param obj - The object to wrap
+ * @returns A new Can instance
+ */
 export function can(obj: any) {
   return new Can(obj);
 }
 
-// Assumes data is already sorted
+/**
+ * Performs a binary search on a sorted array
+ * Note: Assumes the array is already sorted according to the compare function
+ * @param item - The item to search for
+ * @param array - The sorted array to search in
+ * @param compare - Comparator function that returns -1 (item < array[i]), 0 (equal), or 1 (item > array[i])
+ * @returns The matching item if found, undefined otherwise
+ * @throws Error if the item is not comparable to an array element
+ */
 export function binarySearch<T>(item: T, array: T[], compare: (a: T, b: T) => 1 | -1 | 0 | undefined): T | undefined {
   return search(0, array.length - 1);
 

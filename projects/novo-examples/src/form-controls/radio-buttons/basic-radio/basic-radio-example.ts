@@ -12,6 +12,6 @@ import { Component } from '@angular/core';
 export class BasicRadioExample {
   model: any = 'two';
   onChange(change: Event): void {
-    console.log('Radio Change:', change); // tslint:disable-line
+    console.info('Radio Change:', change);
   }
 }

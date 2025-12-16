@@ -1,6 +1,6 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild, computed } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, UntypedFormBuilder } from '@angular/forms';
-import { BaseFieldDef, CriteriaBuilderComponent, FieldConfig, QueryBuilderConfig } from 'novo-elements';
+import { CriteriaBuilderComponent, QueryBuilderConfig } from 'novo-elements';
 import { MockCandidateMeta as MockMeta } from '../just-criteria/MockMeta';
 
 /**
@@ -67,6 +67,6 @@ export class SingleFieldCriteriaExample implements OnInit {
   }
 
   onSubmit() {
-    console.log('Your form data : ', this.queryForm.value);
+    console.info('Your form data : ', this.queryForm.value);
   }
 }
