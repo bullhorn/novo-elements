@@ -1123,7 +1123,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
                     // the bindings in this template will be evaluated _after_ the table's view is evaluated, which
                     // means the template in the table's view will not have the updated value (and in fact will cause
                     // an ExpressionChangedAfterItHasBeenCheckedError).
-                    // tslint:disable-next-line:validate-decorators
                     changeDetection: ChangeDetectionStrategy.Default,
                     standalone: false
                 }]

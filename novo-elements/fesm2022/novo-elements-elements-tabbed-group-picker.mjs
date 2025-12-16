@@ -51,6 +51,9 @@ class NovoTabbedGroupPickerElement {
         this.scrollViewportHeight = 351;
         this.virtualScrollItemSize = 39;
         this.getSelectedState = (childArray) => {
+            if (!Array.isArray(childArray)) {
+                return undefined;
+            }
             const numberOfSelectedItems = childArray.filter(({ selected }) => selected).length;
             if (!numberOfSelectedItems) {
                 return undefined;
@@ -162,9 +165,11 @@ class NovoTabbedGroupPickerElement {
         };
     }
     replaceChildrenWithReferences(parent, sortedData, compareFunction, warnFunction) {
-        parent.children = parent.children
-            .map((child) => binarySearch(child, sortedData, compareFunction) || warnFunction(child))
-            .filter(Boolean); // since map can return undefined, remove undefined elements
+        if (Array.isArray(parent?.children)) {
+            parent.children = parent.children
+                .map((child) => binarySearch(child, sortedData, compareFunction) || warnFunction(child))
+                .filter(Boolean); // since map can return undefined, remove undefined elements
+        }
     }
     makeWarningFunction(parentLabel, childLabel, childValueField) {
         return (child) => {

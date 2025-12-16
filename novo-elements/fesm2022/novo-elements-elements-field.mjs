@@ -142,7 +142,6 @@ class NovoFieldElement {
             this._elementRef.nativeElement.setAttribute('data-control-key', control.ngControl.name);
         }
         // Subscribe to changes in the child control state in order to update the form field UI.
-        // tslint:disable-next-line:deprecation
         control.stateChanges.pipe(startWith(null)).subscribe(() => {
             this.stateChanges.next();
             this._changeDetectorRef.markForCheck();
@@ -1099,7 +1098,6 @@ class NovoInputBase {
     }
 }
 /** Directive that allows a native input to work inside a `NovoField`. */
-// tslint:disable: no-conflicting-lifecycle member-ordering
 class NovoInput extends NovoInputBase {
     /**
      * Implemented as part of NovoFieldControl.

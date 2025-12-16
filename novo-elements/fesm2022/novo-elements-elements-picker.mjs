@@ -136,7 +136,7 @@ class BasePickerResults {
             this.isLoading = false;
             this.lastPage = true;
             if (this.term && this.term.length !== 0) {
-                console.error(err); // tslint:disable-lineno
+                console.error(err);
             }
             this.ref.markForCheck();
         });

@@ -1867,39 +1867,39 @@ class FieldInteractionApi {
     }
     getFieldSet(key, otherForm) {
         if (!key) {
-            console.error('[FieldInteractionAPI] - invalid or missing "key"'); // tslint:disable-line
+            console.error('[FieldInteractionAPI] - invalid or missing "key"');
             return null;
         }
         const form = otherForm || this.form;
         const fieldSet = form.fieldsets.find((fs) => fs.key && fs.key.toLowerCase() === key.toLowerCase());
         if (!fieldSet) {
-            console.error('[FieldInteractionAPI] - could not find a fieldset in the form by the key --', key); // tslint:disable-line
+            console.error('[FieldInteractionAPI] - could not find a fieldset in the form by the key --', key);
             return null;
         }
         return fieldSet;
     }
     getControl(key, otherForm) {
         if (!key) {
-            console.error('[FieldInteractionAPI] - invalid or missing "key"'); // tslint:disable-line
+            console.error('[FieldInteractionAPI] - invalid or missing "key"');
             return null;
         }
         const form = otherForm || this.form;
         const control = form.controls[key];
         if (!control) {
-            console.error('[FieldInteractionAPI] - could not find a control in the form by the key --', key); // tslint:disable-line
+            console.error('[FieldInteractionAPI] - could not find a control in the form by the key --', key);
             return null;
         }
         return control;
     }
     getFormGroupArray(key, otherForm) {
         if (!key) {
-            console.error('[FieldInteractionAPI] - invalid or missing "key"'); // tslint:disable-line
+            console.error('[FieldInteractionAPI] - invalid or missing "key"');
             return null;
         }
         const form = otherForm || this.form;
         const formArray = form.controls[key];
         if (!formArray || !formArray.controls) {
-            console.error('[FieldInteractionAPI] - could not find a form array in the form by the key --', key); // tslint:disable-line
+            console.error('[FieldInteractionAPI] - could not find a form array in the form by the key --', key);
             return null;
         }
         return formArray.controls;
@@ -2321,7 +2321,7 @@ class FieldInteractionApi {
     }
     addControl(key, metaForNewField, position = FieldInteractionApi.FIELD_POSITIONS.ABOVE_FIELD, initialValue, otherForm) {
         if (!metaForNewField.key && !metaForNewField.name) {
-            console.error('[FieldInteractionAPI] - missing "key" in meta for new field'); // tslint:disable-line
+            console.error('[FieldInteractionAPI] - missing "key" in meta for new field');
             return null;
         }
         if (!metaForNewField.key) {
@@ -2797,8 +2797,8 @@ class NovoControlElement extends OutsideClick {
                     interaction.script(this.fieldInteractionApi, this.control.key);
                 }
                 catch (err) {
-                    console.info('Field Interaction Error!', this.control.key); // tslint:disable-line
-                    console.error(err); // tslint:disable-line
+                    console.info('Field Interaction Error!', this.control.key);
+                    console.error(err);
                 }
             });
         }

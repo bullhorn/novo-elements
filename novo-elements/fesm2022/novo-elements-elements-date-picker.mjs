@@ -239,6 +239,7 @@ class NovoDatePickerElement {
             case 'range':
             case 'week':
                 this.setRangeSelection();
+                break;
             case 'single':
             default:
                 this.selection = [model];

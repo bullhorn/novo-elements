@@ -233,7 +233,6 @@ class NovoSidenavComponent {
         // @HostBinding is used in the class as it is expected to be extended.  Since @Component decorator
         // metadata is not inherited by child classes, instead the host binding data is defined in a way
         // that can be inherited.
-        // tslint:disable:no-host-decorator-in-concrete
         this._animationState = 'void';
         /** Event emitted when the drawer open state is changed. */
         this.openedChange = 
@@ -250,7 +249,6 @@ class NovoSidenavComponent {
         /** Emits when the component is destroyed. */
         this._destroyed = new Subject();
         /** Event emitted when the drawer's position changes. */
-        // tslint:disable-next-line:no-output-on-prefix
         this.onPositionChanged = new EventEmitter();
         /**
          * An observable that emits when the drawer mode changes. This is used by the drawer container to

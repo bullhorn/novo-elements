@@ -53,7 +53,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
                 }]
         }] });
 
-// tslint:disable: directive-selector
 class AccentColorDirective {
     get hb_textColor() {
         // Support legacy classic theme... for now
@@ -88,7 +87,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
                 args: ['class']
             }] } });
 
-// tslint:disable: directive-selector
 class BackgroundColorDirective {
     get hb_bgColor() {
         return isValidColor$1(this.bg) ? 'novo-background-custom' : `novo-background-${this.bg}`;
@@ -121,7 +119,6 @@ function isValidColor$1(color) {
     return color.startsWith('#') || color.startsWith('rgb');
 }
 
-// tslint:disable: directive-selector
 class BorderDirective {
     get hb_border() {
         return `border-${this.border}`;
@@ -202,7 +199,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
                 args: ['style.border-bottom']
             }] } });
 
-// tslint:disable: directive-selector
 class TextColorDirective {
     get hb_textColor() {
         return isValidColor(this.txc) ? 'novo-text-custom' : `novo-text-${this.txc}`;
@@ -235,7 +231,6 @@ function isValidColor(color) {
     return color.startsWith('#') || color.startsWith('rgb');
 }
 
-// tslint:disable: directive-selector
 class FillColorDirective {
     get hb_textColor() {
         return `novo-fill-${this.fill}`;
@@ -281,7 +276,6 @@ class FlexDirective {
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: FlexDirective, decorators: [{
             type: Directive,
             args: [{
-                    // tslint:disable-next-line: directive-selector
                     selector: '[flex]',
                     standalone: false
                 }]
@@ -292,7 +286,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
                 type: Input
             }] } });
 
-// tslint:disable: directive-selector
 /*
 Prop	CSS Property	Theme Field
 m, margin	margin	space
@@ -358,7 +351,6 @@ class MarginDirective {
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: MarginDirective, decorators: [{
             type: Directive,
             args: [{
-                    // tslint:disable-next-line: max-line-length
                     selector: '[m],[margin],[marginTop],[marginRight],[marginBottom],[marginLeft],[marginX],[marginY],[mt],[mr],[mb],[ml],[mx],[my]',
                     standalone: false
                 }]
@@ -428,7 +420,6 @@ class PaddingDirective {
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: PaddingDirective, decorators: [{
             type: Directive,
             args: [{
-                    // tslint:disable-next-line: max-line-length
                     selector: '[p],[padding],[paddingTop],[paddingRight],[paddingBottom],[paddingLeft],[paddingX],[paddingY],[pt],[pr],[pb],[pl],[px],[py]',
                     standalone: false
                 }]
@@ -536,7 +527,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
                 type: Input
             }] } });
 
-// tslint:disable: directive-selector
 class ThemeColorDirective {
     get hb_textColor() {
         return `novo-theme-${this.theme}`;
@@ -857,7 +847,6 @@ class NovoOptionBase {
         /** The unique ID of the option. */
         this.id = `novo-option-${_uniqueIdCounter++}`;
         /** Event emitted when the option is selected or deselected. */
-        // tslint:disable-next-line:no-output-on-prefix
         this.onSelectionChange = new EventEmitter();
         /** Emits when the state of the option changes and any parents have to be notified. */
         this._stateChanges = new Subject();

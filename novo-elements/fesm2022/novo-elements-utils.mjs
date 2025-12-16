@@ -88,7 +88,7 @@ class AppBridge {
     }
     _trace(eventType, event) {
         if (this._tracing) {
-            console.log(`[${this.traceName || this.id}] "${eventType}"`, event); // tslint:disable-line
+            console.info(`[${this.traceName || this.id}] "${eventType}"`, event);
         }
     }
     _setupHandlers() {
@@ -368,7 +368,7 @@ class AppBridge {
             }
             else {
                 if (packet) {
-                    console.info('[AppBridge] - close(packet) is deprecated! Please just use close()!'); // tslint:disable-line
+                    console.info('[AppBridge] - close(packet) is deprecated! Please just use close()!');
                 }
                 const realPacket = { id: this.id, windowName: this.windowName };
                 this.postRobot
@@ -405,7 +405,7 @@ class AppBridge {
             }
             else {
                 if (packet) {
-                    console.info('[AppBridge] - refresh(packet) is deprecated! Please just use refresh()!'); // tslint:disable-line
+                    console.info('[AppBridge] - refresh(packet) is deprecated! Please just use refresh()!');
                 }
                 const realPacket = { id: this.id, windowName: this.windowName };
                 this.postRobot
@@ -461,7 +461,7 @@ class AppBridge {
             }
             else {
                 if (packet) {
-                    console.info('[AppBridge] - pin(packet) is deprecated! Please just use pin()!'); // tslint:disable-line
+                    console.info('[AppBridge] - pin(packet) is deprecated! Please just use pin()!');
                 }
                 const realPacket = { id: this.id, windowName: this.windowName };
                 this.postRobot
@@ -21568,6 +21568,11 @@ function Deferred() {
 
 // @dynamic
 class Helpers {
+    /**
+     * Checks if the provided value is an Angular TemplateRef
+     * @param value - The value to check
+     * @returns true if the value is an instance of TemplateRef, false otherwise
+     */
     static isTemplateRef(value) {
         return value instanceof TemplateRef;
     }
@@ -21580,6 +21585,13 @@ class Helpers {
             event.preventDefault();
         }
     }
+    /**
+     * Interpolates a string or function with provided properties
+     * Replaces placeholders in the format $variableName with values from props
+     * @param str - The format string or function to interpolate
+     * @param props - The object containing values to replace placeholders
+     * @returns The interpolated string
+     */
     static interpolate(str, props) {
         if (typeof str === 'function') {
             return str(props);
@@ -21597,6 +21609,14 @@ class Helpers {
             return value !== undefined ? value : '';
         });
     }
+    /**
+     * Interpolates a format string (or array of strings) with provided data
+     * Attempts to replace all variables, returning the first successful interpolation
+     * or an empty string if all attempts fail
+     * @param formatString - A single format string or array of format strings to try
+     * @param data - The object containing values to replace placeholders
+     * @returns The first successfully interpolated string, or an empty string
+     */
     static interpolateWithFallback(formatString, data) {
         // Format string can be an array, it will attempt to interpolate each item
         // in the array, if there is a failure to replace it will mark it as such
@@ -21649,6 +21669,11 @@ class Helpers {
             return props.hasOwnProperty(key.substr(1));
         });
     }
+    /**
+     * Checks if the provided value is a plain object
+     * @param item - The value to check
+     * @returns true if the value is an object but not an array or null, false otherwise
+     */
     static isObject(item) {
         return item && typeof item === 'object' && !Array.isArray(item) && item !== null;
     }
@@ -21658,12 +21683,23 @@ class Helpers {
     static isString(obj) {
         return typeof obj === 'string';
     }
+    /**
+     * Escapes special regex characters in a string
+     * @param obj - The value to escape (if it's a string)
+     * @returns The escaped string if input is a string, otherwise the original value
+     */
     static escapeString(obj) {
         if (Helpers.isString(obj)) {
             return obj.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
         }
         return obj;
     }
+    /**
+     * Checks if a value is a valid number (string or numeric type)
+     * @param val - The value to check
+     * @param includeNegatives - Whether to allow negative numbers (default: false)
+     * @returns true if the value is a valid number, false otherwise
+     */
     static isNumber(val, includeNegatives = false) {
         const numberRegex = includeNegatives ? /^-{0,1}\d*\.?\d*$/ : /^\d*\.?\d*$/;
         if (typeof val === 'string') {
@@ -21703,6 +21739,11 @@ class Helpers {
     static isDate(obj) {
         return obj instanceof Date;
     }
+    /**
+     * Checks if a string is a valid ISO 8601 date format
+     * @param str - The string to validate
+     * @returns true if the string is a valid ISO date, false otherwise
+     */
     static isIsoDate(str) {
         if (!/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/.test(str)) {
             return false;
@@ -21710,6 +21751,11 @@ class Helpers {
         const d = new Date(str);
         return d.toISOString() === str;
     }
+    /**
+     * Converts a value to an array
+     * @param obj - The value to convert
+     * @returns An empty array if undefined, the value wrapped in an array if not already an array, or the array as-is
+     */
     static convertToArray(obj) {
         if (obj === undefined) {
             return [];
@@ -21719,6 +21765,12 @@ class Helpers {
         }
         return obj;
     }
+    /**
+     * Creates a comparator function for sorting objects by specified fields
+     * @param fields - A field name, array of field names, or custom comparator function
+     * @param reverse - Whether to reverse the sort order (default: false for ascending)
+     * @returns A comparator function suitable for use with Array.sort()
+     */
     static sortByField(fields, reverse = false) {
         return (previous, current) => {
             if (Helpers.isFunction(fields)) {
@@ -21756,6 +21808,13 @@ class Helpers {
             return 0;
         };
     }
+    /**
+     * Creates a filter function for filtering objects by field values
+     * Supports exact matching, arrays, ranges, and complex filter objects
+     * @param key - The field key to filter on (supports dot notation for nested properties)
+     * @param value - The filter value (can be a function, array, range object, or regex pattern string)
+     * @returns A filter function suitable for use with Array.filter()
+     */
     static filterByField(key, value) {
         return (item) => {
             const results = [];
@@ -21803,16 +21862,27 @@ class Helpers {
             return results.every((x) => x);
         };
     }
+    /**
+     * Finds the first ancestor element that matches the provided CSS selector
+     * @param element - The starting element to search from
+     * @param selector - The CSS selector to match against
+     * @returns The first matching ancestor element, or undefined if none found
+     */
     static findAncestor(element, selector) {
         while ((element = element.parentElement) && !element.matches.call(element, selector))
-            ; // tslint:disable-line
+            ;
         return element;
     }
+    /**
+     * Creates a deep clone of an object or array
+     * Recursively clones all nested properties and array elements
+     * @param item - The item to clone
+     * @returns A deep clone of the provided item
+     */
     static deepClone(item) {
         if (Array.isArray(item)) {
             const newArr = [];
             for (let i = item.length; i-- > 0;) {
-                // tslint:disable-line
                 newArr[i] = Helpers.deepClone(item[i]);
             }
             return newArr;
@@ -21837,6 +21907,13 @@ class Helpers {
         }
         return item;
     }
+    /**
+     * Recursively merges multiple objects into a single object
+     * Nested objects and arrays are merged deeply
+     * @param objs - Two or more objects to merge
+     * @returns A new object with all properties merged
+     * @throws Error if fewer than 2 objects are provided
+     */
     static deepAssign(...objs) {
         if (objs.length < 2) {
             throw new Error('Need two or more objects to merge');
@@ -21906,6 +21983,11 @@ class Helpers {
             return e;
         }
     }
+    /**
+     * Converts a Date object to an object with formatted date and time parts
+     * @param date - The Date object to convert
+     * @returns An object with date components (year, month, day, hour, minute, second, weekday, era, dayPeriod)
+     */
     static dateToObject(date) {
         const dateObj = {
             day: '',
@@ -21937,10 +22019,22 @@ class Helpers {
         return dateObj;
     }
 }
+/**
+ * Helper class for safe property access using dot notation
+ */
 class Can {
+    /**
+     * Creates a new Can instance
+     * @param obj - The object to wrap for safe property access
+     */
     constructor(obj) {
         this.obj = obj;
     }
+    /**
+     * Safely accesses a property using dot notation
+     * @param key - The property key (supports dot notation for nested properties)
+     * @returns The property value or undefined
+     */
     have(key) {
         const props = key.split('.');
         let item = this.obj;
@@ -21952,14 +22046,32 @@ class Can {
         }
         return item;
     }
+    /**
+     * Checks if a value is defined (not undefined)
+     * @param thing - The value to check
+     * @returns true if the value is defined, false otherwise
+     */
     check(thing) {
         return thing !== void 0;
     }
 }
+/**
+ * Factory function to create a Can instance for safe property access
+ * @param obj - The object to wrap
+ * @returns A new Can instance
+ */
 function can(obj) {
     return new Can(obj);
 }
-// Assumes data is already sorted
+/**
+ * Performs a binary search on a sorted array
+ * Note: Assumes the array is already sorted according to the compare function
+ * @param item - The item to search for
+ * @param array - The sorted array to search in
+ * @param compare - Comparator function that returns -1 (item < array[i]), 0 (equal), or 1 (item > array[i])
+ * @returns The matching item if found, undefined otherwise
+ * @throws Error if the item is not comparable to an array element
+ */
 function binarySearch(item, array, compare) {
     return search(0, array.length - 1);
     function search(min, max) {
@@ -22088,7 +22200,7 @@ function notify(message) {
         return;
     }
     notifications[message] = true;
-    console.warn(message); // tslint:disable-line
+    console.warn(message);
 }
 
 // NG2
