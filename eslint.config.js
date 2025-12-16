@@ -34,6 +34,15 @@ module.exports = [
       '@typescript-eslint/prefer-function-type': 'error',
       '@typescript-eslint/prefer-namespace-keyword': 'error',
       '@typescript-eslint/triple-slash-reference': 'error',
+      '@typescript-eslint/naming-convention': [
+        'error',
+        {
+            selector: 'variable',
+            format: ['camelCase', 'UPPER_CASE', 'PascalCase'],
+            leadingUnderscore: 'allow',
+            trailingUnderscore: 'forbid',
+        },
+      ],
       'no-var': 'error',
       'prefer-const': 'error',
       'use-isnan': 'error',
