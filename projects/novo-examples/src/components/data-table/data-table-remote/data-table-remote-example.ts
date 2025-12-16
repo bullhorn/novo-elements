@@ -406,11 +406,11 @@ class RemoteMockDataService extends RemoteDataTableService<MockData> {
   }
 
   private parseQueryValue(key: string, value: any, isNot: boolean = false) {
-    const clauses: Array<string> = [],
-      IN = isNot ? ' NOT IN ' : ' IN ',
-      EQ = isNot ? '<>' : '=',
-      GT = isNot ? '<' : '>=',
-      LT = isNot ? '>=' : '<';
+    const clauses: Array<string> = [];
+    const IN = isNot ? ' NOT IN ' : ' IN ';
+    const EQ = isNot ? '<>' : '=';
+    const GT = isNot ? '<' : '>=';
+    const LT = isNot ? '>=' : '<';
     if (Array.isArray(value)) {
       clauses.push(`${key}${IN}(${this.writeQueryValues(value)})`);
     } else if (value instanceof Object) {

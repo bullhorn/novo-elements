@@ -452,7 +452,8 @@ describe('AppBridge', () => {
         await frame1Bridge.register();
         await frame2Bridge.register();
         const data = { dataContent: 1000 };
-        let receivedData1, receivedData2: any;
+        let receivedData1;
+        let receivedData2: any;
         frame1Bridge.addEventListener('test', eventData => {
             receivedData1 = eventData;
         });

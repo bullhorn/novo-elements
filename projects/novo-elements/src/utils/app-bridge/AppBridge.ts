@@ -217,7 +217,8 @@ export class AppBridge {
     let returnPromise: Promise<any>;
     if (this._handlers[handler]) {
       // Should be directly returning a promise. However, as a fallback, provide callback arguments
-      let callbackSuccess, callbackFail;
+      let callbackSuccess;
+      let callbackFail;
       returnPromise = new Promise((s, f) => {
         callbackSuccess = s;
         callbackFail = f;

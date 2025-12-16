@@ -165,7 +165,9 @@ function rgbToHsl({ r, g, b }: RGB): HSL {
  * @return  Array           The RGB representation
  */
 function hslToRgb({ h, s, l }: HSL): RGB {
-  let r, g, b;
+  let r;
+  let g;
+  let b;
 
   if (s === 0) {
     r = g = b = l; // achromatic
@@ -256,7 +258,9 @@ function rgbToHsv({ r, g, b }: RGB): HSV {
  * @return  Array           The RGB representation
  */
 function hsvToRgb({ h, s, v }: HSV): RGB {
-  let r, g, b;
+  let r;
+  let g;
+  let b;
 
   const i = Math.floor(h * 6);
   const f = h * 6 - i;

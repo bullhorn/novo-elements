@@ -115,7 +115,10 @@ type DateStrings = {
 
 export function splitDateString(dateString: string): DateStrings {
   const array = dateString.split(parseTokenDateTimeDelimeter)
-  let timeString, date, time, timezone
+  let timeString;
+  let date;
+  let time;
+  let timezone;
 
   if (parseTokenPlainTime.test(array[0])) {
     date = undefined

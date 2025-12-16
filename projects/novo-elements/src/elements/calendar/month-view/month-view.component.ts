@@ -110,10 +110,10 @@ export class NovoMonthViewElement implements OnInit {
     const start = DateUtil.startOfMonth(month);
 
     // House keeping variables to know when we are done building the month
-    let done = false,
-      date = DateUtil.startOfWeek(start, { weekStartsOn: this.weekStartsOn }),
-      monthIndex = date.getMonth(),
-      count = 0;
+    let done = false;
+    let date = DateUtil.startOfWeek(start, { weekStartsOn: this.weekStartsOn });
+    let monthIndex = date.getMonth();
+    let count = 0;
 
     while (!done) {
       // Build the days for the weeks
