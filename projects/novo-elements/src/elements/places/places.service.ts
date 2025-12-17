@@ -131,6 +131,7 @@ export class GooglePlacesService {
               }
             }
             _tempArr = this.getUniqueResults(_tempArr);
+            _tempArr = _tempArr.filter((item: any) => !item.types?.includes('postal_code'));
             resolve(_tempArr);
           } else {
             resolve(values[0]);
