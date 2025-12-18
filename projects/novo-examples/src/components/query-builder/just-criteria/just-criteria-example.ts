@@ -14,8 +14,8 @@ import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { MockCandidateMeta, MockNoteMeta } from './MockMeta';
 
 @Component({
-    selector: 'custom-picker-condition-def',
-    template: `
+  selector: 'custom-picker-condition-def',
+  template: `
     <ng-container novoConditionFieldDef>
       <novo-field *novoConditionOperatorsDef="let formGroup" [formGroup]="formGroup">
         <novo-select placeholder="Operator..." formControlName="operator">
@@ -29,16 +29,18 @@ import { MockCandidateMeta, MockNoteMeta } from './MockMeta';
           <novo-option>
             <novo-select-search [formControl]="searchCtrl"></novo-select-search>
           </novo-option>
-          <novo-option *ngFor="let option of remoteResults | async" [value]="option.id">
-            {{ option.name }}
-          </novo-option>
+          @for (option of remoteResults | async; track option) {
+            <novo-option [value]="option.id">
+              {{ option.name }}
+            </novo-option>
+          }
         </novo-select>
       </novo-field>
     </ng-container>
   `,
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.Default,
-    standalone: false
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.Default,
+  standalone: false
 })
 export class CustomPickerConditionDef extends AbstractConditionFieldDef implements OnInit {
   defaultOperator = Operator.includeAny;

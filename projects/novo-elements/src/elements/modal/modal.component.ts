@@ -3,40 +3,42 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NovoModalRef } from './modal-ref';
 
 @Component({
-    selector: 'novo-modal',
-    template: `
+  selector: 'novo-modal',
+  template: `
     <ng-content select="header,novo-header,novo-card-header"></ng-content>
     <ng-content select="section,novo-card-content"></ng-content>
     <footer class="novo-modal-footer"><ng-content select="button,novo-button"></ng-content></footer>
   `,
-    styleUrls: ['./modal.component.scss'],
-    host: {
-        class: 'novo-modal',
-    },
-    standalone: false
+  styleUrls: ['./modal.component.scss'],
+  host: {
+    class: 'novo-modal',
+  },
+  standalone: false
 })
 export class NovoModalElement {
   constructor(private modalRef: NovoModalRef) {}
 }
 
 @Component({
-    selector: 'novo-notification',
-    template: `
+  selector: 'novo-notification',
+  template: `
     <novo-button class="modal-close" theme="icon" icon="x" (click)="close()"></novo-button>
     <header class="novo-notification-header"><ng-content select="label,novo-label"></ng-content></header>
     <section class="novo-notification-body notification-body">
-      <i class="indicator" [ngClass]="iconType" *ngIf="iconType"></i>
+      @if (iconType) {
+        <i class="indicator" [ngClass]="iconType"></i>
+      }
       <ng-content select="h1"></ng-content>
       <ng-content select="h2"></ng-content>
       <ng-content select="p"></ng-content>
     </section>
     <footer class="novo-notification-footer"><ng-content select="button,novo-button,novo-dropdown"></ng-content></footer>
   `,
-    styleUrls: ['./notification.component.scss'],
-    host: {
-        class: 'novo-notification',
-    },
-    standalone: false
+  styleUrls: ['./notification.component.scss'],
+  host: {
+    class: 'novo-notification',
+  },
+  standalone: false
 })
 export class NovoModalNotificationElement implements OnInit {
   @Input()

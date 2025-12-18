@@ -7,9 +7,9 @@
         <novo-select-search [formControl]="stateFilterCtrl"></novo-select-search>
       </novo-option>
 
-      <novo-option *ngFor="let state of filteredStates | async" [value]="state">
-        {{state.name}}
-      </novo-option>
+      @for (state of filteredStates | async; track state) {
+        <novo-option [value]="state">{{state.name}}</novo-option>
+      }
     </novo-select>
   </novo-field>
 </p>

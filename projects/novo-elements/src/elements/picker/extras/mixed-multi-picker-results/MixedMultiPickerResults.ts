@@ -22,71 +22,79 @@ export interface IMixedMultiPickerOption {
 }
 
 @Component({
-    selector: 'mixed-multi-picker-results',
-    template: ` <div class="mixed-multi-picker-groups">
-      <novo-list direction="vertical">
+  selector: 'mixed-multi-picker-results',
+  template: ` <div class="mixed-multi-picker-groups">
+    <novo-list direction="vertical">
+      @for (option of options; track option) {
         <novo-list-item
-          *ngFor="let option of options"
           (click)="selectPrimaryOption(option, $event)"
           [class.active]="selectedPrimaryOption?.value === option.value"
           [attr.data-automation-id]="option.label"
-          [class.disabled]="isLoading"
-        >
+          [class.disabled]="isLoading">
           <item-content>
-            <i *ngIf="option.iconClass" [class]="option.iconClass"></i>
+            @if (option.iconClass) {
+              <i [class]="option.iconClass"></i>
+            }
             <span data-automation-id="label">{{ option.label }}</span>
           </item-content>
-          <item-end *ngIf="optionHasSecondaryOptions(option)">
-            <i class="bhi-next"></i>
-          </item-end>
+          @if (optionHasSecondaryOptions(option)) {
+            <item-end>
+              <i class="bhi-next"></i>
+            </item-end>
+          }
         </novo-list-item>
-      </novo-list>
-    </div>
-    <div class="mixed-multi-picker-matches" [hidden]="!optionHasSecondaryOptions(selectedPrimaryOption)">
-      <div
-        class="mixed-multi-picker-input-container"
-        [hidden]="!shouldShowSearchBox(selectedPrimaryOption)"
-        data-automation-id="input-container"
-      >
-        <input autofocus #input [(ngModel)]="searchTerm" [disabled]="isLoading" data-automation-id="input" [placeholder]="placeholder" />
-        <i class="bhi-search" *ngIf="!searchTerm" [class.disabled]="isLoading" data-automation-id="seach-icon"></i>
+      }
+    </novo-list>
+  </div>
+  <div class="mixed-multi-picker-matches" [hidden]="!optionHasSecondaryOptions(selectedPrimaryOption)">
+    <div
+      class="mixed-multi-picker-input-container"
+      [hidden]="!shouldShowSearchBox(selectedPrimaryOption)"
+      data-automation-id="input-container">
+      <input autofocus #input [(ngModel)]="searchTerm" [disabled]="isLoading" data-automation-id="input" [placeholder]="placeholder" />
+      @if (!searchTerm) {
+        <i class="bhi-search" [class.disabled]="isLoading" data-automation-id="seach-icon"></i>
+      }
+      @if (searchTerm) {
         <i
           class="bhi-times"
-          *ngIf="searchTerm"
           (click)="clearSearchTerm($event)"
           [class.disabled]="isLoading"
           data-automation-id="remove-icon"
         ></i>
-      </div>
-      <div class="mixed-multi-picker-list-container">
-        <novo-list direction="vertical" #list>
+      }
+    </div>
+    <div class="mixed-multi-picker-list-container">
+      <novo-list direction="vertical" #list>
+        @for (match of matches; track match) {
           <novo-list-item
-            *ngFor="let match of matches"
             (click)="selectMatch($event)"
             [class.active]="match === activeMatch"
             (mouseenter)="selectActive(match)"
             [class.disabled]="preselected(match) || isLoading"
-            [attr.data-automation-id]="match.label"
-          >
+            [attr.data-automation-id]="match.label">
             <item-content>
               <span>{{ match.label }}</span>
             </item-content>
           </novo-list-item>
-        </novo-list>
+        }
+      </novo-list>
+      @if (matches.length === 0 && !isLoading && selectedPrimaryOption) {
         <div
           class="mixed-multi-picker-no-results"
-          *ngIf="matches.length === 0 && !isLoading && selectedPrimaryOption"
-          data-automation-id="empty-message"
-        >
+          data-automation-id="empty-message">
           {{ config.emptyOptionsLabel ? config.emptyOptionsLabel : labels.groupedMultiPickerEmpty }}
         </div>
-        <div class="mixed-multi-picker-loading" *ngIf="isLoading" data-automation-id="loading-message">
+      }
+      @if (isLoading) {
+        <div class="mixed-multi-picker-loading" data-automation-id="loading-message">
           <novo-loading theme="line"></novo-loading>
         </div>
-      </div>
-    </div>`,
-    styleUrls: ['./MixedMultiPickerResults.scss'],
-    standalone: false
+      }
+    </div>
+  </div>`,
+  styleUrls: ['./MixedMultiPickerResults.scss'],
+  standalone: false
 })
 export class MixedMultiPickerResults extends BasePickerResults implements OnDestroy {
   @ViewChild('input', { static: true })

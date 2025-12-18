@@ -7,18 +7,21 @@ import { NovoActivityTableState } from './state';
 const DEFAULT_PAGE_SIZE = 50;
 
 @Component({
-    selector: 'novo-simple-table-pagination',
-    template: `
+  selector: 'novo-simple-table-pagination',
+  template: `
     <div class="novo-simple-table-pagination-size">
-      <novo-tiles
-        *ngIf="displayedPageSizeOptions.length > 1"
-        [(ngModel)]="pageSize"
-        [options]="displayedPageSizeOptions"
-        (onChange)="changePageSize($event)"
-        data-automation-id="novo-simple-table-pagination-tiles"
-      >
-      </novo-tiles>
-      <div *ngIf="displayedPageSizeOptions.length <= 1">{{ pageSize }}</div>
+      @if (displayedPageSizeOptions.length > 1) {
+        <novo-tiles
+          [(ngModel)]="pageSize"
+          [options]="displayedPageSizeOptions"
+          (onChange)="changePageSize($event)"
+          data-automation-id="novo-simple-table-pagination-tiles"
+          >
+        </novo-tiles>
+      }
+      @else {
+        <div>{{ pageSize }}</div>
+      }
     </div>
 
     <div class="novo-simple-table-range-label-long" data-automation-id="novo-simple-table-pagination-range-label-long">
@@ -36,8 +39,7 @@ const DEFAULT_PAGE_SIZE = 50;
       icon="previous"
       side="left"
       [disabled]="!hasPreviousPage()"
-      data-automation-id="novo-simple-table-pagination-previous"
-    >
+      data-automation-id="novo-simple-table-pagination-previous">
       <span>{{ labels.previous }}</span>
     </novo-button>
     <novo-button
@@ -48,13 +50,12 @@ const DEFAULT_PAGE_SIZE = 50;
       icon="next"
       side="right"
       [disabled]="!hasNextPage()"
-      data-automation-id="novo-simple-table-pagination-next"
-    >
+      data-automation-id="novo-simple-table-pagination-next">
       <span>{{ labels.next }}</span>
     </novo-button>
   `,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class NovoSimpleTablePagination implements OnInit, OnDestroy {
   private _initialized: boolean;

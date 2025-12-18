@@ -17,29 +17,32 @@ import { DataTableState } from '../state/data-table-state.service';
 const MAX_PAGES_DISPLAYED = 5;
 
 @Component({
-    selector: 'novo-data-table-pagination',
-    template: `
-    <ng-container *ngIf="theme === 'basic' || theme === 'basic-wide'">
+  selector: 'novo-data-table-pagination',
+  template: `
+    @if (theme === 'basic' || theme === 'basic-wide') {
       <div class="novo-data-table-pagination-size">
-        <novo-tiles
-          class="pagination-tiles"
-          *ngIf="displayedPageSizeOptions.length > 1"
-          [(ngModel)]="pageSize"
-          [options]="displayedPageSizeOptions"
-          (onChange)="changePageSize($event)"
-          data-automation-id="novo-data-table-pagination-tiles"
-        >
-        </novo-tiles>
-        <div *ngIf="displayedPageSizeOptions.length <= 1">{{ pageSize }}</div>
+        @if (displayedPageSizeOptions.length > 1) {
+          <novo-tiles
+            class="pagination-tiles"
+            [(ngModel)]="pageSize"
+            [options]="displayedPageSizeOptions"
+            (onChange)="changePageSize($event)"
+            data-automation-id="novo-data-table-pagination-tiles">
+          </novo-tiles>
+        }
+        @if (displayedPageSizeOptions.length <= 1) {
+          <div>{{ pageSize }}</div>
+        }
       </div>
-
       <div class="novo-data-table-range-label-long" data-automation-id="novo-data-table-pagination-range-label-long">
         {{ longRangeLabel }}
       </div>
       <div class="novo-data-table-range-label-short" data-automation-id="novo-data-table-pagination-range-label-short">
         {{ shortRangeLabel }}
       </div>
-      <span class="spacer novo-data-table-spacer" *ngIf="theme === 'basic-wide'"></span>
+      @if (theme === 'basic-wide') {
+        <span class="spacer novo-data-table-spacer"></span>
+      }
       <novo-button
         theme="dialogue"
         type="button"
@@ -48,8 +51,7 @@ const MAX_PAGES_DISPLAYED = 5;
         icon="previous"
         side="left"
         [disabled]="!hasPreviousPage()"
-        data-automation-id="novo-data-table-pagination-previous"
-      >
+        data-automation-id="novo-data-table-pagination-previous">
         <span>{{ labels.previous }}</span>
       </novo-button>
       <novo-button
@@ -60,12 +62,11 @@ const MAX_PAGES_DISPLAYED = 5;
         icon="next"
         side="right"
         [disabled]="!hasNextPage()"
-        data-automation-id="novo-data-table-pagination-next"
-      >
+        data-automation-id="novo-data-table-pagination-next">
         <span>{{ labels.next }}</span>
       </novo-button>
-    </ng-container>
-    <ng-container *ngIf="theme === 'standard'">
+    }
+    @if (theme === 'standard') {
       <h5 class="rows">{{ labels.itemsPerPage }}</h5>
       <novo-select
         [options]="displayedPageSizeOptions"
@@ -73,35 +74,44 @@ const MAX_PAGES_DISPLAYED = 5;
         [(ngModel)]="pageSize"
         (onSelect)="changePageSize($event.selected)"
         data-automation-id="pager-select"
-        [attr.data-feature-id]="dataFeatureId"
-      >
+        [attr.data-feature-id]="dataFeatureId">
       </novo-select>
-      <div *ngIf="showPaginationTotalRecordCount && !loading && !errorLoading" class="novo-data-table-of-total-amount" data-automation-id="novo-data-table-of-total-amount">
-        {{ labels.ofXAmount(length) }}
-      </div>
+      @if (showPaginationTotalRecordCount && !loading && !errorLoading) {
+        <div class="novo-data-table-of-total-amount" data-automation-id="novo-data-table-of-total-amount">
+          {{ labels.ofXAmount(length) }}
+        </div>
+      }
       <span class="spacer"></span>
-      <ul *ngIf="!loading && !errorLoading" class="pager" data-automation-id="pager">
-        <li class="page" (click)="selectPage(page - 1)" [ngClass]="{ disabled: page === 0 }">
-          <i class="bhi-previous" data-automation-id="pager-previous"></i>
-        </li>
-        <li class="page" [ngClass]="{ active: p.number === page + 1 }" *ngFor="let p of pages" (click)="selectPage(p.number - 1)">
-          {{ p.text }}
-        </li>
-        <li class="page" (click)="selectPage(page + 1)" [ngClass]="{ disabled: page + 1 === totalPages }">
-          <i class="bhi-next" data-automation-id="pager-next"></i>
-        </li>
-      </ul>
-      <novo-spinner *ngIf="loading"></novo-spinner>
-      <button *ngIf="errorLoading"
-              theme="primary"
-              color="negative"
-              icon="refresh"
-              (click)="paginationRefreshSubject.next()">{{ labels.refreshPagination }}</button>
-    </ng-container>
+      @if (!loading && !errorLoading) {
+        <ul class="pager" data-automation-id="pager">
+          <li class="page" (click)="selectPage(page - 1)" [ngClass]="{ disabled: page === 0 }">
+            <i class="bhi-previous" data-automation-id="pager-previous"></i>
+          </li>
+          @for (p of pages; track p) {
+            <li class="page" [ngClass]="{ active: p.number === page + 1 }" (click)="selectPage(p.number - 1)">
+              {{ p.text }}
+            </li>
+          }
+          <li class="page" (click)="selectPage(page + 1)" [ngClass]="{ disabled: page + 1 === totalPages }">
+            <i class="bhi-next" data-automation-id="pager-next"></i>
+          </li>
+        </ul>
+      }
+      @if (loading) {
+        <novo-spinner></novo-spinner>
+      }
+      @if (errorLoading) {
+        <button
+          theme="primary"
+          color="negative"
+          icon="refresh"
+        (click)="paginationRefreshSubject.next()">{{ labels.refreshPagination }}</button>
+      }
+    }
   `,
-    styleUrls: ['./data-table-pagination.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  styleUrls: ['./data-table-pagination.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class NovoDataTablePagination<T> implements OnInit, OnDestroy {
   @HostBinding('class')

@@ -1189,10 +1189,12 @@ class ErrorNet extends ErrorHandler {
 @Component({
   selector: 'novo-control-templates-test',
   template: `
-  <novo-control-templates></novo-control-templates>
-  <div *ngIf="templatesReady">
-    <novo-control (change)="change.emit($event)" (focus)="focus.emit($event)" (blur)="blur.emit($event)" [form]="form" [control]="control"></novo-control>
-  </div>
+    <novo-control-templates></novo-control-templates>
+    @if (templatesReady) {
+      <div>
+        <novo-control (change)="change.emit($event)" (focus)="focus.emit($event)" (blur)="blur.emit($event)" [form]="form" [control]="control"></novo-control>
+      </div>
+    }
   `,
   providers: [{
     provide: ErrorHandler,

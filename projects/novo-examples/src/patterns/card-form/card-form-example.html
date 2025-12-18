@@ -39,12 +39,12 @@
       <novo-field>
         <novo-label>To</novo-label>
         <novo-chip-list #chips aria-label="Recipients">
-          <novo-chip
-            *ngFor="let person of recipients | slice:0"
-            (removed)="remove(person)">
-            {{person.name}}
-            <novo-icon novoChipRemove>box-times-o</novo-icon>
-          </novo-chip>
+          @for (person of recipients | slice:0; track person) {
+            <novo-chip (removed)="remove(person)">
+              {{person.name}}
+              <novo-icon novoChipRemove>box-times-o</novo-icon>
+            </novo-chip>
+          }
           <input
             novoChipInput
             #searchInput
@@ -52,18 +52,22 @@
             autocomplete="off"
             [formControl]="recipientCtrl"
             (novoChipInputTokenEnd)="add($event)" />
-          <novo-text *ngIf="recipients.length">+{{recipients.length - 2}}</novo-text>
+          @if (recipients.length) {
+            <novo-text>+{{recipients.length - 2}}</novo-text>
+          }
         </novo-chip-list>
         <novo-autocomplete (optionSelected)="selected($event)">
-          <novo-option *ngFor="let person of filteredPeople | async" [value]="person">
-            <novo-flex gap="1rem">
-              <novo-avatar [source]="person"></novo-avatar>
-              <novo-flex direction="column" align="start">
-                <novo-text>{{person.name}}</novo-text>
-                <novo-caption>{{person.email}}</novo-caption>
+          @for (person of filteredPeople | async; track person) {
+            <novo-option [value]="person">
+              <novo-flex gap="1rem">
+                <novo-avatar [source]="person"></novo-avatar>
+                <novo-flex direction="column" align="start">
+                  <novo-text>{{person.name}}</novo-text>
+                  <novo-caption>{{person.email}}</novo-caption>
+                </novo-flex>
               </novo-flex>
-            </novo-flex>
-          </novo-option>
+            </novo-option>
+          }
         </novo-autocomplete>
       </novo-field>
       <!-- Email Subject Line -->

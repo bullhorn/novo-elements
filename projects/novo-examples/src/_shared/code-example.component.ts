@@ -4,8 +4,8 @@ import { Component, Input } from '@angular/core';
 import { EXAMPLE_COMPONENTS, LiveExample } from '../examples.module';
 
 @Component({
-    selector: 'code-example',
-    template: `
+  selector: 'code-example',
+  template: `
     <div class="example">
       <div class="example-container">
         <ng-template [cdkPortalOutlet]="selectedPortal"></ng-template>
@@ -13,11 +13,13 @@ import { EXAMPLE_COMPONENTS, LiveExample } from '../examples.module';
       <div class="example-actions">
         <novo-button theme="icon" icon="book" (click)="toggleSourceView()"></novo-button>
       </div>
-      <code-snippet [example]="example" *ngIf="showSource"></code-snippet>
+      @if (showSource) {
+        <code-snippet [example]="example"></code-snippet>
+      }
     </div>
   `,
-    styles: [
-        `
+  styles: [
+    `
       .example {
         position: relative;
       }
@@ -34,8 +36,8 @@ import { EXAMPLE_COMPONENTS, LiveExample } from '../examples.module';
         right: 0;
       }
     `,
-    ],
-    standalone: false
+  ],
+  standalone: false
 })
 export class CodeExampleComponent {
   /** Component portal for the currently displayed example. */

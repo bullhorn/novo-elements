@@ -7,99 +7,107 @@ import { NovoListElement } from 'novo-elements/elements/list';
 import { BasePickerResults } from '../base-picker-results/BasePickerResults';
 
 @Component({
-    selector: 'grouped-multi-picker-results',
-    template: `
+  selector: 'grouped-multi-picker-results',
+  template: `
     <div class="grouped-multi-picker-groups">
       <novo-list direction="vertical">
-        <novo-list-item
-          *ngIf="config.displayAll"
-          (click)="selectCategory({ value: 'all', label: 'all' })"
-          [class.active]="selectedCategory?.value === 'all'"
-          data-automation-id="display-all"
-          [class.disabled]="isLoading"
-        >
-          <item-content>
-            <span data-automation-id="label">{{ labels.all }}</span>
-          </item-content>
-          <item-end>
-            <i class="bhi-next"></i>
-          </item-end>
-        </novo-list-item>
-        <novo-list-item
-          *ngFor="let category of categories"
-          (click)="selectCategory(category)"
-          [class.active]="selectedCategory?.value === category.value"
-          [attr.data-automation-id]="category.label"
-          [class.disabled]="isLoading"
-        >
-          <item-content>
-            <i *ngIf="category.iconClass" [class]="category.iconClass"></i>
-            <span data-automation-id="label">{{ category.label }}</span>
-          </item-content>
-          <item-end>
-            <i class="bhi-next"></i>
-          </item-end>
-        </novo-list-item>
+        @if (config.displayAll) {
+          <novo-list-item
+            (click)="selectCategory({ value: 'all', label: 'all' })"
+            [class.active]="selectedCategory?.value === 'all'"
+            data-automation-id="display-all"
+            [class.disabled]="isLoading">
+            <item-content>
+              <span data-automation-id="label">{{ labels.all }}</span>
+            </item-content>
+            <item-end>
+              <i class="bhi-next"></i>
+            </item-end>
+          </novo-list-item>
+        }
+        @for (category of categories; track category) {
+          <novo-list-item
+            (click)="selectCategory(category)"
+            [class.active]="selectedCategory?.value === category.value"
+            [attr.data-automation-id]="category.label"
+            [class.disabled]="isLoading">
+            <item-content>
+              @if (category.iconClass) {
+                <i [class]="category.iconClass"></i>
+              }
+              <span data-automation-id="label">{{ category.label }}</span>
+            </item-content>
+            <item-end>
+              <i class="bhi-next"></i>
+            </item-end>
+          </novo-list-item>
+        }
       </novo-list>
-      <footer
-        class="grouped-multi-picker-groups-footer"
-        *ngIf="customFilterEnabled"
-        data-automation-id="footer"
-        [class.disabled]="isLoading"
-      >
-        <novo-switch [(ngModel)]="customFilterValue" (onChange)="fireCustomFilter($event)" data-automation-id="switch"></novo-switch>
-        <label data-automation-id="label">{{ customFilterLabel }}</label>
-      </footer>
+      @if (customFilterEnabled) {
+        <footer
+          class="grouped-multi-picker-groups-footer"
+          data-automation-id="footer"
+          [class.disabled]="isLoading">
+          <novo-switch [(ngModel)]="customFilterValue" (onChange)="fireCustomFilter($event)" data-automation-id="switch"></novo-switch>
+          <label data-automation-id="label">{{ customFilterLabel }}</label>
+        </footer>
+      }
     </div>
     <div class="grouped-multi-picker-matches">
       <div class="grouped-multi-picker-input-container" [hidden]="!selectedCategory" data-automation-id="input-container">
         <input autofocus #input [(ngModel)]="searchTerm" [disabled]="isLoading" data-automation-id="input" [placeholder]="placeholder" />
-        <i class="bhi-search" *ngIf="!searchTerm" [class.disabled]="isLoading" data-automation-id="seach-icon"></i>
-        <i
-          class="bhi-times"
-          *ngIf="searchTerm"
-          (click)="clearSearchTerm($event)"
-          [class.disabled]="isLoading"
-          data-automation-id="remove-icon"
-        ></i>
+        @if (!searchTerm) {
+          <i class="bhi-search" [class.disabled]="isLoading" data-automation-id="seach-icon"></i>
+        }
+        @else {
+          <i
+            class="bhi-times"
+            (click)="clearSearchTerm($event)"
+            [class.disabled]="isLoading"
+            data-automation-id="remove-icon"
+          ></i>
+        }
       </div>
       <div class="grouped-multi-picker-list-container">
         <novo-list direction="vertical" #list>
-          <novo-list-item
-            *ngFor="let match of matches"
-            (click)="selectMatch($event)"
-            [class.active]="match === activeMatch"
-            (mouseenter)="selectActive(match)"
-            [class.disabled]="preselected(match) || isLoading"
-            [attr.data-automation-id]="match.label"
-          >
-            <item-content>
-              <span>{{ match.label }}</span>
-            </item-content>
-          </novo-list-item>
+          @for (match of matches; track match) {
+            <novo-list-item
+              (click)="selectMatch($event)"
+              [class.active]="match === activeMatch"
+              (mouseenter)="selectActive(match)"
+              [class.disabled]="preselected(match) || isLoading"
+              [attr.data-automation-id]="match.label">
+              <item-content>
+                <span>{{ match.label }}</span>
+              </item-content>
+            </novo-list-item>
+          }
         </novo-list>
-        <div
-          class="grouped-multi-picker-no-results"
-          *ngIf="matches.length === 0 && !isLoading && selectedCategory"
-          data-automation-id="empty-message"
-        >
-          {{ labels.groupedMultiPickerEmpty }}
-        </div>
-        <div
-          class="grouped-multi-picker-no-category"
-          *ngIf="matches.length === 0 && !isLoading && !selectedCategory"
-          data-automation-id="select-category-message"
-        >
-          {{ labels.groupedMultiPickerSelectCategory }}
-        </div>
-        <div class="grouped-multi-picker-loading" *ngIf="isLoading" data-automation-id="loading-message">
-          <novo-loading theme="line"></novo-loading>
-        </div>
+        @if (matches.length === 0 && !isLoading && selectedCategory) {
+          <div
+            class="grouped-multi-picker-no-results"
+            data-automation-id="empty-message">
+            {{ labels.groupedMultiPickerEmpty }}
+          </div>
+        }
+        @if (matches.length === 0 && !isLoading && !selectedCategory) {
+          <div
+            class="grouped-multi-picker-no-category"
+            data-automation-id="select-category-message"
+            >
+            {{ labels.groupedMultiPickerSelectCategory }}
+          </div>
+        }
+        @if (isLoading) {
+          <div class="grouped-multi-picker-loading" data-automation-id="loading-message">
+            <novo-loading theme="line"></novo-loading>
+          </div>
+        }
       </div>
     </div>
   `,
-    styleUrls: ['./GroupedMultiPickerResults.scss'],
-    standalone: false
+  styleUrls: ['./GroupedMultiPickerResults.scss'],
+  standalone: false
 })
 export class GroupedMultiPickerResults extends BasePickerResults implements OnInit, OnDestroy {
   @ViewChild('input', { static: true })

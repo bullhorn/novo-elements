@@ -6,25 +6,25 @@
     aria-label="Shift selection"
     [formControl]="shiftCtrl"
     [compareWith]="compareById">
-    <novo-chip
-      *ngFor="let shift of chipList.value"
-      (removed)="remove(shift)">
-      <novo-flex gap="1rem">
-        <novo-text>
-          <novo-icon>calendar</novo-icon>
-          {{shift.startTime | isoDate}}
-        </novo-text>
-        <novo-text>
-          <novo-icon>clock</novo-icon>
-          {{[shift.startTime, shift.endTime] | isoTimeRange}}
-        </novo-text>
-        <novo-text>
-          <novo-icon>candidate-circle</novo-icon>
-          {{shift.numAssigned}} / {{shift.openings}}
-        </novo-text>
-      </novo-flex>
-      <novo-icon novoChipRemove>delete</novo-icon>
-    </novo-chip>
+    @for (shift of chipList.value; track shift) {
+      <novo-chip (removed)="remove(shift)">
+        <novo-flex gap="1rem">
+          <novo-text>
+            <novo-icon>calendar</novo-icon>
+            {{shift.startTime | isoDate}}
+          </novo-text>
+          <novo-text>
+            <novo-icon>clock</novo-icon>
+            {{[shift.startTime, shift.endTime] | isoTimeRange}}
+          </novo-text>
+          <novo-text>
+            <novo-icon>candidate-circle</novo-icon>
+            {{shift.numAssigned}} / {{shift.openings}}
+          </novo-text>
+        </novo-flex>
+        <novo-icon novoChipRemove>delete</novo-icon>
+      </novo-chip>
+    }
     <input
       novoChipInput
       #searchInput
@@ -34,13 +34,15 @@
       (novoChipInputTokenEnd)="add($event)" />
   </novo-chip-list>
   <novo-autocomplete (optionSelected)="selected($event)" multiple>
-    <novo-option *ngFor="let shift of filteredShifts | async" [value]="shift">
-      <novo-text>
-        <novo-icon>calendar</novo-icon>
-        {{shift.startTime | isoDate}}
-        {{[shift.startTime, shift.endTime] | isoTimeRange}}
-      </novo-text>
-    </novo-option>
+    @for (shift of filteredShifts | async; track shift) {
+      <novo-option [value]="shift">
+        <novo-text>
+          <novo-icon>calendar</novo-icon>
+          {{shift.startTime | isoDate}}
+          {{[shift.startTime, shift.endTime] | isoTimeRange}}
+        </novo-text>
+      </novo-option>
+    }
   </novo-autocomplete>
 </novo-field>
 

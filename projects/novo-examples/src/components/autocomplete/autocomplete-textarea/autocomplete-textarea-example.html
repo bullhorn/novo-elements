@@ -5,18 +5,20 @@
       novoInput
       [formControl]="myControl"
       placeholder="Type $ to trigger autocomplete"
-      autocomplete="off"></textarea>
+    autocomplete="off"></textarea>
     <novo-autocomplete [triggerOn]="triggerFn()" #auto>
-      <novo-option *ngFor="let option of filteredOptions | async" [value]="option">
-        {{option}}
-      </novo-option>
+      @for (option of filteredOptions | async; track option) {
+        <novo-option [value]="option">{{option}}</novo-option>
+      }
     </novo-autocomplete>
   </novo-field>
 
   <novo-field appearance="fill">
     <novo-label>Toppings</novo-label>
     <novo-select [formControl]="myOtherControl" multiple>
-      <novo-option *ngFor="let option of filteredOptions | async" [value]="option">{{option}}</novo-option>
+      @for (option of filteredOptions | async; track option) {
+        <novo-option [value]="option">{{option}}</novo-option>
+      }
     </novo-select>
   </novo-field>
 </form>

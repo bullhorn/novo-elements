@@ -11,39 +11,50 @@ import { BasePickerResults } from '../base-picker-results/BasePickerResults';
  * @description This is the actual list of matches that gets injected into the DOM.
  */
 @Component({
-    selector: 'checklist-picker-results',
-    host: {
-        class: 'active picker-results',
-    },
-    template: `
-    <novo-loading theme="line" *ngIf="isLoading && !matches.length"></novo-loading>
-    <ul *ngIf="matches.length > 0">
-      <span *ngFor="let section of matches; let i = index">
-        <li class="header caption" *ngIf="section.data.length > 0">{{ section.label || section.type }}</li>
-        <li
-          *ngFor="let match of section.data; let i = index"
-          [ngClass]="{ checked: match.checked }"
-          (click)="selectMatch($event, match)"
-          [class.active]="match === activeMatch"
-          (mouseenter)="selectActive(match)"
-        >
-          <label>
-            <i
-              [ngClass]="{
-                'bhi-checkbox-empty': !match.checked,
-                'bhi-checkbox-filled': match.checked,
-                'bhi-checkbox-indeterminate': match.indeterminate
-              }"
-            ></i>
-            {{ match.label }}
-          </label>
-        </li>
-      </span>
-    </ul>
-    <p class="picker-error" *ngIf="hasError">{{ labels.pickerError }}</p>
-    <p class="picker-null-results" *ngIf="!isLoading && !matches.length && !hasError && term !== ''">{{ labels.pickerEmpty }}</p>
+  selector: 'checklist-picker-results',
+  host: {
+    class: 'active picker-results',
+  },
+  template: `
+    @if (isLoading && !matches.length) {
+      <novo-loading theme="line"></novo-loading>
+    }
+    @if (matches.length > 0) {
+      <ul>
+        @for (section of matches; track section; let i = $index) {
+          <span>
+            @if (section.data.length > 0) {
+              <li class="header caption">{{ section.label || section.type }}</li>
+            }
+            @for (match of section.data; track match; let i = $index) {
+              <li
+                [ngClass]="{ checked: match.checked }"
+                (click)="selectMatch($event, match)"
+                [class.active]="match === activeMatch"
+                (mouseenter)="selectActive(match)">
+                <label>
+                  <i
+                    [ngClass]="{
+                      'bhi-checkbox-empty': !match.checked,
+                      'bhi-checkbox-filled': match.checked,
+                      'bhi-checkbox-indeterminate': match.indeterminate
+                    }"></i>
+                  {{ match.label }}
+                </label>
+              </li>
+            }
+          </span>
+        }
+      </ul>
+    }
+    @if (hasError) {
+      <p class="picker-error">{{ labels.pickerError }}</p>
+    }
+    @if (!isLoading && !matches.length && !hasError && term !== '') {
+      <p class="picker-null-results">{{ labels.pickerEmpty }}</p>
+    }
   `,
-    standalone: false
+  standalone: false
 })
 export class ChecklistPickerResults extends BasePickerResults {
   filteredMatches: any;

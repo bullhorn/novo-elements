@@ -12,7 +12,9 @@
   </novo-criteria-builder>
 
   <novo-row gap="md" justify="end">
-    <button theme="primary" size="sm" *ngIf="!useNoteMeta" (click)="builder.addConditionGroup()">Add a group</button>
+    @if (!useNoteMeta) {
+      <button theme="primary" size="sm" (click)="builder.addConditionGroup()">Add a group</button>
+    }
     <button theme="secondary" size="sm" (click)="resetGroups()">Reset</button>
     <button theme="secondary" size="sm" (click)="resetQueryForm(useNoteMeta)">Repopulate</button>
   </novo-row>
@@ -35,47 +37,49 @@
       <span tooltip="Adding an additional entity scope to the searchable fields will change the behavior when adding a new condition">
         <novo-icon>info</novo-icon>
       </span></novo-label>
-    <novo-tiles [options]="useNoteMetaOptions" [(ngModel)]="useNoteMeta" (onChange)="setFieldConfig($event)"/>
-  </section>
-</novo-row>
+      <novo-tiles [options]="useNoteMetaOptions" [(ngModel)]="useNoteMeta" (onChange)="setFieldConfig($event)"/>
+    </section>
+  </novo-row>
 
-<novo-row align="start" gap="xl" margin="xl">
-  <section>
-    <novo-label marginRight="md">Hide First Operator
-      <span tooltip="Disabling will display the AND/OR/NOT operator in the first row. Enabling (default) will hide it">
-        <novo-icon>info</novo-icon>
-      </span></novo-label>
-    <novo-tiles [options]="hideFirstOperatorOptions" [(ngModel)]="hideFirstOperator"/>
-  </section>
-</novo-row>
-
-<novo-row align="start" gap="xl" margin="xl">
-  <section>
-    <novo-label marginRight="md">Can Be Empty
-      <span tooltip="Enabling will allow you to delete a row if it is the only row in the criteria builder. Disabling (default) will keep the final row, and will instead clear it out">
-        <novo-icon>info</novo-icon>
-      </span></novo-label>
-    <novo-tiles [options]="canBeEmptyOptions" [(ngModel)]="canBeEmpty"/>
-  </section>
-</novo-row>
-
-<novo-row align="start" gap="xl" margin="xl">
-  <section>
-    <novo-label marginRight="md">Address Radius
-      <span tooltip="Enabling will add a radius option to the full address criteria operator dropdown">
-        <novo-icon>info</novo-icon>
-      </span>
-    </novo-label>
-    <novo-tiles [options]="addressRadiusEnabledOptions" (onChange)="addressRadiusEnabledChanged($event)"
-                [(ngModel)]="addressRadiusEnabled"/>
-    <novo-row *ngIf="addressRadiusEnabled" align="start" gap="xl" marginLeft="xl">
-      <novo-label margin="lg">Units:</novo-label>
-      <novo-select margin="lg" value="miles" (onSelect)="addressRadiusUnitsSelected($event.selected)">
-        <novo-option value="miles">Miles</novo-option>
-        <novo-option value="km">Km</novo-option>
-      </novo-select>
+  <novo-row align="start" gap="xl" margin="xl">
+    <section>
+      <novo-label marginRight="md">Hide First Operator
+        <span tooltip="Disabling will display the AND/OR/NOT operator in the first row. Enabling (default) will hide it">
+          <novo-icon>info</novo-icon>
+        </span></novo-label>
+        <novo-tiles [options]="hideFirstOperatorOptions" [(ngModel)]="hideFirstOperator"/>
+      </section>
     </novo-row>
-  </section>
-</novo-row>
 
-<pre><code>{{ queryForm.value | json }}</code></pre>
+    <novo-row align="start" gap="xl" margin="xl">
+      <section>
+        <novo-label marginRight="md">Can Be Empty
+          <span tooltip="Enabling will allow you to delete a row if it is the only row in the criteria builder. Disabling (default) will keep the final row, and will instead clear it out">
+            <novo-icon>info</novo-icon>
+          </span></novo-label>
+          <novo-tiles [options]="canBeEmptyOptions" [(ngModel)]="canBeEmpty"/>
+        </section>
+      </novo-row>
+
+      <novo-row align="start" gap="xl" margin="xl">
+        <section>
+          <novo-label marginRight="md">Address Radius
+            <span tooltip="Enabling will add a radius option to the full address criteria operator dropdown">
+              <novo-icon>info</novo-icon>
+            </span>
+          </novo-label>
+          <novo-tiles [options]="addressRadiusEnabledOptions" (onChange)="addressRadiusEnabledChanged($event)"
+            [(ngModel)]="addressRadiusEnabled"/>
+          @if (addressRadiusEnabled) {
+            <novo-row align="start" gap="xl" marginLeft="xl">
+              <novo-label margin="lg">Units:</novo-label>
+              <novo-select margin="lg" value="miles" (onSelect)="addressRadiusUnitsSelected($event.selected)">
+                <novo-option value="miles">Miles</novo-option>
+                <novo-option value="km">Km</novo-option>
+              </novo-select>
+            </novo-row>
+          }
+        </section>
+      </novo-row>
+
+      <pre><code>{{ queryForm.value | json }}</code></pre>

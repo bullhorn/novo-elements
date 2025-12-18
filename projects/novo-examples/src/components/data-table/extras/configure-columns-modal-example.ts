@@ -7,8 +7,8 @@ import { MockData } from './mock-data';
  */
 
 @Component({
-    selector: 'configure-columns-modal-example',
-    template: `
+  selector: 'configure-columns-modal-example',
+  template: `
     <novo-modal>
       <header title="Configure Columns" theme="contact">
         <utils>
@@ -17,21 +17,23 @@ import { MockData } from './mock-data';
       </header>
       <section>
         <novo-list direction="vertical">
-          <novo-list-item *ngFor="let column of columns">
-            <item-header>
-              <item-title>{{ column.id }}</item-title>
-              <item-header-end>
-                <novo-checkbox [(ngModel)]="column.enabled"></novo-checkbox>
-              </item-header-end>
-            </item-header>
-          </novo-list-item>
+          @for (column of $any(columns); track column) {
+            <novo-list-item>
+              <item-header>
+                <item-title>{{ column.id }}</item-title>
+                <item-header-end>
+                  <novo-checkbox [(ngModel)]="column.enabled"></novo-checkbox>
+                </item-header-end>
+              </item-header>
+            </novo-list-item>
+          }
         </novo-list>
       </section>
       <button theme="standard" (click)="close()">Cancel</button>
       <button theme="primary" color="success" icon="check" (click)="save()">Save</button>
     </novo-modal>
   `,
-    standalone: false
+  standalone: false
 })
 export class ConfigureColumnsModal {
   public columns: IDataTableColumn<MockData>;
