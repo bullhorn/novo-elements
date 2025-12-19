@@ -25,3 +25,12 @@ export async function asyncForIn(object: Object, callback: Function): Promise<an
         }
     }
 }
+
+export async function asyncMap(array: any[], mapper: Function): Promise<any> {
+    let q: Promise<any> = Promise.resolve();
+    return Promise.all(array.map((v: any) => (q = q.then(() => mapper(v)))));
+}
+
+export function failureMessage(message: any) {
+    console.warn(`      ×`, message);
+}

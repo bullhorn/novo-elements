@@ -1,4 +1,5 @@
 import { asyncForEach } from "utils/AutomationHelpers";
+import { click, scrollIntoView } from "utils/ElementActionUtil";
 import { examplesUrl, URLS } from "utils/EnvironmentUtil";
 import { getAllElements } from "utils/GetElementUtil";
 import { codeExample, elements } from "utils/SelectorUtil";
@@ -88,6 +89,16 @@ describe('Button Demo Page', () => {
     describe('Dynamic', () => {
         it('should display example section', async () => {
             await verifyPresent(codeExample('button-dynamic'));
+        });
+        it('should disable the button', async () => {
+            await scrollIntoView('button-dynamic-example');
+            await verifyPresent('button-dynamic-example button.novo-button.novo-theme-primary');
+            await click('i.bhi-checkbox-empty');
+            await verifyPresent('button-dynamic-example button.novo-button.novo-theme-primary.novo-button-disabled');
+        });
+        it('should re-enable the button', async () => {
+            await click('i.bhi-checkbox-filled');
+            await verifyPresent('button-dynamic-example button.novo-button.novo-theme-primary');
         });
     });
 
