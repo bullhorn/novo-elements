@@ -128,6 +128,20 @@
           }
         }
       }
+    },
+    "novo-e2e": {
+      "root": "projects/novo-e2e",
+      "sourceRoot": "projects/novo-e2e/src",
+      "projectType": "application",
+      "prefix": "novo-e2e",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:custom-webpack",
+          "options": {
+            "tsConfig": "projects/novo-e2e/tsconfig.json"
+          }
+        }
+      }
     }
   },
   "cli": {

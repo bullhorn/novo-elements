@@ -41,7 +41,10 @@
     "postrelease:elements": "git push --follow-tags origin master; npm run build; cd dist/novo-elements && npm publish",
     "snapshot-publish": "bash snapshot-publish",
     "prettier": "prettier --write \"./projects/**/*.{ts,js,html,scss}\"",
-    "prettier:check": "prettier --list-different \"./projects/**/*.{ts,js,html,scss}\""
+    "prettier:check": "prettier --list-different \"./projects/**/*.{ts,js,html,scss}\"",
+    "e2e": "wdio run projects/novo-e2e/wdio.conf.ts --headless=true",
+    "e2e:headed": "wdio run projects/novo-e2e/wdio.conf.ts --headless=false",
+    "e2e:headless": "wdio run projects/novo-e2e/wdio.conf.ts --headless=true"
   },
   "dependencies": {
     "@angular/animations": "^20.3.15",
