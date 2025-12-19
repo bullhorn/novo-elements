@@ -16,16 +16,34 @@ describe('Button Demo Page', () => {
         await browser.navigateTo(URLS.HOME);
     });
 
-    it('should display page title and examples', async () => {
-        await verifyPresent(elements.title);
-        await verifyText(elements.title, 'Button', 'Button example page title');
-        await verifyPresent('button-examples-page');
+    describe('Page Elements', () => {
+        it('should display page title and examples', async () => {
+            await verifyPresent(elements.title);
+            await verifyText(elements.title, 'Button', 'Button example page title');
+            await verifyPresent('button-examples-page');
+        });
+
+        const buttonTypes = [
+            'overview',
+            'primary',
+            'secondary',
+            'inverse',
+            'dialogue',
+            'standard',
+            'icon',
+            'fab',
+            'dynamic',
+            'loading',
+            'two-icon'
+        ];
+        buttonTypes.forEach(type => {
+            it(`should display example section - ${type}`, async () => {
+                await verifyPresent(codeExample(`button-${type}`));
+            });
+        });
     });
 
     describe('Colors', () => {
-        it('should display example section', async () => {
-            await verifyPresent(codeExample('button-overview'));
-        });
         it('should have labels for all main types of buttons', async () => {
             const buttonTypes = ['Basic', 'Primary', 'Secondary', 'Icon', 'Fab'];
             const allButtonTypeLabels = await getAllElements('button-overview-example div.example-label');
@@ -44,52 +62,7 @@ describe('Button Demo Page', () => {
         });
     });
 
-    describe('Primary', () => {
-        it('should display example section', async () => {
-            await verifyPresent(codeExample('button-primary'));
-        });
-    });
-
-    describe('Secondary', () => {
-        it('should display example section', async () => {
-            await verifyPresent(codeExample('button-secondary'));
-        });
-    });
-
-    describe('Inverse', () => {
-        it('should display example section', async () => {
-            await verifyPresent(codeExample('button-inverse'));
-        });
-    });
-
-    describe('Dialogue', () => {
-        it('should display example section', async () => {
-            await verifyPresent(codeExample('button-dialogue'));
-        });
-    });
-
-    describe('Standard', () => {
-        it('should display example section', async () => {
-            await verifyPresent(codeExample('button-primary'));
-        });
-    });
-
-    describe('Icon', () => {
-        it('should display example section', async () => {
-            await verifyPresent(codeExample('button-icon'));
-        });
-    });
-
-    describe('Fab', () => {
-        it('should display example section', async () => {
-            await verifyPresent(codeExample('button-fab'));
-        });
-    });
-
     describe('Dynamic', () => {
-        it('should display example section', async () => {
-            await verifyPresent(codeExample('button-dynamic'));
-        });
         it('should disable the button', async () => {
             await scrollIntoView('button-dynamic-example');
             await verifyPresent('button-dynamic-example button.novo-button.novo-theme-primary');
@@ -103,20 +76,11 @@ describe('Button Demo Page', () => {
     });
 
     describe('Loading', () => {
-        it('should display example section', async () => {
-            await verifyPresent(codeExample('button-loading'));
-        });
-        it('should disable the button', async () => {
+        it('should make the button enter a loading state', async () => {
             await scrollIntoView('button-loading-example');
             await verifyPresent('button-loading-example button.novo-button.novo-theme-primary');
             await click('button-loading-example button.novo-button.novo-theme-primary');
             await verifyPresent('button-loading-example button.novo-button[loading="true"]');
-        });
-    });
-
-    describe('Two Icon', () => {
-        it('should display example section', async () => {
-            await verifyPresent(codeExample('button-two-icon'));
         });
     });
 });
