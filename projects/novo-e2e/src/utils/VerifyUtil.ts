@@ -1,4 +1,4 @@
-import { getAllElements, getElement } from "./GetElementUtil";
+import { getAllElements, getElement } from './GetElementUtil';
 
 export async function verifyPresent(el: string, friendlyElementName: string = '', totalWaitTime: number = 8000, interval = 1000): Promise<void> {
     await expect($(el)).toBePresent({

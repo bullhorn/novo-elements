@@ -1,9 +1,9 @@
-import { failureMessage } from "./AutomationHelpers";
-import { getElementClickability, getElementVisibility, isDisplayed, isPresentAndDisplayed } from "./ElementPropertiesUtil";
-import { getElement, resolveElement } from "./GetElementUtil";
-import { retry } from "./RetryUtil";
-import { sleep } from "./SleepUtil";
-import { waitForElementToBePresent } from "./WaitUtil";
+import { failureMessage } from './AutomationHelpers';
+import { getElementClickability, getElementVisibility, isDisplayed } from './ElementPropertiesUtil';
+import { getElement, resolveElement } from './GetElementUtil';
+import { retry } from './RetryUtil';
+import { sleep } from './SleepUtil';
+import { waitForElementToBePresent } from './WaitUtil';
 
 
 export async function click(element: string | WebdriverIO.Element, index: number = 0, maxRetries = 3): Promise<void> {

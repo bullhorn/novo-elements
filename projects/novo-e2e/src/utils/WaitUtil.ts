@@ -58,7 +58,7 @@ export async function waitForElementPresenceOrAbsenceAndReturnIsPresent(el: stri
             await element.waitForExist({timeout: timeout});
             return true;
         } catch (error) {
-            console.log(`expected ${el} to be present`);
+            console.error(`expected ${el} to be present`);
             return false;
         }
     } else {
@@ -66,7 +66,7 @@ export async function waitForElementPresenceOrAbsenceAndReturnIsPresent(el: stri
             await element.waitForExist({timeout: timeout, reverse: false});
             return true;
         } catch (error) {
-            console.log(`expected ${el} to be absent`);
+            console.error(`expected ${el} to be absent`);
             return false;
         }
     }
@@ -94,7 +94,7 @@ export async function waitForElementOrXMilliseconds(selector: string, timeout: n
     try {
         await waitForElementToExist(selector, timeout);
     } catch (e) {
-        console.log(`The element at ${selector} was not present before the timeout of ${timeout}.
+        console.error(`The element at ${selector} was not present before the timeout of ${timeout}.
             Still moving forward with the test`);
     }
 }
@@ -114,7 +114,7 @@ export async function waitForElementAbsenceOrXSeconds(el: string, timeout = 3000
     try {
         await waitForElementToBeAbsent(el, timeout);
     } catch (e) {
-        console.log(`The element at ${el} was still present after the timeout of ${timeout}.
+        console.error(`The element at ${el} was still present after the timeout of ${timeout}.
             Still moving forward with the test`);
     }
 }

@@ -33,7 +33,7 @@ export async function repeatUntilCondition(asyncFunction: () => Promise<boolean>
             throw new Error(`Check "${description}" failed after ${maxRetries} attempts`);
         } else {
             attempt++;
-            console.log(`Repeating check "${description}": Attempt #${attempt} of ${maxRetries}`);
+            console.info(`Repeating check "${description}": Attempt #${attempt} of ${maxRetries}`);
             return executeAsyncFunction();
         }
     };
