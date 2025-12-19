@@ -1,4 +1,4 @@
-import { asyncForEach } from "./AutomationHelpers";
+import { asyncForEach } from './AutomationHelpers';
 
 export async function getElement(selector: string, index: number = 0): Promise<WebdriverIO.Element> {
     let elem: WebdriverIO.Element;
