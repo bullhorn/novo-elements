@@ -6,3 +6,7 @@ export const URLS = {
 export function examplesUrl(component: string): string {
     return `${URLS.BASE}${component}/examples`;
 }
+
+export function componentsUrl(component: string): string {
+    return `${URLS.BASE}${component}`;
+}

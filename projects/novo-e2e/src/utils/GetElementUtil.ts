@@ -26,6 +26,11 @@ export async function getAllElements(selector: string): Promise<WebdriverIO.Elem
     return (await ($$(selector)).getElements());
 }
 
+export async function getElementCount(selector: string): Promise<number> {
+    const elems = await getAllElements(selector);
+    return elems.length;
+}
+
 export async function getChainedElement(parentElem: WebdriverIO.Element, childElemSelector: string): Promise<WebdriverIO.Element> {
     return (await (parentElem.$(childElemSelector).getElement()));
 }
