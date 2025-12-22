@@ -1,10 +1,36 @@
-import { getAllElements, getElement } from './GetElementUtil';
+import { getAllElements, getElement, getElementCount } from './GetElementUtil';
+import { retry } from "./RetryUtil";
+import { hasClass } from "./ElementPropertiesUtil";
+import { Classes } from "./SelectorUtil";
 
 export async function verifyPresent(el: string, friendlyElementName: string = '', totalWaitTime: number = 8000, interval = 1000): Promise<void> {
     await expect($(el)).toBePresent({
         message: `Expected at least one ${friendlyElementName}, but there were none for selector: ${el}`,
         interval: interval,
         wait: totalWaitTime
+    });
+}
+
+export async function verifyAbsent(el: string, friendlyElementName: string = null, maxRetries: number = 3): Promise<void> {
+    const elementName = friendlyElementName || el;
+    await retry(async () => {
+        const actual = await getElementCount(el);
+        if (actual > 0) {
+            throw new Error(`Expected no elements for ${elementName}, but found: '${actual}' for selector: '${el}'`);
+        }
+    }, null, maxRetries);
+}
+
+export async function verifyNotActive(el: string, friendlyElementName: string = null, index: number = 0): Promise<void> {
+    await verifyClassAbsent(el, Classes.active, friendlyElementName, index);
+}
+
+export async function verifyClassAbsent(el: string, unexpectedClass: string, friendlyElementName: string = null, index: number = 0): Promise<void> {
+    const elementName = friendlyElementName || 'element';
+    await retry(async () => {
+        if (await hasClass(el, unexpectedClass, index)) {
+            throw new Error(`${elementName} has the unexpected class: ${unexpectedClass}.`);
+        }
     });
 }
 
