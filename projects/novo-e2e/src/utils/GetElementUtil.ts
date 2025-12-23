@@ -1,5 +1,3 @@
-import { asyncForEach } from './AutomationHelpers';
-
 export async function getElement(selector: string, index: number = 0): Promise<WebdriverIO.Element> {
     let elem: WebdriverIO.Element;
 
@@ -41,28 +39,28 @@ export async function getChainedElements(parentElem: WebdriverIO.Element, childE
 
 export async function getElementWithTextValue(selector: string, textValue: string): Promise<WebdriverIO.Element | null> {
     const elements: WebdriverIO.Element[] = Array.from(await getAllElements(selector));
-    let elementMatchingText: WebdriverIO.Element;
 
-    await asyncForEach(elements, async (el: WebdriverIO.Element) => {
+    for (const el of elements) {
         const text = await el.getText();
         if (text.toLowerCase() === textValue.toLowerCase()) {
-            elementMatchingText = el;
+            return el;
         }
-    });
+    }
 
-    return elementMatchingText;
+    return null;
 }
 
 export async function getElementIndexWithTextValue(selector: string, textValue: string): Promise<number | null> {
-    let elIndex = null;
     const elements = await getAllElements(selector);
-    await asyncForEach(elements, async (el: { getText: () => any; }, index: number) => {
-        const text = await el.getText();
+
+    for (let index = 0; index < elements.length; index++) {
+        const text = await elements[index].getText();
         if (text.toLowerCase() === textValue.toLowerCase()) {
-            elIndex = index;
+            return index;
         }
-    });
-    return elIndex;
+    }
+
+    return null;
 }
 
 export async function resolveElement(element: string | WebdriverIO.Element, index: number = 0): Promise<WebdriverIO.Element> {

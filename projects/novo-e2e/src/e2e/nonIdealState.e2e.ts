@@ -13,7 +13,7 @@ describe('Non Ideal State Demo Page', () => {
 
     before(async () => {
         await browser.navigateTo(url);
-        buttons = await getAllElements(elements.primary);
+        buttons = await getAllElements(elements.primaryButton);
     });
 
     after(async () => {
