@@ -11,8 +11,13 @@ import { click } from '../utils/ElementActionUtil';
 import { sleep } from '../utils/SleepUtil';
 
 describe('Data Table Demo Tests', () => {
-    const dataTable = 'data-table-page';
     const url = componentsUrl('data-table');
+    const dataTablePage = 'data-table-page';
+    const detailRow = '.novo-data-table-detail-row';
+    const emptyMessage = '.novo-data-table-empty-message';
+    const configureColumnsModal = 'novo-modal [title="Configure Columns"]';
+    const headerPagination = `header ${elements.pagination}`;
+    const footerPagination = `footer ${elements.pagination}`;
 
     before(async () => {
         await browser.navigateTo(url);
@@ -23,8 +28,8 @@ describe('Data Table Demo Tests', () => {
     });
 
     it('should display page title and examples', async () => {
-        await verifyText(`${dataTable} h1`, 'Data Table (source)', 'Data Table example page title');
-        await verifyPresent(dataTable);
+        await verifyText(`${dataTablePage} h1`, 'Data Table (source)', 'Data Table example page title');
+        await verifyPresent(dataTablePage);
     });
 
     describe('Array of Rows section', () => {
@@ -46,11 +51,11 @@ describe('Data Table Demo Tests', () => {
             await verifyText(automationId('Hide'), 'Hide');
         });
         it('should display Configure Columns buttons', async () => {
-            await verifyText(elements.primary, 'Configure Columns', 'Configure Columns button');
+            await verifyText(elements.primaryButton, 'Configure Columns', 'Configure Columns button');
         });
         it('should display Row Details buttons', async () => {
-            await verifyText(elements.primary, 'Show Row Details (first table)', 'Show Row Details (first table) button', 1);
-            await verifyText(elements.primary, 'Hide Row Details (first table)', 'Hide Row Details (first table) button', 2);
+            await verifyText(elements.primaryButton, 'Show Row Details (first table)', 'Show Row Details (first table) button', 1);
+            await verifyText(elements.primaryButton, 'Hide Row Details (first table)', 'Hide Row Details (first table) button', 2);
         });
         it('should display 3 options in the Actions dropdown', async () => {
             await click(`${elements.actions} button`, 1);
@@ -64,7 +69,7 @@ describe('Data Table Demo Tests', () => {
             await click(automationId('Dataset #3'));
             await verifyPresent(`${automationId('Dataset #3')}${elements.buttonThemes.primary}`);
             await verifyPresent(`${automationId('Dataset #1')}${elements.buttonThemes.dialogue}`);
-            await verifyText('.novo-data-table-empty-message', 'Yo! No Records!');
+            await verifyText(emptyMessage, 'Yo! No Records!');
             await click(automationId('Dataset #1'));
         });
         it('should change pagination style', async () => {
@@ -81,15 +86,15 @@ describe('Data Table Demo Tests', () => {
         it('should change pagination placement', async () => {
             await verifyPresent(`${automationId('Top')}${elements.buttonThemes.primary}`);
             await verifyPresent(`${automationId('Bottom')}${elements.buttonThemes.dialogue}`);
-            await verifyPresent(`header ${elements.pagination}`);
-            await verifyElementCountEquals(`header ${elements.pagination}`, 3);
-            await verifyElementCountEquals(`footer ${elements.pagination}`, 0);
+            await verifyPresent(headerPagination);
+            await verifyElementCountEquals(headerPagination, 3);
+            await verifyElementCountEquals(footerPagination, 0);
             await click(automationId('Bottom'));
             await verifyPresent(`${automationId('Bottom')}${elements.buttonThemes.primary}`);
             await verifyPresent(`${automationId('Top')}${elements.buttonThemes.dialogue}`);
-            await verifyPresent(`footer ${elements.pagination}`);
-            await verifyElementCountEquals(`header ${elements.pagination}`, 2);
-            await verifyElementCountEquals(`footer ${elements.pagination}`, 1);
+            await verifyPresent(footerPagination);
+            await verifyElementCountEquals(headerPagination, 2);
+            await verifyElementCountEquals(footerPagination, 1);
         });
         it('should toggle global search', async () => {
             await verifyPresent(`${automationId('Hide')}${elements.buttonThemes.primary}`);
@@ -101,18 +106,18 @@ describe('Data Table Demo Tests', () => {
             await verifyPresent('header novo-search');
         });
         it('should open a Configure Columns modal', async () => {
-            await click(elements.primary);
-            await verifyPresent('novo-modal [title="Configure Columns"]');
-            await verifyText('novo-modal [title="Configure Columns"] novo-title', 'Configure Columns');
+            await click(elements.primaryButton);
+            await verifyPresent(configureColumnsModal);
+            await verifyText(`${configureColumnsModal} novo-title`, 'Configure Columns');
             await click(`button${elements.buttonThemes.standard}`);
-            await verifyAbsent('novo-modal [title="Configure Columns"]');
+            await verifyAbsent(configureColumnsModal);
         });
         it('should show and hide row details', async () => {
-            await click(elements.primary, 1);
-            await verifyPresent('.novo-data-table-detail-row');
-            await click(elements.primary, 2);
+            await click(elements.primaryButton, 1);
+            await verifyPresent(detailRow);
+            await click(elements.primaryButton, 2);
             await sleep(500);
-            await verifyAbsent('.novo-data-table-detail-row');
+            await verifyAbsent(detailRow);
         });
     });
     describe('Test elements', async () => {
