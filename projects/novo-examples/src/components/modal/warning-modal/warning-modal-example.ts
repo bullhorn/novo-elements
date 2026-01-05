@@ -11,7 +11,7 @@ import { NovoModalRef, NovoModalService } from 'novo-elements';
       <button theme="primary" color="negative" icon="delete" (click)="close()">Delete</button>
     </novo-notification>
   `,
-    standalone: false
+    standalone: false,
 })
 export class ModalWarningDemo {
   constructor(private modalRef: NovoModalRef) {}
@@ -27,7 +27,7 @@ export class ModalWarningDemo {
     selector: 'warning-modal-example',
     templateUrl: 'warning-modal-example.html',
     styleUrls: ['warning-modal-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class WarningModalExample {
   constructor(private modalService: NovoModalService) {}

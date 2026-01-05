@@ -9,7 +9,7 @@ import { CheckboxControl, FieldInteractionApi, FormUtils, PickerControl, SelectC
     selector: 'fi-modify-options-example',
     templateUrl: 'fi-modify-options-example.html',
     styleUrls: ['fi-modify-options-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class FiModifyOptionsExample {
   public form: any = {};

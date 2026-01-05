@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'position-drop-down-example',
     templateUrl: 'position-drop-down-example.html',
     styleUrls: ['position-drop-down-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class PositionDropDownExample {
   public POSITION_OPTIONS: { name: string; description: string }[] = [

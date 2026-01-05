@@ -6,7 +6,7 @@ import { Directive, TemplateRef } from '@angular/core';
  */
 @Directive({
     selector: 'ng-template[matExpansionPanelContent]',
-    standalone: false
+    standalone: false,
 })
 export class NovoExpansionPanelContent {
   constructor(public _template: TemplateRef<any>) {}

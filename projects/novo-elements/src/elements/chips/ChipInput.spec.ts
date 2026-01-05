@@ -32,7 +32,7 @@ describe('Directive: NovoChipInput', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [FormsModule, NovoChipsModule, ReactiveFormsModule, NovoFieldModule],
-      declarations: [TestChipInputComponent]
+      declarations: [TestChipInputComponent],
     }).compileComponents();
   }));
 
@@ -50,7 +50,7 @@ describe('Directive: NovoChipInput', () => {
   it('should clear the control value on blur', () => {
     fixture.detectChanges();
     const blurEvent = new FocusEvent('blur', {
-        relatedTarget: mockOverlay
+        relatedTarget: mockOverlay,
     });
     testComponent.textCtrl.setValue('value');
     spyOn(NovoFieldElement.prototype, 'blurEventIsInField').and.returnValue(false);

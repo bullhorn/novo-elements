@@ -83,7 +83,7 @@ const DATE_VALUE_ACCESSOR = {
     </novo-overlay-template>
   `,
     styleUrls: ['./DateRangeInput.scss'],
-    standalone: false
+    standalone: false,
 })
 export class NovoDateRangeInputElement implements OnInit, OnChanges, ControlValueAccessor {
   public formattedStartDate: string = '';

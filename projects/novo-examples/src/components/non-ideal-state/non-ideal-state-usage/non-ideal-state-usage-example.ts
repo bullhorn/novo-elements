@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
     selector: 'non-ideal-state-usage-example',
     templateUrl: './non-ideal-state-usage-example.html',
     styleUrls: ['./non-ideal-state-usage-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class NonIdealStateUsageExample {}

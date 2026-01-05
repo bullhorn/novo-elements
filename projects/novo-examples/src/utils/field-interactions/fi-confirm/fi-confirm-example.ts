@@ -9,7 +9,7 @@ import { FieldInteractionApi, FormUtils, TextBoxControl } from 'novo-elements';
     selector: 'fi-confirm-example',
     templateUrl: 'fi-confirm-example.html',
     styleUrls: ['fi-confirm-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class FiConfirmExample {
   public form: any;

@@ -22,7 +22,7 @@ import type { DateLike, Day, OverlayDate } from 'novo-elements/utils';
     templateUrl: './month-view.component.html',
     styleUrls: ['./month-view.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    standalone: false,
 })
 export class NovoMonthViewElement implements OnInit {
   @Input()
@@ -110,10 +110,10 @@ export class NovoMonthViewElement implements OnInit {
     const start = DateUtil.startOfMonth(month);
 
     // House keeping variables to know when we are done building the month
-    let done = false,
-      date = DateUtil.startOfWeek(start, { weekStartsOn: this.weekStartsOn }),
-      monthIndex = date.getMonth(),
-      count = 0;
+    let done = false;
+    let date = DateUtil.startOfWeek(start, { weekStartsOn: this.weekStartsOn });
+    let monthIndex = date.getMonth();
+    let count = 0;
 
     while (!done) {
       // Build the days for the weeks
@@ -167,7 +167,7 @@ export class NovoMonthViewElement implements OnInit {
 
   /** Returns whether a cell should be marked as an overlay. */
   _hasOverlayType(value: DateLike) {
-    let overlay = this.overlays && this.overlays.find((o) => DateUtil.isSameDay(o.date, value));
+    const overlay = this.overlays && this.overlays.find((o) => DateUtil.isSameDay(o.date, value));
     return overlay ? overlay.type : null;
   }
 

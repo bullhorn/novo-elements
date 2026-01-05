@@ -18,7 +18,7 @@ import {
     selector: 'horizontal-example',
     templateUrl: 'horizontal-example.html',
     styleUrls: ['horizontal-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class HorizontalExample {
   public formGroup: NovoFormGroup;

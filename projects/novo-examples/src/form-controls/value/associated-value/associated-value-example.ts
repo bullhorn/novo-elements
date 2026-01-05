@@ -8,7 +8,7 @@ import { NOVO_VALUE_THEME } from 'novo-elements';
     selector: 'associated-value-example',
     templateUrl: 'associated-value-example.html',
     styleUrls: ['associated-value-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class AssociatedValueExample {
   public theme = NOVO_VALUE_THEME.DEFAULT;

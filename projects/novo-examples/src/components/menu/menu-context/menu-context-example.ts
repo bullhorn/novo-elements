@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'menu-context-example',
     templateUrl: 'menu-context-example.html',
     styleUrls: ['menu-context-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class MenuContextExample {
   public apple = 'Context is Apples';

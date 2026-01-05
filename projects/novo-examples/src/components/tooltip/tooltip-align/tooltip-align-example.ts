@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
     selector: 'tooltip-align-example',
     templateUrl: 'tooltip-align-example.html',
     styleUrls: ['tooltip-align-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class TooltipAlignExample {}

@@ -8,7 +8,7 @@ import { GroupedMultiPickerResults } from 'novo-elements';
     selector: 'grouped-multi-picker-example',
     templateUrl: 'grouped-multi-picker-example.html',
     styleUrls: ['grouped-multi-picker-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class GroupedMultiPickerExample {
   public placeholder: string = 'Select...';

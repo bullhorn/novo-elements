@@ -9,7 +9,7 @@ import { Directive } from '@angular/core';
         '[type]': 'type',
     },
     inputs: ['type'],
-    standalone: false
+    standalone: false,
 })
 export class NovoStepperNext extends CdkStepperNext {}
 
@@ -21,6 +21,6 @@ export class NovoStepperNext extends CdkStepperNext {}
         '[type]': 'type',
     },
     inputs: ['type'],
-    standalone: false
+    standalone: false,
 })
 export class NovoStepperPrevious extends CdkStepperPrevious {}

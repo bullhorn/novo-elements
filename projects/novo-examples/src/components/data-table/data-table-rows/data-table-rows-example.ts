@@ -20,7 +20,7 @@ import { ConfigureColumnsModal, MockData } from '../extras';
     templateUrl: 'data-table-rows-example.html',
     styleUrls: ['data-table-rows-example.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    standalone: false,
 })
 export class DataTableRowsExample implements AfterViewInit {
   @ViewChild('basic')

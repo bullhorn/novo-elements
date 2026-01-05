@@ -24,7 +24,7 @@ class FixedSelectComponent {
   select: NovoSelectElement;
 
   form = new FormGroup({
-    value: new FormControl(['2'])
+    value: new FormControl(['2']),
   });
 }
 

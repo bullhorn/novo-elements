@@ -38,7 +38,7 @@ const CHECKLIST_VALUE_ACCESSOR = {
       </label>
     </div>
   `,
-    standalone: false
+    standalone: false,
 })
 export class NovoCheckListElement implements ControlValueAccessor, OnInit {
   @Input() name: string;

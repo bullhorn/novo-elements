@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
     selector: 'avatar-usage-example',
     templateUrl: 'avatar-usage-example.html',
     styleUrls: ['avatar-usage-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class AvatarUsageExample {}

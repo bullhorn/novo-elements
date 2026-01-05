@@ -37,7 +37,7 @@ import { NovoLabelService } from 'novo-elements/services';
   `,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.Default,
-    standalone: false
+    standalone: false,
 })
 export class NovoDefaultNumberConditionDef extends AbstractConditionFieldDef {
   defaultOperator = Operator.equalTo;

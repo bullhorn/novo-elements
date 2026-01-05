@@ -7,7 +7,7 @@ import { BooleanInput } from 'novo-elements/utils';
 @Component({
     selector: 'novo-card-actions',
     template: '<ng-content></ng-content>',
-    standalone: false
+    standalone: false,
 })
 export class CardActionsElement {}
 
@@ -19,7 +19,7 @@ export class CardActionsElement {}
     host: { class: 'novo-card-content', '[class.condensed]': 'condensed' },
     template: '<ng-content></ng-content>',
     styleUrls: ['./CardContent.scss'],
-    standalone: false
+    standalone: false,
 })
 export class CardContentElement {
   @Input() @BooleanInput() condensed: boolean = false;
@@ -42,7 +42,7 @@ export class CardContentElement {
     </div>
   `,
     styleUrls: ['./CardHeader.scss'],
-    standalone: false
+    standalone: false,
 })
 export class CardHeaderElement {}
 
@@ -51,7 +51,7 @@ export class CardHeaderElement {}
     host: { class: 'novo-card-footer' },
     template: '<ng-content></ng-content>',
     styleUrls: ['./CardFooter.scss'],
-    standalone: false
+    standalone: false,
 })
 export class CardFooterElement {}
 
@@ -125,7 +125,7 @@ export class CardFooterElement {}
     ></ng-content>
   `,
     styleUrls: ['./Card.scss'],
-    standalone: false
+    standalone: false,
 })
 export class CardElement implements OnChanges, OnInit {
   @Input()

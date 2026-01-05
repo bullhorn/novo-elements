@@ -49,7 +49,7 @@ import { novoSidenavAnimations } from './sidenav.animations';
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: false
+    standalone: false,
 })
 export class NovoSidenavComponent implements AfterContentInit, AfterContentChecked, OnDestroy {
   /** Whether the sidenav is fixed in the viewport. */

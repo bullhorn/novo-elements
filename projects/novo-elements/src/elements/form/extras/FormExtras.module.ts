@@ -30,7 +30,7 @@ import { NovoFieldModule } from 'novo-elements/elements/field';
     DragDropModule,
     NovoFlexModule,
     NovoFieldModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   declarations: [NovoAddressElement, NovoFileInputElement, NumberRangeComponent],
   exports: [NovoAddressElement, NovoFileInputElement, NumberRangeComponent],

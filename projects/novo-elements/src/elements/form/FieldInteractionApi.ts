@@ -889,6 +889,7 @@ export class FieldInteractionApi {
   }
 
   debounce(func: () => void, wait = 50) {
+    // eslint-disable-next-line prefer-const
     let h;
     clearTimeout(h);
     h = setTimeout(() => func(), wait);

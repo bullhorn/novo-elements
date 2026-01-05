@@ -5,7 +5,7 @@ import { Security } from 'novo-elements/services';
 
 @Directive({
     selector: '[bhUnless]',
-    standalone: false
+    standalone: false,
 })
 export class Unless {
   permissions: string = '';

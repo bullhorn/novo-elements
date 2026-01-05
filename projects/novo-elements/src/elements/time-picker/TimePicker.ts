@@ -121,7 +121,7 @@ export enum TIME_VALUE_FORMATS {
         class: 'novo-time-picker',
         '[class.military]': 'military',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoTimePickerElement implements ControlValueAccessor, OnInit, OnChanges {
   @Input()
@@ -313,6 +313,7 @@ export class NovoTimePickerElement implements ControlValueAccessor, OnInit, OnCh
     const pmFormat = this.labels.timeFormatPM.toUpperCase();
 
     const [time, modifier] = time12h.split(' ');
+    // eslint-disable-next-line prefer-const
     let [hours, minutes] = time.split(':');
     if (hours === '12') {
       hours = '00';

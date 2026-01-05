@@ -3,7 +3,7 @@ import { Directive, TemplateRef } from '@angular/core';
 
 @Directive({
     selector: '[novoStepLabel]',
-    standalone: false
+    standalone: false,
 })
 export class NovoStepLabel extends CdkStepLabel {
   constructor(template: TemplateRef<any>) {

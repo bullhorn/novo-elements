@@ -12,7 +12,7 @@ import { primaryColors as colors } from '../colors';
     selector: 'primary-colors-example',
     templateUrl: './primary-colors-example.html',
     styleUrls: ['./primary-colors-example.scss'],
-    standalone: false
+    standalone: false,
 })
 export class PrimaryColorsExample {
   primaryColors = colors;

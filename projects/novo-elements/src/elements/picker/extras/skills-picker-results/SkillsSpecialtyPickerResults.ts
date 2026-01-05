@@ -33,7 +33,7 @@ import { BasePickerResults } from '../base-picker-results/BasePickerResults';
     <p class="picker-null" *ngIf="!isLoading && !matches.length && !hasError">{{ labels.pickerEmpty }}</p>
   `,
     styleUrls: ['./SkillsSpecialtyPickerResults.scss'],
-    standalone: false
+    standalone: false,
 })
 export class SkillsSpecialtyPickerResults extends BasePickerResults {
   @HostBinding('class.active')

@@ -27,12 +27,12 @@ import { NovoHintElement } from './hint/hint';
 
 @Directive({
     selector: '[novoPrefix]',
-    standalone: false
+    standalone: false,
 })
 export class NovoFieldPrefixDirective {}
 @Directive({
     selector: '[novoSuffix]',
-    standalone: false
+    standalone: false,
 })
 export class NovoFieldSuffixDirective {}
 
@@ -81,7 +81,7 @@ export const NOVO_FORM_FIELD = new InjectionToken<NovoFieldElement>('NovoFormFie
         '[class.ng-pending]': '_shouldForward("pending")',
     },
     providers: [{ provide: NOVO_FORM_FIELD, useExisting: NovoFieldElement }],
-    standalone: false
+    standalone: false,
 })
 export class NovoFieldElement implements AfterContentInit, OnDestroy {
   private _labelClicks = Subscription.EMPTY;

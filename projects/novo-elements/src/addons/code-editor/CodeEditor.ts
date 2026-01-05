@@ -27,7 +27,7 @@ const FormControlCodeWriter = Annotation.define();
     template: '',
     styleUrls: ['./CodeEditor.scss'],
     providers: [CODE_EDITOR_VALUE_ACCESSOR],
-    standalone: false
+    standalone: false,
 })
 export class NovoCodeEditor implements ControlValueAccessor, OnInit, OnDestroy, AfterViewInit {
   @Input()
@@ -73,7 +73,7 @@ export class NovoCodeEditor implements ControlValueAccessor, OnInit, OnDestroy, 
   createEditorView(): void {
     const extensions = [
       basicSetup,
-      keymap.of(defaultKeymap)
+      keymap.of(defaultKeymap),
     ];
     if (this.mode === 'javascript') {
       extensions.push(javascript());
@@ -93,7 +93,7 @@ export class NovoCodeEditor implements ControlValueAccessor, OnInit, OnDestroy, 
         if (transaction.docChanged) {
           this.changed.emit(view.state.doc.toString());
         }
-      }
+      },
     });
   }
 

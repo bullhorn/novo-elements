@@ -75,7 +75,7 @@ export class DataTableSource<T> extends DataSource<T> {
         return data.results;
       }),
       catchError((err, caught) => {
-        console.error(err, caught); // tslint: disable-line
+        console.error(err, caught);
         this.loading = false;
         return of(null);
       }),

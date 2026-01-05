@@ -54,7 +54,7 @@ import { Helpers, Key, OutsideClick } from 'novo-elements/utils';
         '(keydown)': 'onKeyDown($event)',
         '[class.active]': 'active',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoCategoryDropdownElement extends OutsideClick implements OnInit, OnDestroy {
   _query: string = '';

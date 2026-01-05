@@ -8,7 +8,7 @@ import { DateControl, DateTimeControl, FormUtils, TimeControl, TimezoneControl }
     selector: 'calendar-input-controls-example',
     templateUrl: 'calendar-input-controls-example.html',
     styleUrls: ['calendar-input-controls-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class CalendarInputControlsExample {
   public dateControl: any;

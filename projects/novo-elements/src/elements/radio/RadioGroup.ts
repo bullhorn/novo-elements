@@ -52,7 +52,7 @@ const NovoRadioGroupMixins: CanUpdateErrorStateCtor & typeof NovoRadioGroupBase 
         '[class.novo-radio-group-appearance-horizontal]': 'appearance=="horizontal"',
         '[class.novo-radio-group-appearance-vertical]': 'appearance=="vertical"',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoRadioGroup extends NovoRadioGroupMixins implements NovoFieldControl<any>, ControlValueAccessor, AfterContentInit {
   private _uniqueId: string = `novo-radio-group-${++nextId}`;

@@ -9,7 +9,7 @@ import { CheckboxControl, FileControl, FormUtils, PickerControl, TextBoxControl 
     selector: 'updating-form-example',
     templateUrl: 'updating-form-example.html',
     styleUrls: ['updating-form-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class UpdatingFormExample {
   public textControl: any;

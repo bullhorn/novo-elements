@@ -51,7 +51,7 @@ export class QueryBuilderService {
   }
   private _config: QueryBuilderConfig = {
     fields: [],
-    staticFieldSelection: null
+    staticFieldSelection: null,
   };
 
   /**

@@ -8,7 +8,7 @@ import { NOVO_VALUE_THEME } from 'novo-elements';
     selector: 'formatter-value-example',
     templateUrl: 'formatter-value-example.html',
     styleUrls: ['formatter-value-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class FormatterValueExample {
   public theme = NOVO_VALUE_THEME.DEFAULT;

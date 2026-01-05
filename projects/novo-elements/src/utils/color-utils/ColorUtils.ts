@@ -146,6 +146,9 @@ function rgbToHsl({ r, g, b }: RGB): HSL {
       case b:
         h = (r - g) / d + 4;
         break;
+      default:
+        // max is always one of r, g, or b; this should never be reached
+        break;
     }
     h /= 6;
   }
@@ -165,7 +168,9 @@ function rgbToHsl({ r, g, b }: RGB): HSL {
  * @return  Array           The RGB representation
  */
 function hslToRgb({ h, s, l }: HSL): RGB {
-  let r, g, b;
+  let r;
+  let g;
+  let b;
 
   if (s === 0) {
     r = g = b = l; // achromatic
@@ -219,11 +224,10 @@ function rgbToHsv({ r, g, b }: RGB): HSV {
   const max = Math.max(r, g, b);
   const min = Math.min(r, g, b);
   let h;
-  let s;
   const v = max;
 
   const d = max - min;
-  s = max === 0 ? 0 : d / max;
+  const s = max === 0 ? 0 : d / max;
 
   if (max === min) {
     h = 0; // achromatic
@@ -237,6 +241,9 @@ function rgbToHsv({ r, g, b }: RGB): HSV {
         break;
       case b:
         h = (r - g) / d + 4;
+        break;
+      default:
+        // max is always one of r, g, or b; this should never be reached
         break;
     }
     h /= 6;
@@ -257,7 +264,9 @@ function rgbToHsv({ r, g, b }: RGB): HSV {
  * @return  Array           The RGB representation
  */
 function hsvToRgb({ h, s, v }: HSV): RGB {
-  let r, g, b;
+  let r;
+  let g;
+  let b;
 
   const i = Math.floor(h * 6);
   const f = h * 6 - i;
@@ -283,6 +292,9 @@ function hsvToRgb({ h, s, v }: HSV): RGB {
       break;
     case 5:
       (r = v), (g = p), (b = q);
+      break;
+    default:
+      // i % 6 is always 0-5; this should never be reached
       break;
   }
 

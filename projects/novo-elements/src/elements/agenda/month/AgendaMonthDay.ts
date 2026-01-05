@@ -48,7 +48,7 @@ import { CalendarEvent, CalendarEventResponse, MonthViewDay } from 'novo-element
         '[class.agenda-has-events]': 'day.events.length > 0',
         '[style.backgroundColor]': 'day.backgroundColor',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoAgendaMonthDayElement {
   @Input()

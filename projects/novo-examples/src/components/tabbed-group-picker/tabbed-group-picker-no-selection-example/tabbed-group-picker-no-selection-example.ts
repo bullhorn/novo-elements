@@ -7,13 +7,13 @@ import { Component } from '@angular/core';
     selector: 'tabbed-group-picker-no-selection-example',
     templateUrl: 'tabbed-group-picker-no-selection-example.html',
     styleUrls: ['../tabbed-group-picker-example.scss'],
-    standalone: false
+    standalone: false,
 })
 export class TabbedGroupPickerNoSelectionExample {
   getActions = (): { actionId: number; name: string }[] =>
     ['Run', 'Jump', 'Swim', 'Climb', 'Walk', 'Fly'].map((name, index) => ({
       name,
-      actionId: index + 1
+      actionId: index + 1,
     }));
 
   actionsTab = {
@@ -25,7 +25,7 @@ export class TabbedGroupPickerNoSelectionExample {
   };
 
   example_tab = [
-    this.actionsTab
+    this.actionsTab,
   ];
 
   public example_buttonConfig = {

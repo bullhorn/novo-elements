@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'calendar-example',
     templateUrl: 'calendar-example.html',
     styleUrls: ['calendar-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class CalendarExample {
   activeDate = new Date();

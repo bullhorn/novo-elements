@@ -24,7 +24,7 @@ type DateRange = {
         class: 'novo-date-range-format',
     },
     providers: [DATERANGEFORMAT_VALUE_ACCESSOR, { provide: NOVO_INPUT_FORMAT, useExisting: NovoDateRangeFormatDirective }],
-    standalone: false
+    standalone: false,
 })
 export class NovoDateRangeFormatDirective extends IMaskDirective<any> {
   valueChange: EventEmitter<any> = new EventEmitter();
@@ -70,7 +70,9 @@ export class NovoDateRangeFormatDirective extends IMaskDirective<any> {
   }
 
   formatAsIso(value: DateRange): string {
-    if (!value) return '';
+    if (!value) {
+      return '';
+    }
     const { startDate, endDate } = value;
     if (startDate && isValid(startDate) && endDate && isValid(endDate)) {
       const startIso = startDate.toISOString().slice(0, 10);
@@ -81,7 +83,9 @@ export class NovoDateRangeFormatDirective extends IMaskDirective<any> {
   }
 
   formatValue(value: DateRange): string {
-    if (!value) return '';
+    if (!value) {
+      return '';
+    }
     const { startDate, endDate } = value;
     return `${this.formatDate(startDate)} - ${this.formatDate(endDate)}`;
   }

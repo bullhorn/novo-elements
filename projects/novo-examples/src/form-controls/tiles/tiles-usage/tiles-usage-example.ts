@@ -8,7 +8,7 @@ import { allColors } from '../../../design';
     selector: 'tiles-usage-example',
     templateUrl: 'tiles-usage-example.html',
     styleUrls: ['tiles-usage-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class TilesUsageExample {
   public demoTilesDefault: Array<any> = [

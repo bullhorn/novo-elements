@@ -43,7 +43,7 @@ const PROGRESS_BAR_VALUE_ACCESSOR = {
       />
     </svg>
   `,
-    standalone: false
+    standalone: false,
 })
 export class NovoProgressBarElement implements ControlValueAccessor, OnInit {
   private _uniqueId: string = `novo-progress-${++nextId}`;
@@ -77,7 +77,7 @@ export class NovoProgressBarElement implements ControlValueAccessor, OnInit {
   @HostBinding('style.width')
   get width() {
     if (this.appearance === ProgressAppearance.RADIAL) {
-      return `100%`;
+      return '100%';
     }
     return `${this._percent * 100}%`;
   }

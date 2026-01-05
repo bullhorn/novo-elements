@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'scroll-to-item-drop-down-example',
     templateUrl: 'scroll-to-item-drop-down-example.html',
     styleUrls: ['scroll-to-item-drop-down-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class ScrollToItemDropDownExample {
   public selectedWord: string = '';

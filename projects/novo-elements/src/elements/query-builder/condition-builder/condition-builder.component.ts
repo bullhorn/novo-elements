@@ -17,7 +17,7 @@ import {
   ViewChild,
   ViewContainerRef,
   computed,
-  input
+  input,
 } from '@angular/core';
 import { ControlContainer, FormControl, FormGroup } from '@angular/forms';
 import { NovoLabelService } from 'novo-elements/services';
@@ -34,7 +34,7 @@ import { AddressCriteriaConfig, BaseFieldDef, DateCriteriaConfig, FieldConfig, Q
  */
 @Directive({
     selector: '[conditionInputOutlet]',
-    standalone: false
+    standalone: false,
 })
 export class ConditionInputOutlet implements QueryFilterOutlet {
   constructor(public viewContainer: ViewContainerRef, public elementRef: ElementRef) {}
@@ -46,7 +46,7 @@ export class ConditionInputOutlet implements QueryFilterOutlet {
  */
 @Directive({
     selector: '[conditionOperatorOutlet]',
-    standalone: false
+    standalone: false,
 })
 export class ConditionOperatorOutlet implements QueryFilterOutlet {
   constructor(public viewContainer: ViewContainerRef, public elementRef: ElementRef) {}
@@ -65,11 +65,11 @@ export class ConditionOperatorOutlet implements QueryFilterOutlet {
                     queryBuilderService = new QueryBuilderService(labelService);
                 }
                 return queryBuilderService;
-            }
-        }
+            },
+        },
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    standalone: false,
 })
 export class ConditionBuilderComponent implements OnInit, OnChanges, AfterContentInit, AfterViewInit, OnDestroy {
   @ViewChild(ConditionOperatorOutlet, { static: true }) _operatorOutlet: ConditionOperatorOutlet;
@@ -213,7 +213,9 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
 
   getField() {
     const field = this.parentForm?.value?.field;
-    if (!field) return null;
+    if (!field) {
+      return null;
+    }
     return this.fieldConfig.find(field);
   }
 
@@ -255,7 +257,9 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
   }
 
   private findDefinitionForField(field) {
-    if (!field) return;
+    if (!field) {
+      return;
+    }
     const editType = this.editTypeFn()(field);
     // Don't look at dataSpecialization it is no good, this misses currency, and percent
     const { name } = field;

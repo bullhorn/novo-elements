@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
     selector: 'button-secondary-example',
     templateUrl: 'button-secondary-example.html',
     styleUrls: ['button-secondary-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class ButtonSecondaryExample {}

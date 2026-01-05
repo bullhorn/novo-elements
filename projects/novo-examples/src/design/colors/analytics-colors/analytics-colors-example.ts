@@ -12,7 +12,7 @@ import { analyticsColors as colors } from '../colors';
     selector: 'analytics-colors-example',
     templateUrl: './analytics-colors-example.html',
     styleUrls: ['./analytics-colors-example.scss'],
-    standalone: false
+    standalone: false,
 })
 export class AnalyticsColorsExample {
   analyticsColors = colors;

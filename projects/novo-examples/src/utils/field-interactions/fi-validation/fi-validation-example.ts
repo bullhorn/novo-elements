@@ -9,7 +9,7 @@ import { FieldInteractionApi, FormUtils, TextBoxControl } from 'novo-elements';
     selector: 'fi-validation-example',
     templateUrl: 'fi-validation-example.html',
     styleUrls: ['fi-validation-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class FiValidationExample {
   public form: any = {};

@@ -22,7 +22,7 @@ import {
     <span class="dot"></span>
     <span class="dot"></span>
   `,
-    standalone: false
+    standalone: false,
 })
 export class NovoLoadingElement {
   /**
@@ -31,7 +31,7 @@ export class NovoLoadingElement {
    **/
   @Input()
   set theme(value: string) {
-    console.warn(`'theme' property is deprecated, please use 'color'.`);
+    console.warn('\'theme\' property is deprecated, please use \'color\'.');
     this.color = value;
   }
   get theme(): string {
@@ -67,7 +67,7 @@ export class NovoLoadingElement {
     <div class="dot11 dot"></div>
     <div class="dot12 dot"></div>
   `,
-    standalone: false
+    standalone: false,
 })
 export class NovoSpinnerElement {
   /**
@@ -76,7 +76,7 @@ export class NovoSpinnerElement {
    **/
   @Input()
   set theme(value: string) {
-    console.warn(`'theme' property is deprecated, please use 'color'.`);
+    console.warn('\'theme\' property is deprecated, please use \'color\'.');
     this.color = value;
   }
   get theme(): string {
@@ -106,7 +106,7 @@ export class NovoSpinnerElement {
 
 @Directive({
     selector: '[skeleton]',
-    standalone: false
+    standalone: false,
 })
 export class NovoSkeletonDirective {
   @HostBinding('class.skeleton')
@@ -114,13 +114,13 @@ export class NovoSkeletonDirective {
 }
 @Directive({
     selector: '[loaded]',
-    standalone: false
+    standalone: false,
 })
 export class NovoLoadedDirective {}
 
 @Directive({
     selector: '[isLoading]',
-    standalone: false
+    standalone: false,
 })
 export class NovoIsLoadingDirective {
   @ContentChildren(NovoSkeletonDirective, { read: TemplateRef })

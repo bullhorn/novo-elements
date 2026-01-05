@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
     selector: 'breadcrumb-usage-example',
     templateUrl: 'breadcrumb-usage-example.html',
     styleUrls: ['breadcrumb-usage-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class BreadcrumbUsageExample {}

@@ -10,7 +10,7 @@ import { NovoModalRef, NovoModalService } from 'novo-elements';
       <button theme="primary" icon="refresh-o" (click)="close()">Refresh this page</button>
     </novo-notification>
   `,
-    standalone: false
+    standalone: false,
 })
 export class ModalErrorDemo {
   constructor(private modalRef: NovoModalRef) {}
@@ -26,7 +26,7 @@ export class ModalErrorDemo {
     selector: 'error-modal-example',
     templateUrl: 'error-modal-example.html',
     styleUrls: ['error-modal-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class ErrorModalExample {
   constructor(private modalService: NovoModalService) {}

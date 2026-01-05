@@ -35,7 +35,7 @@ class FakeEvent {
 
   dataTransfer = {
     effectAllowed: 'none',
-    dropEffect: 'undefined'
+    dropEffect: 'undefined',
   }
 }
 
@@ -49,7 +49,7 @@ describe('Elements: NovoDragDropParent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [DragDropTestComponent],
-      imports: [NovoDragDropModule]
+      imports: [NovoDragDropModule],
     }).compileComponents();
     fixture = TestBed.createComponent(DragDropTestComponent);
     directive = fixture.debugElement.queryAllNodes(By.directive(NovoDragBoxParent))[0].injector.get(NovoDragBoxParent);
@@ -124,26 +124,26 @@ describe('Elements: NovoDragDropParent', () => {
       left: 150,
       right: 250,
       top: 220,
-      bottom: 320
+      bottom: 320,
     };
     const mockElement: any = {
       getBoundingClientRect() {
         return mockRect;
-      }
+      },
     };
     expect(directive.isElementWithinEventBounds(mockElement, {
       clientX: 170,
-      clientY: 280
+      clientY: 280,
     } as any)).toBeTruthy();
 
     expect(directive.isElementWithinEventBounds(mockElement, {
       clientX: 140,
-      clientY: 280
+      clientY: 280,
     } as any)).toBeFalsy();
 
     expect(directive.isElementWithinEventBounds(mockElement, {
       clientX: 160,
-      clientY: 200
+      clientY: 200,
     } as any)).toBeFalsy();
   });
 
