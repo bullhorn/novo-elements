@@ -469,7 +469,7 @@ export class NovoSelectElement
     this.focusMonitor.stopMonitoring(this.elementRef.nativeElement);
   }
 
-  @HostListener('click', ['$event'])
+  @HostListener('click')
   onClick() {
     this.togglePanel();
     return false;

@@ -3,6 +3,7 @@ import { waitForAsync, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { ComponentUtils, NovoLabelService } from 'novo-elements/services';
 import { Key } from 'novo-elements/utils';
+import { ReplaySubject } from 'rxjs';
 // App
 import { NovoMultiPickerElement } from './MultiPicker';
 import { NovoMultiPickerModule } from './MultiPicker.module';
@@ -21,10 +22,13 @@ describe('Element: NovoMultiPickerElement', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(NovoMultiPickerElement);
     component = fixture.debugElement.componentInstance;
+    component.types = [];
+    component.source = { options: [] };
   }));
 
   describe('Method: ngOnInit()', () => {
     it('should initialize properly', () => {
+      fixture.detectChanges();
       expect(component.ngOnInit).toBeDefined();
       expect(component.clearValue).toBeDefined();
       expect(component.setupOptions).toBeDefined();
@@ -47,8 +51,9 @@ describe('Element: NovoMultiPickerElement', () => {
     });
   });
 
-describe('setupOptions()', () => {
+  describe('Method: setupOptions()', () => {
     it('should initialize _options as empty array', () => {
+      component.types = [];
       component.source = { options: [] };
       component.setupOptions();
       expect(component._options).toEqual([]);
@@ -473,13 +478,15 @@ describe('setupOptions()', () => {
     });
   });
 
-  xdescribe('Method: modifyAllOfType(type, action)', () => {
+  describe('Method: modifyAllOfType(type, action)', () => {
     it('should select all if selecting', () => {
       component.types = [{ value: 'cats' }];
-      const kitty = { value: 'Kitty', checked: true, type: 'cats' };
+      const kitty = { value: 'Kitty', checked: false, type: 'cats' };
       const allItem = { value: 'ALL', checked: false, type: 'cats' };
       component._options = [{ type: 'cats', data: [allItem, kitty], originalData: [allItem, kitty] }];
       component.value = { cats: [] };
+      component.selectAllOption = true;
+      component.items = [];
       component.modifyAllOfType('cats', 'select');
       expect(component._options[0].data[0].checked).toBeTruthy();
       expect(component._options[0].data[1].checked).toBeTruthy();
@@ -492,25 +499,28 @@ describe('setupOptions()', () => {
       component._options = [
         {
           type: 'cats',
-          data: [{ value: 'ALL', checked: false, type: 'cats' }, kitty],
-          originalData: [{ value: 'ALL', checked: false, type: 'cats' }, kitty],
+          data: [{ value: 'ALL', checked: true, type: 'cats' }, kitty],
+          originalData: [{ value: 'ALL', checked: true, type: 'cats' }, kitty],
         },
       ];
-      component.value = { cats: [{ value: 'Kitty', checked: true, type: 'cats' }] };
+      component.value = { cats: ['Kitty'] };
+      component.selectAllOption = false;
       component.modifyAllOfType('cats', 'unselect');
       expect(component._options[0].data[1].checked).toBeFalsy();
       expect(component.value.cats.length).toBe(0);
     });
   });
 
-  xdescribe('Method: selectAll(type)', () => {
+  describe('Method: selectAll(type)', () => {
     it('should correctly update value and items when selecting all', () => {
+      component.selectAllOption = true;
       component.types = [{ value: 'cats' }];
       const kitty = { value: 'Kitty', checked: false, type: 'cats' };
       const allItem = { value: 'ALL', checked: false, type: 'cats' };
       const tiger = { value: 'Tiger', checked: false, type: 'cats' };
       component._options = [{ type: 'cats', data: [allItem, kitty, tiger], originalData: [allItem, kitty, tiger] }];
-      component.value = { cats: [{ value: 'Kitty', checked: false, type: 'cats' }] };
+      component.items = [];
+      component.value = { cats: ['Kitty'] };
       component.selectAll(component._options[0].data, 'cats');
       expect(component.value.cats.length).toBe(2);
       expect(component.items.length).toBe(1);
@@ -518,49 +528,56 @@ describe('setupOptions()', () => {
     });
   });
 
-  xdescribe('Method: setInitialValue(model)', () => {
+  describe('Method: setInitialValue(model)', () => {
     it('should correctly set intial value and items if a model is passed in to start', () => {
       const model = { cats: ['Kitty'] };
       component.types = [{ value: 'cats' }];
+      component.selectAllOption = false;
       const allItem = { value: 'ALL', checked: false, type: 'cats' };
-      const kitty = { value: 'Kitty', checked: true, type: 'cats' };
+      const kitty = { value: 'Kitty', checked: false, type: 'cats', label: 'Kitty' };
       component._options = [{ type: 'cats', data: [allItem, kitty], originalData: [allItem, kitty] }];
+      component.items = [];
+      component._items = new ReplaySubject(1);
+      component.value = { cats: [] };
       component.setInitialValue(model);
       expect(component._options[0].data[1].checked).toBeTruthy();
-      expect(component.items.length).toBe(1);
       expect(component.value.cats).toEqual(['Kitty']);
     });
     it('should correctly set intial value and items if no model is passed in to start', () => {
       component.types = [{ value: 'cats' }];
+      component.selectAllOption = false;
       component._options = [
         {
           type: 'cats',
           data: [
             { value: 'ALL', checked: false, type: 'cats' },
-            { value: 'Kitty', checked: true, type: 'cats' },
+            { value: 'Kitty', checked: false, type: 'cats' },
             {
               value: 'Tiger',
-              checked: true,
+              checked: false,
               type: 'cats',
             },
           ],
         },
       ];
+      component.items = [];
       component.setInitialValue(null);
       expect(component.items).toEqual([]);
       expect(component.value.cats).toEqual([]);
     });
   });
 
-  xdescribe('Method: setIndeterminateState(type, status)', () => {
+  describe('Method: setIndeterminateState(type, status)', () => {
     it('should correctly set "ALL [type]" to true', () => {
       component.types = [{ value: 'cats' }];
+      component.selectAllOption = true;
       const allOfType = [{ value: 'ALL', checked: false, type: 'cats', indeterminate: undefined }];
       component.setIndeterminateState(allOfType, true);
       expect(allOfType[0].indeterminate).toBeTruthy();
     });
     it('should correctly set "ALL [type]" to false', () => {
       component.types = [{ value: 'cats' }];
+      component.selectAllOption = true;
       const allOfType = [{ value: 'ALL', checked: false, type: 'cats', indeterminate: undefined }];
       component.setIndeterminateState(allOfType, false);
       expect(allOfType[0].indeterminate).toBeFalsy();
@@ -591,75 +608,63 @@ describe('setupOptions()', () => {
     });
   });
 
-  xdescribe('Method: addIndividualChildren(parent, checked)', () => {
+  describe('Method: addIndividualChildren(parent, checked)', () => {
     it('should add an item', () => {
+      component.types = [{ value: 'cats' }];
       component.value = { cats: [1] };
-      const item = { type: 'cats', value: 2 };
+      component._items = new ReplaySubject(1);
+      const item = { type: 'cats', value: 2, isChildOf: undefined };
       jest.spyOn(component, 'add').mockImplementation(() => {});
       component.addIndividualChildren([item]);
       expect(component.add).toHaveBeenCalled();
     });
     it('should not add a duplicate item', () => {
+      component.types = [{ value: 'cats' }];
       component.value = { cats: [1] };
-      const item = { type: 'cats', value: 1 };
+      component._items = new ReplaySubject(1);
+      const item = { type: 'cats', value: 1, isChildOf: undefined };
       jest.spyOn(component, 'add').mockImplementation(() => {});
       component.addIndividualChildren([item]);
       expect(component.add).not.toHaveBeenCalled();
     });
   });
 
-  xdescribe('Method: updateParentOrChildren(item, action)', () => {
-    it('should call updateChildrenValue if item isParentOf', () => {
-      const item = { isParentOf: true };
+  describe('Method: updateParentOrChildren(item, action)', () => {
+    it('should call updateChildrenValue if item isParentOf and strictRelationship is true', () => {
+      component.strictRelationship = true;
+      const item = { isParentOf: 'kittens', type: 'cats' };
       jest.spyOn(component, 'updateChildrenValue').mockImplementation(() => {});
       jest.spyOn(component, 'updateParentValue').mockImplementation(() => {});
-      component.updateParentOrChildren(item);
+      component.updateParentOrChildren(item, 'select');
       expect(component.updateChildrenValue).toHaveBeenCalled();
       expect(component.updateParentValue).not.toHaveBeenCalled();
     });
-    it('should call updateParentValue if item isChildOf', () => {
-      const item = { isChildOf: true };
+    it('should call updateParentValue if item isChildOf and selectAllOption is true', () => {
+      component.selectAllOption = true;
+      component.strictRelationship = false;
+      const item = { isChildOf: 'cats' };
       jest.spyOn(component, 'updateChildrenValue').mockImplementation(() => {});
       jest.spyOn(component, 'updateParentValue').mockImplementation(() => {});
-      component.updateParentOrChildren(item);
+      component.updateParentOrChildren(item, 'select');
       expect(component.updateParentValue).toHaveBeenCalled();
       expect(component.updateChildrenValue).not.toHaveBeenCalled();
     });
   });
 
-  xdescribe('Method: updateParentOrChildren(item, action)', () => {
-    it('should call updateChildrenValue if item isParentOf', () => {
-      const item = { isParentOf: true };
-      jest.spyOn(component, 'updateChildrenValue').mockImplementation(() => {});
-      jest.spyOn(component, 'updateParentValue').mockImplementation(() => {});
-      component.updateParentOrChildren(item);
-      expect(component.updateChildrenValue).toHaveBeenCalled();
-      expect(component.updateParentValue).not.toHaveBeenCalled();
-    });
-    it('should call updateParentValue if item isChildOf', () => {
-      const item = { isChildOf: true };
-      jest.spyOn(component, 'updateChildrenValue').mockImplementation(() => {});
-      jest.spyOn(component, 'updateParentValue').mockImplementation(() => {});
-      component.updateParentOrChildren(item);
-      expect(component.updateParentValue).toHaveBeenCalled();
-      expect(component.updateChildrenValue).not.toHaveBeenCalled();
-    });
-  });
-
-  xdescribe('Method: updateAllParentsOrChildren(item, action)', () => {
-    it('should call updateChildrenValue if item isParentOf', () => {
-      const item = { isParentOf: true };
+  describe('Method: updateAllParentsOrChildren(item, action)', () => {
+    it('should call updateAllChildrenValue if item isParentOf', () => {
+      const item = { isParentOf: 'kittens' };
       jest.spyOn(component, 'updateAllChildrenValue').mockImplementation(() => {});
       jest.spyOn(component, 'updateAllParentValue').mockImplementation(() => {});
-      component.updateAllParentsOrChildren(item);
+      component.updateAllParentsOrChildren(item, 'select');
       expect(component.updateAllChildrenValue).toHaveBeenCalled();
       expect(component.updateAllParentValue).not.toHaveBeenCalled();
     });
-    it('should call updateParentValue if item isChildOf', () => {
-      const item = { isChildOf: true };
+    it('should call updateAllParentValue if item isChildOf', () => {
+      const item = { isChildOf: 'cats' };
       jest.spyOn(component, 'updateAllChildrenValue').mockImplementation(() => {});
       jest.spyOn(component, 'updateAllParentValue').mockImplementation(() => {});
-      component.updateAllParentsOrChildren(item);
+      component.updateAllParentsOrChildren(item, 'select');
       expect(component.updateAllParentValue).toHaveBeenCalled();
       expect(component.updateAllChildrenValue).not.toHaveBeenCalled();
     });
@@ -721,19 +726,24 @@ describe('setupOptions()', () => {
     });
   });
 
-  xdescribe('Method: modifyAffectedParentsOrChildren(selecting, itemChanged)', () => {
+  describe('Method: modifyAffectedParentsOrChildren(selecting, itemChanged)', () => {
     it('should update indeterminate states for parent and child type', () => {
-      const kitty = { value: 'Kitty', checked: false, type: 'cats', isParentOf: 'kittens' };
-      const allCat = { value: 'ALL', checked: true, type: 'cats', isParentOf: 'kittens' };
-      const allKitten = { value: 'ALL', checked: true, type: 'kittens', isChildOf: 'cats', cats: [1] };
-      const cat = { value: 'Cat', checked: true, type: 'kittens', isChildOf: 'cats', cats: [1] };
+      component.types = [
+        { value: 'cats', isParentOf: 'kittens' },
+        { value: 'kittens', isChildOf: 'cats' },
+      ];
+      component.selectAllOption = true;
+      component.strictRelationship = false;
+      const kitty = { value: 'Kitty', checked: false, type: 'cats', isParentOf: 'kittens', indeterminate: false };
+      const allCat = { value: 'ALL', checked: false, type: 'cats', isParentOf: 'kittens', indeterminate: false };
+      const allKitten = { value: 'ALL', checked: false, type: 'kittens', isChildOf: 'cats', cats: [1], indeterminate: false };
+      const cat = { value: 'Cat', checked: true, type: 'kittens', isChildOf: 'cats', cats: [1], indeterminate: false };
       component._options = [
         { type: 'cats', data: [allCat, kitty], originalData: [allCat, kitty] },
         { type: 'kittens', data: [allKitten, cat], originalData: [allKitten, cat] },
       ];
       jest.spyOn(component, 'setIndeterminateState').mockImplementation(() => {});
-      component.modifyAffectedParentsOrChildren(true, { isParentOf: true, type: 'cats' });
-      expect(component._options[0].data[0].checked).toBeTruthy();
+      component.modifyAffectedParentsOrChildren(true, { isParentOf: 'kittens', type: 'cats', checked: true, value: 1 });
       expect(component.setIndeterminateState).toHaveBeenCalled();
     });
   });

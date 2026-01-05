@@ -1,6 +1,6 @@
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { _VIEW_REPEATER_STRATEGY, _DisposeViewRepeaterStrategy } from '@angular/cdk/collections';
-import { CdkTable, CDK_TABLE, CDK_TABLE_TEMPLATE, _COALESCED_STYLE_SCHEDULER, _CoalescedStyleScheduler } from '@angular/cdk/table';
+import { CdkTable, CDK_TABLE } from '@angular/cdk/table';
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
@@ -24,7 +24,19 @@ import { ActivityTableDataSource, ActivityTableService } from './table-source';
 
 @Component({
     selector: 'novo-simple-table',
-    template: CDK_TABLE_TEMPLATE,
+    template: `
+      <table role="table">
+        <thead role="rowgroup">
+        <tr role="row">
+          <td role="gridcell"></td>
+        </tr>
+        </thead>
+        <tbody role="rowgroup">
+        <tr role="row">
+          <td role="gridcell"></td>
+        </tr>
+        </tbody>
+      </table>`,
     styleUrls: ['./table.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -80,7 +92,7 @@ export class NovoActivityTableNoResultsMessage {}
     <header *ngIf="(!(dataSource?.totallyEmpty && !state.userFiltered) && !loading) || forceShowHeader">
       <ng-content select="[novo-activity-table-custom-header]"></ng-content>
       <novo-search
-        alwaysOpen="true"
+        [alwaysOpen]=true
         (searchChanged)="onSearchChange($event)"
         [(ngModel)]="state.globalSearch"
         *ngIf="!hideGlobalSearch"
@@ -167,7 +179,6 @@ export class NovoActivityTableNoResultsMessage {}
     providers: [
         NovoActivityTableState,
         { provide: _VIEW_REPEATER_STRATEGY, useClass: _DisposeViewRepeaterStrategy },
-        { provide: _COALESCED_STYLE_SCHEDULER, useClass: _CoalescedStyleScheduler },
     ],
     standalone: false,
 })

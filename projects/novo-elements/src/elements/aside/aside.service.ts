@@ -1,5 +1,5 @@
 import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
-import { ComponentPortal, PortalInjector } from '@angular/cdk/portal';
+import { ComponentPortal } from '@angular/cdk/portal';
 import { ComponentRef, Injectable, Injector } from '@angular/core';
 import { NovoAsideRef } from './aside-ref';
 import { AsideComponent } from './aside.component';
@@ -53,12 +53,11 @@ export class NovoAsideService {
     return containerRef.instance;
   }
 
-  private createInjector(config: AsideConfig, asideRef: NovoAsideRef): PortalInjector {
-    const injectionTokens = new WeakMap();
-
-    injectionTokens.set(NovoAsideRef, asideRef);
-
-    return new PortalInjector(this.injector, injectionTokens);
+  private createInjector(config: AsideConfig, asideRef: NovoAsideRef): Injector {
+    return Injector.create({
+      parent: this.injector,
+      providers: [{ provide: NovoAsideRef, useValue: asideRef }],
+    });
   }
 
   private getOverlayConfig(config: AsideConfig): AsideConfig {

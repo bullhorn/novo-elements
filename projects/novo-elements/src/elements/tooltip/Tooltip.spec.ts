@@ -27,7 +27,7 @@ describe('Elements: TooltipDirective', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(TestComponent);
     component = fixture.debugElement.componentInstance;
-    tooltipHost = fixture.debugElement.queryAll(By.directive(TooltipDirective))
+    tooltipHost = fixture.debugElement.queryAll(By.directive(TooltipDirective));
   }));
 
   it('should initialize with defaults', () => {
@@ -48,7 +48,7 @@ describe('Elements: TooltipDirective', () => {
       tooltipHost[1].triggerEventHandler('mouseenter');
       fixture.detectChanges();
       expect(fixture.debugElement.query(By.css('novo-tooltip'))).toBeTruthy();
-      tooltipHost[1].triggerEventHandler('click')
+      tooltipHost[1].triggerEventHandler('click');
       fixture.detectChanges();
       expect(fixture.debugElement.query(By.css('novo-tooltip'))).toBeFalsy();
     });
