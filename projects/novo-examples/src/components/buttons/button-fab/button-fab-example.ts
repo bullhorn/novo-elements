@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
     selector: 'button-fab-example',
     templateUrl: 'button-fab-example.html',
     styleUrls: ['button-fab-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class ButtonFabExample {}

@@ -88,7 +88,7 @@ const DATE_PICKER_VALUE_ACCESSOR = {
     </div>
   `,
     styleUrls: ['./DatePicker.scss'],
-    standalone: false
+    standalone: false,
 })
 export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
   /**
@@ -196,7 +196,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
     return ['range', 'week'].includes(this.mode) || this._range;
   }
   set range(value) {
-    console.warn(`'range' property is deprecated, please use 'mode="range"'.`);
+    console.warn('\'range\' property is deprecated, please use \'mode="range"\'.');
     if (this._range !== value) {
       this._range = value;
       this.mode = 'range';
@@ -210,7 +210,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
     return this._mode === 'week' || this._weekRangeSelect;
   }
   set weekRangeSelect(value) {
-    console.warn(`'weekRangeSelect' property is deprecated, please use 'mode="week"'.`);
+    console.warn('\'weekRangeSelect\' property is deprecated, please use \'mode="week"\'.');
     if (this._weekRangeSelect !== value) {
       this._weekRangeSelect = value;
       this.mode = 'week';

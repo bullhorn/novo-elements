@@ -4,7 +4,7 @@ import { IDataTableColumn } from '../interfaces';
 
 @Directive({
     selector: 'novo-data-table-header-cell',
-    standalone: false
+    standalone: false,
 })
 export class NovoDataTableHeaderCell<T> extends CdkHeaderCell implements OnInit {
   @HostBinding('attr.role')

@@ -3,7 +3,7 @@ import { Injectable, Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
     name: 'default', pure: true,
-    standalone: false
+    standalone: false,
 })
 @Injectable()
 export class DefaultPipe implements PipeTransform {

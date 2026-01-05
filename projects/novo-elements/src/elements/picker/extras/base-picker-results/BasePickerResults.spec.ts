@@ -54,7 +54,7 @@ describe('Elements: BasePickerResults', () => {
       expect(component.selectActiveMatch).toBeDefined();
     });
     it('should call selectMatch.', () => {
-      let spy = jest.spyOn(component, 'selectMatch');
+      const spy = jest.spyOn(component, 'selectMatch');
       component.selectActiveMatch();
       expect(spy).toHaveBeenCalled();
     });

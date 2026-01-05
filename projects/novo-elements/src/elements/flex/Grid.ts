@@ -5,8 +5,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
     selector: 'novo-grid',
-    template: ` <ng-content></ng-content> `,
-    standalone: false
+    template: ' <ng-content></ng-content> ',
+    standalone: false,
 })
 export class NovoGridElement {
   @HostBinding('style.display')

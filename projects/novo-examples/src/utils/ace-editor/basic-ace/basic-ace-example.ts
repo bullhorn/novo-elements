@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
     selector: 'basic-ace-example',
     templateUrl: 'basic-ace-example.html',
     styleUrls: ['basic-ace-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class BasicAceExample {}

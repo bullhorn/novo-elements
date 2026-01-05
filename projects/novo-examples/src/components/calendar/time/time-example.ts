@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'time-example',
     templateUrl: 'time-example.html',
     styleUrls: ['time-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class TimeExample {
   public time: Date;

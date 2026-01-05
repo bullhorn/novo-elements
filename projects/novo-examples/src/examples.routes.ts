@@ -1,5 +1,5 @@
 
-/* tslint:disable */
+/* eslint-disable */
 /** DO NOT MANUALLY EDIT THIS FILE, IT IS GENERATED 'build-examples-module' */
 import {NgModule, Component} from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';

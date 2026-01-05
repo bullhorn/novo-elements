@@ -9,7 +9,7 @@ import { FieldInteractionApi, FormUtils, TextBoxControl } from 'novo-elements';
     selector: 'fi-async-example',
     templateUrl: 'fi-async-example.html',
     styleUrls: ['fi-async-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class FiAsyncExample {
   public form: any;

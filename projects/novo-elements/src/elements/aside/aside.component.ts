@@ -9,7 +9,7 @@ import { slideInOut } from './aside.animation';
     templateUrl: './aside.component.html',
     styleUrls: ['./aside.component.scss'],
     animations: [slideInOut],
-    standalone: false
+    standalone: false,
 })
 export class AsideComponent {
   @Output() animationStateChanged = new EventEmitter<AnimationEvent>();

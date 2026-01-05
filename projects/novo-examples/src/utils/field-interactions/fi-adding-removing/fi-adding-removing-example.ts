@@ -10,7 +10,7 @@ import { MockMetaHeaders } from '../MockMeta';
     selector: 'fi-adding-removing-example',
     templateUrl: 'fi-adding-removing-example.html',
     styleUrls: ['fi-adding-removing-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class FiAddingRemovingExample {
   public form: any;

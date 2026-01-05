@@ -20,7 +20,7 @@ import { ConfigureColumnsModal, MockData } from '../extras';
     templateUrl: 'data-table-service-example.html',
     styleUrls: ['data-table-service-example.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    standalone: false,
 })
 export class DataTableServiceExample {
   // Table configuration

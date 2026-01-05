@@ -1,4 +1,4 @@
-/* tslint:disable */
+
 /** DO NOT MANUALLY EDIT THIS FILE, IT IS GENERATED VIA GULP 'build-examples-module' */
 import { PortalModule } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';

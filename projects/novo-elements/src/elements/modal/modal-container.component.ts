@@ -9,7 +9,7 @@ import { zoomInOut } from './modal.animation';
     templateUrl: './modal-container.component.html',
     styleUrls: ['./modal-container.component.scss'],
     animations: [zoomInOut],
-    standalone: false
+    standalone: false,
 })
 export class NovoModalContainerComponent {
   @Output() animationStateChanged = new EventEmitter<AnimationEvent>();

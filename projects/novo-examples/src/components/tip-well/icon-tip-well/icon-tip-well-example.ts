@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'icon-tip-well-example',
     templateUrl: 'icon-tip-well-example.html',
     styleUrls: ['icon-tip-well-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class IconTipWellExample {
   public demoTip: string =

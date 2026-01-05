@@ -102,7 +102,7 @@ export class ActivityTableDataSource<T> extends DataSource<T> {
         return data.results;
       }),
       catchError((error) => {
-        console.error(error); // tslint: disable-line
+        console.error(error);
         this.loading = false;
         return of(null);
       }),

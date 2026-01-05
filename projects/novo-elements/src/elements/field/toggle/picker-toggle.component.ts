@@ -39,7 +39,7 @@ import { NovoFieldElement, NOVO_FORM_FIELD } from '../field';
     exportAs: 'novoPickerToggle',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    standalone: false,
 })
 export class NovoPickerToggleElement<T = any> implements AfterContentInit, AfterViewInit, OnChanges, OnDestroy {
   private _stateChanges = Subscription.EMPTY;

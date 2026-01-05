@@ -44,7 +44,7 @@ interface Page {
   `,
     styleUrls: ['./PaginationOld.scss'],
     encapsulation: ViewEncapsulation.None,
-    standalone: false
+    standalone: false,
 })
 export class Pagination implements OnInit, OnChanges {
   @Input()

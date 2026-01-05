@@ -324,10 +324,10 @@ describe('Elements: NovoPickerElement', () => {
         },
       };
       component.select = {
-        emit: jest.fn()
+        emit: jest.fn(),
       } as unknown;
       component.changed = {
-        emit: jest.fn()
+        emit: jest.fn(),
       } as unknown;
       spyOn(component, 'onModelChange');
       spyOn(component, 'hideResults');

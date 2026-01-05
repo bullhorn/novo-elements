@@ -9,7 +9,7 @@ import { MockMeta } from '../MockMeta';
     selector: 'dynamic-form-example',
     templateUrl: 'dynamic-form-example.html',
     styleUrls: ['dynamic-form-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class DynamicFormExample {
   public dynamic: any;

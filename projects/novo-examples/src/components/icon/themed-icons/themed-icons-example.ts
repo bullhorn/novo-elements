@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
     selector: 'themed-icons-example',
     templateUrl: 'themed-icons-example.html',
     styleUrls: ['themed-icons-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class ThemedIconsExample {}

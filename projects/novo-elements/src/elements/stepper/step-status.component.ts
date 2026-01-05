@@ -9,7 +9,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
     host: {
         class: 'novo-step-status',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoStepStatus {
   @Input()

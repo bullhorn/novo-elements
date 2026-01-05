@@ -14,7 +14,7 @@ import { Component, HostBinding, Input } from '@angular/core';
     <ng-content select="novo-text"></ng-content>
     <ng-content></ng-content>
   `,
-    standalone: false
+    standalone: false,
 })
 export class NonIdealStateElement {
   @HostBinding('class')

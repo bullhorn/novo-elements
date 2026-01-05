@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'button-loading-example',
     templateUrl: 'button-loading-example.html',
     styleUrls: ['button-loading-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class ButtonLoadingExample {
   loading: boolean = false;

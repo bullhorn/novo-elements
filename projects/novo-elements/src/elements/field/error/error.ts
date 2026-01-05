@@ -6,7 +6,7 @@ import { DomSanitizer } from '@angular/platform-browser';
     selector: 'novo-error',
     templateUrl: './error.html',
     styleUrls: ['./error.scss'],
-    standalone: false
+    standalone: false,
 })
 export class NovoErrorElement implements OnInit {
   constructor(private sanitizer: DomSanitizer) {}

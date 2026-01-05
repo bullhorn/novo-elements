@@ -23,7 +23,7 @@ import { Key } from 'novo-elements/utils';
     host: {
         '[class]': 'currentClass',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoSliderElement implements OnInit, OnDestroy {
   @Input()

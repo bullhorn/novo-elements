@@ -8,7 +8,7 @@ import { NOVO_VALUE_THEME } from 'novo-elements';
     selector: 'category-value-example',
     templateUrl: 'category-value-example.html',
     styleUrls: ['category-value-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class CategoryValueExample {
   public theme = NOVO_VALUE_THEME.DEFAULT;

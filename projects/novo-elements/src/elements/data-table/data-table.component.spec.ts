@@ -27,7 +27,7 @@ describe('Elements: NovoDataTable', () => {
       component.overrideTotal = null;
       component.dataSource = {};
       Object.defineProperty(component.dataSource, 'totallyEmpty', {
-        get: jest.fn(() => true)
+        get: jest.fn(() => true),
       });
       const result = component.empty;
       expect(result).toEqual(true);

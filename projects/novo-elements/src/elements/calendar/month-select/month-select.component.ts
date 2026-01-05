@@ -9,7 +9,7 @@ import { DateUtil } from 'novo-elements/utils';
     templateUrl: './month-select.component.html',
     styleUrls: ['./month-select.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    standalone: false,
 })
 export class NovoMonthSelectElement implements OnInit {
   @Input()

@@ -8,7 +8,7 @@ import { NovoToastService } from 'novo-elements';
     selector: 'toast-actions-example',
     templateUrl: 'toast-actions-example.html',
     styleUrls: ['toast-actions-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class ToastActionsExample {
   public options: any = {

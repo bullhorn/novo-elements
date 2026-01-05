@@ -4,7 +4,7 @@ import {
     differenceInCalendarDays, differenceInDays,
     differenceInSeconds, endOfDay, endOfMonth, endOfWeek, format, getMonth, getYear,
     isAfter, isBefore, isSameDay, isSameMonth, isSameSecond, isWithinInterval,
-    setHours, setMinutes, startOfDay, startOfMinute, startOfMonth, startOfWeek
+    setHours, setMinutes, startOfDay, startOfMinute, startOfMonth, startOfWeek,
 } from 'date-fns';
 import { convertTokens } from './convert-tokens';
 import { LegacyParseOptions, legacyParse } from './legacy-parse';

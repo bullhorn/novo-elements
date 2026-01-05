@@ -128,7 +128,7 @@ export class NovoFormControl extends FormControl {
     this.restrictFieldInteractions = control.restrictFieldInteractions;
     this.appendToBody = control.appendToBody;
     if (this.appendToBody) {
-      notify(`'appendToBody' has been deprecated. Please remove this attribute.`);
+      notify('\'appendToBody\' has been deprecated. Please remove this attribute.');
     }
     this.parentScrollSelector = control.parentScrollSelector;
     this.description = control.description;

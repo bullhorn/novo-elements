@@ -10,7 +10,7 @@ import { MockCandidateMeta as MockMeta } from '../just-criteria/MockMeta';
     selector: 'single-field-criteria-example',
     templateUrl: 'single-field-criteria-example.html',
     styleUrls: ['single-field-criteria-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class SingleFieldCriteriaExample implements OnInit {
   @ViewChild('criteriaBuilder', { static: true }) criteriaBuilder: CriteriaBuilderComponent;
@@ -21,7 +21,9 @@ export class SingleFieldCriteriaExample implements OnInit {
   mockMetaFields = MockMeta.fields;
 
   editTypeFn = (field: any) => {
-    if (field.optionsType === 'Brewery') return 'custom';
+    if (field.optionsType === 'Brewery') {
+      return 'custom';
+    }
     return (field.inputType || field.dataType || field.type).toLowerCase();
   };
 
@@ -32,7 +34,7 @@ export class SingleFieldCriteriaExample implements OnInit {
     const fields = this.getFieldConfig();
     this.resetQueryForm();
     this.config = {
-      fields
+      fields,
     };
     this.cdr.detectChanges();
   }
@@ -57,7 +59,7 @@ export class SingleFieldCriteriaExample implements OnInit {
     const prepopulatedData = {
       field: '',
       operator: 'includeAny',
-      value: []
+      value: [],
     };
     this.setQueryForm(prepopulatedData);
   }

@@ -20,7 +20,7 @@ import { NOVO_LAYOUT_CONTAINER } from '../layout.constants';
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: false
+    standalone: false,
 })
 export class NovoLayoutContent extends CdkScrollable implements AfterContentInit {
   constructor(

@@ -33,7 +33,7 @@ describe('Elements: NovoTimePickerInputElement', () => {
     it('should toggle disabled state', () => {
       component.setDisabledState(true);
       expect(component.disabled).toBe(true);
-      
+
       component.setDisabledState(false);
       expect(component.disabled).toBe(false);
     });

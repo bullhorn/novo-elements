@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
     selector: 'chip-usage-example',
     templateUrl: 'chip-usage-example.html',
     styleUrls: ['chip-usage-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class ChipUsageExample {}

@@ -33,7 +33,7 @@ interface PropertyDeclartion {
     styleUrls: ['./props-table.scss'],
     host: { class: 'props-table' },
     encapsulation: ViewEncapsulation.None,
-    standalone: false
+    standalone: false,
 })
 export class PropsTableComponent implements OnInit {
   @Input()

@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'tabs-color-example',
     templateUrl: 'tabs-color-example.html',
     styleUrls: ['tabs-color-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class TabsColorExample {
   public selected = 1;

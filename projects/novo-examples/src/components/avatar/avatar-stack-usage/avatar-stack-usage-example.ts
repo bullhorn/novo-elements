@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'avatar-stack-usage-example',
     templateUrl: 'avatar-stack-usage-example.html',
     styleUrls: ['avatar-stack-usage-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class AvatarStackUsageExample {
   public profiles: any[] = [
