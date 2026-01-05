@@ -1,7 +1,7 @@
 import { FocusableOption } from '@angular/cdk/a11y';
 import { BooleanInput, coerceBooleanProperty, NumberInput } from '@angular/cdk/coercion';
 import { Platform } from '@angular/cdk/platform';
-import { DOCUMENT } from '@angular/common';
+
 import {
   Attribute,
   ChangeDetectorRef,
@@ -18,6 +18,7 @@ import {
   Optional,
   Output,
   ViewEncapsulation,
+  DOCUMENT
 } from '@angular/core';
 import { ANIMATION_MODULE_TYPE } from '@angular/platform-browser/animations';
 import { Subject } from 'rxjs';

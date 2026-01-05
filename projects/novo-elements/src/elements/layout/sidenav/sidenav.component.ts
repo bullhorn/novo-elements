@@ -3,7 +3,7 @@ import { FocusMonitor, FocusOrigin, FocusTrap, FocusTrapFactory } from '@angular
 import { BooleanInput, coerceBooleanProperty, coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
 import { hasModifierKey } from '@angular/cdk/keycodes';
 import { Platform } from '@angular/cdk/platform';
-import { DOCUMENT } from '@angular/common';
+
 import {
   AfterContentChecked,
   AfterContentInit,
@@ -20,6 +20,7 @@ import {
   Optional,
   Output,
   ViewEncapsulation,
+  DOCUMENT
 } from '@angular/core';
 import { Key } from 'novo-elements/utils';
 import { fromEvent, Observable, Subject } from 'rxjs';

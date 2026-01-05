@@ -11,7 +11,7 @@ import {
   VerticalConnectionPos,
 } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
-import { DOCUMENT } from '@angular/common';
+
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -28,6 +28,7 @@ import {
   TemplateRef,
   ViewChild,
   ViewContainerRef,
+  DOCUMENT
 } from '@angular/core';
 // Vendor
 import { Helpers } from 'novo-elements/utils';
