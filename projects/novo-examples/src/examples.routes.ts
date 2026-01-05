@@ -1841,12 +1841,9 @@ export class CardDesignPage {
 
 @Component({
   selector: 'card-description-page',
-  template: `<novo-grid columns="2" align="start" gap="2rem">
-<div>
+  template: `<div>
 <p>A card is a container that organizes a related grouping of information. Cards can sometimes be configured and reordered on a page allowing for optimal user customization. A card is content container for the presentation information with a shared singular context, usually related in some way to the main content.</p>
 </div>
-<img src="https://via.placeholder.com/350x250"/>
-<div>
 `,
   host: { class: 'markdown-page' },
   standalone: false,
@@ -2049,12 +2046,8 @@ export class TimePickerExamplesPage {
 <h1>Components</h1>
 <h2>NovoTimePickerInputElement <code>novo-time-picker-input</code></h2>
 <p>The <code>novo-time-picker-input</code> is deprecated, but it still used with the dynamic form containers. It is a convienent wrapper componet for an input with a time picker trigger. Most inputs are just pass throughs to the <code>novo-time-picker</code> instance.</p>
-<h3>Properties</h3>
-<p><props-table component="NovoTimePickerInputElement"></props-table></p>
 <h2>NovoTimePickerElement <code>novo-time-picker</code></h2>
 <p>The <code>novo-time-picker</code> component is used to allow the user to select the time of the day similar to the browsers native time picker. The main benefit is that we can control timezones and formatting based on user and agency configuration rather than using the computers default settings.</p>
-<h3>Properties</h3>
-<p><props-table component="NovoTimePickerElement"></props-table></p>
 `,
   host: { class: 'markdown-page' },
   standalone: false,
@@ -2424,12 +2417,8 @@ export class DateTimePickerExamplesPage {
 <h1>Components</h1>
 <h2>NovoDateTimePickerInputElement <code>novo-date-picker-input</code></h2>
 <p>The <code>novo-date-time-picker-input</code> is deprecated, but it still used with the dynamic form containers. It is a convienent wrapper componet for an input with a date picker trigger. Most inputs are just pass throughs to the <code>novo-date-picker</code> or <code>novo-time-picker</code> instance.</p>
-<h3>Properties</h3>
-<p><props-table component="NovoDatePickerInputElement"></props-table></p>
 <h2>NovoDateTimePickerElement <code>novo-date-time-picker</code></h2>
 <p>The <code>novo-spinner</code> component displays the circular loading visual, usually used within the button to indicate the action is performing but not complete yet.</p>
-<h3>Properties</h3>
-<p><props-table component="NovoDatePickerElement"></props-table></p>
 `,
   host: { class: 'markdown-page' },
   standalone: false,
@@ -2569,12 +2558,8 @@ export class DatePickerExamplesPage {
 <h1>Components</h1>
 <h2>NovoDatePickerInputElement <code>novo-date-picker-input</code></h2>
 <p>The <code>novo-date-picker-input</code> is deprecated, but it still used with the dynamic form containers. It is a convienent wrapper componet for an input with a date picker trigger. Most inputs are just pass throughs to the <code>novo-date-picker</code> instance.</p>
-<h3>Properties</h3>
-<p><props-table component="NovoDatePickerInputElement"></props-table></p>
 <h2>NovoDatePickerElement <code>novo-date-picker</code></h2>
 <p>The <code>novo-spinner</code> component displays the circular loading visual, usually used within the button to indicate the action is performing but not complete yet.</p>
-<h3>Properties</h3>
-<p><props-table component="NovoDatePickerElement"></props-table></p>
 `,
   host: { class: 'markdown-page' },
   standalone: false,
@@ -2749,12 +2734,8 @@ export class ChipsExamplesPage {
 <h1>Components</h1>
 <h2>NovoChipElement <code>novo-chip</code></h2>
 <p>The <code>novo-chip</code> component is the lowest level component for the chips module.  Contains all the styles contained with a single chip.  This component can start being used for more use-cases other than the multi-select picker.</p>
-<h3>Properties</h3>
-<p><props-table component="NovoChipElement"></props-table></p>
 <h2>NovoChipListElement <code>novo-chip-list</code></h2>
 <p>The <code>novo-chip-list</code> is just a container to wrap many chips within.  This should control basic flow and layout of the contained chips.</p>
-<h3>Properties</h3>
-<p><props-table component="NovoChipListElement"></props-table></p>
 `,
   host: { class: 'markdown-page' },
   standalone: false,
@@ -3360,8 +3341,6 @@ export class TooltipExamplesPage {
 <h1>Components</h1>
 <h2>TooltipDirective <code>[tooltip]</code></h2>
 <p>Adds a tooltip to the element the directive is attached too. Use the input option to align and control how the tooltip displays.</p>
-<h3>Properties</h3>
-<p><props-table component="TooltipDirective"></props-table></p>
 `,
   host: { class: 'markdown-page' },
   standalone: false,
@@ -3519,12 +3498,8 @@ export class ToolbarExamplesPage {
 <h1>Components</h1>
 <h2>NovoToolbarElement <code>novo-toolbar</code></h2>
 <p>The <code>novo-toolbar</code> component is just a container, look at patterns to determine correct usage.</p>
-<h3>Properties</h3>
-<p><props-table component="NovoToolbar"></props-table></p>
 <h2>NovoToolbarRowElement <code>novo-toolbar-row</code></h2>
 <p>The <code>novo-toolbar-row</code> component is also just a container to help create multi-row toolbars, look at examples to determine correct usage.</p>
-<h3>Properties</h3>
-<p><props-table component="NovoToolbarRow"></props-table></p>
 `,
   host: { class: 'markdown-page' },
   standalone: false,
@@ -3661,13 +3636,9 @@ export class ToasterExamplesPage {
 <h1>Components</h1>
 <h2>NovoFieldElement <code>novo-field</code></h2>
 <p>The <code>novo-field</code> component expects 1 <code>button</code> or <code>novo-button</code> as the trigger for the menu list which is comprised of all the <code>novo-option</code> or <code>novo-optgroup</code> child components.</p>
-<h3>Properties</h3>
-<p><props-table component="NovoFieldElement"></props-table></p>
 <h1>Directive</h1>
 <h2>NovoInput <code>[novoInput]</code></h2>
 <p>The <code>novoInput</code> component expects 1 <code>button</code> or <code>novo-button</code> as the trigger for the menu list which is comprised of all the <code>novo-option</code> or <code>novo-optgroup</code> child components.</p>
-<h3>Properties</h3>
-<p><props-table component="NovoInput"></props-table></p>
 `,
   host: { class: 'markdown-page' },
   standalone: false,
@@ -3843,8 +3814,6 @@ export class TipWellExamplesPage {
 <h1>Components</h1>
 <h2>NovoTipWellElement <code>novo-tip-well</code></h2>
 <p>The <code>novo-tip-well</code> component expects a <code>name</code> property, which will be used to store the state of the tipwell in local-storage.</p>
-<h3>Properties</h3>
-<p><props-table component="NovoTipWellElement"></props-table></p>
 `,
   host: { class: 'markdown-page' },
   standalone: false,
@@ -4030,12 +3999,8 @@ export class QueryBuilderExamplesPage {
 <h1>Components</h1>
 <h2>QueryBuilderComponent <code>novo-query-builder</code></h2>
 <p>All tabs must be incapsulated in a <code>novo-nav</code> container. The nav will control the context and active tab.</p>
-<h3>Properties</h3>
-<p><props-table component="QueryBuilderComponent"></props-table></p>
 <h2>ExpressionBuilderComponent <code>novo-expression-builder</code></h2>
 <p>All tabs must be incapsulated in a <code>novo-nav</code> container. The nav will control the context and active tab.</p>
-<h3>Properties</h3>
-<p><props-table component="ExpressionBuilderComponent"></props-table></p>
 <h1>Custom Condition Field Definitions</h1>
 <p>Your implementation might require a custom input type to specifically define how you want to query against your data. Since your implementation will have to convert the query builder form to the query syntax of your system, you can add custom field definitions to override the defaults or provide new implementations.</p>
 <p>First you need to create your custom condition</p>
@@ -4225,8 +4190,6 @@ export class ProgressExamplesPage {
 <h1>Components</h1>
 <h2>NovoProgressElement <code>novo-progress</code></h2>
 <p>The <code>novo-progress</code> component displays the loading bar in a linear or radial line. This commonly used for showing the state of a long running process, like a file upload. The progress bar can also be used for reporting on progress made towards a goal, eg. 5 of 10 shifts filled.</p>
-<h3>Properties</h3>
-<p><props-table component="NovoProgressElement"></props-table></p>
 `,
   host: { class: 'markdown-page' },
   standalone: false,
@@ -4375,13 +4338,9 @@ export class PopoverExamplesPage {
 <h1>Components</h1>
 <h2>NovoFieldElement <code>novo-field</code></h2>
 <p>The <code>novo-field</code> component expects 1 <code>button</code> or <code>novo-button</code> as the trigger for the menu list which is comprised of all the <code>novo-option</code> or <code>novo-optgroup</code> child components.</p>
-<h3>Properties</h3>
-<p><props-table component="NovoFieldElement"></props-table></p>
 <h1>Directive</h1>
 <h2>NovoInput <code>[novoInput]</code></h2>
 <p>The <code>novoInput</code> component expects 1 <code>button</code> or <code>novo-button</code> as the trigger for the menu list which is comprised of all the <code>novo-option</code> or <code>novo-optgroup</code> child components.</p>
-<h3>Properties</h3>
-<p><props-table component="NovoInput"></props-table></p>
 `,
   host: { class: 'markdown-page' },
   standalone: false,
@@ -4501,8 +4460,6 @@ export class NonIdealStateExamplesPage {
 <h1>Components</h1>
 <h2>NovoNavElement <code>novo-non-ideal-state</code></h2>
 <p>Used as a placeholder template when every components or views are in a non-ideal state suchas empty, error, loading, etc...</p>
-<h3>Properties</h3>
-<p><props-table component="NonIdealStateElement"></props-table></p>
 `,
   host: { class: 'markdown-page' },
   standalone: false,
@@ -4985,8 +4942,6 @@ export class MenuExamplesPage {
 <h1>Components</h1>
 <h2>NovoLoadingElement <code>novo-menu</code></h2>
 <p>The <code>novo-menu</code> component is a hidden wrapper that holds the templates for a menu. When a menu is triggered by the element with the matching <code>[menu]</code> attribute, a new instance of the menuItems will be created and the context will be passed to</p>
-<h3>Properties</h3>
-<p><props-table component="MenuComponent"></props-table></p>
 <h2>MenuDirective <code>[menu]</code></h2>
 <p>This will define an element as a trigger for the menu. Use the <code>#</code> notation to make a reference to the <code>novo-menu</code> container, then pass the reference as the value of the attribute to link them together. A menu can be shared between multiple triggers, use the <code>menuContext</code> attribute to perform actions based on that context. The context can be reference in the structural directive <code>menuItem</code> as the implicit value, ie <code>*menuItem=&quot;let item&quot;</code>, <code>item</code> will be equal to <code>menuContext</code>.</p>
 <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">novo-menu</span> #<span class="hljs-attr">menu</span>&gt;</span>
@@ -4997,12 +4952,8 @@ export class MenuExamplesPage {
 <span class="hljs-comment">&lt;!-- The speak action will display bark! --&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">novo-button</span> [<span class="hljs-attr">menu</span>]=<span class="hljs-string">&quot;menu&quot;</span> <span class="hljs-attr">menuContext</span>=<span class="hljs-string">&quot;bark!&quot;</span>&gt;</span>Dog<span class="hljs-tag">&lt;/<span class="hljs-name">novo-button</span>&gt;</span>
 </code></pre>
-<h3>Properties</h3>
-<p><props-table component="MenuDirective"></props-table></p>
 <h2>MenuItemDirective <code>*menuItem</code></h2>
 <p>A structural directive to be used with <code>novo-option</code> to create menu items. The <code>menuContext</code> set on the trigger will be passed to the implicit value, ie <code>*menuItem=&quot;let item&quot;</code>, <code>item</code> will be equal to <code>menuContext</code>.</p>
-<h3>Properties</h3>
-<p><props-table component="MenuItemDirective"></props-table></p>
 `,
   host: { class: 'markdown-page' },
   standalone: false,
@@ -5151,12 +5102,8 @@ export class LoadingExamplesPage {
 <h1>Components</h1>
 <h2>NovoLoadingElement <code>novo-loading</code></h2>
 <p>The <code>novo-loading</code> component displays the loading dots in a linear line. This commonly used for loading the page, content within a modal, or when refreshing data within a table.</p>
-<h3>Properties</h3>
-<p><props-table component="NovoLoadingElement"></props-table></p>
 <h2>NovoSpinnerElement <code>novo-spinner</code></h2>
 <p>The <code>novo-spinner</code> component displays the circular loading visual, usually used within the button to indicate the action is performing but not complete yet.</p>
-<h3>Properties</h3>
-<p><props-table component="NovoSpinnerElement"></props-table></p>
 `,
   host: { class: 'markdown-page' },
   standalone: false,
@@ -5305,8 +5252,6 @@ export class IconExamplesPage {
 <h1>Components</h1>
 <h2>NovoIconComponent <code>novo-icon</code></h2>
 <p>The <code>novo-icon</code> component is used as a convience wrapper for all the bullhorn icons. This is to enable consistent styling when using the icons in various usecase, ie. inline, headers, buttons, etc...</p>
-<h3>Properties</h3>
-<p><props-table component="NovoIconComponent"></props-table></p>
 `,
   host: { class: 'markdown-page' },
   standalone: false,
@@ -5431,13 +5376,9 @@ export class FieldExamplesPage {
 <h1>Components</h1>
 <h2>NovoFieldElement <code>novo-field</code></h2>
 <p>The <code>novo-field</code> component expects 1 <code>button</code> or <code>novo-button</code> as the trigger for the menu list which is comprised of all the <code>novo-option</code> or <code>novo-optgroup</code> child components.</p>
-<h3>Properties</h3>
-<p><props-table component="NovoFieldElement"></props-table></p>
 <h1>Directive</h1>
 <h2>NovoInput <code>[novoInput]</code></h2>
 <p>The <code>novoInput</code> component expects 1 <code>button</code> or <code>novo-button</code> as the trigger for the menu list which is comprised of all the <code>novo-option</code> or <code>novo-optgroup</code> child components.</p>
-<h3>Properties</h3>
-<p><props-table component="NovoInput"></props-table></p>
 `,
   host: { class: 'markdown-page' },
   standalone: false,
@@ -5586,8 +5527,6 @@ export class DropdownExamplesPage {
 <h1>Components</h1>
 <h2>NovoDropdownElement <code>novo-dropdown</code></h2>
 <p>The <code>novo-dropdown</code> component expects 1 <code>button</code> or <code>novo-button</code> as the trigger for the menu list which is comprised of all the <code>novo-option</code> or <code>novo-optgroup</code> child components.</p>
-<h3>Properties</h3>
-<p><props-table component="NovoDropdownElement"></props-table></p>
 `,
   host: { class: 'markdown-page' },
   standalone: false,
@@ -5788,8 +5727,6 @@ export class CalendarExamplesPage {
 <h1>Components</h1>
 <h2>NovoCalendarElement <code>novo-calendar</code></h2>
 <p>All tabs must be incapsulated in a <code>novo-nav</code> container. The nav will control the context and active tab.</p>
-<h3>Properties</h3>
-<p><props-table component="NovoCalendarElement"></props-table></p>
 `,
   host: { class: 'markdown-page' },
   standalone: false,
@@ -5961,8 +5898,6 @@ export class ButtonExamplesPage {
 <h1>Components</h1>
 <h2>NovoButtonElement <code>novo-button</code></h2>
 <p>All tabs must be incapsulated in a <code>novo-nav</code> container. The nav will control the context and active tab.</p>
-<h3>Properties</h3>
-<p><props-table component="NovoButtonElement"></props-table></p>
 `,
   host: { class: 'markdown-page' },
   standalone: false,
@@ -6426,8 +6361,6 @@ export class AutocompleteExamplesPage {
 <h1>Components</h1>
 <h2>NovoAutocompleteElement <code>novo-autocomplete</code></h2>
 <p>The <code>novo-autocomplete</code> component automatically links its list of values to the the novoInput of the <code>novo-field</code>. Subscribe to value changes inorder to update your options list.</p>
-<h3>Properties</h3>
-<p><props-table component="NovoAutocompleteElement"></props-table></p>
 `,
   host: { class: 'markdown-page' },
   standalone: false,
@@ -6708,16 +6641,10 @@ export class AgendaExamplesPage {
 <h1>Components</h1>
 <h2>NovoAgendaMonthViewElement <code>novo-agenda-month</code></h2>
 <p>Display <code>events</code> with a Month view calendar.</p>
-<h3>Properties</h3>
-<p><props-table component="NovoAgendaMonthViewElement"></props-table></p>
 <h2>NovoAgendaWeekViewElement <code>novo-agenda-month</code></h2>
 <p>Display <code>events</code> within a Week view calendar.</p>
-<h3>Properties</h3>
-<p><props-table component="NovoAgendaWeekViewElement"></props-table></p>
 <h2>NovoAgendaDayViewElement <code>novo-agenda-month</code></h2>
 <p>Display <code>events</code> within single day view</p>
-<h3>Properties</h3>
-<p><props-table component="NovoAgendaDayViewElement"></props-table></p>
 `,
   host: { class: 'markdown-page' },
   standalone: false,
@@ -6791,7 +6718,6 @@ export class AgendaDesignPage {
 }
 
 const routes: Routes = [
-  //{ path: '', component: Home, data: {} },
   { path: 'utils/security', component: SecurityPage, data: { order: '1', title: 'Security', section: 'utils' } },
   { path: 'utils/quick note', component: QuickNotePage, data: { order: '1', title: 'Quick Note', section: 'utils' } },
   { path: 'utils/pipes', component: PipesPage, data: { order: '2', title: 'Pipes', section: 'utils' } },

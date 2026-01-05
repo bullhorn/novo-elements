@@ -40,7 +40,3 @@ Tip Wells are used as ephemeral containers of helpful text. The importance of th
 
 The `novo-tip-well` component expects a `name` property, which will be used to store the state of the tipwell in local-storage.
 
-### Properties
-
-<props-table component="NovoTipWellElement"></props-table>
-

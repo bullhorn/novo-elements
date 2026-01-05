@@ -38,14 +38,6 @@ Chips are now separated into their atomic parts: `novo-chip`, `novo-chip-list`, 
 
 The `novo-chip` component is the lowest level component for the chips module.  Contains all the styles contained with a single chip.  This component can start being used for more use-cases other than the multi-select picker.
 
-### Properties
-
-<props-table component="NovoChipElement"></props-table>
-
 ## NovoChipListElement `novo-chip-list`
 
 The `novo-chip-list` is just a container to wrap many chips within.  This should control basic flow and layout of the contained chips.
-
-### Properties
-
-<props-table component="NovoChipListElement"></props-table>
