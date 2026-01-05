@@ -999,7 +999,7 @@ export class PatternsPage {
   Below is some code, you can copy it with <kbd>Ctrl-C</kbd>. Did you know,
   <code>alert(1)</code> can show an alert in JavaScript!
 </p>
-<pre><code>// This logs a message to the console and check out the scrollbar.<br>console.info('Hello, world!')</code></pre>
+<pre><code>// This logs a message to the console and check out the scrollbar.<br>console.log('Hello, world!')</code></pre>
 <h3 id="other">Other</h3>
 <p>Here's a horizontal rule and image because I don't know where else to put them.</p>
 <img src="https://placekitten.com/408/287" alt="Example kitten" />
@@ -1223,7 +1223,6 @@ export class LayoutsPage {
 <p><code-example example="tabs-vertical"></code-example></p>
 <h3>Button Tab Bars</h3>
 <p>Tabbed Button Bars get a similar style treatment to the <code>&quot;header&quot;</code> theme button.</p>
-<!-- <code-example example="tabs-condensed"></code-example> -->
 <h2>As Application Routing Mechanism</h2>
 <p>Follows the same color/white theme as above, but doesn't use the &quot;novo-tabs&quot; tag and you have to add the classes and html accordingly. The header will now control and route your application and put the content in the &quot;router-outlet&quot; and look/feel like our tabs component.</p>
 <p><code-example example="tabs-router"></code-example></p>
@@ -1860,9 +1859,6 @@ export class CardDescriptionPage {
 @Component({
   selector: 'home-page',
   template: `<h1>Novo Elements, Bullhorn's design system</h1>
-<blockquote>
-<div class="p">Version 6.0 is now available! Read about the new features and fixes <a href="#/updates/v6">here</a>.</div>
-</blockquote>
 <h2>Crafted amid Complexity</h2>
 <p>Enterprise software is highly complex and demands a high level of flexibility. Design offers clarity and enables us to make deep, powerful connections.</p>
 <img class="cover-img" src="assets/images/DesignSystem.png" width="100%"/>
@@ -3121,30 +3117,6 @@ export class TypographyPage {
     <pre><code>.box &#123;\n  &#64;include novo-padding-medium(); // use mixin \n  margin: $spacing-xs; // or use scss variables\n  padding: $spacing-xl;\n&#125; &#125;&#125;</code></pre>
   </typedef-snippet>
 </typedef-example>
-<!-- 
-<typedef-example>
-  <typedef-content>
-    <novo-flex gap="1rem">
-      <novo-box bg="ocean"><novo-box margin="xs" padding="xl" bg="white">xs</novo-box></novo-box>
-      <novo-box bg="ocean"><novo-box margin="sm" padding="lg" bg="white">sm</novo-box></novo-box>
-      <novo-box bg="ocean"><novo-box margin="md" padding="md" bg="white">md</novo-box></novo-box>
-      <novo-box bg="ocean"><novo-box margin="lg" padding="sm" bg="white">lg</novo-box></novo-box>
-      <novo-box bg="ocean"><novo-box margin="xl" padding="xs" bg="white">xl</novo-box></novo-box>
-    </novo-flex>
-  </typedef-content>
-  <typedef-specs>
-    <novo-label>Margin</novo-label>
-    <dl>
-      <dt>Font Size       </dt><dd>1.2rem</dd>
-      <dt>Line Height     </dt><dd>1.375 (28px)</dd>
-      <dt>Font Weight     </dt><dd>300</dd>
-      <dt>Max Line Length </dt><dd>550px</dd>
-    </dl>
-  </typedef-specs>
-  <typedef-snippet>
-    <code class="tc-positive">&lt;novo-box margin="sm"&gt;...&lt;/novo-box&gt;</code> or <code class="tc-negative">&#64;include novo-margin-medium()</code>
-  </typedef-snippet>
-</typedef-example> -->
 `,
   host: { class: 'markdown-page' },
   standalone: false,
@@ -4028,8 +4000,7 @@ export class SearchPage {
 <p><code-example example="single-field-criteria"></code-example></p>
 <h2>Full Query Builder</h2>
 <p>The difference between the Query and Criteria Builder is that it allow for the user to define multiple criteria and join them as either inclusion or exclusion criteria.  ie. Find <code>where fruit.seeds &gt;= 1 and not fruit.name='Avacodo'</code></p>
-<p>TBW</p>
-<!-- <code-example example="just-criteria"></code-example> -->`,
+`,
   host: { class: 'markdown-page' },
   standalone: false,
 })
