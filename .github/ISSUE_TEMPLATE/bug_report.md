@@ -4,8 +4,6 @@ about: Report a bug to help us improve
 
 ---
 
-_**Note: for support questions, please use one of these channels:**_ [Chat: BullhornOSS Gitter](https://gitter.im/bullhorn/Open-Source)
-
 **Describe the bug**
 A short summary of what the bug is.
 
