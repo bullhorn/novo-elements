@@ -260,13 +260,28 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
     if (!field) {
       return;
     }
-    const editType = this.editTypeFn()(field);
+    let editType = this.editTypeFn()(field);
     // Don't look at dataSpecialization it is no good, this misses currency, and percent
     const { name } = field;
+    const qualifiesAsBoolean = this.doesFieldQualifyAsBoolean(field);
+    if (editType.toUpperCase() === 'RADIO' && qualifiesAsBoolean) {
+      editType = 'BOOLEAN';
+    }
     const fieldDefsByName = this.queryBuilderService.getFieldDefsByName();
     // Check Fields by priority for match Field Definition
     const key = [name, editType?.toUpperCase(), 'DEFAULT'].find((it) => fieldDefsByName.has(it));
     return fieldDefsByName.get(key);
+  }
+
+  private doesFieldQualifyAsBoolean(field): boolean {
+    if (field.dataType === 'Boolean') {
+      return true;
+    }
+    if (!field.options) {
+      return false;
+    }
+    const values = new Set(field.options.map(opt => opt.value));
+    return field.options.length === 2 && values.has(true) && values.has(false);
   }
 
   private createFieldTemplates() {
