@@ -1,9 +1,9 @@
-import { browser } from "@wdio/globals";
-import { examplesUrl, URLS } from "../utils/EnvironmentUtil";
-import { verifyPresent, verifyText } from "../utils/VerifyUtil";
-import { click } from "../utils/ElementActionUtil";
-import { codeExample, elements } from "../utils/SelectorUtil";
-import { getAllElements } from "../utils/GetElementUtil";
+import { browser } from '@wdio/globals';
+import { examplesUrl, URLS } from '../utils/EnvironmentUtil';
+import { verifyPresent, verifyText } from '../utils/VerifyUtil';
+import { click } from '../utils/ElementActionUtil';
+import { codeExample, elements } from '../utils/SelectorUtil';
+import { getAllElements } from '../utils/GetElementUtil';
 
 describe('Breadcrumbs Demo Page', () => {
     const url = examplesUrl('breadcrumbs');

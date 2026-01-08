@@ -1,5 +1,5 @@
 import { getAllElements, getElement, getElementCount } from './GetElementUtil';
-import { retry } from "./RetryUtil";
+import { retry } from './RetryUtil';
 import { getAllElementsText, hasClass, isPresent } from './ElementPropertiesUtil';
 import {
     Classes,
@@ -14,7 +14,7 @@ import {
     AllowedKey,
     FieldNamesToFormValues,
     FormValues,
-    getControlType
+    getControlType,
 } from '../e2e/common/table.common.page';
 import { asyncForEach } from './AutomationHelpers';
 import { isObject } from 'imask/core/utils';
@@ -23,7 +23,7 @@ export async function verifyPresent(el: string, friendlyElementName: string = ''
     await expect($(el)).toBePresent({
         message: `Expected at least one ${friendlyElementName}, but there were none for selector: ${el}`,
         interval: interval,
-        wait: totalWaitTime
+        wait: totalWaitTime,
     });
 }
 
@@ -86,7 +86,7 @@ export async function verifyText(el: string, expected: string | number | RegExp,
         ignoreCase: true,
         message: `${elementName} is missing the expected text: ${expected}.`,
         interval: 1000,
-        wait: totalWaitTime
+        wait: totalWaitTime,
     });
 }
 
@@ -145,6 +145,8 @@ async function verifyFormValue(fieldName: string, expected: AllowedKey, friendly
                   verifyTextIncludes(pickerChipValue(fieldName), String(expectedChip), friendlyElementName, chipIndex) :
                   verifyText(pickerChipValue(fieldName), String(expectedChip), friendlyElementName, chipIndex);
             });
+        default:
+            break;
     }
     // Default for all fields that provide their string value in their control input value attribute
     return includes ?
@@ -165,7 +167,7 @@ export async function verifyTextIncludes(el: string, expected: string, friendlyE
         message: `Expected text for ${elementName} to include: '${expected}', but found: '${await element.getText()}' for element with selector: '${el}'`,
         interval: 1000,
         wait: totalWaitTime,
-        ignoreCase: true
+        ignoreCase: true,
     });
 }
 
@@ -187,7 +189,7 @@ export async function verifyInputValue(selector: string,
         message,
         interval: 1000,
         wait: totalWaitTime,
-        ignoreCase: true
+        ignoreCase: true,
     });
 }
 
@@ -201,6 +203,6 @@ export async function verifyInputValueIncludes(selector: string,
         message: `Expected ${elementName} value to contain: '${expected}' with selector: '${selector}'`,
         interval: 1000,
         wait: totalWaitTime,
-        ignoreCase: true
+        ignoreCase: true,
     });
 }

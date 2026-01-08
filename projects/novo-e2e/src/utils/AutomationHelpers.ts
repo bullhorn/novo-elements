@@ -32,5 +32,5 @@ export async function asyncMap(array: any[], mapper: Function): Promise<any> {
 }
 
 export function failureMessage(message: any) {
-    console.warn(`      ×`, message);
+    console.warn('      ×', message);
 }

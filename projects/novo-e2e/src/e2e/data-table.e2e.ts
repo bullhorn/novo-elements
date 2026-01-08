@@ -3,7 +3,7 @@ import {
     verifyAbsent,
     verifyElementCountEquals,
     verifyPresent,
-    verifyText
+    verifyText,
 } from '../utils/VerifyUtil';
 import { automationId, elements } from '../utils/SelectorUtil';
 import { testElements, testFiltering, testSorting } from './common/table.common';
@@ -34,9 +34,9 @@ describe('Data Table Demo Tests', () => {
 
     describe('Array of Rows section', () => {
         it('should display Change Dataset buttons', async () => {
-            await verifyText(automationId("Dataset #1"), 'Dataset #1');
-            await verifyText(automationId("Dataset #2"), 'Dataset #2');
-            await verifyText(automationId("Dataset #3"), 'Dataset #3');
+            await verifyText(automationId('Dataset #1'), 'Dataset #1');
+            await verifyText(automationId('Dataset #2'), 'Dataset #2');
+            await verifyText(automationId('Dataset #3'), 'Dataset #3');
         });
         it('should display Change Pagination Style buttons', async () => {
             await verifyText(automationId('Standard'), 'Standard');

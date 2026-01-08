@@ -23,7 +23,7 @@ import {
   getAllElementsText,
   getAttribute,
   getElementText,
-  isPresent
+  isPresent,
 } from '../../utils/ElementPropertiesUtil';
 import { verifyPresent } from '../../utils/VerifyUtil';
 import {
@@ -241,7 +241,7 @@ export async function setPickerValue(fieldName: string, value: string = '', inde
         await click(`${frame.overlay} ${elements.picker.item}`);
       } catch (errorFromWaitingForSpecificOption) {
         // If specific picker option is not in results after timeout, proceed with the first option
-        console.log(errorFromWaitingForSpecificOption);
+        console.warn(errorFromWaitingForSpecificOption);
         await click(`${frame.overlay} ${elements.picker.item}`);
       }
     }
@@ -261,7 +261,7 @@ export async function setPickerValue(fieldName: string, value: string = '', inde
 
 async function waitForSpecificOptionToBeFirst(value: string): Promise<void> {
   await wait(async () => {
-    console.log(`Waiting for ${value} to be the first option in the picker`);
+    console.info(`Waiting for ${value} to be the first option in the picker`);
     const firstOptionText: string =
       await getElementText(`${frame.overlay} ${elements.picker.item} ${elements.picker.itemTitle},.list-item`);
     const pickerOptionsCount: number = await getElementCount(`${frame.overlay} ${elements.picker.item}`);
@@ -424,7 +424,7 @@ export async function clearFilter(): Promise<void> {
     }
     await waitForTableToRefresh();
   } else {
-    console.log('column is not filtered');
+    console.warn('column is not filtered');
   }
 }
 
@@ -470,8 +470,8 @@ export async function filterTableColumn(columnName: string, filterData?: string 
     await browser.keys(['Enter']);
   } else {
     filterText = filterData ? String(filterData) : 'option1';
-    const selectOption = getDropdownContainerSelect(filterText);
-    await click(selectOption);
+    const selectedOption = getDropdownContainerSelect(filterText);
+    await click(selectedOption);
   }
 
   await waitForTableToRefresh();

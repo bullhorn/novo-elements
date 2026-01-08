@@ -16,7 +16,7 @@ export async function getElementVisibility(element: string | WebdriverIO.Element
         resolvedElement.getSize(),
         hasAttribute(resolvedElement, 'hidden', index),
         hasCssValue(resolvedElement, 'visibility', 'hidden', index),
-        hasCssValue(resolvedElement, 'display', 'none', index)
+        hasCssValue(resolvedElement, 'display', 'none', index),
     ]);
 
     if ((elementSize.height === 0 || elementSize.width === 0) || hiddenAttribute || cssVisibilityHidden || cssDisplayNone) {

@@ -1,7 +1,7 @@
-import { browser } from "@wdio/globals";
-import { examplesUrl, URLS } from "../utils/EnvironmentUtil";
-import { verifyPresent, verifyText } from "../utils/VerifyUtil";
-import { codeExample, elements } from "../utils/SelectorUtil";
+import { browser } from '@wdio/globals';
+import { examplesUrl, URLS } from '../utils/EnvironmentUtil';
+import { verifyPresent, verifyText } from '../utils/VerifyUtil';
+import { codeExample, elements } from '../utils/SelectorUtil';
 
 describe('Avatar Demo Page', () => {
     const url = examplesUrl('avatar');

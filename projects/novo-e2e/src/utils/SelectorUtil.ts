@@ -3,26 +3,26 @@ import { Key } from 'webdriverio';
 /**
  * Common element attributes.
  */
-export enum Attributes {
-    automationId = 'data-automation-id',
-    automationValue = 'data-automation-value',
-    backgroundColor = 'background-color',
-    color = 'color',
-    dataHint = 'data-hint',
-    tooltip = 'tooltip',
-    hidden = 'hidden',
-    id = 'id',
-    innerText = 'innerText',
-    name = 'name',
-    src = 'src',
-    style = 'style',
-    title = 'title',
-    type = 'type',
-    value = 'value',
-    action = 'action',
-    ariaSelected = 'aria-selected',
-    disabled = 'disabled'
-}
+export const Attributes = {
+    automationId: 'data-automation-id',
+    automationValue: 'data-automation-value',
+    backgroundColor: 'background-color',
+    color: 'color',
+    dataHint: 'data-hint',
+    tooltip: 'tooltip',
+    hidden: 'hidden',
+    id: 'id',
+    innerText: 'innerText',
+    name: 'name',
+    src: 'src',
+    style: 'style',
+    title: 'title',
+    type: 'type',
+    value: 'value',
+    action: 'action',
+    ariaSelected: 'aria-selected',
+    disabled: 'disabled',
+} as const;
 
 /**
  * Common element classes.
@@ -108,7 +108,7 @@ export const elements = {
             clearSingleCondition: '.delete-btn',
             andNotDropdown: 'groupings-dropdown',
         },
-    }
+    },
 }
 
 /**
@@ -132,7 +132,7 @@ export const keyboardKeys = {
     escape: Key.Escape,
     pause: Key.Pause,
     tab: Key.Tab,
-    spaceBar: Key.Space
+    spaceBar: Key.Space,
 };
 
 export enum ControlType {
@@ -167,7 +167,7 @@ export const frame = {
     mainframe: 'mainframe',
     overlay: '.novo-overlay-panel',
     subMainFrame: '.main-frame',
-    mainWindow: '#bhMainWindow'
+    mainWindow: '#bhMainWindow',
 };
 
 export const novoAdvancedSearchOperator = {

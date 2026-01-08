@@ -34,7 +34,7 @@ describe('Button Demo Page', () => {
             'fab',
             'dynamic',
             'loading',
-            'two-icon'
+            'two-icon',
         ];
         buttonTypes.forEach(type => {
             it(`should display example section - ${type}`, async () => {

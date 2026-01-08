@@ -135,7 +135,7 @@ export async function waitForElementToBeAbsent(selector: string, timeout: number
     return elem.waitForExist({
         reverse: true,
         timeout: timeout,
-        timeoutMsg: `element: ${selector} at index ${index} was never absent`
+        timeoutMsg: `element: ${selector} at index ${index} was never absent`,
     });
 }
 
@@ -196,7 +196,7 @@ export async function waitForElementCount(el: string, count: number, timeout: nu
 export async function waitForElementText(el: string, timeout: number = 8000) {
     await wait(async () => {
         return await getElementText(el) !== '';
-    }, timeout, `Element text was an empty string`);
+    }, timeout, 'Element text was an empty string');
 }
 
 export async function waitForElementToBeDisabled(el: string , timeout: number = 8000, index: number = 0) {

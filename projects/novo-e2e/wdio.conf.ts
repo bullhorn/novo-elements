@@ -34,7 +34,7 @@ export const config: Options.Testrunner = {
     },
   },
 
-  onPrepare: async (config, capabilities) => {
+  onPrepare: async (conf, capabilities) => {
     setHeadlessMode(capabilities);
   },
   before: async () => {
