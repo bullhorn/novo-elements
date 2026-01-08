@@ -66,7 +66,15 @@ npm run e2e:headed
 
 # Run tests in headless mode (explicit)
 npm run e2e:headless
+
+# Run a single test file by name
+npm run e2e:single button
+# This runs: projects/novo-e2e/src/e2e/button.e2e.ts
 ```
+
+When running a single test file with `npm run e2e:single`, simply provide the filename without the `.e2e.ts` extension. For example:
+- `npm run e2e:single button` → runs `projects/novo-e2e/src/e2e/button.e2e.ts`
+- `npm run e2e:single queryBuilder` → runs `projects/novo-e2e/src/e2e/queryBuilder.e2e.ts`
 
 ## Customizing Labels
 
