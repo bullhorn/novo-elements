@@ -31,19 +31,42 @@
     # Install the module from NPM
     npm install --save novo-elements
 
-Depending on what system you are using (SystemJS, Webpack, etc..) the setup will vary.
+Depending on what system you are using (SystemJS, Webpack, etc.) the setup will vary.
 
 If using SCSS/SASS you will need to include the following includes: `node_modules/novo-elements/lib`.
 
 ## Building Examples
 
-> All examples can be added to the appropriate directory in the `novo-examples` project. Each markdown file will be converted to a demo page and a route will automatically be added to the demo. You can import any example project by using the angular selector, or inject it using the `code-example` tag, ie. `<code-example example="demo-name"></code-example>`.
+> All examples can be added to the appropriate directory in the `novo-examples` project. Each markdown file will be converted to a demo page and a route will automatically be added to the demo. You can import any example project by using the angular selector, or inject it using the `code-example` tag, i.e. `<code-example example="demo-name"></code-example>`.
 
     # Compile markdown, generate routes, and AOT build the project
     npm run build:examples
 
     # Automatically rebuild changes to the examples project
     npm run build:examples:watch
+
+## E2E Testing
+
+The project includes end-to-end tests using WebdriverIO (wdio) and Mocha for testing component functionality across the entire application.
+
+### E2E Test Structure/Configuration
+
+- E2E tests are located in `projects/novo-e2e/src/e2e/`
+- Tests are configured in `projects/novo-e2e/wdio.conf.ts`
+- Run against the published demo at `https://bullhorn.github.io/novo-elements/docs/`
+
+### Running E2E Tests
+
+```bash
+# Run tests in headless mode (default)
+npm run e2e
+
+# Run tests in headed mode (browser window visible)
+npm run e2e:headed
+
+# Run tests in headless mode (explicit)
+npm run e2e:headless
+```
 
 ## Customizing Labels
 
@@ -58,7 +81,7 @@ To make Angular use this new class over the default one you can provide in the b
 To use the default labels, you will need to provide the `NOVO_ELEMENTS_LABELS_PROVIDERS` via
 
 ```ts
-import {NOVO_ELEMENTS_LABELS_PROVIDERS} from 'novo-elements';
+import { NOVO_ELEMENTS_LABELS_PROVIDERS } from 'novo-elements';
 bootstrap(MyApp [..NOVO_ELEMENTS_LABELS_PROVIDERS]);
 ```
 
