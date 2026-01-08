@@ -37,8 +37,8 @@ describe('Query Builder Demo Page', () => {
   describe('Basic Criteria builder', () => {
     const trueButtonActive = `button ${automationId('True')}${elements.buttonThemes.primary}`;
     const falseButtonActive = `button ${automationId('False')}${elements.buttonThemes.primary}`;
-    const yesButtonActive = `button ${automationId("Yes")}${elements.buttonThemes.primary}`;
-    const noButtonActive = `button ${automationId("No")}${elements.buttonThemes.primary}`;
+    const yesButtonActive = `button ${automationId('Yes')}${elements.buttonThemes.primary}`;
+    const noButtonActive = `button ${automationId('No')}${elements.buttonThemes.primary}`;
 
     it('criteria builder elements', async () => {
       await Promise.all([

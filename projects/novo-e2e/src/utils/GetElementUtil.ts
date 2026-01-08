@@ -11,7 +11,7 @@ export async function getElement(selector: string, index: number = 0): Promise<W
             return elem;
         }, {
             timeout: 8000,
-            timeoutMsg: `No element found for selector ${selector} at index ${index}`
+            timeoutMsg: `No element found for selector ${selector} at index ${index}`,
         });
     } else {
         elem = await $(selector).getElement();

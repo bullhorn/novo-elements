@@ -1,9 +1,9 @@
-import { browser } from "@wdio/globals";
-import { examplesUrl, URLS } from "../utils/EnvironmentUtil";
-import { verifyNotActive, verifyPresent, verifyText } from "../utils/VerifyUtil";
-import { click, scrollIntoView } from "../utils/ElementActionUtil";
-import { getAllElements } from "../utils/GetElementUtil";
-import { elements } from "../utils/SelectorUtil";
+import { browser } from '@wdio/globals';
+import { examplesUrl, URLS } from '../utils/EnvironmentUtil';
+import { verifyNotActive, verifyPresent, verifyText } from '../utils/VerifyUtil';
+import { click, scrollIntoView } from '../utils/ElementActionUtil';
+import { getAllElements } from '../utils/GetElementUtil';
+import { elements } from '../utils/SelectorUtil';
 
 describe('Non Ideal State Demo Page', () => {
     const url = examplesUrl('non ideal state');
@@ -40,7 +40,7 @@ describe('Non Ideal State Demo Page', () => {
         })
 
         it('should display "This folder is empty" title', async () => {
-            await verifyText(`novo-title.novo-non-ideal-state-title`, 'This folder is empty', 'Non ideal state title');
+            await verifyText('novo-title.novo-non-ideal-state-title', 'This folder is empty', 'Non ideal state title');
         });
 
         it('should display upload description text', async () => {
