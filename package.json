@@ -43,6 +43,7 @@
     "prettier": "prettier --write \"./projects/**/*.{ts,js,html,scss}\"",
     "prettier:check": "prettier --list-different \"./projects/**/*.{ts,js,html,scss}\"",
     "e2e": "wdio run projects/novo-e2e/wdio.conf.ts --headless=true",
+    "e2e:single": "bash -c 'wdio run projects/novo-e2e/wdio.conf.ts --spec \"projects/novo-e2e/src/e2e/$1.e2e.ts\" --headless=true' --",
     "e2e:headed": "wdio run projects/novo-e2e/wdio.conf.ts --headless=false",
     "e2e:headless": "wdio run projects/novo-e2e/wdio.conf.ts --headless=true"
   },
