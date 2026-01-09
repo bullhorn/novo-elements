@@ -1,12 +1,12 @@
 import { browser } from '@wdio/globals';
-import { examplesUrl, URLS } from '../utils/EnvironmentUtil';
+import { COMPONENT_URLS, examplesUrl, URLS } from '../utils/EnvironmentUtil';
 import { verifyPresent, verifyText } from '../utils/VerifyUtil';
 import { click } from '../utils/ElementActionUtil';
 import { codeExample, elements } from '../utils/SelectorUtil';
 import { getAllElements } from '../utils/GetElementUtil';
 
 describe('Breadcrumbs Demo Page', () => {
-    const url = examplesUrl('breadcrumbs');
+    const url = examplesUrl(COMPONENT_URLS.BREADCRUMB);
 
     before(async () => {
         await browser.navigateTo(url);

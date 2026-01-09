@@ -1,12 +1,12 @@
 import { asyncForEach } from 'utils/AutomationHelpers';
 import { click, scrollIntoView } from 'utils/ElementActionUtil';
-import { examplesUrl, URLS } from 'utils/EnvironmentUtil';
+import { COMPONENT_URLS, examplesUrl, URLS } from 'utils/EnvironmentUtil';
 import { getAllElements } from 'utils/GetElementUtil';
 import { codeExample, elements } from 'utils/SelectorUtil';
 import { verifyPresent, verifyText } from 'utils/VerifyUtil';
 
 describe('Button Demo Page', () => {
-    const url = examplesUrl('button');
+    const url = examplesUrl(COMPONENT_URLS.BUTTON);
 
     before(async () => {
         await browser.navigateTo(url);

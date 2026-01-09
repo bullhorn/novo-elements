@@ -1,4 +1,4 @@
-import { componentsUrl, URLS } from '../utils/EnvironmentUtil';
+import { COMPONENT_URLS, componentsUrl, URLS } from '../utils/EnvironmentUtil';
 import {
     verifyAbsent,
     verifyElementCountEquals,
@@ -11,7 +11,7 @@ import { click } from '../utils/ElementActionUtil';
 import { sleep } from '../utils/SleepUtil';
 
 describe('Data Table Demo Tests', () => {
-    const url = componentsUrl('data-table');
+    const url = componentsUrl(COMPONENT_URLS.DATA_TABLE);
     const dataTablePage = 'data-table-page';
     const detailRow = '.novo-data-table-detail-row';
     const emptyMessage = '.novo-data-table-empty-message';
