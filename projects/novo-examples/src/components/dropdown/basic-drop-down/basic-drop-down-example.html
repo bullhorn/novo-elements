@@ -1,12 +1,12 @@
 <novo-dropdown>
   <novo-button theme="secondary" icon="collapse" data-automation-id="basic-dropdown-actions-button">Actions</novo-button>
-  <novo-optgroup label="Engage">
+  <novo-optgroup label="Engage" data-automation-id="opt-group-engage-label">
     <novo-option (click)="clickMe('Hello!')">Send Email</novo-option>
     <novo-option (click)="clickMe('Another!')">Send SMS</novo-option>
     <novo-option tooltip="Test tooltip :)"
       tooltipPosition="right"
       (click)="clickMe()"
-      disabled>Advertise Shifts</novo-option>
+      disabled data-automation-id="dropdown-disabled-option">Advertise Shifts</novo-option>
   </novo-optgroup>
   <novo-optgroup label="Manage">
     <novo-option (click)="clickMe('Hello!')">Find Matching Jobs</novo-option>

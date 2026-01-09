@@ -99,6 +99,15 @@ export async function verifyElementCountEquals(el: string, expected: number, fri
     });
 }
 
+export async function verifyVisibleElementCountEquals(el: string, expected: number, friendlyElementName: string = null, totalWaitTime: number = 3000) {
+    await verifyElementCountEquals(el, expected, friendlyElementName, totalWaitTime);
+
+    const elements = $$(el);
+    expect(elements).toBeDisplayed({
+        message: `Expected count of visible ${friendlyElementName} to be: '${expected}', but found: '${elements.length}' for element with selector: '${el}'`,
+    });
+}
+
 export async function verifyFormValues(values: FormValues, matchAsIncludes = false): Promise<void> {
     const formArray: FieldNamesToFormValues[] = Array.isArray(values) ? values : [values];
     return await asyncForEach(formArray, async (form, index) => {
