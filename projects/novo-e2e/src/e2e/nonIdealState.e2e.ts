@@ -1,12 +1,12 @@
 import { browser } from '@wdio/globals';
-import { examplesUrl, URLS } from '../utils/EnvironmentUtil';
+import { COMPONENT_URLS, examplesUrl, URLS } from '../utils/EnvironmentUtil';
 import { verifyNotActive, verifyPresent, verifyText } from '../utils/VerifyUtil';
 import { click, scrollIntoView } from '../utils/ElementActionUtil';
 import { getAllElements } from '../utils/GetElementUtil';
 import { elements } from '../utils/SelectorUtil';
 
 describe('Non Ideal State Demo Page', () => {
-    const url = examplesUrl('non ideal state');
+    const url = examplesUrl(COMPONENT_URLS.NON_IDEAL_STATE);
     const searchSelector = 'code-example[example="non-ideal-state-search-usage"]';
     const loadingSelector = 'code-example[example="non-ideal-state-loading-usage"]';
     let buttons;

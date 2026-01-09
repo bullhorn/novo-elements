@@ -1,10 +1,10 @@
 import { browser } from '@wdio/globals';
-import { examplesUrl, URLS } from '../utils/EnvironmentUtil';
+import { COMPONENT_URLS, examplesUrl, URLS } from '../utils/EnvironmentUtil';
 import { verifyPresent, verifyText } from '../utils/VerifyUtil';
 import { codeExample, elements } from '../utils/SelectorUtil';
 
 describe('Avatar Demo Page', () => {
-    const url = examplesUrl('avatar');
+    const url = examplesUrl(COMPONENT_URLS.AVATAR);
 
     before(async () => {
         await browser.navigateTo(url);

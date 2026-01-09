@@ -1,4 +1,4 @@
-import { examplesUrl, URLS } from '../utils/EnvironmentUtil';
+import { COMPONENT_URLS, examplesUrl, URLS } from '../utils/EnvironmentUtil';
 import { browser } from '@wdio/globals';
 import { setFiltersFromAdvancedSearch } from './common/table.common.page';
 import { automationId, elements, novoAdvancedSearchOperator } from '../utils/SelectorUtil';
@@ -16,7 +16,7 @@ import { getElementWithTextValue } from '../utils/GetElementUtil';
 import { click, moveMouseToElement } from '../utils/ElementActionUtil';
 
 describe('Query Builder Demo Page', () => {
-  const url = examplesUrl('query builder');
+  const url = examplesUrl(COMPONENT_URLS.QUERY_BUILDER);
   const sectionLabel = 'section .novo-label';
   const sectionLabelSpan = 'section novo-label span';
   const pageHeader1 = 'query-builder-examples-page h1';
