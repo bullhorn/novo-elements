@@ -1,5 +1,5 @@
 import { click } from 'utils/ElementActionUtil';
-import { COMPONENT_URLS, examplesUrl, URLS } from 'utils/EnvironmentUtil';
+import { COMPONENT_URLS, examplesUrl, getURLs } from 'utils/EnvironmentUtil';
 import { automationId, codeExample, elements } from 'utils/SelectorUtil';
 import { verifyAbsent, verifyPresent, verifyText, verifyDisabled } from 'utils/VerifyUtil';
 
@@ -11,7 +11,7 @@ describe('Dropdown Demo Page', () => {
   });
 
   after(async () => {
-    await browser.navigateTo(URLS.HOME);
+    await browser.navigateTo(getURLs().HOME);
   });
 
   describe('Page Elements', () => {
@@ -34,7 +34,7 @@ describe('Dropdown Demo Page', () => {
       await click(automationId('basic-dropdown-actions-button'));
       await verifyPresent('.dropdown-container');
       await verifyPresent(automationId('opt-group-engage-label'));
-      await verifyText(automationId('opt-group-engage-label'), 'Engage');
+      await verifyText(`${automationId('opt-group-engage-label')} .novo-optgroup-label`, 'Engage');
     });
     it('should close the dropdown when clicked again', async () => {
       await click(automationId('basic-dropdown-actions-button'));

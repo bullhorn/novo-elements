@@ -1,4 +1,4 @@
-import { COMPONENT_URLS, componentsUrl, URLS } from '../utils/EnvironmentUtil';
+import { COMPONENT_URLS, componentsUrl, getURLs } from '../utils/EnvironmentUtil';
 import {
     verifyAbsent,
     verifyElementCountEquals,
@@ -24,7 +24,7 @@ describe('Data Table Demo Tests', () => {
     });
 
     after(async () => {
-        await browser.navigateTo(URLS.HOME);
+        await browser.navigateTo(getURLs().HOME);
     });
 
     it('should display page title and examples', async () => {

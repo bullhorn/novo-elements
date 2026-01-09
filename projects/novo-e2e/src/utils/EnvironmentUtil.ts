@@ -1,9 +1,12 @@
-export const URLS = {
-    // BASE: 'https://bullhorn.github.io/novo-elements/docs/#/components/',
-    // HOME: 'https://bullhorn.github.io/novo-elements/docs/#/home',
-    BASE: 'https://novo-elements--pr1750-f-automation-wjx10too.web.app/#/components/',
-    HOME: 'https://novo-elements--pr1750-f-automation-wjx10too.web.app/#/home',
-};
+export function getURLs() {
+    const baseUrl = (global as any).E2E_BASE_URL || 'https://bullhorn.github.io/novo-elements/docs';
+    return {
+        BASE: `${baseUrl}/#/components/`,
+        HOME: `${baseUrl}/#/home`,
+    };
+}
+
+export const URLS = getURLs();
 
 export const COMPONENT_URLS = {
     AVATAR: 'avatar',
@@ -16,9 +19,11 @@ export const COMPONENT_URLS = {
 };
 
 export function examplesUrl(component: string): string {
-    return `${URLS.BASE}${component}/examples`;
+    const urls = getURLs();
+    return `${urls.BASE}${component}/examples`;
 }
 
 export function componentsUrl(component: string): string {
-    return `${URLS.BASE}${component}`;
+    const urls = getURLs();
+    return `${urls.BASE}${component}`;
 }

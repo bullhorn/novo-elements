@@ -1,10 +1,10 @@
 import { browser } from '@wdio/globals';
 import { verifyPresent, verifyText } from 'utils/VerifyUtil';
-import { URLS } from 'utils/EnvironmentUtil';
+import { getURLs } from 'utils/EnvironmentUtil';
 
 describe('Novo Elements Demo Home Page', () => {
   before(async () => {
-      await browser.navigateTo(URLS.HOME);
+      await browser.navigateTo(getURLs().HOME);
   });
 
   it('should load the demo page', async () => {

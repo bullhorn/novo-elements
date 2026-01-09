@@ -1,4 +1,4 @@
-import { COMPONENT_URLS, examplesUrl, URLS } from '../utils/EnvironmentUtil';
+import { COMPONENT_URLS, examplesUrl, getURLs } from '../utils/EnvironmentUtil';
 import { browser } from '@wdio/globals';
 import { setFiltersFromAdvancedSearch } from './common/table.common.page';
 import { automationId, elements, novoAdvancedSearchOperator } from '../utils/SelectorUtil';
@@ -31,7 +31,7 @@ describe('Query Builder Demo Page', () => {
   });
 
   after(async () => {
-    await browser.navigateTo(URLS.HOME);
+    await browser.navigateTo(getURLs().HOME);
   });
 
   describe('Basic Criteria builder', () => {

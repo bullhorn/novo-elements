@@ -1,5 +1,5 @@
 import { browser } from '@wdio/globals';
-import { COMPONENT_URLS, examplesUrl, URLS } from '../utils/EnvironmentUtil';
+import { COMPONENT_URLS, examplesUrl, getURLs } from '../utils/EnvironmentUtil';
 import { verifyPresent, verifyText } from '../utils/VerifyUtil';
 import { codeExample, elements } from '../utils/SelectorUtil';
 
@@ -11,7 +11,7 @@ describe('Avatar Demo Page', () => {
     });
 
     after(async () => {
-        await browser.navigateTo(URLS.HOME);
+        await browser.navigateTo(getURLs().HOME);
     });
 
     it('should display page title and examples', async () => {
