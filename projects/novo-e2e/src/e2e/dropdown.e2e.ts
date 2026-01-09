@@ -1,38 +1,44 @@
-import { COMPONENT_URLS, examplesUrl, URLS } from "utils/EnvironmentUtil";
-import { codeExample, elements } from "utils/SelectorUtil";
-import { verifyPresent, verifyText } from "utils/VerifyUtil";
+import { click } from 'utils/ElementActionUtil';
+import { COMPONENT_URLS, examplesUrl, URLS } from 'utils/EnvironmentUtil';
+import { codeExample, elements } from 'utils/SelectorUtil';
+import { verifyAbsent, verifyPresent, verifyText } from 'utils/VerifyUtil';
 
 describe('Dropdown Demo Page', () => {
-    const url = examplesUrl(COMPONENT_URLS.DROPDOWN);
+  const url = examplesUrl(COMPONENT_URLS.DROPDOWN);
 
-    before(async () => {
-        await browser.navigateTo(url);
+  before(async () => {
+    await browser.navigateTo(url);
+  });
+
+  after(async () => {
+    await browser.navigateTo(URLS.HOME);
+  });
+
+  describe('Page Elements', () => {
+    it('should display page title and examples', async () => {
+      await verifyPresent(elements.title);
+      await verifyText(elements.title, 'Dropdown', 'Dropdown example page title');
+      await verifyPresent('dropdown-examples-page');
     });
 
-    after(async () => {
-        await browser.navigateTo(URLS.HOME);
+    const dropdownTypes = ['basic', 'position', 'large', 'scrollable', 'custom', 'multi', 'scroll-to-item'];
+    dropdownTypes.forEach((type) => {
+      it(`should display example section - ${type}`, async () => {
+        await verifyPresent(codeExample(`${type}-drop-down`));
+      });
     });
+  });
 
-    describe('Page Elements', () => {
-        it('should display page title and examples', async () => {
-            await verifyPresent(elements.title);
-            await verifyText(elements.title, 'Dropdown', 'Dropdown example page title');
-            await verifyPresent('dropdown-examples-page');
-        });
-
-        const dropdownTypes = [
-            'basic',
-            'position',
-            'large',
-            'scrollable',
-            'custom',
-            'multi',
-            'scroll-to-item',
-        ];
-        dropdownTypes.forEach(type => {
-            it(`should display example section - ${type}`, async () => {
-                await verifyPresent(codeExample(`${type}-drop-down`));
-            });
-        });
+  describe('Dropdown Menu', () => {
+    it('should open a dropdown with options', async () => {
+      // await click(automationId('basic-dropdown-actions-button'));
+      await click('basic-drop-down-example novo-dropdown novo-button.novo-theme-secondary');
+      await verifyPresent('.dropdown-container');
     });
+    it('should close the dropdown when clicked again', async () => {
+      // await click(automationId('basic-dropdown-actions-button'));
+      await click('basic-drop-down-example novo-dropdown novo-button.novo-theme-secondary');
+      await verifyAbsent('.dropdown-container');
+    });
+  });
 });
