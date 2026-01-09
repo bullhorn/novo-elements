@@ -1,6 +1,6 @@
 import { getAllElements, getElement, getElementCount } from './GetElementUtil';
 import { retry } from './RetryUtil';
-import { getAllElementsText, hasClass, isPresent } from './ElementPropertiesUtil';
+import { getAllElementsText, getClasses, hasAttribute, hasClass, isPresent } from './ElementPropertiesUtil';
 import {
     Classes,
     controlInput,
@@ -204,5 +204,27 @@ export async function verifyInputValueIncludes(selector: string,
         interval: 1000,
         wait: totalWaitTime,
         ignoreCase: true,
+    });
+}
+
+export async function verifyDisabled(selector: string, friendlyElementName: string = null, index: number = 0): Promise<void> {
+    const elementName = friendlyElementName || 'element';
+    await retry(async () => {
+        if (!(await hasClass(selector, Classes.disabled, index) || await hasClass(selector, Classes.novoButtonDisabled, index) || await hasClass(selector, Classes.novoOptionDisabled, index) || await hasClass(selector, Classes.controlDisabled, index))) {
+            if (!await hasAttribute(selector, Classes.disabled, index)) {
+                throw new Error(`Expected ${elementName} to have a disabling class or attribute, but only found the
+                    following classes for selector '${selector}': ${await getClasses(selector, index)}`);
+            }
+        }
+    });
+}
+
+export async function verifyEnabled(el: string, friendlyElementName: string = null, index: number = 0): Promise<void> {
+    const elementName = friendlyElementName || 'element';
+    await retry(async () => {
+        const classes = await getClasses(el, index);
+        if (classes.toString().includes(Classes.disabled)) {
+            throw new Error(`Expected ${elementName} to not have the 'disabled' class, but only found the following classes for selector ${el}: ${classes}`);
+        }
     });
 }
