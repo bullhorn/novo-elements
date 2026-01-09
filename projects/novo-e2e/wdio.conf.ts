@@ -1,5 +1,3 @@
-import type { Options } from '@wdio/types';
-
 // Extract base URL from environment or command line
 let baseUrl = process.env.E2E_BASE_URL || 'https://bullhorn.github.io/novo-elements/docs';
 
@@ -17,16 +15,23 @@ console.info('E2E Base URL:', baseUrl);
 // Import after setting global variable
 import { getURLs } from './src/utils/EnvironmentUtil';
 
-export const config: Options.Testrunner = {
+export const config = {
   runner: 'local',
   specs: ['./src/**/*.e2e.ts'],
   exclude: [],
+  maxInstances: 1,
   capabilities: [
     {
-      maxInstances: 1,
       browserName: 'chrome',
+      browserVersion: 'stable',
       'goog:chromeOptions': {
-        args: ['--disable-gpu'],
+          args: [],
+      },
+      'goog:loggingPrefs': {
+          browser: 'ALL',
+      },
+      timeouts: {
+          pageLoad: 120000,
       },
     },
   ],
