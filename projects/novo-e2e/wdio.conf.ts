@@ -1,5 +1,21 @@
 import type { Options } from '@wdio/types';
-import { URLS } from './src/utils/EnvironmentUtil';
+
+// Extract base URL from environment or command line
+let baseUrl = process.env.E2E_BASE_URL || 'https://bullhorn.github.io/novo-elements/docs';
+
+process.argv.forEach((arg) => {
+  if (arg.startsWith('--baseUrl=')) {
+    baseUrl = arg.split('=')[1];
+  }
+});
+
+// Store globally for EnvironmentUtil to access
+(global as any).E2E_BASE_URL = baseUrl;
+
+console.info('E2E Base URL:', baseUrl);
+
+// Import after setting global variable
+import { getURLs } from './src/utils/EnvironmentUtil';
 
 export const config: Options.Testrunner = {
   runner: 'local',
@@ -16,7 +32,7 @@ export const config: Options.Testrunner = {
   ],
   logLevel: 'silent',
   bail: 0,
-  baseUrl: 'https://bullhorn.github.io/novo-elements/docs/#/home',
+  baseUrl: baseUrl + '/#/home',
   waitforTimeout: 10000,
   connectionRetryTimeout: 120000,
   connectionRetryCount: 3,
@@ -38,6 +54,7 @@ export const config: Options.Testrunner = {
     setHeadlessMode(capabilities);
   },
   before: async () => {
+    const URLS = getURLs();
     await browser.url(URLS.HOME);
   },
 };

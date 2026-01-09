@@ -81,6 +81,39 @@ When running a single test file with `npm run e2e:single` or `npm run e2e:single
 - `npm run e2e:single:headed button` → runs `projects/novo-e2e/src/e2e/button.e2e.ts` with browser visible
 - `npm run e2e:single queryBuilder` → runs `projects/novo-e2e/src/e2e/queryBuilder.e2e.ts` in headless mode
 
+### Using a Custom Base URL
+
+By default, e2e tests run against the [published demo](https://bullhorn.github.io/novo-elements/docs/#/home). You can override the base URL using either an environment variable or command line argument.
+
+**Environment Variable:**
+```bash
+E2E_BASE_URL=https://your-custom-url npm run e2e
+E2E_BASE_URL=https://your-custom-url npm run e2e:headed
+E2E_BASE_URL=https://your-custom-url npm run e2e:single button
+E2E_BASE_URL=https://your-custom-url npm run e2e:single:headed button
+```
+
+**Command Line Argument:**
+```bash
+npm run e2e -- --baseUrl=https://your-custom-url
+npm run e2e:headed -- --baseUrl=https://your-custom-url
+npm run e2e:single button -- --baseUrl=https://your-custom-url
+npm run e2e:single:headed button -- --baseUrl=https://your-custom-url
+```
+
+**Example (running tests against a staging environment):**
+```bash
+E2E_BASE_URL=https://staging.example.com npm run e2e
+```
+
+To avoid setting the environment variable for every command, you can export it once in your current terminal session:
+```bash
+export E2E_BASE_URL=https://staging.example.com
+npm run e2e
+npm run e2e:single button
+# Variable remains set for all subsequent commands
+```
+
 ## Customizing Labels
 
 With Novo Elements there are a few hard-coded labels throughout the library. To override these labels with your own, you will simply extend the `NovoLabelService` and override any labels that you wish.

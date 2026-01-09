@@ -1,6 +1,6 @@
 import { asyncForEach } from 'utils/AutomationHelpers';
 import { click, scrollIntoView } from 'utils/ElementActionUtil';
-import { COMPONENT_URLS, examplesUrl, URLS } from 'utils/EnvironmentUtil';
+import { COMPONENT_URLS, examplesUrl, getURLs } from 'utils/EnvironmentUtil';
 import { getAllElements } from 'utils/GetElementUtil';
 import { automationId, codeExample, elements } from 'utils/SelectorUtil';
 import { verifyDisabled, verifyEnabled, verifyPresent, verifyText } from 'utils/VerifyUtil';
@@ -13,7 +13,7 @@ describe('Button Demo Page', () => {
     });
 
     after(async () => {
-        await browser.navigateTo(URLS.HOME);
+        await browser.navigateTo(getURLs().HOME);
     });
 
     describe('Page Elements', () => {

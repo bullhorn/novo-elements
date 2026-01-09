@@ -1,5 +1,5 @@
 import { browser } from '@wdio/globals';
-import { COMPONENT_URLS, examplesUrl, URLS } from '../utils/EnvironmentUtil';
+import { COMPONENT_URLS, examplesUrl, getURLs } from '../utils/EnvironmentUtil';
 import { verifyNotActive, verifyPresent, verifyText } from '../utils/VerifyUtil';
 import { click, scrollIntoView } from '../utils/ElementActionUtil';
 import { getAllElements } from '../utils/GetElementUtil';
@@ -17,7 +17,7 @@ describe('Non Ideal State Demo Page', () => {
     });
 
     after(async () => {
-        await browser.navigateTo(URLS.HOME);
+        await browser.navigateTo(getURLs().HOME);
     });
 
     it('should display page title', async () => {
