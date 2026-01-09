@@ -1,6 +1,8 @@
 export const URLS = {
-    BASE: 'https://bullhorn.github.io/novo-elements/docs/#/components/',
-    HOME: 'https://bullhorn.github.io/novo-elements/docs/#/home',
+    // BASE: 'https://bullhorn.github.io/novo-elements/docs/#/components/',
+    // HOME: 'https://bullhorn.github.io/novo-elements/docs/#/home',
+    BASE: 'https://novo-elements--pr1750-f-automation-wjx10too.web.app/#/components/',
+    HOME: 'https://novo-elements--pr1750-f-automation-wjx10too.web.app/#/home',
 };
 
 export const COMPONENT_URLS = {
