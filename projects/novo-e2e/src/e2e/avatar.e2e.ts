@@ -1,7 +1,7 @@
 import { browser } from '@wdio/globals';
 import { COMPONENT_URLS, examplesUrl, getURLs } from '../utils/EnvironmentUtil';
-import { verifyPresent, verifyText } from '../utils/VerifyUtil';
-import { codeExample, elements } from '../utils/SelectorUtil';
+import { verifyElementCountEquals, verifyPresent, verifyText } from '../utils/VerifyUtil';
+import { automationId, codeExample, elements } from '../utils/SelectorUtil';
 
 describe('Avatar Demo Page', () => {
     const url = examplesUrl(COMPONENT_URLS.AVATAR);
@@ -31,14 +31,13 @@ describe('Avatar Demo Page', () => {
         });
 
         it('should display novo-avatar elements', async () => {
-            await verifyPresent('avatar-usage-example novo-avatar');
+            await verifyElementCountEquals(`avatar-usage-example ${automationId('avatar')}`, 3);
         });
     });
 
     describe('Avatar Stack Section', () => {
         it('should display Avatar Stack section', async () => {
-            const stackTitle = 'avatar-examples-page h3:nth-of-type(2)';
-            await verifyText(stackTitle, 'Avatar Stack', 'Avatar Stack section title');
+            await verifyText('h3', 'Avatar Stack', 'Avatar Stack section title', 1);
         });
 
         it('should have Avatar Stack usage example', async () => {
@@ -46,11 +45,11 @@ describe('Avatar Demo Page', () => {
         });
 
         it('should display novo-avatar-stack element', async () => {
-            await verifyPresent('avatar-stack-usage-example novo-avatar-stack');
+            await verifyPresent(automationId('avatar-stack'));
         });
 
         it('should have multiple avatars in the stack', async () => {
-            await verifyPresent('avatar-stack-usage-example novo-avatar-stack novo-avatar');
+            await verifyElementCountEquals(automationId('avatar'), 6);
         });
     });
 });
