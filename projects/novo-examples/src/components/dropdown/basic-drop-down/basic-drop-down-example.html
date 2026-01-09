@@ -1,5 +1,5 @@
 <novo-dropdown>
-  <novo-button theme="secondary" icon="collapse">Actions</novo-button>
+  <novo-button theme="secondary" icon="collapse" data-automation-id="basic-dropdown-actions-button">Actions</novo-button>
   <novo-optgroup label="Engage">
     <novo-option (click)="clickMe('Hello!')">Send Email</novo-option>
     <novo-option (click)="clickMe('Another!')">Send SMS</novo-option>
@@ -19,7 +19,7 @@
 </novo-dropdown>
 
 <novo-dropdown side="right">
-  <novo-button theme="icon" icon="menu"></novo-button>
+  <novo-button theme="icon" icon="menu" data-automation-id="basic-dropdown-menu-button"></novo-button>
   <novo-optgroup>
     <novo-option *ngFor="let action of asyncItems" (click)="clickMe(action)">{{action}}</novo-option>
     <novo-divider></novo-divider>

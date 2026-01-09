@@ -1,6 +1,6 @@
 import { click } from 'utils/ElementActionUtil';
 import { COMPONENT_URLS, examplesUrl, URLS } from 'utils/EnvironmentUtil';
-import { codeExample, elements } from 'utils/SelectorUtil';
+import { automationId, codeExample, elements } from 'utils/SelectorUtil';
 import { verifyAbsent, verifyPresent, verifyText } from 'utils/VerifyUtil';
 
 describe('Dropdown Demo Page', () => {
@@ -31,13 +31,11 @@ describe('Dropdown Demo Page', () => {
 
   describe('Dropdown Menu', () => {
     it('should open a dropdown with options', async () => {
-      // await click(automationId('basic-dropdown-actions-button'));
-      await click('basic-drop-down-example novo-dropdown novo-button.novo-theme-secondary');
+      await click(automationId('basic-dropdown-actions-button'));
       await verifyPresent('.dropdown-container');
     });
     it('should close the dropdown when clicked again', async () => {
-      // await click(automationId('basic-dropdown-actions-button'));
-      await click('basic-drop-down-example novo-dropdown novo-button.novo-theme-secondary');
+      await click(automationId('basic-dropdown-actions-button'));
       await verifyAbsent('.dropdown-container');
     });
   });
