@@ -2,7 +2,7 @@ import { browser } from '@wdio/globals';
 import { COMPONENT_URLS, examplesUrl, getURLs } from '../utils/EnvironmentUtil';
 import { verifyPresent, verifyText } from '../utils/VerifyUtil';
 import { click } from '../utils/ElementActionUtil';
-import { codeExample, elements } from '../utils/SelectorUtil';
+import { automationId, codeExample, elements } from '../utils/SelectorUtil';
 import { getAllElements } from '../utils/GetElementUtil';
 
 describe('Breadcrumbs Demo Page', () => {
@@ -38,46 +38,45 @@ describe('Breadcrumbs Demo Page', () => {
         });
 
         it('should have static Home breadcrumb', async () => {
-            const exampleSelector = codeExample('breadcrumb-usage');
-            await verifyText(`${exampleSelector} a[routerlink="/components/get-start"]`, 'Home', 'First Static Item');
+            await verifyText(automationId('breadcrumb-home'), 'Home');
         });
 
         it('should have static Components breadcrumb', async () => {
-            const exampleSelector = codeExample('breadcrumb-usage');
-            await verifyText(`${exampleSelector} novo-breadcrumb-item span.novo-breadcrumb-item`, 'Components', 'Second Static Item', 1);
+            await verifyText(automationId('breadcrumb-components'), 'Components');
         });
     });
 
     describe('Dynamic Example', () => {
+        const exampleSelector = codeExample('breadcrumb-source-usage-example');
         it('should display dynamic section with correct breadcrumb structure', async () => {
-            const exampleSelector = codeExample('breadcrumb-source-usage');
-            await verifyPresent(exampleSelector);
-            await verifyBreadcrumbCount(exampleSelector, 2);
+            const usageSelector = codeExample('breadcrumb-source-usage');
+            await verifyPresent(usageSelector);
+            await verifyBreadcrumbCount(usageSelector, 2);
         });
 
         it('should have dynamic Home breadcrumb', async () => {
-            const exampleSelector = codeExample('breadcrumb-source-usage');
-            await verifyText(`${exampleSelector} novo-breadcrumb-item:nth-of-type(1) span.novo-breadcrumb-item a`, 'Home', 'First Dynamic Item');
+            await verifyText(`${exampleSelector} span.novo-breadcrumb-item a`, 'Home', 'First Dynamic Item');
         });
 
         it('should have dynamic Components breadcrumb', async () => {
-            const exampleSelector = codeExample('breadcrumb-source-usage');
-            await verifyText(`${exampleSelector} novo-breadcrumb-item:nth-of-type(2) span.novo-breadcrumb-item span`, 'Components', 'Second Dynamic Item');
+            await verifyText(`${exampleSelector} span.novo-breadcrumb-item span`, 'Components', 'Second Dynamic Item');
         });
     });
 
     describe('Breadcrumb Dropdown', () => {
+        const button = 'novo-breadcrumb-item novo-button';
+        const dropdownOption = '.novo-option-text';
         it('should display dropdown button in breadcrumb', async () => {
-            await verifyPresent('novo-breadcrumb-item novo-button');
+            await verifyPresent(button);
         });
 
         it('should open dropdown menu and display all options', async () => {
-            await click('novo-breadcrumb-item novo-button');
+            await click(button);
             await Promise.all([
                 verifyPresent('.dropdown-container'),
-                verifyText('.novo-option-text', 'Colors', 'First dropdown option'),
-                verifyText('.novo-option-text', 'Composition', 'Second dropdown option', 1),
-                verifyText('.novo-option-text', 'Typography', 'Second dropdown option', 2),
+                verifyText(dropdownOption, 'Colors', 'First dropdown option'),
+                verifyText(dropdownOption, 'Composition', 'Second dropdown option', 1),
+                verifyText(dropdownOption, 'Typography', 'Third dropdown option', 2),
             ]);
         });
 

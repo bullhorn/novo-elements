@@ -44,7 +44,7 @@ describe('Non Ideal State Demo Page', () => {
         });
 
         it('should display upload description text', async () => {
-            const exampleSelector = 'code-example[example="non-ideal-state-usage"] non-ideal-state-usage-example novo-non-ideal-state:nth-of-type(1)';
+            const exampleSelector = '[title="This folder is empty"]';
             await verifyText(`${exampleSelector} novo-text`, 'Upload a new file to populate the folder.', 'Upload description');
         });
 
@@ -87,7 +87,7 @@ describe('Non Ideal State Demo Page', () => {
         });
 
         it('should display loading message', async () => {
-            await verifyText(`${loadingSelector} ${elements.text}`, 'We are currently experiencing technical difficulites and your wait time is taking a bit longer than expected. Thank you for your patience.'); // todo fix spelling when code is fixed
+            await verifyText(`${loadingSelector} ${elements.text}`, 'We are currently experiencing technical difficulties and your wait time is taking a bit longer than expected. Thank you for your patience.');
         });
 
         it('should display Refresh button', async () => {
