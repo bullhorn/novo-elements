@@ -21,6 +21,7 @@ jobs:
 
       - run: npm ci && npm run build:ci && npm run build:examples && npm run build:demo
       - name: Deploy preview
+        id: firebase_deploy
         uses: FirebaseExtended/action-hosting-deploy@v0
         if: ${{ env.IS_FORK == 'false' && env.IS_DEPENDABOT == 'false' }}
         with:
@@ -29,6 +30,21 @@ jobs:
           projectId: novo-elements
           expires: 7d
           firebaseToolsVersion: 12.9.1
+      - name: Wait for preview to be ready
+        if: ${{ env.IS_FORK == 'false' && env.IS_DEPENDABOT == 'false' }}
+        run: |
+          sleep 10
+          timeout 60 bash -c 'until curl -f ${{ steps.firebase_deploy.outputs.details_url }} > /dev/null 2>&1; do sleep 5; done'
+      - name: Run E2E Tests
+        if: ${{ env.IS_FORK == 'false' && env.IS_DEPENDABOT == 'false' }}
+        run: |
+          E2E_BASE_URL=${{ steps.firebase_deploy.outputs.details_url }} npm run e2e
+      - name: Upload E2E Test Results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: e2e-test-results
+          path: projects/novo-e2e/test-reports/
 
 concurrency:
   group: firebase-${{ github.head_ref }}
