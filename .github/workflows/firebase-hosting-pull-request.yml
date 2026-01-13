@@ -39,6 +39,13 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y chromium-browser
 
+      - name: Verify Chrome installation
+        if: ${{ env.IS_FORK == 'false' && env.IS_DEPENDABOT == 'false' }}
+        run: |
+          which chromium-browser
+          chromium-browser --version
+          ls -la /usr/bin/chromium*
+
       - name: Run E2E Tests
         if: ${{ env.IS_FORK == 'false' && env.IS_DEPENDABOT == 'false' }}
         run: |
