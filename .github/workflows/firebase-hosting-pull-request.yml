@@ -22,11 +22,6 @@ jobs:
       - name: Build project
         run: npm ci && npm run build:ci && npm run build:examples && npm run build:demo
 
-      - name: Install Chrome dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y chromium-browser
-
       - name: Deploy preview
         id: firebase_deploy
         uses: FirebaseExtended/action-hosting-deploy@v0
@@ -38,9 +33,11 @@ jobs:
           expires: 7d
           firebaseToolsVersion: 12.9.1
 
-      - name: Wait for preview to be ready
+      - name: Install Chrome dependencies
         if: ${{ env.IS_FORK == 'false' && env.IS_DEPENDABOT == 'false' }}
-        run: sleep 20
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y chromium-browser
 
       - name: Run E2E Tests
         if: ${{ env.IS_FORK == 'false' && env.IS_DEPENDABOT == 'false' }}
