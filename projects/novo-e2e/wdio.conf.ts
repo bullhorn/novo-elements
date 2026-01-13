@@ -36,7 +36,7 @@ export const config = {
       },
     },
   ],
-  logLevel: 'silent',
+  logLevel: 'debug',
   bail: 0,
   baseUrl: baseUrl + '/#/home',
   waitforTimeout: 10000,
