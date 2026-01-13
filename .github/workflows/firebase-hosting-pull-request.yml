@@ -34,7 +34,7 @@ jobs:
         if: ${{ env.IS_FORK == 'false' && env.IS_DEPENDABOT == 'false' }}
         run: |
           sleep 20
-          timeout 120 bash -c 'until curl -f -s ${{ steps.firebase_deploy.outputs.details_url }} | grep -q "novo-elements"; do sleep 5; done'
+          timeout 60 bash -c 'until curl -f ${{ steps.firebase_deploy.outputs.details_url }} > /dev/null 2>&1; do sleep 5; done'
       - name: Run E2E Tests
         if: ${{ env.IS_FORK == 'false' && env.IS_DEPENDABOT == 'false' }}
         run: |
