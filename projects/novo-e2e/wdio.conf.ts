@@ -25,6 +25,7 @@ export const config = {
       browserName: 'chrome',
       browserVersion: 'stable',
       'goog:chromeOptions': {
+          binary: process.env.CHROMIUM_BIN || '/usr/bin/chromium-browser',
           args: [],
       },
       'goog:loggingPrefs': {
