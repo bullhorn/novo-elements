@@ -88,6 +88,8 @@ function setHeadlessMode(capabilities) {
             default:
                 capabilities[0]['goog:chromeOptions'].args.push('--headless');
                 capabilities[0]['goog:chromeOptions'].args.push('--window-size=1936,1056');
+                capabilities[0]['goog:chromeOptions'].args.push('--no-sandbox');
+                capabilities[0]['goog:chromeOptions'].args.push('--disable-dev-shm-usage');
         }
     }
 }
