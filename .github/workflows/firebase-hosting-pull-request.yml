@@ -19,8 +19,11 @@ jobs:
         with:
           node-version: 20.10.0
 
-      - run: npm ci && npm run build:ci && npm run build:examples && npm run build:demo
+      - name: Build project
+        run: npm ci && npm run build:ci && npm run build:examples && npm run build:demo
+
       - name: Deploy preview
+        id: firebase_deploy
         uses: FirebaseExtended/action-hosting-deploy@v0
         if: ${{ env.IS_FORK == 'false' && env.IS_DEPENDABOT == 'false' }}
         with:
@@ -29,6 +32,32 @@ jobs:
           projectId: novo-elements
           expires: 7d
           firebaseToolsVersion: 12.9.1
+
+      - name: Install Chrome dependencies
+        if: ${{ env.IS_FORK == 'false' && env.IS_DEPENDABOT == 'false' }}
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y chromium-browser
+
+      - name: Verify Chrome installation
+        if: ${{ env.IS_FORK == 'false' && env.IS_DEPENDABOT == 'false' }}
+        run: |
+          which chromium-browser
+          chromium-browser --version
+          ls -la /usr/bin/chromium*
+
+      - name: Run E2E Tests
+        if: ${{ env.IS_FORK == 'false' && env.IS_DEPENDABOT == 'false' }}
+        run: |
+          E2E_BASE_URL=${{ steps.firebase_deploy.outputs.details_url }} npm run e2e
+
+      - name: Upload E2E Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-test-results
+          path: projects/novo-e2e/test-reports/
+          retention-days: 30
 
 concurrency:
   group: firebase-${{ github.head_ref }}

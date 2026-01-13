@@ -31,19 +31,88 @@
     # Install the module from NPM
     npm install --save novo-elements
 
-Depending on what system you are using (SystemJS, Webpack, etc..) the setup will vary.
+Depending on what system you are using (SystemJS, Webpack, etc.) the setup will vary.
 
 If using SCSS/SASS you will need to include the following includes: `node_modules/novo-elements/lib`.
 
 ## Building Examples
 
-> All examples can be added to the appropriate directory in the `novo-examples` project. Each markdown file will be converted to a demo page and a route will automatically be added to the demo. You can import any example project by using the angular selector, or inject it using the `code-example` tag, ie. `<code-example example="demo-name"></code-example>`.
+> All examples can be added to the appropriate directory in the `novo-examples` project. Each markdown file will be converted to a demo page and a route will automatically be added to the demo. You can import any example project by using the angular selector, or inject it using the `code-example` tag, i.e. `<code-example example="demo-name"></code-example>`.
 
     # Compile markdown, generate routes, and AOT build the project
     npm run build:examples
 
     # Automatically rebuild changes to the examples project
     npm run build:examples:watch
+
+## E2E Testing
+
+The project includes end-to-end tests using WebdriverIO (wdio) and Mocha for testing component functionality across the entire application.
+
+### E2E Test Structure/Configuration
+
+- E2E tests are located in `projects/novo-e2e/src/e2e/`
+- Tests are configured in `projects/novo-e2e/wdio.conf.ts`
+- Run against the published demo at `https://bullhorn.github.io/novo-elements/docs/`
+
+### Running E2E Tests
+
+```bash
+# Run tests in headless mode (default)
+npm run e2e
+
+# Run tests in headed mode (browser window visible)
+npm run e2e:headed
+
+# Run tests in headless mode (explicit)
+npm run e2e:headless
+
+# Run a single test file by name
+npm run e2e:single button
+# This runs: projects/novo-e2e/src/e2e/button.e2e.ts
+
+# Run a single test file in headed mode (browser window visible)
+npm run e2e:single:headed button
+# This runs: projects/novo-e2e/src/e2e/button.e2e.ts
+```
+
+When running a single test file with `npm run e2e:single` or `npm run e2e:single:headed`, simply provide the filename without the `.e2e.ts` extension. For example:
+- `npm run e2e:single button` → runs `projects/novo-e2e/src/e2e/button.e2e.ts` in headless mode
+- `npm run e2e:single:headed button` → runs `projects/novo-e2e/src/e2e/button.e2e.ts` with browser visible
+- `npm run e2e:single queryBuilder` → runs `projects/novo-e2e/src/e2e/queryBuilder.e2e.ts` in headless mode
+
+### Using a Custom Base URL
+
+By default, e2e tests run against the [published demo](https://bullhorn.github.io/novo-elements/docs/#/home). You can override the base URL using either an environment variable or command line argument.
+
+**Environment Variable:**
+```bash
+E2E_BASE_URL=https://your-custom-url npm run e2e
+E2E_BASE_URL=https://your-custom-url npm run e2e:headed
+E2E_BASE_URL=https://your-custom-url npm run e2e:single button
+E2E_BASE_URL=https://your-custom-url npm run e2e:single:headed button
+```
+
+**Command Line Argument:**
+```bash
+npm run e2e -- --baseUrl=https://your-custom-url
+npm run e2e:headed -- --baseUrl=https://your-custom-url
+npm run e2e:single button -- --baseUrl=https://your-custom-url
+npm run e2e:single:headed button -- --baseUrl=https://your-custom-url
+```
+
+**Example (running tests against a staging environment):**
+```bash
+E2E_BASE_URL=https://staging.example.com npm run e2e
+```
+
+To avoid setting the environment variable for every command, you can export it once in your current terminal session:
+```bash
+export E2E_BASE_URL=https://staging.example.com
+npm run e2e
+npm run e2e:single button
+# Variable remains set for all subsequent commands
+```
 
 ## Customizing Labels
 
@@ -58,7 +127,7 @@ To make Angular use this new class over the default one you can provide in the b
 To use the default labels, you will need to provide the `NOVO_ELEMENTS_LABELS_PROVIDERS` via
 
 ```ts
-import {NOVO_ELEMENTS_LABELS_PROVIDERS} from 'novo-elements';
+import { NOVO_ELEMENTS_LABELS_PROVIDERS } from 'novo-elements';
 bootstrap(MyApp [..NOVO_ELEMENTS_LABELS_PROVIDERS]);
 ```
 

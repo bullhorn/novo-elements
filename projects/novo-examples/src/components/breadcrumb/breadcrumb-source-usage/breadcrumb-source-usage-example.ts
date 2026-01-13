@@ -11,13 +11,14 @@ import { Component } from '@angular/core';
 })
 export class BreadcrumbSourceUsageExample {
   source = [
-    { title: 'Home', showMenu: false, link: '#/components' },
+    { title: 'Home', showMenu: false, link: '#/components', automationId: 'breadcrumb-dynamic-home' },
     {
       title: 'Components',
       link: '#/components/breadcrumb',
       showMenu: true,
       noNavigation: true,
       isSearch: true,
+      automationId: 'breadcrumb-dynamic-components',
       menuList: [
         { name: 'Colors', link: '#/design/colors', target: '_blank' },
         { name: 'Composition', link: '#/design/componsition', linkType: 'routerLink' },

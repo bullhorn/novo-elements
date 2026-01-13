@@ -1,3 +1,3 @@
-<novo-checkbox label="Disabled?" [(ngModel)]="isChecked"></novo-checkbox>
-<button [theme]="theme" [icon]="isChecked ? 'check' : 'times'" (click)="changeTheme()" [disabled]="isChecked">Change
+<novo-checkbox label="Disabled?" [(ngModel)]="isChecked" data-automation-id="disable-button-checkbox"></novo-checkbox>
+<button [theme]="theme" [icon]="isChecked ? 'check' : 'times'" (click)="changeTheme()" [disabled]="isChecked" data-automation-id="dynamic-button-example">Change
   Theme</button>
