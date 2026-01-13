@@ -33,8 +33,8 @@ jobs:
       - name: Wait for preview to be ready
         if: ${{ env.IS_FORK == 'false' && env.IS_DEPENDABOT == 'false' }}
         run: |
-          sleep 10
-          timeout 60 bash -c 'until curl -f ${{ steps.firebase_deploy.outputs.details_url }} > /dev/null 2>&1; do sleep 5; done'
+          sleep 20
+          timeout 120 bash -c 'until curl -f -s ${{ steps.firebase_deploy.outputs.details_url }} | grep -q "novo-elements"; do sleep 5; done'
       - name: Run E2E Tests
         if: ${{ env.IS_FORK == 'false' && env.IS_DEPENDABOT == 'false' }}
         run: |
@@ -45,6 +45,7 @@ jobs:
         with:
           name: e2e-test-results
           path: projects/novo-e2e/test-reports/
+          retention-days: 30
 
 concurrency:
   group: firebase-${{ github.head_ref }}
