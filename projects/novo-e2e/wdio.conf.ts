@@ -23,7 +23,6 @@ export const config = {
   capabilities: [
     {
       browserName: 'chrome',
-      browserVersion: 'stable',
       'goog:chromeOptions': {
           binary: process.env.CHROMIUM_BIN || '/usr/bin/chromium-browser',
           args: [],
