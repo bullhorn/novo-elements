@@ -1,10 +1,11 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { ControlContainer, FormArray, FormBuilder, UntypedFormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 import { merge, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { QueryBuilderService } from '../query-builder.service';
 import { Condition, Conjunction } from '../query-builder.types';
 import { NovoLabelService } from 'novo-elements/services';
+import { NovoConfirmModal, NovoModalService } from 'novo-elements/elements/modal';
 
 const EMPTY_CONDITION: Condition = {
   conditionType: '$and',
@@ -37,6 +38,8 @@ export class ConditionGroupComponent implements OnInit, OnDestroy {
   public parentForm: UntypedFormGroup;
   /** Subject that emits when the component has been destroyed. */
   private readonly _onDestroy = new Subject<void>();
+
+  private modalService = inject(NovoModalService);
 
   constructor(
     public qbs: QueryBuilderService,
@@ -97,6 +100,7 @@ export class ConditionGroupComponent implements OnInit, OnDestroy {
       value: condition.value,
       supportingValue: condition.supportingValue,
       entity: condition.entity,
+      warnOnDelete: condition.warnOnDelete,
     };
   }
 
@@ -112,7 +116,21 @@ export class ConditionGroupComponent implements OnInit, OnDestroy {
     this.cdr.markForCheck();
   }
 
-  removeCondition(index: number) {
+  async removeCondition(index: number) {
+    const warnOnDelete = this.root.at(index)?.value?.warnOnDelete;
+    if (warnOnDelete) {
+      const shouldDelete = await this.modalService.open(NovoConfirmModal, {
+          headerText: this.labels.deleteFilterHeaderText,
+          subheaderText: this.labels.deleteFilterSubtext,
+          buttonIcon: '',
+          buttonColor: 'negative',
+          confirmButtonText: this.labels.deleteFilterButtonText,
+      }).onClosed;
+      if (!shouldDelete) {
+        return;
+      }
+    }
+
     const isPrimaryScope = this.scope === this.qbs.scopes()[0];
     const lastRowInGroup = this.root.length === 1;
     const lastRowInQueryBuilder = this.cantRemoveRow();
@@ -123,7 +141,7 @@ export class ConditionGroupComponent implements OnInit, OnDestroy {
     this.cdr.markForCheck();
   }
 
-  newCondition({ field, operator, scope, value, supportingValue, entity }: Condition = EMPTY_CONDITION): UntypedFormGroup {
+  newCondition({ field, operator, scope, value, supportingValue, entity, warnOnDelete }: Condition = EMPTY_CONDITION): UntypedFormGroup {
     return this.formBuilder.group({
       conditionType: '$and',
       field: [field, Validators.required],
@@ -132,6 +150,7 @@ export class ConditionGroupComponent implements OnInit, OnDestroy {
       value: [value],
       supportingValue: [supportingValue],
       entity: [entity],
+      warnOnDelete: [warnOnDelete],
     });
   }
 

@@ -34,6 +34,7 @@ const EMPTY_CONDITION: Condition = {
   value: null,
   supportingValue: null,
   entity: null,
+  warnOnDelete: false,
 };
 @Component({
     selector: 'novo-criteria-builder',
@@ -210,7 +211,7 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
     return this.formBuilder.group(controls);
   }
 
-  newCondition({ field, operator, scope, value, supportingValue }: Condition = EMPTY_CONDITION): UntypedFormGroup {
+  newCondition({ field, operator, scope, value, supportingValue, warnOnDelete }: Condition = EMPTY_CONDITION): UntypedFormGroup {
     const entity = this.getFieldEntity(this.config, scope);
     return this.formBuilder.group({
       conditionType: '$and',
@@ -220,6 +221,7 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
       value: [value],
       supportingValue: [supportingValue],
       entity: [entity],
+      warnOnDelete: [warnOnDelete],
     });
   }
 
