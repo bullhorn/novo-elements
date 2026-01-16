@@ -5,7 +5,7 @@ import { QueryBuilderService } from '../query-builder.service';
 import { NovoLabelService } from '../../../services';
 import { NovoFlexModule } from '../../../elements/flex';
 import { Condition } from '../query-builder.types';
-import { NovoConfirmModal, NovoModalService } from 'novo-elements/elements/modal';
+import { NovoConfirmModal } from 'novo-elements/elements/modal';
 
 describe('ConditionGroupComponent', () => {
   let fixture: ComponentFixture<ConditionGroupComponent>;
