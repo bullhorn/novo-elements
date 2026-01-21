@@ -131,7 +131,7 @@ export class NovoChipInput implements NovoChipTextControl, OnChanges, OnDestroy 
   _blur(blurEvent: FocusEvent) {
     if (this.addOnBlur) {
       this._emitChipEnd();
-    } else if (!this._field.blurEventIsInField(blurEvent)) {
+    } else if (!this._field?.blurEventIsInField(blurEvent)) {
       this.clearValue();
     }
     this.focused = false;

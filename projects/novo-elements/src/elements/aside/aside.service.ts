@@ -20,7 +20,7 @@ const DEFAULT_CONFIG: AsideConfig = {
 export class NovoAsideService {
   constructor(private injector: Injector, private overlay: Overlay) {}
 
-  open<R = any>(component, params = {}, config = {}) {
+  open<R = any>(component, params = {}, config = {}, draggable = false) {
     // Override default configuration
     const asideConfig = this.getOverlayConfig({ ...DEFAULT_CONFIG, ...config });
 
@@ -29,6 +29,7 @@ export class NovoAsideService {
 
     // Instantiate remote control
     const asideRef = new NovoAsideRef<typeof params, R>(component, params, overlayRef);
+    asideRef.draggable = draggable;
 
     const overlayComponent = this.attachAsideContainer(AsideComponent, overlayRef, asideConfig, asideRef);
 

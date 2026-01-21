@@ -1,4 +1,10 @@
-<div class="aside-panel" [@slideInOut]="animationState" (@slideInOut.start)="onAnimationStart($event)"
+<div *ngIf="!draggable" class="aside-panel" [@slideInOut]="animationState" (@slideInOut.start)="onAnimationStart($event)"
   (@slideInOut.done)="onAnimationDone($event)">
   <ng-template [cdkPortalOutlet]="component"></ng-template>
+</div>
+<div *ngIf="draggable" class="aside-panel draggable" [@slideInOut]="animationState" (@slideInOut.start)="onAnimationStart($event)"
+  (@slideInOut.done)="onAnimationDone($event)" cdkDrag [cdkDragDisabled]="disableDrag()" (cdkDragStarted)="asideRef?.onDragStart.emit()" cdkDragBoundary=".cdk-overlay-container">
+  <div class="drag-handle">
+    <ng-template [cdkPortalOutlet]="component"></ng-template>
+  </div>
 </div>
