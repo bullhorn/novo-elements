@@ -31,9 +31,7 @@ import { ActivityTableDataSource, ActivityTableService } from './table-source';
     providers: [{ provide: CDK_TABLE, useExisting: NovoTable }],
     standalone: false,
 })
-export class NovoTable<T> extends CdkTable<T> {
-  // TODO: add explicit constructor
-}
+export class NovoTable<T> extends CdkTable<T> {}
 
 @Directive({
     selector: 'novo-activity-table-actions',

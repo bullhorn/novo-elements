@@ -502,7 +502,6 @@ export class NovoSelectElement
     this._selectionModel.clear();
     if (this.multiple && value) {
       value.forEach((currentValue: any) => this._selectValue(currentValue));
-      this._sortValues();
     } else if (this._keyManager) {
       const correspondingOption = this._selectValue(value);
       // Shift focus to the active item. Note that we shouldn't do this in multiple
@@ -583,7 +582,6 @@ export class NovoSelectElement
         this._keyManager.setActiveItem(option);
       }
       if (this.multiple) {
-        this._sortValues();
         if (isUserInput) {
           this.focus();
         }
@@ -744,13 +742,6 @@ export class NovoSelectElement
   protected _optionsComputed = computed(() => {
     return [...(this.viewOptionsSignal() || []), ...(this.contentOptionsSignal() || [])]
   });
-
-  /** Sorts the selected values in the selected based on their order in the panel. */
-  private _sortValues() {
-    if (this.multiple) {
-      // TODO.
-    }
-  }
 
   /** Emits change event to set the model value. */
   private _propagateChanges(fallbackValue?: any): void {
