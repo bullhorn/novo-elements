@@ -1,5 +1,4 @@
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { _VIEW_REPEATER_STRATEGY, _DisposeViewRepeaterStrategy } from '@angular/cdk/collections';
 import { CdkTable, CDK_TABLE } from '@angular/cdk/table';
 import {
   AfterContentInit,
@@ -178,7 +177,6 @@ export class NovoActivityTableNoResultsMessage {}
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         NovoActivityTableState,
-        { provide: _VIEW_REPEATER_STRATEGY, useClass: _DisposeViewRepeaterStrategy },
     ],
     standalone: false,
 })

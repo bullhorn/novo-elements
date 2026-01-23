@@ -105,7 +105,7 @@ export class NovoChipInput implements NovoChipTextControl, OnChanges, OnDestroy 
     protected _elementRef: ElementRef<HTMLInputElement>,
     @Inject(NOVO_CHIPS_DEFAULT_OPTIONS) private readonly _defaultOptions: NovoChipsDefaultOptions,
     @Optional() @Inject(NovoFieldElement) private readonly _field: NovoFieldElement,
-    @Inject(forwardRef(() => NovoChipList)) private readonly _chipList: NovoChipList,
+    @Inject(forwardRef(() => NovoChipList)) protected readonly _chipList: NovoChipList,
     @Optional() @Self() protected ngControl: NgControl,
   ) {
     this._inputElement = this._elementRef.nativeElement;
