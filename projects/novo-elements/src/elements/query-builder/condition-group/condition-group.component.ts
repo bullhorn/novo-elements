@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, inject, Input, OnDestroy, OnInit, Output, EventEmitter } from '@angular/core';
 import { ControlContainer, FormArray, FormBuilder, UntypedFormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 import { merge, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -32,6 +32,7 @@ export class ConditionGroupComponent implements OnInit, OnDestroy {
   @Input() hideFirstOperator: boolean = true;
   @Input() canBeEmpty: boolean = false;
   @Input() formGroupName: any;
+  @Output() conditionDeleted = new EventEmitter<{ index: number; condition: Condition }>();
 
   public scope: string;
   public entity: string;
@@ -131,12 +132,16 @@ export class ConditionGroupComponent implements OnInit, OnDestroy {
       }
     }
 
+    const deletedCondition = this.root.at(index)?.value;
     const isPrimaryScope = this.scope === this.qbs.scopes()[0];
     const lastRowInGroup = this.root.length === 1;
     const lastRowInQueryBuilder = this.cantRemoveRow();
     this.root.removeAt(index);
     if ((lastRowInQueryBuilder || (lastRowInGroup && isPrimaryScope)) && !this.canBeEmpty) {
       this.addCondition();
+    }
+    if (warnOnDelete) {
+      this.conditionDeleted.emit({ index, condition: deletedCondition });
     }
     this.cdr.markForCheck();
   }
