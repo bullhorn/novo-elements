@@ -3,7 +3,7 @@ import { Directive } from '@angular/core';
 
 /** Button that moves to the next step in a stepper workflow. */
 @Directive({
-    selector: 'button[novoStepperNext],novo-button[novoStepperNext]',
+    selector: 'button[novoStepperNext]',
     host: {
         class: 'novo-stepper-next',
         '[type]': 'type',
@@ -15,7 +15,7 @@ export class NovoStepperNext extends CdkStepperNext {}
 
 /** Button that moves to the previous step in a stepper workflow. */
 @Directive({
-    selector: 'button[novoStepperPrevious],novo-button[novoStepperPrevious]',
+    selector: 'button[novoStepperPrevious]',
     host: {
         class: 'novo-stepper-previous',
         '[type]': 'type',

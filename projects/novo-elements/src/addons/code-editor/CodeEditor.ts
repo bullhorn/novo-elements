@@ -55,7 +55,7 @@ export class NovoCodeEditor implements ControlValueAccessor, OnInit, OnDestroy, 
   initialValue = '';
 
   @HostBinding('class.editor-disabled')
-  private disabled = false;
+  protected disabled = false;
 
   constructor(private elementRef: ElementRef) {}
 

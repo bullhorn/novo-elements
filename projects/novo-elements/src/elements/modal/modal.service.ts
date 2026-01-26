@@ -1,6 +1,6 @@
 // NG2
 import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
-import { ComponentPortal, PortalInjector } from '@angular/cdk/portal';
+import { ComponentPortal } from '@angular/cdk/portal';
 import { ComponentRef, Injectable, Injector, ViewContainerRef } from '@angular/core';
 import { NovoModalContainerComponent } from './modal-container.component';
 // APP
@@ -64,14 +64,15 @@ export class NovoModalService {
     return containerRef.instance;
   }
 
-  private createInjector(config: ModalConfig, modalRef: NovoModalRef): PortalInjector {
-    const injectionTokens = new WeakMap();
-
-    injectionTokens.set(NovoModalRef, modalRef);
-    // Support backwards compatability
-    injectionTokens.set(NovoModalParams, modalRef.params);
-
-    return new PortalInjector(this.injector, injectionTokens);
+  private createInjector(config: ModalConfig, modalRef: NovoModalRef): Injector {
+    return Injector.create({
+      parent: this.injector,
+      providers: [
+        { provide: NovoModalRef, useValue: modalRef },
+        // Support backwards compatability
+        { provide: NovoModalParams, useValue: modalRef.params },
+      ],
+    });
   }
 
   private getOverlayConfig(config: ModalConfig): OverlayConfig {
