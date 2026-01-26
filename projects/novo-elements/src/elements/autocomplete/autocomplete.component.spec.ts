@@ -47,6 +47,10 @@ class TestAutocompleteComponent {
   makeFirstItemActive = false;
   multiple = false;
   options$ = new ReplaySubject<MockOption[]>(1);
+
+  selected(event: any): void {
+    // Handle option selection event
+  }
 }
 
 describe('Elements: NovoAutocompleteElement', () => {
