@@ -4,8 +4,10 @@
     "outDir": "./out-tsc/spec",
     "module": "commonjs",
     "types": [
-      "jest"
-    ]
+      "jest",
+      "node"
+    ],
+    "skipLibCheck": true
   },
   "files": [],
   "include": [

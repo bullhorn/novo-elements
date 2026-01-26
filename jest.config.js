@@ -1,29 +1,34 @@
 module.exports = {
   preset: 'jest-preset-angular',
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
-  globalSetup: 'jest-preset-angular/global-setup',
-  globals: {
-    'ts-jest': {
-      tsconfig: '<rootDir>/projects/novo-elements/tsconfig.spec.json',
-      diagnostics: true,
-      stringifyContentPathRegex: '\\.html$',
-    },
-    CKEDITOR: {}
+  testPathIgnorePatterns: [
+    '<rootDir>/node_modules/',
+    '<rootDir>/dist/'
+  ],
+  transform: {
+    '^.+\\.(ts|mjs|js|html)$': [
+      'jest-preset-angular',
+      {
+        tsconfig: '<rootDir>/tsconfig.spec.json',
+        stringifyContentPathRegex: '\\.html$',
+      }
+    ]
+  },
+  moduleNameMapper: {
+    '^novo-elements$': '<rootDir>/projects/novo-elements/src/index',
+    '^novo-elements/(.*)$': '<rootDir>/projects/novo-elements/src/$1',
+    '^novo-examples$': '<rootDir>/projects/novo-examples/src/index',
+    '^novo-examples/(.*)$': '<rootDir>/projects/novo-examples/src/$1',
   },
   collectCoverage: true,
-  coverageReporters: ['json', 'lcov', 'text', 'text-summary', 'html'],
-  coveragePathIgnorePatterns: [
-    '/node_modules/',
-    'novo-elements/jest.setup.ts',
-    '.spec.ts',
-    'projects/novo-examples',
-    'index.ts'
+  collectCoverageFrom: [
+    'projects/novo-elements/**/*.ts',
+    '!projects/novo-elements/**/*.spec.ts',
+    '!projects/novo-elements/**/index.ts'
   ],
-  moduleFileExtensions: ['ts', 'html', 'js', 'json', 'mjs'],
-  modulePathIgnorePatterns: ['/dist/', '/novo-elements/package.json'],
+  coverageReporters: ['json', 'lcov', 'text', 'text-summary', 'html'],
   testEnvironmentOptions: {
     url: 'http://localhost',
   },
-  transformIgnorePatterns: ['node_modules/(?!.*\\.mjs$)'],
   testRunner: 'jest-jasmine2',
 };

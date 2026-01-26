@@ -81,7 +81,7 @@ export class NovoPickerElement implements OnInit {
   results: ViewContainerRef;
 
   @Input()
-  config: any;
+  config: any = {};
   @Input()
   placeholder: string;
   @Input()

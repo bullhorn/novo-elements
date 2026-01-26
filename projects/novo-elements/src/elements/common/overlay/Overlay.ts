@@ -28,7 +28,7 @@ import {
   TemplateRef,
   ViewChild,
   ViewContainerRef,
-  DOCUMENT
+  DOCUMENT,
 } from '@angular/core';
 // Vendor
 import { Helpers } from 'novo-elements/utils';

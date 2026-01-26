@@ -20,7 +20,7 @@ import {
   Optional,
   Output,
   ViewEncapsulation,
-  DOCUMENT
+  DOCUMENT,
 } from '@angular/core';
 import { Key } from 'novo-elements/utils';
 import { fromEvent, Observable, Subject } from 'rxjs';
