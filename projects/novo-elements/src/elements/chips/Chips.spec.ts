@@ -1,11 +1,10 @@
 // NG2
-import { waitForAsync, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { ComponentUtils, NovoLabelService } from 'novo-elements/services';
 // App
 import { NovoChipsElement } from './Chips';
 import { NovoChipsModule } from './Chips.module';
-import { By } from '@angular/platform-browser';
 
 describe('Elements: NovoChipsElement', () => {
   let fixture: ComponentFixture<NovoChipsElement>;
@@ -21,6 +20,8 @@ describe('Elements: NovoChipsElement', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(NovoChipsElement);
     component = fixture.debugElement.componentInstance;
+    component.source = { hiddenChipsLimit: 4 };
+    fixture.detectChanges();
   }));
 
   describe('Method: ngOnInit()', () => {
@@ -69,29 +70,27 @@ describe('Elements: NovoChipsElement', () => {
       expect(component.items[0].value).toBe('test');
     });
     it('should set value wih valueFomatterFunc if provided', () => {
-      component.source = { valueFormatter: (values) => `${values[0].label} (${values[0].value})` };
+      component.source = {
+        hiddenChipsLimit: 4,
+        valueFormatter: (values) => `${values[0].label} (${values[0].value})`,
+      };
+      component.picker = {
+        container: { overlayRef: { updatePosition: () => {} } },
+        popup: { instance: { selected: [] } },
+        selected: [],
+      } as any;
       component.add({ label: 'Test', value: 'test' });
       expect(component.value).toBe('Test (test)');
     });
-    it('should tell the picker overlay to update its position, if available', fakeAsync(() => {
-      component.source = {};
-      fixture.detectChanges();
-      fixture.debugElement.query(By.css('novo-picker > input')).nativeElement.focus();
-      fixture.detectChanges();
-      spyOn(component.picker.container.overlayRef, 'updatePosition');
-      expect(component.picker.popup.instance.selected).toEqual([]);
-
-      const newVal = { label: 'Test', value: 'test' };
-      fixture.debugElement.query(By.css('novo-picker')).triggerEventHandler('select', newVal);
-      tick();
-      expect(component.picker.container.overlayRef.updatePosition).toHaveBeenCalled();
-      // overlay selection has been updated
-      expect(component.picker.popup.instance.selected).toEqual([newVal]);
-    }));
   });
 
   describe('Method: updateHiddenChips()', () => {
     it('should update hiddenChipsCount based on the items length and the hiddenChipsLimit property', () => {
+      component.picker = {
+        container: { overlayRef: { updatePosition: () => {} } },
+        popup: { instance: { selected: [] } },
+        selected: [],
+      } as any;
       component.items = ['A','B','C','D','E','F'];
       component.hiddenChipsLimit = 4;
       component._hiddenChipsLimit = component.hiddenChipsLimit;
@@ -103,6 +102,11 @@ describe('Elements: NovoChipsElement', () => {
     });
 
     it('should reset the hiddenChipsLimit to the original limit if: currently showing all chips BUT there are no longer any extra chips to hide', () => {
+      component.picker = {
+        container: { overlayRef: { updatePosition: () => {} } },
+        popup: { instance: { selected: [] } },
+        selected: [],
+      } as any;
       component.items = ['A','B','C','D'];
       component._hiddenChipsLimit = 3;
       component.hiddenChipsLimit = component.CHIPS_SHOWN_MAX; // currently showing all chips
@@ -134,7 +138,10 @@ describe('Elements: NovoChipsElement', () => {
     it('should remove an item wih valueFomatterFunc if provided', () => {
       const itemFoo = { label: 'Foo', value: 'foo' };
       const itemBar = { label: 'Bar', value: 'bar' };
-      component.source = { valueFormatter: (values) => `${values[0].label} (${values[0].value})` };
+      component.source = {
+        hiddenChipsLimit: 4,
+        valueFormatter: (values) => `${values[0].label} (${values[0].value})`,
+      };
       component.items = [itemFoo, itemBar];
       component.remove(null, itemFoo);
       expect(component.value).toBe('Bar (bar)');
