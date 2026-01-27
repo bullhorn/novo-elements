@@ -20,6 +20,12 @@ module.exports = {
     '^novo-examples$': '<rootDir>/projects/novo-examples/src/index',
     '^novo-examples/(.*)$': '<rootDir>/projects/novo-examples/src/$1',
   },
+  testMatch: [
+    '<rootDir>/projects/**/*.spec.ts'
+  ],
+  roots: [
+    '<rootDir>/projects'
+  ],
   collectCoverage: true,
   collectCoverageFrom: [
     'projects/novo-elements/**/*.ts',

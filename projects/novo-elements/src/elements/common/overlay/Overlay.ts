@@ -126,6 +126,9 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
   }
 
   public openPanel(): void {
+    if (!this.parent?.nativeElement) {
+      return;
+    }
     if (!this.overlayRef) {
       this.createOverlay(this.template);
     } else {
@@ -189,11 +192,13 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
     return merge(fromEvent(this.document, 'mouseup'), fromEvent(this.document, 'touchend')).pipe(
       filter((event: MouseEvent | TouchEvent) => {
         const clickTarget: HTMLElement = event.target as HTMLElement;
+        const connectedElement = this.getConnectedElement();
         const clickedOutside: boolean =
           this.panelOpen &&
-          clickTarget !== this.getConnectedElement().nativeElement &&
+          connectedElement &&
+          clickTarget !== connectedElement.nativeElement &&
           this.isInDocument(clickTarget) &&
-          !this.getConnectedElement().nativeElement.contains(clickTarget) &&
+          !connectedElement.nativeElement.contains(clickTarget) &&
           (!!this.overlayRef && !this.overlayRef.overlayElement.contains(clickTarget)) &&
           this.elementIsInContext(clickTarget) &&
           !this.elementIsInNestedOverlay(clickTarget);
@@ -379,7 +384,11 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
   }
 
   protected getHostWidth(): number {
-    return this.getConnectedElement().nativeElement.getBoundingClientRect().width;
+    const element = this.getConnectedElement();
+    if (!element?.nativeElement) {
+      return 0;
+    }
+    return element.nativeElement.getBoundingClientRect().width;
   }
 
   public isBlurRecipient(event: FocusEvent): boolean {
