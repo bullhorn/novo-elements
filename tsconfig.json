@@ -8,12 +8,10 @@
     "target": "ES2022",
     "module": "esnext",
     "lib": ["es2020", "dom"],
-    "typeRoots": [
-      "node_modules/@types"
-    ],
+    "typeRoots": ["node_modules/@types"],
     "sourceMap": true,
     "declaration": false,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "resolveJsonModule": true,
@@ -26,9 +24,9 @@
       "novo-elements": ["projects/novo-elements/src/index"],
       "novo-examples": ["projects/novo-examples/src/index"],
       "novo-elements/*": ["projects/novo-elements/src/*"],
-      "novo-examples/*": ["projects/novo-examples/src/*"],
+      "novo-examples/*": ["projects/novo-examples/src/*"]
     },
-    "useDefineForClassFields": false,
+    "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
     "compilationMode": "partial",
@@ -37,5 +35,5 @@
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true,
     "enableResourceInlining": true
-  },
+  }
 }

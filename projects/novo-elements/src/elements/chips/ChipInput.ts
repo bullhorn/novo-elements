@@ -37,8 +37,8 @@ let nextUniqueId = 0;
         '[id]': 'id',
         '[attr.disabled]': 'disabled || null',
         '[attr.placeholder]': 'placeholder || null',
-        '[attr.aria-invalid]': '_chipList && _chipList.ngControl ? _chipList.ngControl.invalid : null',
-        '[attr.aria-required]': '_chipList && _chipList.required || null',
+        '[attr.aria-invalid]': 'chipList && chipList.ngControl ? chipList.ngControl.invalid : null',
+        '[attr.aria-required]': 'chipList && chipList.required || null',
     },
     standalone: false,
 })
@@ -89,6 +89,11 @@ export class NovoChipInput implements NovoChipTextControl, OnChanges, OnDestroy 
   /** Whether the input is empty. */
   get empty(): boolean {
     return !this._inputElement.value;
+  }
+
+  /** Getter for accessing chipList in templates */
+  get chipList(): NovoChipList {
+    return this._chipList;
   }
 
   /** The native input element to which this directive is attached. */

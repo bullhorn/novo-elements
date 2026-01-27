@@ -126,7 +126,7 @@ export class NovoNavElement implements AfterContentChecked {
         '(click)': 'select()',
         '[class.active]': 'active',
         '[class.disabled]': 'disabled',
-        '[attr.role]': 'tab',
+        '[attr.role]': '"tab"',
     },
     template: `
     <div #tablink class="novo-tab-link">
