@@ -117,8 +117,12 @@ export class ConditionGroupComponent implements OnInit, OnDestroy {
   }
 
   async removeCondition(index: number) {
-    const warnOnDelete = this.root.at(index)?.value?.warnOnDelete;
-    if (warnOnDelete) {
+    const condition = this.root.at(index)?.value;
+    const warnOnDelete = condition?.warnOnDelete;
+    const fieldName = condition?.field;
+    const isLastInstanceOfPinnedField = warnOnDelete && this.root.value.filter(c => c.field === fieldName).length === 1;
+
+    if (isLastInstanceOfPinnedField) {
       const shouldDelete = await this.modalService.open(NovoConfirmModal, {
           headerText: this.labels.deleteFilterHeaderText,
           subheaderText: this.labels.deleteFilterSubtext,
