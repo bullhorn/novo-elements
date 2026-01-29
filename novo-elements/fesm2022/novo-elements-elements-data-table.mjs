@@ -165,7 +165,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
     </div>
   `,
                     changeDetection: ChangeDetectionStrategy.OnPush,
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i1.CdkColumnDef }, { type: i0.ElementRef }, { type: i0.Renderer2 }, { type: undefined, decorators: [{
                     type: Inject,
@@ -201,15 +201,15 @@ class NovoDataTableExpandHeaderCell extends CdkHeaderCell {
         this.dataTable.expandRows(!this.expanded);
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoDataTableExpandHeaderCell, deps: [{ token: i1.CdkColumnDef }, { token: i0.ElementRef }, { token: i0.Renderer2 }, { token: NOVO_DATA_TABLE_REF }, { token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "19.2.15", type: NovoDataTableExpandHeaderCell, isStandalone: false, selector: "novo-data-table-expand-header-cell", host: { properties: { "attr.role": "this.role" } }, usesInheritance: true, ngImport: i0, template: ` <i class="bhi-next data-table-icon" novo-data-table-expander="true" (click)="expandAll()" [class.expanded]="expanded"></i> `, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "19.2.15", type: NovoDataTableExpandHeaderCell, isStandalone: false, selector: "novo-data-table-expand-header-cell", host: { properties: { "attr.role": "this.role" } }, usesInheritance: true, ngImport: i0, template: ' <i class="bhi-next data-table-icon" novo-data-table-expander="true" (click)="expandAll()" [class.expanded]="expanded"></i> ', isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoDataTableExpandHeaderCell, decorators: [{
             type: Component,
             args: [{
                     selector: 'novo-data-table-expand-header-cell',
-                    template: ` <i class="bhi-next data-table-icon" novo-data-table-expander="true" (click)="expandAll()" [class.expanded]="expanded"></i> `,
+                    template: ' <i class="bhi-next data-table-icon" novo-data-table-expander="true" (click)="expandAll()" [class.expanded]="expanded"></i> ',
                     changeDetection: ChangeDetectionStrategy.OnPush,
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i1.CdkColumnDef }, { type: i0.ElementRef }, { type: i0.Renderer2 }, { type: undefined, decorators: [{
                     type: Inject,
@@ -572,7 +572,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             type: Directive,
             args: [{
                     selector: '[novoDataTableSortFilter]',
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: DataTableState }] });
 
@@ -627,7 +627,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
     </div>
   `,
                     changeDetection: ChangeDetectionStrategy.OnPush,
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i0.ChangeDetectorRef }, { type: i1$1.NovoLabelService }], propDecorators: { label: [{
                 type: Input
@@ -1309,7 +1309,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
     <div class="data-table-header-resizable" *ngIf="config.resizable"><span (mousedown)="startResize($event)">&nbsp;</span></div>
   `,
                     changeDetection: ChangeDetectionStrategy.OnPush,
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i0.ChangeDetectorRef }, { type: i1$1.NovoLabelService }, { type: DataTableState }, { type: i0.Renderer2 }, { type: i0.ElementRef }, { type: NovoDataTableSortFilter, decorators: [{
                     type: Optional
@@ -1372,7 +1372,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             type: Directive,
             args: [{
                     selector: 'novo-data-table-header-cell',
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i1.CdkColumnDef }, { type: i0.ElementRef }, { type: i0.Renderer2 }], propDecorators: { role: [{
                 type: HostBinding,
@@ -1419,15 +1419,15 @@ class NovoDataTableCell extends CdkCell {
         }
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoDataTableCell, deps: [{ token: i1.CdkColumnDef }, { token: i0.ElementRef }, { token: i0.Renderer2 }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "19.2.15", type: NovoDataTableCell, isStandalone: false, selector: "novo-data-table-cell", inputs: { row: "row", template: "template", column: "column", resized: "resized" }, host: { properties: { "attr.role": "this.role" } }, usesInheritance: true, ngImport: i0, template: ` <ng-container *ngTemplateOutlet="template; context: { $implicit: row, col: column }"></ng-container> `, isInline: true, dependencies: [{ kind: "directive", type: i6.NgTemplateOutlet, selector: "[ngTemplateOutlet]", inputs: ["ngTemplateOutletContext", "ngTemplateOutlet", "ngTemplateOutletInjector"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "19.2.15", type: NovoDataTableCell, isStandalone: false, selector: "novo-data-table-cell", inputs: { row: "row", template: "template", column: "column", resized: "resized" }, host: { properties: { "attr.role": "this.role" } }, usesInheritance: true, ngImport: i0, template: ' <ng-container *ngTemplateOutlet="template; context: { $implicit: row, col: column }"></ng-container> ', isInline: true, dependencies: [{ kind: "directive", type: i6.NgTemplateOutlet, selector: "[ngTemplateOutlet]", inputs: ["ngTemplateOutletContext", "ngTemplateOutlet", "ngTemplateOutletInjector"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoDataTableCell, decorators: [{
             type: Component,
             args: [{
                     selector: 'novo-data-table-cell',
-                    template: ` <ng-container *ngTemplateOutlet="template; context: { $implicit: row, col: column }"></ng-container> `,
+                    template: ' <ng-container *ngTemplateOutlet="template; context: { $implicit: row, col: column }"></ng-container> ',
                     changeDetection: ChangeDetectionStrategy.OnPush,
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i1.CdkColumnDef }, { type: i0.ElementRef }, { type: i0.Renderer2 }], propDecorators: { role: [{
                 type: HostBinding,
@@ -1508,7 +1508,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
     </div>
   `,
                     changeDetection: ChangeDetectionStrategy.OnPush,
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i1.CdkColumnDef }, { type: i0.ElementRef }, { type: i0.Renderer2 }, { type: undefined, decorators: [{
                     type: Inject,
@@ -1550,15 +1550,15 @@ class NovoDataTableExpandCell extends CdkCell {
         }
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoDataTableExpandCell, deps: [{ token: i1.CdkColumnDef }, { token: i0.ElementRef }, { token: i0.Renderer2 }, { token: NOVO_DATA_TABLE_REF }, { token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "19.2.15", type: NovoDataTableExpandCell, isStandalone: false, selector: "novo-data-table-expand-cell", inputs: { row: "row" }, host: { properties: { "attr.role": "this.role" } }, usesInheritance: true, ngImport: i0, template: ` <i class="bhi-next data-table-icon" novo-data-table-expander="true" [class.expanded]="expanded"></i> `, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "19.2.15", type: NovoDataTableExpandCell, isStandalone: false, selector: "novo-data-table-expand-cell", inputs: { row: "row" }, host: { properties: { "attr.role": "this.role" } }, usesInheritance: true, ngImport: i0, template: ' <i class="bhi-next data-table-icon" novo-data-table-expander="true" [class.expanded]="expanded"></i> ', isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoDataTableExpandCell, decorators: [{
             type: Component,
             args: [{
                     selector: 'novo-data-table-expand-cell',
-                    template: ` <i class="bhi-next data-table-icon" novo-data-table-expander="true" [class.expanded]="expanded"></i> `,
+                    template: ' <i class="bhi-next data-table-icon" novo-data-table-expander="true" [class.expanded]="expanded"></i> ',
                     changeDetection: ChangeDetectionStrategy.OnPush,
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i1.CdkColumnDef }, { type: i0.ElementRef }, { type: i0.Renderer2 }, { type: undefined, decorators: [{
                     type: Inject,
@@ -1690,7 +1690,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
     </novo-dropdown>
   `,
                     changeDetection: ChangeDetectionStrategy.OnPush,
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: DataTableState }, { type: i0.ChangeDetectorRef }, { type: i1$1.NovoLabelService }], propDecorators: { selectedClear: [{
                 type: Output
@@ -1747,7 +1747,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             type: Directive,
             args: [{
                     selector: '[novoDataTableExpand]',
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i0.ViewContainerRef }, { type: DataTableState }, { type: undefined, decorators: [{
                     type: Inject,
@@ -1818,7 +1818,7 @@ class DataTableSource extends DataSource {
             });
             return data.results;
         }), catchError((err, caught) => {
-            console.error(err, caught); // tslint: disable-line
+            console.error(err, caught);
             this.loading = false;
             return of(null);
         }));
@@ -1888,7 +1888,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
                     selector: 'novo-data-table-header-row',
                     template: CDK_ROW_TEMPLATE,
                     changeDetection: ChangeDetectionStrategy.OnPush,
-                    standalone: false
+                    standalone: false,
                 }]
         }], propDecorators: { rowClass: [{
                 type: HostBinding,
@@ -1918,7 +1918,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
                     selector: 'novo-data-table-row',
                     template: CDK_ROW_TEMPLATE,
                     changeDetection: ChangeDetectionStrategy.OnPush,
-                    standalone: false
+                    standalone: false,
                 }]
         }], propDecorators: { rowClass: [{
                 type: HostBinding,
@@ -2334,7 +2334,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             args: [{
                     name: 'dataTableInterpolate',
                     pure: true,
-                    standalone: false
+                    standalone: false,
                 }]
         }] });
 class DateTableDateRendererPipe {
@@ -2355,7 +2355,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             args: [{
                     name: 'dataTableDateRenderer',
                     pure: true,
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i1$1.NovoLabelService }] });
 class DateTableDateTimeRendererPipe {
@@ -2376,7 +2376,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             args: [{
                     name: 'dataTableDateTimeRenderer',
                     pure: true,
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i1$1.NovoLabelService }] });
 class DateTableTimeRendererPipe {
@@ -2397,7 +2397,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             args: [{
                     name: 'dataTableTimeRenderer',
                     pure: true,
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i1$1.NovoLabelService }] });
 class DateTableNumberRendererPipe {
@@ -2422,7 +2422,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             args: [{
                     name: 'dataTableNumberRenderer',
                     pure: true,
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i1$1.NovoLabelService }] });
 class DataTableBigDecimalRendererPipe {
@@ -2444,7 +2444,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             args: [{
                     name: 'dataTableBigDecimalRenderer',
                     pure: true,
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i1$1.NovoLabelService }] });
 class DateTableCurrencyRendererPipe {
@@ -2466,7 +2466,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             args: [{
                     name: 'dataTableCurrencyRenderer',
                     pure: true,
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i1$1.NovoLabelService }] });
 
@@ -2616,7 +2616,7 @@ class NovoDataTable {
                     where: event.where,
                     savedSearchName: event.savedSearchName,
                     appliedSearchType: event.appliedSearchType,
-                    eventSrc: 'statesortchange'
+                    eventSrc: 'statesortchange',
                 });
                 this.performInteractions('change');
             }

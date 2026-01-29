@@ -138,7 +138,7 @@ class QueryBuilderService {
         this._editTypeFn = defaultEditTypeFn;
         this._config = {
             fields: [],
-            staticFieldSelection: null
+            staticFieldSelection: null,
         };
     }
     /** Adds a field definition that was not included as part of the content children. */
@@ -191,7 +191,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             type: Directive,
             args: [{
                     selector: '[novoConditionInputDef]',
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i0.TemplateRef }] });
 /**
@@ -208,7 +208,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             type: Directive,
             args: [{
                     selector: '[novoConditionOperatorsDef]',
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i0.TemplateRef }] });
 /**
@@ -276,7 +276,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             type: Directive,
             args: [{
                     selector: '[novoConditionFieldDef]',
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: QueryBuilderService }] });
 
@@ -436,8 +436,8 @@ class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef {
         const current = this.getValue(formGroup);
         const updated = Array.isArray(current) ? [...current, valueToAdd] : [valueToAdd];
         formGroup.get('value').setValue(this.updateRadiusInValues(formGroup, updated));
-        this.inputChildren.forEach(input => {
-            input.nativeElement.value = '';
+        this.inputChildren.forEach(inputChild => {
+            inputChild.nativeElement.value = '';
         });
         this.getCurrentInput(viewIndex)?.nativeElement.focus();
         this.closePlacesList(viewIndex);
@@ -600,7 +600,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
   `,
                     encapsulation: ViewEncapsulation.None,
                     changeDetection: ChangeDetectionStrategy.Default,
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i1.NovoLabelService }], propDecorators: { overlayChildren: [{
                 type: ViewChildren,
@@ -667,7 +667,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
   `,
                     encapsulation: ViewEncapsulation.None,
                     changeDetection: ChangeDetectionStrategy.Default,
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i1.NovoLabelService }] });
 
@@ -814,7 +814,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
   `,
                     encapsulation: ViewEncapsulation.None,
                     changeDetection: ChangeDetectionStrategy.Default,
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i1.NovoLabelService }], propDecorators: { overlayChildren: [{
                 type: ViewChildren,
@@ -992,7 +992,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
     `,
                     encapsulation: ViewEncapsulation.None,
                     changeDetection: ChangeDetectionStrategy.Default,
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i1.NovoLabelService }], propDecorators: { overlayChildren: [{
                 type: ViewChildren,
@@ -1124,7 +1124,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
                     // means the template in the table's view will not have the updated value (and in fact will cause
                     // an ExpressionChangedAfterItHasBeenCheckedError).
                     changeDetection: ChangeDetectionStrategy.Default,
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i1.NovoLabelService }] });
 
@@ -1198,7 +1198,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
   `,
                     encapsulation: ViewEncapsulation.None,
                     changeDetection: ChangeDetectionStrategy.Default,
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i1.NovoLabelService }] });
 
@@ -1244,7 +1244,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
   `,
                     encapsulation: ViewEncapsulation.None,
                     changeDetection: ChangeDetectionStrategy.Default,
-                    standalone: false
+                    standalone: false,
                 }]
         }] });
 
@@ -1285,7 +1285,7 @@ class NovoDefaultPickerConditionDef extends AbstractConditionFieldDef {
             return (!options || !(options.find(option => option.value === selectedOption)));
         }).map(value => ({
             value,
-            label: value
+            label: value,
         }));
     }
     applyCustomItem() {
@@ -1386,7 +1386,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
   `,
                     encapsulation: ViewEncapsulation.None,
                     changeDetection: ChangeDetectionStrategy.Default,
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i1.NovoLabelService }] });
 
@@ -1419,7 +1419,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             type: Directive,
             args: [{
                     selector: '[conditionInputOutlet]',
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i0.ViewContainerRef }, { type: i0.ElementRef }] });
 /**
@@ -1438,7 +1438,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             type: Directive,
             args: [{
                     selector: '[conditionOperatorOutlet]',
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i0.ViewContainerRef }, { type: i0.ElementRef }] });
 class ConditionBuilderComponent {
@@ -1549,8 +1549,9 @@ class ConditionBuilderComponent {
     }
     getField() {
         const field = this.parentForm?.value?.field;
-        if (!field)
+        if (!field) {
             return null;
+        }
         return this.fieldConfig.find(field);
     }
     getDefaultField() {
@@ -1587,8 +1588,9 @@ class ConditionBuilderComponent {
         this.parentForm.get('conditionType')?.setValue(this.conditionType());
     }
     findDefinitionForField(field) {
-        if (!field)
+        if (!field) {
             return;
+        }
         const editType = this.editTypeFn()(field);
         // Don't look at dataSpecialization it is no good, this misses currency, and percent
         const { name } = field;
@@ -1631,8 +1633,8 @@ class ConditionBuilderComponent {
                         queryBuilderService = new QueryBuilderService(labelService);
                     }
                     return queryBuilderService;
-                }
-            }
+                },
+            },
         ], viewQueries: [{ propertyName: "_operatorOutlet", first: true, predicate: ConditionOperatorOutlet, descendants: true, static: true }, { propertyName: "_inputOutlet", first: true, predicate: ConditionInputOutlet, descendants: true, static: true }], usesOnChanges: true, ngImport: i0, template: "<form [formGroup]=\"parentForm\">\n  <novo-grid gap=\"1rem\" [columns]=\"gridColumns()\" align=\"end\">\n    <novo-field class=\"condition-field\" *ngIf=\"!staticFieldSelection()\">\n      <novo-select\n        [placeholder]=\"labels.chooseAField\"\n        formControlName=\"field\"\n        (onSelect)=\"updateFieldSelection()\"\n        overlayWidth=\"24rem\"\n        overlayHeight=\"20rem\"\n        [displayWith]=\"fieldDisplayWith\"\n        [style.minWidth.px]=\"160\"\n        [style.maxWidth.px]=\"(hideOperator() || isConditionHost) ? 200 : 160\"\n        [displayIcon]=\"displayIcon\">\n        <novo-optgroup class=\"filter-search-results\">\n          <novo-option>\n            <novo-select-search [formControl]=\"searchTerm\" [clearSearchInput]=\"false\"></novo-select-search>\n          </novo-option>\n          <ng-container *ngIf=\"results$ | async as results; else loading\">\n            <ng-container *ngIf=\"results.length\">\n              <novo-option *ngFor=\"let field of results\" value=\"{{ field.name }}\"\n                [attr.data-automation-id]=\"field.name\">\n                {{ field.label || field.name }}\n              </novo-option>\n            </ng-container>\n          </ng-container>\n        </novo-optgroup>\n      </novo-select>\n    </novo-field>\n\n    <div class=\"condition-operator\">\n      <ng-container conditionOperatorOutlet></ng-container>\n    </div>\n\n    <div class=\"condition-input\">\n      <ng-container conditionInputOutlet></ng-container>\n    </div>\n  </novo-grid>\n  <ng-content></ng-content>\n</form>\n\n<novo-condition-templates *ngIf=\"isConditionHost\" [addressConfig]=\"addressConfig\" [dateConfig]=\"dateConfig\"/>\n\n<!-- LOADING TEMPLATE -->\n<ng-template #loading>\n  <novo-loading></novo-loading>\n</ng-template>\n", styles: [":host{position:relative;display:block;width:100%}:host.condition-host{padding:var(--spacing-md);margin-bottom:1rem}:host .condition-field{grid-template-columns:minmax(fit-content,1fr);width:100%;width:-webkit-fill-available}:host .condition-operator::ng-deep .novo-select{min-width:13rem}:host .condition-input::ng-deep novo-field.novo-field-layout-vertical{grid-template-columns:minmax(fit-content,1fr);width:-webkit-fill-available}:host .condition-input::ng-deep novo-field.novo-field-layout-vertical .novo-input-element{width:100%}:host .condition-input::ng-deep novo-field{width:fit-content}:host .condition-input::ng-deep novo-field.address-radius{width:100px;min-width:100px;max-width:100px;margin-right:1rem}:host .condition-input::ng-deep novo-field.address-radius novo-select{min-width:70px}:host .condition-input::ng-deep novo-field.address-location .novo-field-suffix{align-self:flex-end}:host .condition-input::ng-deep .novo-field-infix{white-space:nowrap;overflow:hidden}:host .condition-input::ng-deep novo-chip-list{flex-grow:1}:host .condition-input::ng-deep novo-chip-list novo-chip{max-width:min(33rem,100% - 9px)}:host .condition-input::ng-deep novo-chips{border-bottom:none!important}:host .condition-input::ng-deep novo-chips input{padding-left:0!important}:host .condition-input::ng-deep novo-radio-group{padding:0!important}:host .and-or-filter-button{box-sizing:border-box;background:#fff;border:1px solid #ddd;color:#5691f5;display:inline-block;position:relative;cursor:pointer;margin:.4rem auto;align-items:center;text-align:center;-webkit-user-select:none;user-select:none;outline:none;white-space:nowrap;text-transform:uppercase;overflow:hidden;transition:box-shadow .4s cubic-bezier(.25,.8,.25,1),background-color .4s cubic-bezier(.25,.8,.25,1)}\n"], dependencies: [{ kind: "directive", type: i2.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i2.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i3.ɵNgNoValidate, selector: "form:not([ngNoForm]):not([ngNativeValidate])" }, { kind: "directive", type: i3.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i3.NgControlStatusGroup, selector: "[formGroupName],[formArrayName],[ngModelGroup],[formGroup],form:not([ngNoForm]),[ngForm]" }, { kind: "directive", type: i3.FormControlDirective, selector: "[formControl]", inputs: ["formControl", "disabled", "ngModel"], outputs: ["ngModelChange"], exportAs: ["ngForm"] }, { kind: "directive", type: i3.FormGroupDirective, selector: "[formGroup]", inputs: ["formGroup"], outputs: ["ngSubmit"], exportAs: ["ngForm"] }, { kind: "directive", type: i3.FormControlName, selector: "[formControlName]", inputs: ["formControlName", "disabled", "ngModel"], outputs: ["ngModelChange"] }, { kind: "directive", type: i5.GapDirective, selector: "[gap]", inputs: ["gap"] }, { kind: "component", type: i5$1.NovoSelectElement, selector: "novo-select", inputs: ["disabled", "required", "tabIndex", "id", "name", "placeholder", "readonly", "headerConfig", "position", "overlayWidth", "overlayHeight", "displayIcon", "displayWith", "compareWith", "hideLegacyOptions", "value", "multiple", "options"], outputs: ["onSelect", "selectionChange", "valueChange", "openedChange", "opened", "closed"] }, { kind: "component", type: i6.NovoFieldElement, selector: "novo-field", inputs: ["layout", "appearance", "customOverlayOrigin", "width"], outputs: ["valueChanges", "stateChanges"] }, { kind: "component", type: i5.NovoOption, selector: "novo-option", inputs: ["selected", "keepOpen", "novoInert", "value", "disabled"], exportAs: ["novoOption"] }, { kind: "component", type: i5.NovoOptgroup, selector: "novo-optgroup", inputs: ["disabled", "label"], exportAs: ["novoOptgroup"] }, { kind: "component", type: i8.NovoGridElement, selector: "novo-grid", inputs: ["direction", "align", "justify", "columns"] }, { kind: "component", type: i9$3.NovoLoadingElement, selector: "novo-loading", inputs: ["theme", "color", "size"] }, { kind: "component", type: i9$2.NovoSelectSearchComponent, selector: "novo-select-search", inputs: ["name", "placeholderLabel", "type", "noEntriesFoundLabel", "indexAndLengthScreenReaderText", "clearSearchInput", "searching", "disableInitialFocus", "enableClearOnEscapePressed", "allowDeselectDuringFilter", "preventHomeEndKeyPropagation", "disableScrollToActiveOnOptionsChanged", "ariaLabel", "showToggleAllCheckbox", "toggleAllCheckboxChecked", "toggleAllCheckboxIndeterminate", "toggleAllCheckboxTooltipMessage", "toogleAllCheckboxTooltipPosition", "hideClearSearchButton", "alwaysRestoreSelectedOptionsMulti"], outputs: ["toggleAll"] }, { kind: "directive", type: ConditionInputOutlet, selector: "[conditionInputOutlet]" }, { kind: "directive", type: ConditionOperatorOutlet, selector: "[conditionOperatorOutlet]" }, { kind: "component", type: NovoConditionTemplatesComponent, selector: "novo-condition-templates", inputs: ["addressConfig", "dateConfig"] }, { kind: "pipe", type: i2.AsyncPipe, name: "async" }], changeDetection: i0.ChangeDetectionStrategy.OnPush }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: ConditionBuilderComponent, decorators: [{
@@ -1646,8 +1648,8 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
                                     queryBuilderService = new QueryBuilderService(labelService);
                                 }
                                 return queryBuilderService;
-                            }
-                        }
+                            },
+                        },
                     ], changeDetection: ChangeDetectionStrategy.OnPush, standalone: false, template: "<form [formGroup]=\"parentForm\">\n  <novo-grid gap=\"1rem\" [columns]=\"gridColumns()\" align=\"end\">\n    <novo-field class=\"condition-field\" *ngIf=\"!staticFieldSelection()\">\n      <novo-select\n        [placeholder]=\"labels.chooseAField\"\n        formControlName=\"field\"\n        (onSelect)=\"updateFieldSelection()\"\n        overlayWidth=\"24rem\"\n        overlayHeight=\"20rem\"\n        [displayWith]=\"fieldDisplayWith\"\n        [style.minWidth.px]=\"160\"\n        [style.maxWidth.px]=\"(hideOperator() || isConditionHost) ? 200 : 160\"\n        [displayIcon]=\"displayIcon\">\n        <novo-optgroup class=\"filter-search-results\">\n          <novo-option>\n            <novo-select-search [formControl]=\"searchTerm\" [clearSearchInput]=\"false\"></novo-select-search>\n          </novo-option>\n          <ng-container *ngIf=\"results$ | async as results; else loading\">\n            <ng-container *ngIf=\"results.length\">\n              <novo-option *ngFor=\"let field of results\" value=\"{{ field.name }}\"\n                [attr.data-automation-id]=\"field.name\">\n                {{ field.label || field.name }}\n              </novo-option>\n            </ng-container>\n          </ng-container>\n        </novo-optgroup>\n      </novo-select>\n    </novo-field>\n\n    <div class=\"condition-operator\">\n      <ng-container conditionOperatorOutlet></ng-container>\n    </div>\n\n    <div class=\"condition-input\">\n      <ng-container conditionInputOutlet></ng-container>\n    </div>\n  </novo-grid>\n  <ng-content></ng-content>\n</form>\n\n<novo-condition-templates *ngIf=\"isConditionHost\" [addressConfig]=\"addressConfig\" [dateConfig]=\"dateConfig\"/>\n\n<!-- LOADING TEMPLATE -->\n<ng-template #loading>\n  <novo-loading></novo-loading>\n</ng-template>\n", styles: [":host{position:relative;display:block;width:100%}:host.condition-host{padding:var(--spacing-md);margin-bottom:1rem}:host .condition-field{grid-template-columns:minmax(fit-content,1fr);width:100%;width:-webkit-fill-available}:host .condition-operator::ng-deep .novo-select{min-width:13rem}:host .condition-input::ng-deep novo-field.novo-field-layout-vertical{grid-template-columns:minmax(fit-content,1fr);width:-webkit-fill-available}:host .condition-input::ng-deep novo-field.novo-field-layout-vertical .novo-input-element{width:100%}:host .condition-input::ng-deep novo-field{width:fit-content}:host .condition-input::ng-deep novo-field.address-radius{width:100px;min-width:100px;max-width:100px;margin-right:1rem}:host .condition-input::ng-deep novo-field.address-radius novo-select{min-width:70px}:host .condition-input::ng-deep novo-field.address-location .novo-field-suffix{align-self:flex-end}:host .condition-input::ng-deep .novo-field-infix{white-space:nowrap;overflow:hidden}:host .condition-input::ng-deep novo-chip-list{flex-grow:1}:host .condition-input::ng-deep novo-chip-list novo-chip{max-width:min(33rem,100% - 9px)}:host .condition-input::ng-deep novo-chips{border-bottom:none!important}:host .condition-input::ng-deep novo-chips input{padding-left:0!important}:host .condition-input::ng-deep novo-radio-group{padding:0!important}:host .and-or-filter-button{box-sizing:border-box;background:#fff;border:1px solid #ddd;color:#5691f5;display:inline-block;position:relative;cursor:pointer;margin:.4rem auto;align-items:center;text-align:center;-webkit-user-select:none;user-select:none;outline:none;white-space:nowrap;text-transform:uppercase;overflow:hidden;transition:box-shadow .4s cubic-bezier(.25,.8,.25,1),background-color .4s cubic-bezier(.25,.8,.25,1)}\n"] }]
         }], ctorParameters: () => [{ type: i1.NovoLabelService }, { type: i0.ChangeDetectorRef }, { type: QueryBuilderService }, { type: i3.ControlContainer }], propDecorators: { _operatorOutlet: [{
                 type: ViewChild,
@@ -1738,7 +1740,7 @@ class ConditionGroupComponent {
             scope: condition.scope,
             value: condition.value,
             supportingValue: condition.supportingValue,
-            entity: condition.entity
+            entity: condition.entity,
         };
     }
     get root() {
@@ -1966,7 +1968,7 @@ class CriteriaBuilderComponent {
     onFieldSelect(field) {
         this.scopedFieldPicker().dropdown.closePanel();
         const condition = { field: field.name, operator: null, scope: field.scope, value: null, entity: field.entity };
-        const group = this.conditionGroups().find((group) => group.scope === field.scope);
+        const group = this.conditionGroups().find((conditionGroup) => conditionGroup.scope === field.scope);
         if (group) {
             group.addCondition(condition);
         }

@@ -157,11 +157,10 @@ class TooltipDirective {
         }
     }
     getPosition() {
-        let strategy;
         let defaultPosition;
         let offsetX;
         let offsetY;
-        let autoPositions = [
+        const autoPositions = [
             { originX: 'center', originY: 'bottom', overlayX: 'center', overlayY: 'top', offsetX: 0, offsetY: 12 },
             { originX: 'end', originY: 'bottom', overlayX: 'end', overlayY: 'top', offsetX: 0, offsetY: 12 },
             { originX: 'end', originY: 'center', overlayX: 'start', overlayY: 'center', offsetX: 12, offsetY: 0 },
@@ -220,7 +219,7 @@ class TooltipDirective {
                 break;
         }
         const allPositions = this.autoPosition ? [defaultPosition].concat(autoPositions) : [defaultPosition];
-        strategy = this.overlay
+        const strategy = this.overlay
             .position()
             .flexibleConnectedTo(this.elementRef)
             .withFlexibleDimensions(false)
@@ -243,7 +242,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
                     host: {
                         '[attr.data-hint]': 'tooltip',
                     },
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i1$1.Overlay }, { type: i0.ViewContainerRef }, { type: i0.ElementRef }], propDecorators: { tooltip: [{
                 type: Input

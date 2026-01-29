@@ -193,7 +193,7 @@ class AppBridge {
                         this.postRobot.send(frame.source, MESSAGE_TYPES.CUSTOM_EVENT, event.data);
                     });
                 }
-            }
+            },
         };
         Object.keys(defaultMsgHandlers).forEach(msgType => {
             this.postRobot.on(msgType, event => {
@@ -221,7 +221,8 @@ class AppBridge {
         let returnPromise;
         if (this._handlers[handler]) {
             // Should be directly returning a promise. However, as a fallback, provide callback arguments
-            let callbackSuccess, callbackFail;
+            let callbackSuccess;
+            let callbackFail;
             returnPromise = new Promise((s, f) => {
                 callbackSuccess = s;
                 callbackFail = f;
@@ -878,7 +879,7 @@ const tokensMap = {
     Z: 'xxx',
     ZZ: 'xx',
     X: 't',
-    x: 'T'
+    x: 'T',
 };
 const v1tokens = Object.keys(tokensMap)
     .sort()
@@ -905,7 +906,7 @@ function convertTokens(format) {
                 acc.textBuffer = [];
             }
             if (v2token)
-                acc.formatBuffer.push(v2token);
+                acc.formatBuffer.push(v2token); // eslint-disable-line
             return acc;
         }, { formatBuffer: [], textBuffer: [] })
             .formatBuffer.join('');
@@ -929,13 +930,13 @@ const parseTokenYY = /^(\d{2})$/;
 const parseTokensYYY = [
     /^([+-]\d{2})$/, // 0 additional digits
     /^([+-]\d{3})$/, // 1 additional digit
-    /^([+-]\d{4})$/ // 2 additional digits
+    /^([+-]\d{4})$/, // 2 additional digits
 ];
 const parseTokenYYYY = /^(\d{4})/;
 const parseTokensYYYYY = [
     /^([+-]\d{4})/, // 0 additional digits
     /^([+-]\d{5})/, // 1 additional digit
-    /^([+-]\d{6})/ // 2 additional digits
+    /^([+-]\d{6})/, // 2 additional digits
 ];
 // date tokens
 const parseTokenMM = /^-(\d{2})$/;
@@ -999,7 +1000,10 @@ function legacyParse(argument, options = {}) {
 }
 function splitDateString(dateString) {
     const array = dateString.split(parseTokenDateTimeDelimeter);
-    let timeString, date, time, timezone;
+    let timeString;
+    let date;
+    let time;
+    let timezone;
     if (parseTokenPlainTime.test(array[0])) {
         date = undefined;
         timeString = array[0];
@@ -1021,7 +1025,7 @@ function splitDateString(dateString) {
     return {
         date,
         time,
-        timezone
+        timezone,
     };
 }
 function parseYear(dateString, additionalDigits) {
@@ -1034,7 +1038,7 @@ function parseYear(dateString, additionalDigits) {
         const yearString = token[1];
         return {
             year: parseInt(yearString, 10),
-            restDateString: dateString.slice(yearString.length)
+            restDateString: dateString.slice(yearString.length),
         };
     }
     // YY or ±YYY
@@ -1043,12 +1047,12 @@ function parseYear(dateString, additionalDigits) {
         const centuryString = token[1];
         return {
             year: parseInt(centuryString, 10) * 100,
-            restDateString: dateString.slice(centuryString.length)
+            restDateString: dateString.slice(centuryString.length),
         };
     }
     // Invalid ISO-formatted year
     return {
-        year: null
+        year: null,
     };
 }
 function parseDate(dateString, year) {
@@ -1375,6 +1379,7 @@ class DateRange {
     }
 }
 
+/* eslint-disable no-invalid-this */
 /**
  * Copyright © 2018-2022 Ferdinand Prantl
  * https://www.npmjs.com/package/timezone-support
@@ -1895,6 +1900,9 @@ function rgbToHsl({ r, g, b }) {
             case b:
                 h = (r - g) / d + 4;
                 break;
+            default:
+                // max is always one of r, g, or b; this should never be reached
+                break;
         }
         h /= 6;
     }
@@ -1912,7 +1920,9 @@ function rgbToHsl({ r, g, b }) {
  * @return  Array           The RGB representation
  */
 function hslToRgb({ h, s, l }) {
-    let r, g, b;
+    let r;
+    let g;
+    let b;
     if (s === 0) {
         r = g = b = l; // achromatic
     }
@@ -1963,10 +1973,9 @@ function rgbToHsv({ r, g, b }) {
     const max = Math.max(r, g, b);
     const min = Math.min(r, g, b);
     let h;
-    let s;
     const v = max;
     const d = max - min;
-    s = max === 0 ? 0 : d / max;
+    const s = max === 0 ? 0 : d / max;
     if (max === min) {
         h = 0; // achromatic
     }
@@ -1980,6 +1989,9 @@ function rgbToHsv({ r, g, b }) {
                 break;
             case b:
                 h = (r - g) / d + 4;
+                break;
+            default:
+                // max is always one of r, g, or b; this should never be reached
                 break;
         }
         h /= 6;
@@ -1998,7 +2010,9 @@ function rgbToHsv({ r, g, b }) {
  * @return  Array           The RGB representation
  */
 function hsvToRgb({ h, s, v }) {
-    let r, g, b;
+    let r;
+    let g;
+    let b;
     const i = Math.floor(h * 6);
     const f = h * 6 - i;
     const p = v * (1 - s);
@@ -2023,6 +2037,9 @@ function hsvToRgb({ h, s, v }) {
         case 5:
             (r = v), (g = p), (b = q);
             break;
+        default:
+            // i % 6 is always 0-5; this should never be reached
+            break;
     }
     return {
         r: r * 255,
@@ -2031,7 +2048,6 @@ function hsvToRgb({ h, s, v }) {
     };
 }
 
-/* tslint:disable:quotemark */
 /**
  * AUTOGENERATED FILE - DO NOT EDIT
  * Generated by: https://bhsource.bullhorn.com/DEV_WORKSPACE/country-state-parser
@@ -21870,7 +21886,7 @@ class Helpers {
      */
     static findAncestor(element, selector) {
         while ((element = element.parentElement) && !element.matches.call(element, selector))
-            ;
+            ; // eslint-disable-line
         return element;
     }
     /**

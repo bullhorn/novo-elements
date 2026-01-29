@@ -402,7 +402,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
       <novo-color-picker [(color)]="value" (onChange)="setValueAndClose($event)"></novo-color-picker>
     </novo-overlay-template>
   `,
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i0.ElementRef }, { type: i1$1.NovoLabelService }, { type: i0.ChangeDetectorRef }], propDecorators: { name: [{
                 type: Input

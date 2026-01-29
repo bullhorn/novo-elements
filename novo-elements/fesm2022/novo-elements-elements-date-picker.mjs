@@ -69,7 +69,7 @@ class NovoDatePickerElement {
         return ['range', 'week'].includes(this.mode) || this._range;
     }
     set range(value) {
-        console.warn(`'range' property is deprecated, please use 'mode="range"'.`);
+        console.warn('\'range\' property is deprecated, please use \'mode="range"\'.');
         if (this._range !== value) {
             this._range = value;
             this.mode = 'range';
@@ -82,7 +82,7 @@ class NovoDatePickerElement {
         return this._mode === 'week' || this._weekRangeSelect;
     }
     set weekRangeSelect(value) {
-        console.warn(`'weekRangeSelect' property is deprecated, please use 'mode="week"'.`);
+        console.warn('\'weekRangeSelect\' property is deprecated, please use \'mode="week"\'.');
         if (this._weekRangeSelect !== value) {
             this._weekRangeSelect = value;
             this.mode = 'week';
@@ -599,7 +599,7 @@ class NovoDatePickerInputElement {
         }
     }
     _handleOverlayClickout() {
-        this.handleInvalidDate(/*fromPanelClose:*/ true);
+        this.handleInvalidDate(/* fromPanelClose: */ true);
         this.blurEvent.emit();
     }
     _handleFocus(event) {
@@ -696,7 +696,7 @@ class NovoDatePickerInputElement {
     }
     _setCalendarValue(value) {
         if (value instanceof Date && this.value instanceof Date) {
-            let newDate = new Date(value);
+            const newDate = new Date(value);
             newDate.setHours(0, 0, 0, 0);
             this.value = newDate;
             return;

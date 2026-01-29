@@ -27,7 +27,7 @@ const PROGRESS_BAR_VALUE_ACCESSOR = {
 class NovoProgressBarElement {
     get width() {
         if (this.appearance === ProgressAppearance.RADIAL) {
-            return `100%`;
+            return '100%';
         }
         return `${this._percent * 100}%`;
     }
@@ -253,11 +253,11 @@ class NovoProgressElement {
                 provide: NOVO_PROGRESS_CONTAINER,
                 useExisting: NovoProgressElement,
             },
-        ], queries: [{ propertyName: "_bars", predicate: i0.forwardRef(() => NovoProgressBarElement), descendants: true }], ngImport: i0, template: ` <ng-content></ng-content> `, isInline: true, styles: [":host{display:flex;position:relative;border-radius:.2em}:host.striped{background-image:linear-gradient(45deg,rgba(0,0,0,.25) 25%,transparent 25%,transparent 50%,rgba(0,0,0,.25) 50%,rgba(0,0,0,.25) 75%,transparent 75%,transparent);background-size:20px 20px}:host.linear{width:200px;height:1.2em;background-color:#f7f7f7;border:1px solid #cccdcc;overflow:hidden}:host.radial{width:9.2em;height:9.2em}:host.fit-container{width:100%}\n"] }); }
+        ], queries: [{ propertyName: "_bars", predicate: i0.forwardRef(() => NovoProgressBarElement), descendants: true }], ngImport: i0, template: ' <ng-content></ng-content> ', isInline: true, styles: [":host{display:flex;position:relative;border-radius:.2em}:host.striped{background-image:linear-gradient(45deg,rgba(0,0,0,.25) 25%,transparent 25%,transparent 50%,rgba(0,0,0,.25) 50%,rgba(0,0,0,.25) 75%,transparent 75%,transparent);background-size:20px 20px}:host.linear{width:200px;height:1.2em;background-color:#f7f7f7;border:1px solid #cccdcc;overflow:hidden}:host.radial{width:9.2em;height:9.2em}:host.fit-container{width:100%}\n"] }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoProgressElement, decorators: [{
             type: Component,
-            args: [{ selector: 'novo-progress', template: ` <ng-content></ng-content> `, providers: [
+            args: [{ selector: 'novo-progress', template: ' <ng-content></ng-content> ', providers: [
                         {
                             provide: NOVO_PROGRESS_CONTAINER,
                             useExisting: NovoProgressElement,

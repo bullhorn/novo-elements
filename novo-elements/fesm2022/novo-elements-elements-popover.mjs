@@ -358,7 +358,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
                      *  it interferes with the newly added (2023) HTML standard spec popover attribute.
                      */
                     selector: '[popover], [novoPopover]',
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i0.ViewContainerRef }, { type: i0.ComponentFactoryResolver }], propDecorators: { content: [{
                 type: Input,
@@ -415,8 +415,8 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
                     declarations: [PopOverContent, PopOverDirective],
                     exports: [PopOverContent, PopOverDirective],
                     imports: [
-                        CommonModule
-                    ]
+                        CommonModule,
+                    ],
                 }]
         }] });
 

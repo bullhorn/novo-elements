@@ -19,7 +19,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             type: Pipe,
             args: [{
                     name: 'decodeURI',
-                    standalone: false
+                    standalone: false,
                 }]
         }, {
             type: Injectable
@@ -38,7 +38,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             type: Pipe,
             args: [{
                     name: 'default', pure: true,
-                    standalone: false
+                    standalone: false,
                 }]
         }, {
             type: Injectable
@@ -66,7 +66,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             type: Pipe,
             args: [{
                     name: 'groupBy',
-                    standalone: false
+                    standalone: false,
                 }]
         }] });
 
@@ -87,7 +87,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             type: Pipe,
             args: [{
                     name: 'highlight', pure: true,
-                    standalone: false
+                    standalone: false,
                 }]
         }, {
             type: Injectable
@@ -112,7 +112,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             type: Pipe,
             args: [{
                     name: 'isoDateRange',
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [] });
 
@@ -131,7 +131,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             type: Pipe,
             args: [{
                     name: 'isoDate',
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [] });
 
@@ -154,7 +154,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             type: Pipe,
             args: [{
                     name: 'isoTimeRange',
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [] });
 
@@ -174,7 +174,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             type: Pipe,
             args: [{
                     name: 'isoTime',
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [] });
 
@@ -528,7 +528,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             type: Pipe,
             args: [{
                     name: 'plural',
-                    standalone: false
+                    standalone: false,
                 }]
         }, {
             type: Injectable

@@ -13,7 +13,7 @@ class NovoLoadingElement {
      * @deprecated
      **/
     set theme(value) {
-        console.warn(`'theme' property is deprecated, please use 'color'.`);
+        console.warn('\'theme\' property is deprecated, please use \'color\'.');
         this.color = value;
     }
     get theme() {
@@ -59,7 +59,7 @@ class NovoSpinnerElement {
      * @deprecated
      **/
     set theme(value) {
-        console.warn(`'theme' property is deprecated, please use 'color'.`);
+        console.warn('\'theme\' property is deprecated, please use \'color\'.');
         this.color = value;
     }
     get theme() {
@@ -129,7 +129,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             type: Directive,
             args: [{
                     selector: '[skeleton]',
-                    standalone: false
+                    standalone: false,
                 }]
         }], propDecorators: { skeleton: [{
                 type: HostBinding,
@@ -143,7 +143,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             type: Directive,
             args: [{
                     selector: '[loaded]',
-                    standalone: false
+                    standalone: false,
                 }]
         }] });
 class NovoIsLoadingDirective {
@@ -182,7 +182,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             type: Directive,
             args: [{
                     selector: '[isLoading]',
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i0.ViewContainerRef }], propDecorators: { skeletonTemplates: [{
                 type: ContentChildren,

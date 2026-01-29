@@ -33,7 +33,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
                     host: {
                         class: 'novo-dropdown-trigger',
                     },
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i0.ElementRef }] });
 // Create Base Class from Mixins
@@ -84,7 +84,7 @@ class NovoDropdownElement extends NovoDropdownMixins {
     }
     ngOnInit() {
         if (this.appendToBody) {
-            notify(`'appendToBody' has been deprecated. Please remove this attribute.`);
+            notify('\'appendToBody\' has been deprecated. Please remove this attribute.');
         }
     }
     ngAfterContentInit() {
@@ -239,7 +239,7 @@ class NovoDropdownElement extends NovoDropdownMixins {
     }
     /** Calculates the height of the select's options. */
     _getItemHeight() {
-        let [first] = this.options;
+        const [first] = this.options;
         if (first) {
             return first._getHostElement().offsetHeight;
         }
@@ -325,7 +325,7 @@ class NovoItemElement {
         this.keepOpen = false;
         this.action = new EventEmitter();
         this.active = false;
-        notify(`'item' element has been deprecated. Please use 'novo-option' and 'novo-optgroup'.`);
+        notify('\'item\' element has been deprecated. Please use \'novo-option\' and \'novo-optgroup\'.');
     }
     onClick(event) {
         // Poor man's disable
@@ -350,7 +350,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
                         '[class.disabled]': 'disabled',
                         '[class.active]': 'active',
                     },
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: NovoDropdownElement }, { type: i0.ElementRef }], propDecorators: { disabled: [{
                 type: Input
@@ -365,7 +365,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
 class NovoDropdownListElement {
     constructor(dropdown) {
         this.dropdown = dropdown;
-        notify(`'list' element has been deprecated. Please use novo-option and novo-optgroup.`);
+        notify('\'list\' element has been deprecated. Please use novo-option and novo-optgroup.');
     }
     ngAfterContentInit() {
         this.dropdown.items = this.items;
@@ -381,7 +381,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             args: [{
                     selector: 'list',
                     template: '<ng-content></ng-content>',
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: NovoDropdownElement }], propDecorators: { items: [{
                 type: ContentChildren,
@@ -389,7 +389,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             }] } });
 class NovoDropDownItemHeaderElement {
     constructor() {
-        notify(`'dropdown-item-header' element has been deprecated. Please use novo-option and novo-optgroup.`);
+        notify('\'dropdown-item-header\' element has been deprecated. Please use novo-option and novo-optgroup.');
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoDropDownItemHeaderElement, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
     static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "19.2.15", type: NovoDropDownItemHeaderElement, isStandalone: false, selector: "dropdown-item-header", ngImport: i0, template: '<ng-content></ng-content>', isInline: true }); }
@@ -399,7 +399,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             args: [{
                     selector: 'dropdown-item-header',
                     template: '<ng-content></ng-content>',
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [] });
 

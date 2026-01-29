@@ -16,14 +16,14 @@ class NovoBoxElement {
         return 'block';
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoBoxElement, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "19.2.15", type: NovoBoxElement, isStandalone: false, selector: "novo-box", inputs: { direction: "direction", align: "align", justify: "justify", wrap: "wrap", gap: "gap" }, host: { properties: { "style.display": "this.display", "style.flex-direction": "this.direction", "style.align-items": "this.align", "style.justify-content": "this.justify", "style.flex-wrap": "this.wrap", "style.gap": "this.gap" } }, ngImport: i0, template: ` <ng-content></ng-content> `, isInline: true }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "19.2.15", type: NovoBoxElement, isStandalone: false, selector: "novo-box", inputs: { direction: "direction", align: "align", justify: "justify", wrap: "wrap", gap: "gap" }, host: { properties: { "style.display": "this.display", "style.flex-direction": "this.direction", "style.align-items": "this.align", "style.justify-content": "this.justify", "style.flex-wrap": "this.wrap", "style.gap": "this.gap" } }, ngImport: i0, template: ' <ng-content></ng-content> ', isInline: true }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoBoxElement, decorators: [{
             type: Component,
             args: [{
                     selector: 'novo-box',
-                    template: ` <ng-content></ng-content> `,
-                    standalone: false
+                    template: ' <ng-content></ng-content> ',
+                    standalone: false,
                 }]
         }], propDecorators: { display: [{
                 type: HostBinding,
@@ -67,14 +67,14 @@ class NovoFlexElement {
         return 'flex';
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoFlexElement, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "19.2.15", type: NovoFlexElement, isStandalone: false, selector: "novo-flex,novo-row", inputs: { direction: "direction", align: "align", justify: "justify", wrap: "wrap", gap: "gap" }, host: { properties: { "style.display": "this.display", "style.flex-direction": "this.direction", "style.align-items": "this.align", "style.justify-content": "this.justify", "style.flex-wrap": "this.wrap", "style.gap": "this.gap" } }, ngImport: i0, template: ` <ng-content></ng-content> `, isInline: true }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "19.2.15", type: NovoFlexElement, isStandalone: false, selector: "novo-flex,novo-row", inputs: { direction: "direction", align: "align", justify: "justify", wrap: "wrap", gap: "gap" }, host: { properties: { "style.display": "this.display", "style.flex-direction": "this.direction", "style.align-items": "this.align", "style.justify-content": "this.justify", "style.flex-wrap": "this.wrap", "style.gap": "this.gap" } }, ngImport: i0, template: ' <ng-content></ng-content> ', isInline: true }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoFlexElement, decorators: [{
             type: Component,
             args: [{
                     selector: 'novo-flex,novo-row',
-                    template: ` <ng-content></ng-content> `,
-                    standalone: false
+                    template: ' <ng-content></ng-content> ',
+                    standalone: false,
                 }]
         }], propDecorators: { display: [{
                 type: HostBinding,
@@ -112,14 +112,14 @@ class NovoStackElement extends NovoFlexElement {
         this.align = 'start';
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoStackElement, deps: null, target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "19.2.15", type: NovoStackElement, isStandalone: false, selector: "novo-stack,novo-column", inputs: { direction: "direction", align: "align" }, host: { properties: { "style.flex-direction": "this.direction", "style.align-items": "this.align" } }, usesInheritance: true, ngImport: i0, template: ` <ng-content></ng-content> `, isInline: true }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "19.2.15", type: NovoStackElement, isStandalone: false, selector: "novo-stack,novo-column", inputs: { direction: "direction", align: "align" }, host: { properties: { "style.flex-direction": "this.direction", "style.align-items": "this.align" } }, usesInheritance: true, ngImport: i0, template: ' <ng-content></ng-content> ', isInline: true }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoStackElement, decorators: [{
             type: Component,
             args: [{
                     selector: 'novo-stack,novo-column',
-                    template: ` <ng-content></ng-content> `,
-                    standalone: false
+                    template: ' <ng-content></ng-content> ',
+                    standalone: false,
                 }]
         }], propDecorators: { direction: [{
                 type: HostBinding,
@@ -152,14 +152,14 @@ class NovoGridElement {
         this.columns = '1';
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoGridElement, deps: [{ token: i1.DomSanitizer }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "19.2.15", type: NovoGridElement, isStandalone: false, selector: "novo-grid", inputs: { direction: "direction", align: "align", justify: "justify", columns: "columns" }, host: { properties: { "style.display": "this.display", "style.flex-direction": "this.direction", "style.align-items": "this.align", "style.justify-content": "this.justify", "style.grid-template-columns": "this.hb_gridCols" } }, ngImport: i0, template: ` <ng-content></ng-content> `, isInline: true }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "19.2.15", type: NovoGridElement, isStandalone: false, selector: "novo-grid", inputs: { direction: "direction", align: "align", justify: "justify", columns: "columns" }, host: { properties: { "style.display": "this.display", "style.flex-direction": "this.direction", "style.align-items": "this.align", "style.justify-content": "this.justify", "style.grid-template-columns": "this.hb_gridCols" } }, ngImport: i0, template: ' <ng-content></ng-content> ', isInline: true }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoGridElement, decorators: [{
             type: Component,
             args: [{
                     selector: 'novo-grid',
-                    template: ` <ng-content></ng-content> `,
-                    standalone: false
+                    template: ' <ng-content></ng-content> ',
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i1.DomSanitizer }], propDecorators: { display: [{
                 type: HostBinding,

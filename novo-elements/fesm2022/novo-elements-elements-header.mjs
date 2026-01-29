@@ -21,22 +21,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 class NovoHeaderSpacer {
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoHeaderSpacer, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "19.2.15", type: NovoHeaderSpacer, isStandalone: false, selector: "header-spacer", ngImport: i0, template: `<ng-content></ng-content>`, isInline: true, styles: [":host{display:inline-block;height:1.8em;width:2px;margin:0 .6em;background-color:#00000040}\n"] }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "19.2.15", type: NovoHeaderSpacer, isStandalone: false, selector: "header-spacer", ngImport: i0, template: '<ng-content></ng-content>', isInline: true, styles: [":host{display:inline-block;height:1.8em;width:2px;margin:0 .6em;background-color:#00000040}\n"] }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoHeaderSpacer, decorators: [{
             type: Component,
-            args: [{ selector: 'header-spacer', template: `<ng-content></ng-content>`, standalone: false, styles: [":host{display:inline-block;height:1.8em;width:2px;margin:0 .6em;background-color:#00000040}\n"] }]
+            args: [{ selector: 'header-spacer', template: '<ng-content></ng-content>', standalone: false, styles: [":host{display:inline-block;height:1.8em;width:2px;margin:0 .6em;background-color:#00000040}\n"] }]
         }] });
 class NovoUtilsComponent {
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoUtilsComponent, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "19.2.15", type: NovoUtilsComponent, isStandalone: false, selector: "utils", ngImport: i0, template: `<ng-content></ng-content>`, isInline: true }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "19.2.15", type: NovoUtilsComponent, isStandalone: false, selector: "utils", ngImport: i0, template: '<ng-content></ng-content>', isInline: true }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoUtilsComponent, decorators: [{
             type: Component,
             args: [{
                     selector: 'utils',
-                    template: `<ng-content></ng-content>`,
-                    standalone: false
+                    template: '<ng-content></ng-content>',
+                    standalone: false,
                 }]
         }] });
 class NovoUtilActionComponent {
@@ -59,7 +59,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
                     host: {
                         class: 'novo-action',
                     },
-                    standalone: false
+                    standalone: false,
                 }]
         }], propDecorators: { icon: [{
                 type: Input

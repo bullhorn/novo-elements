@@ -46,7 +46,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
                     host: {
                         class: 'novo-accordion',
                     },
-                    standalone: false
+                    standalone: false,
                 }]
         }], propDecorators: { hideToggle: [{
                 type: Input
@@ -101,7 +101,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             type: Directive,
             args: [{
                     selector: 'ng-template[matExpansionPanelContent]',
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i0.TemplateRef }] });
 
@@ -231,7 +231,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
                     host: {
                         class: 'novo-action-row',
                     },
-                    standalone: false
+                    standalone: false,
                 }]
         }] });
 
@@ -337,7 +337,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
                     host: {
                         class: 'novo-expansion-panel-header-description',
                     },
-                    standalone: false
+                    standalone: false,
                 }]
         }] });
 /**
@@ -356,7 +356,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
                     host: {
                         class: 'novo-expansion-panel-header-title',
                     },
-                    standalone: false
+                    standalone: false,
                 }]
         }] });
 

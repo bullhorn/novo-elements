@@ -189,7 +189,10 @@ class NovoMonthViewElement {
         this.weeks = [];
         const start = DateUtil.startOfMonth(month);
         // House keeping variables to know when we are done building the month
-        let done = false, date = DateUtil.startOfWeek(start, { weekStartsOn: this.weekStartsOn }), monthIndex = date.getMonth(), count = 0;
+        let done = false;
+        let date = DateUtil.startOfWeek(start, { weekStartsOn: this.weekStartsOn });
+        let monthIndex = date.getMonth();
+        let count = 0;
         while (!done) {
             // Build the days for the weeks
             this.weeks.push({ days: this.buildWeek(new Date(date.getTime()), month) });
@@ -233,7 +236,7 @@ class NovoMonthViewElement {
     }
     /** Returns whether a cell should be marked as an overlay. */
     _hasOverlayType(value) {
-        let overlay = this.overlays && this.overlays.find((o) => DateUtil.isSameDay(o.date, value));
+        const overlay = this.overlays && this.overlays.find((o) => DateUtil.isSameDay(o.date, value));
         return overlay ? overlay.type : null;
     }
     /** Gets whether a value is the start of the main range. */
@@ -462,9 +465,9 @@ class NovoCalendarElement {
     }
     get hb_width() {
         if (this.layout === 'vertical') {
-            return this._sanitizer.bypassSecurityTrustStyle(`min-content`);
+            return this._sanitizer.bypassSecurityTrustStyle('min-content');
         }
-        return this._sanitizer.bypassSecurityTrustStyle(`min-content`);
+        return this._sanitizer.bypassSecurityTrustStyle('min-content');
     }
     get hb_horiztonal() {
         return this.layout !== 'vertical';

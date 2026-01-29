@@ -117,7 +117,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             type: Directive,
             args: [{
                     selector: '[novoSortFilter]',
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: NovoActivityTableState }] });
 class NovoSelection {
@@ -167,7 +167,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             type: Directive,
             args: [{
                     selector: '[novoSelection]',
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: NovoActivityTableState }], propDecorators: { novoSelectAllToggle: [{
                 type: Output
@@ -188,7 +188,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             args: [{
                     selector: '[novoSimpleCellDef]',
                     providers: [{ provide: CdkCellDef, useExisting: NovoSimpleCellDef }],
-                    standalone: false
+                    standalone: false,
                 }]
         }] });
 class NovoSimpleHeaderCellDef extends _NovoHeaderCellDef {
@@ -200,7 +200,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             args: [{
                     selector: '[novoSimpleHeaderCellDef]',
                     providers: [{ provide: CdkHeaderCellDef, useExisting: NovoSimpleHeaderCellDef }],
-                    standalone: false
+                    standalone: false,
                 }]
         }] });
 class NovoSimpleColumnDef extends _NovoColumnDef {
@@ -233,7 +233,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             args: [{
                     selector: '[novoSimpleColumnDef]',
                     providers: [{ provide: CdkColumnDef, useExisting: NovoSimpleColumnDef }],
-                    standalone: false
+                    standalone: false,
                 }]
         }], propDecorators: { name: [{
                 type: Input,
@@ -263,7 +263,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             type: Directive,
             args: [{
                     selector: 'novo-simple-header-cell',
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i1.CdkColumnDef }, { type: i0.ElementRef }, { type: i0.Renderer2 }], propDecorators: { role: [{
                 type: HostBinding,
@@ -286,7 +286,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             type: Directive,
             args: [{
                     selector: 'novo-simple-empty-header-cell',
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i1.CdkColumnDef }, { type: i0.ElementRef }, { type: i0.Renderer2 }], propDecorators: { role: [{
                 type: HostBinding,
@@ -313,14 +313,14 @@ class NovoSimpleCheckboxHeaderCell extends _NovoHeaderCell {
         this._selection.selectAll(value);
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoSimpleCheckboxHeaderCell, deps: [{ token: i1.CdkColumnDef }, { token: i0.ElementRef }, { token: i0.Renderer2 }, { token: i0.ChangeDetectorRef }, { token: NovoSelection, optional: true }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "19.2.15", type: NovoSimpleCheckboxHeaderCell, isStandalone: false, selector: "novo-simple-checkbox-header-cell", host: { properties: { "attr.role": "this.role" } }, usesInheritance: true, ngImport: i0, template: `<novo-checkbox [(ngModel)]="selectAll" (ngModelChange)="toggle($event)"></novo-checkbox>`, isInline: true, dependencies: [{ kind: "directive", type: i3.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i3.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }, { kind: "component", type: i4.NovoCheckboxElement, selector: "novo-checkbox", inputs: ["aria-label", "aria-labelledby", "aria-describedby", "id", "name", "label", "disabled", "layoutOptions", "color", "value", "tabIndex", "required", "checked", "indeterminate"], outputs: ["change", "indeterminateChange", "onSelect"] }] }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "19.2.15", type: NovoSimpleCheckboxHeaderCell, isStandalone: false, selector: "novo-simple-checkbox-header-cell", host: { properties: { "attr.role": "this.role" } }, usesInheritance: true, ngImport: i0, template: '<novo-checkbox [(ngModel)]="selectAll" (ngModelChange)="toggle($event)"></novo-checkbox>', isInline: true, dependencies: [{ kind: "directive", type: i3.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i3.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }, { kind: "component", type: i4.NovoCheckboxElement, selector: "novo-checkbox", inputs: ["aria-label", "aria-labelledby", "aria-describedby", "id", "name", "label", "disabled", "layoutOptions", "color", "value", "tabIndex", "required", "checked", "indeterminate"], outputs: ["change", "indeterminateChange", "onSelect"] }] }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoSimpleCheckboxHeaderCell, decorators: [{
             type: Component,
             args: [{
                     selector: 'novo-simple-checkbox-header-cell',
-                    template: `<novo-checkbox [(ngModel)]="selectAll" (ngModelChange)="toggle($event)"></novo-checkbox>`,
-                    standalone: false
+                    template: '<novo-checkbox [(ngModel)]="selectAll" (ngModelChange)="toggle($event)"></novo-checkbox>',
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i1.CdkColumnDef }, { type: i0.ElementRef }, { type: i0.Renderer2 }, { type: i0.ChangeDetectorRef }, { type: NovoSelection, decorators: [{
                     type: Optional
@@ -356,15 +356,15 @@ class NovoSimpleCell extends _NovoCell {
         return;
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoSimpleCell, deps: [{ token: i1.CdkColumnDef }, { token: i0.ElementRef }, { token: i0.Renderer2 }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "19.2.15", type: NovoSimpleCell, isStandalone: false, selector: "novo-simple-cell", inputs: { row: "row", column: "column" }, host: { properties: { "attr.role": "this.role" } }, usesInheritance: true, ngImport: i0, template: ` <span [class.clickable]="!!column.onClick" (click)="onClick($event)" #span>{{ column.renderer(row) }}</span> `, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "19.2.15", type: NovoSimpleCell, isStandalone: false, selector: "novo-simple-cell", inputs: { row: "row", column: "column" }, host: { properties: { "attr.role": "this.role" } }, usesInheritance: true, ngImport: i0, template: ' <span [class.clickable]="!!column.onClick" (click)="onClick($event)" #span>{{ column.renderer(row) }}</span> ', isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoSimpleCell, decorators: [{
             type: Component,
             args: [{
                     selector: 'novo-simple-cell',
-                    template: ` <span [class.clickable]="!!column.onClick" (click)="onClick($event)" #span>{{ column.renderer(row) }}</span> `,
+                    template: ' <span [class.clickable]="!!column.onClick" (click)="onClick($event)" #span>{{ column.renderer(row) }}</span> ',
                     changeDetection: ChangeDetectionStrategy.OnPush,
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i1.CdkColumnDef }, { type: i0.ElementRef }, { type: i0.Renderer2 }], propDecorators: { role: [{
                 type: HostBinding,
@@ -400,14 +400,14 @@ class NovoSimpleCheckboxCell extends _NovoCell {
         this._selection.toggle(this.row.id || this.index, value, this.row);
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoSimpleCheckboxCell, deps: [{ token: i1.CdkColumnDef }, { token: i0.ElementRef }, { token: i0.Renderer2 }, { token: NovoSelection, optional: true }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "19.2.15", type: NovoSimpleCheckboxCell, isStandalone: false, selector: "novo-simple-checkbox-cell", inputs: { row: "row", index: "index" }, host: { properties: { "attr.role": "this.role" } }, usesInheritance: true, ngImport: i0, template: ` <novo-checkbox [ngModel]="selected" (ngModelChange)="toggle($event)"></novo-checkbox> `, isInline: true, dependencies: [{ kind: "directive", type: i3.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i3.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }, { kind: "component", type: i4.NovoCheckboxElement, selector: "novo-checkbox", inputs: ["aria-label", "aria-labelledby", "aria-describedby", "id", "name", "label", "disabled", "layoutOptions", "color", "value", "tabIndex", "required", "checked", "indeterminate"], outputs: ["change", "indeterminateChange", "onSelect"] }] }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "19.2.15", type: NovoSimpleCheckboxCell, isStandalone: false, selector: "novo-simple-checkbox-cell", inputs: { row: "row", index: "index" }, host: { properties: { "attr.role": "this.role" } }, usesInheritance: true, ngImport: i0, template: ' <novo-checkbox [ngModel]="selected" (ngModelChange)="toggle($event)"></novo-checkbox> ', isInline: true, dependencies: [{ kind: "directive", type: i3.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i3.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }, { kind: "component", type: i4.NovoCheckboxElement, selector: "novo-checkbox", inputs: ["aria-label", "aria-labelledby", "aria-describedby", "id", "name", "label", "disabled", "layoutOptions", "color", "value", "tabIndex", "required", "checked", "indeterminate"], outputs: ["change", "indeterminateChange", "onSelect"] }] }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoSimpleCheckboxCell, decorators: [{
             type: Component,
             args: [{
                     selector: 'novo-simple-checkbox-cell',
-                    template: ` <novo-checkbox [ngModel]="selected" (ngModelChange)="toggle($event)"></novo-checkbox> `,
-                    standalone: false
+                    template: ' <novo-checkbox [ngModel]="selected" (ngModelChange)="toggle($event)"></novo-checkbox> ',
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i1.CdkColumnDef }, { type: i0.ElementRef }, { type: i0.Renderer2 }, { type: NovoSelection, decorators: [{
                     type: Optional
@@ -482,7 +482,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
     </ng-container>
   `,
                     changeDetection: ChangeDetectionStrategy.OnPush,
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i1.CdkColumnDef }, { type: i0.ElementRef }, { type: i0.Renderer2 }, { type: i1$1.NovoLabelService }], propDecorators: { role: [{
                 type: HostBinding,
@@ -507,7 +507,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             type: Directive,
             args: [{
                     selector: '[novoSimpleFilterFocus]',
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i0.ElementRef }] });
 class NovoSimpleCellHeader {
@@ -835,7 +835,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
   `,
                     encapsulation: ViewEncapsulation.None,
                     changeDetection: ChangeDetectionStrategy.OnPush,
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i0.ChangeDetectorRef }, { type: i1$1.NovoLabelService }, { type: NovoActivityTableState }, { type: NovoSortFilter, decorators: [{
                     type: Optional
@@ -1063,7 +1063,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
     </novo-button>
   `,
                     changeDetection: ChangeDetectionStrategy.OnPush,
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i0.ChangeDetectorRef }, { type: i1$1.NovoLabelService }, { type: NovoActivityTableState }], propDecorators: { page: [{
                 type: Input
@@ -1272,7 +1272,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             args: [{
                     selector: '[novoSimpleHeaderRowDef]',
                     providers: [{ provide: CdkHeaderRowDef, useExisting: NovoSimpleHeaderRowDef }],
-                    standalone: false
+                    standalone: false,
                 }]
         }], propDecorators: { columns: [{
                 type: Input,
@@ -1287,7 +1287,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             args: [{
                     selector: '[novoSimpleRowDef]',
                     providers: [{ provide: CdkRowDef, useExisting: NovoSimpleRowDef }],
-                    standalone: false
+                    standalone: false,
                 }]
         }], propDecorators: { columns: [{
                 type: Input,
@@ -1308,7 +1308,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
                     selector: 'novo-simple-header-row',
                     template: CDK_ROW_TEMPLATE,
                     changeDetection: ChangeDetectionStrategy.OnPush,
-                    standalone: false
+                    standalone: false,
                 }]
         }], propDecorators: { rowClass: [{
                 type: HostBinding,
@@ -1332,7 +1332,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
                     selector: 'novo-simple-row',
                     template: CDK_ROW_TEMPLATE,
                     changeDetection: ChangeDetectionStrategy.OnPush,
-                    standalone: false
+                    standalone: false,
                 }]
         }], propDecorators: { rowClass: [{
                 type: HostBinding,
@@ -1400,7 +1400,7 @@ class ActivityTableDataSource extends DataSource {
             });
             return data.results;
         }), catchError((error) => {
-            console.error(error); // tslint: disable-line
+            console.error(error);
             this.loading = false;
             return of(null);
         }));
@@ -1424,7 +1424,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             type: Directive,
             args: [{
                     selector: 'novo-activity-table-actions',
-                    standalone: false
+                    standalone: false,
                 }]
         }] });
 class NovoActivityTableCustomHeader {
@@ -1435,7 +1435,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             type: Directive,
             args: [{
                     selector: 'novo-activity-table-custom-header',
-                    standalone: false
+                    standalone: false,
                 }]
         }] });
 class NovoActivityTableCustomFilter {
@@ -1446,7 +1446,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             type: Directive,
             args: [{
                     selector: 'novo-activity-table-custom-filter',
-                    standalone: false
+                    standalone: false,
                 }]
         }] });
 class NovoActivityTableEmptyMessage {
@@ -1457,7 +1457,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             type: Directive,
             args: [{
                     selector: 'novo-activity-table-empty-message',
-                    standalone: false
+                    standalone: false,
                 }]
         }] });
 class NovoActivityTableNoResultsMessage {
@@ -1468,7 +1468,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             type: Directive,
             args: [{
                     selector: 'novo-activity-table-no-results-message',
-                    standalone: false
+                    standalone: false,
                 }]
         }] });
 class NovoActivityTable {

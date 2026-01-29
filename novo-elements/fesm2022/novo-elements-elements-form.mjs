@@ -144,7 +144,7 @@ class BaseControl extends ControlConfig {
         this.dataType = config.dataType;
         this.appendToBody = !!config.appendToBody;
         if (this.appendToBody) {
-            notify(`'appendToBody' has been deprecated. Please remove this attribute.`);
+            notify('\'appendToBody\' has been deprecated. Please remove this attribute.');
         }
         this.parentScrollSelector = config.parentScrollSelector;
         this.description = config.description;
@@ -684,7 +684,7 @@ class NovoFormControl extends FormControl {
         this.restrictFieldInteractions = control.restrictFieldInteractions;
         this.appendToBody = control.appendToBody;
         if (this.appendToBody) {
-            notify(`'appendToBody' has been deprecated. Please remove this attribute.`);
+            notify('\'appendToBody\' has been deprecated. Please remove this attribute.');
         }
         this.parentScrollSelector = control.parentScrollSelector;
         this.description = control.description;
@@ -900,7 +900,7 @@ class FormUtils {
         const dataTypeToTypeMap = {
             Timestamp: 'date',
             Date: 'date',
-            Boolean: 'tiles',
+            Boolean: 'tiles', // eslint-disable-line
         };
         const inputTypeToTypeMap = {
             CHECKBOX: 'radio',
@@ -1680,7 +1680,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
       </novo-button>
     </novo-notification>
   `,
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i1$1.NovoModalRef }, { type: i1$1.NovoModalParams }, { type: i1.NovoLabelService }] });
 class ControlPromptModal {
@@ -1734,7 +1734,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
       </novo-button>
     </novo-notification>
   `,
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i1$1.NovoModalRef }, { type: i1$1.NovoModalParams }, { type: i1.NovoLabelService }] });
 
@@ -2406,6 +2406,7 @@ class FieldInteractionApi {
         }
     }
     debounce(func, wait = 50) {
+        // eslint-disable-next-line prefer-const
         let h;
         clearTimeout(h);
         h = setTimeout(() => func(), wait);
@@ -2468,7 +2469,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             type: Directive,
             args: [{
                     selector: 'textarea[autosize]',
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i0.ElementRef }], propDecorators: { onInput: [{
                 type: HostListener,
@@ -3341,7 +3342,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
                         '[class.inline-embedded]': 'control.isInlineEmbedded',
                         '[class.embedded]': 'control.isEmbedded',
                     },
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i0.ElementRef }, { type: i1.NovoLabelService }, { type: i1.DateFormatService }, { type: FieldInteractionApi }, { type: i1.NovoTemplateService }, { type: i0.ChangeDetectorRef }, { type: undefined, decorators: [{
                     type: Inject,
@@ -6149,7 +6150,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
       </div>
     </ng-template>
   `,
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i1.NovoTemplateService }], propDecorators: { defaultTemplates: [{
                 type: ViewChildren,
@@ -6233,7 +6234,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
       </ng-container>
     </div>
   `,
-                    standalone: false
+                    standalone: false,
                 }]
         }], propDecorators: { controls: [{
                 type: Input
@@ -6501,8 +6502,8 @@ class NumberRangeComponent {
             {
                 provide: NG_VALUE_ACCESSOR,
                 useExisting: forwardRef(() => NumberRangeComponent),
-                multi: true
-            }
+                multi: true,
+            },
         ], ngImport: i0, template: `
     <form [formGroup]="rangeForm">
       <novo-flex justify='space-between' align='end' gap="1rem">
@@ -6542,10 +6543,10 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
                         {
                             provide: NG_VALUE_ACCESSOR,
                             useExisting: forwardRef(() => NumberRangeComponent),
-                            multi: true
-                        }
+                            multi: true,
+                        },
                     ],
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i1.NovoLabelService }, { type: i3$1.FormBuilder }] });
 
@@ -6595,7 +6596,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
                         DragDropModule,
                         NovoFlexModule,
                         NovoFieldModule,
-                        ReactiveFormsModule
+                        ReactiveFormsModule,
                     ],
                     declarations: [NovoAddressElement, NovoFileInputElement, NumberRangeComponent],
                     exports: [NovoAddressElement, NovoFileInputElement, NumberRangeComponent],

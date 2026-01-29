@@ -516,7 +516,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
     <p class="picker-error" *ngIf="hasError">{{ labels.pickerError }}</p>
     <p class="picker-null-results" *ngIf="!isLoading && !matches.length && !hasError && term !== ''">{{ labels.pickerEmpty }}</p>
   `,
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i0.ElementRef }, { type: i1.NovoLabelService }, { type: i0.ChangeDetectorRef }] });
 
@@ -604,7 +604,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
       <novo-loading theme="line" *ngIf="isLoading && matches?.length > 0"></novo-loading>
     </novo-list>
   `,
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i0.ElementRef }, { type: i1$1.DomSanitizer }, { type: i1.NovoLabelService }, { type: i0.ChangeDetectorRef }], propDecorators: { active: [{
                 type: HostBinding,
@@ -1880,7 +1880,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
     <p class="picker-error" *ngIf="hasError">{{ labels.pickerError }}</p>
     <p class="picker-null-results" *ngIf="hasNonErrorMessage">{{ getEmptyMessage() }}</p>
   `,
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i0.ElementRef }, { type: i1$1.DomSanitizer }, { type: i1.NovoLabelService }, { type: i0.ChangeDetectorRef }] });
 
@@ -1938,9 +1938,9 @@ class NovoPickerElement {
             this.element = this.overrideElement;
         }
         if (this.appendToBody) {
-            notify(`'appendToBody' has been deprecated. Please remove this attribute.`);
+            notify('\'appendToBody\' has been deprecated. Please remove this attribute.');
         }
-        let debounceTimeInMilliSeconds = Number.isNaN(Number(this.config?.debounceTimeInMilliSeconds)) ? DEFAULT_DEBOUNCE_TIME : Number(this.config?.debounceTimeInMilliSeconds);
+        const debounceTimeInMilliSeconds = Number.isNaN(Number(this.config?.debounceTimeInMilliSeconds)) ? DEFAULT_DEBOUNCE_TIME : Number(this.config?.debounceTimeInMilliSeconds);
         // Custom results template
         this.resultsComponent = this.config.resultsTemplate || PickerResults;
         const pasteObserver = fromEvent(this.input.nativeElement, 'paste').pipe(debounceTime(debounceTimeInMilliSeconds), distinctUntilChanged());

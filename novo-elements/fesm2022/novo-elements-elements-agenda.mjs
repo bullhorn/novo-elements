@@ -26,7 +26,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             type: Pipe,
             args: [{
                     name: 'weekday',
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: undefined, decorators: [{
                     type: Inject,
@@ -47,7 +47,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             type: Pipe,
             args: [{
                     name: 'dayofmonth',
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: undefined, decorators: [{
                     type: Inject,
@@ -68,7 +68,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             type: Pipe,
             args: [{
                     name: 'month',
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: undefined, decorators: [{
                     type: Inject,
@@ -89,7 +89,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             type: Pipe,
             args: [{
                     name: 'monthday',
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: undefined, decorators: [{
                     type: Inject,
@@ -110,7 +110,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             type: Pipe,
             args: [{
                     name: 'year',
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: undefined, decorators: [{
                     type: Inject,
@@ -134,7 +134,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             type: Pipe,
             args: [{
                     name: 'endofweekdisplay',
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: undefined, decorators: [{
                     type: Inject,
@@ -267,7 +267,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
     >
     </ng-template>
   `,
-                    standalone: false
+                    standalone: false,
                 }]
         }], propDecorators: { events: [{
                 type: Input
@@ -317,7 +317,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
     >
     </ng-template>
   `,
-                    standalone: false
+                    standalone: false,
                 }]
         }], propDecorators: { event: [{
                 type: Input
@@ -387,7 +387,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
     >
     </ng-template>
   `,
-                    standalone: false
+                    standalone: false,
                 }]
         }], propDecorators: { dayEvent: [{
                 type: Input
@@ -413,7 +413,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             type: Pipe,
             args: [{
                     name: 'hours',
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: undefined, decorators: [{
                     type: Inject,
@@ -471,7 +471,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
     >
     </ng-template>
   `,
-                    standalone: false
+                    standalone: false,
                 }]
         }], propDecorators: { segment: [{
                 type: Input
@@ -952,7 +952,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
                         '[class.agenda-has-events]': 'day.events.length > 0',
                         '[style.backgroundColor]': 'day.backgroundColor',
                     },
-                    standalone: false
+                    standalone: false,
                 }]
         }], propDecorators: { day: [{
                 type: Input
@@ -1041,7 +1041,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
     >
     </ng-template>
   `,
-                    standalone: false
+                    standalone: false,
                 }]
         }], propDecorators: { viewDate: [{
                 type: Input
@@ -1315,7 +1315,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
     >
     </ng-template>
   `,
-                    standalone: false
+                    standalone: false,
                 }]
         }], propDecorators: { weekEvent: [{
                 type: Input
@@ -1396,7 +1396,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
     >
     </ng-template>
   `,
-                    standalone: false
+                    standalone: false,
                 }]
         }], propDecorators: { days: [{
                 type: Input

@@ -31,7 +31,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             args: [{
                     selector: 'novo-card-actions',
                     template: '<ng-content></ng-content>',
-                    standalone: false
+                    standalone: false,
                 }]
         }] });
 /**

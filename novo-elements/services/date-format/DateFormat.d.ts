@@ -14,7 +14,7 @@ export declare class DateFormatService {
     /**
      * Certain date format characters are considered nonstandard. We can still use them, but remove them for date parsing to avoid errors
      * @param dateString
-     * @param format
+     * @param formatString
      * @returns date string and format in array, both having had their
      */
     private removeNonstandardFormatCharacters;
@@ -22,7 +22,7 @@ export declare class DateFormatService {
     parseTimeString(timeString: string, militaryTime: boolean): [Date, string];
     parseString(dateTimeString: string, militaryTime: boolean, type: string): [Date, string, boolean?];
     convertTime12to24(time12h: string): string;
-    isValidDatePart(value: string, format: string): boolean;
+    isValidDatePart(value: string, formatString: string): boolean;
     static ɵfac: i0.ɵɵFactoryDeclaration<DateFormatService, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<DateFormatService>;
 }

@@ -42,7 +42,7 @@ class NovoCodeEditor {
     createEditorView() {
         const extensions = [
             basicSetup,
-            keymap.of(defaultKeymap)
+            keymap.of(defaultKeymap),
         ];
         if (this.mode === 'javascript') {
             extensions.push(javascript());
@@ -62,7 +62,7 @@ class NovoCodeEditor {
                 if (transaction.docChanged) {
                     this.changed.emit(view.state.doc.toString());
                 }
-            }
+            },
         });
     }
     onFocus() {
@@ -138,7 +138,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             args: [{
                     imports: [CommonModule, FormsModule],
                     declarations: [NovoCodeEditor],
-                    exports: [NovoCodeEditor]
+                    exports: [NovoCodeEditor],
                 }]
         }] });
 

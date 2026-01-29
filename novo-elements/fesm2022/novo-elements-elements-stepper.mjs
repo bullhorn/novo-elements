@@ -26,7 +26,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             type: Directive,
             args: [{
                     selector: '[novoStepLabel]',
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i0.TemplateRef }] });
 
@@ -143,7 +143,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
                         '[type]': 'type',
                     },
                     inputs: ['type'],
-                    standalone: false
+                    standalone: false,
                 }]
         }] });
 /** Button that moves to the previous step in a stepper workflow. */
@@ -160,7 +160,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
                         '[type]': 'type',
                     },
                     inputs: ['type'],
-                    standalone: false
+                    standalone: false,
                 }]
         }] });
 
@@ -264,7 +264,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
                         { provide: CdkStep, useExisting: NovoStep },
                         { provide: CdkStepper, useExisting: NovoStepper },
                     ],
-                    standalone: false
+                    standalone: false,
                 }]
         }], propDecorators: { _stepHeader: [{
                 type: ViewChildren,

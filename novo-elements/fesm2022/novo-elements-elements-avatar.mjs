@@ -10,8 +10,9 @@ class NovoAvatarElement {
         return [`avatar-size-${this.size}`, `avatar-shape-${this.shape}`, `avatar-color-${this.color}`];
     }
     get background() {
-        if (!this.image && !this.source.profileImage)
+        if (!this.image && !this.source.profileImage) {
             return;
+        }
         return `url(${this.image || this.source.profileImage})`;
     }
     constructor(sanitizer) {

@@ -52,7 +52,7 @@ class NovoDragBoxParent {
     registerChild(element, index) {
         const trackedItem = {
             item: this.items[index],
-            element
+            element,
         };
         if (this.dragFilter && !this.dragFilter(this.items[index])) {
             element.draggable = false;
@@ -62,7 +62,7 @@ class NovoDragBoxParent {
             const listeners = [
                 this.renderer.listen(element, 'dragstart', this.onDragStart.bind(this)),
                 this.renderer.listen(element, 'drop', this.onDragFinish.bind(this)),
-                this.renderer.listen(element, 'dragend', this.onDragStop.bind(this))
+                this.renderer.listen(element, 'dragend', this.onDragStop.bind(this)),
             ];
             element.draggable = true;
             trackedItem.removeListeners = () => listeners.forEach(cb => cb());
@@ -75,7 +75,7 @@ class NovoDragBoxParent {
         }
         const addedNodes = new Set();
         const removedNodes = new Set();
-        for (let mutation of mutations) {
+        for (const mutation of mutations) {
             mutation.addedNodes.forEach((a) => {
                 if (!removedNodes.delete(a)) {
                     addedNodes.add(a);
@@ -133,7 +133,7 @@ class NovoDragBoxParent {
         }
         const draggedItem = this.trackedItems.find(item => item.element === this.pickedUp)?.item;
         this.trackedItems = Array.prototype.map.call(this.element.children, child => {
-            const item = this.trackedItems.find(item => item.element === child);
+            const item = this.trackedItems.find(trackedItem => trackedItem.element === child);
             if (!item) {
                 throw new Error('DragDrop: Error - could not reassociate an item post-drag');
             }
@@ -142,7 +142,7 @@ class NovoDragBoxParent {
         this.novoDragDropFinish.emit({
             draggedItem,
             allItems: this.itemsReordered,
-            event
+            event,
         });
     }
     /** - end per-item listeners */
@@ -323,7 +323,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
                     host: {
                         class: 'novo-drag-container',
                         '[class.dragging]': '!!pickedUp',
-                    }
+                    },
                 }]
         }], ctorParameters: () => [{ type: i0.ElementRef }, { type: i0.Renderer2 }], propDecorators: { items: [{
                 type: Input,
@@ -353,7 +353,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             type: NgModule,
             args: [{
                     declarations: [NovoDragBoxParent],
-                    exports: [NovoDragBoxParent]
+                    exports: [NovoDragBoxParent],
                 }]
         }] });
 

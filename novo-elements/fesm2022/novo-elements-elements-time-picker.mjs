@@ -176,6 +176,7 @@ class NovoTimePickerElement {
     convertTime12to24(time12h) {
         const pmFormat = this.labels.timeFormatPM.toUpperCase();
         const [time, modifier] = time12h.split(' ');
+        // eslint-disable-next-line prefer-const
         let [hours, minutes] = time.split(':');
         if (hours === '12') {
             hours = '00';

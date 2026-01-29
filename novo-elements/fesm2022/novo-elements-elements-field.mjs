@@ -81,7 +81,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             type: Directive,
             args: [{
                     selector: '[novoPrefix]',
-                    standalone: false
+                    standalone: false,
                 }]
         }] });
 class NovoFieldSuffixDirective {
@@ -92,7 +92,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             type: Directive,
             args: [{
                     selector: '[novoSuffix]',
-                    standalone: false
+                    standalone: false,
                 }]
         }] });
 const NOVO_INPUT_UNDERLINED_TYPES = [
@@ -399,7 +399,7 @@ class NovoDateFormatDirective extends IMaskDirective {
     normalize(value) {
         const pattern = this.labels.dateFormatString().toUpperCase();
         if (!value) {
-            return "";
+            return '';
         }
         return DateUtil.format(DateUtil.parse(value, { userDateFormat: this.labels.dateFormatString() }), pattern);
     }
@@ -416,8 +416,9 @@ class NovoDateFormatDirective extends IMaskDirective {
         return null;
     }
     formatValue(value, options) {
-        if (value == null)
+        if (value == null) {
             return '';
+        }
         const dateFormat = this.labels.dateFormatString().toUpperCase();
         const date = DateUtil.parse(value, options);
         if (isValid(date)) {
@@ -468,7 +469,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
                         class: 'novo-date-format',
                     },
                     providers: [DATEFORMAT_VALUE_ACCESSOR, { provide: NOVO_INPUT_FORMAT, useExisting: NovoDateFormatDirective }],
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i1$2.NovoLabelService }, { type: i1$2.DateFormatService }], propDecorators: { dateFormat: [{
                 type: Input
@@ -521,8 +522,9 @@ class NovoDateRangeFormatDirective extends IMaskDirective {
         return DateUtil.format(value ? DateUtil.parse(value, options) : null, pattern);
     }
     formatAsIso(value) {
-        if (!value)
+        if (!value) {
             return '';
+        }
         const { startDate, endDate } = value;
         if (startDate && isValid(startDate) && endDate && isValid(endDate)) {
             const startIso = startDate.toISOString().slice(0, 10);
@@ -532,8 +534,9 @@ class NovoDateRangeFormatDirective extends IMaskDirective {
         return null;
     }
     formatValue(value) {
-        if (!value)
+        if (!value) {
             return '';
+        }
         const { startDate, endDate } = value;
         return `${this.formatDate(startDate)} - ${this.formatDate(endDate)}`;
     }
@@ -602,7 +605,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
                         class: 'novo-date-range-format',
                     },
                     providers: [DATERANGEFORMAT_VALUE_ACCESSOR, { provide: NOVO_INPUT_FORMAT, useExisting: NovoDateRangeFormatDirective }],
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i1$2.NovoLabelService }, { type: i1$2.DateFormatService }], propDecorators: { dateRangeFormat: [{
                 type: Input
@@ -773,6 +776,7 @@ class NovoDateTimeFormatDirective extends IMaskDirective {
     convertTime12to24(time12h) {
         const pmFormat = this.labels.timeFormatPM.toUpperCase();
         const [time, meridian] = time12h.split(' ');
+        // eslint-disable-next-line prefer-const
         let [hours, minutes] = time.split(':');
         if (hours === '12') {
             hours = '00';
@@ -790,8 +794,9 @@ class NovoDateTimeFormatDirective extends IMaskDirective {
         return time24h;
     }
     formatValue(value, options) {
-        if (value == null)
+        if (value == null) {
             return '';
+        }
         // Use `parse` because it keeps dates in locale
         const date = DateUtil.parse(value, options);
         if (isValid(date)) {
@@ -849,7 +854,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
                         '(keydown)': '_handleKeydown($event)',
                     },
                     providers: [DATETIMEFORMAT_VALUE_ACCESSOR, { provide: NOVO_INPUT_FORMAT, useExisting: NovoDateTimeFormatDirective }],
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i1$2.NovoLabelService }, { type: i1$2.DateFormatService }], propDecorators: { military: [{
                 type: Input
@@ -1007,6 +1012,7 @@ class NovoTimeFormatDirective extends IMaskDirective {
     convertTime12to24(time12h) {
         const pmFormat = this.labels.timeFormatPM.toUpperCase();
         const [time, meridian] = time12h.split(' ');
+        // eslint-disable-next-line prefer-const
         let [hours, minutes] = time.split(':');
         if (hours === '12') {
             hours = '00';
@@ -1062,7 +1068,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
                         '(keydown)': '_handleKeydown($event)',
                     },
                     providers: [TIMEFORMAT_VALUE_ACCESSOR, { provide: NOVO_INPUT_FORMAT, useExisting: NovoTimeFormatDirective }],
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i1$2.NovoLabelService }, { type: i0.ChangeDetectorRef }], propDecorators: { military: [{
                 type: Input
@@ -1369,7 +1375,7 @@ class NovoInput extends NovoInputBase {
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoInput, decorators: [{
             type: Directive,
             args: [{
-                    selector: `input[novoInput], textarea[novoInput], select[novoInput]`,
+                    selector: 'input[novoInput], textarea[novoInput], select[novoInput]',
                     host: {
                         class: 'novo-input-element',
                         '[attr.id]': 'id',
@@ -1382,7 +1388,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
                         '[attr.autocomplete]': "'off'",
                     },
                     providers: [{ provide: NovoFieldControl, useExisting: NovoInput }],
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i0.ElementRef }, { type: i1$3.Platform }, { type: i2.NgControl, decorators: [{
                     type: Optional
@@ -1472,7 +1478,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
                         class: 'novo-has-picker',
                         '[attr.autocomplete]': 'autocompleteAttribute',
                     },
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i0.ElementRef }, { type: undefined, decorators: [{
                     type: Optional

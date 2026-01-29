@@ -23,7 +23,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
                     selector: 'novo-toolbar-row',
                     host: { class: 'novo-toolbar-row' },
                     inputs: ['color', 'gap'],
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [{ type: i0.ElementRef }] });
 class NovoToolbar extends _NovoToolbarBase {

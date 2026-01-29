@@ -622,9 +622,9 @@ class NovoLabelService {
             const dt = new Date();
             return dt.setDate(dt.getDate() - dt.getDay() + dayOfWeek);
         }
-        let weekdays = [getDay(0), getDay(1), getDay(2), getDay(3), getDay(4), getDay(5), getDay(6)].reduce((weekdays, dt) => {
-            weekdays.push(new Intl.DateTimeFormat(this.userLocale, { weekday: 'long' }).format(dt));
-            return weekdays;
+        let weekdays = [getDay(0), getDay(1), getDay(2), getDay(3), getDay(4), getDay(5), getDay(6)].reduce((dayList, dt) => {
+            dayList.push(new Intl.DateTimeFormat(this.userLocale, { weekday: 'long' }).format(dt));
+            return dayList;
         }, []);
         if (weekStartsOn > 0 && weekStartsOn <= 6) {
             const newStart = weekdays.splice(weekStartsOn);
@@ -813,7 +813,7 @@ class DateFormatService {
     }
     getDateMask() {
         return {
-            mask: /^((\d)(\d|\/|\.|\-){0,7})?(\d){0,2}$/
+            mask: /^((\d)(\d|\/|\.|\-){0,7})?(\d){0,2}$/,
         };
     }
     getDateTimeMask(militaryTime = false) {
@@ -835,7 +835,7 @@ class DateFormatService {
         const [cleanDateString, cleanFormat] = this.removeNonstandardFormatCharacters(dateString, customFormat);
         try {
             date = parse(cleanDateString, cleanFormat, new Date(), {
-                useAdditionalWeekYearTokens: false
+                useAdditionalWeekYearTokens: false,
             });
             if (isNaN(date.getTime())) {
                 date = null;
@@ -862,11 +862,11 @@ class DateFormatService {
         }
         return [date, dateString, isInvalidDate];
     }
-    dateFormatToImaskPattern(format) {
+    dateFormatToImaskPattern(formatString) {
         const partsReg = /(\w)\1+|([\.\\/-])/g;
         let output = '';
         let match;
-        while ((match = partsReg.exec(format)) != null) {
+        while ((match = partsReg.exec(formatString)) != null) {
             if (match[1]) {
                 const matchLow = match[1].toLowerCase();
                 if (matchLow === 'y') {
@@ -885,26 +885,24 @@ class DateFormatService {
     /**
      * Certain date format characters are considered nonstandard. We can still use them, but remove them for date parsing to avoid errors
      * @param dateString
-     * @param format
+     * @param formatString
      * @returns date string and format in array, both having had their
      */
-    removeNonstandardFormatCharacters(dateString, format) {
+    removeNonstandardFormatCharacters(dateString, formatString) {
         const bannedChars = /[iIRoPp]+/;
         // remove quotes
-        format = format.replace(/['"]/g, '');
+        formatString = formatString.replace(/['"]/g, '');
         let match = null;
-        while ((match = bannedChars.exec(format)) != null) {
-            format = format.substring(0, match.index) + format.substring(match.index + match[0].length);
+        while ((match = bannedChars.exec(formatString)) != null) {
+            formatString = formatString.substring(0, match.index) + formatString.substring(match.index + match[0].length);
             dateString = dateString.substring(0, match.index) + dateString.substring(match.index + match[0].length);
         }
-        return [dateString, format];
+        return [dateString, formatString];
     }
     parseDateString(dateString) {
         let dateFormat = this.labels.dateFormatString();
         const dateFormatRegex = /(\w+)[\/|\.|\-](\w+)[\/|\.|\-](\w+)/gi;
         const dateValueRegex = /(\d+)[\/|\.|\-](\d+)[\/|\.|\-](\d+)/gi;
-        let dateFormatTokens;
-        let dateValueTokens;
         let year;
         let month;
         let day;
@@ -917,8 +915,8 @@ class DateFormatService {
         else {
             dateFormat = dateFormat.toLowerCase();
         }
-        dateFormatTokens = dateFormatRegex.exec(dateFormat);
-        dateValueTokens = dateValueRegex.exec(dateString);
+        const dateFormatTokens = dateFormatRegex.exec(dateFormat);
+        const dateValueTokens = dateValueRegex.exec(dateString);
         if (dateFormatTokens && dateFormatTokens.length === 4 && dateValueTokens && dateValueTokens.length === 4) {
             for (let i = 1; i < 4; i++) {
                 if (dateFormatTokens[i].includes('m')) {
@@ -1027,6 +1025,7 @@ class DateFormatService {
     convertTime12to24(time12h) {
         const pmFormat = this.labels.timeFormatPM.toUpperCase();
         const [time, modifier] = time12h.split(' ');
+        // eslint-disable-next-line prefer-const
         let [hours, minutes] = time.split(':');
         if (hours === '12') {
             hours = '00';
@@ -1036,11 +1035,11 @@ class DateFormatService {
         }
         return `${hours}:${minutes}`;
     }
-    isValidDatePart(value, format) {
+    isValidDatePart(value, formatString) {
         const datePart = parseInt(value, 10);
-        return ((format.includes('m') && (datePart >= 2 || value.length === 2)) ||
-            (format.includes('d') && (datePart >= 4 || value.length === 2)) ||
-            (format.includes('y') && datePart >= 1000));
+        return ((formatString.includes('m') && (datePart >= 2 || value.length === 2)) ||
+            (formatString.includes('d') && (datePart >= 4 || value.length === 2)) ||
+            (formatString.includes('y') && datePart >= 1000));
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: DateFormatService, deps: [{ token: NovoLabelService }], target: i0.ɵɵFactoryTarget.Injectable }); }
     static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: DateFormatService }); }
@@ -1066,7 +1065,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
         }] });
 class NodeGlobalRef extends GlobalRef {
     get nativeGlobal() {
-        throw new Error(`global doesn't compile for some reason`);
+        throw new Error('global doesn\'t compile for some reason');
     }
     get nativeWindow() {
         throw new Error('Node does not have a window object');

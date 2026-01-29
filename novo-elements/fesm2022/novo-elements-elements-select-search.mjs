@@ -41,7 +41,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             type: Directive,
             args: [{
                     selector: '[novoSelectSearchClear]',
-                    standalone: false
+                    standalone: false,
                 }]
         }] });
 
@@ -216,7 +216,7 @@ class NovoSelectSearchComponent {
         this._options$ = new BehaviorSubject(null);
         this._filterFinishedRerender = this._formControl.valueChanges.pipe(debounceTime(1));
         this.optionsList$ = this._options$.pipe(switchMap((_options) => _options
-            ? combineLatest([_options.changes, this._filterFinishedRerender]).pipe(map(([options,]) => options.toArray().filter(option => !(option._getHostElement()?.classList.contains('add-option') || option._getHostElement().hidden))), startWith(_options.toArray()), distinctUntilChanged((optsA, optsB) => optsA.map(opt => opt.value).join(',') === optsB.map(opt => opt.value).join(',')))
+            ? combineLatest([_options.changes, this._filterFinishedRerender]).pipe(map(([options]) => options.toArray().filter(option => !(option._getHostElement()?.classList.contains('add-option') || option._getHostElement().hidden))), startWith(_options.toArray()), distinctUntilChanged((optsA, optsB) => optsA.map(opt => opt.value).join(',') === optsB.map(opt => opt.value).join(',')))
             : of(null)));
         this.optionsLength$ = this.optionsList$.pipe(map((options) => (options ? options.length : 0)));
         /** whether to show the no entries found message */

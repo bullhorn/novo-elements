@@ -421,7 +421,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             args: [{
                     name: 'render',
                     pure: false,
-                    standalone: false
+                    standalone: false,
                 }]
         }, {
             type: Injectable
@@ -516,7 +516,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
       </span>
     </div>
   `,
-                    standalone: false
+                    standalone: false,
                 }]
         }], ctorParameters: () => [], propDecorators: { data: [{
                 type: Input
