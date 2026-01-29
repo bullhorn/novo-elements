@@ -1,6 +1,7 @@
 // NG2
 import { OverlayModule } from '@angular/cdk/overlay';
 import { waitForAsync, TestBed } from '@angular/core/testing';
+import { FormGroup } from '@angular/forms';
 import { NovoTemplateService } from 'novo-elements/services';
 // App
 import { NovoFormElement } from './Form';
@@ -15,13 +16,8 @@ describe('Elements: NovoFormElement', () => {
     fixture = TestBed.createComponent(NovoFormElement);
     component = fixture.debugElement.componentInstance;
     // Mock @Input
-    component.form = {
-      value: 'TEST',
-      valid: false,
-      getRawValue: () => {
-        return 'TEST';
-      },
-    };
+    component.form = new FormGroup({});
+    component.form.getRawValue = () => 'TEST';
     component.layout = 'vertical';
   }));
 

@@ -1,6 +1,7 @@
 // NG2
 import { waitForAsync, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
+import { provideNoopAnimations } from '@angular/platform-browser/animations';
 // APP
 import { NovoLabelService } from 'novo-elements/services';
 import { NovoDatePickerModule } from 'novo-elements/elements/date-picker';
@@ -14,7 +15,10 @@ describe('Elements: NovoDateTimePickerElement', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [NovoDateTimePickerElement],
-      providers: [{ provide: NovoLabelService, useClass: NovoLabelService }],
+      providers: [
+        { provide: NovoLabelService, useClass: NovoLabelService },
+        provideNoopAnimations(),
+      ],
       imports: [FormsModule, NovoDatePickerModule, NovoTimePickerModule],
     }).compileComponents();
     fixture = TestBed.createComponent(NovoDateTimePickerElement);

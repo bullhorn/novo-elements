@@ -6,7 +6,6 @@ import { Directive } from '@angular/core';
     selector: 'button[novoStepperNext]',
     host: {
         class: 'novo-stepper-next',
-        '[type]': 'type',
     },
     inputs: ['type'],
     standalone: false,
@@ -18,7 +17,6 @@ export class NovoStepperNext extends CdkStepperNext {}
     selector: 'button[novoStepperPrevious]',
     host: {
         class: 'novo-stepper-previous',
-        '[type]': 'type',
     },
     inputs: ['type'],
     standalone: false,

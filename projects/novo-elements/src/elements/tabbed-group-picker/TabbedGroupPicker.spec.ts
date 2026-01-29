@@ -27,6 +27,12 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(NovoTabbedGroupPickerElement);
     component = fixture.debugElement.componentInstance;
+    component.tabs = [{ typeName: 'default', typeLabel: 'Default', valueField: 'value', labelField: 'label', data: [] }];
+    component.displayTabs = [];
+    component.theme = 'default';
+    component.buttonConfig = { theme: 'default', side: 'left', icon: 'apply', label: 'Apply' };
+    component.quickSelectConfig = { label: 'Quick Select', items: [] };
+    component.dropdown = { closePanel: () => {} } as any;
   }));
 
   it('should initialize correctly', () => {

@@ -375,7 +375,7 @@ describe('NovoControlElement', () => {
 
   describe('Function: handleTabForPickers', () => {
     beforeEach(() => {
-      spyOn((component as any), 'toggleActive').and.callFake(() => {});
+      jest.spyOn((component as any), 'toggleActive').mockImplementation(() => {});
     });
     it('should call toggleActive with Escape key', () => {
       const event = {

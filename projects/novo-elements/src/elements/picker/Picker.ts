@@ -115,9 +115,9 @@ export class NovoPickerElement implements OnInit {
   @Input()
   allowCustomValues = false;
   @Input()
-  width: string;
+  width: number;
   @Input()
-  minWidth: string;
+  minWidth: number;
   @Input()
   allowTabNavigation: boolean = false;
 

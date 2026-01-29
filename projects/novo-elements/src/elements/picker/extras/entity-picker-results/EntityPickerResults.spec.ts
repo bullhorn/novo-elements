@@ -16,6 +16,7 @@ describe('Elements: EntityPickerResult', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(EntityPickerResult);
     component = fixture.debugElement.componentInstance;
+    component.match = { data: {} };
   }));
 
   it('should initialize correctly', () => {

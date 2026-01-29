@@ -236,14 +236,14 @@ describe('CriteriaBuilderComponent', () => {
       expect(component.scopedFieldPicker().dropdown.closePanel).toHaveBeenCalled();
     });
     it('if a scoped group already exists for the field, add the condition to that group', () => {
-      spyOn(MOCK_CONDITION_GROUP_1, 'addCondition');
-      spyOn(component, 'conditionGroups').and.returnValue([MOCK_CONDITION_GROUP_1, MOCK_CONDITION_GROUP_2]);
+      jest.spyOn(MOCK_CONDITION_GROUP_1, 'addCondition');
+      jest.spyOn(component, 'conditionGroups').mockReturnValue([MOCK_CONDITION_GROUP_1, MOCK_CONDITION_GROUP_2]);
       component.onFieldSelect(MOCK_FIELD);
       expect(MOCK_CONDITION_GROUP_1.addCondition).toHaveBeenCalled();
     });
     it('if a scoped group does not already exist for the field, add a new group with the condition', () => {
-      spyOn(component, 'addConditionGroup');
-      spyOn(component, 'conditionGroups').and.returnValue([MOCK_CONDITION_GROUP_2]);
+      jest.spyOn(component, 'addConditionGroup');
+      jest.spyOn(component, 'conditionGroups').mockReturnValue([MOCK_CONDITION_GROUP_2]);
       component.onFieldSelect(MOCK_FIELD);
       expect(component.addConditionGroup).toHaveBeenCalled();
     });
