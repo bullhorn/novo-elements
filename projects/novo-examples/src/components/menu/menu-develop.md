@@ -40,10 +40,6 @@ order: 3
 
 The `novo-menu` component is a hidden wrapper that holds the templates for a menu. When a menu is triggered by the element with the matching `[menu]` attribute, a new instance of the menuItems will be created and the context will be passed to
 
-### Properties
-
-<props-table component="MenuComponent"></props-table>
-
 ## MenuDirective `[menu]`
 
 This will define an element as a trigger for the menu. Use the `#` notation to make a reference to the `novo-menu` container, then pass the reference as the value of the attribute to link them together. A menu can be shared between multiple triggers, use the `menuContext` attribute to perform actions based on that context. The context can be reference in the structural directive `menuItem` as the implicit value, ie `*menuItem="let item"`, `item` will be equal to `menuContext`.
@@ -58,14 +54,6 @@ This will define an element as a trigger for the menu. Use the `#` notation to m
 <novo-button [menu]="menu" menuContext="bark!">Dog</novo-button>
 ```
 
-### Properties
-
-<props-table component="MenuDirective"></props-table>
-
 ## MenuItemDirective `*menuItem`
 
 A structural directive to be used with `novo-option` to create menu items. The `menuContext` set on the trigger will be passed to the implicit value, ie `*menuItem="let item"`, `item` will be equal to `menuContext`.
-
-### Properties
-
-<props-table component="MenuItemDirective"></props-table>

@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'button-primary-example',
     templateUrl: 'button-primary-example.html',
     styleUrls: ['button-primary-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class ButtonPrimaryExample {
   negativeColor: string = 'negative';

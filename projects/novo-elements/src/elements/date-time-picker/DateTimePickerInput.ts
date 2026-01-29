@@ -39,7 +39,7 @@ const DATE_VALUE_ACCESSOR = {
     ></novo-time-picker-input>
   `,
     styleUrls: ['./DateTimePickerInput.scss'],
-    standalone: false
+    standalone: false,
 })
 export class NovoDateTimePickerInputElement implements ControlValueAccessor {
   public value: any;

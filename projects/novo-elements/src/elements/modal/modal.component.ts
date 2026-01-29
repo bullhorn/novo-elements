@@ -13,7 +13,7 @@ import { NovoModalRef } from './modal-ref';
     host: {
         class: 'novo-modal',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoModalElement {
   constructor(private modalRef: NovoModalRef) {}
@@ -36,7 +36,7 @@ export class NovoModalElement {
     host: {
         class: 'novo-notification',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoModalNotificationElement implements OnInit {
   @Input()

@@ -6,7 +6,7 @@ import { DomSanitizer } from '@angular/platform-browser';
     selector: 'novo-avatar',
     styleUrls: ['./Avatar.scss'],
     template: '<img *ngIf="src" [src]="src"/>',
-    standalone: false
+    standalone: false,
 })
 export class NovoAvatarElement implements OnInit {
   @Input() source: any;
@@ -30,7 +30,9 @@ export class NovoAvatarElement implements OnInit {
 
   @HostBinding('style.backgroundImage')
   get background(): string {
-    if (!this.image && !this.source.profileImage) return;
+    if (!this.image && !this.source.profileImage) {
+      return;
+    }
     return `url(${this.image || this.source.profileImage})`;
   }
 

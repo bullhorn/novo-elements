@@ -37,7 +37,7 @@ export enum TIME_FORMATS {
         '(keydown)': '_handleKeydown($event)',
     },
     providers: [TIMEFORMAT_VALUE_ACCESSOR, { provide: NOVO_INPUT_FORMAT, useExisting: NovoTimeFormatDirective }],
-    standalone: false
+    standalone: false,
 })
 export class NovoTimeFormatDirective extends IMaskDirective<any> implements NovoInputFormat, AfterViewInit, OnChanges {
   valueChange: EventEmitter<any> = new EventEmitter();
@@ -189,6 +189,7 @@ export class NovoTimeFormatDirective extends IMaskDirective<any> implements Novo
   convertTime12to24(time12h: string) {
     const pmFormat = this.labels.timeFormatPM.toUpperCase();
     const [time, meridian] = time12h.split(' ');
+    // eslint-disable-next-line prefer-const
     let [hours, minutes] = time.split(':');
     if (hours === '12') {
       hours = '00';

@@ -86,7 +86,7 @@ export interface IMixedMultiPickerOption {
       </div>
     </div>`,
     styleUrls: ['./MixedMultiPickerResults.scss'],
-    standalone: false
+    standalone: false,
 })
 export class MixedMultiPickerResults extends BasePickerResults implements OnDestroy {
   @ViewChild('input', { static: true })

@@ -8,7 +8,7 @@ import { MenuConfig } from '../Breadcrumb.types';
     selector: 'novo-breadcrumb-item',
     templateUrl: './BreadcrumbItem.html',
     styleUrls: ['./BreadcrumbItem.scss'],
-    standalone: false
+    standalone: false,
 })
 export class BreadcrumbItemElement implements OnInit {
   @Input() showMenu = false;

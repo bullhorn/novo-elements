@@ -44,7 +44,7 @@ export type NovoPseudoCheckboxShape = 'box' | 'circle' | 'line';
         '[class.novo-pseudo-checkbox-disabled]': 'disabled',
         '[class._novo-animation-noopable]': '_animationMode === "NoopAnimations"',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoPseudoCheckbox {
   /** Display state of the checkbox. */

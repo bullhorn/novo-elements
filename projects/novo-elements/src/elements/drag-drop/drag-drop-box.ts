@@ -22,7 +22,7 @@ const SCROLL_DRAGGABLE_EVENT_AMT = 10;
     host: {
         class: 'novo-drag-container',
         '[class.dragging]': '!!pickedUp',
-    }
+    },
 })
 export class NovoDragBoxParent<T> implements AfterViewInit, OnDestroy {
 
@@ -39,7 +39,7 @@ export class NovoDragBoxParent<T> implements AfterViewInit, OnDestroy {
      */
     @Input('novoDragDropFilter') dragFilter?: (item: T) => boolean;
     /**
-     * Prevents behavior that eases the act of dragging an object to the edge of a scrollable container. 
+     * Prevents behavior that eases the act of dragging an object to the edge of a scrollable container.
      */
     @Input('novoDragDropDisableScroll') disableScroll?: boolean;
 
@@ -98,7 +98,7 @@ export class NovoDragBoxParent<T> implements AfterViewInit, OnDestroy {
     private registerChild(element: HTMLElement, index: number) {
         const trackedItem: Partial<NovoDragItem<T>> = {
             item: this.items[index],
-            element
+            element,
         };
         if (this.dragFilter && !this.dragFilter(this.items[index])) {
             element.draggable = false;
@@ -107,7 +107,7 @@ export class NovoDragBoxParent<T> implements AfterViewInit, OnDestroy {
             const listeners = [
                 this.renderer.listen(element, 'dragstart', this.onDragStart.bind(this)),
                 this.renderer.listen(element, 'drop', this.onDragFinish.bind(this)),
-                this.renderer.listen(element, 'dragend', this.onDragStop.bind(this))
+                this.renderer.listen(element, 'dragend', this.onDragStop.bind(this)),
             ];
             element.draggable = true;
             trackedItem.removeListeners = () => listeners.forEach(cb => cb());
@@ -121,7 +121,7 @@ export class NovoDragBoxParent<T> implements AfterViewInit, OnDestroy {
         }
         const addedNodes = new Set<HTMLElement>();
         const removedNodes = new Set<HTMLElement>();
-        for (let mutation of mutations) {
+        for (const mutation of mutations) {
             mutation.addedNodes.forEach((a: HTMLElement) => {
                 if (!removedNodes.delete(a)) {
                     addedNodes.add(a);
@@ -185,7 +185,7 @@ export class NovoDragBoxParent<T> implements AfterViewInit, OnDestroy {
         }
         const draggedItem = this.trackedItems.find(item => item.element === this.pickedUp)?.item;
         this.trackedItems = Array.prototype.map.call(this.element.children, child => {
-            const item = this.trackedItems.find(item => item.element === child);
+            const item = this.trackedItems.find(trackedItem => trackedItem.element === child);
             if (!item) {
                 throw new Error('DragDrop: Error - could not reassociate an item post-drag');
             }
@@ -194,7 +194,7 @@ export class NovoDragBoxParent<T> implements AfterViewInit, OnDestroy {
         this.novoDragDropFinish.emit({
             draggedItem,
             allItems: this.itemsReordered,
-            event
+            event,
         });
 
     }
@@ -342,19 +342,19 @@ export class NovoDragBoxParent<T> implements AfterViewInit, OnDestroy {
         let currentElement = this.element.parentElement;
         this.scrollX.set(false);
         this.scrollY.set(false);
-        
+
         while (currentElement) {
             const hasVerticalScroll = currentElement.scrollHeight > currentElement.clientHeight;
             const hasHorizontalScroll = currentElement.scrollWidth > currentElement.clientWidth;
             const isScrollable = hasVerticalScroll || hasHorizontalScroll;
-            
+
             if (isScrollable) {
                 const computedStyle = window.getComputedStyle(currentElement);
                 const overflowY = computedStyle.overflowY;
                 const overflowX = computedStyle.overflowX;
-                
+
                 // Check if overflow is set to allow scrolling
-                if ((overflowY === 'auto' || overflowY === 'scroll') || 
+                if ((overflowY === 'auto' || overflowY === 'scroll') ||
                     (overflowX === 'auto' || overflowX === 'scroll')) {
                     // Verify the scrollable parent is smaller than the drag container
                     if (currentElement.clientHeight < this.element.clientHeight) {
@@ -368,10 +368,10 @@ export class NovoDragBoxParent<T> implements AfterViewInit, OnDestroy {
                     }
                 }
             }
-            
+
             currentElement = currentElement.parentElement;
         }
-        
+
         return null;
     }
 

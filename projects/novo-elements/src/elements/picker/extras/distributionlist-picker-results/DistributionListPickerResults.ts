@@ -37,7 +37,7 @@ import { BasePickerResults } from '../base-picker-results/BasePickerResults';
       <novo-loading theme="line" *ngIf="isLoading && matches?.length > 0"></novo-loading>
     </novo-list>
   `,
-    standalone: false
+    standalone: false,
 })
 export class DistributionListPickerResults extends BasePickerResults {
   @HostBinding('class.active')

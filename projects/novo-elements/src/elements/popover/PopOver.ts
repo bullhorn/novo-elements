@@ -19,7 +19,7 @@ import { PopOverContent } from './PopOverContent';
      *  it interferes with the newly added (2023) HTML standard spec popover attribute.
      */
     selector: '[popover], [novoPopover]',
-    standalone: false
+    standalone: false,
 })
 export class PopOverDirective implements OnChanges {
   protected PopoverComponent = PopOverContent;

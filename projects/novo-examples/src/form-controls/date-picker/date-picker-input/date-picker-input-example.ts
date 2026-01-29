@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'date-picker-input-example',
     templateUrl: 'date-picker-input-example.html',
     styleUrls: ['date-picker-input-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class DatePickerInputExample {
   selected: Date = new Date();

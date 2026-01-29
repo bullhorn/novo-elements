@@ -25,7 +25,7 @@ import { NovoDataTableRef, NOVO_DATA_TABLE_REF } from '../data-table.token';
     </div>
   `,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    standalone: false,
 })
 export class NovoDataTableCheckboxHeaderCell<T> extends CdkHeaderCell implements OnDestroy {
   @HostBinding('attr.role')

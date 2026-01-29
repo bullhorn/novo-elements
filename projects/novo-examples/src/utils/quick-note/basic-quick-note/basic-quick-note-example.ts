@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'basic-quick-note-example',
     templateUrl: 'basic-quick-note-example.html',
     styleUrls: ['basic-quick-note-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class BasicQuickNoteExample {
   public note: any;

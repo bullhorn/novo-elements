@@ -19,7 +19,7 @@ import { PARENT_MENU } from './menu.tokens';
 
 @Directive({
     selector: '[menu]',
-    standalone: false
+    standalone: false,
 })
 export class MenuDirective implements OnInit, OnDestroy {
   @Input() public menuContext: any;

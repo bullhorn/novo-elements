@@ -890,7 +890,7 @@ describe('RenderPipe', () => {
       const value = '<a href="#">link</a>';
       pipe.render(value, args);
       expect(sanitizationService.bypassSecurityTrustHtml).toHaveBeenCalledWith(
-        expect.stringContaining('target="_blank"')
+        expect.stringContaining('target="_blank"'),
       );
     });
 

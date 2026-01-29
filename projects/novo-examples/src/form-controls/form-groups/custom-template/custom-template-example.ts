@@ -18,7 +18,7 @@ import {
     selector: 'custom-template-example',
     templateUrl: 'custom-template-example.html',
     styleUrls: ['custom-template-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class CustomTemplateExample {
   public formGroup: NovoFormGroup;

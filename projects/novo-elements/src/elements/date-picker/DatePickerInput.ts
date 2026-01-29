@@ -12,7 +12,7 @@ import {
   Output,
   SimpleChanges,
   ViewChild,
-  forwardRef
+  forwardRef,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // Vendor
@@ -82,7 +82,7 @@ const DATE_VALUE_ACCESSOR = {
     </novo-overlay-template>
   `,
     styleUrls: ['./DatePickerInput.scss'],
-    standalone: false
+    standalone: false,
 })
 export class NovoDatePickerInputElement implements OnInit, OnChanges, AfterViewInit, ControlValueAccessor {
   public value: any;
@@ -273,7 +273,7 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, AfterViewI
   }
 
   _handleOverlayClickout(): void {
-    this.handleInvalidDate(/*fromPanelClose:*/true);
+    this.handleInvalidDate(/* fromPanelClose: */true);
     this.blurEvent.emit();
   }
 
@@ -377,7 +377,7 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, AfterViewI
 
   private _setCalendarValue(value: any): void {
     if (value instanceof Date && this.value instanceof Date) {
-      let newDate = new Date(value);
+      const newDate = new Date(value);
       newDate.setHours(0, 0, 0, 0);
       this.value = newDate;
       return;

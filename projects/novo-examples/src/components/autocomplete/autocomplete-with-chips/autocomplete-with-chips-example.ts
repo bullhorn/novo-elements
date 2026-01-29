@@ -12,7 +12,7 @@ import { map, startWith } from 'rxjs/operators';
     selector: 'autocomplete-with-chips-example',
     templateUrl: 'autocomplete-with-chips-example.html',
     styleUrls: ['autocomplete-with-chips-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class AutocompleteWithChipsExample {
   visible = true;

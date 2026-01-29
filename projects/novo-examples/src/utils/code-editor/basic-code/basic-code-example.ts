@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'basic-code-example',
     templateUrl: 'basic-code-example.html',
     styleUrls: ['basic-code-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class BasicCodeExample {
 

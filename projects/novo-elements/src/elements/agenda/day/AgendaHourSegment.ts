@@ -25,7 +25,7 @@ import { DayViewHourSegment } from 'novo-elements/utils';
     >
     </ng-template>
   `,
-    standalone: false
+    standalone: false,
 })
 export class NovoAgendaHourSegmentElement {
   @Input()

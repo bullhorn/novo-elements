@@ -25,7 +25,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output
     `,
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    standalone: false,
 })
 export class NovoColorSwatchComponent implements OnInit {
   @Input() color!: string;

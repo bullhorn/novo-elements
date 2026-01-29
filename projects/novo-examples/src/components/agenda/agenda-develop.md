@@ -35,21 +35,11 @@ _renamed to Agenda in this version_
 ## NovoAgendaMonthViewElement `novo-agenda-month`
 
 Display `events` with a Month view calendar.
-### Properties
-
-<props-table component="NovoAgendaMonthViewElement"></props-table>
 
 ## NovoAgendaWeekViewElement `novo-agenda-month`
 
 Display `events` within a Week view calendar.
-### Properties
-
-<props-table component="NovoAgendaWeekViewElement"></props-table>
-
 
 ## NovoAgendaDayViewElement `novo-agenda-month`
 
 Display `events` within single day view
-### Properties
-
-<props-table component="NovoAgendaDayViewElement"></props-table>

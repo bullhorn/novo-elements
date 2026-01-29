@@ -35,7 +35,3 @@ _Added in this version_
 ## NovoNavElement `novo-non-ideal-state`
 
 Used as a placeholder template when every components or views are in a non-ideal state suchas empty, error, loading, etc...
-
-### Properties
-
-<props-table component="NonIdealStateElement"></props-table>

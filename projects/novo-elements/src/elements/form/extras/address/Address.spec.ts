@@ -557,4 +557,57 @@ describe('Elements: NovoAddressElement', () => {
       expect(result.every((country) => 'value' in country && 'label' in country && Object.keys(country).length === 2)).toBe(true);
     });
   });
+
+  describe('Method: ngDoCheck()', () => {
+    beforeEach(() => {
+      component.config = {
+        address1: { required: false },
+        address2: { required: false },
+        city: { required: false },
+        state: { required: false },
+        zip: { required: false },
+        countryID: { required: false },
+      };
+      component.initComplete = true;
+      component.model = {};
+      jest.spyOn(component, 'isValid');
+      jest.spyOn(component, 'isInvalid');
+    });
+
+    it('should not run if initComplete is false', () => {
+      component.initComplete = false;
+      component.ngDoCheck();
+      expect(component.isValid).not.toHaveBeenCalled();
+    });
+
+    it('should call isValid and isInvalid when required state changes', () => {
+      component.previousRequiredState = {
+        address1: false,
+        address2: false,
+        city: false,
+        state: false,
+        zip: false,
+        countryID: false,
+      };
+      component.config.address1.required = true;
+      component.ngDoCheck();
+      expect(component.isValid).toHaveBeenCalledWith('address1');
+      expect(component.isInvalid).toHaveBeenCalledWith('address1');
+      expect(component.previousRequiredState.address1).toBe(true);
+    });
+
+    it('should not call isValid or isInvalid when required state does not change', () => {
+      component.previousRequiredState = {
+        address1: false,
+        address2: false,
+        city: false,
+        state: false,
+        zip: false,
+        countryID: false,
+      };
+      component.ngDoCheck();
+      expect(component.isValid).not.toHaveBeenCalled();
+      expect(component.isInvalid).not.toHaveBeenCalled();
+    });
+  });
 });

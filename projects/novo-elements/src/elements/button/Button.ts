@@ -70,7 +70,7 @@ import { BooleanInput, Helpers, Key } from 'novo-elements/utils';
     </i>
   `,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    standalone: false,
 })
 export class NovoButtonElement implements OnChanges {
   /**

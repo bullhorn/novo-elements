@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
     selector: 'basic-icons-example',
     templateUrl: 'basic-icons-example.html',
     styleUrls: ['basic-icons-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class BasicIconsExample {}

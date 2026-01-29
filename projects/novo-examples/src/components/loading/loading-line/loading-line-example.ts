@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
     selector: 'loading-line-example',
     templateUrl: 'loading-line-example.html',
     styleUrls: ['loading-line-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class LoadingLineExample {}

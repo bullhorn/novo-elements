@@ -8,7 +8,7 @@ import { EntityPickerResults } from 'novo-elements';
     selector: 'entity-picker-example',
     templateUrl: 'entity-picker-example.html',
     styleUrls: ['entity-picker-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class EntityPickerExample {
   public placeholder: string = 'Select...';

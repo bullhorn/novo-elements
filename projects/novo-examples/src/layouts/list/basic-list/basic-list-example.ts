@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'basic-list-example',
     templateUrl: 'basic-list-example.html',
     styleUrls: ['basic-list-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class BasicListExample {
   public pulseItems: any;

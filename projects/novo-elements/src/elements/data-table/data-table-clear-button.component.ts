@@ -33,7 +33,7 @@ import { BooleanInput } from 'novo-elements/utils';
     </novo-dropdown>
   `,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    standalone: false,
 })
 export class NovoDataTableClearButton<T> {
   @Output()

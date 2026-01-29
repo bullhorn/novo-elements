@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
     selector: 'loading-circle-example',
     templateUrl: 'loading-circle-example.html',
     styleUrls: ['loading-circle-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class LoadingCircleExample {}

@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'formatted-picker-example',
     templateUrl: 'formatted-picker-example.html',
     styleUrls: ['formatted-picker-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class FormattedPickerExample {
   public placeholder: string = 'Select...';
@@ -40,7 +40,7 @@ export class FormattedPickerExample {
 
     this.formatted = {
       field: 'id',
-      format: `$firstName $lastName`,
+      format: '$firstName $lastName',
       options: collaborators,
     };
   }

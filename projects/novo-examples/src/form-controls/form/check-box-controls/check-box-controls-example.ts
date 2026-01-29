@@ -8,7 +8,7 @@ import { CheckboxControl, CheckListControl, FormUtils, SwitchControl, TilesContr
     selector: 'check-box-controls-example',
     templateUrl: 'check-box-controls-example.html',
     styleUrls: ['check-box-controls-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class CheckBoxControlsExample {
   public checkControl: any;

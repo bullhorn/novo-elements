@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
     selector: 'basic-slide-example',
     templateUrl: 'basic-slide-example.html',
     styleUrls: ['basic-slide-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class BasicSlideExample {}

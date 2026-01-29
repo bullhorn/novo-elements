@@ -22,7 +22,7 @@ export const DATETIMEFORMAT_VALUE_ACCESSOR = {
         '(keydown)': '_handleKeydown($event)',
     },
     providers: [DATETIMEFORMAT_VALUE_ACCESSOR, { provide: NOVO_INPUT_FORMAT, useExisting: NovoDateTimeFormatDirective }],
-    standalone: false
+    standalone: false,
 })
 export class NovoDateTimeFormatDirective extends IMaskDirective<any> implements NovoInputFormat, OnChanges {
   valueChange: EventEmitter<any> = new EventEmitter();
@@ -194,6 +194,7 @@ export class NovoDateTimeFormatDirective extends IMaskDirective<any> implements 
   convertTime12to24(time12h: string) {
     const pmFormat = this.labels.timeFormatPM.toUpperCase();
     const [time, meridian] = time12h.split(' ');
+    // eslint-disable-next-line prefer-const
     let [hours, minutes] = time.split(':');
     if (hours === '12') {
       hours = '00';
@@ -213,7 +214,9 @@ export class NovoDateTimeFormatDirective extends IMaskDirective<any> implements 
   }
 
   formatValue(value: Date | string, options?: DateParseOptions): string {
-    if (value == null) return '';
+    if (value == null) {
+      return '';
+    }
     // Use `parse` because it keeps dates in locale
     const date = DateUtil.parse(value, options);
     if (isValid(date)) {

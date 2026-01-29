@@ -10,7 +10,7 @@ import { NovoToastService } from 'novo-elements';
     selector: 'card-config-example',
     templateUrl: 'card-config-example.html',
     styleUrls: ['card-config-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class CardConfigExample {
   // Config for demos

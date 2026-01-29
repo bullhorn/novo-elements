@@ -19,7 +19,7 @@ export const DATEFORMAT_VALUE_ACCESSOR = {
         class: 'novo-date-format',
     },
     providers: [DATEFORMAT_VALUE_ACCESSOR, { provide: NOVO_INPUT_FORMAT, useExisting: NovoDateFormatDirective }],
-    standalone: false
+    standalone: false,
 })
 export class NovoDateFormatDirective extends IMaskDirective<any> {
   valueChange: EventEmitter<any> = new EventEmitter();
@@ -68,7 +68,7 @@ export class NovoDateFormatDirective extends IMaskDirective<any> {
   normalize(value: string) {
     const pattern = this.labels.dateFormatString().toUpperCase();
     if (!value) {
-      return "";
+      return '';
     }
     return DateUtil.format(DateUtil.parse(value, { userDateFormat: this.labels.dateFormatString()}), pattern);
   }
@@ -88,7 +88,9 @@ export class NovoDateFormatDirective extends IMaskDirective<any> {
   }
 
   formatValue(value: any, options?: DateParseOptions): string {
-    if (value == null) return '';
+    if (value == null) {
+      return '';
+    }
     const dateFormat = this.labels.dateFormatString().toUpperCase();
     const date = DateUtil.parse(value, options);
     if (isValid(date)) {

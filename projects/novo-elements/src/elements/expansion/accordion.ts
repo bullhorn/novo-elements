@@ -14,7 +14,7 @@ export type NovoAccordionDisplayMode = 'default' | 'flat';
     host: {
         class: 'novo-accordion',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoAccordion extends CdkAccordion {
   /** Whether the expansion indicator should be hidden. */

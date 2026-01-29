@@ -10,7 +10,7 @@ export const _NovoRow = CdkRow;
 @Directive({
     selector: '[novoSimpleHeaderRowDef]',
     providers: [{ provide: CdkHeaderRowDef, useExisting: NovoSimpleHeaderRowDef }],
-    standalone: false
+    standalone: false,
 })
 export class NovoSimpleHeaderRowDef extends _NovoHeaderRowDef {
   // TODO: add explicit constructor
@@ -22,7 +22,7 @@ export class NovoSimpleHeaderRowDef extends _NovoHeaderRowDef {
 @Directive({
     selector: '[novoSimpleRowDef]',
     providers: [{ provide: CdkRowDef, useExisting: NovoSimpleRowDef }],
-    standalone: false
+    standalone: false,
 })
 export class NovoSimpleRowDef<T> extends _NovoCdkRowDef<T> {
   // TODO: add explicit constructor
@@ -35,7 +35,7 @@ export class NovoSimpleRowDef<T> extends _NovoCdkRowDef<T> {
     selector: 'novo-simple-header-row',
     template: CDK_ROW_TEMPLATE,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    standalone: false,
 })
 export class NovoSimpleHeaderRow extends _NovoHeaderRow {
   @HostBinding('class')
@@ -48,7 +48,7 @@ export class NovoSimpleHeaderRow extends _NovoHeaderRow {
     selector: 'novo-simple-row',
     template: CDK_ROW_TEMPLATE,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    standalone: false,
 })
 export class NovoSimpleRow extends _NovoRow {
   @HostBinding('class')

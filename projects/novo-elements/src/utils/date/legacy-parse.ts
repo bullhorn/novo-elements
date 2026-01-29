@@ -1,4 +1,4 @@
-/** 
+/**
  * Copyright © 2022 Sasha Koss
  * https://www.npmjs.com/package/@date-fns/upgrade
  **/
@@ -17,14 +17,14 @@ const parseTokenYY = /^(\d{2})$/
 const parseTokensYYY = [
   /^([+-]\d{2})$/, // 0 additional digits
   /^([+-]\d{3})$/, // 1 additional digit
-  /^([+-]\d{4})$/ // 2 additional digits
+  /^([+-]\d{4})$/, // 2 additional digits
 ]
 
 const parseTokenYYYY = /^(\d{4})/
 const parseTokensYYYYY = [
   /^([+-]\d{4})/, // 0 additional digits
   /^([+-]\d{5})/, // 1 additional digit
-  /^([+-]\d{6})/ // 2 additional digits
+  /^([+-]\d{6})/, // 2 additional digits
 ]
 
 // date tokens
@@ -51,7 +51,7 @@ export type LegacyParseOptions = {
 
 export function legacyParse(
   argument: any,
-  options: LegacyParseOptions = {}
+  options: LegacyParseOptions = {},
 ): Date {
   if (isDate(argument)) {
     // Prevent the date to lose the milliseconds when passed to new Date() in IE10
@@ -115,7 +115,10 @@ type DateStrings = {
 
 export function splitDateString(dateString: string): DateStrings {
   const array = dateString.split(parseTokenDateTimeDelimeter)
-  let timeString, date, time, timezone
+  let timeString;
+  let date;
+  let time;
+  let timezone;
 
   if (parseTokenPlainTime.test(array[0])) {
     date = undefined
@@ -138,7 +141,7 @@ export function splitDateString(dateString: string): DateStrings {
   return {
     date,
     time,
-    timezone
+    timezone,
   }
 }
 
@@ -154,7 +157,7 @@ function parseYear(dateString: string, additionalDigits: number) {
     const yearString = token[1]
     return {
       year: parseInt(yearString, 10),
-      restDateString: dateString.slice(yearString.length)
+      restDateString: dateString.slice(yearString.length),
     }
   }
 
@@ -164,13 +167,13 @@ function parseYear(dateString: string, additionalDigits: number) {
     const centuryString = token[1]
     return {
       year: parseInt(centuryString, 10) * 100,
-      restDateString: dateString.slice(centuryString.length)
+      restDateString: dateString.slice(centuryString.length),
     }
   }
 
   // Invalid ISO-formatted year
   return {
-    year: null
+    year: null,
   }
 }
 

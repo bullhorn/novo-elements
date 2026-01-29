@@ -60,7 +60,3 @@ _added in this version_
 ## NovoCalendarElement `novo-calendar`
 
 All tabs must be incapsulated in a `novo-nav` container. The nav will control the context and active tab.
-
-### Properties
-
-<props-table component="NovoCalendarElement"></props-table>

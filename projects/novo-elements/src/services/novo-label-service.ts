@@ -250,9 +250,9 @@ export class NovoLabelService {
       return dt.setDate(dt.getDate() - dt.getDay() + dayOfWeek);
     }
 
-    let weekdays = [getDay(0), getDay(1), getDay(2), getDay(3), getDay(4), getDay(5), getDay(6)].reduce((weekdays, dt) => {
-      weekdays.push(new Intl.DateTimeFormat(this.userLocale, { weekday: 'long' }).format(dt));
-      return weekdays;
+    let weekdays = [getDay(0), getDay(1), getDay(2), getDay(3), getDay(4), getDay(5), getDay(6)].reduce((dayList, dt) => {
+      dayList.push(new Intl.DateTimeFormat(this.userLocale, { weekday: 'long' }).format(dt));
+      return dayList;
     }, []);
 
     if (weekStartsOn > 0 && weekStartsOn <= 6) {

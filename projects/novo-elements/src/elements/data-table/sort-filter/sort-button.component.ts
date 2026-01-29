@@ -9,7 +9,7 @@ import { SortDirection } from './sort-direction';
     templateUrl: './sort-button.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     animations: [sortAscAnim, sortDescAnim, sortNoneAnim],
-    standalone: false
+    standalone: false,
 })
 export class NovoDataTableSortButton<T> {
   @Output() sortChange: EventEmitter<SortDirection> = new EventEmitter();

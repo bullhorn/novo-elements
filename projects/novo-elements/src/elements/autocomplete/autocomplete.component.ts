@@ -71,12 +71,12 @@ const NovoAutocompleteMixins: HasOverlayCtor & CanDisableCtor & typeof NovoAutoc
     },
     providers: [
         { provide: NOVO_OPTION_PARENT_COMPONENT, useExisting: NovoAutocompleteElement },
-        { provide: NOVO_OVERLAY_CONTAINER, useExisting: NovoAutocompleteElement }
+        { provide: NOVO_OVERLAY_CONTAINER, useExisting: NovoAutocompleteElement },
     ],
     exportAs: 'novoAutocomplete',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    standalone: false,
 })
 export class NovoAutocompleteElement
   extends NovoAutocompleteMixins
@@ -242,7 +242,7 @@ export class NovoAutocompleteElement
         this._formField._control.value = valueToEmit;
       }
     } else {
-      console.warn(`AutoComplete only intended to be used within a NovoField`);
+      console.warn('AutoComplete only intended to be used within a NovoField');
     }
     this._previousValue = optionValue;
   }
@@ -271,13 +271,17 @@ export class NovoAutocompleteElement
    */
   private _setValueAndClose(event: NovoOptionSelectionChange | null): void {
     if (event && event.source) {
-      if (!this.multiple) this._clearPreviousSelectedOption(event.source);
+      if (!this.multiple) {
+        this._clearPreviousSelectedOption(event.source);
+      }
       this._setTriggerValue(event.source);
       this._emitSelectEvent(event.source);
       this._watchSelectionEvents();
     }
 
-    if (!this.multiple) this.closePanel();
+    if (!this.multiple) {
+      this.closePanel();
+    }
   }
 
   private _watchSelectionEvents() {

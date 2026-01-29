@@ -180,7 +180,7 @@ export class BaseControl extends ControlConfig {
     this.dataType = config.dataType;
     this.appendToBody = !!config.appendToBody;
     if (this.appendToBody) {
-      notify(`'appendToBody' has been deprecated. Please remove this attribute.`);
+      notify('\'appendToBody\' has been deprecated. Please remove this attribute.');
     }
     this.parentScrollSelector = config.parentScrollSelector;
     this.description = config.description;

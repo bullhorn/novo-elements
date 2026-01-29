@@ -9,9 +9,9 @@ import { Component, ContentChild, ElementRef, Input, OnInit } from '@angular/cor
         '[class.horizontal-list]': 'direction === "horizontal"',
         '[attr.theme]': 'theme',
     },
-    template: ` <ng-content></ng-content> `,
+    template: ' <ng-content></ng-content> ',
     styleUrls: ['./List.scss'],
-    standalone: false
+    standalone: false,
 })
 export class NovoListElement {
   @Input()
@@ -24,12 +24,12 @@ export class NovoListElement {
 
 @Component({
     selector: 'item-avatar, novo-item-avatar',
-    template: ` <novo-icon *ngIf="icon" [color]="color || icon">{{ icon }}</novo-icon> `,
+    template: ' <novo-icon *ngIf="icon" [color]="color || icon">{{ icon }}</novo-icon> ',
     styleUrls: ['./list-item-header-avatar.scss'],
     host: {
         class: 'novo-item-avatar',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoItemAvatarElement {
   @Input()
@@ -40,12 +40,12 @@ export class NovoItemAvatarElement {
 
 @Component({
     selector: 'item-title, novo-item-title',
-    template: `<ng-content></ng-content>`,
+    template: '<ng-content></ng-content>',
     styleUrls: ['./list-item-header-title.scss'],
     host: {
         class: 'novo-item-title',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoItemTitleElement {}
 
@@ -62,18 +62,18 @@ export class NovoItemTitleElement {}
     host: {
         class: 'novo-item-header',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoItemHeaderElement {}
 
 @Component({
     selector: 'item-header-end, novo-item-header-end',
-    template: ` <ng-content></ng-content> `,
+    template: ' <ng-content></ng-content> ',
     styleUrls: ['./list-item-header-end.scss'],
     host: {
         class: 'novo-item-header-end',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoItemDateElement {}
 
@@ -84,9 +84,9 @@ export class NovoItemDateElement {}
         '[class.vertical-list]': 'direction === "vertical"',
         '[class.horizontal-list]': 'direction === "horizontal"',
     },
-    template: ` <ng-content></ng-content> `,
+    template: ' <ng-content></ng-content> ',
     styleUrls: ['./list-item-content.scss'],
-    standalone: false
+    standalone: false,
 })
 export class NovoItemContentElement {
   @Input()
@@ -95,12 +95,12 @@ export class NovoItemContentElement {
 
 @Component({
     selector: 'item-end, novo-item-end',
-    template: ` <ng-content></ng-content> `,
+    template: ' <ng-content></ng-content> ',
     styleUrls: ['./list-item-end.scss'],
     host: {
         class: 'novo-item-end',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoItemEndElement {}
 
@@ -118,7 +118,7 @@ export class NovoItemEndElement {}
     host: {
         class: 'novo-list-item',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoListItemElement implements OnInit {
   avatar: boolean = false;

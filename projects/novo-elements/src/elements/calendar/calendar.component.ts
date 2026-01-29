@@ -20,7 +20,7 @@ import { DefaultDateSelectionStrategy, MultiDateSelectionStrategy, RangeSelectio
     selector: 'novo-calendar',
     templateUrl: './calendar.component.html',
     styleUrls: ['./calendar.component.scss'],
-    standalone: false
+    standalone: false,
 })
 export class NovoCalendarElement implements OnInit {
   @Input()
@@ -127,9 +127,9 @@ export class NovoCalendarElement implements OnInit {
   @HostBinding('style.width')
   get hb_width() {
     if (this.layout === 'vertical') {
-      return this._sanitizer.bypassSecurityTrustStyle(`min-content`);
+      return this._sanitizer.bypassSecurityTrustStyle('min-content');
     }
-    return this._sanitizer.bypassSecurityTrustStyle(`min-content`);
+    return this._sanitizer.bypassSecurityTrustStyle('min-content');
   }
 
   @HostBinding('class.layout-horizontal')

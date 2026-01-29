@@ -46,7 +46,7 @@ import { BooleanInput, Key, notify } from 'novo-elements/utils';
     host: {
         class: 'novo-dropdown-trigger',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoDropDownTrigger {
   constructor(public element: ElementRef) {}
@@ -75,7 +75,7 @@ const NovoDropdownMixins: HasOverlayCtor & CanDisableCtor & HasTabIndexCtor & ty
     host: {
         '[attr.tabIndex]': 'disabled ? -1 : 0',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoDropdownElement extends NovoDropdownMixins implements OnInit, AfterContentInit, AfterViewInit, OnDestroy {
   @Input()
@@ -170,7 +170,7 @@ export class NovoDropdownElement extends NovoDropdownMixins implements OnInit, A
 
   public ngOnInit(): void {
     if (this.appendToBody) {
-      notify(`'appendToBody' has been deprecated. Please remove this attribute.`);
+      notify('\'appendToBody\' has been deprecated. Please remove this attribute.');
     }
   }
 
@@ -344,7 +344,7 @@ export class NovoDropdownElement extends NovoDropdownMixins implements OnInit, A
 
   /** Calculates the height of the select's options. */
   private _getItemHeight(): number {
-    let [first] = this.options;
+    const [first] = this.options;
     if (first) {
       return first._getHostElement().offsetHeight;
     }
@@ -361,7 +361,7 @@ export class NovoDropdownElement extends NovoDropdownMixins implements OnInit, A
         '[class.disabled]': 'disabled',
         '[class.active]': 'active',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoItemElement {
   @Input()
@@ -374,7 +374,7 @@ export class NovoItemElement {
   public active: boolean = false;
 
   constructor(private dropdown: NovoDropdownElement, public element: ElementRef) {
-    notify(`'item' element has been deprecated. Please use 'novo-option' and 'novo-optgroup'.`);
+    notify('\'item\' element has been deprecated. Please use \'novo-option\' and \'novo-optgroup\'.');
   }
 
   @HostListener('click', ['$event'])
@@ -394,14 +394,14 @@ export class NovoItemElement {
 @Component({
     selector: 'list',
     template: '<ng-content></ng-content>',
-    standalone: false
+    standalone: false,
 })
 export class NovoDropdownListElement implements AfterContentInit {
   @ContentChildren(NovoItemElement)
   public items: QueryList<NovoItemElement>;
 
   constructor(private dropdown: NovoDropdownElement) {
-    notify(`'list' element has been deprecated. Please use novo-option and novo-optgroup.`);
+    notify('\'list\' element has been deprecated. Please use novo-option and novo-optgroup.');
   }
 
   public ngAfterContentInit(): void {
@@ -415,10 +415,10 @@ export class NovoDropdownListElement implements AfterContentInit {
 @Component({
     selector: 'dropdown-item-header',
     template: '<ng-content></ng-content>',
-    standalone: false
+    standalone: false,
 })
 export class NovoDropDownItemHeaderElement {
   constructor() {
-    notify(`'dropdown-item-header' element has been deprecated. Please use novo-option and novo-optgroup.`);
+    notify('\'dropdown-item-header\' element has been deprecated. Please use novo-option and novo-optgroup.');
   }
 }

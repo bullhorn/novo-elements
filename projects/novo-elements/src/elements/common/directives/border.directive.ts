@@ -1,7 +1,7 @@
 import { Directive, ElementRef, HostBinding, Input } from '@angular/core';
 @Directive({
     selector: '[border], [bb], [borderBottom], [bt], [borderTop], [bl], [borderLeft], [br], [borderRight], [bx], [borderX], [by], [borderY]',
-    standalone: false
+    standalone: false,
 })
 export class BorderDirective {
   @Input() borderStyle = 'solid';

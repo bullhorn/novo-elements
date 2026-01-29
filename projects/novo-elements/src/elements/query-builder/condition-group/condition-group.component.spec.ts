@@ -25,12 +25,12 @@ describe('ConditionGroupComponent', () => {
       ],
       imports: [
         NovoFlexModule,
-      ]
+      ],
     }).compileComponents();
     fixture = TestBed.createComponent(ConditionGroupComponent);
     component = fixture.debugElement.componentInstance;
   });
-  
+
   it('should initialize correctly', () => {
     expect(component).toBeDefined();
   });
@@ -56,13 +56,13 @@ describe('ConditionGroupComponent', () => {
       const mockParentForm = {
         value: {
           '$and': [
-            { 
-              scope: 'testScope', 
+            {
+              scope: 'testScope',
               entity: 'testEntity',
-              field: 'testField' 
-            }
-          ]
-        }
+              field: 'testField',
+            },
+          ],
+        },
       };
       component.parentForm = mockParentForm as any;
 
@@ -75,8 +75,8 @@ describe('ConditionGroupComponent', () => {
     it('should use default scope when no scope in form values', () => {
       const mockParentForm = {
         value: {
-          '$and': [{ field: 'testField' }] // No scope property
-        }
+          '$and': [{ field: 'testField' }], // No scope property
+        },
       };
       component.parentForm = mockParentForm as any;
 
@@ -100,7 +100,7 @@ describe('ConditionGroupComponent', () => {
         // Extra properties that should be filtered out
         extraProp1: 'should be removed',
         extraProp2: 123,
-        someOtherData: { nested: 'object' }
+        someOtherData: { nested: 'object' },
       };
 
       const result = component['sanitizeCondition'](inputCondition);
@@ -112,7 +112,7 @@ describe('ConditionGroupComponent', () => {
         scope: 'testScope',
         value: 'testValue',
         supportingValue: 'testSupportingValue',
-        entity: 'testEntity'
+        entity: 'testEntity',
       });
     });
 
@@ -125,7 +125,7 @@ describe('ConditionGroupComponent', () => {
         scope: 'testScope',
         value: null,
         supportingValue: undefined,
-        entity: null
+        entity: null,
       };
 
       const result: any = component['sanitizeCondition'](inputCondition);
@@ -137,14 +137,14 @@ describe('ConditionGroupComponent', () => {
         scope: 'testScope',
         value: null,
         supportingValue: undefined,
-        entity: null
+        entity: null,
       });
     });
 
     it('should handle missing properties gracefully', () => {
       const inputCondition = {
         conditionType: '$and',
-        field: 'testField'
+        field: 'testField',
         // Missing other properties
       };
 
@@ -157,7 +157,7 @@ describe('ConditionGroupComponent', () => {
         scope: undefined,
         value: undefined,
         supportingValue: undefined,
-        entity: undefined
+        entity: undefined,
       });
     });
   });
@@ -166,7 +166,7 @@ describe('ConditionGroupComponent', () => {
     it('should create and add new condition to FormArray', () => {
       const mockFormArray = { push: jest.fn(), value: [] };
       Object.defineProperty(component, 'root', { get: () => mockFormArray, configurable: true });
-      
+
       const mockFormGroup = {} as any;
       jest.spyOn(component, 'newCondition').mockReturnValue(mockFormGroup);
       jest.spyOn(component['cdr'], 'markForCheck').mockImplementation();
@@ -188,13 +188,13 @@ describe('ConditionGroupComponent', () => {
     it('should remove condition at specified index', () => {
       const mockFormArray = {
         removeAt: jest.fn(),
-        length: 2
+        length: 2,
       };
       Object.defineProperty(component, 'root', {
         get: () => mockFormArray,
-        configurable: true
+        configurable: true,
       });
-      
+
       jest.spyOn(component, 'cantRemoveRow').mockReturnValue(false);
       jest.spyOn(component.qbs as any, 'scopes').mockReturnValue(['primaryScope']);
 
@@ -206,13 +206,13 @@ describe('ConditionGroupComponent', () => {
     it('should call addCondition if cantRemoveRow is true', () => {
       const mockFormArray = {
         removeAt: jest.fn(),
-        length: 2
+        length: 2,
       };
       Object.defineProperty(component, 'root', {
         get: () => mockFormArray,
-        configurable: true
+        configurable: true,
       });
-      
+
       jest.spyOn(component, 'cantRemoveRow').mockReturnValue(true);
       jest.spyOn(component.qbs as any, 'scopes').mockReturnValue(['primaryScope']);
 
@@ -223,13 +223,13 @@ describe('ConditionGroupComponent', () => {
     it('should call addCondition if canBeEmpty is false', () => {
       const mockFormArray = {
         removeAt: jest.fn(),
-        length: 1
+        length: 1,
       };
       Object.defineProperty(component, 'root', {
         get: () => mockFormArray,
-        configurable: true
+        configurable: true,
       });
-      
+
       jest.spyOn(component, 'cantRemoveRow').mockReturnValue(false);
       jest.spyOn(component.qbs as any, 'scopes').mockReturnValue(['primaryScope']);
       component.scope = 'primaryScope';
@@ -273,9 +273,9 @@ describe('ConditionGroupComponent', () => {
     it('should return FormArray from parentForm using controlName', () => {
       const mockFormArray = new FormArray([]);
       const mockParentForm = {
-        get: jest.fn().mockReturnValue(mockFormArray)
+        get: jest.fn().mockReturnValue(mockFormArray),
       };
-      
+
       component.parentForm = mockParentForm as any;
       component.controlName = '$and';
 

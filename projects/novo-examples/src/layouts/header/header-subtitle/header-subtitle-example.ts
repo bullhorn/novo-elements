@@ -11,7 +11,7 @@ const HEADER_ICONS = ['company', 'job', 'candidate', 'person', 'opportunity', 'l
     selector: 'header-subtitle-example',
     templateUrl: 'header-subtitle-example.html',
     styleUrls: ['header-subtitle-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class HeaderSubtitleExample {
   public theme: string = 'company';

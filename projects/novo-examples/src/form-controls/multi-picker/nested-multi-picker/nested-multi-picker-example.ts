@@ -8,7 +8,7 @@ import { ChecklistPickerResults } from 'novo-elements';
     selector: 'nested-multi-picker-example',
     templateUrl: 'nested-multi-picker-example.html',
     styleUrls: ['nested-multi-picker-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class NestedMultiPickerExample {
   placeholder: string = 'Select...';

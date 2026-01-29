@@ -24,7 +24,7 @@ describe('Elements: NovoToastService', () => {
           message: 'test message',
           header: 'test header',
         };
-        let spy = jest.spyOn(service, 'setToastOnSession');
+        const spy = jest.spyOn(service, 'setToastOnSession');
         service.handleAlert({}, options);
         expect(spy).toHaveBeenLastCalledWith(expect.any(Object), options);
         spy.mockReset();
@@ -34,7 +34,7 @@ describe('Elements: NovoToastService', () => {
         const toast = {
           isCloseable: false,
         };
-        let spy = jest.spyOn(service, 'toastTimer');
+        const spy = jest.spyOn(service, 'toastTimer');
         service.handleAlert(toast, {});
         expect(spy).toHaveBeenCalledWith(toast);
         spy.mockReset();
@@ -47,7 +47,7 @@ describe('Elements: NovoToastService', () => {
         const options = {
           isCloseable: true,
         };
-        let spy = jest.spyOn(service, 'toastTimer');
+        const spy = jest.spyOn(service, 'toastTimer');
         service.handleAlert(toast, options);
         expect(spy).not.toHaveBeenCalled();
         spy.mockReset();

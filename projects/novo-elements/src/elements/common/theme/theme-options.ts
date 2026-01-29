@@ -47,7 +47,7 @@ export class NovoTheme {
 /**
  getComputedStyle(document.documentElement)
     .getPropertyValue('--my-variable-name'); // #999999
- 
+
  document.documentElement.style
     .setProperty('--my-variable-name', 'pink');
 */

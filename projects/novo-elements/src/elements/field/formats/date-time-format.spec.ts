@@ -32,13 +32,13 @@ jest.mock('angular-imask', () => {
       registerOnChange(fn: any): void {}
 
       registerOnTouched(fn: any): void {}
-    }
+    },
   };
 });
 
 @Component({
   selector: 'test-datetime-format',
-  template: `<input [formControl]="testControl" dateTimeFormat="iso8601">`,
+  template: '<input [formControl]="testControl" dateTimeFormat="iso8601">',
   standalone: false,
 })
 class DateFormatTestComponent {
@@ -57,7 +57,7 @@ describe('NovoDateTimeFormatDirective', () => {
     TestBed.configureTestingModule({
       declarations: [NovoDateTimeFormatDirective, DateFormatTestComponent],
       imports: [FormsModule, ReactiveFormsModule],
-      providers: [NovoLabelService, DateFormatService]
+      providers: [NovoLabelService, DateFormatService],
     }).compileComponents();
     fixture = TestBed.createComponent(DateFormatTestComponent);
     labelService = TestBed.inject(NovoLabelService);

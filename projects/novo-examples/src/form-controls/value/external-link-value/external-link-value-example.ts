@@ -8,7 +8,7 @@ import { NOVO_VALUE_THEME } from 'novo-elements';
     selector: 'external-link-value-example',
     templateUrl: 'external-link-value-example.html',
     styleUrls: ['external-link-value-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class ExternalLinkValueExample {
   public theme = NOVO_VALUE_THEME.MOBILE;

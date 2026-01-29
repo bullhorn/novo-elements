@@ -9,7 +9,7 @@ import { NovoInputFormat, NOVO_INPUT_FORMAT } from './formats/base-format';
         class: 'novo-has-picker',
         '[attr.autocomplete]': 'autocompleteAttribute',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoPickerDirective {
   /** The datepicker that this input is associated with. */

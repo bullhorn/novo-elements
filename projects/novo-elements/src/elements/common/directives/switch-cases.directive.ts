@@ -3,7 +3,7 @@ import { Directive, DoCheck, Host, Input, OnInit, TemplateRef, ViewContainerRef 
 
 @Directive({
     selector: '[novoSwitchCases]',
-    standalone: false
+    standalone: false,
 })
 export class SwitchCasesDirective implements OnInit, DoCheck {
   private ngSwitch: any;

@@ -8,7 +8,7 @@ import { TestBed} from '@angular/core/testing';
 // Crucially, this is similar to the extensive functionality/references of the Window object,
 // which we never want to send through PostRobot.
 function makeSelfReferentialObject() {
-    let circularObject: any = {};
+    const circularObject: any = {};
     circularObject.selfRef = circularObject;
     return circularObject;
 }
@@ -58,7 +58,7 @@ class MockPostrobot {
         const mockRobotEvent = {
             data: {...data},
             source: from.mockSource,
-            origin: from.mockOrigin
+            origin: from.mockOrigin,
         };
         const responder = this.responders[msg];
         return Promise.resolve(responder?.(mockRobotEvent))
@@ -96,14 +96,14 @@ describe('MockPostrobot', () => {
     let mockPostRobot1: MockPostrobot;
     let mockPostRobot2: MockPostrobot;
     let putReceive: any;
-    
+
     beforeEach(() => {
         complexObject = makeSelfReferentialObject();
         mockPostRobot1 = new MockPostrobot('localhost:1');
         mockPostRobot2 = new MockPostrobot('localhost:2', mockPostRobot1);
         mockPostRobot1.on('httpPUT', obj => putReceive = obj);
     });
-    
+
     it('accepts normal json-like messages', async () => {
         const testObj = { a: [ 1, 2, 3], str: 'test' };
         await mockPostRobot2.send(mockPostRobot1.mockSource, 'httpPUT', testObj);
@@ -159,7 +159,7 @@ describe('AppBridge', () => {
         handleFn = jest.fn();
 
         // setup handlers
-        for (let handlerKey of (Object.values(AppBridgeHandler)) as AppBridgeHandler[]) {
+        for (const handlerKey of (Object.values(AppBridgeHandler)) as AppBridgeHandler[]) {
             hostBridge.handle(handlerKey, (event, cb) => {
                 try {
                     return cb(handleFn(handlerKey, event));
@@ -185,7 +185,7 @@ describe('AppBridge', () => {
     it('opens a list', async () => {
         handleFn.mockReturnValue(true);
         frame1Bridge.openList({
-            criteria: 'small'
+            criteria: 'small',
         });
         expect(handleFn).toHaveBeenCalledWith(AppBridgeHandler.OPEN_LIST, jasmine.objectContaining({ criteria: 'small' }));
     });
@@ -195,7 +195,7 @@ describe('AppBridge', () => {
         handleFn.mockReturnValue(true);
         frame1Bridge.openList({
             criteria: 'small',
-            type: 'Candidate'
+            type: 'Candidate',
         });
         expect(handleFn).toHaveBeenCalledWith(AppBridgeHandler.OPEN_LIST, jasmine.objectContaining({ criteria: 'small', type: 'List', entityType: 'Candidate' }));
     });
@@ -212,7 +212,7 @@ describe('AppBridge', () => {
             await frame1Bridge.refresh();
             expect(handleFn).toHaveBeenCalledWith(AppBridgeHandler.REFRESH, jasmine.anything());
         });
-    
+
         it('pins a window', async () => {
             handleFn.mockReturnValue(true);
             await frame1Bridge.pin();
@@ -224,11 +224,11 @@ describe('AppBridge', () => {
             await frame1Bridge.close();
             expect(handleFn).toHaveBeenCalledWith(AppBridgeHandler.CLOSE, jasmine.objectContaining({ id: frame1Bridge.id, windowName: 'terry' }));
         });
-    
+
         it('updates app title', async () => {
             handleFn.mockReturnValue(true);
             await frame1Bridge.update({
-                title: 'x'
+                title: 'x',
             });
             expect(handleFn).toHaveBeenCalledWith(AppBridgeHandler.UPDATE, jasmine.objectContaining({title: 'x', id: frame1Bridge.id, windowName: 'terry' }));
         });
@@ -247,10 +247,10 @@ describe('AppBridge', () => {
             close: [],
             refresh: [],
             pin: [],
-            update: [{}]
+            update: [{}],
         };
         function expectFalseOnAllCalls(failureImplementation: (() => any) | 'enableGenericSendError', failTerm: string) {
-            for (let cmd of Object.keys(cmdFunctionsWithArgs)) {
+            for (const cmd of Object.keys(cmdFunctionsWithArgs)) {
                 it(`should return false when ${cmd}() receives ${failTerm}`, async () => {
                     if (failureImplementation === 'enableGenericSendError') {
                         frame1Robot.enableGenericSendError = true;
@@ -298,8 +298,8 @@ describe('AppBridge', () => {
 
     // Should this behavior change? Won't bother testing it for other HTTP actions
     it('should reject with null when postrobot transmission to parent fails', async () => {
-        const err = new Error('Something about postMessage isn\'t working');
-        spyOn(frame2Robot, 'sendToParent').and.returnValue(Promise.reject(err));
+        const error = new Error('Something about postMessage isn\'t working');
+        spyOn(frame2Robot, 'sendToParent').and.returnValue(Promise.reject(error));
         try {
             await frame2Bridge.httpGET('snack');
             fail('expected promise rejection');
@@ -409,8 +409,8 @@ describe('AppBridge', () => {
             key: 'callbackTest',
             generic: false,
             options: {
-                switch: 'on'
-            }
+                switch: 'on',
+            },
         });
         expect(result).toBe(true);
     });
@@ -423,8 +423,8 @@ describe('AppBridge', () => {
                 key: 'callbackTest',
                 generic: false,
                 options: {
-                    switch: 'on'
-                }
+                    switch: 'on',
+                },
             });
             fail('Expected exception');
         } catch(succeed) {
@@ -439,8 +439,8 @@ describe('AppBridge', () => {
                 key: 'callbackTest',
                 generic: false,
                 options: {
-                    switch: 'on'
-                }
+                    switch: 'on',
+                },
             });
             fail('Expected exception');
         } catch(succeed) {
@@ -452,7 +452,8 @@ describe('AppBridge', () => {
         await frame1Bridge.register();
         await frame2Bridge.register();
         const data = { dataContent: 1000 };
-        let receivedData1, receivedData2: any;
+        let receivedData1;
+        let receivedData2: any;
         frame1Bridge.addEventListener('test', eventData => {
             receivedData1 = eventData;
         });
@@ -487,8 +488,8 @@ describe('AppBridge', () => {
     });
 
     it('should fire custom events to registered neighbor frames', async () => {
-        let extraNeighborRobot = new MockPostrobot('localhost:888', hostRobot);
-        let extraNeighborBridge = new AppBridge('Jest neighbor frame', extraNeighborRobot);
+        const extraNeighborRobot = new MockPostrobot('localhost:888', hostRobot);
+        const extraNeighborBridge = new AppBridge('Jest neighbor frame', extraNeighborRobot);
         let receivedObj: any;
         extraNeighborBridge.addEventListener('custom', obj => {
             receivedObj = obj;

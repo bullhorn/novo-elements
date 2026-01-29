@@ -11,7 +11,7 @@ const HEADER_ICONS = ['company', 'job', 'candidate', 'person', 'opportunity', 'l
     selector: 'basic-header-example',
     templateUrl: 'basic-header-example.html',
     styleUrls: ['basic-header-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class BasicHeaderExample {
   public theme: string = 'company';
