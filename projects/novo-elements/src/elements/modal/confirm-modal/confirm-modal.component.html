@@ -1,0 +1,23 @@
+<novo-notification *ngIf="!customIcon" [ngClass]="{'hide-close' : hideClose, 'truncateSubheader' : truncateSubheader}" type="warning" data-automation-id="are-you-sure-modal">
+        <h1 data-automation-id="are-you-sure-header">{{ headerText }}</h1>
+        <h2 *ngIf="subheaderText" class="subheader-text" data-automation-id="are-you-sure-subheader">{{ subheaderText }}</h2>
+        <h2 *ngIf="descriptionText1" data-automation-id="are-you-sure-descriptiontext1">{{ descriptionText1 }}</h2>
+        <p *ngIf="descriptionText2" data-automation-id="are-you-sure-descriptiontext2">{{ descriptionText2 }}</p>
+        <button *ngIf="showCancel" theme="standard" (click)="cancel()" data-automation-id="are-you-sure-cancel">{{ cancelButtonText }}</button>
+        <button theme="primary" [color]="buttonColor" (click)="yes()" [icon]="buttonIcon" data-automation-id="are-you-sure-yes">{{ confirmButtonText }}</button>
+</novo-notification>
+
+<novo-modal *ngIf="customIcon">
+    <header></header>
+    <section>
+        <div>
+            <div class="caution"><i [class]="customIcon"></i></div>
+            <h1 data-automation-id="are-you-sure-header">{{ headerText }}</h1>
+            <h4 *ngIf="subheaderText" class="subheader-text" data-automation-id="are-you-sure-subheader">{{ subheaderText }}</h4>
+            <h4 *ngIf="descriptionText1" data-automation-id="are-you-sure-descriptiontext1">{{ descriptionText1 }}</h4>
+            <p *ngIf="descriptionText2" data-automation-id="are-you-sure-descriptiontext2">{{ descriptionText2 }}</p>
+        </div>
+    </section>
+    <button *ngIf="showCancel" theme="standard" (click)="cancel()" data-automation-id="are-you-sure-cancel">{{ cancelButtonText }}</button>
+    <button theme="primary" [color]="buttonColor" (click)="yes()" [icon]="buttonIcon" data-automation-id="are-you-sure-yes">{{ confirmButtonText }}</button>
+</novo-modal>

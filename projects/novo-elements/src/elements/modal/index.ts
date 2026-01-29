@@ -4,3 +4,4 @@ export * from './modal.animation';
 export * from './modal.component';
 export * from './modal.module';
 export * from './modal.service';
+export * from './confirm-modal/confirm-modal.component';

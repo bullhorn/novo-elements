@@ -172,6 +172,7 @@ export class JustCriteriaExample implements OnInit {
             scope: 'Candidate',
             entity: 'Person',
             value: 123,
+            warnOnDelete: true,
           }, {
             field: 'availability',
             operator: 'includeAny',
