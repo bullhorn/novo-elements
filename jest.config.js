@@ -12,12 +12,10 @@ module.exports = {
       {
         tsconfig: '<rootDir>/tsconfig.spec.json',
         stringifyContentPathRegex: '\\.html$',
-        isolatedModules: true,
       }
     ]
   },
   extensionsToTreatAsEsm: ['.ts'],
-  moduleFileExtensions: ['ts', 'html', 'js', 'json', 'mjs'],
   moduleNameMapper: {
     '^novo-elements$': '<rootDir>/projects/novo-elements/src/index',
     '^novo-elements/(.*)$': '<rootDir>/projects/novo-elements/src/$1',
