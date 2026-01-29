@@ -252,9 +252,10 @@ describe('ConditionGroupComponent', () => {
 
     it('should show confirmation modal and remove condition when warnOnDelete is true and confirmed', async () => {
       const mockFormArray = {
-        at: jest.fn().mockReturnValue({ value: { warnOnDelete: true } }),
+        at: jest.fn().mockReturnValue({ value: { warnOnDelete: true, field: 'testField' } }),
         removeAt: jest.fn(),
         length: 2,
+        value: [{ warnOnDelete: true, field: 'testField' }],
       };
       const mockModalRef = { onClosed: Promise.resolve(true) };
       jest.spyOn((component as any)['modalService'], 'open').mockReturnValue(mockModalRef as any);
@@ -281,9 +282,10 @@ describe('ConditionGroupComponent', () => {
 
     it('should not remove condition when warnOnDelete is true and user rejects', async () => {
       const mockFormArray = {
-        at: jest.fn().mockReturnValue({ value: { warnOnDelete: true } }),
+        at: jest.fn().mockReturnValue({ value: { warnOnDelete: true, field: 'testField' } }),
         removeAt: jest.fn(),
         length: 2,
+        value: [{ warnOnDelete: true, field: 'testField' }],
       };
       const mockModalRef = { onClosed: Promise.resolve(false) };
       jest.spyOn((component as any)['modalService'], 'open').mockReturnValue(mockModalRef as any);
