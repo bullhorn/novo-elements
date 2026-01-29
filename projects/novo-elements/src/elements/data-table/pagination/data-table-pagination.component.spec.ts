@@ -71,7 +71,8 @@ describe('Elements: NovoDataTablePagination', () => {
 
   describe('Method: nextPage()', () => {
     beforeEach(() => {
-      component.totalPages = 5;
+      component.length = 500;
+      component.pageSize = 100;
       component.page = 1;
       spyOn(component.state, 'checkRetainment');
       spyOn(component, 'emitPageEvent');
@@ -108,7 +109,8 @@ describe('Elements: NovoDataTablePagination', () => {
 
   describe('Method: previousPage()', () => {
     beforeEach(() => {
-      component.totalPages = 5;
+      component.length = 500;
+      component.pageSize = 100;
       component.page = 1;
       spyOn(component.state, 'checkRetainment');
       spyOn(component, 'emitPageEvent');
