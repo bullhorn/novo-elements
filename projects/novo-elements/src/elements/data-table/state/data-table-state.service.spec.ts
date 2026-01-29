@@ -400,7 +400,7 @@ describe('Service: DataTableState', () => {
       expect(service.savedSearchName).toEqual('old saved search');
     });
     it('should only set values included in preferences (filter)', () => {
-      spyOn((service as any), 'transformFilters').and.callThrough();
+      jest.spyOn((service as any), 'transformFilters');
       const updatedPreferences = {
         filter: { id: 'updated', value: 'filter' },
       };

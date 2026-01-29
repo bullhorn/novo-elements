@@ -29,7 +29,7 @@ describe('Elements: NovoDataTablePagination', () => {
       component.pageSize = 25;
       component.length = 500;
       component.ngOnInit();
-      spyOn(component, 'updateDisplayedPageSizeOptions').and.callThrough();
+      jest.spyOn(component, 'updateDisplayedPageSizeOptions');
     });
     it('should set displayed pages via updateDisplayedPageSizeOptions function', () => {
       component.selectPage(10);
@@ -79,7 +79,7 @@ describe('Elements: NovoDataTablePagination', () => {
       spyOn(component, 'getPages');
     });
     it('should return if no next page', () => {
-      spyOn(component, 'hasNextPage').and.returnValue(false);
+      jest.spyOn(component, 'hasNextPage').mockReturnValue(false);
       component.nextPage();
       expect(component.hasNextPage).toHaveBeenCalled();
       expect(component.getPages).not.toHaveBeenCalled();
@@ -90,7 +90,7 @@ describe('Elements: NovoDataTablePagination', () => {
     it('should increment page, set pages and call emitPageEvent', () => {
       component.allMatchingSelected = true;
       component.canSelectAll = false;
-      spyOn(component, 'hasNextPage').and.returnValue(true);
+      jest.spyOn(component, 'hasNextPage').mockReturnValue(true);
       component.nextPage();
       expect(component.hasNextPage).toHaveBeenCalled();
       expect(component.page).toEqual(2);
@@ -99,7 +99,7 @@ describe('Elements: NovoDataTablePagination', () => {
       expect(component.state.checkRetainment).toHaveBeenCalledWith('page', false);
     });
     it('should call state.checkRetainment - allMatchingSelected true', () => {
-      spyOn(component, 'hasNextPage').and.returnValue(true);
+      jest.spyOn(component, 'hasNextPage').mockReturnValue(true);
       component.allMatchingSelected = true;
       component.canSelectAll = true;
       component.nextPage();
@@ -117,7 +117,7 @@ describe('Elements: NovoDataTablePagination', () => {
       spyOn(component, 'getPages');
     });
     it('should return if no next page', () => {
-      spyOn(component, 'hasPreviousPage').and.returnValue(false);
+      jest.spyOn(component, 'hasPreviousPage').mockReturnValue(false);
       component.previousPage();
       expect(component.hasPreviousPage).toHaveBeenCalled();
       expect(component.getPages).not.toHaveBeenCalled();
@@ -128,7 +128,7 @@ describe('Elements: NovoDataTablePagination', () => {
     it('should increment page, set pages and call emitPageEvent', () => {
       component.allMatchingSelected = false;
       component.canSelectAll = true;
-      spyOn(component, 'hasPreviousPage').and.returnValue(true);
+      jest.spyOn(component, 'hasPreviousPage').mockReturnValue(true);
       component.previousPage();
       expect(component.hasPreviousPage).toHaveBeenCalled();
       expect(component.page).toEqual(0);
@@ -137,7 +137,7 @@ describe('Elements: NovoDataTablePagination', () => {
       expect(component.state.checkRetainment).toHaveBeenCalledWith('page', false);
     });
     it('should call state.checkRetainment - allMatchingSelected true', () => {
-      spyOn(component, 'hasPreviousPage').and.returnValue(true);
+      jest.spyOn(component, 'hasPreviousPage').mockReturnValue(true);
       component.allMatchingSelected = true;
       component.canSelectAll = true;
       component.previousPage();

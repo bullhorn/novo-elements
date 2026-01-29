@@ -126,7 +126,7 @@ describe('Elements: NovoSelectElement', () => {
       expect(selectionModel.clear).toHaveBeenCalled();
     });
     it('should invoke select', () => {
-      const selectAction = spyOn(selectionModel, 'select').and.callThrough();
+      const selectAction = jest.spyOn(selectionModel, 'select');
       comp.createdItem = 'baz';
       const options = [
         { label: 'foo', value: 'foo' },
