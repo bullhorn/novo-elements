@@ -10,7 +10,7 @@
     "typeRoots": ["node_modules/@types"],
     "sourceMap": true,
     "declaration": false,
-    "moduleResolution": "node16",
+    "moduleResolution": "bundler",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "resolveJsonModule": true,
