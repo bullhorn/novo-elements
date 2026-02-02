@@ -20,6 +20,8 @@ describe('Elements: NovoRowChipsElement', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(NovoRowChipsElement);
     component = fixture.debugElement.componentInstance;
+    component.source = { hiddenChipsLimit: 1 };
+    fixture.detectChanges();
   }));
 
   describe('Method: onKeyDown(event)', () => {

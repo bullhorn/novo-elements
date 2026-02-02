@@ -538,6 +538,15 @@ describe('Elements: NovoAddressElement', () => {
       expect(component.invalid.address1).toEqual(false);
     });
     it('should render element disabled when containing control element set to readOnly', () => {
+      component.config = {
+        address1: { required: false },
+        address2: { required: false },
+        city: { required: false },
+        state: { required: false, pickerConfig: {} },
+        zip: { required: false },
+        countryID: { required: false, pickerConfig: {} },
+      };
+      component.model = undefined;
       component.disabled = {};
       component.readOnly = true;
       component.fieldList.forEach((field: string) => {
