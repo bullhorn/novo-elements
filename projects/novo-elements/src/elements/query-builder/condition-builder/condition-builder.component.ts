@@ -263,9 +263,12 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
     let editType = this.editTypeFn()(field);
     // Don't look at dataSpecialization it is no good, this misses currency, and percent
     const { name } = field;
-    const qualifiesAsBoolean = this.doesFieldQualifyAsBoolean(field);
-    if (editType.toUpperCase() === 'RADIO' && qualifiesAsBoolean) {
-      editType = 'BOOLEAN';
+    if (editType.toUpperCase() === 'RADIO') {
+      if (this.doesFieldQualifyAsBinary(field)) {
+        editType = 'BOOLEAN';
+      } else if (field.options?.length) {
+        editType = 'SELECT';
+      }
     }
     const fieldDefsByName = this.queryBuilderService.getFieldDefsByName();
     // Check Fields by priority for match Field Definition
@@ -273,15 +276,11 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
     return fieldDefsByName.get(key);
   }
 
-  private doesFieldQualifyAsBoolean(field): boolean {
+  private doesFieldQualifyAsBinary(field): boolean {
     if (field.dataType === 'Boolean') {
       return true;
     }
-    if (!field.options) {
-      return false;
-    }
-    const values = new Set(field.options.map(opt => opt.value));
-    return field.options.length === 2 && values.has(true) && values.has(false);
+    return field.options?.length === 2;
   }
 
   private createFieldTemplates() {

@@ -17,10 +17,10 @@ import { NovoLabelService } from 'novo-elements/services';
           <novo-option value="isNull" *ngIf="!meta?.removeIsEmpty">{{ labels.isEmpty }}</novo-option>
         </novo-select>
       </novo-field>
-      <novo-field *novoConditionInputDef="let formGroup; fieldMeta as meta" [style.width.px]="125" [formGroup]="formGroup">
+      <novo-field *novoConditionInputDef="let formGroup; fieldMeta as meta" [style.maxWidth.px]="250" [formGroup]="formGroup">
         @let isNull = formGroup.value.operator === 'isNull';
         @let useYesNo = isNull || meta.dataType === 'Boolean';
-        @let customOptions = !isNull && meta.options && typeof meta.options[0].value === 'boolean';
+        @let customOptions = !isNull && meta.options?.length === 2;
         @if (customOptions) {
           <novo-radio-group formControlName="value">
             <novo-radio *ngFor="let opt of meta.options; trackBy: optIdentify" [value]="opt.value">{{ opt.label }}</novo-radio>
