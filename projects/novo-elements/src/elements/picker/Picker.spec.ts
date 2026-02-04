@@ -77,15 +77,15 @@ describe('Elements: NovoPickerElement', () => {
     });
     it('sets the value to null when the picker input is cleared out', () => {
       component._value = '123';
-      spyOn(component, 'onModelChange');
+      jest.spyOn(component, 'onModelChange');
       component.checkTerm('');
       expect(component._value).toEqual(null);
       expect(component.onModelChange).toHaveBeenCalled();
     });
     it('does not register a change if there is no value set', () => {
       component._value = null;
-      spyOn(component, 'onModelChange');
-      spyOn(component.ref, 'markForCheck');
+      jest.spyOn(component, 'onModelChange');
+      jest.spyOn(component.ref, 'markForCheck');
       component.checkTerm('');
       expect(component.onModelChange).not.toHaveBeenCalled();
       expect(component.ref.markForCheck).toHaveBeenCalled();
@@ -329,8 +329,8 @@ describe('Elements: NovoPickerElement', () => {
       component.changed = {
         emit: jest.fn(),
       } as unknown;
-      spyOn(component, 'onModelChange');
-      spyOn(component, 'hideResults');
+      jest.spyOn(component, 'onModelChange');
+      jest.spyOn(component, 'hideResults');
     });
 
     it('should clear the value, emit the new value, and optionally clear the term', () => {

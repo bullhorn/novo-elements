@@ -182,7 +182,7 @@ describe('ConditionGroupComponent', () => {
   describe('removeCondition', () => {
     beforeEach(() => {
       jest.spyOn(component['cdr'], 'markForCheck').mockImplementation();
-      spyOn(component, 'addCondition');
+      jest.spyOn(component, 'addCondition');
     });
 
     it('should remove condition at specified index', () => {

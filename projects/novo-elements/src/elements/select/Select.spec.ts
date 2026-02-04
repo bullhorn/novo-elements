@@ -111,7 +111,7 @@ describe('Elements: NovoSelectElement', () => {
       expect(comp.filteredOptions[0]).toEqual(jasmine.objectContaining({ value: 'clone', label: 'text2', active: false }));
     });
     it('should invoke clear', () => {
-      spyOn(selectionModel, 'clear');
+      jest.spyOn(selectionModel, 'clear');
       const mockPlaceholder = 'Test placeholder';
       fixture.componentRef.setInput('options', ['foo', 'bar', 'baz']);
       fixture.componentRef.setInput('value', 'baz');

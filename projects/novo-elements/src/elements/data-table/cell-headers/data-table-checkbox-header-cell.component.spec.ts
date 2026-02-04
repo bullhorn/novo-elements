@@ -55,10 +55,10 @@ describe('Elements: NovoDataTableCheckboxHeaderCell', () => {
       component.toaster = {
         alert: () => {},
       };
-      spyOn(component, 'selectAllChanged');
-      spyOn(component, 'resetAllMatchingSelected');
-      spyOn(component.dataTable, 'selectRows');
-      spyOn(component.toaster, 'alert');
+      jest.spyOn(component, 'selectAllChanged');
+      jest.spyOn(component, 'resetAllMatchingSelected');
+      jest.spyOn(component.dataTable, 'selectRows');
+      jest.spyOn(component.toaster, 'alert');
     });
     it('should call dataTable.selectRows if isAtLimit is false', () => {
       component.dataTable.canSelectAll = false;
@@ -120,7 +120,7 @@ describe('Elements: NovoDataTableCheckboxHeaderCell', () => {
           emit: () => {},
         },
       };
-      spyOn(component.dataTable.allSelected, 'emit');
+      jest.spyOn(component.dataTable.allSelected, 'emit');
       component.selectAllChanged();
       expect(component.dataTable.allSelected.emit).toHaveBeenCalledWith(expected);
     });

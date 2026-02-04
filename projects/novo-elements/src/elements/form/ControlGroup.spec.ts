@@ -121,7 +121,7 @@ describe('Elements: NovoControlGroup', () => {
 
   describe('field interaction events', () => {
     it('should call markForCheck when there are field interaction events on a nested form', () => {
-      spyOn(component.ref, 'markForCheck');
+      jest.spyOn(component.ref, 'markForCheck');
       component.initialValue = [
         { myPercent: 0.1, myString: '10%' },
         { myPercent: 0.2, myString: '20%' },

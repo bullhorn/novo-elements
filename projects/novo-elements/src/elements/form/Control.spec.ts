@@ -187,7 +187,7 @@ describe('NovoControlElement', () => {
 
   describe('Function: handleEdit(value)', () => {
     it('should emit edit event with passed in value', () => {
-      spyOn(component.edit, 'emit');
+      jest.spyOn(component.edit, 'emit');
       component.handleEdit('test');
       expect(component.edit.emit).toHaveBeenCalledWith('test');
     });
@@ -195,7 +195,7 @@ describe('NovoControlElement', () => {
 
   describe('Function: handleSave(value)', () => {
     it('should emit save event with passed in value', () => {
-      spyOn(component.save, 'emit');
+      jest.spyOn(component.save, 'emit');
       component.handleSave('test');
       expect(component.save.emit).toHaveBeenCalledWith('test');
     });
@@ -203,7 +203,7 @@ describe('NovoControlElement', () => {
 
   describe('Function: handleDelete(value)', () => {
     it('should emit delete event with passed in value', () => {
-      spyOn(component.delete, 'emit');
+      jest.spyOn(component.delete, 'emit');
       component.handleDelete('test');
       expect(component.delete.emit).toHaveBeenCalledWith('test');
     });
@@ -211,7 +211,7 @@ describe('NovoControlElement', () => {
 
   describe('Function: handleUpload(value)', () => {
     it('should emit upload event with passed in value', () => {
-      spyOn(component.upload, 'emit');
+      jest.spyOn(component.upload, 'emit');
       component.handleUpload('test');
       expect(component.upload.emit).toHaveBeenCalledWith('test');
     });
@@ -251,7 +251,7 @@ describe('NovoControlElement', () => {
           },
         },
       };
-      spyOn(component.form.controls.newField, 'setValue');
+      jest.spyOn(component.form.controls.newField, 'setValue');
       component.clearValue();
       expect(component.form.controls.newField.setValue).toHaveBeenCalledWith(null);
       expect(component.formattedValue).toBeNull();
@@ -260,8 +260,8 @@ describe('NovoControlElement', () => {
 
   describe('Function: handleTextAreaInput', () => {
     it('should call emitChange and restrictKeys with passed in value', () => {
-      spyOn(component, 'emitChange');
-      spyOn(component, 'restrictKeys');
+      jest.spyOn(component, 'emitChange');
+      jest.spyOn(component, 'restrictKeys');
       const event: any = { text: 'test' };
       component.handleTextAreaInput(event);
       expect(component.emitChange).toHaveBeenCalledWith(event);
@@ -304,7 +304,7 @@ describe('NovoControlElement', () => {
           },
         },
       };
-      spyOn(component.form.controls.newField, 'updateValueAndValidity');
+      jest.spyOn(component.form.controls.newField, 'updateValueAndValidity');
     });
 
     it('should call control.updateValueAndValidity with an emitEvent variable - true', () => {
@@ -424,8 +424,8 @@ describe('NovoControlElement', () => {
           },
         },
       };
-      spyOn(component.form.controls.newField, 'setValue');
-      spyOn(component.change, 'emit');
+      jest.spyOn(component.form.controls.newField, 'setValue');
+      jest.spyOn(component.change, 'emit');
     });
 
     it('should emit change event and set control value with value made into a percent - target value', () => {
@@ -514,14 +514,14 @@ describe('NovoControlElement', () => {
         value: '123',
       };
       event.key = 2;
-      spyOn(event, 'preventDefault');
+      jest.spyOn(event, 'preventDefault');
       component.restrictKeys(event);
       expect(event.preventDefault).toHaveBeenCalled();
     });
     it('should call preventDefault if the control is a number field and a non-number is entered', () => {
       event.key = 'T';
       component.control.key = 'numberField';
-      spyOn(event, 'preventDefault');
+      jest.spyOn(event, 'preventDefault');
       component.restrictKeys(event);
       expect(event.preventDefault).toHaveBeenCalled();
     });
@@ -529,7 +529,7 @@ describe('NovoControlElement', () => {
       component.locale = 'fr-FR';
       event.key = 'T';
       component.control.key = 'floatField';
-      spyOn(event, 'preventDefault');
+      jest.spyOn(event, 'preventDefault');
       component.restrictKeys(event);
       expect(event.preventDefault).toHaveBeenCalled();
     });
@@ -537,7 +537,7 @@ describe('NovoControlElement', () => {
       component.locale = 'fr-FR';
       event.key = ',';
       component.control.key = 'floatField';
-      spyOn(event, 'preventDefault');
+      jest.spyOn(event, 'preventDefault');
       component.restrictKeys(event);
       expect(event.preventDefault).not.toHaveBeenCalled();
     });
@@ -545,7 +545,7 @@ describe('NovoControlElement', () => {
       component.locale = 'en-US';
       event.key = 'T';
       component.control.key = 'floatField';
-      spyOn(event, 'preventDefault');
+      jest.spyOn(event, 'preventDefault');
       component.restrictKeys(event);
       expect(event.preventDefault).toHaveBeenCalled();
     });
@@ -553,21 +553,21 @@ describe('NovoControlElement', () => {
       component.locale = 'en-US';
       event.key = '.';
       component.control.key = 'floatField';
-      spyOn(event, 'preventDefault');
+      jest.spyOn(event, 'preventDefault');
       component.restrictKeys(event);
       expect(event.preventDefault).not.toHaveBeenCalled();
     });
     it('should not call preventDefault if the control is a float field and a utility key is entered', () => {
       event.key = 'Delete';
       component.control.key = 'floatField';
-      spyOn(event, 'preventDefault');
+      jest.spyOn(event, 'preventDefault');
       component.restrictKeys(event);
       expect(event.preventDefault).not.toHaveBeenCalled();
     });
     it('should not call preventDefault if the control is a number field and a utility key is entered', () => {
       event.key = 'Backspace';
       component.control.key = 'numberField';
-      spyOn(event, 'preventDefault');
+      jest.spyOn(event, 'preventDefault');
       component.restrictKeys(event);
       expect(event.preventDefault).not.toHaveBeenCalled();
     });
@@ -576,7 +576,7 @@ describe('NovoControlElement', () => {
         value: '1',
       };
       event.key = 2;
-      spyOn(event, 'preventDefault');
+      jest.spyOn(event, 'preventDefault');
       component.restrictKeys(event);
       expect(event.preventDefault).not.toHaveBeenCalled();
     });
@@ -598,7 +598,7 @@ describe('NovoControlElement', () => {
         },
       };
       component.labels.invalidIntegerInput = 'Invalid Field';
-      spyOn(component.form.controls.numberField, 'markAsInvalid');
+      jest.spyOn(component.form.controls.numberField, 'markAsInvalid');
     });
     it('should mark control as invalid if a non-number is entered', () => {
       const expected = 'Invalid Field NUMBER';
@@ -616,7 +616,7 @@ describe('NovoControlElement', () => {
     const event: any = { focus: true };
 
     beforeEach(() => {
-      spyOn(component, 'validateIntegerInput');
+      jest.spyOn(component, 'validateIntegerInput');
       component.form = {
         controls: {
           numberField: {
@@ -644,7 +644,7 @@ describe('NovoControlElement', () => {
       expect(component.validateIntegerInput).not.toHaveBeenCalled();
     });
     it('should clear focusedField, set focused and showCount to false and emit a blur event', () => {
-      spyOn((component as any)._blurEmitter, 'emit');
+      jest.spyOn((component as any)._blurEmitter, 'emit');
       component.control = {
         key: 'numberField',
       };
@@ -658,7 +658,7 @@ describe('NovoControlElement', () => {
 
   describe('Function: modelChange(value)', () => {
     it('should emit change event with passed in value', () => {
-      spyOn(component.change, 'emit');
+      jest.spyOn(component.change, 'emit');
       component.modelChange('test');
       expect(component.change.emit).toHaveBeenCalledWith('test');
     });
@@ -671,7 +671,7 @@ describe('NovoControlElement', () => {
 
   describe('Function: modelChangeWithRaw()', () => {
     beforeEach(() => {
-      spyOn(component, 'validateIntegerInput');
+      jest.spyOn(component, 'validateIntegerInput');
       component.form = {
         controls: {
           numberField: {
@@ -694,7 +694,7 @@ describe('NovoControlElement', () => {
         key: 'numberField',
       };
       const expected = 1;
-      spyOn(component.change, 'emit');
+      jest.spyOn(component.change, 'emit');
       component.modelChangeWithRaw(event);
       expect(component.change.emit).toHaveBeenCalledWith(expected);
       expect(component.form.controls.numberField.rawValue).toEqual(expected);
@@ -767,10 +767,10 @@ describe('NovoControlElement', () => {
           },
         },
       };
-      spyOn(component, 'handleAddressChange');
+      jest.spyOn(component, 'handleAddressChange');
     });
     it('should set focused to true and set passed in field as focused field', () => {
-      spyOn((component as any)._focusEmitter, 'emit');
+      jest.spyOn((component as any)._focusEmitter, 'emit');
       const field = 'pickerField';
       component.handleFocus(event, field);
       expect((component as any)._focused).toBeTruthy();

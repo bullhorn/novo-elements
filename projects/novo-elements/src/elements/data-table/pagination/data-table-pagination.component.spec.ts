@@ -46,10 +46,10 @@ describe('Elements: NovoDataTablePagination', () => {
 
   describe('Method: selectPage()', () => {
     beforeEach(() => {
-      spyOn(component.state, 'checkRetainment');
+      jest.spyOn(component.state, 'checkRetainment');
     });
     it('should call emitPageEvent and set page', () => {
-      spyOn(component, 'emitPageEvent');
+      jest.spyOn(component, 'emitPageEvent');
       component.selectPage(1);
       expect(component.emitPageEvent).toHaveBeenCalled();
       expect(component.page).toEqual(1);
@@ -74,9 +74,9 @@ describe('Elements: NovoDataTablePagination', () => {
       component.length = 500;
       component.pageSize = 100;
       component.page = 1;
-      spyOn(component.state, 'checkRetainment');
-      spyOn(component, 'emitPageEvent');
-      spyOn(component, 'getPages');
+      jest.spyOn(component.state, 'checkRetainment');
+      jest.spyOn(component, 'emitPageEvent');
+      jest.spyOn(component, 'getPages');
     });
     it('should return if no next page', () => {
       jest.spyOn(component, 'hasNextPage').mockReturnValue(false);
@@ -112,9 +112,9 @@ describe('Elements: NovoDataTablePagination', () => {
       component.length = 500;
       component.pageSize = 100;
       component.page = 1;
-      spyOn(component.state, 'checkRetainment');
-      spyOn(component, 'emitPageEvent');
-      spyOn(component, 'getPages');
+      jest.spyOn(component.state, 'checkRetainment');
+      jest.spyOn(component, 'emitPageEvent');
+      jest.spyOn(component, 'getPages');
     });
     it('should return if no next page', () => {
       jest.spyOn(component, 'hasPreviousPage').mockReturnValue(false);
@@ -191,7 +191,7 @@ describe('Elements: NovoDataTablePagination', () => {
 
   describe('Method: changePageSize()', () => {
     it('should call emitPageEvent, set pageSize to passed in value and reset page number', () => {
-      spyOn(component, 'emitPageEvent');
+      jest.spyOn(component, 'emitPageEvent');
       component.changePageSize(10);
       expect(component.emitPageEvent).toHaveBeenCalledWith(true);
       expect(component.page).toEqual(0);

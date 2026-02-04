@@ -40,3 +40,11 @@ getTestBed().initTestEnvironment(
   BrowserDynamicTestingModule,
   platformBrowserDynamicTesting()
 );
+
+// Restore all mocks after each test to prevent test pollution
+// For tests using jest.spyOn on shared instances, we need to restore
+// but we do this AFTER the test assertions have run
+afterEach(() => {
+  jest.restoreAllMocks();
+  jest.clearAllMocks();
+});

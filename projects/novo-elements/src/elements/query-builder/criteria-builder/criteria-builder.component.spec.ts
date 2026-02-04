@@ -231,7 +231,7 @@ describe('CriteriaBuilderComponent', () => {
       scope: 'differentScope',
     };
     it('should close the dropdown', () => {
-      spyOn(component.scopedFieldPicker().dropdown, 'closePanel');
+      jest.spyOn(component.scopedFieldPicker().dropdown, 'closePanel');
       component.onFieldSelect(MOCK_FIELD);
       expect(component.scopedFieldPicker().dropdown.closePanel).toHaveBeenCalled();
     });
