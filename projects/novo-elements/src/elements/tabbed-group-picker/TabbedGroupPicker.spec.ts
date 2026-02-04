@@ -561,7 +561,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
 
       component.cancel();
       expect(component.revertState).toHaveBeenCalled();
-      expect(component.cancelChange.emit).toHaveBeenCalledWith([chickenTab]);
+      expect(component.cancelChange.emit).toHaveBeenCalledWith(component.tabs);
     });
   });
 });

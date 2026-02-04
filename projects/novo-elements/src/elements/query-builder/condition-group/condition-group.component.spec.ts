@@ -189,6 +189,7 @@ describe('ConditionGroupComponent', () => {
       const mockFormArray = {
         removeAt: jest.fn(),
         length: 2,
+        push: jest.fn(),
       };
       Object.defineProperty(component, 'root', {
         get: () => mockFormArray,
@@ -207,6 +208,7 @@ describe('ConditionGroupComponent', () => {
       const mockFormArray = {
         removeAt: jest.fn(),
         length: 2,
+        push: jest.fn(),
       };
       Object.defineProperty(component, 'root', {
         get: () => mockFormArray,
@@ -224,6 +226,7 @@ describe('ConditionGroupComponent', () => {
       const mockFormArray = {
         removeAt: jest.fn(),
         length: 1,
+        push: jest.fn(),
       };
       Object.defineProperty(component, 'root', {
         get: () => mockFormArray,

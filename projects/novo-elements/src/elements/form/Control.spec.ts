@@ -260,6 +260,16 @@ describe('NovoControlElement', () => {
 
   describe('Function: handleTextAreaInput', () => {
     it('should call emitChange and restrictKeys with passed in value', () => {
+      component.control = {
+        key: 'newField',
+      };
+      component.form = {
+        controls: {
+          newField: {
+            setValue: () => {},
+          },
+        },
+      };
       jest.spyOn(component, 'emitChange');
       jest.spyOn(component, 'restrictKeys');
       const event: any = { text: 'test' };
@@ -484,11 +494,14 @@ describe('NovoControlElement', () => {
   });
 
   describe('Function: restrictKeys()', () => {
-    const event: any = {
-      preventDefault: jasmine.any(Function),
-    };
+    let event: any;
 
     beforeEach(() => {
+      event = {
+        preventDefault: jest.fn(),
+        target: {},
+        key: '',
+      };
       component.control = {
         key: 'newField',
       };
@@ -514,14 +527,12 @@ describe('NovoControlElement', () => {
         value: '123',
       };
       event.key = 2;
-      jest.spyOn(event, 'preventDefault');
       component.restrictKeys(event);
       expect(event.preventDefault).toHaveBeenCalled();
     });
     it('should call preventDefault if the control is a number field and a non-number is entered', () => {
       event.key = 'T';
       component.control.key = 'numberField';
-      jest.spyOn(event, 'preventDefault');
       component.restrictKeys(event);
       expect(event.preventDefault).toHaveBeenCalled();
     });
@@ -529,7 +540,6 @@ describe('NovoControlElement', () => {
       component.locale = 'fr-FR';
       event.key = 'T';
       component.control.key = 'floatField';
-      jest.spyOn(event, 'preventDefault');
       component.restrictKeys(event);
       expect(event.preventDefault).toHaveBeenCalled();
     });
@@ -537,7 +547,6 @@ describe('NovoControlElement', () => {
       component.locale = 'fr-FR';
       event.key = ',';
       component.control.key = 'floatField';
-      jest.spyOn(event, 'preventDefault');
       component.restrictKeys(event);
       expect(event.preventDefault).not.toHaveBeenCalled();
     });
@@ -545,7 +554,6 @@ describe('NovoControlElement', () => {
       component.locale = 'en-US';
       event.key = 'T';
       component.control.key = 'floatField';
-      jest.spyOn(event, 'preventDefault');
       component.restrictKeys(event);
       expect(event.preventDefault).toHaveBeenCalled();
     });
@@ -553,21 +561,18 @@ describe('NovoControlElement', () => {
       component.locale = 'en-US';
       event.key = '.';
       component.control.key = 'floatField';
-      jest.spyOn(event, 'preventDefault');
       component.restrictKeys(event);
       expect(event.preventDefault).not.toHaveBeenCalled();
     });
     it('should not call preventDefault if the control is a float field and a utility key is entered', () => {
       event.key = 'Delete';
       component.control.key = 'floatField';
-      jest.spyOn(event, 'preventDefault');
       component.restrictKeys(event);
       expect(event.preventDefault).not.toHaveBeenCalled();
     });
     it('should not call preventDefault if the control is a number field and a utility key is entered', () => {
       event.key = 'Backspace';
       component.control.key = 'numberField';
-      jest.spyOn(event, 'preventDefault');
       component.restrictKeys(event);
       expect(event.preventDefault).not.toHaveBeenCalled();
     });
@@ -576,7 +581,6 @@ describe('NovoControlElement', () => {
         value: '1',
       };
       event.key = 2;
-      jest.spyOn(event, 'preventDefault');
       component.restrictKeys(event);
       expect(event.preventDefault).not.toHaveBeenCalled();
     });
@@ -786,6 +790,11 @@ describe('NovoControlElement', () => {
     });
     it('should call handleAddressChange for address fields if they have data', () => {
       component.control.key = 'addressField';
+      component.control.config = {
+        city: {
+          maxlength: 100,
+        },
+      };
       const field = 'city';
       const expected = {
         field,

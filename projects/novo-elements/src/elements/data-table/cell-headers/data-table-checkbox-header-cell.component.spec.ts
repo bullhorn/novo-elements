@@ -51,6 +51,9 @@ describe('Elements: NovoDataTableCheckboxHeaderCell', () => {
     beforeEach(() => {
       component.dataTable = {
         selectRows: () => {},
+        allSelected: {
+          emit: () => {},
+        },
       };
       component.toaster = {
         alert: () => {},
