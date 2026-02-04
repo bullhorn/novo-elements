@@ -62,14 +62,14 @@ describe('Elements: NovoDatePickerInputElement', () => {
 
   describe('Method: handleMaskAccept', () => {
     it('should call clearValue when the mask has been reduced to empty', () => {
-      spyOn(component, 'clearValue');
-      spyOn(component, 'closePanel');
+      jest.spyOn(component, 'clearValue');
+      jest.spyOn(component, 'closePanel');
       component.handleMaskAccept('');
       expect(component.clearValue).toHaveBeenCalled();
       expect(component.closePanel).toHaveBeenCalled();
 
       component.hasButtons = true;
-      component.closePanel.calls.reset();
+      component.closePanel.mockClear();
 
       component.handleMaskAccept('');
       expect(component.closePanel).not.toHaveBeenCalled();

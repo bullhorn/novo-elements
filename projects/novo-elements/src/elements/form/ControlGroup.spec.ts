@@ -121,7 +121,7 @@ describe('Elements: NovoControlGroup', () => {
 
   describe('field interaction events', () => {
     it('should call markForCheck when there are field interaction events on a nested form', () => {
-      spyOn(component.ref, 'markForCheck');
+      jest.spyOn(component.ref, 'markForCheck');
       component.initialValue = [
         { myPercent: 0.1, myString: '10%' },
         { myPercent: 0.2, myString: '20%' },
@@ -173,13 +173,13 @@ describe('Elements: NovoControlGroup', () => {
       expect(component.form.controls.myControls.controls[1].associations.index).toEqual(1);
     });
     it('should check canRemove() function after removal', () => {
-      spyOn(component, 'canRemove').and.returnValue(true);
+      jest.spyOn(component, 'canRemove').mockReturnValue(true);
       component.removeControl(0);
       expect(component.canRemove).toHaveBeenCalledWith({ myPercent: 0.2, myString: '20%' }, 0);
       expect(component.canRemove).toHaveBeenCalledWith({ myPercent: 0.3, myString: '30%' }, 1);
     });
     it('should check canRemove() function when reset', () => {
-      spyOn(component, 'canRemove').and.returnValue(false);
+      jest.spyOn(component, 'canRemove').mockReturnValue(false);
       component.resetAddRemove();
       expect(component.canRemove).toHaveBeenCalledWith({ myPercent: 0.1, myString: '10%' }, 0);
       expect(component.canRemove).toHaveBeenCalledWith({ myPercent: 0.2, myString: '20%' }, 1);
@@ -191,7 +191,7 @@ describe('Elements: NovoControlGroup', () => {
           // Example promise for testing that will only allow the first group to be deleted
           resolve(index === 0);
         });
-      spyOn(component, 'shouldRemove').and.callThrough();
+      jest.spyOn(component, 'shouldRemove');
       expect(component.form.controls.myControls.controls.length).toEqual(3);
 
       component.removeControl(2);
@@ -217,7 +217,7 @@ describe('Elements: NovoControlGroup', () => {
           // Example promise for testing that will only allow the first group to be deleted
           resolve(index === 0);
         });
-      spyOn(component, 'shouldRemove').and.callThrough();
+      jest.spyOn(component, 'shouldRemove');
       expect(component.form.controls.myControls.controls.length).toEqual(3);
 
       component.removeControl(2, false);

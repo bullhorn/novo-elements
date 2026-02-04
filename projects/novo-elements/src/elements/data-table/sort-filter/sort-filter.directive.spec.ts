@@ -24,7 +24,7 @@ describe('Directive: sort-filter', () => {
     });
 
     it('should set check for selectionOptions', () => {
-      spyOn(testState, 'checkRetainment').and.callFake(() => {});
+      jest.spyOn(testState, 'checkRetainment').mockImplementation(() => {});
       expect(directive.filter).toBeDefined();
       directive.filter('test', 'text', null, undefined);
       expect(testState.checkRetainment).toHaveBeenCalled();
@@ -41,7 +41,7 @@ describe('Directive: sort-filter', () => {
     });
 
     it('should set check for selectionOptions', () => {
-      spyOn(testState, 'checkRetainment').and.callFake(() => {});
+      jest.spyOn(testState, 'checkRetainment').mockImplementation(() => {});
       expect(directive.sort).toBeDefined();
       directive.sort('test', 'test', undefined);
       expect(testState.checkRetainment).toHaveBeenCalled();

@@ -3,6 +3,7 @@ import { waitForAsync, TestBed } from '@angular/core/testing';
 // App
 import { NovoValueElement, NOVO_VALUE_THEME, NOVO_VALUE_TYPE } from './Value';
 import { NovoValueModule } from './Value.module';
+import { NovoLabelService } from 'novo-elements/services';
 
 describe('Elements: NovoValueElement', () => {
   let fixture;
@@ -11,6 +12,7 @@ describe('Elements: NovoValueElement', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [NovoValueModule],
+      providers: [NovoLabelService],
     }).compileComponents();
     fixture = TestBed.createComponent(NovoValueElement);
     component = fixture.debugElement.componentInstance;

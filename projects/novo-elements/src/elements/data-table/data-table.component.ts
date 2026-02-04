@@ -316,14 +316,14 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     }
 
     // Default templates defined here
-    this.defaultTemplates.forEach((item) => {
+    this.defaultTemplates?.forEach((item) => {
       // Only override if it doesn't already exist
       if (!this.templates[item.getType()]) {
         this.templates[item.getType()] = item.template;
       }
     });
     // Custom templates passed in
-    this.customTemplates.forEach((item) => {
+    this.customTemplates?.forEach((item) => {
       // Override anything that is custom and in HTML
       this.templates[item.getType()] = item.template;
     });
@@ -345,7 +345,9 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     this.state.selectionOptions = this.selectionOptions ?? undefined;
 
     // Scrolling inside table
-    (this.novoDataTableContainer.nativeElement as Element).addEventListener('scroll', this.scrollListenerHandler);
+    if (this.novoDataTableContainer) {
+      (this.novoDataTableContainer.nativeElement as Element).addEventListener('scroll', this.scrollListenerHandler);
+    }
     this.initialized = true;
     this.ref.markForCheck();
   }
@@ -568,12 +570,14 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   }
 
   private scrollListener(): void {
-    const target: Element = this.novoDataTableContainer.nativeElement as Element;
-    const left: number = target.scrollLeft;
-    if (left !== this.scrollLeft) {
-      this.scrollLeft = target.scrollLeft;
+    if (this.novoDataTableContainer) {
+      const target: Element = this.novoDataTableContainer.nativeElement as Element;
+      const left: number = target.scrollLeft;
+      if (left !== this.scrollLeft) {
+        this.scrollLeft = target.scrollLeft;
+      }
+      this.ref.markForCheck();
     }
-    this.ref.markForCheck();
   }
 
   performInteractions(event: ListInteractionEvent): void {

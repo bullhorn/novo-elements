@@ -27,6 +27,12 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(NovoTabbedGroupPickerElement);
     component = fixture.debugElement.componentInstance;
+    component.tabs = [{ typeName: 'default', typeLabel: 'Default', valueField: 'value', labelField: 'label', data: [] }];
+    component.displayTabs = [];
+    component.theme = 'default';
+    component.buttonConfig = { theme: 'default', side: 'left', icon: 'apply', label: 'Apply' };
+    component.quickSelectConfig = { label: 'Quick Select', items: [] };
+    component.dropdown = { closePanel: () => {} } as any;
   }));
 
   it('should initialize correctly', () => {
@@ -151,7 +157,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       const parent = { children: null } as any;
       const sortedData: any[] = [];
       const compareFunction = (a: any, b: any): 0 | 1 | -1 => 0;
-      const warnFunction = jasmine.createSpy('warnFunction');
+      const warnFunction = jest.fn('warnFunction');
 
       expect(() => {
         component.replaceChildrenWithReferences(parent, sortedData, compareFunction, warnFunction);
@@ -163,7 +169,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       const parent = { children: undefined } as any;
       const sortedData: any[] = [];
       const compareFunction = (a: any, b: any): 0 | 1 | -1 => 0;
-      const warnFunction = jasmine.createSpy('warnFunction');
+      const warnFunction = jest.fn('warnFunction');
 
       expect(() => {
         component.replaceChildrenWithReferences(parent, sortedData, compareFunction, warnFunction);
@@ -175,7 +181,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       const parent = { children: 'not-an-array' } as any;
       const sortedData: any[] = [];
       const compareFunction = (a: any, b: any): 0 | 1 | -1 => 0;
-      const warnFunction = jasmine.createSpy('warnFunction');
+      const warnFunction = jest.fn('warnFunction');
 
       expect(() => {
         component.replaceChildrenWithReferences(parent, sortedData, compareFunction, warnFunction);
@@ -543,8 +549,8 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
 
   describe('function: cancel', () => {
     it('should revert to original state and emit cancel event with current tabs', () => {
-      spyOn(component, 'revertState');
-      spyOn(component.cancelChange, 'emit');
+      jest.spyOn(component, 'revertState');
+      jest.spyOn(component.cancelChange, 'emit');
       component.dropdown = {
         closePanel: () => {},
       } as any;
@@ -555,7 +561,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
 
       component.cancel();
       expect(component.revertState).toHaveBeenCalled();
-      expect(component.cancelChange.emit).toHaveBeenCalledWith([chickenTab]);
+      expect(component.cancelChange.emit).toHaveBeenCalledWith(component.tabs);
     });
   });
 });

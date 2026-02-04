@@ -19,6 +19,16 @@ describe('Elements: NovoCKEditorElement', () => {
     window.CKEDITOR = {
       ENTER_P: 1,
       ENTER_BR: 2,
+      instances: {},
+      replace: jest.fn(() => ({
+        setData: jest.fn(),
+        getData: jest.fn(() => ''),
+        on: jest.fn(),
+        focusManager: { blur: jest.fn() },
+        removeAllListeners: jest.fn(),
+        destroy: jest.fn(),
+      })),
+      disableAutoInline: false,
     };
   }));
 
@@ -39,12 +49,14 @@ describe('Elements: NovoCKEditorElement', () => {
 
     it('should set the base config', () => {
       jest.spyOn(component, 'getBaseConfig').mockReturnValue({ test: true });
+      jest.spyOn(component, 'ckeditorInit');
       component.ngAfterViewInit();
       expect(component.ckeditorInit).toHaveBeenCalledWith({ test: true });
     });
 
     it('should use the passed in config to overwrite and add to base config', () => {
       jest.spyOn(component, 'getBaseConfig').mockReturnValue({ base: true, default: false });
+      jest.spyOn(component, 'ckeditorInit');
       component.config = { default: true, another: true };
       component.ngAfterViewInit();
       expect(component.ckeditorInit).toHaveBeenCalledWith({ base: true, default: true, another: true });

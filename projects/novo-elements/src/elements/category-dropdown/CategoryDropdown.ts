@@ -106,7 +106,9 @@ export class NovoCategoryDropdownElement extends OutsideClick implements OnInit,
 
   ngOnInit() {
     const button = this.element.nativeElement.querySelector('button');
-    button.addEventListener('click', this.clickHandler);
+    if (button) {
+      button.addEventListener('click', this.clickHandler);
+    }
   }
 
   ngOnDestroy() {

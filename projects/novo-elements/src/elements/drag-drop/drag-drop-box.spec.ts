@@ -71,9 +71,9 @@ describe('Elements: NovoDragDropParent', () => {
     const itemOne = draggableItems[0];
     const itemFour = draggableItems[3];
     const startEvt = new FakeEvent(itemOne.nativeElement, undefined);
-    spyOn(startEvt, 'preventDefault');
+    jest.spyOn(startEvt, 'preventDefault');
     // this function mocked, as it's not easy to replicate bounds calculation in a test environment
-    spyOn(directive, 'isElementWithinEventBounds').and.returnValue(true);
+    jest.spyOn(directive, 'isElementWithinEventBounds').mockReturnValue(true);
     let itemsAfterFinish;
     directive.novoDragDropFinish.subscribe(event => {
       itemsAfterFinish = event.allItems;
@@ -91,9 +91,9 @@ describe('Elements: NovoDragDropParent', () => {
     const itemOne = draggableItems[0];
     const itemFour = draggableItems[3];
     const startEvt = new FakeEvent(itemFour.nativeElement, undefined);
-    spyOn(startEvt, 'preventDefault');
+    jest.spyOn(startEvt, 'preventDefault');
     // this function mocked, as it's not easy to replicate bounds calculation in a test environment
-    spyOn(directive, 'isElementWithinEventBounds').and.returnValue(true);
+    jest.spyOn(directive, 'isElementWithinEventBounds').mockReturnValue(true);
     let itemsAfterFinish;
     directive.novoDragDropFinish.subscribe(event => {
       itemsAfterFinish = event.allItems;
@@ -108,11 +108,11 @@ describe('Elements: NovoDragDropParent', () => {
   });
 
   it('should reject drag if it is outside the draggable region', () => {
-    spyOn(directive, 'isElementWithinEventBounds').and.returnValue(false);
+    jest.spyOn(directive, 'isElementWithinEventBounds').mockReturnValue(false);
     const itemOne = draggableItems[0];
     const itemOneDragPt = itemOne.query(By.css('.novo-drag-target'));
     const startEvt: any = new FakeEvent(itemOne.nativeElement, undefined);
-    spyOn(startEvt, 'preventDefault');
+    jest.spyOn(startEvt, 'preventDefault');
     itemOne.triggerEventHandler('dragstart', startEvt);
     expect(directive.isElementWithinEventBounds).toHaveBeenCalledWith(itemOneDragPt.nativeElement, startEvt);
     expect(startEvt.preventDefault).toHaveBeenCalled();
@@ -151,10 +151,10 @@ describe('Elements: NovoDragDropParent', () => {
     const itemOne = draggableItems[0];
     const itemFour = draggableItems[3];
     const startEvt = new FakeEvent(itemOne.nativeElement, undefined);
-    spyOn(startEvt, 'preventDefault');
+    jest.spyOn(startEvt, 'preventDefault');
     // Return true first when starting drag and checking if we're within novo-drag-target. Then, false when running drag event
     // and deciding we are out of bounds of the drag box.
-    spyOn(directive, 'isElementWithinEventBounds').and.returnValues(true, false);
+    jest.spyOn(directive, 'isElementWithinEventBounds').mockReturnValueOnce(true).mockReturnValueOnce(false);
     itemOne.triggerEventHandler('dragstart', startEvt);
     expect(startEvt.preventDefault).not.toHaveBeenCalled();
     directive.onDragOver(new FakeEvent(itemFour.nativeElement) as any);
@@ -175,10 +175,10 @@ describe('Elements: NovoDragDropParent', () => {
     const itemOne = draggableItems[0];
     const itemFour = draggableItems[3];
     const startEvt = new FakeEvent(itemOne.nativeElement, undefined);
-    spyOn(startEvt, 'preventDefault');
+    jest.spyOn(startEvt, 'preventDefault');
     // Return true first when starting drag and checking if we're within novo-drag-target. Then, false when running drag event
     // and deciding we are out of bounds of the drag box.
-    spyOn(directive, 'isElementWithinEventBounds').and.returnValues(true, false);
+    jest.spyOn(directive, 'isElementWithinEventBounds').mockReturnValueOnce(true).mockReturnValueOnce(false);
     itemOne.triggerEventHandler('dragstart', startEvt);
     expect(startEvt.preventDefault).not.toHaveBeenCalled();
 
@@ -192,19 +192,21 @@ describe('Elements: NovoDragDropParent', () => {
   });
 
   it('should automatically update if the component externally removes data', async () => {
-    component.items.pop();
+    component.items = component.items.slice(0, -1);
+    fixture.changeDetectorRef.markForCheck();
     fixture.detectChanges();
     await fixture.whenStable();
+    draggableItems = fixture.debugElement.queryAll(By.css('[draggable]'));
     expect(itemTextOrder()).toEqual(['1', '2', '3', '4']);
     expect(directive.itemsReordered).toEqual([1, 2, 3, 4]);
   });
 
   it('should automatically update if the component externally adds data', async () => {
-
-    component.items.push(6);
+    component.items = [...component.items, 6];
+    fixture.changeDetectorRef.markForCheck();
     fixture.detectChanges();
     await fixture.whenStable();
-
+    draggableItems = fixture.debugElement.queryAll(By.css('[draggable]'));
     expect(itemTextOrder()).toEqual(['1', '2', '3', '4', '5', '6']);
     expect(directive.itemsReordered).toEqual([1, 2, 3, 4, 5, 6]);
   });

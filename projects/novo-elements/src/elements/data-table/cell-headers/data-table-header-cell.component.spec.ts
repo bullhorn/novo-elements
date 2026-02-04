@@ -12,21 +12,41 @@ import { NovoTooltipModule } from 'novo-elements/elements/tooltip';
 import { IDataTableColumnFilterOption } from '../interfaces';
 import { DataTableState } from '../state/data-table-state.service';
 import { NovoDataTableCellHeader } from './data-table-header-cell.component';
+import { Subject } from 'rxjs';
+
 
 // App
 
 describe('Elements: NovoDataTableCellHeader', () => {
   let fixture;
   let component;
+  let mockDataTableState;
 
   beforeEach(waitForAsync(() => {
+    mockDataTableState = {
+      updates: new Subject(),
+      filter: undefined,
+      sort: undefined,
+    };
     TestBed.configureTestingModule({
       declarations: [NovoDataTableCellHeader],
       imports: [FormsModule, NovoTooltipModule, NovoButtonModule, NovoDropdownModule, NovoDatePickerModule, IMaskModule],
-      providers: [NovoLabelService, DataTableState],
+      providers: [
+        NovoLabelService,
+        { provide: DataTableState, useValue: mockDataTableState },
+      ],
     }).compileComponents();
     fixture = TestBed.createComponent(NovoDataTableCellHeader);
     component = fixture.debugElement.componentInstance;
+    // Initialize config before any lifecycle hooks run
+    component.config = {
+      filterable: true,
+      sortable: true,
+      resizable: true,
+      filterConfig: {
+        type: 'text',
+      },
+    };
   }));
 
   beforeEach(() => {
@@ -34,6 +54,9 @@ describe('Elements: NovoDataTableCellHeader', () => {
       filterable: true,
       sortable: true,
       resizable: true,
+      filterConfig: {
+        type: 'text',
+      },
     };
     component._column = {
       width: 999,

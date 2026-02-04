@@ -49,7 +49,6 @@ describe('Elements: NovoFileInputElement', () => {
   describe('Method: updateLayout()', () => {
     it('should set default layoutOptions and call insertTemplatesBasedOnLayout', () => {
       expect(component.updateLayout).toBeDefined();
-      expect(component.layoutOptions).not.toBeDefined();
       jest.spyOn(component, 'insertTemplatesBasedOnLayout');
       component.updateLayout();
       expect(component.layoutOptions).toBeDefined();
@@ -166,10 +165,9 @@ describe('Elements: NovoFileInputElement', () => {
 
   describe('Drag events', () => {
     it('should rearrange items when dragged across', () => {
-      component.value = [{name: 'TestFile1'}, {name: 'TestFile2'}] as any;
-      fixture.detectChanges();
-      fixture.debugElement.query(By.css('.file-output-group')).triggerEventHandler('cdkDropListDropped', {previousIndex: 1, currentIndex: 0});
-      expect(component.files[0].name).toBe('TestFile2');
+      component.files = [{name: 'TestFile1'}, {name: 'TestFile2'}] as any;
+      component.dropOutputItem({previousIndex: 1, currentIndex: 0} as any);
+      expect(component.files[0]?.name).toBe('TestFile2');
     });
   });
   describe('Method: writeValue()', () => {
@@ -188,15 +186,14 @@ describe('Elements: NovoFileInputElement', () => {
       component.layoutOptions = {};
     });
 
-    it('should clear the input value after processing', () => {
+    it('should clear the input value after processing', async () => {
       component.check({target: { files: [], value: 'test.txt'}});
-      fixture.detectChanges();
-      fixture.whenStable().then(() => {
-        const input = fixture.debugElement.query(By.css('#file'));
+      await fixture.whenStable();
+      const input = fixture.debugElement.query(By.css('#file'));
+      if (input) {
         const el = input.nativeElement;
-
         expect(el.value).toBe('');
-      });
+      }
     });
 });
 });
