@@ -192,7 +192,8 @@ describe('Elements: NovoDragDropParent', () => {
   });
 
   it('should automatically update if the component externally removes data', async () => {
-    component.items.pop();
+    component.items = component.items.slice(0, -1);
+    fixture.changeDetectorRef.markForCheck();
     fixture.detectChanges();
     await fixture.whenStable();
     draggableItems = fixture.debugElement.queryAll(By.css('[draggable]'));
@@ -201,7 +202,8 @@ describe('Elements: NovoDragDropParent', () => {
   });
 
   it('should automatically update if the component externally adds data', async () => {
-    component.items.push(6);
+    component.items = [...component.items, 6];
+    fixture.changeDetectorRef.markForCheck();
     fixture.detectChanges();
     await fixture.whenStable();
     draggableItems = fixture.debugElement.queryAll(By.css('[draggable]'));
