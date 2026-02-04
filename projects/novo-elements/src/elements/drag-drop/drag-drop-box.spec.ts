@@ -112,7 +112,7 @@ describe('Elements: NovoDragDropParent', () => {
     const itemOne = draggableItems[0];
     const itemOneDragPt = itemOne.query(By.css('.novo-drag-target'));
     const startEvt: any = new FakeEvent(itemOne.nativeElement, undefined);
-    spyOn(startEvt, 'preventDefault');
+    jest.spyOn(startEvt, 'preventDefault');
     itemOne.triggerEventHandler('dragstart', startEvt);
     expect(directive.isElementWithinEventBounds).toHaveBeenCalledWith(itemOneDragPt.nativeElement, startEvt);
     expect(startEvt.preventDefault).toHaveBeenCalled();
@@ -195,16 +195,16 @@ describe('Elements: NovoDragDropParent', () => {
     component.items.pop();
     fixture.detectChanges();
     await fixture.whenStable();
+    draggableItems = fixture.debugElement.queryAll(By.css('[draggable]'));
     expect(itemTextOrder()).toEqual(['1', '2', '3', '4']);
     expect(directive.itemsReordered).toEqual([1, 2, 3, 4]);
   });
 
   it('should automatically update if the component externally adds data', async () => {
-
     component.items.push(6);
     fixture.detectChanges();
     await fixture.whenStable();
-
+    draggableItems = fixture.debugElement.queryAll(By.css('[draggable]'));
     expect(itemTextOrder()).toEqual(['1', '2', '3', '4', '5', '6']);
     expect(directive.itemsReordered).toEqual([1, 2, 3, 4, 5, 6]);
   });
