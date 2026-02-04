@@ -1250,7 +1250,6 @@ describe('Novo Control with Templates', () => {
   function makeControl(control: BaseControl) {
     try {
       testComponent.control = control;
-      fixture.detectChanges();
       testComponent.templatesReady = true;
       fixture.detectChanges();
       component = fixture.debugElement.query(By.directive(NovoControlElement)).componentInstance;
