@@ -17,11 +17,20 @@ import { NovoLabelService } from 'novo-elements/services';
           <novo-option value="isNull" *ngIf="!meta?.removeIsEmpty">{{ labels.isEmpty }}</novo-option>
         </novo-select>
       </novo-field>
-      <novo-field *novoConditionInputDef="let formGroup" [style.width.px]="125" [formGroup]="formGroup">
-        <novo-radio-group formControlName="value">
-          <novo-radio [value]="true">{{ formGroup.value.operator === 'isNull' ? labels.yes : labels.true }}</novo-radio>
-          <novo-radio [value]="false">{{ formGroup.value.operator === 'isNull' ? labels.no : labels.false }}</novo-radio>
-        </novo-radio-group>
+      <novo-field *novoConditionInputDef="let formGroup; fieldMeta as meta" [style.maxWidth.px]="250" [formGroup]="formGroup">
+        @let isNull = formGroup.value.operator === 'isNull';
+        @let useYesNo = isNull || meta.dataType === 'Boolean';
+        @let customOptions = !isNull && meta.options?.length === 2;
+        @if (customOptions) {
+          <novo-radio-group formControlName="value">
+            <novo-radio *ngFor="let opt of meta.options; trackBy: optIdentify" [value]="opt.value">{{ opt.label }}</novo-radio>
+          </novo-radio-group>
+        } @else {
+          <novo-radio-group formControlName="value">
+            <novo-radio [value]="true">{{ useYesNo ? labels.yes : labels.true }}</novo-radio>
+            <novo-radio [value]="false">{{ useYesNo ? labels.no : labels.false }}</novo-radio>
+          </novo-radio-group>
+        }
       </novo-field>
     </ng-container>
   `,
@@ -35,5 +44,9 @@ export class NovoDefaultBooleanConditionDef extends AbstractConditionFieldDef {
   constructor(labelService: NovoLabelService) {
     super(labelService);
     this.defineOperatorEditGroup(Operator.include, Operator.exclude, Operator.isNull);
+  }
+
+  optIdentify(option) {
+    return option.label;
   }
 }
