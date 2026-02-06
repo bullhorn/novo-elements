@@ -39,7 +39,7 @@ import { StaticDataTableService } from './services/static-data-table.service';
 import { DataTableState } from './state/data-table-state.service';
 import { NovoDragFinishEvent } from 'novo-elements/elements/drag-drop';
 
-export type DataTablePreferenceUpdateSrc = 'columndrag' | 'input' | 'statesortchange' | 'pagination';
+export type DataTablePreferenceUpdateSrc = 'columndrag' | 'input' | 'statesortchange' | 'pagination' | 'other';
 export interface IDataTablePreferencesChangeEvent extends IDataTablePreferences {
   eventSrc: DataTablePreferenceUpdateSrc
 }
