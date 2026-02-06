@@ -177,7 +177,7 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
   }
 
   ngOnDestroy() {
-    this.searches.unsubscribe();
+    this.searches?.unsubscribe();
     // Clear all outlets and Maps
     [this._operatorOutlet.viewContainer, this._inputOutlet.viewContainer].forEach((def) => {
       def.clear();
