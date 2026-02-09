@@ -34,7 +34,7 @@ const EMPTY_CONDITION: Condition = {
   value: null,
   supportingValue: null,
   entity: null,
-  warnOnDelete: false,
+  warnOnDelete: undefined,
 };
 @Component({
     selector: 'novo-criteria-builder',

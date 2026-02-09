@@ -49,7 +49,7 @@ export interface Condition {
   value: any;
   supportingValue?: any;
   entity?: string;
-  warnOnDelete?: boolean;
+  warnOnDelete?: () => Promise<boolean>;
 }
 
 export interface Criteria {

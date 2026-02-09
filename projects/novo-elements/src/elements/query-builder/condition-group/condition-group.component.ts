@@ -1,11 +1,10 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, Input, OnDestroy, OnInit } from '@angular/core';
 import { ControlContainer, FormArray, FormBuilder, UntypedFormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 import { merge, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { QueryBuilderService } from '../query-builder.service';
 import { Condition, Conjunction } from '../query-builder.types';
 import { NovoLabelService } from 'novo-elements/services';
-import { NovoConfirmModal, NovoModalService } from 'novo-elements/elements/modal';
 
 const EMPTY_CONDITION: Condition = {
   conditionType: '$and',
@@ -38,8 +37,6 @@ export class ConditionGroupComponent implements OnInit, OnDestroy {
   public parentForm: UntypedFormGroup;
   /** Subject that emits when the component has been destroyed. */
   private readonly _onDestroy = new Subject<void>();
-
-  private modalService = inject(NovoModalService);
 
   constructor(
     public qbs: QueryBuilderService,
@@ -120,16 +117,10 @@ export class ConditionGroupComponent implements OnInit, OnDestroy {
     const condition = this.root.at(index)?.value;
     const warnOnDelete = condition?.warnOnDelete;
     const fieldName = condition?.field;
-    const isLastInstanceOfPinnedField = warnOnDelete && this.root.value.filter(c => c.field === fieldName).length === 1;
+    const isLastInstanceOfPinnedField = typeof warnOnDelete === 'function' && this.root.value.filter(c => c.field === fieldName).length === 1;
 
     if (isLastInstanceOfPinnedField) {
-      const shouldDelete = await this.modalService.open(NovoConfirmModal, {
-          headerText: this.labels.deleteFilterHeaderText,
-          subheaderText: this.labels.deleteFilterSubtext,
-          buttonIcon: '',
-          buttonColor: 'negative',
-          confirmButtonText: this.labels.deleteFilterButtonText,
-      }).onClosed;
+      const shouldDelete = await warnOnDelete();
       if (!shouldDelete) {
         return;
       }

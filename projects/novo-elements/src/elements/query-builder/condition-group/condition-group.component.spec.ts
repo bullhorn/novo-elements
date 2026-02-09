@@ -5,7 +5,6 @@ import { QueryBuilderService } from '../query-builder.service';
 import { NovoLabelService } from '../../../services';
 import { NovoFlexModule } from '../../../elements/flex';
 import { Condition } from '../query-builder.types';
-import { NovoConfirmModal } from 'novo-elements/elements/modal';
 
 describe('ConditionGroupComponent', () => {
   let fixture: ComponentFixture<ConditionGroupComponent>;
@@ -91,6 +90,7 @@ describe('ConditionGroupComponent', () => {
 
   describe('sanitizeCondition', () => {
     it('should return only the expected Condition properties', () => {
+      const mockWarnFunction = jest.fn();
       const inputCondition = {
         conditionType: '$or',
         field: 'testField',
@@ -99,7 +99,7 @@ describe('ConditionGroupComponent', () => {
         value: 'testValue',
         supportingValue: 'testSupportingValue',
         entity: 'testEntity',
-        warnOnDelete: true,
+        warnOnDelete: mockWarnFunction,
         // Extra properties that should be filtered out
         extraProp1: 'should be removed',
         extraProp2: 123,
@@ -116,7 +116,7 @@ describe('ConditionGroupComponent', () => {
         value: 'testValue',
         supportingValue: 'testSupportingValue',
         entity: 'testEntity',
-        warnOnDelete: true,
+        warnOnDelete: mockWarnFunction,
       });
     });
 
@@ -130,7 +130,7 @@ describe('ConditionGroupComponent', () => {
         value: null,
         supportingValue: undefined,
         entity: null,
-        warnOnDelete: false,
+        warnOnDelete: undefined,
       };
 
       const result: any = component['sanitizeCondition'](inputCondition);
@@ -143,7 +143,7 @@ describe('ConditionGroupComponent', () => {
         value: null,
         supportingValue: undefined,
         entity: null,
-        warnOnDelete: false,
+        warnOnDelete: undefined,
       });
     });
 
@@ -250,15 +250,14 @@ describe('ConditionGroupComponent', () => {
       expect(component.addCondition).toHaveBeenCalled();
     });
 
-    it('should show confirmation modal and remove condition when warnOnDelete is true and confirmed', async () => {
+    it('should call warnOnDelete function and remove condition when it returns true', async () => {
+      const mockWarnOnDelete = jest.fn().mockResolvedValue(true);
       const mockFormArray = {
-        at: jest.fn().mockReturnValue({ value: { warnOnDelete: true, field: 'testField' } }),
+        at: jest.fn().mockReturnValue({ value: { warnOnDelete: mockWarnOnDelete, field: 'testField' } }),
         removeAt: jest.fn(),
         length: 2,
-        value: [{ warnOnDelete: true, field: 'testField' }],
+        value: [{ warnOnDelete: mockWarnOnDelete, field: 'testField' }],
       };
-      const mockModalRef = { onClosed: Promise.resolve(true) };
-      jest.spyOn((component as any)['modalService'], 'open').mockReturnValue(mockModalRef as any);
 
       Object.defineProperty(component, 'root', {
         get: () => mockFormArray,
@@ -270,25 +269,18 @@ describe('ConditionGroupComponent', () => {
 
       await component.removeCondition(0);
 
-      expect((component as any)['modalService'].open).toHaveBeenCalledWith(NovoConfirmModal, {
-        headerText: component.labels.deleteFilterHeaderText,
-        subheaderText: component.labels.deleteFilterSubtext,
-        buttonIcon: '',
-        buttonColor: 'negative',
-        confirmButtonText: component.labels.deleteFilterButtonText,
-      });
+      expect(mockWarnOnDelete).toHaveBeenCalled();
       expect(mockFormArray.removeAt).toHaveBeenCalledWith(0);
     });
 
-    it('should not remove condition when warnOnDelete is true and user rejects', async () => {
+    it('should not remove condition when warnOnDelete returns false', async () => {
+      const mockWarnOnDelete = jest.fn().mockResolvedValue(false);
       const mockFormArray = {
-        at: jest.fn().mockReturnValue({ value: { warnOnDelete: true, field: 'testField' } }),
+        at: jest.fn().mockReturnValue({ value: { warnOnDelete: mockWarnOnDelete, field: 'testField' } }),
         removeAt: jest.fn(),
         length: 2,
-        value: [{ warnOnDelete: true, field: 'testField' }],
+        value: [{ warnOnDelete: mockWarnOnDelete, field: 'testField' }],
       };
-      const mockModalRef = { onClosed: Promise.resolve(false) };
-      jest.spyOn((component as any)['modalService'], 'open').mockReturnValue(mockModalRef as any);
 
       Object.defineProperty(component, 'root', {
         get: () => mockFormArray,
@@ -297,16 +289,16 @@ describe('ConditionGroupComponent', () => {
 
       await component.removeCondition(0);
 
+      expect(mockWarnOnDelete).toHaveBeenCalled();
       expect(mockFormArray.removeAt).not.toHaveBeenCalled();
     });
 
-    it('should remove condition without showing modal when warnOnDelete is false', async () => {
+    it('should remove condition when warnOnDelete is not a function', async () => {
       const mockFormArray = {
         at: jest.fn().mockReturnValue({ value: { warnOnDelete: false } }),
         removeAt: jest.fn(),
         length: 2,
       };
-      jest.spyOn((component as any)['modalService'], 'open');
 
       Object.defineProperty(component, 'root', {
         get: () => mockFormArray,
@@ -318,17 +310,15 @@ describe('ConditionGroupComponent', () => {
 
       await component.removeCondition(0);
 
-      expect((component as any)['modalService'].open).not.toHaveBeenCalled();
       expect(mockFormArray.removeAt).toHaveBeenCalledWith(0);
     });
 
-    it('should remove condition without showing modal when warnOnDelete is undefined', async () => {
+    it('should remove condition when warnOnDelete is undefined', async () => {
       const mockFormArray = {
         at: jest.fn().mockReturnValue({ value: { warnOnDelete: undefined } }),
         removeAt: jest.fn(),
         length: 2,
       };
-      jest.spyOn((component as any)['modalService'], 'open');
 
       Object.defineProperty(component, 'root', {
         get: () => mockFormArray,
@@ -340,7 +330,6 @@ describe('ConditionGroupComponent', () => {
 
       await component.removeCondition(0);
 
-      expect((component as any)['modalService'].open).not.toHaveBeenCalled();
       expect(mockFormArray.removeAt).toHaveBeenCalledWith(0);
     });
   });
@@ -392,6 +381,7 @@ describe('ConditionGroupComponent', () => {
 
   describe('Function: newCondition', () => {
     it('should create condition with warnOnDelete field', () => {
+      const mockWarnFunction = jest.fn().mockResolvedValue(true);
       const testCondition: Condition = {
         field: 'test.field',
         operator: 'equals',
@@ -399,12 +389,12 @@ describe('ConditionGroupComponent', () => {
         value: 'testValue',
         supportingValue: null,
         entity: 'TestEntity',
-        warnOnDelete: true,
+        warnOnDelete: mockWarnFunction,
       };
 
       const result = component.newCondition(testCondition);
 
-      expect(result.get('warnOnDelete')?.value).toBe(true);
+      expect(result.get('warnOnDelete')?.value).toBe(mockWarnFunction);
       expect(result.get('warnOnDelete')).toBeDefined();
     });
 

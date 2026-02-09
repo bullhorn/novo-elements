@@ -161,9 +161,6 @@ export class NovoLabelService {
   minimumPlaceholder = 'Minimum';
   maximumPlaceholder = 'Maximum';
   minGreaterThanMax = 'The minimum is greater than the maximum value';
-  deleteFilterHeaderText = 'Delete pinned filter?';
-  deleteFilterSubtext = 'This filter will be removed from your pinned filters.';
-  deleteFilterButtonText = 'Delete Filter';
 
   constructor(
     @Optional()
