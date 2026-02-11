@@ -100,6 +100,7 @@
     "conventional-changelog-cli": "~5.0.0",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-jest": "^29.13.0",
     "eslint-plugin-prettier": "^5.5.4",
     "eslint-plugin-unused-imports": "^4.3.0",
     "fs-extra": "^11.3.2",
