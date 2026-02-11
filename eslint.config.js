@@ -1,6 +1,7 @@
 const tsParser = require('@typescript-eslint/parser');
 const tsPlugin = require('@typescript-eslint/eslint-plugin');
 const unusedImportsPlugin = require('eslint-plugin-unused-imports');
+const jestPlugin = require('eslint-plugin-jest');
 
 module.exports = [
   {
@@ -70,6 +71,15 @@ module.exports = [
       curly: 'error',
       'constructor-super': 'error',
       'comma-dangle': ['error', 'always-multiline'],
+    }
+  },
+  {
+    files: ['**/*.{test,spec}.{ts,tsx}'],
+    plugins: {
+      jest: jestPlugin,
+    },
+    rules: {
+      'jest/no-focused-tests': 'error',
     }
   }
 ];
