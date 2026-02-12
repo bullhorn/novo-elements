@@ -215,6 +215,45 @@ describe('CriteriaBuilderComponent', () => {
       });
       expect(result.toString()).toEqual(expected.toString());
     });
+
+    it('should initialize EMPTY_CONDITION with warnOnDelete as null and check all fields', () => {
+      const result = component.newCondition();
+      expect(result.get('conditionType')?.value).toBe('$and');
+      expect(result.get('field')?.value).toBeNull();
+      expect(result.get('operator')?.value).toBeNull();
+      expect(result.get('scope')?.value).toBeNull();
+      expect(result.get('value')?.value).toBeNull();
+      expect(result.get('supportingValue')?.value).toBeNull();
+      expect(result.get('entity')?.value).toBeNull();
+      expect(result.get('warnOnDelete')?.value).toBeNull();
+    });
+
+    it('should set all values when passed a complete condition', () => {
+      const mockWarnFunction = jest.fn().mockResolvedValue(true);
+      const testCondition: Condition = {
+        field: 'Candidate.email',
+        operator: 'contains',
+        scope: 'Candidate',
+        value: 'test@example.com',
+        supportingValue: 'supportValue',
+        entity: 'Candidate',
+        warnOnDelete: mockWarnFunction,
+      };
+      component.config = {
+        fields: [
+          { value: 'Candidate', entity: 'Candidate', label: 'Candidate' },
+        ],
+      };
+      const result = component.newCondition(testCondition);
+      expect(result.get('conditionType')?.value).toBe('$and');
+      expect(result.get('field')?.value).toBe('Candidate.email');
+      expect(result.get('operator')?.value).toBe('contains');
+      expect(result.get('scope')?.value).toBe('Candidate');
+      expect(result.get('value')?.value).toBe('test@example.com');
+      expect(result.get('supportingValue')?.value).toBe('supportValue');
+      expect(result.get('entity')?.value).toBe('Candidate');
+      expect(result.get('warnOnDelete')?.value).toBe(mockWarnFunction);
+    });
   });
 
   describe('Function: onFieldSelect(field)', () => {

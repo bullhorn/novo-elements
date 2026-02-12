@@ -48,7 +48,8 @@ export interface Condition {
   scope?: string;
   value: any;
   supportingValue?: any;
-  entity?: string,
+  entity?: string;
+  warnOnDelete?: () => Promise<boolean>;
 }
 
 export interface Criteria {
