@@ -115,4 +115,30 @@ describe('ConditionBuilderComponent', () => {
     tick();
     expect(createFieldOperators).toHaveBeenCalledWith(queryBuilderService.getFieldDefsByName().get('BOOLEAN'));
   }));
+
+  it('should skip createFieldTemplates when resetInputAndOperator is called with recreateTemplates=false', fakeAsync(() => {
+    fixture.componentRef.setInput('config', fieldConfig);
+    fixture.detectChanges();
+    tick();
+
+    const createFieldTemplatesSpy = spyOn<any>(component, 'createFieldTemplates');
+    createFieldOperators.calls.reset();
+
+    component.resetInputAndOperator(false);
+
+    expect(createFieldTemplatesSpy).not.toHaveBeenCalled();
+  }));
+
+  it('should call createFieldTemplates when resetInputAndOperator is called with recreateTemplates=true (default)', fakeAsync(() => {
+    fixture.componentRef.setInput('config', fieldConfig);
+    fixture.detectChanges();
+    tick();
+
+    const createFieldTemplatesSpy = spyOn<any>(component, 'createFieldTemplates');
+    createFieldOperators.calls.reset();
+
+    component.resetInputAndOperator(true);
+
+    expect(createFieldTemplatesSpy).toHaveBeenCalled();
+  }));
 });
