@@ -197,18 +197,21 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
   }
 
   /**
-   * Resets the input and operator view containers, regenerates the field templates,
-   * and marks the component for change detection.
+   * Resets the input and operator view containers and marks the component for change detection.
    *
    * Use this method after updating form controls to reinitialize the input and
    * operator fields so that the view reflects the latest form control changes.
    *
+   * @param recreateTemplates - If true (default), regenerates the field templates.
+   *                           If false, only clears the outlets without recreating templates.
    * @returns void
    */
-  resetInputAndOperator(): void {
+  resetInputAndOperator(recreateTemplates: boolean = true): void {
     this._inputOutlet.viewContainer.clear();
     this._operatorOutlet.viewContainer.clear();
-    this.createFieldTemplates();
+    if (recreateTemplates) {
+      this.createFieldTemplates();
+    }
     this.cdr.markForCheck();
   }
 
