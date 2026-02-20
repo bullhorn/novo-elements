@@ -1242,7 +1242,7 @@ describe('Novo Control with Templates', () => {
       }).compileComponents();
       fixture = TestBed.createComponent(TestComponent2);
       testComponent = fixture.debugElement.componentInstance;
-    } catch(err) {
+    } catch (err) {
       console.error(err);
     }
   });
@@ -1260,7 +1260,7 @@ describe('Novo Control with Templates', () => {
       component.ngAfterContentInit();
       tick();
       fixture.detectChanges();
-    } catch(err) {
+    } catch (err) {
       console.error(err);
       fail('could not set up Control fixture');
     }

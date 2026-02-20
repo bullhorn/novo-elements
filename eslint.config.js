@@ -71,6 +71,9 @@ module.exports = [
       curly: 'error',
       'constructor-super': 'error',
       'comma-dangle': ['error', 'always-multiline'],
+      'keyword-spacing': ['error', { before: true, after: true }],
+      'space-infix-ops': 'error',
+      'comma-spacing': 'error',
     }
   },
   {

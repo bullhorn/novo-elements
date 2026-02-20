@@ -85,7 +85,7 @@ class MockPostrobot {
 function verifySimpleObject(obj) {
     try {
         JSON.stringify(obj);
-    } catch(err) {
+    } catch (err) {
         throw new Error('Object is not simple enough to use JSON.stringify');
     }
 }
@@ -114,7 +114,7 @@ describe('MockPostrobot', () => {
         try {
             await mockPostRobot2.send(mockPostRobot1.mockSource, 'httpPUT', complexObject);
             fail('should not have succeeded');
-        } catch(err) {
+        } catch (err) {
             expect(err.message).toBe('Object is not simple enough to use JSON.stringify');
         }
     });
@@ -123,7 +123,7 @@ describe('MockPostrobot', () => {
         try {
             await mockPostRobot2.send(mockPostRobot1.mockSource, 'httpPUT', { sendToWindow: mockPostRobot1.mockSource });
             fail('should not have succeeded');
-        } catch(err) {
+        } catch (err) {
             expect(err.message).toBe('Object is not simple enough to use JSON.stringify');
         }
     })
@@ -163,7 +163,7 @@ describe('AppBridge', () => {
             hostBridge.handle(handlerKey, (event, cb) => {
                 try {
                     return cb(handleFn(handlerKey, event));
-                } catch(err) {
+                } catch (err) {
                     cb(null, err);
                 }
             })
@@ -260,7 +260,7 @@ describe('AppBridge', () => {
                     try {
                         const response = await frame1Bridge[cmd].apply(frame1Bridge, cmdFunctionsWithArgs[cmd]);
                         fail(`Function passed unexpectedly when receiving ${failTerm}. Response: ${response}`);
-                    } catch(result) {
+                    } catch (result) {
                         expect(result).toBeFalsy();
                     }
                 });
@@ -303,7 +303,7 @@ describe('AppBridge', () => {
         try {
             await frame2Bridge.httpGET('snack');
             fail('expected promise rejection');
-        } catch(err) {
+        } catch (err) {
             expect(err).toBeNull();
         }
     });
@@ -398,7 +398,7 @@ describe('AppBridge', () => {
         try {
             await frame2Bridge.requestData({ type: 'all' });
             fail('Should not request data successfully');
-        } catch(err2) {
+        } catch (err2) {
             expect(err2).toBeFalsy();
         }
     });
@@ -427,7 +427,7 @@ describe('AppBridge', () => {
                 },
             });
             fail('Expected exception');
-        } catch(succeed) {
+        } catch (succeed) {
             expect(succeed).toBe(false);
         }
     });
@@ -443,7 +443,7 @@ describe('AppBridge', () => {
                 },
             });
             fail('Expected exception');
-        } catch(succeed) {
+        } catch (succeed) {
             expect(succeed).toBe(false);
         }
     });
