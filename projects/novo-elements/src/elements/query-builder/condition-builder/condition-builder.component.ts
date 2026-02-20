@@ -113,6 +113,7 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
 
   public staticFieldSelection = computed(() => this.config().staticFieldSelection);
   private _lastContext: any = {};
+  public allowEmptyField: boolean = false;
   @HostBinding('class.condition-host')
   public isConditionHost = false;
 
@@ -234,7 +235,9 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
   updateFieldSelection() {
     const fieldConf = this.getField();
     if (!fieldConf) {
-      this.parentForm.get('field').setValue(this.getDefaultField());
+      if (!this.allowEmptyField) {
+        this.parentForm.get('field').setValue(this.getDefaultField());
+      }
       return;
     } else {
       this.fieldDisplayWith = () => fieldConf.label || fieldConf.name;
