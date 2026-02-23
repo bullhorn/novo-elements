@@ -18,7 +18,7 @@ export class TabbedGroupPickerChipsExample implements OnInit {
       selected: index % 3 === 1,
     }));
   getPlaces = (): { placeId: number; label: string }[] =>
-    ['Rome', 'Florence', 'Munich', 'Paris', 'Seville', 'Athens',].map((label, index) => ({
+    ['Rome', 'Florence', 'Munich', 'Paris', 'Seville', 'Athens'].map((label, index) => ({
         label,
         placeId: index + 1,
     }));
