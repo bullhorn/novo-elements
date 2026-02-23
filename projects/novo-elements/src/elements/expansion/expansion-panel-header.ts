@@ -46,7 +46,7 @@ import { NovoExpansionPanel } from './expansion-panel';
         }
     }`,
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoExpansionPanelHeader implements OnDestroy {
   private _parentChangeSubscription = Subscription.EMPTY;
@@ -127,7 +127,7 @@ export class NovoExpansionPanelHeader implements OnDestroy {
     host: {
         class: 'novo-expansion-panel-header-description',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoExpansionPanelDescription {}
 
@@ -141,6 +141,6 @@ export class NovoExpansionPanelDescription {}
     host: {
         class: 'novo-expansion-panel-header-title',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoExpansionPanelTitle {}

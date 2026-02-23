@@ -4,6 +4,6 @@ import { NovoDragBoxParent } from './drag-drop-box';
 
 @NgModule({
     declarations: [NovoDragBoxParent],
-    exports: [NovoDragBoxParent]
+    exports: [NovoDragBoxParent],
 })
 export class NovoDragDropModule {}

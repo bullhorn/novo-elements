@@ -13,7 +13,7 @@ import { AfterContentInit, ChangeDetectionStrategy, Component, ElementRef, NgZon
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: false
+    standalone: false,
 })
 export class NovoRailComponent extends CdkScrollable implements AfterContentInit {
   constructor(elementRef: ElementRef<HTMLElement>, scrollDispatcher: ScrollDispatcher, ngZone: NgZone) {

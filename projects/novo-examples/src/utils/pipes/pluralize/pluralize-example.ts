@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
     selector: 'pluralize-example',
     templateUrl: 'pluralize-example.html',
     styleUrls: ['pluralize-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class PluralizeExample {}

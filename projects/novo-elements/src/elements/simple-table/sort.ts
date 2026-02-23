@@ -4,7 +4,7 @@ import { NovoActivityTableState } from './state';
 
 @Directive({
     selector: '[novoSortFilter]',
-    standalone: false
+    standalone: false,
 })
 export class NovoSortFilter {
   constructor(private state: NovoActivityTableState) {}
@@ -31,7 +31,7 @@ export class NovoSortFilter {
 
 @Directive({
     selector: '[novoSelection]',
-    standalone: false
+    standalone: false,
 })
 export class NovoSelection implements OnDestroy {
   @Output()

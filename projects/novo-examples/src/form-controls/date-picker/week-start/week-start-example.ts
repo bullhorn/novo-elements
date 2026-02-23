@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'week-start-example',
     templateUrl: 'week-start-example.html',
     styleUrls: ['week-start-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class WeekStartExample {
   weekStartDate: Date = new Date();

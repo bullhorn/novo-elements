@@ -32,7 +32,7 @@ const DATA = {
     <p class="picker-error" *ngIf="hasError">Oops! An error occured.</p>
     <p class="picker-null" *ngIf="!isLoading && !matches.length && !hasError">No results to display...</p>
   `,
-    standalone: false
+    standalone: false,
 })
 export class CustomQuickNoteResults extends QuickNoteResults {}
 
@@ -43,7 +43,7 @@ export class CustomQuickNoteResults extends QuickNoteResults {}
     selector: 'custom-quick-note-results-example',
     templateUrl: 'custom-quick-note-results-example.html',
     styleUrls: ['custom-quick-note-results-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class CustomQuickNoteResultsExample {
   public note: any;

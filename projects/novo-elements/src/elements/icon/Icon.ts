@@ -14,7 +14,7 @@ import { TypographySize } from 'novo-elements/elements/common';
     host: {
         class: 'novo-icon',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoIconComponent implements AfterViewInit {
   @HostBinding('class.novo-icon-raised')

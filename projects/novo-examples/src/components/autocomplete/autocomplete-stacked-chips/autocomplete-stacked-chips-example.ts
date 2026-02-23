@@ -19,7 +19,7 @@ interface ShiftData {
     selector: 'autocomplete-stacked-chips-example',
     templateUrl: 'autocomplete-stacked-chips-example.html',
     styleUrls: ['autocomplete-stacked-chips-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class AutocompleteStackedChipsExample {
   filteredShifts: Observable<ShiftData[]>;

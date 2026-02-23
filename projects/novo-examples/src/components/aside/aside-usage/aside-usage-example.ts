@@ -51,7 +51,7 @@ interface CustomParams {
         '[style.display]': "'block'",
         '[style.width.%]': "'100'",
     },
-    standalone: false
+    standalone: false,
 })
 export class AsideCustomDemo {
   public values = [
@@ -72,7 +72,7 @@ export class AsideCustomDemo {
     selector: 'aside-usage-example',
     templateUrl: 'aside-usage-example.html',
     styleUrls: ['aside-usage-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class AsideUsageExample {
   constructor(private aside: NovoAsideService) {}

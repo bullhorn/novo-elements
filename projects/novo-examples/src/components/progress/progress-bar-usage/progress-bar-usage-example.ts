@@ -7,8 +7,8 @@ import { Component } from '@angular/core';
     selector: 'progess-bar-usage-example',
     templateUrl: './progress-bar-usage-example.html',
     styleUrls: ['./progress-bar-usage-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class ProgressBarUsageExample {
-  public largeTooltip: string = `Lorem Ipsum\n\n is simply dummy text of the printing and typesetting industry. \n Learn more <a>here</a>`;
+  public largeTooltip: string = 'Lorem Ipsum\n\n is simply dummy text of the printing and typesetting industry. \n Learn more <a>here</a>';
 }

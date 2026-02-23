@@ -11,7 +11,7 @@ import { BooleanInput } from 'novo-elements/utils';
     host: {
         '[attr.data-hint]': 'tooltip',
     },
-    standalone: false
+    standalone: false,
 })
 export class TooltipDirective implements OnDestroy, OnInit, AfterViewInit {
   @Input()
@@ -154,11 +154,10 @@ export class TooltipDirective implements OnDestroy, OnInit, AfterViewInit {
   }
 
   private getPosition(): FlexibleConnectedPositionStrategy {
-    let strategy: FlexibleConnectedPositionStrategy;
     let defaultPosition: ConnectedPosition;
     let offsetX: number;
     let offsetY: number;
-    let autoPositions: ConnectedPosition[] = [
+    const autoPositions: ConnectedPosition[] = [
       { originX: 'center', originY: 'bottom', overlayX: 'center', overlayY: 'top', offsetX: 0, offsetY: 12 },
       { originX: 'end', originY: 'bottom', overlayX: 'end', overlayY: 'top', offsetX: 0, offsetY: 12 },
       { originX: 'end', originY: 'center', overlayX: 'start', overlayY: 'center', offsetX: 12, offsetY: 0 },
@@ -219,7 +218,7 @@ export class TooltipDirective implements OnDestroy, OnInit, AfterViewInit {
     }
 
     const allPositions = this.autoPosition ? [defaultPosition].concat(autoPositions) : [defaultPosition];
-    strategy = this.overlay
+    const strategy: FlexibleConnectedPositionStrategy = this.overlay
       .position()
       .flexibleConnectedTo(this.elementRef)
       .withFlexibleDimensions(false)

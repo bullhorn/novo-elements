@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
     styleUrls: ['./tabs-layout.scss'],
     host: { class: 'tabs-layout' },
     encapsulation: ViewEncapsulation.None,
-    standalone: false
+    standalone: false,
 })
 export class TabsLayout implements AfterViewInit {
   title: string = 'Unknown';

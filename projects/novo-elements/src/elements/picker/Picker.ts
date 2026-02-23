@@ -73,7 +73,7 @@ const DEFAULT_DEBOUNCE_TIME = 250;
   `,
     styleUrls: ['./Picker.scss'],
     encapsulation: ViewEncapsulation.None,
-    standalone: false
+    standalone: false,
 })
 export class NovoPickerElement implements OnInit {
   // Container for the results
@@ -166,9 +166,9 @@ export class NovoPickerElement implements OnInit {
       this.element = this.overrideElement;
     }
     if (this.appendToBody) {
-      notify(`'appendToBody' has been deprecated. Please remove this attribute.`);
+      notify('\'appendToBody\' has been deprecated. Please remove this attribute.');
     }
-    let debounceTimeInMilliSeconds = Number.isNaN(Number(this.config?.debounceTimeInMilliSeconds)) ? DEFAULT_DEBOUNCE_TIME : Number(this.config?.debounceTimeInMilliSeconds);
+    const debounceTimeInMilliSeconds = Number.isNaN(Number(this.config?.debounceTimeInMilliSeconds)) ? DEFAULT_DEBOUNCE_TIME : Number(this.config?.debounceTimeInMilliSeconds);
     // Custom results template
     this.resultsComponent = this.config.resultsTemplate || PickerResults;
 

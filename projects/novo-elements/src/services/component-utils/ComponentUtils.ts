@@ -5,7 +5,7 @@ import { ComponentFactoryResolver, ComponentRef, Injectable, Injector, StaticPro
 export class ComponentUtils<T = any> {
   constructor(public componentFactoryResolver: ComponentFactoryResolver) {}
 
-  append<T>(ComponentClass: Type<T>, location: ViewContainerRef, providers?: StaticProvider[], onTop?: boolean): ComponentRef<T> {
+  append<T>(ComponentClass: Type<T>, location: ViewContainerRef, providers?: StaticProvider[], onTop?: boolean): ComponentRef<T> { //eslint-disable-line
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(ComponentClass);
     const parent = location.injector;
     const index = onTop ? 0 : location.length;

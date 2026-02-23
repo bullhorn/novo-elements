@@ -8,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
     styleUrls: ['./default-layout.scss'],
     host: { class: 'default-layout' },
     encapsulation: ViewEncapsulation.None,
-    standalone: false
+    standalone: false,
 })
 export class DefaultLayout {
   public constructor(private route: ActivatedRoute) {}

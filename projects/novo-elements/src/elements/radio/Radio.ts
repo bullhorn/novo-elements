@@ -60,7 +60,7 @@ const RADIO_VALUE_ACCESSOR = {
     host: {
         '[class.vertical]': 'vertical',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoRadioElement implements ControlValueAccessor, OnInit {
   private _uniqueId: string = `novo-radio-${++nextId}`;

@@ -54,7 +54,7 @@ type FieldOption = BaseFieldDef['options'][number];
   `,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.Default,
-    standalone: false
+    standalone: false,
 })
 export class NovoDefaultPickerConditionDef extends AbstractConditionFieldDef {
   defaultOperator = Operator.includeAny;
@@ -95,7 +95,7 @@ export class NovoDefaultPickerConditionDef extends AbstractConditionFieldDef {
       return (!options || !(options.find(option => option.value === selectedOption)));
     }).map(value => ({
       value,
-      label: value
+      label: value,
     }));
   }
 

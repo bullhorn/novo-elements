@@ -12,7 +12,7 @@ import { State, STATES } from '../states.data';
     selector: 'multiple-select-with-search-example',
     templateUrl: 'multiple-select-with-search-example.html',
     styleUrls: ['multiple-select-with-search-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class MultipleSelectWithSearchExample implements OnInit, AfterViewInit, OnDestroy {
   /** list of states */

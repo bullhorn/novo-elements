@@ -20,7 +20,7 @@ import { Helpers } from 'novo-elements/utils';
     </div>
   `,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    standalone: false,
 })
 export class NovoDataTableCellFilterHeader {
   @Input() label: string | number;

@@ -9,7 +9,7 @@ import { CheckboxControl, FieldInteractionApi, FormUtils, TextBoxControl } from 
     selector: 'fi-description-example',
     templateUrl: 'fi-description-example.html',
     styleUrls: ['fi-description-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class FiDescriptionExample {
   public form: any = {};

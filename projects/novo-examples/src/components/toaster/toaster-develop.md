@@ -44,16 +44,8 @@ Toasts are used as system notifications. They can contain custom text titles and
 
 The `novo-field` component expects 1 `button` or `novo-button` as the trigger for the menu list which is comprised of all the `novo-option` or `novo-optgroup` child components.
 
-### Properties
-
-<props-table component="NovoFieldElement"></props-table>
-
 # Directive
 
 ## NovoInput `[novoInput]`
 
 The `novoInput` component expects 1 `button` or `novo-button` as the trigger for the menu list which is comprised of all the `novo-option` or `novo-optgroup` child components.
-
-### Properties
-
-<props-table component="NovoInput"></props-table>

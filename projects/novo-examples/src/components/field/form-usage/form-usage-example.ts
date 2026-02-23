@@ -8,7 +8,7 @@ import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } 
     selector: 'form-usage-example',
     templateUrl: 'form-usage-example.html',
     styleUrls: ['form-usage-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class FormUsageExample {
   options: UntypedFormGroup;

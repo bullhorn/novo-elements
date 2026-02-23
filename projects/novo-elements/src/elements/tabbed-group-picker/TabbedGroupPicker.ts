@@ -69,15 +69,15 @@ export type TabbedGroupPickerButtonConfig = {
 };
 
 @Component({
-  selector: 'novo-tabbed-group-picker',
-  templateUrl: './TabbedGroupPicker.html',
-  styleUrls: ['./TabbedGroupPicker.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [{ provide: NOVO_OPTION_PARENT_COMPONENT, useExisting: NovoTabbedGroupPickerElement }],
-  standalone: false,
-  host: {
-    '[class.use-chips]': 'useChips()',
-  }
+    selector: 'novo-tabbed-group-picker',
+    templateUrl: './TabbedGroupPicker.html',
+    styleUrls: ['./TabbedGroupPicker.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [{ provide: NOVO_OPTION_PARENT_COMPONENT, useExisting: NovoTabbedGroupPickerElement }],
+    standalone: false,
+    host: {
+      '[class.use-chips]': 'useChips()',
+    },
 })
 export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
   @ViewChild('tabbedGroupPickerVirtualScrollViewport')

@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'override-template-example',
     templateUrl: 'override-template-example.html',
     styleUrls: ['override-template-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class OverrideTemplateExample {
   public placeholder: string = 'Select...';

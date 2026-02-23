@@ -56,7 +56,7 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
     // means the template in the table's view will not have the updated value (and in fact will cause
     // an ExpressionChangedAfterItHasBeenCheckedError).
     changeDetection: ChangeDetectionStrategy.Default,
-    standalone: false
+    standalone: false,
 })
 export class NovoDefaultStringConditionDef extends AbstractConditionFieldDef {
   defaultOperator = Operator.includeAny;

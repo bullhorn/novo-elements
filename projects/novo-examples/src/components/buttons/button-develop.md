@@ -34,7 +34,3 @@ _better sizing_
 ## NovoButtonElement `novo-button`
 
 All tabs must be incapsulated in a `novo-nav` container. The nav will control the context and active tab.
-
-### Properties
-
-<props-table component="NovoButtonElement"></props-table>

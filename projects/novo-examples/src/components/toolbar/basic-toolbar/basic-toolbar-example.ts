@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
     selector: 'basic-toolbar-example',
     templateUrl: 'basic-toolbar-example.html',
     styleUrls: ['basic-toolbar-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class BasicToolbarExample {}

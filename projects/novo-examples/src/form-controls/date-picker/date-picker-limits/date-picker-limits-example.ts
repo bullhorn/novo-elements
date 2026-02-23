@@ -8,7 +8,7 @@ import { BaseControl, FormUtils, NovoFormGroup, TextBoxControl } from 'novo-elem
     selector: 'date-picker-limits-example',
     templateUrl: 'date-picker-limits-example.html',
     styleUrls: ['date-picker-limits-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class DatePickerLimitsExample {
   startDate: Date = new Date();

@@ -32,7 +32,7 @@ import { FormUtils, NovoAsideRef, NovoAsideService, PickerControl, PickerResults
         '[style.display]': "'block'",
         '[style.width.%]': "'100'",
     },
-    standalone: false
+    standalone: false,
 })
 export class AsideFormDemo implements OnInit {
   public textControl: any;
@@ -73,7 +73,7 @@ export class AsideFormDemo implements OnInit {
     selector: 'aside-form-example',
     templateUrl: 'aside-form-example.html',
     styleUrls: ['aside-form-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class AsideFormExample {
   constructor(private aside: NovoAsideService) {}

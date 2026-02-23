@@ -9,7 +9,7 @@ import { AddressControl, findByCountryId, FormUtils } from 'novo-elements';
     selector: 'address-control-example',
     templateUrl: 'address-control-example.html',
     styleUrls: ['address-control-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class AddressControlExample {
   public addressControl: any;

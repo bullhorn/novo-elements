@@ -9,7 +9,7 @@ import { CheckboxControl, FieldInteractionApi, FormUtils, TextBoxControl } from 
     selector: 'fi-required-example',
     templateUrl: 'fi-required-example.html',
     styleUrls: ['fi-required-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class FiRequiredExample {
   public form: any = {};

@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'tabs-vertical-example',
     templateUrl: 'tabs-vertical-example.html',
     styleUrls: ['tabs-vertical-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class TabsVerticalExample {
   tabSelected() {

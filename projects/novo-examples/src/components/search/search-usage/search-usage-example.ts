@@ -8,7 +8,7 @@ import { Subject } from 'rxjs';
     selector: 'search-usage-example',
     templateUrl: 'search-usage-example.html',
     styleUrls: ['search-usage-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class SearchUsageExample {
   public test: string = 'TEST';

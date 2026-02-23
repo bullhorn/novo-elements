@@ -31,7 +31,7 @@ import { novoStepperAnimations } from './stepper.animations';
     preserveWhitespaces: false,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [{ provide: CdkStep, useExisting: NovoStep }],
-    standalone: false
+    standalone: false,
 })
 export class NovoStep extends CdkStep {
   /** Content for step label given by `<ng-template novoStepLabel>`. */
@@ -56,7 +56,7 @@ export class NovoStep extends CdkStep {
         { provide: CdkStep, useExisting: NovoStep },
         { provide: CdkStepper, useExisting: NovoStepper },
     ],
-    standalone: false
+    standalone: false,
 })
 export class NovoStepper extends CdkStepper implements AfterContentInit, OnDestroy {
   /** The list of step headers of the steps in the stepper. */
@@ -135,7 +135,7 @@ export class NovoStepper extends CdkStepper implements AfterContentInit, OnDestr
     // encapsulation: ViewEncapsulation.None,
     preserveWhitespaces: false,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    standalone: false,
 })
 export class NovoHorizontalStepper extends NovoStepper {}
 
@@ -156,7 +156,7 @@ export class NovoHorizontalStepper extends NovoStepper {}
     ],
     preserveWhitespaces: false,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    standalone: false,
 })
 export class NovoVerticalStepper extends NovoStepper {
   constructor(@Optional() dir: Directionality, changeDetectorRef: ChangeDetectorRef, elementRef: ElementRef) {

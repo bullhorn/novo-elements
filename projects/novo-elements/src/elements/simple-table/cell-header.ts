@@ -25,7 +25,7 @@ import { NovoActivityTableState } from './state';
 
 @Directive({
     selector: '[novoSimpleFilterFocus]',
-    standalone: false
+    standalone: false,
 })
 export class NovoSimpleFilterFocus implements AfterViewInit {
   constructor(private element: ElementRef) {}
@@ -124,7 +124,7 @@ export class NovoSimpleFilterFocus implements AfterViewInit {
   `,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    standalone: false,
 })
 export class NovoSimpleCellHeader implements NovoSimpleSortFilter, OnInit, OnDestroy {
   @ViewChild(NovoDropdownElement)

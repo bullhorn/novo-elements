@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'themed-list-example',
     templateUrl: 'themed-list-example.html',
     styleUrls: ['themed-list-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class ThemedListExample {
   public pulseItems: any;

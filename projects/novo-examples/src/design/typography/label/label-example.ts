@@ -8,6 +8,6 @@ import { Component } from '@angular/core';
     selector: 'label-example',
     templateUrl: './label-example.html',
     styleUrls: ['./label-example.scss'],
-    standalone: false
+    standalone: false,
 })
 export class LabelExample {}

@@ -9,7 +9,7 @@ import { NovoToastService } from 'novo-elements';
     selector: 'iconset-example',
     templateUrl: './iconset-example.html',
     styleUrls: ['./iconset-example.scss'],
-    standalone: false
+    standalone: false,
 })
 export class IconsetExample {
   icons = Object.values(Icons);

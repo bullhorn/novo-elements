@@ -40,7 +40,7 @@ let nextUniqueId = 0;
         '[attr.aria-invalid]': '_chipList && _chipList.ngControl ? _chipList.ngControl.invalid : null',
         '[attr.aria-required]': '_chipList && _chipList.required || null',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoChipInput implements NovoChipTextControl, OnChanges, OnDestroy {
   /** Whether the control is focused. */

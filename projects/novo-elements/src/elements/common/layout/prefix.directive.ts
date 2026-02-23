@@ -2,6 +2,6 @@ import { Directive } from '@angular/core';
 
 @Directive({
     selector: '[prefix],[before]',
-    standalone: false
+    standalone: false,
 })
 export class NovoPrefixDirective {}

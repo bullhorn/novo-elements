@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'multi-drop-down-example',
     templateUrl: 'multi-drop-down-example.html',
     styleUrls: ['multi-drop-down-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class MultiDropDownExample {
   public clickMe(data: string): void {

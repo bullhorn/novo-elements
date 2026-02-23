@@ -3,16 +3,16 @@ import { BooleanInput } from 'novo-elements/utils';
 
 @Component({
     selector: 'header-spacer',
-    template: `<ng-content></ng-content>`,
+    template: '<ng-content></ng-content>',
     styleUrls: ['./HeaderSpacer.scss'],
-    standalone: false
+    standalone: false,
 })
 export class NovoHeaderSpacer {}
 
 @Component({
     selector: 'utils',
-    template: `<ng-content></ng-content>`,
-    standalone: false
+    template: '<ng-content></ng-content>',
+    standalone: false,
 })
 export class NovoUtilsComponent {}
 
@@ -26,7 +26,7 @@ export class NovoUtilsComponent {}
     host: {
         class: 'novo-action',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoUtilActionComponent {
   @Input()
@@ -70,7 +70,7 @@ export class NovoUtilActionComponent {
     <ng-content></ng-content>
   `,
     styleUrls: ['./Header.scss'],
-    standalone: false
+    standalone: false,
 })
 export class NovoHeaderComponent {
   @HostBinding('attr.role')

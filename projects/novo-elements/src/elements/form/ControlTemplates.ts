@@ -705,7 +705,7 @@ import { NovoTemplateService } from 'novo-elements/services';
       </div>
     </ng-template>
   `,
-    standalone: false
+    standalone: false,
 })
 export class NovoControlTemplates implements AfterViewInit {
   @ViewChildren(NovoTemplate)

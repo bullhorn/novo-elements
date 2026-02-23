@@ -99,7 +99,7 @@ import { BasePickerResults } from '../base-picker-results/BasePickerResults';
     </div>
   `,
     styleUrls: ['./GroupedMultiPickerResults.scss'],
-    standalone: false
+    standalone: false,
 })
 export class GroupedMultiPickerResults extends BasePickerResults implements OnInit, OnDestroy {
   @ViewChild('input', { static: true })

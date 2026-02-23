@@ -18,7 +18,7 @@ import { ILinkConfig } from './menu.types';
       </ng-container>
     </ul>
   </div> `,
-    standalone: false
+    standalone: false,
 })
 export class MenuContentComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() public menuItems: MenuItemDirective[] = [];

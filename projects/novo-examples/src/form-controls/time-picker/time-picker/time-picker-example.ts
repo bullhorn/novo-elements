@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'time-picker-example',
     templateUrl: 'time-picker-example.html',
     styleUrls: ['time-picker-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class TimePickerExample {
   time1: Date = new Date();

@@ -8,7 +8,7 @@ import { ChildTab, ParentTab, TabbedGroupPickerTab } from 'novo-elements';
     selector: 'tabbed-group-picker-footer-example',
     templateUrl: 'tabbed-group-picker-footer-example.html',
     styleUrls: ['../tabbed-group-picker-example.scss'],
-    standalone: false
+    standalone: false,
 })
 export class TabbedGroupPickerFooterExample {
   getAnimals = (): { animalId: number; name: string }[] =>

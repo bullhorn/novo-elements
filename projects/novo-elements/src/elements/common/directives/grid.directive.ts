@@ -2,7 +2,7 @@ import { Directive, ElementRef, HostBinding, Input, Renderer2 } from '@angular/c
 
 @Directive({
     selector: '[appGrid]',
-    standalone: false
+    standalone: false,
 })
 export class GridDirective {
   @HostBinding('style.grid-template-columns')
@@ -23,7 +23,7 @@ export class GridDirective {
 
 @Directive({
     selector: '[appGridArea]',
-    standalone: false
+    standalone: false,
 })
 export class GridAreaDirective {
   @HostBinding('style.grid-area')

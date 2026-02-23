@@ -131,7 +131,7 @@ export class FormUtils {
     const dataTypeToTypeMap = {
       Timestamp: 'date',
       Date: 'date',
-      Boolean: 'tiles',
+      Boolean: 'tiles', // eslint-disable-line
     };
     const inputTypeToTypeMap = {
       CHECKBOX: 'radio',

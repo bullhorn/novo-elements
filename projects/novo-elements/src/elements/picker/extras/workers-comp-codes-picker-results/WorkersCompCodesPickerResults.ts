@@ -52,7 +52,7 @@ import {PickerResults} from '../picker-results';
     <p class="picker-error" *ngIf="hasError">{{ labels.pickerError }}</p>
     <p class="picker-null-results" *ngIf="hasNonErrorMessage">{{ getEmptyMessage() }}</p>
   `,
-    standalone: false
+    standalone: false,
 })
 export class WorkersCompCodesPickerResults extends PickerResults {
 

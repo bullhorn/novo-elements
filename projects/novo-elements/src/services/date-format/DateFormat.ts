@@ -70,7 +70,7 @@ export class DateFormatService {
 
   getDateMask(): MaskedOptions {
     return {
-      mask: /^((\d)(\d|\/|\.|\-){0,7})?(\d){0,2}$/
+      mask: /^((\d)(\d|\/|\.|\-){0,7})?(\d){0,2}$/,
     };
   }
 
@@ -95,7 +95,7 @@ export class DateFormatService {
     const [cleanDateString, cleanFormat] = this.removeNonstandardFormatCharacters(dateString, customFormat);
     try {
       date = parse(cleanDateString, cleanFormat, new Date(), {
-        useAdditionalWeekYearTokens: false
+        useAdditionalWeekYearTokens: false,
       });
       if (isNaN(date.getTime())) {
         date = null;
@@ -119,11 +119,11 @@ export class DateFormatService {
     return [date, dateString, isInvalidDate];
   }
 
-  private dateFormatToImaskPattern(format: string): string {
+  private dateFormatToImaskPattern(formatString: string): string {
     const partsReg = /(\w)\1+|([\.\\/-])/g;
     let output: string = '';
     let match: RegExpExecArray;
-    while ((match = partsReg.exec(format)) != null) {
+    while ((match = partsReg.exec(formatString)) != null) {
       if (match[1]) {
         const matchLow = match[1].toLowerCase();
         if (matchLow === 'y') {
@@ -141,27 +141,25 @@ export class DateFormatService {
   /**
    * Certain date format characters are considered nonstandard. We can still use them, but remove them for date parsing to avoid errors
    * @param dateString
-   * @param format
+   * @param formatString
    * @returns date string and format in array, both having had their
    */
-  private removeNonstandardFormatCharacters(dateString: string, format: string): [string, string] {
+  private removeNonstandardFormatCharacters(dateString: string, formatString: string): [string, string] {
     const bannedChars = /[iIRoPp]+/;
     // remove quotes
-    format = format.replace(/['"]/g, '');
+    formatString = formatString.replace(/['"]/g, '');
     let match: RegExpExecArray = null;
-    while ((match = bannedChars.exec(format)) != null) {
-      format = format.substring(0, match.index) + format.substring(match.index + match[0].length);
+    while ((match = bannedChars.exec(formatString)) != null) {
+      formatString = formatString.substring(0, match.index) + formatString.substring(match.index + match[0].length);
       dateString = dateString.substring(0, match.index) + dateString.substring(match.index + match[0].length);
     }
-    return [dateString, format];
+    return [dateString, formatString];
   }
 
   parseDateString(dateString: string): [Date, string, boolean] {
     let dateFormat: string = this.labels.dateFormatString();
     const dateFormatRegex = /(\w+)[\/|\.|\-](\w+)[\/|\.|\-](\w+)/gi;
     const dateValueRegex = /(\d+)[\/|\.|\-](\d+)[\/|\.|\-](\d+)/gi;
-    let dateFormatTokens: Array<string>;
-    let dateValueTokens: Array<string>;
     let year: number;
     let month: number;
     let day: number;
@@ -173,8 +171,8 @@ export class DateFormatService {
     } else {
       dateFormat = dateFormat.toLowerCase();
     }
-    dateFormatTokens = dateFormatRegex.exec(dateFormat);
-    dateValueTokens = dateValueRegex.exec(dateString);
+    const dateFormatTokens: Array<string> = dateFormatRegex.exec(dateFormat);
+    const dateValueTokens: Array<string> = dateValueRegex.exec(dateString);
     if (dateFormatTokens && dateFormatTokens.length === 4 && dateValueTokens && dateValueTokens.length === 4) {
       for (let i = 1; i < 4; i++) {
         if (dateFormatTokens[i].includes('m')) {
@@ -280,6 +278,7 @@ export class DateFormatService {
     const pmFormat = this.labels.timeFormatPM.toUpperCase();
 
     const [time, modifier] = time12h.split(' ');
+    // eslint-disable-next-line prefer-const
     let [hours, minutes] = time.split(':');
     if (hours === '12') {
       hours = '00';
@@ -290,10 +289,10 @@ export class DateFormatService {
     return `${hours}:${minutes}`;
   }
 
-  isValidDatePart(value: string, format: string): boolean {
+  isValidDatePart(value: string, formatString: string): boolean {
     const datePart = parseInt(value, 10);
-    return ((format.includes('m') && (datePart >= 2 || value.length === 2)) ||
-      (format.includes('d') && (datePart >= 4 || value.length === 2)) ||
-      (format.includes('y') && datePart >= 1000));
+    return ((formatString.includes('m') && (datePart >= 2 || value.length === 2)) ||
+      (formatString.includes('d') && (datePart >= 4 || value.length === 2)) ||
+      (formatString.includes('y') && datePart >= 1000));
   }
 }

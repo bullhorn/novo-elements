@@ -7,7 +7,6 @@ import markdownItAttrs from 'markdown-it-attrs';
 import Container from 'markdown-it-container';
 import taskLists from 'markdown-it-task-lists';
 import path from 'path';
-import { Application, TSConfigReader } from 'typedoc';
 import { BullhornFlavoredMarkdownPlugin } from './markdown/bfm-blocks';
 import { DoListPlugin } from './markdown/dos-list';
 
@@ -216,7 +215,7 @@ function generatePageRoute(metadata: PageMetadata[]): string {
  */
 function generatePageModule(extractedMetadata: PageMetadata[]): string {
   return `
-/* tslint:disable */
+/* eslint-disable */
 /** DO NOT MANUALLY EDIT THIS FILE, IT IS GENERATED 'build-examples-module' */
 import {NgModule, Component} from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -230,7 +229,6 @@ ${extractedMetadata
     .trim()}
 
 const routes: Routes = [
-  //{ path: '', component: Home, data: {} },
 ${generatePageRoute(extractedMetadata)},
   // Catch All
   { path: '**', redirectTo: '/home', data: {} },
@@ -309,25 +307,6 @@ function parsePageMetadata(filePath: string, sourceContent: string): PageMetadat
   };
 }
 
-async function generateApiDocs() {
-  const app = await Application.bootstrap({
-    // typedoc options here
-    entryPoints: [`${elementsPath}/index.ts`],
-    excludeExternals: true,
-    excludePrivate: true,
-  }, [new TSConfigReader()]);
-
-  const project = await app.convert();
-
-  if (project) {
-    // Project may not have converted correctly
-    const outputDir = 'projects/demo/assets';
-
-    // Alternatively generate JSON output
-    await app.generateJson(project, outputDir + '/documentation.json'); // this is broken with new typedoc update
-  }
-}
-
 /**
  * Aggregate multiple markdown files in same directory
  * to be parsed as single page metadata.
@@ -348,8 +327,6 @@ function aggregatePages(metadata: PageMetadata[]): SectionTree {
  * Creates the examples module and metadata
  */
 const task = async () => {
-  await generateApiDocs();
-
   const results: PageMetadata[] = [];
   const matchedFiles = glob(path.posix.join(examplesPath, '**/*.md'), { posix: true });
 

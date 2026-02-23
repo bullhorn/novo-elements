@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
     selector: 'tooltip-types-example',
     templateUrl: 'tooltip-types-example.html',
     styleUrls: ['tooltip-types-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class TooltipTypesExample {}

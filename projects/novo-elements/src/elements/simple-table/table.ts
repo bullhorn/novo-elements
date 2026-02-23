@@ -29,7 +29,7 @@ import { ActivityTableDataSource, ActivityTableService } from './table-source';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [{ provide: CDK_TABLE, useExisting: NovoTable }],
-    standalone: false
+    standalone: false,
 })
 export class NovoTable<T> extends CdkTable<T> {
   // TODO: add explicit constructor
@@ -37,31 +37,31 @@ export class NovoTable<T> extends CdkTable<T> {
 
 @Directive({
     selector: 'novo-activity-table-actions',
-    standalone: false
+    standalone: false,
 })
 export class NovoActivityTableActions {}
 
 @Directive({
     selector: 'novo-activity-table-custom-header',
-    standalone: false
+    standalone: false,
 })
 export class NovoActivityTableCustomHeader {}
 
 @Directive({
     selector: 'novo-activity-table-custom-filter',
-    standalone: false
+    standalone: false,
 })
 export class NovoActivityTableCustomFilter {}
 
 @Directive({
     selector: 'novo-activity-table-empty-message',
-    standalone: false
+    standalone: false,
 })
 export class NovoActivityTableEmptyMessage {}
 
 @Directive({
     selector: 'novo-activity-table-no-results-message',
-    standalone: false
+    standalone: false,
 })
 export class NovoActivityTableNoResultsMessage {}
 
@@ -169,7 +169,7 @@ export class NovoActivityTableNoResultsMessage {}
         { provide: _VIEW_REPEATER_STRATEGY, useClass: _DisposeViewRepeaterStrategy },
         { provide: _COALESCED_STYLE_SCHEDULER, useClass: _CoalescedStyleScheduler },
     ],
-    standalone: false
+    standalone: false,
 })
 export class NovoActivityTable<T> implements AfterContentInit, OnChanges, OnDestroy {
   @HostBinding('class.global-search-hidden')

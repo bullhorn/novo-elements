@@ -101,7 +101,7 @@ const MAX_PAGES_DISPLAYED = 5;
   `,
     styleUrls: ['./data-table-pagination.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    standalone: false,
 })
 export class NovoDataTablePagination<T> implements OnInit, OnDestroy {
   @HostBinding('class')

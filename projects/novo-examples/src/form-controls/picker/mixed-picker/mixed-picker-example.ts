@@ -8,7 +8,7 @@ import { MixedMultiPickerResults } from 'novo-elements';
     selector: 'mixed-picker-example',
     templateUrl: 'mixed-picker-example.html',
     styleUrls: ['mixed-picker-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class MixedPickerExample {
   public placeholder: string = 'Select...';

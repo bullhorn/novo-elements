@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
     selector: 'tooltip-placement-example',
     templateUrl: 'tooltip-placement-example.html',
     styleUrls: ['tooltip-placement-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class TooltipPlacementExample {}

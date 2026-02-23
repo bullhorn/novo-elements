@@ -89,7 +89,7 @@ import { BasePickerResults } from '../base-picker-results/BasePickerResults';
     </novo-list-item>
   `,
     styleUrls: ['../picker-results/PickerResult.scss'],
-    standalone: false
+    standalone: false,
 })
 export class EntityPickerResult {
   @Input() match: any;
@@ -236,7 +236,7 @@ export class EntityPickerResult {
     host: {
         class: 'novo-entity-picker-results',
     },
-    standalone: false
+    standalone: false,
 })
 export class EntityPickerResults extends BasePickerResults {
   @Output() select: EventEmitter<any> = new EventEmitter();

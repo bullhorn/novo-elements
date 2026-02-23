@@ -2,7 +2,7 @@ import { Directive, ElementRef, HostBinding, Input, Renderer2 } from '@angular/c
 
 @Directive({
     selector: '[flex]',
-    standalone: false
+    standalone: false,
 })
 export class FlexDirective {
   private _flex: string;

@@ -74,7 +74,7 @@ let nextId = 0;
         class: 'novo-checkbox',
         '[class.has-label]': 'label',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoCheckboxElement implements ControlValueAccessor, OnInit {
   /**

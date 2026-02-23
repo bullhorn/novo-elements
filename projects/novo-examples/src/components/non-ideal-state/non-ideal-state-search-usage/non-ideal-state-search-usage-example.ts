@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
     selector: 'non-ideal-state-search-usage-example',
     templateUrl: './non-ideal-state-search-usage-example.html',
     styleUrls: ['./non-ideal-state-search-usage-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class NonIdealStateSearchUsageExample {}

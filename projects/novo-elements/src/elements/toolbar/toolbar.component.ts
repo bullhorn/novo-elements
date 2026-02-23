@@ -13,7 +13,7 @@ const _NovoToolbarBase = mixinColor(
     selector: 'novo-toolbar-row',
     host: { class: 'novo-toolbar-row' },
     inputs: ['color', 'gap'],
-    standalone: false
+    standalone: false,
 })
 export class NovoToolbarRow extends _NovoToolbarBase implements CanColor {
   constructor(elementRef: ElementRef) {
@@ -33,7 +33,7 @@ export class NovoToolbarRow extends _NovoToolbarBase implements CanColor {
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: false
+    standalone: false,
 })
 export class NovoToolbar extends _NovoToolbarBase implements CanColor {
   /** Reference to all toolbar row elements that have been projected. */

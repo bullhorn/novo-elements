@@ -17,12 +17,12 @@ let nextId = 0;
 
 @Component({
     selector: 'novo-label,[novo-label]',
-    template: ` <ng-content></ng-content> `,
+    template: ' <ng-content></ng-content> ',
     styleUrls: ['./label.scss'],
     host: {
         class: 'novo-label',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoLabel extends NovoBaseTextElement implements OnInit{
   @HostBinding('attr.id')

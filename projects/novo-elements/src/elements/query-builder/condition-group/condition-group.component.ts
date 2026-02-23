@@ -23,7 +23,7 @@ const EMPTY_CONDITION: Condition = {
     host: {
         class: 'novo-condition-group',
     },
-    standalone: false
+    standalone: false,
 })
 export class ConditionGroupComponent implements OnInit, OnDestroy {
   @Input() controlName: string = '$' + Conjunction.AND;
@@ -96,7 +96,7 @@ export class ConditionGroupComponent implements OnInit, OnDestroy {
       scope: condition.scope,
       value: condition.value,
       supportingValue: condition.supportingValue,
-      entity: condition.entity
+      entity: condition.entity,
     };
   }
 

@@ -6,7 +6,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
     template: '<ng-content></ng-content>',
     host: { class: 'typedef-content' },
     encapsulation: ViewEncapsulation.None,
-    standalone: false
+    standalone: false,
 })
 export class TypedefContent {}
 
@@ -15,7 +15,7 @@ export class TypedefContent {}
     template: '<ng-content></ng-content>',
     host: { class: 'typedef-specs' },
     encapsulation: ViewEncapsulation.None,
-    standalone: false
+    standalone: false,
 })
 export class TypedefSpec {}
 
@@ -24,7 +24,7 @@ export class TypedefSpec {}
     template: '<ng-content></ng-content>',
     host: { class: 'typedef-snippet' },
     encapsulation: ViewEncapsulation.None,
-    standalone: false
+    standalone: false,
 })
 export class TypedefSnippet {}
 
@@ -34,6 +34,6 @@ export class TypedefSnippet {}
     styleUrls: ['./typedef-example.scss'],
     host: { class: 'typedef-example' },
     encapsulation: ViewEncapsulation.None,
-    standalone: false
+    standalone: false,
 })
 export class TypedefExample {}

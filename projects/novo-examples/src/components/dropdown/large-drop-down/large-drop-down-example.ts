@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'large-drop-down-example',
     templateUrl: 'large-drop-down-example.html',
     styleUrls: ['large-drop-down-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class LargeDropDownExample {
   public MOCK_WORDS: string[] = [

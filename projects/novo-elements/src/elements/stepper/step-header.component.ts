@@ -14,7 +14,7 @@ import { NovoStepLabel } from './step-label.component';
     },
     preserveWhitespaces: false,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    standalone: false,
 })
 export class NovoStepHeader extends CdkStepHeader implements OnDestroy {
   @Input()

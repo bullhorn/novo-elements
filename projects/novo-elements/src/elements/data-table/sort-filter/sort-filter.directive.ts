@@ -4,7 +4,7 @@ import { DataTableState } from '../state/data-table-state.service';
 
 @Directive({
     selector: '[novoDataTableSortFilter]',
-    standalone: false
+    standalone: false,
 })
 export class NovoDataTableSortFilter<T> {
   constructor(private state: DataTableState<T>) {}

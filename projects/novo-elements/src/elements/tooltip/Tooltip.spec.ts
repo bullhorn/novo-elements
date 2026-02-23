@@ -11,7 +11,7 @@ import { TooltipDirective } from './Tooltip.directive';
   template: `
     <div tooltip="test" tooltipPosition="right"></div>
     <div tooltip="test" [tooltipCloseOnClick]="true" tooltipPosition="right"></div>`,
-  standalone: false
+  standalone: false,
 })
 class TestComponent {}
 

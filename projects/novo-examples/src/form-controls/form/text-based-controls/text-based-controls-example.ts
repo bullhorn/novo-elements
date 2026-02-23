@@ -8,7 +8,7 @@ import { AceEditorControl, FormUtils, QuickNoteControl, TextAreaControl, TextBox
     selector: 'text-based-controls-example',
     templateUrl: 'text-based-controls-example.html',
     styleUrls: ['text-based-controls-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class TextBasedControlsExample {
   public quickNoteConfig: any;
@@ -66,9 +66,9 @@ export class TextBasedControlsExample {
       maskOptions: {
         mask: /^[\da-fA-F]{0,10}$/,
         keepCharPositions: false,
-        guide: false
+        guide: false,
       },
-      value: '9F'
+      value: '9F',
     })
     this.textAreaControl = new TextAreaControl({
       key: 'textarea',

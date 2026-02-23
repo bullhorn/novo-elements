@@ -27,7 +27,7 @@ import { AvatarTypePipe } from './pipe/AvatarType.pipe';
     NovoChipsElement,
     NovoRowChipElement,
     NovoRowChipsElement,
-    AvatarTypePipe
+    AvatarTypePipe,
   ],
   exports: [
     NovoChipElement,
@@ -38,7 +38,7 @@ import { AvatarTypePipe } from './pipe/AvatarType.pipe';
     NovoChipsElement,
     NovoRowChipElement,
     NovoRowChipsElement,
-    AvatarTypePipe
+    AvatarTypePipe,
   ],
   providers: [
     ErrorStateMatcher,

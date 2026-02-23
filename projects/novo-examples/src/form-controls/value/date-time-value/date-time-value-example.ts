@@ -8,7 +8,7 @@ import { NOVO_VALUE_THEME } from 'novo-elements';
     selector: 'date-time-value-example',
     templateUrl: 'date-time-value-example.html',
     styleUrls: ['date-time-value-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class DateTimeValueExample {
   public theme = NOVO_VALUE_THEME.DEFAULT;

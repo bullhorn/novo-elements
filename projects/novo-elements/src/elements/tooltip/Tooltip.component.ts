@@ -24,7 +24,7 @@ import { Component } from '@angular/core';
             ]),
         ]),
     ],
-    standalone: false
+    standalone: false,
 })
 export class NovoTooltip {
   public message: string;

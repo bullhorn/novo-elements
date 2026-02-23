@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
     selector: 'pop-over-placement-example',
     templateUrl: 'pop-over-placement-example.html',
     styleUrls: ['pop-over-placement-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class PopOverPlacementExample {}

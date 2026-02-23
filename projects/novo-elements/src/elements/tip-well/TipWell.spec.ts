@@ -36,13 +36,13 @@ describe('Elements: NovoTipWellElement', () => {
 
   describe('Method: tipWithStyles()', () => {
     it('should return sanitized tip', () => {
-      component.tip = `<div style="color: red">This text is RED</div>`;
+      component.tip = '<div style="color: red">This text is RED</div>';
       const actual = component.tipWithStyles;
       expect(actual).toEqual('TRUSTED_HTML');
       expect(component.sanitizer.bypassSecurityTrustHtml).toBeCalledTimes(1);
     });
     it('should cache previous sanitized tip when re-requested', () => {
-      component.tip = `<div style="color: red">This text is RED</div>`;
+      component.tip = '<div style="color: red">This text is RED</div>';
       component.tipWithStyles;
       component.tipWithStyles;
       component.tipWithStyles;
@@ -51,10 +51,10 @@ describe('Elements: NovoTipWellElement', () => {
       expect(component.sanitizer.bypassSecurityTrustHtml).toBeCalledTimes(1);
     });
     it('should bust the cache when the tip is modified', () => {
-      component.tip = `<div style="color: red">This text is RED</div>`;
+      component.tip = '<div style="color: red">This text is RED</div>';
       component.tipWithStyles;
       component.tipWithStyles;
-      component.tip = `<div style="color: blue">This text is BLUE</div>`;
+      component.tip = '<div style="color: blue">This text is BLUE</div>';
       component.tipWithStyles;
       const actual = component.tipWithStyles;
       expect(actual).toEqual('TRUSTED_HTML');

@@ -3,7 +3,7 @@ import { Injectable, Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
     name: 'highlight', pure: true,
-    standalone: false
+    standalone: false,
 })
 @Injectable()
 export class HighlightPipe implements PipeTransform {

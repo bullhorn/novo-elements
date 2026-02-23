@@ -30,7 +30,7 @@ import { FormUtils, NovoModalRef, NovoModalService, PickerControl, PickerResults
       <button theme="primary" icon="check" (click)="close()">Save</button>
     </novo-modal>
   `,
-    standalone: false
+    standalone: false,
 })
 export class ModalEditFormDemo implements OnInit {
   public textControl: any;
@@ -73,7 +73,7 @@ export class ModalEditFormDemo implements OnInit {
     selector: 'modal-edit-form-example',
     templateUrl: 'modal-edit-form-example.html',
     styleUrls: ['modal-edit-form-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class ModalEditFormExample {
   constructor(private modalService: NovoModalService) {}

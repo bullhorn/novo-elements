@@ -4,7 +4,7 @@ type IsoDateRangeArgs = (string | Date)[];
 
 @Pipe({
     name: 'isoDateRange',
-    standalone: false
+    standalone: false,
 })
 export class IsoDateRangePipe implements PipeTransform {
   constructor() {}

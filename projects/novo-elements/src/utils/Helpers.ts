@@ -313,7 +313,7 @@ export class Helpers {
    * @returns The first matching ancestor element, or undefined if none found
    */
   static findAncestor(element: Element, selector: string): Element {
-    while ((element = element.parentElement) && !element.matches.call(element, selector));
+    while ((element = element.parentElement) && !element.matches.call(element, selector)); // eslint-disable-line
     return element;
   }
 

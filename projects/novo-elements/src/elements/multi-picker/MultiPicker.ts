@@ -57,7 +57,7 @@ interface Item {
     host: {
         '[class.with-value]': 'items.length > 0',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoMultiPickerElement implements OnInit {
   @Input()

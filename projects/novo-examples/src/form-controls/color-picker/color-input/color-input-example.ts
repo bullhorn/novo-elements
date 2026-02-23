@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'color-input-example',
     templateUrl: 'color-input-example.html',
     styleUrls: ['color-input-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class ColorInputExample {
   hex: string = '#4A89DC';

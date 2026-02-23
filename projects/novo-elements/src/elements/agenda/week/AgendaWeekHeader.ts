@@ -32,7 +32,7 @@ import { CalendarEvent, WeekDay } from 'novo-elements/utils';
     >
     </ng-template>
   `,
-    standalone: false
+    standalone: false,
 })
 export class NovoAgendaWeekHeaderElement {
   @Input()

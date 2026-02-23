@@ -8,7 +8,7 @@ import { EntityPickerResult, EntityPickerResults, FormUtils, PickerControl } fro
     selector: 'picker-controls-example',
     templateUrl: 'picker-controls-example.html',
     styleUrls: ['picker-controls-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class PickerControlsExample {
   public singlePickerControl: any;

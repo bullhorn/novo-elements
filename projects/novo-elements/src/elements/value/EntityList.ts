@@ -18,7 +18,7 @@ import { Helpers } from 'novo-elements/utils';
       </span>
     </div>
   `,
-    standalone: false
+    standalone: false,
 })
 export class EntityList implements OnInit {
   @Input()

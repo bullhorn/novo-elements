@@ -8,7 +8,7 @@ import { Security } from 'novo-elements';
     selector: 'security-example',
     templateUrl: 'security-example.html',
     styleUrls: ['security-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class SecurityExample {
   perms = [];

@@ -68,7 +68,7 @@ export const NOVO_OPTGROUP = new InjectionToken<NovoOptgroup>('NovoOptgroup');
         '[class.novo-optgroup-disabled]': 'disabled',
     },
     providers: [{ provide: NOVO_OPTGROUP, useExisting: NovoOptgroup }],
-    standalone: false
+    standalone: false,
 })
 export class NovoOptgroup extends NovoOptgroupMixinBase {
   constructor(@Inject(NOVO_OPTION_PARENT_COMPONENT) @Optional() parent?: NovoOptionParentComponent) {

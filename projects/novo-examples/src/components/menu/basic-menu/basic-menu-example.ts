@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'basic-menu-example',
     templateUrl: 'basic-menu-example.html',
     styleUrls: ['basic-menu-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class BasicMenuExample {
   public clickMe(event?: string) {

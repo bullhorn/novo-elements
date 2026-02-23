@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
     selector: 'multi-row-toolbar-example',
     templateUrl: 'multi-row-toolbar-example.html',
     styleUrls: ['multi-row-toolbar-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class MultiRowToolbarExample {}

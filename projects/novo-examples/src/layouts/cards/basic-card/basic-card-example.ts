@@ -8,7 +8,7 @@ import { NovoToastService } from 'novo-elements';
     selector: 'basic-card-example',
     templateUrl: 'basic-card-example.html',
     styleUrls: ['basic-card-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class BasicCardExample {
   // Config for demos

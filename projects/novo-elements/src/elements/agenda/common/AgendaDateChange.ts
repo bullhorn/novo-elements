@@ -19,7 +19,7 @@ import { DateUtil } from 'novo-elements/utils';
     </div>
   `,
     styleUrls: ['./AgendaDateChange.scss'],
-    standalone: false
+    standalone: false,
 })
 export class NovoAgendaDateChangeElement {
   /**

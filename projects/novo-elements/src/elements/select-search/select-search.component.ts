@@ -120,7 +120,7 @@ let autoIncrement = 1;
         },
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    standalone: false,
 })
 export class NovoSelectSearchComponent implements OnInit, OnDestroy, ControlValueAccessor {
   @Input() name = 'select-search-' + autoIncrement++;
@@ -236,9 +236,9 @@ export class NovoSelectSearchComponent implements OnInit, OnDestroy, ControlValu
     switchMap((_options) =>
       _options
         ? combineLatest([_options.changes, this._filterFinishedRerender]).pipe(
-            map(([options,]) => options.toArray().filter(option => !(option._getHostElement()?.classList.contains('add-option') || option._getHostElement().hidden))),
+            map(([options]) => options.toArray().filter(option => !(option._getHostElement()?.classList.contains('add-option') || option._getHostElement().hidden))),
             startWith<NovoOption[]>(_options.toArray()),
-            distinctUntilChanged((optsA, optsB) => optsA.map(opt => opt.value).join(',') === optsB.map(opt => opt.value).join(','))
+            distinctUntilChanged((optsA, optsB) => optsA.map(opt => opt.value).join(',') === optsB.map(opt => opt.value).join(',')),
           )
         : of(null),
     ),

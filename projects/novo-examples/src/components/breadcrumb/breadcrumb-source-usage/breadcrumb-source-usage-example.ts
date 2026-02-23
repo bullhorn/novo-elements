@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'breadcrumb-source-usage-example',
     templateUrl: 'breadcrumb-source-usage-example.html',
     styleUrls: ['breadcrumb-source-usage-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class BreadcrumbSourceUsageExample {
   source = [

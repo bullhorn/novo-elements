@@ -46,7 +46,7 @@ export interface NovoControlGroupRowConfig {
         '[class.novo-control-group-appearance-card]': "appearance=='card'",
         '[class.novo-control-group-appearance-none]': "appearance=='none'",
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoControlGroup implements AfterContentInit, OnChanges, OnDestroy {
   @Input()

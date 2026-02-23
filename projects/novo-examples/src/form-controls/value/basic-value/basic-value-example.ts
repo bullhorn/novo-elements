@@ -8,7 +8,7 @@ import { NOVO_VALUE_THEME } from 'novo-elements';
     selector: 'basic-value-example',
     templateUrl: 'basic-value-example.html',
     styleUrls: ['basic-value-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class BasicValueExample {
   public theme = NOVO_VALUE_THEME.MOBILE;

@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'nested-menu-example',
     templateUrl: 'nested-menu-example.html',
     styleUrls: ['nested-menu-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class NestedMenuExample {
   public clickMe(event?: string) {

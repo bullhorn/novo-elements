@@ -5,7 +5,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular
     selector: 'novo-data-table-header-row',
     template: CDK_ROW_TEMPLATE,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    standalone: false,
 })
 export class NovoDataTableHeaderRow extends CdkHeaderRow {
   @HostBinding('class')

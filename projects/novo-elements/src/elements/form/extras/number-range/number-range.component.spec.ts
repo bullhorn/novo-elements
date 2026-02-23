@@ -12,7 +12,7 @@ describe('NumberRangeComponent', () => {
     TestBed.configureTestingModule({
       declarations: [NumberRangeComponent],
       providers: [{ provide: NovoLabelService, useClass: NovoLabelService }],
-      imports: [NovoQueryBuilderModule, NovoFlexModule]
+      imports: [NovoQueryBuilderModule, NovoFlexModule],
     }).compileComponents();
     fixture = TestBed.createComponent(NumberRangeComponent);
     component = fixture.debugElement.componentInstance;

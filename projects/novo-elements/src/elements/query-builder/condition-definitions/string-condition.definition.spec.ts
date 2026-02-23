@@ -14,9 +14,9 @@ describe('StringConditionDefinition', () => {
     it('should combine arrays in the form control', () => {
         const mockEvent = {
             input: {
-                value: 'string1'
+                value: 'string1',
             },
-            value: 'string1'
+            value: 'string1',
         };
         NovoDefaultStringConditionDef.prototype.add(mockEvent, formGroup);
         expect(formGroup.controls.value.value).toEqual(['string1']);

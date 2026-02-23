@@ -48,7 +48,7 @@ const EMPTY_CONDITION: Condition = {
     host: {
         class: 'novo-criteria-builder',
     },
-    standalone: false
+    standalone: false,
 })
 export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContentChecked, AfterViewInit {
   @Input() config: any;
@@ -120,7 +120,7 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
     this.parentForm.valueChanges.pipe(
       startWith(this.parentForm.value),
       filter(v => v?.criteria),
-      takeUntil(this._onDestroy)
+      takeUntil(this._onDestroy),
     ).subscribe((value) => {
       Promise.resolve().then(() => {
         this.setInitialValue(value[this.controlName]);
@@ -243,7 +243,7 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
   onFieldSelect(field) {
     this.scopedFieldPicker().dropdown.closePanel();
     const condition = { field: field.name, operator: null, scope: field.scope, value: null, entity: field.entity };
-    const group = this.conditionGroups().find((group) => group.scope === field.scope);
+    const group = this.conditionGroups().find((conditionGroup) => conditionGroup.scope === field.scope);
     if (group) {
       group.addCondition(condition);
     } else {

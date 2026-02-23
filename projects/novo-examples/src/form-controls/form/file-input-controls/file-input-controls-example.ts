@@ -9,7 +9,7 @@ import { FileControl, FormUtils, NovoFormGroup } from 'novo-elements';
     selector: 'file-input-controls-example',
     templateUrl: 'file-input-controls-example.html',
     styleUrls: ['file-input-controls-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class FileInputControlsExample {
   public fileControl: any;

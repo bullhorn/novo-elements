@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'basic-checkbox-example',
     templateUrl: 'basic-checkbox-example.html',
     styleUrls: ['basic-checkbox-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class BasicCheckboxExample {
   items: any[] = [

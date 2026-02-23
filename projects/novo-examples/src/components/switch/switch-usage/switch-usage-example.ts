@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'switch-usage-example',
     templateUrl: 'switch-usage-example.html',
     styleUrls: ['switch-usage-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class SwitchUsageExample {
   public toggleCount: number = 0;

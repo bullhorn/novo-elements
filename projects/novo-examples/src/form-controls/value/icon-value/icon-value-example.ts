@@ -8,7 +8,7 @@ import { NOVO_VALUE_THEME } from 'novo-elements';
     selector: 'icon-value-example',
     templateUrl: 'icon-value-example.html',
     styleUrls: ['icon-value-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class IconValueExample {
   public theme = NOVO_VALUE_THEME.DEFAULT;

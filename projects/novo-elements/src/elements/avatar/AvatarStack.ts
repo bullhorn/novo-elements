@@ -9,7 +9,7 @@ import { NovoAvatarElement } from './Avatar';
     <ng-content></ng-content>
     <novo-avatar *ngIf="showTotal" label="+5"></novo-avatar>
   `,
-    standalone: false
+    standalone: false,
 })
 export class NovoAvatarStackElement implements AfterViewInit {
   @Input()

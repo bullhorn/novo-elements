@@ -58,14 +58,6 @@ The `[dateFormat]` directive is used to specify the format the input should disp
 
 The `novo-date-picker-input` is deprecated, but it still used with the dynamic form containers. It is a convienent wrapper componet for an input with a date picker trigger. Most inputs are just pass throughs to the `novo-date-picker` instance.
 
-### Properties
-
-<props-table component="NovoDatePickerInputElement"></props-table>
-
 ## NovoDatePickerElement `novo-date-picker`
 
 The `novo-spinner` component displays the circular loading visual, usually used within the button to indicate the action is performing but not complete yet.
-
-### Properties
-
-<props-table component="NovoDatePickerElement"></props-table>

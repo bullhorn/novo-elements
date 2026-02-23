@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'formatted-chips-example',
     templateUrl: 'formatted-chips-example.html',
     styleUrls: ['formatted-chips-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class FormattedChipsExample {
   public formatted: any;

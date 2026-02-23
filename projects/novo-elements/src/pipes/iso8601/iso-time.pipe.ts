@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
     name: 'isoTime',
-    standalone: false
+    standalone: false,
 })
 export class IsoTimePipe implements PipeTransform {
   constructor() {}

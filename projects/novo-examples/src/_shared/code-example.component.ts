@@ -35,7 +35,7 @@ import { EXAMPLE_COMPONENTS, LiveExample } from '../examples.module';
       }
     `,
     ],
-    standalone: false
+    standalone: false,
 })
 export class CodeExampleComponent {
   /** Component portal for the currently displayed example. */

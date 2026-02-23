@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'button-dynamic-example',
     templateUrl: 'button-dynamic-example.html',
     styleUrls: ['button-dynamic-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class ButtonDynamicExample {
   theme: string = 'primary';

@@ -31,7 +31,7 @@ import { MockData } from './mock-data';
       <button theme="primary" color="success" icon="check" (click)="save()">Save</button>
     </novo-modal>
   `,
-    standalone: false
+    standalone: false,
 })
 export class ConfigureColumnsModal {
   public columns: IDataTableColumn<MockData>;
