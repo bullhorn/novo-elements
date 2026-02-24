@@ -22,6 +22,7 @@ module.exports = [
     },
     rules: {
       'unused-imports/no-unused-imports': 'error',
+      'no-duplicate-imports': 'error',
       'no-console': ['warn', { allow: ['warn', 'error', 'info'] }],
       '@typescript-eslint/no-non-null-assertion': 'warn',
       'no-fallthrough': 'error',

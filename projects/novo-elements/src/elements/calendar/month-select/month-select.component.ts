@@ -1,8 +1,7 @@
 // NG2
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NovoLabelService } from 'novo-elements/services';
-import type { DateLike } from 'novo-elements/utils';
-import { DateUtil } from 'novo-elements/utils';
+import { DateUtil, type DateLike } from 'novo-elements/utils';
 
 @Component({
     selector: 'novo-month-select',

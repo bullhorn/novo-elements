@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import type { DateLike, NovoDateSelectionStrategy } from 'novo-elements/utils';
-import { DateUtil } from 'novo-elements/utils';
+import { DateUtil, type DateLike, type NovoDateSelectionStrategy } from 'novo-elements/utils';
 
 @Injectable()
 export class RangeSelectionStrategy implements NovoDateSelectionStrategy<DateLike[]> {

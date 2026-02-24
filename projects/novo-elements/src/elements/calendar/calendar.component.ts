@@ -5,14 +5,14 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { addMonths, isDate, isSameDay, setMonth, setYear, startOfDay, startOfMonth, subMonths } from 'date-fns';
 // APP
 import { NovoLabelService } from 'novo-elements/services';
-import { Helpers } from 'novo-elements/utils';
-import type {
-  DatePickerSelectModes,
-  NovoDateSelectEvent,
-  NovoDateSelectionStrategy,
-  NovoMonthSelectEvent,
-  NovoYearSelectEvent,
-  OverlayDate,
+import {
+  Helpers,
+  type DatePickerSelectModes,
+  type NovoDateSelectEvent,
+  type NovoDateSelectionStrategy,
+  type NovoMonthSelectEvent,
+  type NovoYearSelectEvent,
+  type OverlayDate,
 } from 'novo-elements/utils';
 import { DefaultDateSelectionStrategy, MultiDateSelectionStrategy, RangeSelectionStrategy, WeekSelectionStrategy } from './strategies';
 
