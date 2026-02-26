@@ -824,43 +824,73 @@ export class v6Page {
 
 @Component({
   selector: 'v12-page',
-  template: `<h1>🎉 TBD 2026 (version 12)</h1>
+  template: `<h1>🎉 March 2026 (version 12)</h1>
 <p><strong>Announcement</strong>: Novo Elements is now on Angular 20!</p>
-<p>This brings Novo Elements up to the latest versions of both Angular and Typescript.</p>
-<h2>Upgrading to v11</h2>
+<p>This brings Novo Elements up to recent versions of both Angular and Typescript.</p>
+<h2>Upgrading to v12</h2>
 <ul>
-<li>Ensure your node version is compatible with Angular 20 which requires <code>^20.19.0</code> or <code>22.12.0</code>.</li>
+<li>Ensure your node version is compatible with Angular 20 which requires <code>^20.19.0</code> or <code>^22.12.0</code> or <code>^24.0.0</code>.</li>
 </ul>
-<h2 id="notable-changes">Notable changes <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v11-announce#notable-changes">#</a></h2>
+<h2 id="notable-changes">Notable changes <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v12-announce#notable-changes">#</a></h2>
 <h3>Angular Upgrade</h3>
 <ul>
-<li>Update to Angular 19 <a href="https://github.com/bullhorn/novo-elements/pull/1706">#1706</a></li>
+<li>Update to Angular 20 <a href="https://github.com/bullhorn/novo-elements/pull/1706">#1706</a></li>
 </ul>
-<h3>Date Picker</h3>
+<h3>Condition Builder</h3>
 <ul>
-<li>Add optional Cancel/Save buttons to Date Picker <a href="https://github.com/bullhorn/novo-elements/pull/1698">#1698</a></li>
-<li>Add optional dateForInitialView input <a href="https://github.com/bullhorn/novo-elements/pull/1635">#1635</a></li>
+<li>Add clear condition function <a href="https://github.com/bullhorn/novo-elements/pull/1764">#1764</a></li>
+<li>Custom options for a boolean condition <a href="https://github.com/bullhorn/novo-elements/pull/1764">#1764</a></li>
+<li>Allow ability to not recreate templates when calling reset on condition builder</li>
+<li>Boolean conditions v2 - use boolean form pattern when 2 options are available <a href="https://github.com/bullhorn/novo-elements/pull/1764">#1764</a></li>
+<li>Allow meta to express custom options for a boolean condition</li>
+</ul>
+<h3>Query Builder</h3>
+<ul>
+<li>Add ability to pop a confirmation modal when deleting <a href="https://github.com/bullhorn/novo-elements/pull/1758">#1758</a></li>
+<li>For address field, change Radius operator to Inside Radius and add a new Outside Radius operator</li>
+<li>Ensure supporting value is included when updating control name</li>
 </ul>
 <h3>Data Table</h3>
 <ul>
-<li>Add option to show the total number of records <a href="https://github.com/bullhorn/novo-elements/pull/1648">#1648</a></li>
+<li>Add ability to show pagination on footer of Data Table <a href="https://github.com/bullhorn/novo-elements/pull/1532">#1532</a></li>
+<li>Add applied search type <a href="https://github.com/bullhorn/novo-elements/pull/1529">#1529</a></li>
+<li>Updates to drag/drop, and implementation in Data Table <a href="https://github.com/bullhorn/novo-elements/pull/1720">#1720</a></li>
+<li>Add matchMetaData to DataTableWhere type <a href="https://github.com/bullhorn/novo-elements/pull/1762">#1762</a></li>
+<li>Make text stay visual while resizing right align columns <a href="https://github.com/bullhorn/novo-elements/pull/1488">#1488</a></li>
 </ul>
-<h3>Components</h3>
+<h3>Components &amp; Features</h3>
 <ul>
-<li>Select: Fixed keyboard navigation <a href="https://github.com/bullhorn/novo-elements/pull/1715">#1715</a></li>
-<li>Button: Add support for two icon buttons <a href="https://github.com/bullhorn/novo-elements/pull/1643">#1643</a></li>
-<li>Aside: Making the Aside component draggable <a href="https://github.com/bullhorn/novo-elements/pull/1660">#1660</a></li>
-<li>novo-field: Added disabled state styling <a href="https://github.com/bullhorn/novo-elements/pull/1644">#1644</a></li>
-<li>NovoOverlay: Contextual custom overlay containers <a href="https://github.com/bullhorn/novo-elements/pull/1639">#1639</a></li>
-<li>SwitchControl: Add change propagation to Switch Control Template <a href="https://github.com/bullhorn/novo-elements/pull/1593">#1593</a></li>
-<li>Autocomplete: Introduce makeFirstItemActive option <a href="https://github.com/bullhorn/novo-elements/pull/1574">#1574</a></li>
-<li>Select: Add icon option to select <a href="https://github.com/bullhorn/novo-elements/pull/1570">#1570</a></li>
-<li>Novo Notification: Added novo-dropdown to ng-content <a href="https://github.com/bullhorn/novo-elements/pull/1568">#1568</a></li>
-<li>Tiles: Restyling the novo-tiles component to be more legible <a href="https://github.com/bullhorn/novo-elements/pull/1590">#1590</a></li>
+<li>Drag Drop Module: Updates to drag/drop functionality <a href="https://github.com/bullhorn/novo-elements/pull/1720">#1720</a></li>
+<li>Aside: Making the Aside component draggable <a href="https://github.com/bullhorn/novo-elements/pull/1720">#1720</a></li>
+<li>Chips: Allow for better interaction with the picker/overlay from a <code>&lt;novo-chips&gt;</code> element <a href="https://github.com/bullhorn/novo-elements/pull/1523">#1523</a></li>
+<li>Chips: Added new hidden chips feature to Chips picker <a href="https://github.com/bullhorn/novo-elements/pull/1521">#1521</a></li>
+<li>Chips: Hidden-chips, existing model data fixes <a href="https://github.com/bullhorn/novo-elements/pull/1525">#1525</a></li>
+<li>TabbeGroupPicker: Add safety checks when setting the state <a href="https://github.com/bullhorn/novo-elements/pull/1735">#1735</a></li>
+<li>Time Picker: Add Save and Cancel buttons to Time Picker <a href="https://github.com/bullhorn/novo-elements/pull/1481">#1481</a></li>
+<li>Progress Bar: Check for a valid total to avoid wrong percentages <a href="https://github.com/bullhorn/novo-elements/pull/1531">#1531</a></li>
+<li>Control: Fixes to an error in Control affecting maxlength fields <a href="https://github.com/bullhorn/novo-elements/pull/1518">#1518</a></li>
+<li>Control: Prevent input events from firing if a mask has rejected <a href="https://github.com/bullhorn/novo-elements/pull/1478">#1478</a></li>
+<li>Control: Issue preventing length of text input from displaying <a href="https://github.com/bullhorn/novo-elements/pull/1508">#1508</a></li>
+<li>Picker: Specify parent of picker components <a href="https://github.com/bullhorn/novo-elements/pull/1483">#1483</a></li>
+<li>Address: Preserve prediction order to prevent incorrect city selection <a href="https://github.com/bullhorn/novo-elements/pull/1749">#1749</a></li>
+<li>Address: Add unit test coverage and fixes <a href="https://github.com/bullhorn/novo-elements/pull/1755">#1755</a></li>
 </ul>
-<h3>Google Places</h3>
+<h3>Utilities &amp; Helpers</h3>
 <ul>
-<li>Add postal_codes to AddressData for better locality support <a href="https://github.com/bullhorn/novo-elements/pull/1703">#1703</a></li>
+<li>Add isNullOrUndefined function and update descriptions <a href="https://github.com/bullhorn/novo-elements/pull/1723">#1723</a></li>
+<li>Country: Update country and state data for Country util <a href="https://github.com/bullhorn/novo-elements/pull/1533">#1533</a></li>
+</ul>
+<h3>Removed Features</h3>
+<ul>
+<li>Dragula: Deleted dragula add-on <a href="https://github.com/bullhorn/novo-elements/pull/1517">#1517</a></li>
+<li>Table: Deleted the table component <a href="https://github.com/bullhorn/novo-elements/pull/1513">#1513</a></li>
+</ul>
+<h3>Bug Fixes</h3>
+<ul>
+<li>ConditionBuilder: When swapping between similar operators, preserve value <a href="https://github.com/bullhorn/novo-elements/pull/1589">#1589</a></li>
+<li>FormControl: Prevent input events from firing if a mask has rejected <a href="https://github.com/bullhorn/novo-elements/pull/1478">#1478</a></li>
+<li>DragDrop: Fix Firefox's use of drag events <a href="https://github.com/bullhorn/novo-elements/pull/1474">#1474</a></li>
+<li>AppBridge: Handling AppBridge events improvements</li>
 </ul>
 `,
   host: { class: 'markdown-page' },
@@ -6778,14 +6808,8 @@ const routes: Routes = [
   { path: 'updates/v8-announce', component: v8Page, data: { order: '4', title: 'v8', section: 'updates' } },
   { path: 'updates/v7-announce', component: v7Page, data: { order: '5', title: 'v7', section: 'updates' } },
   { path: 'updates/v6', component: v6Page, data: { order: '6', title: 'v6', section: 'updates' } },
-  {
-    path: 'updates/v11-announce',
-    component: TabsLayout,
-    data: { title: 'v11 Announce', section: 'updates', pages: [{ title: 'v11', route: './v11'},{ title: 'v11', route: './v11'}], description: null, tag: 'new' },
-    children: [       { path: 'v11', component: v12Page },
-      { path: 'v11', component: v11Page },
-      { path: '', redirectTo: '/updates/v11-announce/v11', pathMatch: 'full' },
-    ]},
+  { path: 'updates/v12-announce', component: v12Page, data: { order: '1', title: 'v12', section: 'updates', tag: 'new' } },
+  { path: 'updates/v11-announce', component: v11Page, data: { order: '1', title: 'v11', section: 'updates', tag: 'new' } },
   { path: 'updates/v10-announce', component: v10Page, data: { order: '2', title: 'v10', section: 'updates' } },
   { path: 'templates', component: TemplatesPage, data: { order: '4', title: 'Templates', section: 'src' } },
   { path: 'patterns', component: PatternsPage, data: { order: '5', title: 'Patterns', section: 'src' } },
