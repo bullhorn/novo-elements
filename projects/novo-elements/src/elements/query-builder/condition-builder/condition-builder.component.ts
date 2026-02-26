@@ -238,7 +238,7 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
     this.parentForm.get('value').setValue(null);
     this.parentForm.get('supportingValue')?.setValue(null);
 
-    // Allow empty field so it won't auto-reset to default
+    // Allow empty field so it won't auto-reset to default during clearing
     this.allowEmptyField = true;
 
     // Reset the field search term
@@ -250,6 +250,9 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
     // Update field selection and clear UI
     this.updateFieldSelection();
     this.resetInputAndOperator(false);
+
+    // Reset allowEmptyField back to false after clearing is complete
+    this.allowEmptyField = false;
   }
 
   getField() {
