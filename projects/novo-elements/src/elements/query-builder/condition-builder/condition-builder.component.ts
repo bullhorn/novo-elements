@@ -216,6 +216,42 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
     this.cdr.markForCheck();
   }
 
+  /**
+   * Clears the entire condition (field, operator, value) and resets the condition builder UI.
+   *
+   * This method performs a complete reset of the condition builder:
+   * - Clears all form values (field, operator, value, supportingValue)
+   * - Allows empty field selection (prevents auto-restoration to default)
+   * - Resets the field search term
+   * - Clears internal state (_lastContext) to force re-detection of field changes
+   * - Updates field selection and clears UI outlets
+   *
+   * Use this method when you need to completely clear a condition and start fresh,
+   * such as when toggling a filter off or resetting a form group.
+   *
+   * @returns void
+   */
+  clearCondition(): void {
+    // Clear all form values
+    this.parentForm.get('field').setValue(null);
+    this.parentForm.get('operator').setValue(null);
+    this.parentForm.get('value').setValue(null);
+    this.parentForm.get('supportingValue')?.setValue(null);
+
+    // Allow empty field so it won't auto-reset to default
+    this.allowEmptyField = true;
+
+    // Reset the field search term
+    this.searchTerm.setValue('');
+
+    // Reset internal state so updateFieldSelection detects the change
+    this._lastContext = {};
+
+    // Update field selection and clear UI
+    this.updateFieldSelection();
+    this.resetInputAndOperator(false);
+  }
+
   getField() {
     const field = this.parentForm?.value?.field;
     if (!field) {
