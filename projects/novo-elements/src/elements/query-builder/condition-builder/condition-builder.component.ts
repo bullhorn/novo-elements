@@ -232,13 +232,16 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
    * @returns void
    */
   clearCondition(): void {
+    // Preserve the current allowEmptyField state to restore after clearing
+    const previousAllowEmptyField = this.allowEmptyField;
+
     // Clear all form values
     this.parentForm.get('field').setValue(null);
     this.parentForm.get('operator').setValue(null);
     this.parentForm.get('value').setValue(null);
     this.parentForm.get('supportingValue')?.setValue(null);
 
-    // Allow empty field so it won't auto-reset to default during clearing
+    // Temporarily allow empty field so it won't auto-reset to default during clearing
     this.allowEmptyField = true;
 
     // Reset the field search term
@@ -251,8 +254,8 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
     this.updateFieldSelection();
     this.resetInputAndOperator(false);
 
-    // Reset allowEmptyField back to false after clearing is complete
-    this.allowEmptyField = false;
+    // Restore the previous allowEmptyField state after clearing is complete
+    this.allowEmptyField = previousAllowEmptyField;
   }
 
   getField() {
