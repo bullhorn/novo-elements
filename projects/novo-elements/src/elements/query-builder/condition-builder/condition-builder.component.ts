@@ -82,6 +82,7 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
   @Input() groupIndex: number;
   @Input() addressConfig: AddressCriteriaConfig;
   @Input() dateConfig: DateCriteriaConfig;
+  @Input() allowEmptyField: boolean = false;
   hideOperator = input(true);
   conditionType = input();
 
@@ -113,7 +114,6 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
 
   public staticFieldSelection = computed(() => this.config().staticFieldSelection);
   private _lastContext: any = {};
-  public allowEmptyField: boolean = false;
   @HostBinding('class.condition-host')
   public isConditionHost = false;
 
