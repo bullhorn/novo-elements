@@ -8,6 +8,7 @@ import * as i0 from "@angular/core";
 export declare class NovoDefaultBooleanConditionDef extends AbstractConditionFieldDef {
     defaultOperator: Operator;
     constructor(labelService: NovoLabelService);
+    optIdentify(option: any): any;
     static ɵfac: i0.ɵɵFactoryDeclaration<NovoDefaultBooleanConditionDef, never>;
     static ɵcmp: i0.ɵɵComponentDeclaration<NovoDefaultBooleanConditionDef, "novo-boolean-condition-def", never, {}, {}, never, never, false, never>;
 }

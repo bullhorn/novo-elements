@@ -42,7 +42,7 @@ export declare class CriteriaBuilderComponent implements OnInit, OnDestroy, Afte
     get root(): FormArray;
     addConditionGroup(data?: any): void;
     newConditionGroup(data: ConditionGroup): UntypedFormGroup;
-    newCondition({ field, operator, scope, value, supportingValue }?: Condition): UntypedFormGroup;
+    newCondition({ field, operator, scope, value, supportingValue, warnOnDelete }?: Condition): UntypedFormGroup;
     getFieldEntity(fieldConfigs: any, scope: any): any;
     removeConditionGroupAt(index: number): void;
     clearAllConditions(): void;

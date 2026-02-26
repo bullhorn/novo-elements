@@ -6,6 +6,7 @@ import * as i1 from 'novo-elements/services';
 import { NovoLabelService } from 'novo-elements/services';
 import { Subject, Subscription, merge, interval } from 'rxjs';
 import { debounceTime, distinctUntilChanged, takeUntil, startWith, filter, debounce } from 'rxjs/operators';
+import { Helpers } from 'novo-elements/utils';
 import * as i2 from '@angular/common';
 import { CommonModule } from '@angular/common';
 import * as i5 from 'novo-elements/elements/common';
@@ -40,7 +41,6 @@ import * as i8$2 from 'novo-elements/elements/form';
 import { NovoFormModule, NovoFormExtrasModule } from 'novo-elements/elements/form';
 import * as i7$1 from 'novo-elements/elements/tabbed-group-picker';
 import { NovoTabbedGroupPickerElement, NovoTabbedGroupPickerModule } from 'novo-elements/elements/tabbed-group-picker';
-import { Helpers } from 'novo-elements/utils';
 import * as i5$2 from 'novo-elements/elements/button';
 import { NovoButtonModule } from 'novo-elements/elements/button';
 import * as i8$3 from 'novo-elements/elements/dropdown';
@@ -625,8 +625,11 @@ class NovoDefaultBooleanConditionDef extends AbstractConditionFieldDef {
         this.defaultOperator = Operator.include;
         this.defineOperatorEditGroup(Operator.include, Operator.exclude, Operator.isNull);
     }
+    optIdentify(option) {
+        return option.label;
+    }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoDefaultBooleanConditionDef, deps: [{ token: i1.NovoLabelService }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "19.2.15", type: NovoDefaultBooleanConditionDef, isStandalone: false, selector: "novo-boolean-condition-def", usesInheritance: true, ngImport: i0, template: `
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "19.2.15", type: NovoDefaultBooleanConditionDef, isStandalone: false, selector: "novo-boolean-condition-def", usesInheritance: true, ngImport: i0, template: `
     <ng-container novoConditionFieldDef>
       <novo-field *novoConditionOperatorsDef="let formGroup; fieldMeta as meta" [formGroup]="formGroup">
         <novo-select [placeholder]="labels.operator" formControlName="operator" (onSelect)="onOperatorSelect(formGroup)">
@@ -635,14 +638,23 @@ class NovoDefaultBooleanConditionDef extends AbstractConditionFieldDef {
           <novo-option value="isNull" *ngIf="!meta?.removeIsEmpty">{{ labels.isEmpty }}</novo-option>
         </novo-select>
       </novo-field>
-      <novo-field *novoConditionInputDef="let formGroup" [style.width.px]="125" [formGroup]="formGroup">
-        <novo-radio-group formControlName="value">
-          <novo-radio [value]="true">{{ formGroup.value.operator === 'isNull' ? labels.yes : labels.true }}</novo-radio>
-          <novo-radio [value]="false">{{ formGroup.value.operator === 'isNull' ? labels.no : labels.false }}</novo-radio>
-        </novo-radio-group>
+      <novo-field *novoConditionInputDef="let formGroup; fieldMeta as meta" [style.maxWidth.px]="250" [formGroup]="formGroup">
+        @let isNull = formGroup.value.operator === 'isNull';
+        @let useYesNo = isNull || meta.dataType === 'Boolean';
+        @let customOptions = !isNull && meta.options?.length === 2;
+        @if (customOptions) {
+          <novo-radio-group formControlName="value">
+            <novo-radio *ngFor="let opt of meta.options; trackBy: optIdentify" [value]="opt.value">{{ opt.label }}</novo-radio>
+          </novo-radio-group>
+        } @else {
+          <novo-radio-group formControlName="value">
+            <novo-radio [value]="true">{{ useYesNo ? labels.yes : labels.true }}</novo-radio>
+            <novo-radio [value]="false">{{ useYesNo ? labels.no : labels.false }}</novo-radio>
+          </novo-radio-group>
+        }
       </novo-field>
     </ng-container>
-  `, isInline: true, dependencies: [{ kind: "directive", type: i2.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i3.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i3.NgControlStatusGroup, selector: "[formGroupName],[formArrayName],[ngModelGroup],[formGroup],form:not([ngNoForm]),[ngForm]" }, { kind: "directive", type: i3.FormGroupDirective, selector: "[formGroup]", inputs: ["formGroup"], outputs: ["ngSubmit"], exportAs: ["ngForm"] }, { kind: "directive", type: i3.FormControlName, selector: "[formControlName]", inputs: ["formControlName", "disabled", "ngModel"], outputs: ["ngModelChange"] }, { kind: "component", type: i5$1.NovoSelectElement, selector: "novo-select", inputs: ["disabled", "required", "tabIndex", "id", "name", "placeholder", "readonly", "headerConfig", "position", "overlayWidth", "overlayHeight", "displayIcon", "displayWith", "compareWith", "hideLegacyOptions", "value", "multiple", "options"], outputs: ["onSelect", "selectionChange", "valueChange", "openedChange", "opened", "closed"] }, { kind: "component", type: i6.NovoFieldElement, selector: "novo-field", inputs: ["layout", "appearance", "customOverlayOrigin", "width"], outputs: ["valueChanges", "stateChanges"] }, { kind: "component", type: i5.NovoOption, selector: "novo-option", inputs: ["selected", "keepOpen", "novoInert", "value", "disabled"], exportAs: ["novoOption"] }, { kind: "component", type: i9$1.NovoRadioElement, selector: "novo-radio", inputs: ["id", "name", "tabindex", "vertical", "label", "button", "theme", "size", "icon", "color", "disabled", "checked", "value"], outputs: ["change", "blur", "focus"] }, { kind: "component", type: i9$1.NovoRadioGroup, selector: "novo-radio-group", inputs: ["id", "tabindex", "errorStateMatcher", "appearance", "value", "name", "disabled", "required", "placeholder"], outputs: ["change", "blur"] }, { kind: "directive", type: NovoConditionOperatorsDef, selector: "[novoConditionOperatorsDef]" }, { kind: "directive", type: NovoConditionInputDef, selector: "[novoConditionInputDef]" }, { kind: "directive", type: NovoConditionFieldDef, selector: "[novoConditionFieldDef]" }], changeDetection: i0.ChangeDetectionStrategy.Default, encapsulation: i0.ViewEncapsulation.None }); }
+  `, isInline: true, dependencies: [{ kind: "directive", type: i2.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i2.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i3.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i3.NgControlStatusGroup, selector: "[formGroupName],[formArrayName],[ngModelGroup],[formGroup],form:not([ngNoForm]),[ngForm]" }, { kind: "directive", type: i3.FormGroupDirective, selector: "[formGroup]", inputs: ["formGroup"], outputs: ["ngSubmit"], exportAs: ["ngForm"] }, { kind: "directive", type: i3.FormControlName, selector: "[formControlName]", inputs: ["formControlName", "disabled", "ngModel"], outputs: ["ngModelChange"] }, { kind: "component", type: i5$1.NovoSelectElement, selector: "novo-select", inputs: ["disabled", "required", "tabIndex", "id", "name", "placeholder", "readonly", "headerConfig", "position", "overlayWidth", "overlayHeight", "displayIcon", "displayWith", "compareWith", "hideLegacyOptions", "value", "multiple", "options"], outputs: ["onSelect", "selectionChange", "valueChange", "openedChange", "opened", "closed"] }, { kind: "component", type: i6.NovoFieldElement, selector: "novo-field", inputs: ["layout", "appearance", "customOverlayOrigin", "width"], outputs: ["valueChanges", "stateChanges"] }, { kind: "component", type: i5.NovoOption, selector: "novo-option", inputs: ["selected", "keepOpen", "novoInert", "value", "disabled"], exportAs: ["novoOption"] }, { kind: "component", type: i9$1.NovoRadioElement, selector: "novo-radio", inputs: ["id", "name", "tabindex", "vertical", "label", "button", "theme", "size", "icon", "color", "disabled", "checked", "value"], outputs: ["change", "blur", "focus"] }, { kind: "component", type: i9$1.NovoRadioGroup, selector: "novo-radio-group", inputs: ["id", "tabindex", "errorStateMatcher", "appearance", "value", "name", "disabled", "required", "placeholder"], outputs: ["change", "blur"] }, { kind: "directive", type: NovoConditionOperatorsDef, selector: "[novoConditionOperatorsDef]" }, { kind: "directive", type: NovoConditionInputDef, selector: "[novoConditionInputDef]" }, { kind: "directive", type: NovoConditionFieldDef, selector: "[novoConditionFieldDef]" }], changeDetection: i0.ChangeDetectionStrategy.Default, encapsulation: i0.ViewEncapsulation.None }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoDefaultBooleanConditionDef, decorators: [{
             type: Component,
@@ -657,11 +669,20 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
           <novo-option value="isNull" *ngIf="!meta?.removeIsEmpty">{{ labels.isEmpty }}</novo-option>
         </novo-select>
       </novo-field>
-      <novo-field *novoConditionInputDef="let formGroup" [style.width.px]="125" [formGroup]="formGroup">
-        <novo-radio-group formControlName="value">
-          <novo-radio [value]="true">{{ formGroup.value.operator === 'isNull' ? labels.yes : labels.true }}</novo-radio>
-          <novo-radio [value]="false">{{ formGroup.value.operator === 'isNull' ? labels.no : labels.false }}</novo-radio>
-        </novo-radio-group>
+      <novo-field *novoConditionInputDef="let formGroup; fieldMeta as meta" [style.maxWidth.px]="250" [formGroup]="formGroup">
+        @let isNull = formGroup.value.operator === 'isNull';
+        @let useYesNo = isNull || meta.dataType === 'Boolean';
+        @let customOptions = !isNull && meta.options?.length === 2;
+        @if (customOptions) {
+          <novo-radio-group formControlName="value">
+            <novo-radio *ngFor="let opt of meta.options; trackBy: optIdentify" [value]="opt.value">{{ opt.label }}</novo-radio>
+          </novo-radio-group>
+        } @else {
+          <novo-radio-group formControlName="value">
+            <novo-radio [value]="true">{{ useYesNo ? labels.yes : labels.true }}</novo-radio>
+            <novo-radio [value]="false">{{ useYesNo ? labels.no : labels.false }}</novo-radio>
+          </novo-radio-group>
+        }
       </novo-field>
     </ng-container>
   `,
@@ -1515,7 +1536,7 @@ class ConditionBuilderComponent {
         }
     }
     ngOnDestroy() {
-        this.searches.unsubscribe();
+        this.searches?.unsubscribe();
         // Clear all outlets and Maps
         [this._operatorOutlet.viewContainer, this._inputOutlet.viewContainer].forEach((def) => {
             def.clear();
@@ -1591,13 +1612,28 @@ class ConditionBuilderComponent {
         if (!field) {
             return;
         }
-        const editType = this.editTypeFn()(field);
+        let editType = this.editTypeFn()(field);
         // Don't look at dataSpecialization it is no good, this misses currency, and percent
         const { name } = field;
+        if (editType.toUpperCase() === 'RADIO') {
+            editType = this.doesFieldQualifyAsBinary(field) ? 'BOOLEAN' : 'SELECT';
+        }
         const fieldDefsByName = this.queryBuilderService.getFieldDefsByName();
         // Check Fields by priority for match Field Definition
         const key = [name, editType?.toUpperCase(), 'DEFAULT'].find((it) => fieldDefsByName.has(it));
         return fieldDefsByName.get(key);
+    }
+    doesFieldQualifyAsBinary(field) {
+        if (field.dataType === 'Boolean') {
+            return true;
+        }
+        // If no options are presented, use True/False options.
+        const optionCount = field.options?.length;
+        if (!Helpers.isNumber(optionCount) || optionCount === 0) {
+            return true;
+        }
+        // If the field uses 2 options, we can show 2 radio values for that. 1 is an invalid state, but better displayed with a Select picker.
+        return field.options.length === 2;
     }
     createFieldTemplates() {
         const definition = this.findDefinitionForField(this.getField());
@@ -1741,6 +1777,7 @@ class ConditionGroupComponent {
             value: condition.value,
             supportingValue: condition.supportingValue,
             entity: condition.entity,
+            warnOnDelete: condition.warnOnDelete,
         };
     }
     get root() {
@@ -1753,7 +1790,17 @@ class ConditionGroupComponent {
         this.qbs.hasMultipleScopes() && onlyConditionIsEmpty && this.removeCondition(0);
         this.cdr.markForCheck();
     }
-    removeCondition(index) {
+    async removeCondition(index) {
+        const condition = this.root.at(index)?.value;
+        const warnOnDelete = condition?.warnOnDelete;
+        const fieldName = condition?.field;
+        const isLastInstanceOfPinnedField = typeof warnOnDelete === 'function' && this.root.value.filter(c => c.field === fieldName).length === 1;
+        if (isLastInstanceOfPinnedField) {
+            const shouldDelete = await warnOnDelete();
+            if (!shouldDelete) {
+                return;
+            }
+        }
         const isPrimaryScope = this.scope === this.qbs.scopes()[0];
         const lastRowInGroup = this.root.length === 1;
         const lastRowInQueryBuilder = this.cantRemoveRow();
@@ -1763,7 +1810,7 @@ class ConditionGroupComponent {
         }
         this.cdr.markForCheck();
     }
-    newCondition({ field, operator, scope, value, supportingValue, entity } = EMPTY_CONDITION$1) {
+    newCondition({ field, operator, scope, value, supportingValue, entity, warnOnDelete } = EMPTY_CONDITION$1) {
         return this.formBuilder.group({
             conditionType: '$and',
             field: [field, Validators.required],
@@ -1772,6 +1819,7 @@ class ConditionGroupComponent {
             value: [value],
             supportingValue: [supportingValue],
             entity: [entity],
+            warnOnDelete: [warnOnDelete],
         });
     }
     cantRemoveRow() {
@@ -1781,13 +1829,13 @@ class ConditionGroupComponent {
         return this.root.length <= 1;
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: ConditionGroupComponent, deps: [{ token: QueryBuilderService }, { token: i1.NovoLabelService }, { token: i3.ControlContainer }, { token: i3.FormBuilder }, { token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "19.2.15", type: ConditionGroupComponent, isStandalone: false, selector: "novo-condition-group", inputs: { controlName: "controlName", groupIndex: "groupIndex", hideFirstOperator: "hideFirstOperator", canBeEmpty: "canBeEmpty", formGroupName: "formGroupName" }, host: { classAttribute: "novo-condition-group" }, providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => ConditionGroupComponent), multi: true }], usesOnChanges: true, ngImport: i0, template: "<div [formGroup]=\"parentForm\" class=\"condition-group-container\">\n  <novo-stack [formArrayName]=\"controlName\" gap=\"md\">\n    <ng-container\n      *ngFor=\"let andGroup of root.controls; let andIndex = index; let isFirst = first;let isLast = last;\">\n      <ng-container [formGroupName]=\"andIndex\">\n        <novo-flex class=\"condition-row\" [ngClass]=\"{ isFirst: andIndex === 0 }\" [class]=\"entity || scope\" align=\"end\" gap=\"sm\" #flex>\n          <novo-dropdown *ngIf=\"(!isFirst || !hideFirstOperator) && qbs.allowedGroupings.length > 1; else labeledGroup\" data-automation-id=\"groupings-dropdown\">\n            <button theme=\"dialogue\" icon=\"collapse\" size=\"sm\">{{qbs.getConjunctionLabel(controlName)}}</button>\n            <novo-optgroup>\n              <novo-option *ngFor=\"let c of qbs.allowedGroupings\" (click)=\"updateControlName(c)\" [attr.data-automation-id]=\"c\">\n                {{qbs.getConjunctionLabel(c)}}</novo-option>\n            </novo-optgroup>\n          </novo-dropdown>\n          <ng-template #labeledGroup>\n            <novo-label *ngIf=\"!isFirst || !hideFirstOperator\" color=\"ash\" size=\"xs\" uppercase padding=\"sm\">\n              {{qbs.getConjunctionLabel(controlName)}}</novo-label>\n          </ng-template>\n          <novo-condition-builder [groupIndex]=\"groupIndex\" [andIndex]=\"andIndex\" [hideOperator]=\"isFirst && hideFirstOperator\" [scope]=\"scope\" [conditionType]=\"controlName\"></novo-condition-builder>\n          <novo-button class=\"delete-btn\" theme=\"icon\" icon=\"delete-o\" color=\"negative\" (click)=\"removeCondition(andIndex)\">\n          </novo-button>\n        </novo-flex>\n      </ng-container>\n    </ng-container>\n    <button\n      *ngIf=\"!qbs.hasMultipleScopes()\"\n      theme=\"dialogue\"\n      data-automation-id=\"add-advanced-search-condition\"\n      icon=\"add-thin\"\n      side=\"left\"\n      size=\"sm\"\n      uppercase\n      (click)=\"addCondition()\">\n      {{ labels.addCondition }}</button>\n  </novo-stack>\n</div>\n", styles: [":host{position:relative;display:block;border:1px solid var(--border);border-radius:var(--border-radius-round);padding:var(--spacing-md);width:100%}:host .condition-row{width:100%}:host .delete-btn{margin-bottom:1px}\n"], dependencies: [{ kind: "directive", type: i2.NgClass, selector: "[ngClass]", inputs: ["class", "ngClass"] }, { kind: "directive", type: i2.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i2.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i3.NgControlStatusGroup, selector: "[formGroupName],[formArrayName],[ngModelGroup],[formGroup],form:not([ngNoForm]),[ngForm]" }, { kind: "directive", type: i3.FormGroupDirective, selector: "[formGroup]", inputs: ["formGroup"], outputs: ["ngSubmit"], exportAs: ["ngForm"] }, { kind: "directive", type: i3.FormGroupName, selector: "[formGroupName]", inputs: ["formGroupName"] }, { kind: "directive", type: i3.FormArrayName, selector: "[formArrayName]", inputs: ["formArrayName"] }, { kind: "component", type: i5$2.NovoButtonElement, selector: "novo-button,button[theme]", inputs: ["color", "side", "size", "theme", "loading", "icon", "secondIcon", "disabled"] }, { kind: "component", type: i5.NovoLabel, selector: "novo-label,[novo-label]", inputs: ["id"] }, { kind: "directive", type: i5.PaddingDirective, selector: "[p],[padding],[paddingTop],[paddingRight],[paddingBottom],[paddingLeft],[paddingX],[paddingY],[pt],[pr],[pb],[pl],[px],[py]", inputs: ["padding", "p", "paddingLeft", "pl", "paddingRight", "pr", "paddingTop", "pt", "paddingBottom", "pb", "paddingX", "px", "paddingY", "py"] }, { kind: "directive", type: i5.GapDirective, selector: "[gap]", inputs: ["gap"] }, { kind: "directive", type: i5.ThemeColorDirective, selector: "[theme]", inputs: ["theme"] }, { kind: "component", type: i5.NovoOption, selector: "novo-option", inputs: ["selected", "keepOpen", "novoInert", "value", "disabled"], exportAs: ["novoOption"] }, { kind: "component", type: i5.NovoOptgroup, selector: "novo-optgroup", inputs: ["disabled", "label"], exportAs: ["novoOptgroup"] }, { kind: "component", type: i8.NovoFlexElement, selector: "novo-flex,novo-row", inputs: ["direction", "align", "justify", "wrap", "gap"] }, { kind: "component", type: i8.NovoStackElement, selector: "novo-stack,novo-column", inputs: ["direction", "align"] }, { kind: "component", type: i8$3.NovoDropdownElement, selector: "novo-dropdown", inputs: ["parentScrollSelector", "parentScrollAction", "containerClass", "side", "scrollStrategy", "keepOpen", "height", "width", "appendToBody", "multiple", "scrollToActiveItemOnOpen"], outputs: ["toggled"] }, { kind: "component", type: ConditionBuilderComponent, selector: "novo-condition-builder", inputs: ["label", "scope", "andIndex", "groupIndex", "addressConfig", "dateConfig", "hideOperator", "conditionType", "config", "editTypeFn"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "19.2.15", type: ConditionGroupComponent, isStandalone: false, selector: "novo-condition-group", inputs: { controlName: "controlName", groupIndex: "groupIndex", hideFirstOperator: "hideFirstOperator", canBeEmpty: "canBeEmpty", formGroupName: "formGroupName" }, host: { classAttribute: "novo-condition-group" }, providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => ConditionGroupComponent), multi: true }], usesOnChanges: true, ngImport: i0, template: "<div [formGroup]=\"parentForm\" class=\"condition-group-container\">\n  <novo-stack [formArrayName]=\"controlName\" gap=\"md\">\n    <ng-container\n      *ngFor=\"let andGroup of root.controls; let andIndex = index; let isFirst = first;let isLast = last;\">\n      <ng-container [formGroupName]=\"andIndex\">\n        <novo-flex class=\"condition-row\" [ngClass]=\"{ isFirst: andIndex === 0 }\" [class]=\"entity || scope\" align=\"end\" gap=\"sm\" #flex>\n          <novo-dropdown *ngIf=\"(!isFirst || !hideFirstOperator) && qbs.allowedGroupings.length > 1; else labeledGroup\" data-automation-id=\"groupings-dropdown\">\n            <button theme=\"dialogue\" icon=\"collapse\" size=\"sm\">{{qbs.getConjunctionLabel(controlName)}}</button>\n            <novo-optgroup>\n              <novo-option *ngFor=\"let c of qbs.allowedGroupings\" (click)=\"updateControlName(c)\" [attr.data-automation-id]=\"c\">\n                {{qbs.getConjunctionLabel(c)}}</novo-option>\n            </novo-optgroup>\n          </novo-dropdown>\n          <ng-template #labeledGroup>\n            <novo-label *ngIf=\"!isFirst || !hideFirstOperator\" color=\"ash\" size=\"xs\" uppercase padding=\"sm\">\n              {{qbs.getConjunctionLabel(controlName)}}</novo-label>\n          </ng-template>\n          <novo-condition-builder [groupIndex]=\"groupIndex\" [andIndex]=\"andIndex\" [hideOperator]=\"isFirst && hideFirstOperator\" [scope]=\"scope\" [conditionType]=\"controlName\"></novo-condition-builder>\n          <novo-button class=\"delete-btn\" theme=\"icon\" icon=\"delete-o\" color=\"negative\" (click)=\"removeCondition(andIndex)\" data-automation-id=\"delete-filter-button\">\n          </novo-button>\n        </novo-flex>\n      </ng-container>\n    </ng-container>\n    <button\n      *ngIf=\"!qbs.hasMultipleScopes()\"\n      theme=\"dialogue\"\n      data-automation-id=\"add-advanced-search-condition\"\n      icon=\"add-thin\"\n      side=\"left\"\n      size=\"sm\"\n      uppercase\n      (click)=\"addCondition()\">\n      {{ labels.addCondition }}</button>\n  </novo-stack>\n</div>\n", styles: [":host{position:relative;display:block;border:1px solid var(--border);border-radius:var(--border-radius-round);padding:var(--spacing-md);width:100%}:host .condition-row{width:100%}:host .delete-btn{margin-bottom:1px}\n"], dependencies: [{ kind: "directive", type: i2.NgClass, selector: "[ngClass]", inputs: ["class", "ngClass"] }, { kind: "directive", type: i2.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i2.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i3.NgControlStatusGroup, selector: "[formGroupName],[formArrayName],[ngModelGroup],[formGroup],form:not([ngNoForm]),[ngForm]" }, { kind: "directive", type: i3.FormGroupDirective, selector: "[formGroup]", inputs: ["formGroup"], outputs: ["ngSubmit"], exportAs: ["ngForm"] }, { kind: "directive", type: i3.FormGroupName, selector: "[formGroupName]", inputs: ["formGroupName"] }, { kind: "directive", type: i3.FormArrayName, selector: "[formArrayName]", inputs: ["formArrayName"] }, { kind: "component", type: i5$2.NovoButtonElement, selector: "novo-button,button[theme]", inputs: ["color", "side", "size", "theme", "loading", "icon", "secondIcon", "disabled"] }, { kind: "component", type: i5.NovoLabel, selector: "novo-label,[novo-label]", inputs: ["id"] }, { kind: "directive", type: i5.PaddingDirective, selector: "[p],[padding],[paddingTop],[paddingRight],[paddingBottom],[paddingLeft],[paddingX],[paddingY],[pt],[pr],[pb],[pl],[px],[py]", inputs: ["padding", "p", "paddingLeft", "pl", "paddingRight", "pr", "paddingTop", "pt", "paddingBottom", "pb", "paddingX", "px", "paddingY", "py"] }, { kind: "directive", type: i5.GapDirective, selector: "[gap]", inputs: ["gap"] }, { kind: "directive", type: i5.ThemeColorDirective, selector: "[theme]", inputs: ["theme"] }, { kind: "component", type: i5.NovoOption, selector: "novo-option", inputs: ["selected", "keepOpen", "novoInert", "value", "disabled"], exportAs: ["novoOption"] }, { kind: "component", type: i5.NovoOptgroup, selector: "novo-optgroup", inputs: ["disabled", "label"], exportAs: ["novoOptgroup"] }, { kind: "component", type: i8.NovoFlexElement, selector: "novo-flex,novo-row", inputs: ["direction", "align", "justify", "wrap", "gap"] }, { kind: "component", type: i8.NovoStackElement, selector: "novo-stack,novo-column", inputs: ["direction", "align"] }, { kind: "component", type: i8$3.NovoDropdownElement, selector: "novo-dropdown", inputs: ["parentScrollSelector", "parentScrollAction", "containerClass", "side", "scrollStrategy", "keepOpen", "height", "width", "appendToBody", "multiple", "scrollToActiveItemOnOpen"], outputs: ["toggled"] }, { kind: "component", type: ConditionBuilderComponent, selector: "novo-condition-builder", inputs: ["label", "scope", "andIndex", "groupIndex", "addressConfig", "dateConfig", "hideOperator", "conditionType", "config", "editTypeFn"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: ConditionGroupComponent, decorators: [{
             type: Component,
             args: [{ selector: 'novo-condition-group', changeDetection: ChangeDetectionStrategy.OnPush, providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => ConditionGroupComponent), multi: true }], host: {
                         class: 'novo-condition-group',
-                    }, standalone: false, template: "<div [formGroup]=\"parentForm\" class=\"condition-group-container\">\n  <novo-stack [formArrayName]=\"controlName\" gap=\"md\">\n    <ng-container\n      *ngFor=\"let andGroup of root.controls; let andIndex = index; let isFirst = first;let isLast = last;\">\n      <ng-container [formGroupName]=\"andIndex\">\n        <novo-flex class=\"condition-row\" [ngClass]=\"{ isFirst: andIndex === 0 }\" [class]=\"entity || scope\" align=\"end\" gap=\"sm\" #flex>\n          <novo-dropdown *ngIf=\"(!isFirst || !hideFirstOperator) && qbs.allowedGroupings.length > 1; else labeledGroup\" data-automation-id=\"groupings-dropdown\">\n            <button theme=\"dialogue\" icon=\"collapse\" size=\"sm\">{{qbs.getConjunctionLabel(controlName)}}</button>\n            <novo-optgroup>\n              <novo-option *ngFor=\"let c of qbs.allowedGroupings\" (click)=\"updateControlName(c)\" [attr.data-automation-id]=\"c\">\n                {{qbs.getConjunctionLabel(c)}}</novo-option>\n            </novo-optgroup>\n          </novo-dropdown>\n          <ng-template #labeledGroup>\n            <novo-label *ngIf=\"!isFirst || !hideFirstOperator\" color=\"ash\" size=\"xs\" uppercase padding=\"sm\">\n              {{qbs.getConjunctionLabel(controlName)}}</novo-label>\n          </ng-template>\n          <novo-condition-builder [groupIndex]=\"groupIndex\" [andIndex]=\"andIndex\" [hideOperator]=\"isFirst && hideFirstOperator\" [scope]=\"scope\" [conditionType]=\"controlName\"></novo-condition-builder>\n          <novo-button class=\"delete-btn\" theme=\"icon\" icon=\"delete-o\" color=\"negative\" (click)=\"removeCondition(andIndex)\">\n          </novo-button>\n        </novo-flex>\n      </ng-container>\n    </ng-container>\n    <button\n      *ngIf=\"!qbs.hasMultipleScopes()\"\n      theme=\"dialogue\"\n      data-automation-id=\"add-advanced-search-condition\"\n      icon=\"add-thin\"\n      side=\"left\"\n      size=\"sm\"\n      uppercase\n      (click)=\"addCondition()\">\n      {{ labels.addCondition }}</button>\n  </novo-stack>\n</div>\n", styles: [":host{position:relative;display:block;border:1px solid var(--border);border-radius:var(--border-radius-round);padding:var(--spacing-md);width:100%}:host .condition-row{width:100%}:host .delete-btn{margin-bottom:1px}\n"] }]
+                    }, standalone: false, template: "<div [formGroup]=\"parentForm\" class=\"condition-group-container\">\n  <novo-stack [formArrayName]=\"controlName\" gap=\"md\">\n    <ng-container\n      *ngFor=\"let andGroup of root.controls; let andIndex = index; let isFirst = first;let isLast = last;\">\n      <ng-container [formGroupName]=\"andIndex\">\n        <novo-flex class=\"condition-row\" [ngClass]=\"{ isFirst: andIndex === 0 }\" [class]=\"entity || scope\" align=\"end\" gap=\"sm\" #flex>\n          <novo-dropdown *ngIf=\"(!isFirst || !hideFirstOperator) && qbs.allowedGroupings.length > 1; else labeledGroup\" data-automation-id=\"groupings-dropdown\">\n            <button theme=\"dialogue\" icon=\"collapse\" size=\"sm\">{{qbs.getConjunctionLabel(controlName)}}</button>\n            <novo-optgroup>\n              <novo-option *ngFor=\"let c of qbs.allowedGroupings\" (click)=\"updateControlName(c)\" [attr.data-automation-id]=\"c\">\n                {{qbs.getConjunctionLabel(c)}}</novo-option>\n            </novo-optgroup>\n          </novo-dropdown>\n          <ng-template #labeledGroup>\n            <novo-label *ngIf=\"!isFirst || !hideFirstOperator\" color=\"ash\" size=\"xs\" uppercase padding=\"sm\">\n              {{qbs.getConjunctionLabel(controlName)}}</novo-label>\n          </ng-template>\n          <novo-condition-builder [groupIndex]=\"groupIndex\" [andIndex]=\"andIndex\" [hideOperator]=\"isFirst && hideFirstOperator\" [scope]=\"scope\" [conditionType]=\"controlName\"></novo-condition-builder>\n          <novo-button class=\"delete-btn\" theme=\"icon\" icon=\"delete-o\" color=\"negative\" (click)=\"removeCondition(andIndex)\" data-automation-id=\"delete-filter-button\">\n          </novo-button>\n        </novo-flex>\n      </ng-container>\n    </ng-container>\n    <button\n      *ngIf=\"!qbs.hasMultipleScopes()\"\n      theme=\"dialogue\"\n      data-automation-id=\"add-advanced-search-condition\"\n      icon=\"add-thin\"\n      side=\"left\"\n      size=\"sm\"\n      uppercase\n      (click)=\"addCondition()\">\n      {{ labels.addCondition }}</button>\n  </novo-stack>\n</div>\n", styles: [":host{position:relative;display:block;border:1px solid var(--border);border-radius:var(--border-radius-round);padding:var(--spacing-md);width:100%}:host .condition-row{width:100%}:host .delete-btn{margin-bottom:1px}\n"] }]
         }], ctorParameters: () => [{ type: QueryBuilderService }, { type: i1.NovoLabelService }, { type: i3.ControlContainer }, { type: i3.FormBuilder }, { type: i0.ChangeDetectorRef }], propDecorators: { controlName: [{
                 type: Input
             }], groupIndex: [{
@@ -1808,6 +1856,7 @@ const EMPTY_CONDITION = {
     value: null,
     supportingValue: null,
     entity: null,
+    warnOnDelete: undefined,
 };
 class CriteriaBuilderComponent {
     set HideFirstOperator(hide) {
@@ -1939,7 +1988,7 @@ class CriteriaBuilderComponent {
         }, {});
         return this.formBuilder.group(controls);
     }
-    newCondition({ field, operator, scope, value, supportingValue } = EMPTY_CONDITION) {
+    newCondition({ field, operator, scope, value, supportingValue, warnOnDelete } = EMPTY_CONDITION) {
         const entity = this.getFieldEntity(this.config, scope);
         return this.formBuilder.group({
             conditionType: '$and',
@@ -1949,6 +1998,7 @@ class CriteriaBuilderComponent {
             value: [value],
             supportingValue: [supportingValue],
             entity: [entity],
+            warnOnDelete: [warnOnDelete],
         });
     }
     getFieldEntity(fieldConfigs, scope) {

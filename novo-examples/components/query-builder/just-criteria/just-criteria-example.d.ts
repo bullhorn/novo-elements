@@ -2,8 +2,17 @@ import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef, OnInit } from '@angular/core';
 import { AbstractControl, UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
 import { AbstractConditionFieldDef, AddressCriteriaConfig, AddressRadiusUnitsName, Conjunction, CriteriaBuilderComponent, Operator } from 'novo-elements';
+import { NovoModalRef } from 'novo-elements/elements/modal';
 import { ReplaySubject, Subject } from 'rxjs';
 import * as i0 from "@angular/core";
+export declare class DeleteFilterModalDemo {
+    private modalRef;
+    constructor(modalRef: NovoModalRef);
+    confirm(): void;
+    cancel(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<DeleteFilterModalDemo, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<DeleteFilterModalDemo, "delete-filter-modal-demo", never, {}, {}, never, never, false, never>;
+}
 export declare class CustomPickerConditionDef extends AbstractConditionFieldDef implements OnInit {
     defaultOperator: Operator;
     searchCtrl: UntypedFormControl;
@@ -50,6 +59,7 @@ export declare class JustCriteriaExample implements OnInit {
         value: boolean;
     }[];
     editTypeFn: (field: any) => any;
+    private modalService;
     constructor(formBuilder: UntypedFormBuilder, cdr: ChangeDetectorRef);
     ngOnInit(): void;
     getFieldConfig(useNoteMeta: boolean): Promise<{
@@ -1128,6 +1138,36 @@ export declare class JustCriteriaExample implements OnInit {
                 value: string;
                 label: string;
             }[];
+            hideFromSearch: boolean;
+            sortOrder: number;
+            hint: string;
+            description: string;
+            systemRequired: boolean;
+            shouldAddCustomEntityLabel: boolean;
+            allowCustomFilterValues: boolean;
+            dataSpecialization?: undefined;
+            fields?: undefined;
+            optionsType?: undefined;
+            optionsUrl?: undefined;
+            associatedEntity?: undefined;
+            hasBeginsWith?: undefined;
+            defaultValue?: undefined;
+        } | {
+            name: string;
+            type: string;
+            dataType: string;
+            maxLength: number;
+            confidential: boolean;
+            optional: boolean;
+            label: string;
+            required: boolean;
+            readOnly: boolean;
+            multiValue: boolean;
+            inputType: string;
+            options: {
+                value: string;
+                label: string;
+            }[];
             defaultValue: string;
             hideFromSearch: boolean;
             sortOrder: number;
@@ -1721,36 +1761,6 @@ export declare class JustCriteriaExample implements OnInit {
             inputType?: undefined;
             defaultValue?: undefined;
             allowCustomFilterValues?: undefined;
-        } | {
-            name: string;
-            type: string;
-            dataType: string;
-            maxLength: number;
-            confidential: boolean;
-            optional: boolean;
-            label: string;
-            required: boolean;
-            readOnly: boolean;
-            multiValue: boolean;
-            inputType: string;
-            options: {
-                value: string;
-                label: string;
-            }[];
-            hideFromSearch: boolean;
-            sortOrder: number;
-            hint: string;
-            description: string;
-            systemRequired: boolean;
-            shouldAddCustomEntityLabel: boolean;
-            allowCustomFilterValues: boolean;
-            dataSpecialization?: undefined;
-            fields?: undefined;
-            optionsType?: undefined;
-            optionsUrl?: undefined;
-            associatedEntity?: undefined;
-            hasBeginsWith?: undefined;
-            defaultValue?: undefined;
         } | {
             name: string;
             type: string;
@@ -3099,6 +3109,36 @@ export declare class JustCriteriaExample implements OnInit {
                 value: string;
                 label: string;
             }[];
+            hideFromSearch: boolean;
+            sortOrder: number;
+            hint: string;
+            description: string;
+            systemRequired: boolean;
+            shouldAddCustomEntityLabel: boolean;
+            allowCustomFilterValues: boolean;
+            dataSpecialization?: undefined;
+            fields?: undefined;
+            optionsType?: undefined;
+            optionsUrl?: undefined;
+            associatedEntity?: undefined;
+            hasBeginsWith?: undefined;
+            defaultValue?: undefined;
+        } | {
+            name: string;
+            type: string;
+            dataType: string;
+            maxLength: number;
+            confidential: boolean;
+            optional: boolean;
+            label: string;
+            required: boolean;
+            readOnly: boolean;
+            multiValue: boolean;
+            inputType: string;
+            options: {
+                value: string;
+                label: string;
+            }[];
             defaultValue: string;
             hideFromSearch: boolean;
             sortOrder: number;
@@ -3692,36 +3732,6 @@ export declare class JustCriteriaExample implements OnInit {
             inputType?: undefined;
             defaultValue?: undefined;
             allowCustomFilterValues?: undefined;
-        } | {
-            name: string;
-            type: string;
-            dataType: string;
-            maxLength: number;
-            confidential: boolean;
-            optional: boolean;
-            label: string;
-            required: boolean;
-            readOnly: boolean;
-            multiValue: boolean;
-            inputType: string;
-            options: {
-                value: string;
-                label: string;
-            }[];
-            hideFromSearch: boolean;
-            sortOrder: number;
-            hint: string;
-            description: string;
-            systemRequired: boolean;
-            shouldAddCustomEntityLabel: boolean;
-            allowCustomFilterValues: boolean;
-            dataSpecialization?: undefined;
-            fields?: undefined;
-            optionsType?: undefined;
-            optionsUrl?: undefined;
-            associatedEntity?: undefined;
-            hasBeginsWith?: undefined;
-            defaultValue?: undefined;
         } | {
             name: string;
             type: string;
@@ -5070,6 +5080,36 @@ export declare class JustCriteriaExample implements OnInit {
                 value: string;
                 label: string;
             }[];
+            hideFromSearch: boolean;
+            sortOrder: number;
+            hint: string;
+            description: string;
+            systemRequired: boolean;
+            shouldAddCustomEntityLabel: boolean;
+            allowCustomFilterValues: boolean;
+            dataSpecialization?: undefined;
+            fields?: undefined;
+            optionsType?: undefined;
+            optionsUrl?: undefined;
+            associatedEntity?: undefined;
+            hasBeginsWith?: undefined;
+            defaultValue?: undefined;
+        } | {
+            name: string;
+            type: string;
+            dataType: string;
+            maxLength: number;
+            confidential: boolean;
+            optional: boolean;
+            label: string;
+            required: boolean;
+            readOnly: boolean;
+            multiValue: boolean;
+            inputType: string;
+            options: {
+                value: string;
+                label: string;
+            }[];
             defaultValue: string;
             hideFromSearch: boolean;
             sortOrder: number;
@@ -5666,36 +5706,6 @@ export declare class JustCriteriaExample implements OnInit {
         } | {
             name: string;
             type: string;
-            dataType: string;
-            maxLength: number;
-            confidential: boolean;
-            optional: boolean;
-            label: string;
-            required: boolean;
-            readOnly: boolean;
-            multiValue: boolean;
-            inputType: string;
-            options: {
-                value: string;
-                label: string;
-            }[];
-            hideFromSearch: boolean;
-            sortOrder: number;
-            hint: string;
-            description: string;
-            systemRequired: boolean;
-            shouldAddCustomEntityLabel: boolean;
-            allowCustomFilterValues: boolean;
-            dataSpecialization?: undefined;
-            fields?: undefined;
-            optionsType?: undefined;
-            optionsUrl?: undefined;
-            associatedEntity?: undefined;
-            hasBeginsWith?: undefined;
-            defaultValue?: undefined;
-        } | {
-            name: string;
-            type: string;
             dataSpecialization: string;
             confidential: boolean;
             optional: boolean;
@@ -5971,6 +5981,7 @@ export declare class JustCriteriaExample implements OnInit {
         })[];
     }[]>;
     setFieldConfig(useNoteMeta: boolean): void;
+    private createWarnOnDeleteFn;
     prepopulateForm(addAdditionalScope?: boolean): void;
     resetQueryForm(addAdditionalScope?: boolean): void;
     setQueryForm(criteria?: any): void;

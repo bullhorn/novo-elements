@@ -1075,6 +1075,36 @@ export declare const MockCandidateMeta: {
             value: string;
             label: string;
         }[];
+        hideFromSearch: boolean;
+        sortOrder: number;
+        hint: string;
+        description: string;
+        systemRequired: boolean;
+        shouldAddCustomEntityLabel: boolean;
+        allowCustomFilterValues: boolean;
+        dataSpecialization?: undefined;
+        fields?: undefined;
+        optionsType?: undefined;
+        optionsUrl?: undefined;
+        associatedEntity?: undefined;
+        hasBeginsWith?: undefined;
+        defaultValue?: undefined;
+    } | {
+        name: string;
+        type: string;
+        dataType: string;
+        maxLength: number;
+        confidential: boolean;
+        optional: boolean;
+        label: string;
+        required: boolean;
+        readOnly: boolean;
+        multiValue: boolean;
+        inputType: string;
+        options: {
+            value: string;
+            label: string;
+        }[];
         defaultValue: string;
         hideFromSearch: boolean;
         sortOrder: number;
@@ -1668,36 +1698,6 @@ export declare const MockCandidateMeta: {
         inputType?: undefined;
         defaultValue?: undefined;
         allowCustomFilterValues?: undefined;
-    } | {
-        name: string;
-        type: string;
-        dataType: string;
-        maxLength: number;
-        confidential: boolean;
-        optional: boolean;
-        label: string;
-        required: boolean;
-        readOnly: boolean;
-        multiValue: boolean;
-        inputType: string;
-        options: {
-            value: string;
-            label: string;
-        }[];
-        hideFromSearch: boolean;
-        sortOrder: number;
-        hint: string;
-        description: string;
-        systemRequired: boolean;
-        shouldAddCustomEntityLabel: boolean;
-        allowCustomFilterValues: boolean;
-        dataSpecialization?: undefined;
-        fields?: undefined;
-        optionsType?: undefined;
-        optionsUrl?: undefined;
-        associatedEntity?: undefined;
-        hasBeginsWith?: undefined;
-        defaultValue?: undefined;
     } | {
         name: string;
         type: string;

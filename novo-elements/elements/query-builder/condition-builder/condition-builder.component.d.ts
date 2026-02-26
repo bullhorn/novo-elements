@@ -85,6 +85,7 @@ export declare class ConditionBuilderComponent implements OnInit, OnChanges, Aft
     updateFieldSelection(): void;
     updateConditionType(): void;
     private findDefinitionForField;
+    private doesFieldQualifyAsBinary;
     private createFieldTemplates;
     private createFieldOperators;
     private createFieldInput;

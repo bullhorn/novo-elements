@@ -29,8 +29,8 @@ export declare class ConditionGroupComponent implements OnInit, OnDestroy {
     private sanitizeCondition;
     get root(): FormArray;
     addCondition(data?: any): void;
-    removeCondition(index: number): void;
-    newCondition({ field, operator, scope, value, supportingValue, entity }?: Condition): UntypedFormGroup;
+    removeCondition(index: number): Promise<void>;
+    newCondition({ field, operator, scope, value, supportingValue, entity, warnOnDelete }?: Condition): UntypedFormGroup;
     cantRemoveRow(): boolean;
     static ɵfac: i0.ɵɵFactoryDeclaration<ConditionGroupComponent, never>;
     static ɵcmp: i0.ɵɵComponentDeclaration<ConditionGroupComponent, "novo-condition-group", never, { "controlName": { "alias": "controlName"; "required": false; }; "groupIndex": { "alias": "groupIndex"; "required": false; }; "hideFirstOperator": { "alias": "hideFirstOperator"; "required": false; }; "canBeEmpty": { "alias": "canBeEmpty"; "required": false; }; "formGroupName": { "alias": "formGroupName"; "required": false; }; }, {}, never, never, false, never>;
