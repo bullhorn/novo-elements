@@ -73,6 +73,9 @@ export class NovoChipInput implements NovoChipTextControl, OnChanges, OnDestroy 
   /** The input's placeholder text. */
   @Input() placeholder: string = '';
 
+  /** Setting to false prevents input from being cleared when focus is lost. */
+  @Input() clearOnBlur: boolean = true;
+
   /** Unique id for the input. */
   @Input() id: string = `novo-chip-list-input-${nextUniqueId++}`;
 
@@ -131,7 +134,7 @@ export class NovoChipInput implements NovoChipTextControl, OnChanges, OnDestroy 
   _blur(blurEvent: FocusEvent) {
     if (this.addOnBlur) {
       this._emitChipEnd();
-    } else if (!this._field?.blurEventIsInField(blurEvent)) {
+    } else if (this.clearOnBlur && !this._field?.blurEventIsInField(blurEvent)) {
       this.clearValue();
     }
     this.focused = false;
