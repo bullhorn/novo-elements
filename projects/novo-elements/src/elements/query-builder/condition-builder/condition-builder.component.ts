@@ -233,13 +233,13 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
    */
   clearCondition(): void {
     // Clear all form values
-    this.parentForm.get('field').setValue(null);
-    this.parentForm.get('operator').setValue(null);
-    this.parentForm.get('value').setValue(null);
-    this.parentForm.get('supportingValue')?.setValue(null);
+    this.parentForm?.get('field')?.setValue(null);
+    this.parentForm?.get('operator')?.setValue(null);
+    this.parentForm?.get('value')?.setValue(null);
+    this.parentForm?.get('supportingValue')?.setValue(null);
 
     // Reset the field search term
-    this.searchTerm.setValue('');
+    this.searchTerm?.setValue('');
 
     // Reset internal state so updateFieldSelection detects the change
     this._lastContext = {};

@@ -141,4 +141,100 @@ describe('ConditionBuilderComponent', () => {
 
     expect(createFieldTemplatesSpy).toHaveBeenCalled();
   }));
+
+  describe('updateFieldSelection with allowEmptyField', () => {
+    beforeEach(() => {
+      fixture.componentRef.setInput('config', fieldConfig);
+      parentForm.controls.supportingValue = formBuilder.control(null);
+      fixture.detectChanges();
+    });
+
+    it('should not set default field when allowEmptyField is true and no field is selected', fakeAsync(() => {
+      component.allowEmptyField = true;
+      parentForm.get('field').setValue(null);
+      const getDefaultFieldSpy = spyOn(component, 'getDefaultField');
+
+      tick();
+
+      component.updateFieldSelection();
+      tick();
+
+      // When allowEmptyField is true, getDefaultField should not be called
+      expect(getDefaultFieldSpy).not.toHaveBeenCalled();
+    }));
+
+    it('should set default field when allowEmptyField is false and no field is selected', fakeAsync(() => {
+      component.allowEmptyField = false;
+      parentForm.get('field').setValue(null);
+      const setValueSpy = spyOn(parentForm.get('field'), 'setValue');
+
+      tick();
+
+      component.updateFieldSelection();
+      tick();
+
+      // When allowEmptyField is false, should try to set default field
+      expect(setValueSpy).toHaveBeenCalledWith(jasmine.anything());
+    }));
+  });
+
+  describe('clearCondition', () => {
+    beforeEach(() => {
+      fixture.componentRef.setInput('config', fieldConfig);
+      parentForm.controls.supportingValue = formBuilder.control(null);
+      fixture.detectChanges();
+    });
+
+    it('should clear all form values', fakeAsync(() => {
+      // Set up form with values
+      parentForm?.get('field')?.setValue('testradio');
+      parentForm?.get('operator')?.setValue('equals');
+      parentForm?.get('value')?.setValue('someValue');
+      parentForm?.get('supportingValue')?.setValue('supportingValue');
+
+      tick();
+
+      // Spy on setValue to verify it's called with null
+      const fieldSetValueSpy = spyOn(parentForm.get('field'), 'setValue');
+      const operatorSetValueSpy = spyOn(parentForm.get('operator'), 'setValue');
+      const valueSetValueSpy = spyOn(parentForm.get('value'), 'setValue');
+      const supportingValueSetValueSpy = spyOn(parentForm.get('supportingValue'), 'setValue');
+
+      // Call clearCondition
+      component.clearCondition();
+
+      // Verify setValue was called on each control with null
+      expect(fieldSetValueSpy).toHaveBeenCalledWith(null);
+      expect(operatorSetValueSpy).toHaveBeenCalledWith(null);
+      expect(valueSetValueSpy).toHaveBeenCalledWith(null);
+      expect(supportingValueSetValueSpy).toHaveBeenCalledWith(null);
+    }));
+
+    it('should reset the search term', fakeAsync(() => {
+      component.searchTerm.setValue('test search');
+
+      tick();
+
+      const searchTermSetValueSpy = spyOn(component.searchTerm, 'setValue');
+
+      component.clearCondition();
+
+      expect(searchTermSetValueSpy).toHaveBeenCalledWith('');
+    }));
+
+    it('should reset internal state (_lastContext)', () => {
+      // Mock to avoid side effects
+      spyOn(component, 'resetInputAndOperator');
+      spyOn(component, 'updateFieldSelection');
+
+      // Manually set _lastContext to simulate previous state
+      (component as any)._lastContext = { field: 'testradio', operator: 'equals' };
+
+      component.clearCondition();
+
+      // Verify _lastContext is reset to empty object
+      expect((component as any)._lastContext).toEqual({});
+    });
+
+  });
 });
