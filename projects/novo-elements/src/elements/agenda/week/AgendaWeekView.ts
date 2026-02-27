@@ -11,6 +11,7 @@ import {
   Output,
   TemplateRef,
 } from '@angular/core';
+import { Day } from 'date-fns';
 import { Subject, Subscription } from 'rxjs';
 import {
   CalendarEvent,
