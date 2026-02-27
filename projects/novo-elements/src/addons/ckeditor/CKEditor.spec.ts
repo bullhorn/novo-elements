@@ -4,6 +4,13 @@ import { waitForAsync, TestBed } from '@angular/core/testing';
 // App
 import { NovoCKEditorElement } from './CKEditor';
 
+// Extend the global window object with CKEDITOR for tests
+declare global {
+  interface Window {
+    CKEDITOR: any;
+  }
+}
+
 describe('Elements: NovoCKEditorElement', () => {
   let fixture;
   let component;

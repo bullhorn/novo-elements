@@ -10,11 +10,7 @@ const CKEDITOR_CONTROL_VALUE_ACCESSOR = {
 };
 
 declare const CKEDITOR: any;
-declare global {
-  interface Window {
-    CKEDITOR: any;
-  }
-}
+
 // Prevents CKEDITOR from querying the page for all [contenteditable] elements (fixes a conflict against Codemirror Editor)
 try {
   CKEDITOR.disableAutoInline = true;
