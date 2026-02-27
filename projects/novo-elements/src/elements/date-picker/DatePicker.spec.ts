@@ -350,18 +350,15 @@ describe('NovoDatePickerElement', () => {
     });
 
     it('should filter out non-date values', () => {
-      // Note: date-fns v4 changed mocking behavior, this test validates filtering works
       const dates = [new Date('2023-01-15'), null, new Date('2023-01-16')];
       component.selection = dates as any;
       expect(component._selection.length).toBe(2);
     });
 
     it('should call DateUtil.startOfDay on each date', () => {
-      // Note: date-fns v4 changed mocking behavior
       const dates = [new Date('2023-01-15')];
       component.selection = dates;
-      // Verify the selection is set properly
-      expect(component._selection).toBeDefined();
+      expect(DateUtil.startOfDay).toHaveBeenCalled();
     });
 
     it('should handle null value', () => {
@@ -853,7 +850,6 @@ describe('NovoDatePickerElement', () => {
       jest.spyOn(Helpers, 'isDate').mockReturnValue(false);
       jest.spyOn(Helpers, 'isString').mockReturnValue(true);
       jest.spyOn(DateUtil, 'parse').mockReturnValue(new Date('2023-01-15'));
-      // Note: date-fns v4 changed mocking behavior for isValid
       component.writeValue('2023-01-15' as any);
       expect(updateViewSpy).toHaveBeenCalled();
       updateViewSpy.mockRestore();
@@ -864,7 +860,6 @@ describe('NovoDatePickerElement', () => {
       jest.spyOn(Helpers, 'isDate').mockReturnValue(false);
       jest.spyOn(Helpers, 'isString').mockReturnValue(true);
       jest.spyOn(DateUtil, 'parse').mockReturnValue(new Date('invalid'));
-      // Note: date-fns v4 changed mocking behavior for isValid
       component.writeValue('invalid-date' as any);
       expect(updateViewSpy).not.toHaveBeenCalled();
       updateViewSpy.mockRestore();
@@ -920,15 +915,13 @@ describe('NovoDatePickerElement', () => {
     });
 
     it('should handle DataTableRangeModel with min and max', () => {
-      // Note: date-fns v4 changed mocking behavior
       const range = {
         min: new Date('2023-01-15'),
         max: new Date('2023-01-20'),
       };
       component.model = range;
       component.setRangeSelection();
-      // Verify selection is set
-      expect(component.selection).toBeDefined();
+      expect(component._selection.length).toBe(2);
     });
 
     it('should handle model without startDate or min', () => {
@@ -1096,7 +1089,6 @@ describe('NovoDatePickerElement', () => {
 
   describe('Edge Cases', () => {
     it('should handle selection with null dates', () => {
-      // Note: date-fns v4 changed mocking behavior
       component.selection = [new Date('2023-01-15'), null, new Date('2023-01-16')] as any;
       expect(component._selection.length).toBe(2);
     });
