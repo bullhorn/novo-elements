@@ -47,10 +47,7 @@ class TestAutocompleteComponent {
   makeFirstItemActive = false;
   multiple = false;
   options$ = new ReplaySubject<MockOption[]>(1);
-
-  selected(event: any): void {
-    // Handle option selection event
-  }
+  selected = jest.fn();
 }
 
 describe('Elements: NovoAutocompleteElement', () => {
