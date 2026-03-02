@@ -87,17 +87,6 @@ async function setFormValue(fieldName: string, value: AllowedKey | AllowedKey[],
   const controlSpecificTypes = controlTypes.filter((controlType) => controlType === currentControlType);
   const elementSpecificIndex = controlSpecificTypes.length;
   switch (currentControlType) {
-    // case ControlType.aceEditor:
-    // case ControlType.editor:
-    // case ControlType.editorWithTemplate:
-    // case ControlType.quickNote:
-    //   // Embedded editors have their own iframe - switch to theirs, send keys then switch back
-    //   if (appendText) {
-    //     await sendKeys('body', value.toString());
-    //   } else {
-    //     await clearInputAndSendKeys('body', value.toString());
-    //   }
-    //   break;
     case ControlType.date:
     case ControlType.dateTime:
     case ControlType.picker:
@@ -203,14 +192,6 @@ export async function getControlType(fieldName: string, index: number = 0): Prom
 
       // Allow for overrides coming from novo when necessary
       const override = (await el.getAttribute('data-control-type-override')) as ControlType;
-      // // Handle address subfields by converting them to the appropriate input type
-      // if (controlType === ControlType.address && fieldName.includes('.')) {
-      //   const addressSubField = fieldName.split('.')[1];
-      //   if (getAddressPickerFieldOrNull(addressSubField)) {
-      //     controlType = ControlType.picker;
-      //   }
-      // }
-
       return override || ((await el.getAttribute('data-control-type')) as ControlType);
     },
     async () => {

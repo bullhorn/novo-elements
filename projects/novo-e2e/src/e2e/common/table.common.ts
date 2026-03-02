@@ -2,7 +2,8 @@ import { verifyPresent } from '../../utils/VerifyUtil';
 import { automationId, elements } from '../../utils/SelectorUtil';
 import { waitForElementToBeAbsent, waitForElementToBePresent } from '../../utils/WaitUtil';
 import {
-  clearFilter, filterTableColumn,
+  clearFilter,
+  filterTableColumn,
   getColumnHeaderSelector,
   sortTableColumn,
   verifyColumnFiltered,
