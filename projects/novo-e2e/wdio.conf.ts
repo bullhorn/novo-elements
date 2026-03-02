@@ -1,6 +1,24 @@
 // Extract base URL from environment or command line
 let baseUrl = process.env.E2E_BASE_URL || 'https://bullhorn.github.io/novo-elements/docs';
 
+const wdioChromeCapabilities = {
+    browserName: 'chrome',
+    browserVersion: 'stable',
+    'goog:chromeOptions': {
+        args: [
+            // Required for API response mocking
+            '--disable-web-security',
+            '--disable-site-isolation-trials',
+        ],
+    },
+    'goog:loggingPrefs': {
+        browser: 'ALL',
+    },
+    timeouts: {
+        pageLoad: 120000,
+    },
+};
+
 process.argv.forEach((arg) => {
   if (arg.startsWith('--baseUrl=')) {
     baseUrl = arg.split('=')[1];
@@ -20,21 +38,7 @@ export const config = {
   specs: ['./src/**/*.e2e.ts'],
   exclude: [],
   maxInstances: 1,
-  capabilities: [
-    {
-      browserName: 'chrome',
-      'goog:chromeOptions': {
-          binary: process.env.CHROMIUM_BIN || '/usr/bin/chromium-browser',
-          args: [],
-      },
-      'goog:loggingPrefs': {
-          browser: 'ALL',
-      },
-      timeouts: {
-          pageLoad: 120000,
-      },
-    },
-  ],
+  capabilities: [wdioChromeCapabilities],
   logLevel: 'debug',
   bail: 0,
   baseUrl: baseUrl + '/#/home',

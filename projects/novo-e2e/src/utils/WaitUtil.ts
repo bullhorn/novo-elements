@@ -199,13 +199,13 @@ export async function waitForElementText(el: string, timeout: number = 8000) {
     }, timeout, 'Element text was an empty string');
 }
 
-export async function waitForElementToBeDisabled(el: string , timeout: number = 8000, index: number = 0) {
+export async function waitForElementToBeDisabled(el: string, timeout: number = 8000, index: number = 0) {
     return wait(async () => {
         return (await isDisabled(el, index));
     }, timeout, `element: ${el} was never disabled`);
 }
 
-export async function waitForElementToBeEnabled(el: string , timeout: number = 8000, index: number = 0) {
+export async function waitForElementToBeEnabled(el: string, timeout: number = 8000, index: number = 0) {
     return wait(async () => {
         return !(await isDisabled(el, index));
     }, timeout, `element: ${el} was never enabled`);
