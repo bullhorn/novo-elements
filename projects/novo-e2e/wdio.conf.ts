@@ -39,7 +39,7 @@ export const config = {
   exclude: [],
   maxInstances: 1,
   capabilities: [wdioChromeCapabilities],
-  logLevel: 'debug',
+  logLevel: 'silent',
   bail: 0,
   baseUrl: baseUrl + '/#/home',
   waitforTimeout: 10000,
