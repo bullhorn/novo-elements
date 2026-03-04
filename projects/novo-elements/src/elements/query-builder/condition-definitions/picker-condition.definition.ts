@@ -65,7 +65,7 @@ export class NovoDefaultPickerConditionDef extends AbstractConditionFieldDef {
     this.defineOperatorEditGroup(Operator.includeAny, Operator.includeAll, Operator.excludeAny);
   }
 
-  onOperatorSelect(formGroup: UntypedFormGroup): void {
+  override onOperatorSelect(formGroup: UntypedFormGroup): void {
     super.onOperatorSelect(formGroup);
     // For multi-select operators, ensure value is an array, not null/boolean
     const newOperator = formGroup.get('operator').value;
