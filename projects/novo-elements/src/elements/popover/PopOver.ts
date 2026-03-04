@@ -184,4 +184,8 @@ export class PopOverDirective implements OnChanges {
   getElement() {
     return this.viewContainerRef.element.nativeElement;
   }
+
+  reposition() {
+    (this.content as PopOverContent).show();
+  }
 }

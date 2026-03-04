@@ -51,6 +51,7 @@ export class PopOverContent implements AfterViewInit {
   constructor(protected element: ElementRef, protected cdr: ChangeDetectorRef) {}
 
   ngAfterViewInit(): void {
+    console.log('ngAfterViewInit');
     this.show();
     this.cdr.detectChanges();
   }
@@ -64,6 +65,7 @@ export class PopOverContent implements AfterViewInit {
   }
 
   show(): void {
+    console.log('show');
     if (!this.popover || !this.popover.getElement()) {
       return;
     }
@@ -76,6 +78,7 @@ export class PopOverContent implements AfterViewInit {
   }
 
   hide(): void {
+    console.log('show');
     this.top = -10000;
     this.left = -10000;
     this.isHidden = true;
@@ -93,6 +96,7 @@ export class PopOverContent implements AfterViewInit {
     positionStr: string,
     appendToBody = false,
   ): { top: number; left: number } {
+    console.log('positionElements');
     const positionStrParts = positionStr.split('-');
     const mainSide = (this.effectivePlacement = this.getEffectivePlacement(positionStrParts[0] || 'right', hostEl, targetEl));
     const orientation = (this.effectiveAlignment = positionStrParts[1] || 'center');
@@ -159,6 +163,7 @@ export class PopOverContent implements AfterViewInit {
   }
 
   protected position(nativeEl: HTMLElement): { width: number; height: number; top: number; left: number } {
+    console.log('position');
     let offsetParentBCR = { top: 0, left: 0 };
     const elBCR = this.offset(nativeEl);
     const offsetParentEl = this.parentOffsetEl(nativeEl);
@@ -178,6 +183,7 @@ export class PopOverContent implements AfterViewInit {
   }
 
   protected offset(nativeEl: any): { width: number; height: number; top: number; left: number } {
+    console.log('offset');
     const boundingClientRect = nativeEl.getBoundingClientRect();
     return {
       width: boundingClientRect.width || nativeEl.offsetWidth,
@@ -188,6 +194,7 @@ export class PopOverContent implements AfterViewInit {
   }
 
   protected getStyle(nativeEl: HTMLElement, cssProp: string): string {
+    console.log('getStyle');
     if ((nativeEl as any).currentStyle) {
       return (nativeEl as any).currentStyle[cssProp];
     }
@@ -200,6 +207,7 @@ export class PopOverContent implements AfterViewInit {
   }
 
   protected isStaticPositioned(nativeEl: HTMLElement): boolean {
+    console.log('isStaticPositioned');
     return (this.getStyle(nativeEl, 'position') || 'static') === 'static';
   }
 
@@ -212,6 +220,7 @@ export class PopOverContent implements AfterViewInit {
   }
 
   protected getEffectivePlacement(desiredPlacement: string, hostElement: HTMLElement, targetElement: HTMLElement): string {
+    console.log('getEffectivePlacement');
     const hostElBoundingRect = hostElement.getBoundingClientRect();
 
     if (desiredPlacement === 'top' && hostElBoundingRect.top - targetElement.offsetHeight < 0) {
