@@ -1,7 +1,6 @@
 const tsParser = require('@typescript-eslint/parser');
 const tsPlugin = require('@typescript-eslint/eslint-plugin');
 const unusedImportsPlugin = require('eslint-plugin-unused-imports');
-const importPlugin = require('eslint-plugin-import');
 const jestPlugin = require('eslint-plugin-jest');
 
 module.exports = [
@@ -20,12 +19,17 @@ module.exports = [
     plugins: {
       '@typescript-eslint': tsPlugin,
       'unused-imports': unusedImportsPlugin,
-      'import': importPlugin,
     },
     rules: {
       'unused-imports/no-unused-imports': 'error',
-      'import/no-namespace': 'error',
-      'import/no-duplicates': 'error',
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector: 'ImportNamespaceSpecifier',
+          message: 'Wildcard imports are not allowed',
+        },
+      ],
+      'no-duplicate-imports': 'error',
       'no-console': ['warn', { allow: ['warn', 'error', 'info'] }],
       '@typescript-eslint/no-non-null-assertion': 'warn',
       'no-fallthrough': 'error',

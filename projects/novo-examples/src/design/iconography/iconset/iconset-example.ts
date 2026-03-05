@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-// eslint-disable-next-line import/no-namespace
+// eslint-disable-next-line no-restricted-syntax
 import * as Icons from '@bullhorn/bullhorn-icons';
 import { NovoToastService } from 'novo-elements';
 
