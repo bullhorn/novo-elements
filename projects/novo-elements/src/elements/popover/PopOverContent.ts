@@ -65,7 +65,8 @@ export class PopOverContent implements AfterViewInit {
   }
 
   show(): void {
-    console.log('show');
+    console.log('show popover', !!this.popover);
+    console.log('show popover getElement', !!this.popover?.getElement());
     if (!this.popover || !this.popover.getElement()) {
       return;
     }
@@ -75,10 +76,15 @@ export class PopOverContent implements AfterViewInit {
     this.top = p.top;
     this.left = p.left;
     this.isHidden = false;
+
+    // Host
+    this.popover.getElement().setAttribute('style', 'border: 1px solid red;');
+    // Target
+    this.popoverDiv.nativeElement.setAttribute('style', this.popoverDiv.nativeElement.getAttribute('style') + 'border: 1px solid blue;');
   }
 
   hide(): void {
-    console.log('show');
+    console.log('hide');
     this.top = -10000;
     this.left = -10000;
     this.isHidden = true;
@@ -96,13 +102,20 @@ export class PopOverContent implements AfterViewInit {
     positionStr: string,
     appendToBody = false,
   ): { top: number; left: number } {
-    console.log('positionElements');
+
+    console.log('positionElements positionStr', positionStr);
+    console.log('positionElements appendToBody', appendToBody);
     const positionStrParts = positionStr.split('-');
     const mainSide = (this.effectivePlacement = this.getEffectivePlacement(positionStrParts[0] || 'right', hostEl, targetEl));
-    const orientation = (this.effectiveAlignment = positionStrParts[1] || 'center');
+    // const orientation = (this.effectiveAlignment = positionStrParts[1] || 'center');
+    const orientation = (this.effectiveAlignment = this.getEffectivePlacement(positionStrParts[1] || 'center', hostEl, targetEl));
     const hostElPos = appendToBody ? this.offset(hostEl) : this.position(hostEl);
+    console.log('positionElements hostElPos', hostElPos);
     const targetElWidth = targetEl.offsetWidth;
     const targetElHeight = targetEl.offsetHeight;
+
+    console.log('positionElements mainSide', mainSide);
+    console.log('positionElements orientation', orientation);
 
     const shiftWidth: any = {
       center(): number {
@@ -163,17 +176,20 @@ export class PopOverContent implements AfterViewInit {
   }
 
   protected position(nativeEl: HTMLElement): { width: number; height: number; top: number; left: number } {
-    console.log('position');
     let offsetParentBCR = { top: 0, left: 0 };
     const elBCR = this.offset(nativeEl);
     const offsetParentEl = this.parentOffsetEl(nativeEl);
+    console.log('position elBCR', elBCR);
     if (offsetParentEl !== window.document) {
+      console.log('position offsetParentEl is NOT window.document', offsetParentBCR);
       offsetParentBCR = this.offset(offsetParentEl);
+      console.log('position offsetParentBCR', offsetParentBCR);
       offsetParentBCR.top += offsetParentEl.clientTop - offsetParentEl.scrollTop;
       offsetParentBCR.left += offsetParentEl.clientLeft - offsetParentEl.scrollLeft;
     }
 
     const boundingClientRect = nativeEl.getBoundingClientRect();
+    console.log('position boundingClientRect', boundingClientRect);
     return {
       width: boundingClientRect.width || nativeEl.offsetWidth,
       height: boundingClientRect.height || nativeEl.offsetHeight,
@@ -194,7 +210,6 @@ export class PopOverContent implements AfterViewInit {
   }
 
   protected getStyle(nativeEl: HTMLElement, cssProp: string): string {
-    console.log('getStyle');
     if ((nativeEl as any).currentStyle) {
       return (nativeEl as any).currentStyle[cssProp];
     }
@@ -207,11 +222,12 @@ export class PopOverContent implements AfterViewInit {
   }
 
   protected isStaticPositioned(nativeEl: HTMLElement): boolean {
-    console.log('isStaticPositioned');
+    console.log('isStaticPositioned', (this.getStyle(nativeEl, 'position') || 'static') === 'static');
     return (this.getStyle(nativeEl, 'position') || 'static') === 'static';
   }
 
   protected parentOffsetEl(nativeEl: HTMLElement): any {
+    console.log('parentOffsetEl');
     let offsetParent: any = nativeEl.offsetParent || window.document;
     while (offsetParent && offsetParent !== window.document && this.isStaticPositioned(offsetParent)) {
       offsetParent = offsetParent.offsetParent;
@@ -220,22 +236,26 @@ export class PopOverContent implements AfterViewInit {
   }
 
   protected getEffectivePlacement(desiredPlacement: string, hostElement: HTMLElement, targetElement: HTMLElement): string {
-    console.log('getEffectivePlacement');
+    console.log('desiredPlacement', desiredPlacement);
     const hostElBoundingRect = hostElement.getBoundingClientRect();
 
     if (desiredPlacement === 'top' && hostElBoundingRect.top - targetElement.offsetHeight < 0) {
+      console.log('!!! hit top', hostElBoundingRect.top - targetElement.offsetHeight, 'reposition to bottom');
       return 'bottom';
     }
     if (desiredPlacement === 'bottom' && hostElBoundingRect.bottom + targetElement.offsetHeight > window.innerHeight) {
+      console.log('!!! hit bottom', hostElBoundingRect.top - targetElement.offsetHeight, 'reposition to top');
       return 'top';
     }
     if (desiredPlacement === 'left' && hostElBoundingRect.left - targetElement.offsetWidth < 0) {
+      console.log('!!! hit left', hostElBoundingRect.top - targetElement.offsetHeight, 'reposition to right');
       return 'right';
     }
     if (desiredPlacement === 'right' && hostElBoundingRect.right + targetElement.offsetWidth > window.innerWidth) {
+      console.log('!!! hit right', hostElBoundingRect.top - targetElement.offsetHeight, 'reposition to left');
       return 'left';
     }
-
+    console.log('!!! didnt hit anything --> ', desiredPlacement);
     return desiredPlacement;
   }
 }
