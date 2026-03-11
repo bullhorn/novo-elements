@@ -10,7 +10,7 @@ import { NovoSelectModule } from './Select.module';
 import { SelectionModel } from '@angular/cdk/collections';
 import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 import { TAB } from '@angular/cdk/keycodes';
-import { Component, viewChild } from '@angular/core';
+import { Component, Input, viewChild } from '@angular/core';
 
 @Component({
   selector: 'test-select-component',
@@ -24,6 +24,7 @@ import { Component, viewChild } from '@angular/core';
 })
 class TestSelectComponent {
   select = viewChild(NovoSelectElement);
+  @Input()
   options = [{
     label: 'Option 1',
     value: '111',
@@ -34,6 +35,7 @@ class TestSelectComponent {
     label: 'Option 3',
     value: '333',
   }];
+  @Input()
   value: any;
 }
 
@@ -77,7 +79,7 @@ describe('Elements: NovoSelectElement', () => {
 
   describe('Function: ngOnChanges', () => {
     // Currently broken
-    xit('should convert readOnly from a non-boolean to a boolean', () => {
+    it('should convert readOnly from a non-boolean to a boolean', () => {
       fixture.componentRef.setInput('readonly', 'true');
       fixture.detectChanges();
       expect(comp.readonly).toEqual(true);
@@ -207,8 +209,7 @@ describe('Elements: NovoSelectElement', () => {
         value: 'foo',
         valid: true,
       };
-      fixture.componentRef.setInput('headerConfig', { onSave: jest.fn() });
-      fixture.detectChanges();
+      fixture.componentRef.setInput('headerConfig', { onSave: jasmine.createSpy('onSave') });
       comp._handleKeydown(mockEvent);
       expect(comp.headerConfig.onSave).toHaveBeenCalled();
     });
@@ -252,7 +253,7 @@ describe('Elements: NovoSelectElement', () => {
       expect(legacyOption.viewValue).toBe('bif');
     });
 
-    xit('should present a disabled "legacy option" when updating the list of options (via content children) to remove a previously valid value', fakeAsync(() => {
+    it('should present a disabled "legacy option" when updating the list of options (via content children) to remove a previously valid value', fakeAsync(() => {
       const fixture2 = TestBed.createComponent(TestSelectComponent);
       fixture2.componentRef.setInput('value', '333');
       fixture2.detectChanges();
@@ -302,7 +303,7 @@ describe('Elements: NovoSelectElement', () => {
       expect(legacyOption.viewValue).toBe('baz');
     });
 
-    xit('should hide legacy options when input or signal is configured to hide them', fakeAsync(() => {
+    it('should hide legacy options when input or signal is configured to hide them', fakeAsync(() => {
       const options = [
         { label: 'foo', value: 'foo' },
         { label: 'bar', value: 'bar' },
