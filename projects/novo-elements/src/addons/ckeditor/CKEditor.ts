@@ -18,7 +18,7 @@ declare global {
 // Prevents CKEDITOR from querying the page for all [contenteditable] elements (fixes a conflict against Codemirror Editor)
 try {
   CKEDITOR.disableAutoInline = true;
-} catch(err) {
+} catch (err) {
   // may be running in a context without CKEDITOR - ignore
 }
 

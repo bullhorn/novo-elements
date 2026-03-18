@@ -9,9 +9,32 @@ import {
   CriteriaBuilderComponent,
   Operator,
 } from 'novo-elements';
+import { NovoModalRef, NovoModalService } from 'novo-elements/elements/modal';
 import { ReplaySubject, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { MockCandidateMeta, MockNoteMeta } from './MockMeta';
+
+@Component({
+    selector: 'delete-filter-modal-demo',
+    template: `
+    <novo-notification type="warning">
+      <h1>Delete this filter?</h1>
+      <h2>Are you sure you wish to continue?</h2>
+      <button theme="standard" (click)="cancel()">Cancel</button>
+      <button theme="primary" color="negative" icon="delete" (click)="confirm()">Delete</button>
+    </novo-notification>
+  `,
+    standalone: false,
+})
+export class DeleteFilterModalDemo {
+  constructor(private modalRef: NovoModalRef) {}
+  confirm() {
+    this.modalRef.close(true);
+  }
+  cancel() {
+    this.modalRef.close(false);
+  }
+}
 
 @Component({
     selector: 'custom-picker-condition-def',
@@ -127,6 +150,8 @@ export class JustCriteriaExample implements OnInit {
     return (field.inputType || field.dataType || field.type).toLowerCase();
   };
 
+  private modalService = inject(NovoModalService);
+
   constructor(private formBuilder: UntypedFormBuilder, private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
@@ -162,6 +187,14 @@ export class JustCriteriaExample implements OnInit {
     });
   }
 
+  private createWarnOnDeleteFn = (): (() => Promise<boolean>) => {
+    return async () => {
+      const modalRef = this.modalService.open(DeleteFilterModalDemo);
+      const result = await modalRef.onClosed;
+      return result;
+    };
+  };
+
   prepopulateForm(addAdditionalScope = false) {
     const prepopulatedData: any = [
       {
@@ -172,6 +205,7 @@ export class JustCriteriaExample implements OnInit {
             scope: 'Candidate',
             entity: 'Person',
             value: 123,
+            warnOnDelete: this.createWarnOnDeleteFn(),
           }, {
             field: 'availability',
             operator: 'includeAny',

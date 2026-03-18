@@ -32,6 +32,7 @@ export interface DataTableWhere {
   keywords?: SearchKeywords;
   booleanKeywords?: string;
   scoreByEntityId?: number;
+  matchMetaData?: any;
   form: any;
 }
 

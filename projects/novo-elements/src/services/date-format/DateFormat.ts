@@ -113,7 +113,7 @@ export class DateFormatService {
       } else {
         isInvalidDate = false;
       }
-    } catch(err) {
+    } catch (err) {
       // ignore error - keep isInvalidDate true and date null
     }
     return [date, dateString, isInvalidDate];
