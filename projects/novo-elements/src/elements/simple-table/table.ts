@@ -26,16 +26,18 @@ import { ActivityTableDataSource, ActivityTableService } from './table-source';
     selector: 'novo-simple-table',
     template: `
       <table role="table">
+        <caption></caption>
+        <colgroup></colgroup>
         <thead role="rowgroup">
-        <tr role="row">
-          <td role="gridcell"></td>
-        </tr>
+          <ng-container headerRowOutlet></ng-container>
         </thead>
         <tbody role="rowgroup">
-        <tr role="row">
-          <td role="gridcell"></td>
-        </tr>
+          <ng-container rowOutlet></ng-container>
+          <ng-container noDataRowOutlet></ng-container>
         </tbody>
+        <tfoot role="rowgroup">
+          <ng-container footerRowOutlet></ng-container>
+        </tfoot>
       </table>`,
     styleUrls: ['./table.scss'],
     encapsulation: ViewEncapsulation.None,
