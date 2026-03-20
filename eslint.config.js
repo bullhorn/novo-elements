@@ -82,6 +82,7 @@ module.exports = [
       'keyword-spacing': ['error', { before: true, after: true }],
       'space-infix-ops': 'error',
       'comma-spacing': 'error',
+      'no-extra-semi': 'error',
     }
   },
   {
