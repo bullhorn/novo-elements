@@ -14,11 +14,11 @@ novo-simple-table {
     overflow: hidden;
     max-height: 52px;
   }
-  > .novo-simple-row:nth-of-type(odd) {
-    .novo-simple-cell,
-    .novo-simple-button-cell,
-    .novo-simple-dropdown-cell,
-    .novo-simple-checkbox-cell {
+  .novo-simple-row:nth-of-type(odd) {
+  .novo-simple-cell,
+  .novo-simple-button-cell,
+  .novo-simple-dropdown-cell,
+  .novo-simple-checkbox-cell {
       background-color: $table-bg-accent;
     }
     &.active {
@@ -30,11 +30,11 @@ novo-simple-table {
       }
     }
   }
-  > .novo-simple-row:nth-of-type(even) {
-    .novo-simple-cell,
-    .novo-simple-button-cell,
-    .novo-simple-dropdown-cell,
-    .novo-simple-checkbox-cell {
+  .novo-simple-row:nth-of-type(even) {
+  .novo-simple-cell,
+  .novo-simple-button-cell,
+  .novo-simple-dropdown-cell,
+  .novo-simple-checkbox-cell {
       background-color: $white;
     }
     &.active {
