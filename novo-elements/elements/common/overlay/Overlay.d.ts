@@ -28,6 +28,7 @@ export declare class NovoOverlayTemplateComponent implements OnDestroy {
     protected closingActionsSubscription: Subscription;
     private _parent;
     private overlayContainer;
+    private destroyRef;
     private overlayContext;
     constructor(overlay: Overlay, viewContainerRef: ViewContainerRef, zone: NgZone, changeDetectorRef: ChangeDetectorRef, document: any);
     ngOnDestroy(): void;

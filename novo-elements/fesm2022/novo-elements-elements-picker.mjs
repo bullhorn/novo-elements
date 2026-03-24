@@ -20,6 +20,7 @@ import { NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
 import * as i7 from 'novo-elements/elements/switch';
 import { NovoSwitchModule } from 'novo-elements/elements/switch';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 /**
  * @description This is the actual list of matches that gets injected into the DOM. It's also the piece that can be
@@ -1905,10 +1906,11 @@ class NovoPickerElement {
     get disablePickerInput() {
         return this._disablePickerInput;
     }
-    constructor(element, componentUtils, ref) {
+    constructor(element, componentUtils, ref, destroyRef) {
         this.element = element;
         this.componentUtils = componentUtils;
         this.ref = ref;
+        this.destroyRef = destroyRef;
         this.closeOnSelect = true;
         this.selected = [];
         // Deprecated
@@ -1943,10 +1945,16 @@ class NovoPickerElement {
         const debounceTimeInMilliSeconds = Number.isNaN(Number(this.config?.debounceTimeInMilliSeconds)) ? DEFAULT_DEBOUNCE_TIME : Number(this.config?.debounceTimeInMilliSeconds);
         // Custom results template
         this.resultsComponent = this.config.resultsTemplate || PickerResults;
-        const pasteObserver = fromEvent(this.input.nativeElement, 'paste').pipe(debounceTime(debounceTimeInMilliSeconds), distinctUntilChanged());
-        pasteObserver.subscribe((event) => this.onDebouncedKeyup(event), (err) => this.hideResults(err));
-        const keyboardObserver = fromEvent(this.input.nativeElement, 'keyup').pipe(debounceTime(debounceTimeInMilliSeconds), distinctUntilChanged());
-        keyboardObserver.subscribe((event) => this.onDebouncedKeyup(event), (err) => this.hideResults(err));
+        const pasteObserver = fromEvent(this.input.nativeElement, 'paste').pipe(takeUntilDestroyed(this.destroyRef), debounceTime(debounceTimeInMilliSeconds), distinctUntilChanged());
+        pasteObserver.subscribe({
+            next: (event) => this.onDebouncedKeyup(event),
+            error: (err) => this.hideResults(err),
+        });
+        const keyboardObserver = fromEvent(this.input.nativeElement, 'keyup').pipe(takeUntilDestroyed(this.destroyRef), debounceTime(debounceTimeInMilliSeconds), distinctUntilChanged());
+        keyboardObserver.subscribe({
+            next: (event) => this.onDebouncedKeyup(event),
+            error: (err) => this.hideResults(err),
+        });
     }
     onDebouncedKeyup(event) {
         if (["Escape" /* Key.Escape */, "ArrowDown" /* Key.ArrowDown */, "ArrowUp" /* Key.ArrowUp */, "Enter" /* Key.Enter */, "Tab" /* Key.Tab */].some((key) => key === event.key)) {
@@ -2165,7 +2173,7 @@ class NovoPickerElement {
     setDisabledState(disabled) {
         this._disablePickerInput = disabled;
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoPickerElement, deps: [{ token: i0.ElementRef }, { token: i1.ComponentUtils }, { token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoPickerElement, deps: [{ token: i0.ElementRef }, { token: i1.ComponentUtils }, { token: i0.ChangeDetectorRef }, { token: i0.DestroyRef }], target: i0.ɵɵFactoryTarget.Component }); }
     static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "19.2.15", type: NovoPickerElement, isStandalone: false, selector: "novo-picker", inputs: { config: "config", placeholder: "placeholder", clearValueOnSelect: "clearValueOnSelect", closeOnSelect: "closeOnSelect", selected: "selected", appendToBody: "appendToBody", parentScrollSelector: "parentScrollSelector", parentScrollAction: "parentScrollAction", containerClass: "containerClass", side: "side", autoSelectFirstOption: "autoSelectFirstOption", overrideElement: "overrideElement", maxlength: "maxlength", allowCustomValues: "allowCustomValues", width: "width", minWidth: "minWidth", allowTabNavigation: "allowTabNavigation", disablePickerInput: "disablePickerInput" }, outputs: { changed: "changed", select: "select", focus: "focus", blur: "blur", typing: "typing", tab: "tab" }, providers: [PICKER_VALUE_ACCESSOR], viewQueries: [{ propertyName: "results", first: true, predicate: ["results"], descendants: true, read: ViewContainerRef, static: true }, { propertyName: "container", first: true, predicate: NovoOverlayTemplateComponent, descendants: true, static: true }, { propertyName: "input", first: true, predicate: ["input"], descendants: true, static: true }], ngImport: i0, template: `
     <i class="bhi-more" *ngIf="config?.entityIcon && !_value"></i>
     <i class="bhi-{{ config?.entityIcon }} entity-icon {{ config?.entityIcon }}" *ngIf="config?.entityIcon && _value"></i>
@@ -2233,7 +2241,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
       <ng-content></ng-content>
     </novo-overlay-template>
   `, encapsulation: ViewEncapsulation.None, standalone: false, styles: ["novo-picker{width:100%;display:flex;align-items:center;flex-wrap:wrap;justify-content:flex-start;transition:all .2s ease-in-out;position:relative;padding-bottom:0}novo-picker.selected+i,novo-picker.selected:hover+i{color:#4a89dc}novo-picker.ng-touched.ng-invalid:not(.ng-pristine)>input,novo-picker.ng-touched.ng-invalid:not(.ng-pristine)>input:hover,novo-picker.ng-touched.ng-invalid:not(.ng-pristine)>input:focus{border-bottom-color:transparent!important}novo-picker input{font-size:1em;background:transparent!important;border:none;border-bottom:1px solid rgb(175.4891304348,184.7826086957,192.0108695652);border-radius:0;outline:none;height:2rem;width:100%;margin:0;padding:0;box-shadow:none;box-sizing:content-box;transition:all .3s;color:#26282b}novo-picker input:hover{border-bottom:1px solid rgb(94.8152173913,108.8043478261,119.6847826087)}novo-picker input:focus{border-bottom:1px solid #4a89dc}novo-picker input:invalid{border-bottom:1px solid #da4453}novo-picker input.entity-picker{padding-left:2em}novo-picker input.entity-selected{padding-left:2.5em;background:#f7f7f7!important}novo-picker input:disabled{border-bottom:1px dashed rgb(175.4891304348,184.7826086957,192.0108695652)!important}novo-picker i.bhi-more{position:absolute;left:0;top:2px;background:#f7f7f7;font-size:1em;border-radius:3px;padding:3px}novo-picker i.entity-icon{position:absolute;left:5px;top:3px;font-size:1em;border-radius:3px;padding:3px;color:#fff}novo-picker i.entity-icon.black{background:#000}novo-picker i.entity-icon.white{background:#fff}novo-picker i.entity-icon.gray{background:#9e9e9e}novo-picker i.entity-icon.grey{background:#9e9e9e}novo-picker i.entity-icon.offWhite{background:#f7f7f7}novo-picker i.entity-icon.bright{background:#f7f7f7}novo-picker i.entity-icon.light{background:#dbdbdb}novo-picker i.entity-icon.neutral{background:#4f5361}novo-picker i.entity-icon.dark{background:#3d464d}novo-picker i.entity-icon.orange{background:#ff6900}novo-picker i.entity-icon.navigation{background:#202945}novo-picker i.entity-icon.skyBlue{background:#009bdf}novo-picker i.entity-icon.steel{background:#5b6770}novo-picker i.entity-icon.metal{background:#637893}novo-picker i.entity-icon.sand{background:#f4f4f4}novo-picker i.entity-icon.silver{background:#e2e2e2}novo-picker i.entity-icon.stone{background:#bebebe}novo-picker i.entity-icon.ash{background:#a0a0a0}novo-picker i.entity-icon.slate{background:#707070}novo-picker i.entity-icon.onyx{background:#526980}novo-picker i.entity-icon.charcoal{background:#282828}novo-picker i.entity-icon.moonlight{background:#1a242f}novo-picker i.entity-icon.midnight{background:#202945}novo-picker i.entity-icon.darkness{background:#161f27}novo-picker i.entity-icon.navy{background:#0d2d42}novo-picker i.entity-icon.aqua{background:#3bafda}novo-picker i.entity-icon.ocean{background:#4a89dc}novo-picker i.entity-icon.mint{background:#37bc9b}novo-picker i.entity-icon.grass{background:#8cc152}novo-picker i.entity-icon.sunflower{background:#f6b042}novo-picker i.entity-icon.bittersweet{background:#eb6845}novo-picker i.entity-icon.grapefruit{background:#da4453}novo-picker i.entity-icon.carnation{background:#d770ad}novo-picker i.entity-icon.lavender{background:#967adc}novo-picker i.entity-icon.mountain{background:#9678b6}novo-picker i.entity-icon.info{background:#4a89dc}novo-picker i.entity-icon.positive{background:#4a89dc}novo-picker i.entity-icon.success{background:#8cc152}novo-picker i.entity-icon.negative{background:#da4453}novo-picker i.entity-icon.danger{background:#da4453}novo-picker i.entity-icon.error{background:#da4453}novo-picker i.entity-icon.warning{background:#f6b042}novo-picker i.entity-icon.empty{background:#cccdcc}novo-picker i.entity-icon.disabled{background:#bebebe}novo-picker i.entity-icon.background{background:#f7f7f7}novo-picker i.entity-icon.backgroundDark{background:#e2e2e2}novo-picker i.entity-icon.presentation{background:#5b6770}novo-picker i.entity-icon.bullhorn{background:#ff6900}novo-picker i.entity-icon.pulse{background:#3bafda}novo-picker i.entity-icon.company{background:#39d}novo-picker i.entity-icon.candidate{background:#4b7}novo-picker i.entity-icon.lead{background:#a69}novo-picker i.entity-icon.contact{background:#fa4}novo-picker i.entity-icon.clientcontact{background:#fa4}novo-picker i.entity-icon.opportunity{background:#625}novo-picker i.entity-icon.job{background:#b56}novo-picker i.entity-icon.joborder{background:#b56}novo-picker i.entity-icon.submission{background:#a9adbb}novo-picker i.entity-icon.sendout{background:#747884}novo-picker i.entity-icon.placement{background:#0b344f}novo-picker i.entity-icon.note{background:#747884}novo-picker i.entity-icon.contract{background:#454ea0}novo-picker i.entity-icon.task{background:#4f5361}novo-picker i.entity-icon.jobCode{background:#696d79}novo-picker i.entity-icon.earnCode{background:#696d79}novo-picker i.entity-icon.invoiceStatement{background:#696d79}novo-picker i.entity-icon.billableCharge{background:#696d79}novo-picker i.entity-icon.payableCharge{background:#696d79}novo-picker i.entity-icon.user{background:#696d79}novo-picker i.entity-icon.corporateUser{background:#696d79}novo-picker i.entity-icon.distributionList{background:#696d79}novo-picker i.entity-icon.credential{background:#696d79}novo-picker i.entity-icon.person{background:#696d79}novo-picker i.bhi-search,novo-picker i.bhi-times{position:absolute;right:0;color:#3d464d}novo-picker i.bhi-search.entity-selected,novo-picker i.bhi-times.entity-selected{right:5px}novo-picker i.bhi-search{top:0;font-size:1.2rem}novo-picker i.bhi-times{top:0;cursor:pointer;font-size:1.2rem}\n"] }]
-        }], ctorParameters: () => [{ type: i0.ElementRef }, { type: i1.ComponentUtils }, { type: i0.ChangeDetectorRef }], propDecorators: { results: [{
+        }], ctorParameters: () => [{ type: i0.ElementRef }, { type: i1.ComponentUtils }, { type: i0.ChangeDetectorRef }, { type: i0.DestroyRef }], propDecorators: { results: [{
                 type: ViewChild,
                 args: ['results', { read: ViewContainerRef, static: true }]
             }], config: [{

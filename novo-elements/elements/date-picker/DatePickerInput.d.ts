@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, ElementRef, EventEmitter, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, DestroyRef, ElementRef, EventEmitter, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { NovoOverlayTemplateComponent } from 'novo-elements/elements/common';
 import { DateFormatService, NovoLabelService } from 'novo-elements/services';
@@ -8,6 +8,7 @@ export declare class NovoDatePickerInputElement implements OnInit, OnChanges, Af
     labels: NovoLabelService;
     private _changeDetectorRef;
     dateFormatService: DateFormatService;
+    private destroyRef;
     value: any;
     formattedValue: string;
     showInvalidDateError: boolean;
@@ -91,7 +92,7 @@ export declare class NovoDatePickerInputElement implements OnInit, OnChanges, Af
     valueCleared: EventEmitter<any>;
     /** Element for the panel containing the autocomplete options. */
     overlay: NovoOverlayTemplateComponent;
-    constructor(element: ElementRef, labels: NovoLabelService, _changeDetectorRef: ChangeDetectorRef, dateFormatService: DateFormatService);
+    constructor(element: ElementRef, labels: NovoLabelService, _changeDetectorRef: ChangeDetectorRef, dateFormatService: DateFormatService, destroyRef: DestroyRef);
     ngOnInit(): void;
     ngOnChanges(changes: SimpleChanges): void;
     ngAfterViewInit(): void;

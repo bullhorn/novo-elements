@@ -7,6 +7,7 @@ import { InjectionToken, Inject, ViewEncapsulation, ChangeDetectionStrategy, Com
 import { ANIMATION_MODULE_TYPE } from '@angular/platform-browser/animations';
 import { Subject, fromEvent, merge } from 'rxjs';
 import { filter, map, mapTo, takeUntil, distinctUntilChanged, take, startWith, debounceTime } from 'rxjs/operators';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import * as i1$1 from '@angular/cdk/a11y';
 import { hasModifierKey } from '@angular/cdk/keycodes';
 import * as i2 from '@angular/cdk/platform';
@@ -37,20 +38,21 @@ function NOVO_LAYOUT_DEFAULT_AUTOSIZE_FACTORY() {
 }
 
 class NovoLayoutContent extends CdkScrollable {
-    constructor(_changeDetectorRef, _container, elementRef, scrollDispatcher, ngZone) {
+    constructor(_changeDetectorRef, _container, elementRef, scrollDispatcher, ngZone, destroyRef) {
         super(elementRef, scrollDispatcher, ngZone);
         this._changeDetectorRef = _changeDetectorRef;
         this._container = _container;
+        this.destroyRef = destroyRef;
     }
     ngAfterContentInit() {
-        this._container._contentMarginChanges.subscribe(() => {
+        this._container._contentMarginChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
             this._changeDetectorRef.markForCheck();
         });
     }
     getHostElement() {
         return this.elementRef.nativeElement;
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoLayoutContent, deps: [{ token: i0.ChangeDetectorRef }, { token: NOVO_LAYOUT_CONTAINER }, { token: i0.ElementRef }, { token: i1.ScrollDispatcher }, { token: i0.NgZone }], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoLayoutContent, deps: [{ token: i0.ChangeDetectorRef }, { token: NOVO_LAYOUT_CONTAINER }, { token: i0.ElementRef }, { token: i1.ScrollDispatcher }, { token: i0.NgZone }, { token: i0.DestroyRef }], target: i0.ɵɵFactoryTarget.Component }); }
     static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "19.2.15", type: NovoLayoutContent, isStandalone: false, selector: "novo-layout-content", host: { classAttribute: "novo-layout-content" }, exportAs: ["novoLayoutContent"], usesInheritance: true, ngImport: i0, template: '<ng-content></ng-content>', isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoLayoutContent, decorators: [{
@@ -69,7 +71,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
         }], ctorParameters: () => [{ type: i0.ChangeDetectorRef }, { type: undefined, decorators: [{
                     type: Inject,
                     args: [NOVO_LAYOUT_CONTAINER]
-                }] }, { type: i0.ElementRef }, { type: i1.ScrollDispatcher }, { type: i0.NgZone }] });
+                }] }, { type: i0.ElementRef }, { type: i1.ScrollDispatcher }, { type: i0.NgZone }, { type: i0.DestroyRef }] });
 
 class NovoRailComponent extends CdkScrollable {
     constructor(elementRef, scrollDispatcher, ngZone) {

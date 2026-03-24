@@ -1,6 +1,6 @@
 import { EventEmitter, OnInit } from '@angular/core';
 import { NovoLabelService } from 'novo-elements/services';
-import type { DateLike } from 'novo-elements/utils';
+import { type DateLike } from 'novo-elements/utils';
 import * as i0 from "@angular/core";
 export declare class NovoYearSelectElement implements OnInit {
     labels: NovoLabelService;

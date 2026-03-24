@@ -1,9 +1,10 @@
-import { AfterViewInit, ElementRef, EventEmitter, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, DestroyRef, ElementRef, EventEmitter, OnDestroy, OnInit } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { EditorView } from '@codemirror/view';
 import * as i0 from "@angular/core";
 export declare class NovoCodeEditor implements ControlValueAccessor, OnInit, OnDestroy, AfterViewInit {
     private elementRef;
+    private destroyRef;
     theme: string;
     lineNumbers: boolean;
     name: string;
@@ -15,7 +16,7 @@ export declare class NovoCodeEditor implements ControlValueAccessor, OnInit, OnD
     editorView: EditorView;
     initialValue: string;
     private disabled;
-    constructor(elementRef: ElementRef);
+    constructor(elementRef: ElementRef, destroyRef: DestroyRef);
     ngOnInit(): void;
     ngOnDestroy(): void;
     ngAfterViewInit(): void;

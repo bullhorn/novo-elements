@@ -1,12 +1,13 @@
-import { ComponentFactoryResolver, ComponentRef, EventEmitter, OnChanges, SimpleChange, ViewContainerRef } from '@angular/core';
+import { ComponentFactoryResolver, ComponentRef, EventEmitter, OnChanges, OnDestroy, SimpleChange, ViewContainerRef } from '@angular/core';
 import { PopOverContent } from './PopOverContent';
 import * as i0 from "@angular/core";
-export declare class PopOverDirective implements OnChanges {
+export declare class PopOverDirective implements OnChanges, OnDestroy {
     protected viewContainerRef: ViewContainerRef;
     protected resolver: ComponentFactoryResolver;
     protected PopoverComponent: typeof PopOverContent;
     protected popover: ComponentRef<PopOverContent>;
     protected visible: boolean;
+    private subscriptions;
     constructor(viewContainerRef: ViewContainerRef, resolver: ComponentFactoryResolver);
     content: string | PopOverContent;
     set novoPopover(content: string | PopOverContent);
@@ -26,6 +27,7 @@ export declare class PopOverDirective implements OnChanges {
     ngOnChanges(changes: {
         [propertyName: string]: SimpleChange;
     }): void;
+    ngOnDestroy(): void;
     toggle(): void;
     show(): void;
     hide(): void;

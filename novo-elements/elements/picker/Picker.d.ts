@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, ComponentRef, ElementRef, EventEmitter, OnInit, ViewContainerRef } from '@angular/core';
+import { ChangeDetectorRef, ComponentRef, DestroyRef, ElementRef, EventEmitter, OnInit, ViewContainerRef } from '@angular/core';
 import { ComponentUtils } from 'novo-elements/services';
 import { NovoOverlayTemplateComponent } from 'novo-elements/elements/common';
 import * as i0 from "@angular/core";
@@ -12,6 +12,7 @@ export declare class NovoPickerElement implements OnInit {
     element: ElementRef;
     private componentUtils;
     private ref;
+    private destroyRef;
     results: ViewContainerRef;
     config: any;
     placeholder: string;
@@ -47,7 +48,7 @@ export declare class NovoPickerElement implements OnInit {
     _value: any;
     onModelChange: Function;
     onModelTouched: Function;
-    constructor(element: ElementRef, componentUtils: ComponentUtils, ref: ChangeDetectorRef);
+    constructor(element: ElementRef, componentUtils: ComponentUtils, ref: ChangeDetectorRef, destroyRef: DestroyRef);
     ngOnInit(): void;
     private onDebouncedKeyup;
     openPanel(): void;

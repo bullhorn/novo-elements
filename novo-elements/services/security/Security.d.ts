@@ -1,4 +1,5 @@
 import { EventEmitter } from '@angular/core';
+import { Subscription } from 'rxjs';
 import * as i0 from "@angular/core";
 export declare class Security {
     credentials: string[];
@@ -7,7 +8,7 @@ export declare class Security {
     has(value: any): boolean;
     revoke(value: any): void;
     clear(): void;
-    subscribe(fn: any): void;
+    subscribe(fn: any): Subscription;
     checkRoutes(routes: {
         entities?: any[];
         permissions?: any[] | Function;

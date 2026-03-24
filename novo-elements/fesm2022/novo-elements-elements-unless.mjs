@@ -5,13 +5,21 @@ import { CommonModule } from '@angular/common';
 
 // NG2
 class Unless {
-    constructor(templateRef, viewContainer, security) {
+    constructor(templateRef, viewContainer, security, destroyRef) {
         this.templateRef = templateRef;
         this.viewContainer = viewContainer;
         this.security = security;
+        this.destroyRef = destroyRef;
         this.permissions = '';
         this.isDisplayed = false;
-        this.security.subscribe(this.check.bind(this));
+        const sub = this.security.subscribe(this.check.bind(this));
+        this.destroyRef.onDestroy(() => {
+            // If Security uses an old definition, subscribe will return void/undefined.
+            try {
+                sub?.unsubscribe();
+            }
+            catch { }
+        });
     }
     set bhUnless(value) {
         this.permissions = value || '';
@@ -41,7 +49,7 @@ class Unless {
             this.viewContainer.clear();
         }
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: Unless, deps: [{ token: i0.TemplateRef }, { token: i0.ViewContainerRef }, { token: i1.Security }], target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: Unless, deps: [{ token: i0.TemplateRef }, { token: i0.ViewContainerRef }, { token: i1.Security }, { token: i0.DestroyRef }], target: i0.ɵɵFactoryTarget.Directive }); }
     static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "19.2.15", type: Unless, isStandalone: false, selector: "[bhUnless]", inputs: { bhUnless: "bhUnless" }, ngImport: i0 }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: Unless, decorators: [{
@@ -50,7 +58,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
                     selector: '[bhUnless]',
                     standalone: false,
                 }]
-        }], ctorParameters: () => [{ type: i0.TemplateRef }, { type: i0.ViewContainerRef }, { type: i1.Security }], propDecorators: { bhUnless: [{
+        }], ctorParameters: () => [{ type: i0.TemplateRef }, { type: i0.ViewContainerRef }, { type: i1.Security }, { type: i0.DestroyRef }], propDecorators: { bhUnless: [{
                 type: Input
             }] } });
 

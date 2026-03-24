@@ -1,7 +1,7 @@
 import * as i1 from '@angular/common';
 import { CommonModule, DOCUMENT } from '@angular/common';
 import * as i0 from '@angular/core';
-import { EventEmitter, Injectable, HostBinding, Input, Directive, Host, Optional, Inject, ChangeDetectionStrategy, ViewEncapsulation, Component, NgModule, InjectionToken, Output, input, inject, TemplateRef, ViewChild } from '@angular/core';
+import { EventEmitter, Injectable, HostBinding, Input, Directive, Host, Optional, Inject, ChangeDetectionStrategy, ViewEncapsulation, Component, NgModule, InjectionToken, Output, input, inject, DestroyRef, TemplateRef, ViewChild } from '@angular/core';
 import { of, Subject, fromEvent, merge } from 'rxjs';
 import * as tokens from 'novo-design-tokens';
 import { BooleanInput, Helpers } from 'novo-elements/utils';
@@ -11,6 +11,7 @@ import { hasModifierKey } from '@angular/cdk/keycodes';
 import * as i1$1 from '@angular/cdk/overlay';
 import { OverlayContainer, OverlayConfig, OverlayModule } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { filter, first, switchMap } from 'rxjs/operators';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { FormsModule } from '@angular/forms';
@@ -1780,6 +1781,7 @@ class NovoOverlayTemplateComponent {
         this.closing = new EventEmitter();
         this.backDropClicked = new EventEmitter();
         this.overlayContainer = inject(OverlayContainer);
+        this.destroyRef = inject(DestroyRef);
     }
     ngOnDestroy() {
         this.destroyOverlay();
@@ -1889,7 +1891,7 @@ class NovoOverlayTemplateComponent {
     createOverlay(template) {
         this.portal = new TemplatePortal(template, this.viewContainerRef);
         this.overlayRef = this.overlay.create(this.getOverlayConfig());
-        this.overlayRef.backdropClick().subscribe(() => {
+        this.overlayRef.backdropClick().pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
             this.backDropClicked.emit(true);
             this.closePanel();
         });

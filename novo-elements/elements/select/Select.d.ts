@@ -4,8 +4,7 @@ import { AfterViewInit, ChangeDetectorRef, ElementRef, EventEmitter, Injector, N
 import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
 import { NovoLabelService } from 'novo-elements/services';
-import { CanDisableCtor, CanRequireCtor, CanUpdateErrorStateCtor, ErrorStateMatcher, HasOverlayCtor, HasTabIndexCtor, NovoOptgroup, NovoOption } from 'novo-elements/elements/common';
-import { NovoOverlayTemplateComponent } from 'novo-elements/elements/common';
+import { CanDisableCtor, CanRequireCtor, CanUpdateErrorStateCtor, ErrorStateMatcher, HasOverlayCtor, HasTabIndexCtor, NovoOptgroup, NovoOption, NovoOverlayTemplateComponent } from 'novo-elements/elements/common';
 import { NovoFieldControl, NovoFieldElement } from 'novo-elements/elements/field';
 import * as i0 from "@angular/core";
 /** Change event object that is emitted when the select value has changed. */

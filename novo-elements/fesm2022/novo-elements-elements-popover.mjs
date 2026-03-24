@@ -1,5 +1,6 @@
 import * as i0 from '@angular/core';
 import { EventEmitter, ViewChild, Input, Component, HostListener, Output, Directive, NgModule } from '@angular/core';
+import { Subscription } from 'rxjs';
 import * as i1 from '@angular/common';
 import { CommonModule } from '@angular/common';
 
@@ -229,6 +230,7 @@ class PopOverDirective {
         this.viewContainerRef = viewContainerRef;
         this.resolver = resolver;
         this.PopoverComponent = PopOverContent;
+        this.subscriptions = new Subscription();
         this.popoverOnHover = false;
         this.popoverDismissTimeout = 0;
         this.onShown = new EventEmitter();
@@ -270,6 +272,9 @@ class PopOverDirective {
             }
         }
     }
+    ngOnDestroy() {
+        this.subscriptions.unsubscribe();
+    }
     toggle() {
         if (!this.visible) {
             this.show();
@@ -306,7 +311,7 @@ class PopOverDirective {
             if (this.popoverTitle !== undefined) {
                 popover.title = this.popoverTitle;
             }
-            popover.onCloseFromOutside.subscribe(() => this.hide());
+            this.subscriptions.add(popover.onCloseFromOutside.subscribe(() => this.hide()));
             if (this.popoverDismissTimeout > 0) {
                 setTimeout(() => this.hide(), this.popoverDismissTimeout);
             }
@@ -323,7 +328,7 @@ class PopOverDirective {
             if (this.popoverTitle !== undefined) {
                 popover.title = this.popoverTitle;
             }
-            popover.onCloseFromOutside.subscribe(() => this.hide());
+            this.subscriptions.add(popover.onCloseFromOutside.subscribe(() => this.hide()));
             if (this.popoverDismissTimeout > 0) {
                 setTimeout(() => this.hide(), this.popoverDismissTimeout);
             }

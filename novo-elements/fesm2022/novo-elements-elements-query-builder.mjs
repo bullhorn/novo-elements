@@ -1278,6 +1278,17 @@ class NovoDefaultPickerConditionDef extends AbstractConditionFieldDef {
         this.defaultOperator = Operator.includeAny;
         this.defineOperatorEditGroup(Operator.includeAny, Operator.includeAll, Operator.excludeAny);
     }
+    onOperatorSelect(formGroup) {
+        super.onOperatorSelect(formGroup);
+        // For multi-select operators, ensure value is an array, not null/boolean
+        const newOperator = formGroup.get('operator').value;
+        if ([Operator.includeAny, Operator.includeAll, Operator.excludeAny].includes(newOperator)) {
+            const currentValue = formGroup.get('value').value;
+            if (!Array.isArray(currentValue)) {
+                formGroup.get('value').setValue([]);
+            }
+        }
+    }
     showAddOption(meta, select, filterValue) {
         if (!(meta?.allowCustomFilterValues)) {
             return false;
@@ -1286,7 +1297,7 @@ class NovoDefaultPickerConditionDef extends AbstractConditionFieldDef {
         if (!filterValue) {
             return false;
         }
-        if (select.value && select.value.find(selectValue => selectValue.trim().toLowerCase() === filterValue)) {
+        if (select?.value && Array.isArray(select.value) && select.value.find(selectValue => selectValue.trim().toLowerCase() === filterValue)) {
             return false;
         }
         return meta?.options && meta.options.find(opt => {
@@ -1302,7 +1313,10 @@ class NovoDefaultPickerConditionDef extends AbstractConditionFieldDef {
             !option.label.toLowerCase().includes(filterValue.toLowerCase()));
     }
     customOptions(options, select) {
-        return select.value?.filter((selectedOption) => {
+        if (!Array.isArray(select.value)) {
+            return [];
+        }
+        return select.value.filter((selectedOption) => {
             return (!options || !(options.find(option => option.value === selectedOption)));
         }).map(value => ({
             value,
@@ -1332,7 +1346,7 @@ class NovoDefaultPickerConditionDef extends AbstractConditionFieldDef {
             <novo-option [disabled]="!meta?.allowCustomFilterValues" [hidden]="!meta?.allowCustomFilterValues">
               <novo-select-search #filterInput allowDeselectDuringFilter></novo-select-search>
             </novo-option>
-            <!-- WHat about optionUrl/optionType -->
+            <!-- What about optionUrl/optionType -->
             @for (option of meta?.options; track optionTracker) {
               <novo-option [hidden]="hideOption(option, filterInput?.value)" [value]="option.value" [attr.data-automation-value]="option.label">
                 {{ option.label}}
@@ -1379,7 +1393,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             <novo-option [disabled]="!meta?.allowCustomFilterValues" [hidden]="!meta?.allowCustomFilterValues">
               <novo-select-search #filterInput allowDeselectDuringFilter></novo-select-search>
             </novo-option>
-            <!-- WHat about optionUrl/optionType -->
+            <!-- What about optionUrl/optionType -->
             @for (option of meta?.options; track optionTracker) {
               <novo-option [hidden]="hideOption(option, filterInput?.value)" [value]="option.value" [attr.data-automation-value]="option.label">
                 {{ option.label}}

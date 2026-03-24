@@ -6,21 +6,21 @@ import { MaskedEnum, MaskedRange } from 'imask';
 
 // NG2
 class ComponentUtils {
-    constructor(componentFactoryResolver) {
-        this.componentFactoryResolver = componentFactoryResolver;
-    }
     append(ComponentClass, location, providers, onTop) {
-        const componentFactory = this.componentFactoryResolver.resolveComponentFactory(ComponentClass);
         const parent = location.injector;
         const index = onTop ? 0 : location.length;
-        return location.createComponent(componentFactory, index, Injector.create({ providers, parent }));
+        const injector = Injector.create({ providers, parent });
+        return location.createComponent(ComponentClass, {
+            index,
+            injector,
+        });
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: ComponentUtils, deps: [{ token: i0.ComponentFactoryResolver }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: ComponentUtils, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
     static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: ComponentUtils }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: ComponentUtils, decorators: [{
             type: Injectable
-        }], ctorParameters: () => [{ type: i0.ComponentFactoryResolver }] });
+        }] });
 
 class CollectionEvent {
     static { this.REFRESH = 'Collection.REFRESH'; }
@@ -1149,7 +1149,7 @@ class Security {
         this.change.emit(this.credentials);
     }
     subscribe(fn) {
-        this.change.subscribe(fn);
+        return this.change.subscribe(fn);
     }
     checkRoutes(routes, options) {
         const filtered = [];

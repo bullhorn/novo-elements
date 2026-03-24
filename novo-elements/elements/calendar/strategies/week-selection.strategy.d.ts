@@ -1,4 +1,4 @@
-import type { DateLike, NovoDateSelectionStrategy } from 'novo-elements/utils';
+import { type DateLike, type NovoDateSelectionStrategy } from 'novo-elements/utils';
 export declare class WeekSelectionStrategy implements NovoDateSelectionStrategy<DateLike[]> {
     private weekStartsOn;
     constructor(weekStartsOn?: Day);

@@ -1,4 +1,4 @@
-import type { DateLike, NovoDateSelectionStrategy } from 'novo-elements/utils';
+import { type DateLike, type NovoDateSelectionStrategy } from 'novo-elements/utils';
 import * as i0 from "@angular/core";
 export declare class RangeSelectionStrategy implements NovoDateSelectionStrategy<DateLike[]> {
     selectionFinished(date: DateLike, currentRange: DateLike[]): DateLike[];

@@ -1,13 +1,14 @@
-import { TemplateRef, ViewContainerRef } from '@angular/core';
+import { DestroyRef, TemplateRef, ViewContainerRef } from '@angular/core';
 import { Security } from 'novo-elements/services';
 import * as i0 from "@angular/core";
 export declare class Unless {
     templateRef: TemplateRef<any>;
     viewContainer: ViewContainerRef;
     security: Security;
+    private destroyRef;
     permissions: string;
     isDisplayed: boolean;
-    constructor(templateRef: TemplateRef<any>, viewContainer: ViewContainerRef, security: Security);
+    constructor(templateRef: TemplateRef<any>, viewContainer: ViewContainerRef, security: Security, destroyRef: DestroyRef);
     set bhUnless(value: string);
     check(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<Unless, never>;

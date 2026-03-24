@@ -1,6 +1,7 @@
 import * as i0 from '@angular/core';
 import { forwardRef, EventEmitter, HostListener, HostBinding, ViewChild, Input, Output, Component, NgModule } from '@angular/core';
 import { NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { defaultKeymap } from '@codemirror/commands';
 import { javascript } from '@codemirror/lang-javascript';
 import { Annotation, EditorState } from '@codemirror/state';
@@ -21,8 +22,9 @@ const FormControlCodeWriter = Annotation.define();
 // (This is a replacement for the "novo-ace-editor". Notably, we are no longer naming it based on the underlying component. It is possible, in the future,
 // we decide there is another code editing component that better fits our use case - in which situation we should replace the implementation here, but keep its name)
 class NovoCodeEditor {
-    constructor(elementRef) {
+    constructor(elementRef, destroyRef) {
         this.elementRef = elementRef;
+        this.destroyRef = destroyRef;
         this.theme = 'default';
         this.lineNumbers = true;
         this.blur = new EventEmitter();
@@ -35,6 +37,10 @@ class NovoCodeEditor {
     ngOnInit() {
     }
     ngOnDestroy() {
+        if (this.editorView) {
+            this.editorView.destroy();
+            this.editorView = null;
+        }
     }
     ngAfterViewInit() {
         this.createEditorView();
@@ -88,21 +94,21 @@ class NovoCodeEditor {
         }
     }
     registerOnChange(fn) {
-        this.changed.subscribe(fn);
+        this.changed.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(fn);
     }
     registerOnTouched(fn) {
-        this.blur.subscribe(fn);
+        this.blur.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(fn);
     }
     setDisabledState(isDisabled) {
         this.disabled = isDisabled;
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoCodeEditor, deps: [{ token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoCodeEditor, deps: [{ token: i0.ElementRef }, { token: i0.DestroyRef }], target: i0.ɵɵFactoryTarget.Component }); }
     static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "19.2.15", type: NovoCodeEditor, isStandalone: false, selector: "novo-code-editor", inputs: { theme: "theme", lineNumbers: "lineNumbers", name: "name", mode: "mode" }, outputs: { blur: "blur", focus: "focus" }, host: { listeners: { "focus": "onFocus()", "blur": "onBlur()" }, properties: { "class.editor-disabled": "this.disabled" } }, providers: [CODE_EDITOR_VALUE_ACCESSOR], viewQueries: [{ propertyName: "editorRoot", first: true, predicate: ["editorRoot"], descendants: true }], ngImport: i0, template: '', isInline: true, styles: [":host{height:200px;display:block;overflow:auto}\n"] }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoCodeEditor, decorators: [{
             type: Component,
             args: [{ selector: 'novo-code-editor', template: '', providers: [CODE_EDITOR_VALUE_ACCESSOR], standalone: false, styles: [":host{height:200px;display:block;overflow:auto}\n"] }]
-        }], ctorParameters: () => [{ type: i0.ElementRef }], propDecorators: { theme: [{
+        }], ctorParameters: () => [{ type: i0.ElementRef }, { type: i0.DestroyRef }], propDecorators: { theme: [{
                 type: Input
             }], lineNumbers: [{
                 type: Input

@@ -23,6 +23,7 @@ import * as i4$1 from 'novo-elements/elements/common';
 import { NovoOverlayTemplateComponent, NovoOverlayModule } from 'novo-elements/elements/common';
 import * as i6$1 from 'novo-elements/elements/icon';
 import { NovoIconModule } from 'novo-elements/elements/icon';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 var __decorate$1 = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -494,11 +495,12 @@ const DATE_VALUE_ACCESSOR$1 = {
     multi: true,
 };
 class NovoDatePickerInputElement {
-    constructor(element, labels, _changeDetectorRef, dateFormatService) {
+    constructor(element, labels, _changeDetectorRef, dateFormatService, destroyRef) {
         this.element = element;
         this.labels = labels;
         this._changeDetectorRef = _changeDetectorRef;
         this.dateFormatService = dateFormatService;
+        this.destroyRef = destroyRef;
         this.formattedValue = '';
         this.invalidDateErrorMessage = '';
         /** View -> model callback called when value changes */
@@ -550,7 +552,7 @@ class NovoDatePickerInputElement {
         }
     }
     ngAfterViewInit() {
-        this.overlay.panelClosingActions.subscribe(this._handleOverlayClickout.bind(this));
+        this.overlay.panelClosingActions.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(this._handleOverlayClickout.bind(this));
     }
     _initFormatOptions() {
         this.userDefinedFormat = this.format ? !this.format.match(/^(DD\/MM\/YYYY|MM\/DD\/YYYY)$/g) : false;
@@ -783,7 +785,7 @@ class NovoDatePickerInputElement {
     cancel() {
         this.onCancel.emit();
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoDatePickerInputElement, deps: [{ token: i0.ElementRef }, { token: i1.NovoLabelService }, { token: i0.ChangeDetectorRef }, { token: i1.DateFormatService }], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoDatePickerInputElement, deps: [{ token: i0.ElementRef }, { token: i1.NovoLabelService }, { token: i0.ChangeDetectorRef }, { token: i1.DateFormatService }, { token: i0.DestroyRef }], target: i0.ɵɵFactoryTarget.Component }); }
     static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "19.2.15", type: NovoDatePickerInputElement, isStandalone: false, selector: "novo-date-picker-input", inputs: { name: "name", start: "start", end: "end", placeholder: "placeholder", maskOptions: "maskOptions", format: "format", textMaskEnabled: "textMaskEnabled", allowInvalidDate: "allowInvalidDate", overlayOnElement: "overlayOnElement", hideFooter: "hideFooter", hideToday: "hideToday", hasButtons: "hasButtons", disabled: "disabled", disabledDateMessage: "disabledDateMessage", dateForInitialView: "dateForInitialView", weekStart: "weekStart" }, outputs: { blurEvent: "blurEvent", focusEvent: "focusEvent", changeEvent: "changeEvent", onSave: "onSave", onCancel: "onCancel", valueCleared: "valueCleared" }, host: { properties: { "class.disabled": "this.disabled" } }, providers: [DATE_VALUE_ACCESSOR$1], viewQueries: [{ propertyName: "overlay", first: true, predicate: NovoOverlayTemplateComponent, descendants: true }], usesOnChanges: true, ngImport: i0, template: `
     <input
       type="text"
@@ -897,7 +899,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
       </novo-date-picker>
     </novo-overlay-template>
   `, standalone: false, styles: [":host{flex:1;position:relative;display:block!important}:host.disabled{pointer-events:none;opacity:1}:host input{font-size:1em;border:none;border-bottom:1px solid #dbdbdb;background:transparent!important;border-radius:0;outline:none;height:2rem;width:100%;margin:0;padding:0;box-shadow:none;box-sizing:content-box;transition:all .3s;color:#3d464d}:host input:focus{border-bottom:1px solid #4a89dc}:host span.error-text{color:#da4453;padding-top:10px;flex:1;display:flex}:host>i.bhi-clock,:host>i.bhi-search,:host>i.bhi-times,:host>i.bhi-calendar{position:absolute;right:0;top:0;font-size:1.2rem;cursor:pointer}\n"] }]
-        }], ctorParameters: () => [{ type: i0.ElementRef }, { type: i1.NovoLabelService }, { type: i0.ChangeDetectorRef }, { type: i1.DateFormatService }], propDecorators: { name: [{
+        }], ctorParameters: () => [{ type: i0.ElementRef }, { type: i1.NovoLabelService }, { type: i0.ChangeDetectorRef }, { type: i1.DateFormatService }, { type: i0.DestroyRef }], propDecorators: { name: [{
                 type: Input
             }], start: [{
                 type: Input

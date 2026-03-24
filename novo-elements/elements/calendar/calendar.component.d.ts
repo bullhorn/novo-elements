@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, ElementRef, EventEmitter, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NovoLabelService } from 'novo-elements/services';
-import type { DatePickerSelectModes, NovoDateSelectEvent, NovoDateSelectionStrategy, NovoMonthSelectEvent, NovoYearSelectEvent, OverlayDate } from 'novo-elements/utils';
+import { type DatePickerSelectModes, type NovoDateSelectEvent, type NovoDateSelectionStrategy, type NovoMonthSelectEvent, type NovoYearSelectEvent, type OverlayDate } from 'novo-elements/utils';
 import * as i0 from "@angular/core";
 export declare class NovoCalendarElement implements OnInit {
     labels: NovoLabelService;

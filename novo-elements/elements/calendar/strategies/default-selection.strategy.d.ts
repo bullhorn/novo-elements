@@ -1,5 +1,5 @@
 import { FactoryProvider, InjectionToken } from '@angular/core';
-import type { DateLike, NovoDateSelectionStrategy } from 'novo-elements/utils';
+import { type DateLike, type NovoDateSelectionStrategy } from 'novo-elements/utils';
 import * as i0 from "@angular/core";
 /** Injection token used to customize the date range selection behavior. */
 export declare const NOVO_DATE_SELECTION_STRATEGY: InjectionToken<NovoDateSelectionStrategy<DateLike>>;

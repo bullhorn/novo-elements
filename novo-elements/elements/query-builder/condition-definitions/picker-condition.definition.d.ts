@@ -1,3 +1,4 @@
+import { UntypedFormGroup } from '@angular/forms';
 import { NovoLabelService } from 'novo-elements/services';
 import { BaseFieldDef, Operator } from '../query-builder.types';
 import { AbstractConditionFieldDef } from './abstract-condition.definition';
@@ -10,6 +11,7 @@ type FieldOption = BaseFieldDef['options'][number];
 export declare class NovoDefaultPickerConditionDef extends AbstractConditionFieldDef {
     defaultOperator: Operator;
     constructor(labelService: NovoLabelService);
+    onOperatorSelect(formGroup: UntypedFormGroup): void;
     showAddOption(meta: any, select: any, filterValue: string): boolean;
     optionTracker(option: FieldOption): string;
     hideOption(option: FieldOption, filterValue: string): boolean;

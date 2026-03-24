@@ -2,7 +2,7 @@ import { ChangeDetectorRef, ElementRef, EventEmitter, OnInit } from '@angular/co
 import { DomSanitizer } from '@angular/platform-browser';
 import { Day as DateFnsDay } from 'date-fns';
 import { NovoLabelService } from 'novo-elements/services';
-import type { DateLike, Day, OverlayDate } from 'novo-elements/utils';
+import { type DateLike, type Day, type OverlayDate } from 'novo-elements/utils';
 import * as i0 from "@angular/core";
 export declare class NovoMonthViewElement implements OnInit {
     labels: NovoLabelService;
