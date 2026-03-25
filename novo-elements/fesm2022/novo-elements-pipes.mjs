@@ -11,11 +11,11 @@ class DecodeURIPipe {
         }
         return decodedString;
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: DecodeURIPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe }); }
-    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "19.2.15", ngImport: i0, type: DecodeURIPipe, isStandalone: false, name: "decodeURI" }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: DecodeURIPipe }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: DecodeURIPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe }); }
+    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "20.3.17", ngImport: i0, type: DecodeURIPipe, isStandalone: false, name: "decodeURI" }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: DecodeURIPipe }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: DecodeURIPipe, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: DecodeURIPipe, decorators: [{
             type: Pipe,
             args: [{
                     name: 'decodeURI',
@@ -30,11 +30,11 @@ class DefaultPipe {
     transform(value, defaultValue) {
         return value || defaultValue;
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: DefaultPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe }); }
-    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "19.2.15", ngImport: i0, type: DefaultPipe, isStandalone: false, name: "default" }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: DefaultPipe }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: DefaultPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe }); }
+    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "20.3.17", ngImport: i0, type: DefaultPipe, isStandalone: false, name: "default" }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: DefaultPipe }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: DefaultPipe, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: DefaultPipe, decorators: [{
             type: Pipe,
             args: [{
                     name: 'default', pure: true,
@@ -59,10 +59,10 @@ class GroupByPipe {
         }
         return Object.keys(arr).map((key) => ({ key, value: arr[key] }));
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: GroupByPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe }); }
-    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "19.2.15", ngImport: i0, type: GroupByPipe, isStandalone: false, name: "groupBy" }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: GroupByPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe }); }
+    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "20.3.17", ngImport: i0, type: GroupByPipe, isStandalone: false, name: "groupBy" }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: GroupByPipe, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: GroupByPipe, decorators: [{
             type: Pipe,
             args: [{
                     name: 'groupBy',
@@ -79,11 +79,11 @@ class HighlightPipe {
         // Ex: if the capture is "a" the result will be \a
         return queryToEscape.replace(/([.?*+^$[\]\\(){}|-])/g, '\\$1');
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: HighlightPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe }); }
-    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "19.2.15", ngImport: i0, type: HighlightPipe, isStandalone: false, name: "highlight" }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: HighlightPipe }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: HighlightPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe }); }
+    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "20.3.17", ngImport: i0, type: HighlightPipe, isStandalone: false, name: "highlight" }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: HighlightPipe }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: HighlightPipe, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: HighlightPipe, decorators: [{
             type: Pipe,
             args: [{
                     name: 'highlight', pure: true,
@@ -105,10 +105,10 @@ class IsoDateRangePipe {
         });
         return `${start} - ${end}`;
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: IsoDateRangePipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe }); }
-    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "19.2.15", ngImport: i0, type: IsoDateRangePipe, isStandalone: false, name: "isoDateRange" }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: IsoDateRangePipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe }); }
+    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "20.3.17", ngImport: i0, type: IsoDateRangePipe, isStandalone: false, name: "isoDateRange" }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: IsoDateRangePipe, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: IsoDateRangePipe, decorators: [{
             type: Pipe,
             args: [{
                     name: 'isoDateRange',
@@ -124,10 +124,10 @@ class IsoDatePipe {
         }
         return date.slice(0, 10);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: IsoDatePipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe }); }
-    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "19.2.15", ngImport: i0, type: IsoDatePipe, isStandalone: false, name: "isoDate" }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: IsoDatePipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe }); }
+    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "20.3.17", ngImport: i0, type: IsoDatePipe, isStandalone: false, name: "isoDate" }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: IsoDatePipe, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: IsoDatePipe, decorators: [{
             type: Pipe,
             args: [{
                     name: 'isoDate',
@@ -147,10 +147,10 @@ class IsoTimeRangePipe {
         });
         return `${start} - ${end}`;
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: IsoTimeRangePipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe }); }
-    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "19.2.15", ngImport: i0, type: IsoTimeRangePipe, isStandalone: false, name: "isoTimeRange" }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: IsoTimeRangePipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe }); }
+    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "20.3.17", ngImport: i0, type: IsoTimeRangePipe, isStandalone: false, name: "isoTimeRange" }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: IsoTimeRangePipe, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: IsoTimeRangePipe, decorators: [{
             type: Pipe,
             args: [{
                     name: 'isoTimeRange',
@@ -167,10 +167,10 @@ class IsoTimePipe {
         }
         return date.slice(11, 16);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: IsoTimePipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe }); }
-    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "19.2.15", ngImport: i0, type: IsoTimePipe, isStandalone: false, name: "isoTime" }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: IsoTimePipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe }); }
+    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "20.3.17", ngImport: i0, type: IsoTimePipe, isStandalone: false, name: "isoTime" }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: IsoTimePipe, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: IsoTimePipe, decorators: [{
             type: Pipe,
             args: [{
                     name: 'isoTime',
@@ -520,11 +520,11 @@ class PluralPipe {
     transform(value) {
         return Pluralize.pluralize(value);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: PluralPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe }); }
-    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "19.2.15", ngImport: i0, type: PluralPipe, isStandalone: false, name: "plural" }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: PluralPipe }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: PluralPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe }); }
+    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "20.3.17", ngImport: i0, type: PluralPipe, isStandalone: false, name: "plural" }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: PluralPipe }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: PluralPipe, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: PluralPipe, decorators: [{
             type: Pipe,
             args: [{
                     name: 'plural',
@@ -536,11 +536,11 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
 
 // NG2
 class NovoPipesModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoPipesModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "19.2.15", ngImport: i0, type: NovoPipesModule, declarations: [PluralPipe, DecodeURIPipe, GroupByPipe, HighlightPipe, DefaultPipe, IsoTimePipe, IsoDatePipe, IsoTimeRangePipe, IsoDateRangePipe], exports: [PluralPipe, DecodeURIPipe, GroupByPipe, HighlightPipe, DefaultPipe, IsoTimePipe, IsoDatePipe, IsoTimeRangePipe, IsoDateRangePipe] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoPipesModule }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoPipesModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.3.17", ngImport: i0, type: NovoPipesModule, declarations: [PluralPipe, DecodeURIPipe, GroupByPipe, HighlightPipe, DefaultPipe, IsoTimePipe, IsoDatePipe, IsoTimeRangePipe, IsoDateRangePipe], exports: [PluralPipe, DecodeURIPipe, GroupByPipe, HighlightPipe, DefaultPipe, IsoTimePipe, IsoDatePipe, IsoTimeRangePipe, IsoDateRangePipe] }); }
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoPipesModule }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoPipesModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoPipesModule, decorators: [{
             type: NgModule,
             args: [{
                     declarations: [PluralPipe, DecodeURIPipe, GroupByPipe, HighlightPipe, DefaultPipe, IsoTimePipe, IsoDatePipe, IsoTimeRangePipe, IsoDateRangePipe],

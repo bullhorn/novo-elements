@@ -16,10 +16,10 @@ class NovoDragBoxParent {
         this.renderer = renderer;
         this.overlayContainer = inject(OverlayContainer, { optional: true });
         this.novoDragDropFinish = new EventEmitter();
-        this.scrollContainer = signal(null);
-        this.scrollContainerRect = computed(() => this.scrollContainer()?.getBoundingClientRect());
-        this.scrollX = signal(false);
-        this.scrollY = signal(false);
+        this.scrollContainer = signal(null, ...(ngDevMode ? [{ debugName: "scrollContainer" }] : []));
+        this.scrollContainerRect = computed(() => this.scrollContainer()?.getBoundingClientRect(), ...(ngDevMode ? [{ debugName: "scrollContainerRect" }] : []));
+        this.scrollX = signal(false, ...(ngDevMode ? [{ debugName: "scrollX" }] : []));
+        this.scrollY = signal(false, ...(ngDevMode ? [{ debugName: "scrollY" }] : []));
         this.mutationObserver = new MutationObserver(this.mutationDetected.bind(this));
     }
     get element() {
@@ -312,10 +312,10 @@ class NovoDragBoxParent {
         }
         return null;
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoDragBoxParent, deps: [{ token: i0.ElementRef }, { token: i0.Renderer2 }], target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "19.2.15", type: NovoDragBoxParent, isStandalone: false, selector: "[novoDragDrop]", inputs: { items: ["novoDragDrop", "items"], dragFilter: ["novoDragDropFilter", "dragFilter"], disableScroll: ["novoDragDropDisableScroll", "disableScroll"] }, outputs: { novoDragDropFinish: "novoDragDropFinish" }, host: { listeners: { "window:dragover": "onDragOver($event)" }, properties: { "class.dragging": "this.dragging" }, classAttribute: "novo-drag-container" }, ngImport: i0 }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoDragBoxParent, deps: [{ token: i0.ElementRef }, { token: i0.Renderer2 }], target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "20.3.17", type: NovoDragBoxParent, isStandalone: false, selector: "[novoDragDrop]", inputs: { items: ["novoDragDrop", "items"], dragFilter: ["novoDragDropFilter", "dragFilter"], disableScroll: ["novoDragDropDisableScroll", "disableScroll"] }, outputs: { novoDragDropFinish: "novoDragDropFinish" }, host: { listeners: { "window:dragover": "onDragOver($event)" }, properties: { "class.dragging": "this.dragging" }, classAttribute: "novo-drag-container" }, ngImport: i0 }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoDragBoxParent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoDragBoxParent, decorators: [{
             type: Directive,
             args: [{
                     selector: '[novoDragDrop]',
@@ -345,11 +345,11 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImpo
             }] } });
 
 class NovoDragDropModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoDragDropModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "19.2.15", ngImport: i0, type: NovoDragDropModule, declarations: [NovoDragBoxParent], exports: [NovoDragBoxParent] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoDragDropModule }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoDragDropModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.3.17", ngImport: i0, type: NovoDragDropModule, declarations: [NovoDragBoxParent], exports: [NovoDragBoxParent] }); }
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoDragDropModule }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoDragDropModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoDragDropModule, decorators: [{
             type: NgModule,
             args: [{
                     declarations: [NovoDragBoxParent],

@@ -1,10 +1,10 @@
 import { Subject } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
-import { trigger, state, transition, style, animate } from '@angular/animations';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 import * as i2 from '@angular/cdk/portal';
-import { ComponentPortal, PortalInjector, PortalModule } from '@angular/cdk/portal';
+import { ComponentPortal, PortalModule } from '@angular/cdk/portal';
 import * as i0 from '@angular/core';
-import { EventEmitter, Output, Component, Injectable, NgModule } from '@angular/core';
+import { EventEmitter, Output, Component, Injector, Injectable, NgModule } from '@angular/core';
 import * as i1 from '@angular/cdk/overlay';
 import { OverlayModule } from '@angular/cdk/overlay';
 
@@ -77,10 +77,10 @@ class AsideComponent {
     startExitAnimation() {
         this.animationState = 'leave';
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: AsideComponent, deps: [{ token: i0.Injector }, { token: NovoAsideRef }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "19.2.15", type: AsideComponent, isStandalone: false, selector: "novo-aside", outputs: { animationStateChanged: "animationStateChanged" }, ngImport: i0, template: "<div class=\"aside-panel\" [@slideInOut]=\"animationState\" (@slideInOut.start)=\"onAnimationStart($event)\"\n  (@slideInOut.done)=\"onAnimationDone($event)\">\n  <ng-template [cdkPortalOutlet]=\"component\"></ng-template>\n</div>", styles: [":host .aside-panel{background-color:var(--background-bright, #ffffff);height:100vh;width:50%;min-width:min-content;max-width:540px;position:absolute;top:0;right:0;padding:0;display:flex;justify-content:stretch;align-items:stretch}\n"], dependencies: [{ kind: "directive", type: i2.CdkPortalOutlet, selector: "[cdkPortalOutlet]", inputs: ["cdkPortalOutlet"], outputs: ["attached"], exportAs: ["cdkPortalOutlet"] }], animations: [slideInOut] }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: AsideComponent, deps: [{ token: i0.Injector }, { token: NovoAsideRef }], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.17", type: AsideComponent, isStandalone: false, selector: "novo-aside", outputs: { animationStateChanged: "animationStateChanged" }, ngImport: i0, template: "<div class=\"aside-panel\" [@slideInOut]=\"animationState\" (@slideInOut.start)=\"onAnimationStart($event)\"\n  (@slideInOut.done)=\"onAnimationDone($event)\">\n  <ng-template [cdkPortalOutlet]=\"component\"></ng-template>\n</div>", styles: [":host .aside-panel{background-color:var(--background-bright, #ffffff);height:100vh;width:50%;min-width:min-content;max-width:540px;position:absolute;top:0;right:0;padding:0;display:flex;justify-content:stretch;align-items:stretch}\n"], dependencies: [{ kind: "directive", type: i2.CdkPortalOutlet, selector: "[cdkPortalOutlet]", inputs: ["cdkPortalOutlet"], outputs: ["attached"], exportAs: ["cdkPortalOutlet"] }], animations: [slideInOut] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: AsideComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: AsideComponent, decorators: [{
             type: Component,
             args: [{ selector: 'novo-aside', animations: [slideInOut], standalone: false, template: "<div class=\"aside-panel\" [@slideInOut]=\"animationState\" (@slideInOut.start)=\"onAnimationStart($event)\"\n  (@slideInOut.done)=\"onAnimationDone($event)\">\n  <ng-template [cdkPortalOutlet]=\"component\"></ng-template>\n</div>", styles: [":host .aside-panel{background-color:var(--background-bright, #ffffff);height:100vh;width:50%;min-width:min-content;max-width:540px;position:absolute;top:0;right:0;padding:0;display:flex;justify-content:stretch;align-items:stretch}\n"] }]
         }], ctorParameters: () => [{ type: i0.Injector }, { type: NovoAsideRef }], propDecorators: { animationStateChanged: [{
@@ -120,9 +120,10 @@ class NovoAsideService {
         return containerRef.instance;
     }
     createInjector(config, asideRef) {
-        const injectionTokens = new WeakMap();
-        injectionTokens.set(NovoAsideRef, asideRef);
-        return new PortalInjector(this.injector, injectionTokens);
+        return Injector.create({
+            parent: this.injector,
+            providers: [{ provide: NovoAsideRef, useValue: asideRef }],
+        });
     }
     getOverlayConfig(config) {
         const scrollStrategy = config.hasBackdrop ? this.overlay.scrollStrategies.block() : this.overlay.scrollStrategies.noop();
@@ -133,20 +134,20 @@ class NovoAsideService {
             panelClass: config.panelClass,
         };
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoAsideService, deps: [{ token: i0.Injector }, { token: i1.Overlay }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoAsideService, providedIn: 'root' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoAsideService, deps: [{ token: i0.Injector }, { token: i1.Overlay }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoAsideService, providedIn: 'root' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoAsideService, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoAsideService, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }], ctorParameters: () => [{ type: i0.Injector }, { type: i1.Overlay }] });
 
 class NovoAsideModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoAsideModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "19.2.15", ngImport: i0, type: NovoAsideModule, declarations: [AsideComponent], imports: [OverlayModule, PortalModule] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoAsideModule, providers: [NovoAsideService], imports: [OverlayModule, PortalModule] }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoAsideModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.3.17", ngImport: i0, type: NovoAsideModule, declarations: [AsideComponent], imports: [OverlayModule, PortalModule] }); }
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoAsideModule, providers: [NovoAsideService], imports: [OverlayModule, PortalModule] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: NovoAsideModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoAsideModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [OverlayModule, PortalModule],

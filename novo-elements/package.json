@@ -1,6 +1,6 @@
 {
   "name": "novo-elements",
-  "version": "10.0.0",
+  "version": "12.0.0",
   "sideEffects": true,
   "peerDependencies": {
     "@angular/animations": ">=10",
@@ -40,22 +40,6 @@
       "types": "./addons/index.d.ts",
       "default": "./fesm2022/novo-elements-addons.mjs"
     },
-    "./elements": {
-      "types": "./elements/index.d.ts",
-      "default": "./fesm2022/novo-elements-elements.mjs"
-    },
-    "./pipes": {
-      "types": "./pipes/index.d.ts",
-      "default": "./fesm2022/novo-elements-pipes.mjs"
-    },
-    "./services": {
-      "types": "./services/index.d.ts",
-      "default": "./fesm2022/novo-elements-services.mjs"
-    },
-    "./utils": {
-      "types": "./utils/index.d.ts",
-      "default": "./fesm2022/novo-elements-utils.mjs"
-    },
     "./addons/ace-editor": {
       "types": "./addons/ace-editor/index.d.ts",
       "default": "./fesm2022/novo-elements-addons-ace-editor.mjs"
@@ -67,6 +51,10 @@
     "./addons/code-editor": {
       "types": "./addons/code-editor/index.d.ts",
       "default": "./fesm2022/novo-elements-addons-code-editor.mjs"
+    },
+    "./elements": {
+      "types": "./elements/index.d.ts",
+      "default": "./fesm2022/novo-elements-elements.mjs"
     },
     "./elements/agenda": {
       "types": "./elements/agenda/index.d.ts",
@@ -291,6 +279,18 @@
     "./elements/value": {
       "types": "./elements/value/index.d.ts",
       "default": "./fesm2022/novo-elements-elements-value.mjs"
+    },
+    "./pipes": {
+      "types": "./pipes/index.d.ts",
+      "default": "./fesm2022/novo-elements-pipes.mjs"
+    },
+    "./services": {
+      "types": "./services/index.d.ts",
+      "default": "./fesm2022/novo-elements-services.mjs"
+    },
+    "./utils": {
+      "types": "./utils/index.d.ts",
+      "default": "./fesm2022/novo-elements-utils.mjs"
     }
   },
   "schematics": "../../schematics/collection.json",

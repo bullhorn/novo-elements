@@ -1552,7 +1552,7 @@ function getWeekDay({ date }) {
         isPast: date < today,
         isToday: DateUtil.isSameDay(date, today),
         isFuture: date > today,
-        isWeekend: WEEKEND_DAY_NUMBERS.indexOf(getDay(date)) > -1,
+        isWeekend: WEEKEND_DAY_NUMBERS.includes(getDay(date)),
     };
 }
 function getWeekViewHeader({ viewDate, weekStartsOn, excluded = [], }) {
@@ -22268,10 +22268,10 @@ class OutsideClick {
             this.toggleActive(event, false);
         }
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: OutsideClick, deps: [{ token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: OutsideClick }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: OutsideClick, deps: [{ token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: OutsideClick }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.15", ngImport: i0, type: OutsideClick, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: OutsideClick, decorators: [{
             type: Injectable
         }], ctorParameters: () => [{ type: i0.ElementRef }] });
 
