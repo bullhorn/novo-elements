@@ -22,6 +22,13 @@ module.exports = [
     },
     rules: {
       'unused-imports/no-unused-imports': 'error',
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector: 'ImportNamespaceSpecifier',
+          message: 'Wildcard imports are not allowed',
+        },
+      ],
       'no-duplicate-imports': 'error',
       'no-console': ['warn', { allow: ['warn', 'error', 'info'] }],
       '@typescript-eslint/no-non-null-assertion': 'warn',
@@ -75,6 +82,7 @@ module.exports = [
       'keyword-spacing': ['error', { before: true, after: true }],
       'space-infix-ops': 'error',
       'comma-spacing': 'error',
+      'no-extra-semi': 'error',
     }
   },
   {
