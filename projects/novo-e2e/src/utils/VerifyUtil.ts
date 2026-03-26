@@ -15,7 +15,7 @@ import {
     FieldNamesToFormValues,
     FormValues,
     getControlType,
-} from '../e2e/common/table.common.page';
+} from './FormUtil';
 import { asyncForEach } from './AutomationHelpers';
 import { isObject } from 'imask/core/utils';
 

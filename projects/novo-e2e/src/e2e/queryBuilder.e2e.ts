@@ -1,6 +1,5 @@
 import { COMPONENT_URLS, examplesUrl, getURLs } from '../utils/EnvironmentUtil';
 import { browser } from '@wdio/globals';
-import { setFiltersFromAdvancedSearch } from './common/table.common.page';
 import { automationId, elements, novoAdvancedSearchOperator } from '../utils/SelectorUtil';
 import { sleep } from '../utils/SleepUtil';
 import {
@@ -14,6 +13,7 @@ import {
 } from '../utils/VerifyUtil';
 import { getElementWithTextValue } from '../utils/GetElementUtil';
 import { click, moveMouseToElement } from '../utils/ElementActionUtil';
+import { setFiltersFromAdvancedSearch } from 'utils/TableUtil';
 
 describe('Query Builder Demo Page', () => {
   const url = examplesUrl(COMPONENT_URLS.QUERY_BUILDER);
