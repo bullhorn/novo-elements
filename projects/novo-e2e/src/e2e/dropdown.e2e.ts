@@ -1,7 +1,7 @@
-import { click } from 'utils/ElementActionUtil';
-import { COMPONENT_URLS, examplesUrl, getURLs } from 'utils/EnvironmentUtil';
-import { automationId, codeExample, elements } from 'utils/SelectorUtil';
-import { verifyAbsent, verifyPresent, verifyText, verifyDisabled } from 'utils/VerifyUtil';
+import { click } from '../utils/ElementActionUtil';
+import { COMPONENT_URLS, examplesUrl, getURLs } from '../utils/EnvironmentUtil';
+import { automationId, codeExample, elements } from '../utils/SelectorUtil';
+import { verifyAbsent, verifyPresent, verifyText, verifyDisabled } from '../utils/VerifyUtil';
 
 describe('Dropdown Demo Page', () => {
   const url = examplesUrl(COMPONENT_URLS.DROPDOWN);

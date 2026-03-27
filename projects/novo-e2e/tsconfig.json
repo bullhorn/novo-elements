@@ -3,15 +3,21 @@
   "compilerOptions": {
     "sourceMap": true,
     "declaration": false,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "outDir": "../../dist/novo-e2e",
-    "baseUrl": "./src",
+    "baseUrl": "../../",
     "types": [
       "node",
-      "mocha",
+      "mocha"
     ],
+    "paths": {
+      "novo-elements": ["projects/novo-elements/src/index"],
+      "novo-examples": ["projects/novo-examples/src/index"],
+      "novo-elements/*": ["projects/novo-elements/src/*"],
+      "novo-examples/*": ["projects/novo-examples/src/*"]
+    },
     "target": "es2022",
     "module": "commonjs",
     "lib": [

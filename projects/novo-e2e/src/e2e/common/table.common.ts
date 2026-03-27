@@ -8,7 +8,7 @@ import {
   sortTableColumn,
   verifyColumnFiltered,
   verifyColumnSorted,
-} from 'utils/TableUtil';
+} from '../../utils/TableUtil';
 
 export async function testElements(columns: string[]) {
   for (const column of columns) {

@@ -13,7 +13,7 @@ import {
 } from '../utils/VerifyUtil';
 import { getElementWithTextValue } from '../utils/GetElementUtil';
 import { click, moveMouseToElement } from '../utils/ElementActionUtil';
-import { setFiltersFromAdvancedSearch } from 'utils/TableUtil';
+import { setFiltersFromAdvancedSearch } from '../utils/TableUtil';
 
 describe('Query Builder Demo Page', () => {
   const url = examplesUrl(COMPONENT_URLS.QUERY_BUILDER);

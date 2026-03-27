@@ -1,9 +1,9 @@
-import { asyncForEach } from 'utils/AutomationHelpers';
-import { click, scrollIntoView } from 'utils/ElementActionUtil';
-import { COMPONENT_URLS, examplesUrl, getURLs } from 'utils/EnvironmentUtil';
-import { getAllElements } from 'utils/GetElementUtil';
-import { automationId, codeExample, elements } from 'utils/SelectorUtil';
-import { verifyDisabled, verifyEnabled, verifyPresent, verifyText } from 'utils/VerifyUtil';
+import { asyncForEach } from '../utils/AutomationHelpers';
+import { click, scrollIntoView } from '../utils/ElementActionUtil';
+import { COMPONENT_URLS, examplesUrl, getURLs } from '../utils/EnvironmentUtil';
+import { getAllElements } from '../utils/GetElementUtil';
+import { automationId, codeExample, elements } from '../utils/SelectorUtil';
+import { verifyDisabled, verifyEnabled, verifyPresent, verifyText } from '../utils/VerifyUtil';
 
 describe('Button Demo Page', () => {
     const url = examplesUrl(COMPONENT_URLS.BUTTON);

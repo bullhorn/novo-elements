@@ -1,6 +1,6 @@
 import { browser } from '@wdio/globals';
-import { verifyPresent, verifyText } from 'utils/VerifyUtil';
-import { getURLs } from 'utils/EnvironmentUtil';
+import { verifyPresent, verifyText } from '../utils/VerifyUtil';
+import { getURLs } from '../utils/EnvironmentUtil';
 
 describe('Novo Elements Demo Home Page', () => {
   before(async () => {
