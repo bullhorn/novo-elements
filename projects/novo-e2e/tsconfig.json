@@ -1,0 +1,35 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "bundler",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "outDir": "../../dist/novo-e2e",
+    "baseUrl": "../../",
+    "types": [
+      "node",
+      "mocha"
+    ],
+    "paths": {
+      "novo-elements": ["projects/novo-elements/src/index"],
+      "novo-examples": ["projects/novo-examples/src/index"],
+      "novo-elements/*": ["projects/novo-elements/src/*"],
+      "novo-examples/*": ["projects/novo-examples/src/*"]
+    },
+    "target": "es2022",
+    "module": "commonjs",
+    "lib": [
+      "es2022",
+      "dom"
+    ],
+    "strict": false,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
+}
