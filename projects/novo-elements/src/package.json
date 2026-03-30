@@ -18,7 +18,7 @@
     "codemirror": "6.0.1",
     "date-fns": ">=2",
     "novo-design-tokens": "^0.0.9",
-    "post-robot": "^8.0.0",
+    "post-robot": ">=8.0.0 <10.0.0",
     "rxjs": ">=7",
     "timezone-support": "^3.1.0"
   },
