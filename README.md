@@ -17,7 +17,7 @@
     cd novo-elements
 
     # Install
-    npm install
+    npm ci
 
     # Start (you will need two terminals)
     npm run build (builds the library, alternatively you can use npm run build:watch for live-reload)
