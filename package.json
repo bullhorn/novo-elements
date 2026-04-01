@@ -102,7 +102,7 @@
     "@typescript-eslint/eslint-plugin": "^8.56.1",
     "@typescript-eslint/parser": "^8.56.1",
     "@wdio/cli": "^9.15.0",
-    "@wdio/devtools-service": "^8.46.0",
+    "@wdio/devtools-service": "^10.2.1",
     "@wdio/dot-reporter": "^9.15.0",
     "@wdio/globals": "^9.27.0",
     "@wdio/junit-reporter": "^9.15.0",
