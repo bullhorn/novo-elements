@@ -328,7 +328,7 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
   private createFieldTemplates() {
     const definition = this.findDefinitionForField(this.getField());
 
-    if (!this.parentForm.get('operator').value) {
+    if (!this.parentForm.get('operator').value && definition) {
       this.parentForm.get('operator').setValue(definition.defaultOperator);
     }
 
