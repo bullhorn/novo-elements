@@ -27,6 +27,8 @@ export class OutsideClick implements OnDestroy {
    */
   ngOnDestroy() {
     window.removeEventListener('click', this.onOutsideClick);
+    delete this.onOutsideClick;
+    delete this.otherElement;
   }
 
   /**
