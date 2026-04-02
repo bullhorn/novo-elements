@@ -1,6 +1,7 @@
 import {
   AfterContentInit,
   AfterViewInit,
+  BooleanInput,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -82,7 +83,7 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
   @Input() groupIndex: number;
   @Input() addressConfig: AddressCriteriaConfig;
   @Input() dateConfig: DateCriteriaConfig;
-  @Input() allowEmptyField: boolean = false;
+  @BooleanInput() @Input() allowEmptyField: boolean = false;
   hideOperator = input(true);
   conditionType = input();
 
