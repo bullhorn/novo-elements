@@ -1,7 +1,6 @@
 import {
   AfterContentInit,
   AfterViewInit,
-  BooleanInput,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -28,7 +27,7 @@ import { BaseConditionFieldDef } from '../query-builder.directives';
 import { QueryBuilderConfig, QueryBuilderService } from '../query-builder.service';
 import { NOVO_CONDITION_BUILDER } from '../query-builder.tokens';
 import { AddressCriteriaConfig, BaseFieldDef, DateCriteriaConfig, FieldConfig, QueryFilterOutlet } from '../query-builder.types';
-import { Helpers } from 'novo-elements/utils';
+import { BooleanInput, Helpers } from 'novo-elements/utils';
 
 /**
  * Provides a handle for the table to grab the view container's ng-container to insert data rows.
