@@ -177,8 +177,6 @@ export const MockMeta = {
       confidential: false,
       label: 'State',
       required: true,
-      // TODO: Align picker with META by passing META obj into picker
-      // options: [ /* flat array of states */ ]
       options: {
         options: [
           'Alabama',

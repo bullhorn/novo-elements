@@ -38,9 +38,9 @@ export enum NOVO_VALUE_THEME {
 })
 export class NovoValueElement implements OnInit, OnChanges {
   @Input()
-  data: any; // TODO use interface
+  data: any;
   @Input()
-  meta: any = { type: 'SCALAR', label: '' }; // TODO use interface
+  meta: any = { type: 'SCALAR', label: '' };
   @Input()
   theme: NOVO_VALUE_THEME = NOVO_VALUE_THEME.DEFAULT;
 

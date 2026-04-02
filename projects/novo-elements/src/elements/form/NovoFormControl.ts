@@ -166,18 +166,22 @@ export class NovoFormControl extends FormControl {
     if (this.required && !this.hasRequiredValidator) {
       const validators: any = [...this.validators];
       validators.push(Validators.required);
-      // TODO: duplicated below
-      this.setValidators(validators);
-      this.updateValueAndValidity({ emitEvent: false });
-      this.hasRequiredValidator = this.required;
+      this.updateValidators(validators);
     } else if (!this.required && this.hasRequiredValidator) {
       let validators: any = [...this.validators];
       validators = validators.filter((val) => val !== Validators.required);
-      // TODO: duplicated above
-      this.setValidators(validators);
-      this.updateValueAndValidity({ emitEvent: false });
-      this.hasRequiredValidator = this.required;
+      this.updateValidators(validators);
     }
+  }
+
+  /**
+   * Helper method to update validators and refresh validation state
+   * @param validators - the updated validators array
+   */
+  private updateValidators(validators: any[]): void {
+    this.setValidators(validators);
+    this.updateValueAndValidity({ emitEvent: false });
+    this.hasRequiredValidator = this.required;
   }
 
   setValue(

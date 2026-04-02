@@ -109,6 +109,10 @@ describe('RenderPipe', () => {
         expect(pipe.equals([1, 2], { 0: 1, 1: 2 })).toBe(false);
       });
 
+      it('should return false when comparing object to array', () => {
+        expect(pipe.equals({ 0: 1, 1: 2 }, [1, 2])).toBe(false);
+      });
+
       it('should handle nested arrays', () => {
         expect(pipe.equals([[1, 2], [3, 4]], [[1, 2], [3, 4]])).toBe(true);
       });
@@ -154,6 +158,31 @@ describe('RenderPipe', () => {
 
       it('should return false if second object has extra defined properties', () => {
         expect(pipe.equals({ a: 1 }, { a: 1, b: 2 })).toBe(false);
+      });
+
+      it('should skip falsy properties in first object during comparison', () => {
+        // The equals function skips properties with falsy values (line 82: if (objectOne[key]))
+        // These are not compared, so { a: 0 } and { b: 1 } are equal if b: 1 is undefined in second obj
+        expect(pipe.equals({ a: 0, b: 1 }, { b: 1 })).toBe(true);
+        expect(pipe.equals({ a: false, b: 2 }, { b: 2 })).toBe(true);
+      });
+
+      it('should return false for objects where first has property but second does not', () => {
+        expect(pipe.equals({ a: 1, b: 2 }, { a: 1 })).toBe(false);
+      });
+
+      it('should handle empty objects', () => {
+        expect(pipe.equals({}, {})).toBe(true);
+      });
+
+      it('should return false comparing empty object to object with properties', () => {
+        expect(pipe.equals({}, { a: 1 })).toBe(false);
+      });
+
+      it('should handle deeply nested objects with arrays', () => {
+        const obj1 = { a: { b: [1, 2, 3] } };
+        const obj2 = { a: { b: [1, 2, 3] } };
+        expect(pipe.equals(obj1, obj2)).toBe(true);
       });
     });
   });
@@ -278,6 +307,166 @@ describe('RenderPipe', () => {
         const item = { name: 'Test' };
         expect(pipe.getEntityLabel(item, 'UnknownEntity')).toBe('');
       });
+    });
+  });
+
+  describe('determineRenderType()', () => {
+    it('should determine TO_MANY type', () => {
+      const args = { type: 'TO_MANY', associatedEntity: { entity: 'Candidate' } };
+      const result = (pipe as any).determineRenderType(args);
+      expect(result).toBe('ToMany');
+    });
+
+    it('should determine TO_ONE type and return associated entity', () => {
+      const args = { type: 'TO_ONE', associatedEntity: { entity: 'Candidate' } };
+      const result = (pipe as any).determineRenderType(args);
+      expect(result).toBe('Candidate');
+    });
+
+    it('should determine DATETIME dataSpecialization', () => {
+      const args = { dataSpecialization: 'DATETIME' };
+      const result = (pipe as any).determineRenderType(args);
+      expect(result).toBe('DateTime');
+    });
+
+    it('should determine YEAR dataSpecialization', () => {
+      const args = { dataSpecialization: 'YEAR' };
+      const result = (pipe as any).determineRenderType(args);
+      expect(result).toBe('Year');
+    });
+
+    it('should determine TIME dataSpecialization', () => {
+      const args = { dataSpecialization: 'TIME' };
+      const result = (pipe as any).determineRenderType(args);
+      expect(result).toBe('Time');
+    });
+
+    it('should determine DATE with matching dataType', () => {
+      const args = { dataSpecialization: 'DATE', dataType: 'Date' };
+      const result = (pipe as any).determineRenderType(args);
+      expect(result).toBe('Date');
+    });
+
+    it('should determine Timestamp dataType', () => {
+      const args = { dataType: 'Timestamp' };
+      const result = (pipe as any).determineRenderType(args);
+      expect(result).toBe('Timestamp');
+    });
+
+    it('should determine Phone type by field name', () => {
+      ['mobile', 'phone', 'phone1', 'phone2', 'phone3', 'workPhone'].forEach((phoneName) => {
+        const args = { name: phoneName };
+        const result = (pipe as any).determineRenderType(args);
+        expect(result).toBe('Phone');
+      });
+    });
+
+    it('should determine Email type by field name starting with email', () => {
+      ['email', 'email1', 'emailHome', 'emailWork'].forEach((emailName) => {
+        const args = { name: emailName };
+        const result = (pipe as any).determineRenderType(args);
+        expect(result).toBe('Email');
+      });
+    });
+
+    it('should determine Country type by field name', () => {
+      const args = { name: 'address.countryID' };
+      const result = (pipe as any).determineRenderType(args);
+      expect(result).toBe('Country');
+    });
+
+    it('should determine Country type by optionsType', () => {
+      const args = { optionsType: 'Country' };
+      const result = (pipe as any).determineRenderType(args);
+      expect(result).toBe('Country');
+    });
+
+    it('should determine SkillText type', () => {
+      const args = { optionsType: 'SkillText' };
+      const result = (pipe as any).determineRenderType(args);
+      expect(result).toBe('SkillText');
+    });
+
+    it('should determine Options type from options property', () => {
+      const args = { options: [{ label: 'Yes', value: true }] };
+      const result = (pipe as any).determineRenderType(args);
+      expect(result).toBe('Options');
+    });
+
+    it('should determine Options type from inputType SELECT', () => {
+      const args = { inputType: 'SELECT' };
+      const result = (pipe as any).determineRenderType(args);
+      expect(result).toBe('Options');
+    });
+
+    it('should determine Options type from inputType CHECKBOX', () => {
+      const args = { inputType: 'CHECKBOX' };
+      const result = (pipe as any).determineRenderType(args);
+      expect(result).toBe('Options');
+    });
+
+    it('should determine MONEY dataSpecialization', () => {
+      const args = { dataSpecialization: 'MONEY' };
+      const result = (pipe as any).determineRenderType(args);
+      expect(result).toBe('Money');
+    });
+
+    it('should determine PERCENTAGE dataSpecialization', () => {
+      const args = { dataSpecialization: 'PERCENTAGE' };
+      const result = (pipe as any).determineRenderType(args);
+      expect(result).toBe('Percentage');
+    });
+
+    it('should determine HTML dataSpecialization', () => {
+      const args = { dataSpecialization: 'HTML' };
+      const result = (pipe as any).determineRenderType(args);
+      expect(result).toBe('Html');
+    });
+
+    it('should determine SSN dataSpecialization', () => {
+      const args = { dataSpecialization: 'SSN' };
+      const result = (pipe as any).determineRenderType(args);
+      expect(result).toBe('Ssn');
+    });
+
+    it('should default to dataType when no other conditions match', () => {
+      const args = { dataType: 'CustomType' };
+      const result = (pipe as any).determineRenderType(args);
+      expect(result).toBe('CustomType');
+    });
+
+    it('should return default when no type information provided', () => {
+      const args = {};
+      const result = (pipe as any).determineRenderType(args);
+      expect(result).toBe('default');
+    });
+
+    it('should prioritize type checks in correct order', () => {
+      // TO_MANY should be checked first
+      const args = { type: 'TO_MANY', dataSpecialization: 'DATETIME' };
+      const result = (pipe as any).determineRenderType(args);
+      expect(result).toBe('ToMany');
+    });
+
+    it('should prioritize TO_ONE over other properties', () => {
+      // TO_ONE should be checked before dataSpecialization
+      const args = { type: 'TO_ONE', associatedEntity: { entity: 'Candidate' }, dataSpecialization: 'DATETIME' };
+      const result = (pipe as any).determineRenderType(args);
+      expect(result).toBe('Candidate');
+    });
+
+    it('should prioritize DATETIME over phone field name', () => {
+      // dataSpecialization should be checked before field name
+      const args = { dataSpecialization: 'DATETIME', name: 'phone' };
+      const result = (pipe as any).determineRenderType(args);
+      expect(result).toBe('DateTime');
+    });
+
+    it('should handle lowercase dataSpecialization values', () => {
+      // Verify capitalization is applied correctly
+      const args = { dataSpecialization: 'MONEY' };
+      const result = (pipe as any).determineRenderType(args);
+      expect(result).toBe('Money');
     });
   });
 
@@ -894,11 +1083,52 @@ describe('RenderPipe', () => {
       );
     });
 
+    it('should handle values without trim method', () => {
+      const args = { dataType: 'String' };
+      const value = 123;
+      const result = pipe.render(value, args);
+      expect(result).toBe(123);
+    });
+
     it('should trim string values by default', () => {
       const args = { dataType: 'String' };
       const value = '  test string  ';
       const result = pipe.render(value, args);
       expect(result).toBe('test string');
+    });
+
+    it('should handle rendering error with try-catch and return original value', () => {
+      const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
+      // Create a scenario that will throw - mock a service to throw an error
+      labels.formatDateShort.mockImplementation(() => {
+        throw new Error('Format error');
+      });
+      const args = { dataType: 'CandidateComment', label: 'Comments' };
+      const value = {
+        comments: 'test',
+        dateLastModified: new Date('2023-01-01'),
+        name: 'John',
+      };
+      const result = pipe.render(value, args);
+      expect(consoleErrorSpy).toHaveBeenCalledWith(
+        expect.stringContaining('WARNING: There was a problem rendering')
+      );
+      expect(result).toBe(value);
+      consoleErrorSpy.mockRestore();
+    });
+
+    it('should handle rendering error in complex entity and return original value', () => {
+      const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
+      // Mock to throw error for complex rendering
+      (findByCountryId as jest.Mock).mockImplementation(() => {
+        throw new Error('Country lookup error');
+      });
+      const args = { name: 'address.countryID', label: 'Country' };
+      const value = 123;
+      const result = pipe.render(value, args);
+      expect(consoleErrorSpy).toHaveBeenCalled();
+      expect(result).toBe(value);
+      consoleErrorSpy.mockRestore();
     });
   });
 

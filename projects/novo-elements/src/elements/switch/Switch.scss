@@ -79,7 +79,7 @@ $switch-thumb-size: 20px !default;
     height: $switch-thumb-size;
     width: $switch-thumb-size;
     border-radius: 50%;
-    box-shadow: $shadow-1; // todo
+    box-shadow: $shadow-1;
     color: getContrastColor("light");
 
     .novo-icon {

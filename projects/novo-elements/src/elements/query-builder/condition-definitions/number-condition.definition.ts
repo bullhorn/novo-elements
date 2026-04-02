@@ -5,7 +5,6 @@ import { NovoLabelService } from 'novo-elements/services';
 
 /**
  * When constructing a query using a field that is an Int, Double, Number ...etc.
- * TODO: Do we implement currency formation here potentially?
  */
 @Component({
     selector: 'novo-number-condition-def',

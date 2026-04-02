@@ -95,12 +95,12 @@ export class NovoLabelService {
   okGotIt = 'Ok, Got it';
   address = 'Address';
   address1 = 'Address';
-  apt = 'Apt'; // TODO delete
+  apt = 'Apt';
   address2 = 'Apt';
   city = 'City / Locality';
   state = 'State / Region';
   zip = 'Postal Code';
-  zipCode = 'Postal Code'; // TODO delete
+  zipCode = 'Postal Code';
   country = 'Country';
   or = 'or';
   clickToBrowse = 'click to browse';

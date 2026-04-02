@@ -375,6 +375,5 @@ export class NovoFileInputElement extends NovoFileInputMixins implements NovoFie
     if (this.disabled) {
       return;
     }
-    // TODO
   }
 }

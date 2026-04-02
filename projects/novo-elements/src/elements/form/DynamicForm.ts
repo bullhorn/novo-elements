@@ -52,10 +52,9 @@ export class NovoFieldsetHeaderElement {
         [class.hidden]="hidden"
       ></novo-fieldset-header>
       <ng-container *ngFor="let control of controls; let controlIndex = index">
-        <div class="novo-form-row" [class.disabled]="control.disabled" *ngIf="control.__type !== 'GroupedControl'">
+        <div class="novo-form-row" [class.disabled]="control.disabled">
           <novo-control [autoFocus]="autoFocus && index === 0 && controlIndex === 0" [control]="control" [form]="form"></novo-control>
         </div>
-        <div *ngIf="control.__type === 'GroupedControl'">TODO - GroupedControl</div>
       </ng-container>
     </div>
   `,
