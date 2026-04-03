@@ -28,12 +28,12 @@ type FieldOption = BaseFieldDef['options'][number];
               <novo-select-search #filterInput allowDeselectDuringFilter></novo-select-search>
             </novo-option>
             <!-- What about optionUrl/optionType -->
-            @for (option of meta?.options; track optionTracker) {
+            @for (option of meta?.options; track optionTracker(option)) {
               <novo-option [hidden]="hideOption(option, filterInput?.value)" [value]="option.value" [attr.data-automation-value]="option.label">
                 {{ option.label}}
               </novo-option>
             }
-            @for (option of customOptions(meta?.options, select); track optionTracker) {
+            @for (option of customOptions(meta?.options, select); track optionTracker(option)) {
               <novo-option [hidden]="hideOption(option, filterInput?.value)" [value]="option.value" [attr.data-automation-value]="option.label">
                 {{ option.label}}
               </novo-option>

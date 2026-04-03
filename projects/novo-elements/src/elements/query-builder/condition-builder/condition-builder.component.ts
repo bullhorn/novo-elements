@@ -27,7 +27,7 @@ import { BaseConditionFieldDef } from '../query-builder.directives';
 import { QueryBuilderConfig, QueryBuilderService } from '../query-builder.service';
 import { NOVO_CONDITION_BUILDER } from '../query-builder.tokens';
 import { AddressCriteriaConfig, BaseFieldDef, DateCriteriaConfig, FieldConfig, QueryFilterOutlet } from '../query-builder.types';
-import { Helpers } from 'novo-elements/utils';
+import { BooleanInput, Helpers } from 'novo-elements/utils';
 
 /**
  * Provides a handle for the table to grab the view container's ng-container to insert data rows.
@@ -82,6 +82,7 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
   @Input() groupIndex: number;
   @Input() addressConfig: AddressCriteriaConfig;
   @Input() dateConfig: DateCriteriaConfig;
+  @BooleanInput() @Input() allowEmptyField: boolean = false;
   hideOperator = input(true);
   conditionType = input();
 
@@ -197,19 +198,55 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
   }
 
   /**
-   * Resets the input and operator view containers, regenerates the field templates,
-   * and marks the component for change detection.
+   * Resets the input and operator view containers and marks the component for change detection.
    *
    * Use this method after updating form controls to reinitialize the input and
    * operator fields so that the view reflects the latest form control changes.
    *
+   * @param recreateTemplates - If true (default), regenerates the field templates.
+   *                           If false, only clears the outlets without recreating templates.
    * @returns void
    */
-  resetInputAndOperator(): void {
+  resetInputAndOperator(recreateTemplates: boolean = true): void {
     this._inputOutlet.viewContainer.clear();
     this._operatorOutlet.viewContainer.clear();
-    this.createFieldTemplates();
+    if (recreateTemplates) {
+      this.createFieldTemplates();
+    }
     this.cdr.markForCheck();
+  }
+
+  /**
+   * Clears the entire condition (field, operator, value) and resets the condition builder UI.
+   *
+   * This method performs a complete reset of the condition builder:
+   * - Clears all form values (field, operator, value, supportingValue)
+   * - Allows empty field selection (prevents auto-restoration to default)
+   * - Resets the field search term
+   * - Clears internal state (_lastContext) to force re-detection of field changes
+   * - Updates field selection and clears UI outlets
+   *
+   * Use this method when you need to completely clear a condition and start fresh,
+   * such as when toggling a filter off or resetting a form group.
+   *
+   * @returns void
+   */
+  clearCondition(): void {
+    // Clear all form values
+    this.parentForm?.get('field')?.setValue(null);
+    this.parentForm?.get('operator')?.setValue(null);
+    this.parentForm?.get('value')?.setValue(null);
+    this.parentForm?.get('supportingValue')?.setValue(null);
+
+    // Reset the field search term
+    this.searchTerm?.setValue('');
+
+    // Reset internal state so updateFieldSelection detects the change
+    this._lastContext = {};
+
+    // Update field selection and clear UI
+    this.updateFieldSelection();
+    this.resetInputAndOperator(false);
   }
 
   getField() {
@@ -231,7 +268,9 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
   updateFieldSelection() {
     const fieldConf = this.getField();
     if (!fieldConf) {
-      this.parentForm.get('field').setValue(this.getDefaultField());
+      if (!this.allowEmptyField) {
+        this.parentForm.get('field').setValue(this.getDefaultField());
+      }
       return;
     } else {
       this.fieldDisplayWith = () => fieldConf.label || fieldConf.name;
@@ -289,7 +328,7 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
   private createFieldTemplates() {
     const definition = this.findDefinitionForField(this.getField());
 
-    if (!this.parentForm.get('operator').value) {
+    if (!this.parentForm.get('operator').value && definition) {
       this.parentForm.get('operator').setValue(definition.defaultOperator);
     }
 
