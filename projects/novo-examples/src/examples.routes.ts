@@ -181,22 +181,6 @@ export class CodeEditorPage {
 
 
 @Component({
-  selector: 'ace-editor-page',
-  template: `<h1>Ace Editor <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/addons/ace-editor">(source)</a></h1>
-<p>🛑 <strong>This add-on has been deprecated. Please use the replacement <a href="http://bullhorn.github.io/novo-elements/docs/#/utils/code%20editor">Code Editor</a> add-on instead.</strong></p>
-<p>Basic code editor using <a href="https://ace.c9.io/">Ace Editor</a>.</p>
-<h5>Basic Example</h5>
-<p><code-example example="basic-ace"></code-example></p>
-`,
-  host: { class: 'markdown-page' },
-  standalone: false,
-})
-export class AceEditorPage {
-  public params: any = {};
-}
-
-
-@Component({
   selector: 'v9-page',
   template: `<h1>📢  December 2023 (version 9)</h1>
 <h1>Continuing CommonJS library removal</h1>
@@ -818,6 +802,20 @@ export class v7Page {
   standalone: false,
 })
 export class v6Page {
+  public params: any = {};
+}
+
+
+@Component({
+  selector: 'v13-page',
+  template: `<h1>📢  RELEASE MONTH TBD (version 13)</h1>
+<h2>Ace Editor</h2>
+<p>The Ace Editor, which has been deprecated since v8, has been removed. If your code has not been migrated, it should instead use the Novo Code Editor, which makes use of &#64;codemirror.</p>
+`,
+  host: { class: 'markdown-page' },
+  standalone: false,
+})
+export class v13Page {
   public params: any = {};
 }
 
@@ -6803,11 +6801,11 @@ const routes: Routes = [
   { path: 'utils/field-interactions', component: FieldInteractionsPage, data: { order: '3', title: 'Field Interactions', section: 'utils' } },
   { path: 'utils/drag and drop', component: DragDropPage, data: { order: '1', title: 'Drag and Drop', section: 'utils', tag: 'new' } },
   { path: 'utils/code editor', component: CodeEditorPage, data: { order: '1', title: 'Code Editor', section: 'utils', tag: 'new' } },
-  { path: 'utils/ace editor', component: AceEditorPage, data: { order: '1', title: 'Ace Editor', section: 'utils', tag: 'deprecated' } },
   { path: 'updates/v9-announce', component: v9Page, data: { order: '4', title: 'v9', section: 'updates' } },
   { path: 'updates/v8-announce', component: v8Page, data: { order: '5', title: 'v8', section: 'updates' } },
   { path: 'updates/v7-announce', component: v7Page, data: { order: '6', title: 'v7', section: 'updates' } },
   { path: 'updates/v6', component: v6Page, data: { order: '7', title: 'v6', section: 'updates' } },
+  { path: 'updates/v13-announce', component: v13Page, data: { order: '3', title: 'v13', section: 'updates' } },
   { path: 'updates/v12-announce', component: v12Page, data: { order: '1', title: 'v12', section: 'updates', tag: 'new' } },
   { path: 'updates/v11-announce', component: v11Page, data: { order: '2', title: 'v11', section: 'updates' } },
   { path: 'updates/v10-announce', component: v10Page, data: { order: '3', title: 'v10', section: 'updates' } },
@@ -7103,7 +7101,7 @@ const routes: Routes = [
 ];
 
 export const PAGE_LIST = [
-  SecurityPage,QuickNotePage,PipesPage,FieldInteractionsPage,DragDropPage,CodeEditorPage,AceEditorPage,v9Page,v8Page,v7Page,v6Page,v12Page,v11Page,v10Page,TemplatesPage,PatternsPage,PatternsTestPage,PatternsNativeFormsPage,LayoutsPage,TabsExamplesPage,TabsDevelopPage,TabsDesignPage,StepperPage,SidenavPage,ListPage,HeaderPage,ExpansionPage,CardExamplesPage,CardDevelopPage,CardDesignPage,CardDescriptionPage,HomePage,FormControlsPage,ValuePage,TimezonePage,TimePickerExamplesPage,TimePickerDevelopPage,TimePickerDesignPage,TilesPage,SelectPage,RadioButtonsPage,PickerPage,MultiPickerPage,FormGroupsPage,FormPage,DynamicFormPage,DateTimePickerExamplesPage,DateTimePickerDevelopPage,DateTimePickerDesignPage,DatePickerExamplesPage,DatePickerDevelopPage,DatePickerDesignPage,ColorPickerPage,CkEditorPage,ChipsExamplesPage,ChipsDevelopPage,ChipsDesignPage,CheckboxPage,DesignPage,TypographyPage,SpacingPage,IconographyPage,CompositionPage,ColorsPage,ComponentsPage,TooltipExamplesPage,TooltipDevelopPage,TooltipDesignPage,ToolbarExamplesPage,ToolbarDevelopPage,ToolbarDesignPage,ToasterExamplesPage,ToasterDevelopPage,ToasterDesignPage,TipWellExamplesPage,TipWellDevelopPage,TipWellDesignPage,TabbedGroupPickerPage,SwitchPage,SlidesPage,SearchPage,QueryBuilderExamplesPage,QueryBuilderDevelopPage,QueryBuilderDesignPage,ProgressUsagePage,ProgressExamplesPage,ProgressDevelopPage,ProgressDesignPage,PopoverExamplesPage,PopoverDevelopPage,PopoverDesignPage,NonIdealStateExamplesPage,NonIdealStateDevelopPage,NonIdealStateDesignPage,ModalExamplesPage,ModalDevelopPage,ModalDesignPage,MenuExamplesPage,MenuDevelopPage,MenuDesignPage,LoadingExamplesPage,LoadingDevelopPage,LoadingDesignPage,IconExamplesPage,IconDevelopPage,IconDesignPage,FieldExamplesPage,FieldDevelopPage,FieldDesignPage,DropdownExamplesPage,DropdownDevelopPage,DropdownDesignPage,DataTablePage,CalendarExamplesPage,CalendarDevelopPage,CalendarDesignPage,ButtonExamplesPage,ButtonDevelopPage,ButtonDesignPage,BreadcrumbExamplesPage,BreadcrumbDevelopPage,BreadcrumbDesignPage,AvatarExamplesPage,AvatarDevelopPage,AvatarDesignPage,AutocompleteExamplesPage,AutocompleteDevelopPage,AutocompleteDesignPage,AsideExamplesPage,AsideDevelopPage,AsideDesignPage,AgendaExamplesPage,AgendaDevelopPage,AgendaDesignPage
+  SecurityPage,QuickNotePage,PipesPage,FieldInteractionsPage,DragDropPage,CodeEditorPage,v9Page,v8Page,v7Page,v6Page,v13Page,v12Page,v11Page,v10Page,TemplatesPage,PatternsPage,PatternsTestPage,PatternsNativeFormsPage,LayoutsPage,TabsExamplesPage,TabsDevelopPage,TabsDesignPage,StepperPage,SidenavPage,ListPage,HeaderPage,ExpansionPage,CardExamplesPage,CardDevelopPage,CardDesignPage,CardDescriptionPage,HomePage,FormControlsPage,ValuePage,TimezonePage,TimePickerExamplesPage,TimePickerDevelopPage,TimePickerDesignPage,TilesPage,SelectPage,RadioButtonsPage,PickerPage,MultiPickerPage,FormGroupsPage,FormPage,DynamicFormPage,DateTimePickerExamplesPage,DateTimePickerDevelopPage,DateTimePickerDesignPage,DatePickerExamplesPage,DatePickerDevelopPage,DatePickerDesignPage,ColorPickerPage,CkEditorPage,ChipsExamplesPage,ChipsDevelopPage,ChipsDesignPage,CheckboxPage,DesignPage,TypographyPage,SpacingPage,IconographyPage,CompositionPage,ColorsPage,ComponentsPage,TooltipExamplesPage,TooltipDevelopPage,TooltipDesignPage,ToolbarExamplesPage,ToolbarDevelopPage,ToolbarDesignPage,ToasterExamplesPage,ToasterDevelopPage,ToasterDesignPage,TipWellExamplesPage,TipWellDevelopPage,TipWellDesignPage,TabbedGroupPickerPage,SwitchPage,SlidesPage,SearchPage,QueryBuilderExamplesPage,QueryBuilderDevelopPage,QueryBuilderDesignPage,ProgressUsagePage,ProgressExamplesPage,ProgressDevelopPage,ProgressDesignPage,PopoverExamplesPage,PopoverDevelopPage,PopoverDesignPage,NonIdealStateExamplesPage,NonIdealStateDevelopPage,NonIdealStateDesignPage,ModalExamplesPage,ModalDevelopPage,ModalDesignPage,MenuExamplesPage,MenuDevelopPage,MenuDesignPage,LoadingExamplesPage,LoadingDevelopPage,LoadingDesignPage,IconExamplesPage,IconDevelopPage,IconDesignPage,FieldExamplesPage,FieldDevelopPage,FieldDesignPage,DropdownExamplesPage,DropdownDevelopPage,DropdownDesignPage,DataTablePage,CalendarExamplesPage,CalendarDevelopPage,CalendarDesignPage,ButtonExamplesPage,ButtonDevelopPage,ButtonDesignPage,BreadcrumbExamplesPage,BreadcrumbDevelopPage,BreadcrumbDesignPage,AvatarExamplesPage,AvatarDevelopPage,AvatarDesignPage,AutocompleteExamplesPage,AutocompleteDevelopPage,AutocompleteDesignPage,AsideExamplesPage,AsideDevelopPage,AsideDesignPage,AgendaExamplesPage,AgendaDevelopPage,AgendaDesignPage
 ];
 
 @NgModule({

@@ -5,7 +5,6 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { IMaskModule } from 'angular-imask';
 // APP
-import { NovoAceEditorModule } from 'novo-elements/addons/ace-editor';
 import { NovoNovoCKEditorModule } from 'novo-elements/addons/ckeditor';
 import { NovoCodeEditorModule } from 'novo-elements/addons/code-editor';
 import { NovoButtonModule } from 'novo-elements/elements/button';
@@ -60,7 +59,6 @@ import { NovoFormExtrasModule } from './extras';
     NovoTipWellModule,
     NovoModalModule,
     NovoButtonModule,
-    NovoAceEditorModule,
     NovoCodeEditorModule,
     NovoCommonModule,
     NovoCheckboxModule,

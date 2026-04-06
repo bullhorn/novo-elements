@@ -1,5 +1,4 @@
 export * from './BaseControl';
-export * from './ace-editor';
 export * from './address';
 export * from './check-list';
 export * from './checkbox';
