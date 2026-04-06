@@ -3,7 +3,6 @@ section: Utils
 page: Drag and Drop
 title: Drag and Drop
 order: 1
-tag: new
 ---
 
 
