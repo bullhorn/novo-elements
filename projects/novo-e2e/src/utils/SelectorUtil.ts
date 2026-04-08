@@ -362,4 +362,3 @@ export function pickerChips(field: string): string {
 export function pickerChipValue(field: string): string {
     return `${control(field)} novo-chips novo-chip, ${control(field)} novo-chip-list novo-chip`;
 }
-

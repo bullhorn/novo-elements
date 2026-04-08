@@ -12,6 +12,7 @@ export const COMPONENT_URLS = {
     AVATAR: 'avatar',
     BREADCRUMB: 'breadcrumbs',
     BUTTON: 'button',
+    CALENDAR: 'calendar',
     DATA_TABLE: 'data-table',
     DROPDOWN: 'dropdown',
     NON_IDEAL_STATE: 'non ideal state',
