@@ -55,6 +55,7 @@ export const elements = {
     fab: 'button.novo-button.novo-theme-fab',
     dialogue: 'button.novo-button.novo-theme-dialogue',
     checkbox: 'novo-checkbox',
+    calendar: 'novo-calendar',
     pagination: 'novo-data-table-pagination',
     paginationDropdown: 'pager-select',
     headerButtons: '.custom-header-buttons',
@@ -283,6 +284,13 @@ export function radioButton(fieldName: string, labelOrValue: string | number | b
         return `${control(fieldName, allowDisabled)} ${automationId(fieldName, AttributeSelectors.beginsWith)}`;
     }
     return `${control(fieldName, allowDisabled)} ${automationId(fieldName + '-' + labelOrValue)}`;
+}
+
+/**
+ * Returns the selector for a radio button by value attribute
+ */
+export function radioByValue(value: string | number): string {
+    return `novo-radio[value="${value}"]`;
 }
 
 /**
