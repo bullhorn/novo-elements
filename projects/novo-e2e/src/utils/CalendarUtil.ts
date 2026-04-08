@@ -26,7 +26,7 @@ export function lastVisibleCalendarDate(): string {
  * Gets the selected values from the calendar display as a Date array
  */
 export async function getCalendarSelectedValues(): Promise<Date[]> {
-    const element = await $('[data-automation-id="calendar-selected-values"]');
+    const elements = await $('[data-automation-id="calendar-selected-values"]');
     const text = await elements[0].getText();
     return JSON.parse(text);
 }
