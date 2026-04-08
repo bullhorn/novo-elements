@@ -11,11 +11,11 @@
 </novo-stack>
 <div>
   <novo-label>Selection mode</novo-label>
-  <novo-radio-group #mode appearance="vertical" value="single">
-    <novo-radio name="mode" value="single">single</novo-radio>
-    <novo-radio name="mode" value="multiple">multiple</novo-radio>
-    <novo-radio name="mode" value="range">range</novo-radio>
-    <novo-radio name="mode" value="week">week</novo-radio>
+  <novo-radio-group #mode appearance="vertical" value="single" data-automation-id="selection-mode">
+    <novo-radio name="mode" value="single" data-automation-id="mode-single">single</novo-radio>
+    <novo-radio name="mode" value="multiple" data-automation-id="mode-multiple">multiple</novo-radio>
+    <novo-radio name="mode" value="range" data-automation-id="mode-range">range</novo-radio>
+    <novo-radio name="mode" value="week" data-automation-id="mode-week">week</novo-radio>
   </novo-radio-group>
 
   <novo-label># of Months</novo-label>
