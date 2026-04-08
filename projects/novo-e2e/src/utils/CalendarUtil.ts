@@ -1,5 +1,45 @@
 import { automationId, elements } from './SelectorUtil';
 
+export const CALENDAR_MONTHS = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'
+];
+
+/**
+ * Gets a month name offset from the current month
+ * @param offset number of months to offset (negative for past, positive for future)
+ * @returns the month name
+ */
+export function getMonthByOffset(offset: number): string {
+    const currentDate = new Date();
+    let targetMonthIndex = currentDate.getMonth() + offset;
+    if (targetMonthIndex < 0) {
+        targetMonthIndex += 12;
+    } else if (targetMonthIndex > 11) {
+        targetMonthIndex -= 12;
+    }
+    return CALENDAR_MONTHS[targetMonthIndex];
+}
+
+/**
+ * Gets a year offset from the current year
+ * @param offset number of years to offset (negative for past, positive for future)
+ * @returns the year number
+ */
+export function getYearByOffset(offset: number): number {
+    return new Date().getFullYear() + offset;
+}
+
 /**
  * Returns the selector for a calendar date by day number
  * @param dayNumber the day number to select (1-31)
@@ -85,6 +125,7 @@ export function calendarYear(yearNumber: number): string {
  * Gets the selected values from the calendar display as a Date array
  */
 export async function getCalendarSelectedValues(): Promise<Date[]> {
+    // TODO: swap this back
     // const element = await $(automationId('calendar-selected-values'));
     const elements = await $$('novo-label ~ div');
     const text = await elements[0].getText();

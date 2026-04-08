@@ -15,7 +15,9 @@ import {
   calendarNextButton,
   calendarPreviousButton,
   calendarMonthText,
-  calendarYearText
+  calendarYearText,
+  getMonthByOffset,
+  getYearByOffset
 } from '../utils/CalendarUtil';
 
 describe('Calendar Demo Page', () => {
@@ -58,28 +60,18 @@ describe('Calendar Demo Page', () => {
 
     it('should open and change month', async () => {
       const initialMonth = await $(calendarMonthText()).getText();
-
-      // Click month header to open month view
       await click(calendarMonthHeader());
-
-      // Select May
-      await click(calendarMonth('May'));
-
-      // Verify month changed
+      const targetMonth = getMonthByOffset(-2);
+      await click(calendarMonth(targetMonth));
       const newMonth = await $(calendarMonthText()).getText();
       expect(initialMonth).not.toEqual(newMonth);
     });
 
     it('should open and change year', async () => {
       const initialYear = await $(calendarYearText()).getText();
-
-      // Click year header to open year view
       await click(calendarYearHeader());
-
-      // Select 2025
-      await click(calendarYear(2025));
-
-      // Verify year changed
+      const targetYear = getYearByOffset(-1);
+      await click(calendarYear(targetYear));
       const newYear = await $(calendarYearText()).getText();
       expect(initialYear).not.toEqual(newYear);
     });
