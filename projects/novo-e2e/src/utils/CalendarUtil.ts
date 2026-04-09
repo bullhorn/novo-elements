@@ -12,7 +12,7 @@ export const CALENDAR_MONTHS = [
     'September',
     'October',
     'November',
-    'December'
+    'December',
 ];
 
 /**
@@ -127,8 +127,8 @@ export function calendarYear(yearNumber: number): string {
 export async function getCalendarSelectedValues(): Promise<Date[]> {
     // TODO: swap this back
     // const element = await $(automationId('calendar-selected-values'));
-    const elements = await $$('novo-label ~ div');
-    const text = await elements[0].getText();
+    const values = await $$('novo-label ~ div');
+    const text = await values[0].getText();
     return JSON.parse(text);
 }
 

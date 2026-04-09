@@ -1,6 +1,6 @@
 import { click, scrollIntoView } from '../utils/ElementActionUtil';
 import { COMPONENT_URLS, examplesUrl, getURLs } from '../utils/EnvironmentUtil';
-import { elements, radioByValue, radioByIndex } from '../utils/SelectorUtil';
+import { elements, radioByIndex } from '../utils/SelectorUtil';
 import { verifyPresent, verifyText, verifyClassPresent, verifyClassAbsent } from '../utils/VerifyUtil';
 import {
   calendarDate,
@@ -17,7 +17,7 @@ import {
   calendarMonthText,
   calendarYearText,
   getMonthByOffset,
-  getYearByOffset
+  getYearByOffset,
 } from '../utils/CalendarUtil';
 
 describe('Calendar Demo Page', () => {
