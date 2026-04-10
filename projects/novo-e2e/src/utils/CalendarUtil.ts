@@ -42,18 +42,14 @@ export function getYearByOffset(offset: number): number {
     return new Date().getFullYear() + offset;
 }
 
-/**
- * Returns the selector for a calendar date by day number
- * @param dayNumber the day number to select (1-31)
- */
 export function calendarDate(dayNumber: number | string): string {
     return `${elements.calendar} .calendar-date${automationId(dayNumber)}`;
 }
 
 /**
  * Returns the selector for a calendar date in a specific month
- * @param dayNumber the day number to select (1-31)
- * @param monthIndex the index of the month (0 for first, 1 for second, etc.)
+ * @param dayNumber the day number to select
+ * @param monthIndex the index of the month
  */
 export function calendarDateInMonth(dayNumber: number | string, monthIndex: number): string {
     return `${elements.calendar} .month-view:nth-of-type(${monthIndex + 1}) .calendar-date${automationId(dayNumber)}`;
@@ -75,58 +71,34 @@ export function lastVisibleCalendarDate(): string {
     return `${elements.calendar} .calendar-date:last-child`;
 }
 
-/**
- * Returns the selector for the month header
- */
 export function calendarMonthHeader(): string {
     return automationId('header-month');
 }
 
-/**
- * Returns the selector for the year header
- */
 export function calendarYearHeader(): string {
     return automationId('header-year');
 }
 
-/**
- * Returns the selector for the next month button
- */
 export function calendarNextButton(): string {
     return automationId('calendar-next');
 }
 
-/**
- * Returns the selector for the previous month button
- */
 export function calendarPreviousButton(): string {
     return automationId('calendar-previous');
 }
 
-/**
- * Returns the selector for the month text element
- */
 export function calendarMonthText(): string {
     return `${elements.calendar} .month`;
 }
 
-/**
- * Returns the selector for the year text element
- */
 export function calendarYearText(): string {
     return `${elements.calendar} .year`;
 }
 
-/**
- * Returns the selector for a month by name in month view
- */
 export function calendarMonth(monthName: string): string {
     return `div${automationId(monthName)}`;
 }
 
-/**
- * Returns the selector for a year by number in year view
- */
 export function calendarYear(yearNumber: number): string {
     return `div${automationId(yearNumber)}`;
 }
@@ -140,9 +112,6 @@ export async function getCalendarSelectedValues(): Promise<Date[]> {
     return JSON.parse(valueText);
 }
 
-/**
- * Verifies that a specific day is selected in the calendar output
- */
 export async function verifyCalendarDateSelected(dayNumber: number): Promise<void> {
     const selectedValues = await getCalendarSelectedValues();
     expect(selectedValues.length).toBe(1);
@@ -150,9 +119,6 @@ export async function verifyCalendarDateSelected(dayNumber: number): Promise<voi
     expect(selectedDate.getDate()).toBe(dayNumber);
 }
 
-/**
- * Verifies that multiple specific days are selected in the calendar output
- */
 export async function verifyCalendarDatesSelected(dayNumbers: number[]): Promise<void> {
     const selectedValues = await getCalendarSelectedValues();
     expect(selectedValues.length).toBe(dayNumbers.length);
@@ -161,16 +127,10 @@ export async function verifyCalendarDatesSelected(dayNumbers: number[]): Promise
     expect(selectedDays).toEqual(expectedDays);
 }
 
-/**
- * Returns the selector for the selection mode radio button by mode name
- */
 export function calendarSelectionMode(mode: string): string {
     return `${automationId(`mode-${mode}`)} i`;
 }
 
-/**
- * Returns the selector for the number of months radio button by value
- */
 export function calendarNumberOfMonths(months: number): string {
     return `${automationId(`months-${months}`)} i`;
 }
@@ -182,23 +142,14 @@ export function calendarWeekStart(day: number): string {
     return `${automationId(`weekstart-${day}`)} i`;
 }
 
-/**
- * Returns the selector for calendar weekday headers
- */
 export function calendarWeekdayHeaders(): string {
     return `${elements.calendar} .calendar-th`;
 }
 
-/**
- * Gets the weekday header elements from the calendar
- */
 export async function getCalendarWeekdayHeaders(): Promise<WebdriverIO.ElementArray> {
     return await getAllElements(calendarWeekdayHeaders());
 }
 
-/**
- * Verifies that a date range is selected in the calendar output
- */
 export async function verifyCalendarDateRangeSelected(startDay: number, endDay: number): Promise<void> {
     const selectedValues = await getCalendarSelectedValues();
     expect(selectedValues.length).toBe(2);
@@ -206,9 +157,6 @@ export async function verifyCalendarDateRangeSelected(startDay: number, endDay: 
     expect(selectedDates).toEqual([startDay, endDay].sort((a, b) => a - b));
 }
 
-/**
- * Verifies that a week is selected with correct styling and selected values
- */
 export async function verifyCalendarWeekRangeDays(): Promise<void> {
     const selectedValues = await getCalendarSelectedValues();
     const startDay = new Date(selectedValues[0]).getDate();

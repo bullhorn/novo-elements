@@ -287,14 +287,6 @@ export function radioButton(fieldName: string, labelOrValue: string | number | b
 }
 
 /**
- * Returns the selector for a radio button in a radio group by index (1-based)
- * @param index the position of the radio button in the group (1 = first, 2 = second, etc.)
- */
-export function radioByIndex(index: number): string {
-    return `novo-radio-group novo-radio:nth-of-type(${index}) i`;
-}
-
-/**
  * Returns the selector for opening a select control by clicking it
  * @param fieldName the name of the select field in meta
  * @param allowDisabled if set to true, then enabled and disabled form inputs will be allowed. defaults to true.
