@@ -1,4 +1,5 @@
 import { automationId, elements } from './SelectorUtil';
+import { verifyClassPresent } from './VerifyUtil';
 
 export const CALENDAR_MONTHS = [
     'January',
@@ -125,11 +126,8 @@ export function calendarYear(yearNumber: number): string {
  * Gets the selected values from the calendar display as a Date array
  */
 export async function getCalendarSelectedValues(): Promise<Date[]> {
-    // TODO: swap this back
-    // const element = await $(automationId('calendar-selected-values'));
-    const values = await $$('novo-label ~ div');
-    const text = await values[0].getText();
-    return JSON.parse(text);
+    const valueText = await $(automationId('calendar-selected-values')).getText();
+    return JSON.parse(valueText);
 }
 
 /**
@@ -151,4 +149,39 @@ export async function verifyCalendarDatesSelected(dayNumbers: number[]): Promise
     const selectedDays = selectedValues.map(val => new Date(val).getDate()).sort((a, b) => a - b);
     const expectedDays = dayNumbers.sort((a, b) => a - b);
     expect(selectedDays).toEqual(expectedDays);
+}
+
+/**
+ * Returns the selector for the selection mode radio button by mode name
+ */
+export function calendarSelectionMode(mode: string): string {
+    return `${automationId(`mode-${mode}`)} i`;
+}
+
+/**
+ * Verifies that a date range is selected in the calendar output
+ */
+export async function verifyCalendarDateRangeSelected(startDay: number, endDay: number): Promise<void> {
+    const selectedValues = await getCalendarSelectedValues();
+    expect(selectedValues.length).toBe(2);
+    const selectedDates = selectedValues.map(val => new Date(val).getDate()).sort((a, b) => a - b);
+    expect(selectedDates).toEqual([startDay, endDay].sort((a, b) => a - b));
+}
+
+/**
+ * Verifies that a week is selected with correct styling and selected values
+ */
+export async function verifyCalendarWeekRangeDays(): Promise<void> {
+    const selectedValues = await getCalendarSelectedValues();
+    const startDay = new Date(selectedValues[0]).getDate();
+    const endDay = new Date(selectedValues[1]).getDate();
+
+    await verifyCalendarDateRangeSelected(startDay, endDay);
+
+    await verifyClassPresent(calendarDate(startDay), 'rangeStart', `calendar date ${startDay} (range start)`);
+    await verifyClassPresent(calendarDate(endDay), 'rangeEnd', `calendar date ${endDay} (range end)`);
+
+    for (let day = startDay + 1; day < endDay; day++) {
+        await verifyClassPresent(calendarDate(day), 'inRange', `calendar date ${day} (in range)`);
+    }
 }

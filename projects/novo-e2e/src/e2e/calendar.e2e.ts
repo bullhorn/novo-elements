@@ -1,6 +1,6 @@
 import { click, scrollIntoView } from '../utils/ElementActionUtil';
 import { COMPONENT_URLS, examplesUrl, getURLs } from '../utils/EnvironmentUtil';
-import { elements, radioByIndex } from '../utils/SelectorUtil';
+import { elements } from '../utils/SelectorUtil';
 import { verifyPresent, verifyText, verifyClassPresent, verifyClassAbsent } from '../utils/VerifyUtil';
 import {
   calendarDate,
@@ -8,6 +8,8 @@ import {
   lastVisibleCalendarDate,
   verifyCalendarDateSelected,
   verifyCalendarDatesSelected,
+  verifyCalendarDateRangeSelected,
+  verifyCalendarWeekRangeDays,
   calendarMonth,
   calendarYear,
   calendarMonthHeader,
@@ -18,6 +20,7 @@ import {
   calendarYearText,
   getMonthByOffset,
   getYearByOffset,
+  calendarSelectionMode,
 } from '../utils/CalendarUtil';
 
 describe('Calendar Demo Page', () => {
@@ -118,7 +121,7 @@ describe('Calendar Demo Page', () => {
   describe('Multiple Selection Mode', () => {
     before(async () => {
       await browser.refresh();
-      await click(radioByIndex(2));
+      await click(calendarSelectionMode('multiple'));
     });
 
     it('should select multiple dates and keep them all selected', async () => {
@@ -139,6 +142,54 @@ describe('Calendar Demo Page', () => {
       await click(calendarDate(15));
       await verifyClassAbsent(calendarDate(15), 'selected', 'calendar date 15');
       await verifyCalendarDatesSelected([10, 20]);
+    });
+  });
+
+  describe('Range Selection Mode', () => {
+    before(async () => {
+      await browser.refresh();
+      await click(calendarSelectionMode('range'));
+    });
+
+    it('should select a date range with start and end dates', async () => {
+      await scrollIntoView(elements.calendar);
+      await click(calendarDate(10));
+      await verifyClassPresent(calendarDate(10), 'selected', 'calendar date 10');
+
+      await click(calendarDate(20));
+      await verifyClassPresent(calendarDate(10), 'rangeStart', 'calendar date 10');
+      await verifyClassPresent(calendarDate(20), 'rangeEnd', 'calendar date 20');
+      await verifyCalendarDateRangeSelected(10, 20);
+    });
+
+    it('should replace the range with a new selection', async () => {
+      await click(calendarDate(5));
+      await verifyClassPresent(calendarDate(5), 'selected', 'calendar date 5');
+
+      await click(calendarDate(15));
+      await verifyClassPresent(calendarDate(5), 'rangeStart', 'calendar date 5');
+      await verifyClassPresent(calendarDate(15), 'rangeEnd', 'calendar date 15');
+      await verifyCalendarDateRangeSelected(5, 15);
+    });
+  });
+
+  describe('Week Selection Mode', () => {
+    before(async () => {
+      await browser.refresh();
+      await click(calendarSelectionMode('week'));
+    });
+
+    it('should select a full week when clicking a date', async () => {
+      await scrollIntoView(elements.calendar);
+      await click(calendarDate(10));
+      await verifyClassPresent(calendarDate(10), 'inRange', 'calendar date 10 is in the selected week');
+      await verifyCalendarWeekRangeDays();
+    });
+
+    it('should replace the week selection with a new week', async () => {
+      await click(calendarDate(20));
+      await verifyClassPresent(calendarDate(20), 'inRange', 'calendar date 20 is in the selected week');
+      await verifyCalendarWeekRangeDays();
     });
   });
 });
