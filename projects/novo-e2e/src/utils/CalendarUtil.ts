@@ -1,5 +1,6 @@
 import { automationId, elements } from './SelectorUtil';
 import { verifyClassPresent } from './VerifyUtil';
+import { getAllElements } from './GetElementUtil';
 
 export const CALENDAR_MONTHS = [
     'January',
@@ -47,6 +48,15 @@ export function getYearByOffset(offset: number): number {
  */
 export function calendarDate(dayNumber: number | string): string {
     return `${elements.calendar} .calendar-date${automationId(dayNumber)}`;
+}
+
+/**
+ * Returns the selector for a calendar date in a specific month
+ * @param dayNumber the day number to select (1-31)
+ * @param monthIndex the index of the month (0 for first, 1 for second, etc.)
+ */
+export function calendarDateInMonth(dayNumber: number | string, monthIndex: number): string {
+    return `${elements.calendar} .month-view:nth-of-type(${monthIndex + 1}) .calendar-date${automationId(dayNumber)}`;
 }
 
 /**
@@ -156,6 +166,34 @@ export async function verifyCalendarDatesSelected(dayNumbers: number[]): Promise
  */
 export function calendarSelectionMode(mode: string): string {
     return `${automationId(`mode-${mode}`)} i`;
+}
+
+/**
+ * Returns the selector for the number of months radio button by value
+ */
+export function calendarNumberOfMonths(months: number): string {
+    return `${automationId(`months-${months}`)} i`;
+}
+
+/**
+ * Returns the selector for the week start radio button by day (0 for Sunday, 1 for Monday)
+ */
+export function calendarWeekStart(day: number): string {
+    return `${automationId(`weekstart-${day}`)} i`;
+}
+
+/**
+ * Returns the selector for calendar weekday headers
+ */
+export function calendarWeekdayHeaders(): string {
+    return `${elements.calendar} .calendar-th`;
+}
+
+/**
+ * Gets the weekday header elements from the calendar
+ */
+export async function getCalendarWeekdayHeaders(): Promise<WebdriverIO.ElementArray> {
+    return await getAllElements(calendarWeekdayHeaders());
 }
 
 /**

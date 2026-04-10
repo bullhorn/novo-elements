@@ -4,6 +4,7 @@ import { elements } from '../utils/SelectorUtil';
 import { verifyPresent, verifyText, verifyClassPresent, verifyClassAbsent } from '../utils/VerifyUtil';
 import {
   calendarDate,
+  calendarDateInMonth,
   firstVisibleCalendarDate,
   lastVisibleCalendarDate,
   verifyCalendarDateSelected,
@@ -21,6 +22,9 @@ import {
   getMonthByOffset,
   getYearByOffset,
   calendarSelectionMode,
+  calendarNumberOfMonths,
+  calendarWeekStart,
+  getCalendarWeekdayHeaders,
 } from '../utils/CalendarUtil';
 
 describe('Calendar Demo Page', () => {
@@ -190,6 +194,53 @@ describe('Calendar Demo Page', () => {
       await click(calendarDate(20));
       await verifyClassPresent(calendarDate(20), 'inRange', 'calendar date 20 is in the selected week');
       await verifyCalendarWeekRangeDays();
+    });
+  });
+
+  describe('Two Month Display', () => {
+    before(async () => {
+      await browser.refresh();
+      await click(calendarSelectionMode('single'));
+      await click(calendarNumberOfMonths(2));
+    });
+
+    it('should display two months', async () => {
+      await scrollIntoView(elements.calendar);
+      const monthElements = await $$(calendarMonthText());
+      expect(monthElements.length).toBe(2);
+    });
+
+    it('should select a date from the first month', async () => {
+      await click(calendarDate(15));
+      await verifyClassPresent(calendarDate(15), 'selected', 'calendar date 15');
+      await verifyCalendarDateSelected(15);
+    });
+
+    it('should select a date from the second month', async () => {
+      await click(calendarDateInMonth(10, 1));
+      await verifyClassPresent(calendarDateInMonth(10, 1), 'selected', 'calendar date 10 in second month');
+      await verifyCalendarDateSelected(10);
+    });
+  });
+
+  describe('Week Start on Monday', () => {
+    before(async () => {
+      await browser.refresh();
+      await click(calendarSelectionMode('single'));
+      await click(calendarWeekStart(1));
+    });
+
+    it('should have Monday as the first day of the week', async () => {
+      await scrollIntoView(elements.calendar);
+      const weekdayHeaders = await getCalendarWeekdayHeaders();
+      const firstDayText = await weekdayHeaders[0].getText();
+      expect(firstDayText).toBe('Mo');
+    });
+
+    it('should select a date with Monday week start', async () => {
+      await click(calendarDate(15));
+      await verifyClassPresent(calendarDate(15), 'selected', 'calendar date 15');
+      await verifyCalendarDateSelected(15);
     });
   });
 });
