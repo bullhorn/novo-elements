@@ -55,6 +55,7 @@ export const elements = {
     fab: 'button.novo-button.novo-theme-fab',
     dialogue: 'button.novo-button.novo-theme-dialogue',
     checkbox: 'novo-checkbox',
+    calendar: 'novo-calendar',
     pagination: 'novo-data-table-pagination',
     paginationDropdown: 'pager-select',
     headerButtons: '.custom-header-buttons',
@@ -362,4 +363,3 @@ export function pickerChips(field: string): string {
 export function pickerChipValue(field: string): string {
     return `${control(field)} novo-chips novo-chip, ${control(field)} novo-chip-list novo-chip`;
 }
-
