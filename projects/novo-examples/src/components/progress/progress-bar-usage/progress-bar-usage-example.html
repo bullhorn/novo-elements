@@ -1,24 +1,24 @@
 <div class="resizable">
   <novo-progress data-automation-id="progress-bar-flash">
-    <novo-progress-bar flash="true"></novo-progress-bar>
+    <novo-progress-bar flash="true" data-automation-id="progress-bar-flash-bar"></novo-progress-bar>
   </novo-progress>
 </div>
 
 <br />
 
 <novo-progress data-automation-id="progress-bar-indeterminate">
-  <novo-progress-bar indeterminate="true"></novo-progress-bar>
+  <novo-progress-bar indeterminate="true" data-automation-id="progress-bar-indeterminate-bar"></novo-progress-bar>
 </novo-progress>
 
 <br />
 
 <novo-progress striped="true" data-automation-id="progress-bar-striped">
-  <novo-progress-bar value="40"></novo-progress-bar>
+  <novo-progress-bar value="40" data-automation-id="progress-bar-striped-bar"></novo-progress-bar>
 </novo-progress>
 
 <br />
 
 <novo-progress total="300" data-automation-id="progress-bar-multi-color">
-  <novo-progress-bar value="120" color="success" [tooltip]="largeTooltip" tooltipSize="large"></novo-progress-bar>
-  <novo-progress-bar value="40" color="negative"></novo-progress-bar>
+  <novo-progress-bar value="120" color="success" [tooltip]="largeTooltip" tooltipSize="large" data-automation-id="progress-bar-multi-color-success"></novo-progress-bar>
+  <novo-progress-bar value="40" color="negative" data-automation-id="progress-bar-multi-color-negative"></novo-progress-bar>
 </novo-progress>

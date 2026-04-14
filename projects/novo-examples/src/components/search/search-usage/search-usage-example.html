@@ -18,7 +18,7 @@
 <novo-search data-automation-id="search-location" icon="location" color="grapefruit" alwaysOpen="true" [(ngModel)]="geo" displayField="formatted_address" [closeOnSelect]="false" hint="Search Google to find your address.">
   <google-places-list [(term)]="geo"></google-places-list>
 </novo-search>
-<div>Value is: {{geo}}</div>
+<div data-automation-id="search-location-value">Value is: {{geo}}</div>
 
 <novo-search data-automation-id="search-candidate" icon="candidate" color="candidate" alwaysOpen="true" [(ngModel)]="entity">
   <entity-picker-results [matches]="searchData" (select)="onSelectEntity($event)"></entity-picker-results>

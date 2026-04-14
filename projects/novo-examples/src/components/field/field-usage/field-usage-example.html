@@ -16,7 +16,7 @@
   <novo-picker-toggle novoSuffix icon="clock">
     <novo-time-picker #timepicker></novo-time-picker>
   </novo-picker-toggle>
-  <novo-hint>value is: {{time}}</novo-hint>
+  <novo-hint data-automation-id="alarm-value">value is: {{time}}</novo-hint>
 </novo-field>
 
 <novo-field data-automation-id="dob-field">
@@ -25,7 +25,7 @@
   <novo-picker-toggle novoSuffix icon="calendar">
     <novo-date-picker #datepicker></novo-date-picker>
   </novo-picker-toggle>
-  <novo-hint>value is: {{date}}</novo-hint>
+  <novo-hint data-automation-id="dob-value">value is: {{date}}</novo-hint>
 
 </novo-field>
 
@@ -35,7 +35,7 @@
   <novo-picker-toggle novoSuffix icon="calendar">
     <novo-date-time-picker #datetimepicker></novo-date-time-picker>
   </novo-picker-toggle>
-  <novo-hint>value is: {{datetime}}</novo-hint>
+  <novo-hint data-automation-id="datetime-value">value is: {{datetime}}</novo-hint>
 
 </novo-field>
 
@@ -45,7 +45,7 @@
   <novo-picker-toggle novoSuffix icon="calendar">
     <novo-date-picker #daterangepicker mode="range" numberOfMonths="2"></novo-date-picker>
   </novo-picker-toggle>
-  <novo-hint>value is: {{daterange}}</novo-hint>
+  <novo-hint data-automation-id="vacation-value">value is: {{daterange}}</novo-hint>
 
 </novo-field>
 
@@ -60,7 +60,7 @@
   <novo-picker-toggle novoSuffix icon="calendar">
     <novo-date-picker #datepicker2></novo-date-picker>
   </novo-picker-toggle>
-  <novo-hint>value is: {{date2}}</novo-hint>
+  <novo-hint data-automation-id="dob-display-value">value is: {{date2}}</novo-hint>
 </novo-field>
 
 <novo-fieldset-header icon="section" title="Section Header" data-automation-id="section-header"></novo-fieldset-header>

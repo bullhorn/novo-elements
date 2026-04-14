@@ -22,10 +22,10 @@
 <novo-row align="start" gap="xl" margin="xl">
   <section>
     <novo-label>Join Operators</novo-label>
-    <novo-radio-group #mode [value]="andOrNot">
-      <novo-radio name="mode" [value]="and">Only And</novo-radio>
-      <novo-radio name="mode" [value]="andOr">And, Or</novo-radio>
-      <novo-radio name="mode" [value]="andOrNot">And, Or, Not</novo-radio>
+    <novo-radio-group #mode [value]="andOrNot" data-automation-id="criteria-mode-group">
+      <novo-radio name="mode" [value]="and" data-automation-id="criteria-mode-and">Only And</novo-radio>
+      <novo-radio name="mode" [value]="andOr" data-automation-id="criteria-mode-and-or">And, Or</novo-radio>
+      <novo-radio name="mode" [value]="andOrNot" data-automation-id="criteria-mode-and-or-not">And, Or, Not</novo-radio>
     </novo-radio-group>
   </section>
 </novo-row>
@@ -71,9 +71,9 @@
                 [(ngModel)]="addressRadiusEnabled"/>
     <novo-row *ngIf="addressRadiusEnabled" align="start" gap="xl" marginLeft="xl">
       <novo-label margin="lg">Units:</novo-label>
-      <novo-select margin="lg" value="miles" (onSelect)="addressRadiusUnitsSelected($event.selected)">
-        <novo-option value="miles">Miles</novo-option>
-        <novo-option value="km">Km</novo-option>
+      <novo-select margin="lg" value="miles" (onSelect)="addressRadiusUnitsSelected($event.selected)" data-automation-id="criteria-radius-units-select">
+        <novo-option value="miles" data-automation-id="criteria-radius-units-miles">Miles</novo-option>
+        <novo-option value="km" data-automation-id="criteria-radius-units-km">Km</novo-option>
       </novo-select>
     </novo-row>
   </section>
