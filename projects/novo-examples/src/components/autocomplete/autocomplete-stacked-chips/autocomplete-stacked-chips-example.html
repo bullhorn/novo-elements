@@ -8,9 +8,9 @@
     [compareWith]="compareById"
     data-automation-id="stacked-chips-list">
     <novo-chip
-      *ngFor="let shift of chipList.value"
+      *ngFor="let shift of chipList.value; index as i"
       (removed)="remove(shift)"
-      [attr.data-automation-id]="'stacked-chip-' + $index">
+      [attr.data-automation-id]="'stacked-chip-' + i">
       <novo-flex gap="1rem">
         <novo-text>
           <novo-icon>calendar</novo-icon>

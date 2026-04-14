@@ -1,18 +1,18 @@
-<novo-loading data-automation-id="loading-line-loader" [size]="size.value" [color]="color.value"></novo-loading>
+<novo-loading [size]="size.value" [color]="color.value" data-automation-id="loading-line-component"></novo-loading>
 
 <section>
   <novo-label>Size</novo-label>
-  <novo-radio-group #size appearance="vertical" value="medium">
-    <novo-radio name="size" value="small">small</novo-radio>
-    <novo-radio name="size" value="medium">medium</novo-radio>
-    <novo-radio name="size" value="large">large</novo-radio>
+  <novo-radio-group #size appearance="vertical" value="medium" data-automation-id="size-line-group">
+    <novo-radio name="size" value="small" data-automation-id="size-line-small">small</novo-radio>
+    <novo-radio name="size" value="medium" data-automation-id="size-line-medium">medium</novo-radio>
+    <novo-radio name="size" value="large" data-automation-id="size-line-large">large</novo-radio>
   </novo-radio-group>
 
   <novo-label>Color</novo-label>
-  <novo-radio-group #color appearance="vertical">
-    <novo-radio name="color" value="grapefruit">grapefruit</novo-radio>
-    <novo-radio name="color" value="aqua">aqua</novo-radio>
-    <novo-radio name="color" value="mint">mint</novo-radio>
-    <novo-radio name="color" value="ocean">ocean</novo-radio>
+  <novo-radio-group #color appearance="vertical" data-automation-id="color-line-group">
+    <novo-radio name="color" value="grapefruit" data-automation-id="color-line-grapefruit">grapefruit</novo-radio>
+    <novo-radio name="color" value="aqua" data-automation-id="color-line-aqua">aqua</novo-radio>
+    <novo-radio name="color" value="mint" data-automation-id="color-line-mint">mint</novo-radio>
+    <novo-radio name="color" value="ocean" data-automation-id="color-line-ocean">ocean</novo-radio>
   </novo-radio-group>
 </section>
