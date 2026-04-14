@@ -1,22 +1,23 @@
 <form class="example-form">
-  <novo-field class="example-full-width">
+  <novo-field class="example-full-width" data-automation-id="textarea-field">
     <novo-label>Number</novo-label>
     <textarea
       novoInput
       [formControl]="myControl"
       placeholder="Type $ to trigger autocomplete"
-      autocomplete="off"></textarea>
-    <novo-autocomplete [triggerOn]="triggerFn()" #auto>
-      <novo-option *ngFor="let option of filteredOptions | async" [value]="option">
+      autocomplete="off"
+      data-automation-id="textarea-input"></textarea>
+    <novo-autocomplete [triggerOn]="triggerFn()" #auto data-automation-id="textarea-autocomplete">
+      <novo-option *ngFor="let option of filteredOptions | async; index as i" [value]="option" [attr.data-automation-id]="'textarea-option-' + i">
         {{option}}
       </novo-option>
     </novo-autocomplete>
   </novo-field>
 
-  <novo-field appearance="fill">
+  <novo-field appearance="fill" data-automation-id="toppings-field">
     <novo-label>Toppings</novo-label>
-    <novo-select [formControl]="myOtherControl" multiple>
-      <novo-option *ngFor="let option of filteredOptions | async" [value]="option">{{option}}</novo-option>
+    <novo-select [formControl]="myOtherControl" multiple data-automation-id="toppings-select">
+      <novo-option *ngFor="let option of filteredOptions | async; index as i" [value]="option" [attr.data-automation-id]="'toppings-option-' + i">{{option}}</novo-option>
     </novo-select>
   </novo-field>
 </form>

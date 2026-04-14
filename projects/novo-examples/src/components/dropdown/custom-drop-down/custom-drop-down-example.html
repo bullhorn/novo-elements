@@ -1,11 +1,13 @@
 <novo-dropdown containerClass="custom-class"
-  scrollStrategy="close">
+  scrollStrategy="close"
+  data-automation-id="custom-dropdown">
   <button type="button"
     theme="secondary"
     icon="collapse"
-    inverse>I Have A Custom Class!</button>
+    inverse
+    data-automation-id="custom-dropdown-button">I Have A Custom Class!</button>
   <novo-optgroup>
-    <novo-option (action)="clickMe('Hello!')">Action 1</novo-option>
-    <novo-option (action)="clickMe('Another!')">Action 2</novo-option>
+    <novo-option (action)="clickMe('Hello!')" data-automation-id="custom-action-1">Action 1</novo-option>
+    <novo-option (action)="clickMe('Another!')" data-automation-id="custom-action-2">Action 2</novo-option>
   </novo-optgroup>
 </novo-dropdown>

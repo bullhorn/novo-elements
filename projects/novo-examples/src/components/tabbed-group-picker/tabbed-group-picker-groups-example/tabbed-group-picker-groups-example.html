@@ -1,14 +1,15 @@
-<div class="tabbed-group-picker-example">
+<div class="tabbed-group-picker-example" data-automation-id="tabbed-picker-groups-example">
   <novo-tabbed-group-picker
+    data-automation-id="tabbed-picker-groups"
     [tabs]="example_tab"
     [quickSelectConfig]="example_quickSelectConfig"
     [buttonConfig]="example_buttonConfig"
     (selectionChange)="onSelectionChange($event)"
   ></novo-tabbed-group-picker>
-  <div class="selected-data-wrapper">
+  <div class="selected-data-wrapper" data-automation-id="selected-data-wrapper">
     <h6>Selected Animal IDs:</h6>
-    <div>{{ selectedAnimals.join(', ') }}</div>
+    <div data-automation-id="selected-animals">{{ selectedAnimals.join(', ') }}</div>
     <h6>Selected Animal Category IDs:</h6>
-    <div>{{ selectedAnimalCategories.join(', ') }}</div>
+    <div data-automation-id="selected-animal-categories">{{ selectedAnimalCategories.join(', ') }}</div>
   </div>
 </div>
