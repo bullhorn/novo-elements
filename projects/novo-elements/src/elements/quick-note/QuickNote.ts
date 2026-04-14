@@ -15,7 +15,7 @@ import {
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ComponentUtils } from 'novo-elements/services';
-import { Key, OutsideClick } from 'novo-elements/utils';
+import { Key, OutsideClick, fixCkEditorInputEvent } from 'novo-elements/utils';
 // APP
 import { QuickNoteResults } from './extras/quick-note-results/QuickNoteResults';
 
@@ -68,6 +68,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
   private debounceTimeout: any;
   private placeholderVisible: boolean = false;
   private _placeholderElement: any = null;
+  private _ckEditorFixRemoveListener?: () => void;
 
   private static TOOLBAR_HEIGHT = 40; // in pixels - configured by stylesheet
 
@@ -106,6 +107,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
   public ngOnDestroy(): void {
     // Tear down the CKEditor instance
     if (this.ckeInstance) {
+      this._ckEditorFixRemoveListener?.();
       this.ckeInstance.focusManager.blur(true); // Remove focus from editor
       setTimeout(() => {
         this.ckeInstance.removeAllListeners();
@@ -127,6 +129,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
 
     // Replace the textarea with an instance of CKEditor
     this.ckeInstance = CKEDITOR.replace(this.host.nativeElement, this.getCKEditorConfig());
+    fixCkEditorInputEvent(this.ckeInstance);
 
     // Set initial value of the note in the editor
     this.writeValue(this.model);
