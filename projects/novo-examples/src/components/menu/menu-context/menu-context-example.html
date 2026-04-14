@@ -1,10 +1,10 @@
-<button type="button" theme="secondary" icon="collapse" [menu]="menu" [menuContext]="apple">Apples</button>
-<button type="button" theme="secondary" icon="collapse" [menu]="menu" [menuContext]="orange">Oranges</button>
+<button type="button" theme="secondary" icon="collapse" [menu]="menu" [menuContext]="apple" data-automation-id="menu-context-apples-button">Apples</button>
+<button type="button" theme="secondary" icon="collapse" [menu]="menu" [menuContext]="orange" data-automation-id="menu-context-oranges-button">Oranges</button>
 <!-- Menu Template -->
-<novo-menu #menu>
-  <novo-option *menuItem="let item" (click)="clickMe(item)">Preview</novo-option>
-  <novo-option *menuItem="let item" (click)="clickMe(item)">Edit</novo-option>
-  <novo-option *menuItem="let item" (click)="clickMe(item)">Delete</novo-option>
-  <novo-option *menuItem="let item" [disabled]="isOrange(item)">Disabled if Orange</novo-option>
-  <novo-option *menuItem="let item;visible:isOrange;">Visible if Orange</novo-option>
+<novo-menu #menu data-automation-id="context-menu">
+  <novo-option *menuItem="let item" (click)="clickMe(item)" data-automation-id="menu-context-preview">Preview</novo-option>
+  <novo-option *menuItem="let item" (click)="clickMe(item)" data-automation-id="menu-context-edit">Edit</novo-option>
+  <novo-option *menuItem="let item" (click)="clickMe(item)" data-automation-id="menu-context-delete">Delete</novo-option>
+  <novo-option *menuItem="let item" [disabled]="isOrange(item)" data-automation-id="menu-context-disabled">Disabled if Orange</novo-option>
+  <novo-option *menuItem="let item;visible:isOrange;" data-automation-id="menu-context-visible">Visible if Orange</novo-option>
 </novo-menu>

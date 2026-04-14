@@ -1,12 +1,13 @@
-<div class="tabbed-group-picker-example">
+<div class="tabbed-group-picker-example" data-automation-id="tabbed-picker-no-selection-example">
   <novo-tabbed-group-picker
+    data-automation-id="tabbed-picker-no-selection"
     [tabs]="example_tab"
     [selectionEnabled]="false"
     [buttonConfig]="example_buttonConfig"
     (activation)="onActivation($event)"
   ></novo-tabbed-group-picker>
-  <div class="selected-data-wrapper">
+  <div class="selected-data-wrapper" data-automation-id="selected-data-wrapper">
     <h6>Last selection:</h6>
-    <div>{{ lastSelection }}</div>
+    <div data-automation-id="last-selection">{{ lastSelection }}</div>
   </div>
 </div>

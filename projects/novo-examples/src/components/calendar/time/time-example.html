@@ -1,7 +1,7 @@
-<div class="calendar-demo-side-by-side">
-    <p>
+<div class="calendar-demo-side-by-side" data-automation-id="time-picker-container">
+    <p data-automation-id="time-display">
         <label>Value</label> {{(time | date:'mediumTime') || 'N/A'}}
     </p>
-    <novo-time-picker [(ngModel)]="time"></novo-time-picker>
-    <novo-time-picker [(ngModel)]="time" military="true"></novo-time-picker>
+    <novo-time-picker [(ngModel)]="time" data-automation-id="time-picker-standard"></novo-time-picker>
+    <novo-time-picker [(ngModel)]="time" military="true" data-automation-id="time-picker-military"></novo-time-picker>
 </div>

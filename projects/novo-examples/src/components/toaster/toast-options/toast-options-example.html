@@ -1,4 +1,4 @@
-<div class="bgc-light">
+<div class="bgc-light" data-automation-id="toast-options-display">
   <novo-toast
     [theme]="style.value==='theme' ? color.value : null"
     [accent]="style.value==='accent' ? color.value : null"
@@ -7,26 +7,26 @@
     [title]="title.value ? 'Save Failed' : null"
     [margin]="margin.value ? '1rem' : 0"
     [isCloseable]="closeable.value"
-    message="Oops! Looks like you're missing some required fields"></novo-toast>
+    message="Oops! Looks like you're missing some required fields" data-automation-id="toast-options-preview"></novo-toast>
 </div>
-<novo-row gap="3rem" align="flex-start">
-  <novo-field>
+<novo-row gap="3rem" align="flex-start" data-automation-id="toast-options-controls">
+  <novo-field data-automation-id="toast-option-appearance">
     <novo-label>Appearance</novo-label>
-    <novo-radio-group #appearance appearance="vertical" value="banner">
+    <novo-radio-group #appearance appearance="vertical" value="banner" data-automation-id="toast-appearance-group">
       <novo-radio name="appearance" value="banner">banner</novo-radio>
       <novo-radio name="appearance" value="growl">growl</novo-radio>
     </novo-radio-group>
   </novo-field>
-  <novo-field>
+  <novo-field data-automation-id="toast-option-style">
     <novo-label>Style</novo-label>
-    <novo-radio-group #style appearance="vertical" value="theme">
+    <novo-radio-group #style appearance="vertical" value="theme" data-automation-id="toast-style-group">
       <novo-radio name="style" value="theme">theme</novo-radio>
       <novo-radio name="style" value="accent">accent</novo-radio>
     </novo-radio-group>
   </novo-field>
-  <novo-field>
+  <novo-field data-automation-id="toast-option-color">
     <novo-label>Color</novo-label>
-    <novo-radio-group #color appearance="vertical" value="info">
+    <novo-radio-group #color appearance="vertical" value="info" data-automation-id="toast-color-group">
       <novo-radio name="color" [value]="null">none</novo-radio>
       <novo-radio name="color" value="info">info</novo-radio>
       <novo-radio name="color" value="success">success</novo-radio>
@@ -34,32 +34,32 @@
       <novo-radio name="color" value="danger">danger</novo-radio>
     </novo-radio-group>
   </novo-field>
-  <novo-field>
+  <novo-field data-automation-id="toast-option-icon">
     <novo-label>Icon</novo-label>
-    <novo-radio-group #icon appearance="vertical" value="bell">
+    <novo-radio-group #icon appearance="vertical" value="bell" data-automation-id="toast-icon-group">
       <novo-radio name="icon" [value]="null">none</novo-radio>
       <novo-radio name="icon" value="check">check</novo-radio>
       <novo-radio name="icon" value="bell">bell</novo-radio>
       <novo-radio name="icon" value="caution">caution</novo-radio>
     </novo-radio-group>
   </novo-field>
-  <novo-field>
+  <novo-field data-automation-id="toast-option-title">
     <novo-label>Show Title</novo-label>
-    <novo-radio-group #title appearance="vertical" [value]="true">
+    <novo-radio-group #title appearance="vertical" [value]="true" data-automation-id="toast-title-group">
       <novo-radio name="title" [value]="true">Show</novo-radio>
       <novo-radio name="title" [value]="false">Hide</novo-radio>
     </novo-radio-group>
   </novo-field>
-  <novo-field>
+  <novo-field data-automation-id="toast-option-margin">
     <novo-label>Margin</novo-label>
-    <novo-radio-group #margin appearance="vertical" [value]="false">
+    <novo-radio-group #margin appearance="vertical" [value]="false" data-automation-id="toast-margin-group">
       <novo-radio name="margin" [value]="false">none</novo-radio>
       <novo-radio name="margin" [value]="true">inset</novo-radio>
     </novo-radio-group>
   </novo-field>
-  <novo-field>
+  <novo-field data-automation-id="toast-option-closeable">
     <novo-label>Closeable</novo-label>
-    <novo-radio-group #closeable appearance="vertical" [value]="false">
+    <novo-radio-group #closeable appearance="vertical" [value]="false" data-automation-id="toast-closeable-group">
       <novo-radio name="margin" [value]="false">false</novo-radio>
       <novo-radio name="margin" [value]="true">true</novo-radio>
     </novo-radio-group>

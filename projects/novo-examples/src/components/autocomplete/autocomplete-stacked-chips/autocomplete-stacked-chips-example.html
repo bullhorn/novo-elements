@@ -1,14 +1,16 @@
-<novo-field class="example-chip-list">
+<novo-field class="example-chip-list" data-automation-id="stacked-chips-field">
   <novo-label>Shifts</novo-label>
   <novo-chip-list
     #chipList
     stacked
     aria-label="Shift selection"
     [formControl]="shiftCtrl"
-    [compareWith]="compareById">
+    [compareWith]="compareById"
+    data-automation-id="stacked-chips-list">
     <novo-chip
       *ngFor="let shift of chipList.value"
-      (removed)="remove(shift)">
+      (removed)="remove(shift)"
+      [attr.data-automation-id]="'stacked-chip-' + $index">
       <novo-flex gap="1rem">
         <novo-text>
           <novo-icon>calendar</novo-icon>
@@ -31,10 +33,11 @@
       autocomplete="off"
       placeholder="add shift..."
       [formControl]="searchCtrl"
-      (novoChipInputTokenEnd)="add($event)" />
+      (novoChipInputTokenEnd)="add($event)"
+      data-automation-id="stacked-chips-input" />
   </novo-chip-list>
-  <novo-autocomplete (optionSelected)="selected($event)" multiple>
-    <novo-option *ngFor="let shift of filteredShifts | async" [value]="shift">
+  <novo-autocomplete (optionSelected)="selected($event)" multiple data-automation-id="stacked-chips-autocomplete">
+    <novo-option *ngFor="let shift of filteredShifts | async; index as i" [value]="shift" [attr.data-automation-id]="'stacked-chips-option-' + i">
       <novo-text>
         <novo-icon>calendar</novo-icon>
         {{shift.startTime | isoDate}}

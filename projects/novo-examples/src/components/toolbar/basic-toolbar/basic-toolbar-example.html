@@ -1,11 +1,11 @@
 <p>
-  <novo-toolbar>
+  <novo-toolbar data-automation-id="basic-toolbar">
     <novo-title>My Application</novo-title>
   </novo-toolbar>
 </p>
 
 <p>
-  <novo-toolbar accent="candidate" gap="md">
+  <novo-toolbar accent="candidate" gap="md" data-automation-id="toolbar-accent">
     <novo-icon color="candidate">candidate</novo-icon>
     <novo-title>Ferdinand del Toro</novo-title>
   </novo-toolbar>
@@ -13,7 +13,7 @@
 
 
 <p>
-  <novo-toolbar color="company" gap="1rem">
+  <novo-toolbar color="company" gap="1rem" data-automation-id="toolbar-company">
     <novo-icon>company</novo-icon>
     <novo-title>Taurus Industries</novo-title>
     <novo-nav theme="color">
@@ -21,29 +21,29 @@
       <novo-tab>Files</novo-tab>
     </novo-nav>
     <span class="example-spacer"></span>
-    <novo-button theme="secondary">Button</novo-button>
-    <novo-action icon="share" tooltip="Share"></novo-action>
-    <novo-action icon="print" tooltip="Print"></novo-action>
-    <novo-action icon="times" tooltip="Close"></novo-action>
+    <novo-button theme="secondary" data-automation-id="toolbar-company-button">Button</novo-button>
+    <novo-action icon="share" tooltip="Share" data-automation-id="toolbar-company-share-action"></novo-action>
+    <novo-action icon="print" tooltip="Print" data-automation-id="toolbar-company-print-action"></novo-action>
+    <novo-action icon="times" tooltip="Close" data-automation-id="toolbar-company-close-action"></novo-action>
   </novo-toolbar>
 </p>
 
 <p>
-  <novo-toolbar color="navigation">
-    <novo-action icon="menu" tooltip="Main Menu"></novo-action>
+  <novo-toolbar color="navigation" data-automation-id="toolbar-navigation">
+    <novo-action icon="menu" tooltip="Main Menu" data-automation-id="toolbar-nav-menu-action"></novo-action>
     <novo-divider vertical></novo-divider>
-    <img src="assets/images/bullhorn-logo.svg" width="120" height="32" />
+    <img src="assets/images/bullhorn-logo.svg" width="120" height="32" data-automation-id="toolbar-nav-logo" />
     <novo-divider vertical></novo-divider>
-    <novo-action icon="add-thin" tooltip="Fast Add"></novo-action>
+    <novo-action icon="add-thin" tooltip="Fast Add" data-automation-id="toolbar-nav-add-action"></novo-action>
     <novo-divider vertical></novo-divider>
-    <novo-search></novo-search>
+    <novo-search data-automation-id="toolbar-nav-search"></novo-search>
 
     <span class="example-spacer"></span>
     <novo-divider vertical></novo-divider>
-    <novo-action icon="question" tooltip="Support"></novo-action>
+    <novo-action icon="question" tooltip="Support" data-automation-id="toolbar-nav-support-action"></novo-action>
     <novo-divider vertical></novo-divider>
-    <novo-action icon="configure-o" tooltip="Settings"></novo-action>
+    <novo-action icon="configure-o" tooltip="Settings" data-automation-id="toolbar-nav-settings-action"></novo-action>
     <novo-divider vertical></novo-divider>
-    <novo-avatar image="https://robohash.org/bvkimball" color="bittersweet"></novo-avatar>
+    <novo-avatar image="https://robohash.org/bvkimball" color="bittersweet" data-automation-id="toolbar-nav-avatar"></novo-avatar>
   </novo-toolbar>
 </p>

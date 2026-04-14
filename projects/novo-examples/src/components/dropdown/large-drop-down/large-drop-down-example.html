@@ -1,10 +1,12 @@
-<novo-dropdown height="250">
+<novo-dropdown height="250" data-automation-id="large-dropdown">
   <button type="button"
     theme="secondary"
     icon="collapse"
-    inverse>Lots of Data Points!</button>
+    inverse
+    data-automation-id="large-dropdown-button">Lots of Data Points!</button>
   <novo-optgroup>
     <novo-option *ngFor="let name of MOCK_WORDS"
-      (action)="clickMe(name)">{{ name }}</novo-option>
+      (action)="clickMe(name)"
+      [attr.data-automation-id]="'large-option-' + name">{{ name }}</novo-option>
   </novo-optgroup>
 </novo-dropdown>

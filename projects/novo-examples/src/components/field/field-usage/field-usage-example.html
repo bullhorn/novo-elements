@@ -1,27 +1,27 @@
 <h4>Basic Field Usage</h4>
 
-<novo-field>
+<novo-field data-automation-id="food-field">
   <novo-label>Favorite food</novo-label>
-  <input novoInput placeholder="Ex. Pizza" value="Sushi" />
+  <input novoInput placeholder="Ex. Pizza" value="Sushi" data-automation-id="food-input" />
 </novo-field>
 
-<novo-field>
+<novo-field data-automation-id="comment-field">
   <novo-label>Leave a comment</novo-label>
-  <textarea novoInput placeholder="Ex. It makes me feel..."></textarea>
+  <textarea novoInput placeholder="Ex. It makes me feel..." data-automation-id="comment-textarea"></textarea>
 </novo-field>
 
-<novo-field>
+<novo-field data-automation-id="alarm-field">
   <novo-label>Set an Alarm</novo-label>
-  <input novoInput [(ngModel)]="time" timeFormat="iso8601" [picker]="timepicker" />
+  <input novoInput [(ngModel)]="time" timeFormat="iso8601" [picker]="timepicker" data-automation-id="alarm-input" />
   <novo-picker-toggle novoSuffix icon="clock">
     <novo-time-picker #timepicker></novo-time-picker>
   </novo-picker-toggle>
   <novo-hint>value is: {{time}}</novo-hint>
 </novo-field>
 
-<novo-field>
+<novo-field data-automation-id="dob-field">
   <novo-label>Date of Birth</novo-label>
-  <input novoInput dateFormat="iso8601" [picker]="datepicker" [(ngModel)]="date" />
+  <input novoInput dateFormat="iso8601" [picker]="datepicker" [(ngModel)]="date" data-automation-id="dob-input" />
   <novo-picker-toggle novoSuffix icon="calendar">
     <novo-date-picker #datepicker></novo-date-picker>
   </novo-picker-toggle>
@@ -29,9 +29,9 @@
 
 </novo-field>
 
-<novo-field>
+<novo-field data-automation-id="datetime-field">
   <novo-label>Datetime</novo-label>
-  <input novoInput dateFormat="iso8601" [picker]="datetimepicker" [(ngModel)]="datetime" />
+  <input novoInput dateFormat="iso8601" [picker]="datetimepicker" [(ngModel)]="datetime" data-automation-id="datetime-input" />
   <novo-picker-toggle novoSuffix icon="calendar">
     <novo-date-time-picker #datetimepicker></novo-date-time-picker>
   </novo-picker-toggle>
@@ -39,9 +39,9 @@
 
 </novo-field>
 
-<novo-field>
+<novo-field data-automation-id="vacation-field">
   <novo-label>Need a Vacation?</novo-label>
-  <input novoInput dateRangeFormat="iso8601" [picker]="daterangepicker" [(ngModel)]="daterange" />
+  <input novoInput dateRangeFormat="iso8601" [picker]="daterangepicker" [(ngModel)]="daterange" data-automation-id="vacation-input" />
   <novo-picker-toggle novoSuffix icon="calendar">
     <novo-date-picker #daterangepicker mode="range" numberOfMonths="2"></novo-date-picker>
   </novo-picker-toggle>
@@ -51,28 +51,28 @@
 
 
 
-<novo-fieldset-header icon="calendar" title="Add Day Of Week"></novo-fieldset-header>
+<novo-fieldset-header icon="calendar" title="Add Day Of Week" data-automation-id="dayofweek-header"></novo-fieldset-header>
 
-<novo-field>
+<novo-field data-automation-id="dob-display-field">
   <novo-label>Date of Birth</novo-label>
-  <novo-text novoPrefix mr="sm">{{date2 | date : 'EEE' }}</novo-text>
-  <input novoInput dateFormat="iso8601" [picker]="datepicker2" [(ngModel)]="date2" disabled readonly />
+  <novo-text novoPrefix mr="sm" data-automation-id="day-display">{{date2 | date : 'EEE' }}</novo-text>
+  <input novoInput dateFormat="iso8601" [picker]="datepicker2" [(ngModel)]="date2" disabled readonly data-automation-id="dob-display-input" />
   <novo-picker-toggle novoSuffix icon="calendar">
     <novo-date-picker #datepicker2></novo-date-picker>
   </novo-picker-toggle>
   <novo-hint>value is: {{date2}}</novo-hint>
 </novo-field>
 
-<novo-fieldset-header icon="section" title="Section Header"></novo-fieldset-header>
+<novo-fieldset-header icon="section" title="Section Header" data-automation-id="section-header"></novo-fieldset-header>
 
-<novo-field>
+<novo-field data-automation-id="effective-on-field">
   <novo-label>
     <novo-flex justify="space-between">
       <span>Effective On</span>
       <novo-chip size="sm" accent="success">current</novo-chip>
     </novo-flex>
   </novo-label>
-  <novo-select value="08/01/2021">
+  <novo-select value="08/01/2021" data-automation-id="effective-on-select">
     <novo-option value="08/01/2021">
       <novo-text>08/01/2021</novo-text>
       <novo-chip accent="success">current</novo-chip>

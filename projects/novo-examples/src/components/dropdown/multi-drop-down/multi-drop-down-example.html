@@ -1,33 +1,34 @@
-<novo-dropdown keepOpen>
+<novo-dropdown keepOpen data-automation-id="keep-open-dropdown">
   <novo-button type="button"
     theme="secondary"
     icon="collapse"
-    inverse>Keep Open</novo-button>
-  <novo-field class="dropdown-search">
-    <input novoInput placeholder="Search..." type="search" width="100%" />
+    inverse
+    data-automation-id="keep-open-button">Keep Open</novo-button>
+  <novo-field class="dropdown-search" data-automation-id="dropdown-search-field">
+    <input novoInput placeholder="Search..." type="search" width="100%" data-automation-id="dropdown-search-input" />
     <novo-icon novoPrefix>search</novo-icon>
   </novo-field>
   <novo-divider></novo-divider>
   <novo-optgroup>
-    <novo-option (click)="clickMe('Hello!')">Action 1</novo-option>
-    <novo-option (click)="clickMe('Another!')">Action 2</novo-option>
+    <novo-option (click)="clickMe('Hello!')" data-automation-id="action-1">Action 1</novo-option>
+    <novo-option (click)="clickMe('Another!')" data-automation-id="action-2">Action 2</novo-option>
   </novo-optgroup>
   <novo-divider></novo-divider>
-  <div class="dropdown-footer">
-    <button theme="dialogue" icon="add-thin">Add</button>
+  <div class="dropdown-footer" data-automation-id="dropdown-footer">
+    <button theme="dialogue" icon="add-thin" data-automation-id="add-button">Add</button>
   </div>
 </novo-dropdown>
 
-<novo-dropdown side="right" multiple>
-  <novo-button theme="secondary" icon="overview" side="left">Hide/Show</novo-button>
-  <novo-option>Action 1</novo-option>
-  <novo-option tooltip="Test tooltip :)" tooltipPosition="left">Action 2</novo-option>
-  <novo-option>Action 3</novo-option>
-  <novo-option>Action 4</novo-option>
-  <novo-option>Action 5</novo-option>
-  <novo-option>Action 6</novo-option>
-  <novo-option>Action 7</novo-option>
-  <novo-option>Action 8</novo-option>
-  <novo-option>Action 9</novo-option>
-  <novo-option>Action 10</novo-option>
+<novo-dropdown side="right" multiple data-automation-id="multi-select-dropdown">
+  <novo-button theme="secondary" icon="overview" side="left" data-automation-id="multi-select-button">Hide/Show</novo-button>
+  <novo-option data-automation-id="multi-action-1">Action 1</novo-option>
+  <novo-option tooltip="Test tooltip :)" tooltipPosition="left" data-automation-id="multi-action-2">Action 2</novo-option>
+  <novo-option data-automation-id="multi-action-3">Action 3</novo-option>
+  <novo-option data-automation-id="multi-action-4">Action 4</novo-option>
+  <novo-option data-automation-id="multi-action-5">Action 5</novo-option>
+  <novo-option data-automation-id="multi-action-6">Action 6</novo-option>
+  <novo-option data-automation-id="multi-action-7">Action 7</novo-option>
+  <novo-option data-automation-id="multi-action-8">Action 8</novo-option>
+  <novo-option data-automation-id="multi-action-9">Action 9</novo-option>
+  <novo-option data-automation-id="multi-action-10">Action 10</novo-option>
 </novo-dropdown>

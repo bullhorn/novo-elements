@@ -1,18 +1,18 @@
-<div>
-  <novo-agenda-date-change [view]="view" [(viewDate)]="viewDate">
+<div data-automation-id="agenda-container">
+  <novo-agenda-date-change [view]="view" [(viewDate)]="viewDate" data-automation-id="agenda-date-change">
   </novo-agenda-date-change>
 
-  <novo-tiles [options]="views" [(ngModel)]="view"></novo-tiles>
+  <novo-tiles [options]="views" [(ngModel)]="view" data-automation-id="agenda-view-selector"></novo-tiles>
 </div>
-<div [ngSwitch]="view" class="cal-demo-content">
+<div [ngSwitch]="view" class="cal-demo-content" data-automation-id="agenda-content">
   <novo-agenda-month *ngSwitchCase="'month'" [(viewDate)]="viewDate" [events]="events"
-    (dayClicked)="dayClicked($event.day.date)">
+    (dayClicked)="dayClicked($event.day.date)" data-automation-id="agenda-month-view">
   </novo-agenda-month>
 
   <novo-agenda-week *ngSwitchCase="'week'" [(viewDate)]="viewDate" [events]="events"
-    (dayClicked)="dayClicked($event.date)" [dayStartHour]="0" [dayEndHour]="23">
+    (dayClicked)="dayClicked($event.date)" [dayStartHour]="0" [dayEndHour]="23" data-automation-id="agenda-week-view">
   </novo-agenda-week>
 
-  <novo-agenda-day *ngSwitchCase="'day'" [(viewDate)]="viewDate" [events]="events" [dayStartHour]="0" [dayEndHour]="23">
+  <novo-agenda-day *ngSwitchCase="'day'" [(viewDate)]="viewDate" [events]="events" [dayStartHour]="0" [dayEndHour]="23" data-automation-id="agenda-day-view">
   </novo-agenda-day>
 </div>
