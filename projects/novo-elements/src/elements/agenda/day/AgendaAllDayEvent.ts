@@ -18,7 +18,7 @@ import { CalendarEvent } from 'novo-elements/utils';
     >
     </ng-template>
   `,
-    standalone: false
+    standalone: false,
 })
 export class NovoAgendaAllDayEventElement {
   @Input()

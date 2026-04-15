@@ -54,7 +54,7 @@ const DEFAULT_PAGE_SIZE = 50;
     </novo-button>
   `,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    standalone: false,
 })
 export class NovoSimpleTablePagination implements OnInit, OnDestroy {
   private _initialized: boolean;

@@ -7,7 +7,7 @@ import { AnchorViewportScroller } from './anchor-scroller';
 @Component({
     selector: 'novo-demo-app',
     templateUrl: './app.component.html',
-    standalone: false
+    standalone: false,
 })
 export class AppComponent implements AfterViewInit {
   menuOpen: boolean = false;

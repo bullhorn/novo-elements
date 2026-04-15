@@ -53,7 +53,7 @@ let uniqueId = 0;
         '[class.novo-expansion-panel-spacing]': '_hasSpacing()',
         '[class.novo-expansion-panel-padding]': 'padding',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoExpansionPanel extends CdkAccordionItem implements AfterContentInit, OnChanges, OnDestroy {
   /** Whether the toggle indicator should be hidden. */
@@ -177,6 +177,6 @@ export class NovoExpansionPanel extends CdkAccordionItem implements AfterContent
     host: {
         class: 'novo-action-row',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoExpansionPanelActionRow {}

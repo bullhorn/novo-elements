@@ -23,7 +23,7 @@ describe('Elements: NovoFileInputElement', () => {
       declarations: [NovoFileInputElement, NovoLoadingElement, DecodeURIPipe],
       providers: [
         { provide: NovoLabelService, useClass: NovoLabelService },
-        { provide: GlobalRef, useValue: mockGlobal }
+        { provide: GlobalRef, useValue: mockGlobal },
       ],
     }).compileComponents();
     fixture = TestBed.createComponent(NovoFileInputElement);
@@ -192,8 +192,8 @@ describe('Elements: NovoFileInputElement', () => {
       component.check({target: { files: [], value: 'test.txt'}});
       fixture.detectChanges();
       fixture.whenStable().then(() => {
-        let input = fixture.debugElement.query(By.css('#file'));
-        let el = input.nativeElement;
+        const input = fixture.debugElement.query(By.css('#file'));
+        const el = input.nativeElement;
 
         expect(el.value).toBe('');
       });

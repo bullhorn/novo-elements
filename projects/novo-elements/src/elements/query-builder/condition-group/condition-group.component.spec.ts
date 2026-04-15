@@ -4,6 +4,7 @@ import { ConditionGroupComponent } from './condition-group.component';
 import { QueryBuilderService } from '../query-builder.service';
 import { NovoLabelService } from '../../../services';
 import { NovoFlexModule } from '../../../elements/flex';
+import { Condition } from '../query-builder.types';
 
 describe('ConditionGroupComponent', () => {
   let fixture: ComponentFixture<ConditionGroupComponent>;
@@ -25,12 +26,12 @@ describe('ConditionGroupComponent', () => {
       ],
       imports: [
         NovoFlexModule,
-      ]
+      ],
     }).compileComponents();
     fixture = TestBed.createComponent(ConditionGroupComponent);
     component = fixture.debugElement.componentInstance;
   });
-  
+
   it('should initialize correctly', () => {
     expect(component).toBeDefined();
   });
@@ -56,13 +57,13 @@ describe('ConditionGroupComponent', () => {
       const mockParentForm = {
         value: {
           '$and': [
-            { 
-              scope: 'testScope', 
+            {
+              scope: 'testScope',
               entity: 'testEntity',
-              field: 'testField' 
-            }
-          ]
-        }
+              field: 'testField',
+            },
+          ],
+        },
       };
       component.parentForm = mockParentForm as any;
 
@@ -75,8 +76,8 @@ describe('ConditionGroupComponent', () => {
     it('should use default scope when no scope in form values', () => {
       const mockParentForm = {
         value: {
-          '$and': [{ field: 'testField' }] // No scope property
-        }
+          '$and': [{ field: 'testField' }], // No scope property
+        },
       };
       component.parentForm = mockParentForm as any;
 
@@ -89,6 +90,7 @@ describe('ConditionGroupComponent', () => {
 
   describe('sanitizeCondition', () => {
     it('should return only the expected Condition properties', () => {
+      const mockWarnFunction = jest.fn();
       const inputCondition = {
         conditionType: '$or',
         field: 'testField',
@@ -97,10 +99,11 @@ describe('ConditionGroupComponent', () => {
         value: 'testValue',
         supportingValue: 'testSupportingValue',
         entity: 'testEntity',
+        warnOnDelete: mockWarnFunction,
         // Extra properties that should be filtered out
         extraProp1: 'should be removed',
         extraProp2: 123,
-        someOtherData: { nested: 'object' }
+        someOtherData: { nested: 'object' },
       };
 
       const result = component['sanitizeCondition'](inputCondition);
@@ -112,7 +115,8 @@ describe('ConditionGroupComponent', () => {
         scope: 'testScope',
         value: 'testValue',
         supportingValue: 'testSupportingValue',
-        entity: 'testEntity'
+        entity: 'testEntity',
+        warnOnDelete: mockWarnFunction,
       });
     });
 
@@ -125,7 +129,8 @@ describe('ConditionGroupComponent', () => {
         scope: 'testScope',
         value: null,
         supportingValue: undefined,
-        entity: null
+        entity: null,
+        warnOnDelete: undefined,
       };
 
       const result: any = component['sanitizeCondition'](inputCondition);
@@ -137,14 +142,15 @@ describe('ConditionGroupComponent', () => {
         scope: 'testScope',
         value: null,
         supportingValue: undefined,
-        entity: null
+        entity: null,
+        warnOnDelete: undefined,
       });
     });
 
     it('should handle missing properties gracefully', () => {
       const inputCondition = {
         conditionType: '$and',
-        field: 'testField'
+        field: 'testField',
         // Missing other properties
       };
 
@@ -157,7 +163,8 @@ describe('ConditionGroupComponent', () => {
         scope: undefined,
         value: undefined,
         supportingValue: undefined,
-        entity: undefined
+        entity: undefined,
+        warnOnDelete: undefined,
       });
     });
   });
@@ -166,7 +173,7 @@ describe('ConditionGroupComponent', () => {
     it('should create and add new condition to FormArray', () => {
       const mockFormArray = { push: jest.fn(), value: [] };
       Object.defineProperty(component, 'root', { get: () => mockFormArray, configurable: true });
-      
+
       const mockFormGroup = {} as any;
       jest.spyOn(component, 'newCondition').mockReturnValue(mockFormGroup);
       jest.spyOn(component['cdr'], 'markForCheck').mockImplementation();
@@ -187,14 +194,15 @@ describe('ConditionGroupComponent', () => {
 
     it('should remove condition at specified index', () => {
       const mockFormArray = {
+        at: jest.fn().mockReturnValue({ value: { warnOnDelete: false } }),
         removeAt: jest.fn(),
-        length: 2
+        length: 2,
       };
       Object.defineProperty(component, 'root', {
         get: () => mockFormArray,
-        configurable: true
+        configurable: true,
       });
-      
+
       jest.spyOn(component, 'cantRemoveRow').mockReturnValue(false);
       jest.spyOn(component.qbs as any, 'scopes').mockReturnValue(['primaryScope']);
 
@@ -205,14 +213,15 @@ describe('ConditionGroupComponent', () => {
     });
     it('should call addCondition if cantRemoveRow is true', () => {
       const mockFormArray = {
+        at: jest.fn().mockReturnValue({ value: { warnOnDelete: false } }),
         removeAt: jest.fn(),
-        length: 2
+        length: 2,
       };
       Object.defineProperty(component, 'root', {
         get: () => mockFormArray,
-        configurable: true
+        configurable: true,
       });
-      
+
       jest.spyOn(component, 'cantRemoveRow').mockReturnValue(true);
       jest.spyOn(component.qbs as any, 'scopes').mockReturnValue(['primaryScope']);
 
@@ -222,14 +231,15 @@ describe('ConditionGroupComponent', () => {
     });
     it('should call addCondition if canBeEmpty is false', () => {
       const mockFormArray = {
+        at: jest.fn().mockReturnValue({ value: { warnOnDelete: false } }),
         removeAt: jest.fn(),
-        length: 1
+        length: 1,
       };
       Object.defineProperty(component, 'root', {
         get: () => mockFormArray,
-        configurable: true
+        configurable: true,
       });
-      
+
       jest.spyOn(component, 'cantRemoveRow').mockReturnValue(false);
       jest.spyOn(component.qbs as any, 'scopes').mockReturnValue(['primaryScope']);
       component.scope = 'primaryScope';
@@ -238,6 +248,89 @@ describe('ConditionGroupComponent', () => {
       component.removeCondition(1);
 
       expect(component.addCondition).toHaveBeenCalled();
+    });
+
+    it('should call warnOnDelete function and remove condition when it returns true', async () => {
+      const mockWarnOnDelete = jest.fn().mockResolvedValue(true);
+      const mockFormArray = {
+        at: jest.fn().mockReturnValue({ value: { warnOnDelete: mockWarnOnDelete, field: 'testField' } }),
+        removeAt: jest.fn(),
+        length: 2,
+        value: [{ warnOnDelete: mockWarnOnDelete, field: 'testField' }],
+      };
+
+      Object.defineProperty(component, 'root', {
+        get: () => mockFormArray,
+        configurable: true,
+      });
+
+      jest.spyOn(component, 'cantRemoveRow').mockReturnValue(false);
+      jest.spyOn(component.qbs as any, 'scopes').mockReturnValue(['primaryScope']);
+
+      await component.removeCondition(0);
+
+      expect(mockWarnOnDelete).toHaveBeenCalled();
+      expect(mockFormArray.removeAt).toHaveBeenCalledWith(0);
+    });
+
+    it('should not remove condition when warnOnDelete returns false', async () => {
+      const mockWarnOnDelete = jest.fn().mockResolvedValue(false);
+      const mockFormArray = {
+        at: jest.fn().mockReturnValue({ value: { warnOnDelete: mockWarnOnDelete, field: 'testField' } }),
+        removeAt: jest.fn(),
+        length: 2,
+        value: [{ warnOnDelete: mockWarnOnDelete, field: 'testField' }],
+      };
+
+      Object.defineProperty(component, 'root', {
+        get: () => mockFormArray,
+        configurable: true,
+      });
+
+      await component.removeCondition(0);
+
+      expect(mockWarnOnDelete).toHaveBeenCalled();
+      expect(mockFormArray.removeAt).not.toHaveBeenCalled();
+    });
+
+    it('should remove condition when warnOnDelete is not a function', async () => {
+      const mockFormArray = {
+        at: jest.fn().mockReturnValue({ value: { warnOnDelete: false } }),
+        removeAt: jest.fn(),
+        length: 2,
+      };
+
+      Object.defineProperty(component, 'root', {
+        get: () => mockFormArray,
+        configurable: true,
+      });
+
+      jest.spyOn(component, 'cantRemoveRow').mockReturnValue(false);
+      jest.spyOn(component.qbs as any, 'scopes').mockReturnValue(['primaryScope']);
+
+      await component.removeCondition(0);
+
+      expect(mockFormArray.removeAt).toHaveBeenCalledWith(0);
+    });
+
+    it('should remove condition when warnOnDelete is undefined', async () => {
+      const mockFormArray = {
+        at: jest.fn().mockReturnValue({ value: { warnOnDelete: undefined } }),
+        removeAt: jest.fn(),
+        length: 2,
+      };
+
+      Object.defineProperty(component, 'root', {
+        get: () => mockFormArray,
+        configurable: true,
+      });
+
+      jest.spyOn(component, 'cantRemoveRow').mockReturnValue(false);
+      jest.spyOn(component.qbs as any, 'scopes').mockReturnValue(['primaryScope']);
+
+      await component.removeCondition(0);
+
+      expect(mockFormArray.removeAt).toHaveBeenCalledWith(0);
     });
   });
 
@@ -273,9 +366,9 @@ describe('ConditionGroupComponent', () => {
     it('should return FormArray from parentForm using controlName', () => {
       const mockFormArray = new FormArray([]);
       const mockParentForm = {
-        get: jest.fn().mockReturnValue(mockFormArray)
+        get: jest.fn().mockReturnValue(mockFormArray),
       };
-      
+
       component.parentForm = mockParentForm as any;
       component.controlName = '$and';
 
@@ -283,6 +376,48 @@ describe('ConditionGroupComponent', () => {
 
       expect(mockParentForm.get).toHaveBeenCalledWith('$and');
       expect(result).toBe(mockFormArray);
+    });
+  });
+
+  describe('Function: newCondition', () => {
+    it('should create condition with warnOnDelete field', () => {
+      const mockWarnFunction = jest.fn().mockResolvedValue(true);
+      const testCondition: Condition = {
+        field: 'test.field',
+        operator: 'equals',
+        scope: 'test',
+        value: 'testValue',
+        supportingValue: null,
+        entity: 'TestEntity',
+        warnOnDelete: mockWarnFunction,
+      };
+
+      const result = component.newCondition(testCondition);
+
+      expect(result.get('warnOnDelete')?.value).toBe(mockWarnFunction);
+      expect(result.get('warnOnDelete')).toBeDefined();
+    });
+
+    it('should set warnOnDelete to null when not provided', () => {
+      const testCondition: Condition = {
+        field: 'test.field',
+        operator: 'equals',
+        scope: 'test',
+        value: 'testValue',
+        supportingValue: null,
+        entity: 'TestEntity',
+      };
+
+      const result = component.newCondition(testCondition);
+
+      expect(result.get('warnOnDelete')?.value).toBeNull();
+      expect(result.get('warnOnDelete')).toBeDefined();
+    });
+
+    it('should set warnOnDelete in empty condition', () => {
+      const result = component.newCondition();
+
+      expect(result.get('warnOnDelete')).toBeDefined();
     });
   });
 });

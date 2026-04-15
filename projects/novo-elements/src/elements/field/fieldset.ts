@@ -15,7 +15,7 @@ import { NovoFieldElement } from './field';
         '[class.novo-fieldset-appearance-outline]': 'appearance == "outline"',
         '[class.novo-fieldset-appearance-list]': 'appearance == "list"',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoFieldsElement implements AfterContentInit {
   @ContentChildren(NovoFieldElement)

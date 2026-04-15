@@ -12,7 +12,7 @@ import { entityColors as colors } from '../colors';
     selector: 'entity-colors-example',
     templateUrl: './entity-colors-example.html',
     styleUrls: ['./entity-colors-example.scss'],
-    standalone: false
+    standalone: false,
 })
 export class EntityColorsExample {
   entityColors = colors;

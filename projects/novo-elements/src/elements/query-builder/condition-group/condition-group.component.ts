@@ -23,7 +23,7 @@ const EMPTY_CONDITION: Condition = {
     host: {
         class: 'novo-condition-group',
     },
-    standalone: false
+    standalone: false,
 })
 export class ConditionGroupComponent implements OnInit, OnDestroy {
   @Input() controlName: string = '$' + Conjunction.AND;
@@ -96,7 +96,8 @@ export class ConditionGroupComponent implements OnInit, OnDestroy {
       scope: condition.scope,
       value: condition.value,
       supportingValue: condition.supportingValue,
-      entity: condition.entity
+      entity: condition.entity,
+      warnOnDelete: condition.warnOnDelete,
     };
   }
 
@@ -112,7 +113,19 @@ export class ConditionGroupComponent implements OnInit, OnDestroy {
     this.cdr.markForCheck();
   }
 
-  removeCondition(index: number) {
+  async removeCondition(index: number) {
+    const condition = this.root.at(index)?.value;
+    const warnOnDelete = condition?.warnOnDelete;
+    const fieldName = condition?.field;
+    const isLastInstanceOfPinnedField = typeof warnOnDelete === 'function' && this.root.value.filter(c => c.field === fieldName).length === 1;
+
+    if (isLastInstanceOfPinnedField) {
+      const shouldDelete = await warnOnDelete();
+      if (!shouldDelete) {
+        return;
+      }
+    }
+
     const isPrimaryScope = this.scope === this.qbs.scopes()[0];
     const lastRowInGroup = this.root.length === 1;
     const lastRowInQueryBuilder = this.cantRemoveRow();
@@ -123,7 +136,7 @@ export class ConditionGroupComponent implements OnInit, OnDestroy {
     this.cdr.markForCheck();
   }
 
-  newCondition({ field, operator, scope, value, supportingValue, entity }: Condition = EMPTY_CONDITION): UntypedFormGroup {
+  newCondition({ field, operator, scope, value, supportingValue, entity, warnOnDelete }: Condition = EMPTY_CONDITION): UntypedFormGroup {
     return this.formBuilder.group({
       conditionType: '$and',
       field: [field, Validators.required],
@@ -132,6 +145,7 @@ export class ConditionGroupComponent implements OnInit, OnDestroy {
       value: [value],
       supportingValue: [supportingValue],
       entity: [entity],
+      warnOnDelete: [warnOnDelete],
     });
   }
 

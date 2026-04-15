@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'field-native-example',
     templateUrl: 'field-native-example.html',
     styleUrls: ['field-native-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class FieldNativeExample {
   appearance = 'standard';

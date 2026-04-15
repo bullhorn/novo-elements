@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
     selector: 'title-example',
     templateUrl: './title-example.html',
     styleUrls: ['./title-example.scss'],
-    standalone: false
+    standalone: false,
 })
 export class TitleExample {
   icons: string[] = ['email', 'bell', 'person', 'caution', 'chart-pie', 'bot', 'certification', 'calendar', 'send', 'coffee'];

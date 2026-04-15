@@ -48,7 +48,7 @@ export const getSpacingToken = (value: string) => {
 
 @Directive({
     selector: '[m],[margin],[marginTop],[marginRight],[marginBottom],[marginLeft],[marginX],[marginY],[mt],[mr],[mb],[ml],[mx],[my]',
-    standalone: false
+    standalone: false,
 })
 export class MarginDirective {
   // Margin
@@ -87,7 +87,7 @@ export class MarginDirective {
 
 @Directive({
     selector: '[p],[padding],[paddingTop],[paddingRight],[paddingBottom],[paddingLeft],[paddingX],[paddingY],[pt],[pr],[pb],[pl],[px],[py]',
-    standalone: false
+    standalone: false,
 })
 export class PaddingDirective {
   // Padding
@@ -126,7 +126,7 @@ export class PaddingDirective {
 
 @Directive({
     selector: '[gap]',
-    standalone: false
+    standalone: false,
 })
 export class GapDirective {
   @Input() gap: string;

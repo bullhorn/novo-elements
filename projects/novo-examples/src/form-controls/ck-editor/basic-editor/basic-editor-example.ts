@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'basic-editor-example',
     templateUrl: 'basic-editor-example.html',
     styleUrls: ['basic-editor-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class BasicEditorExample {
   public editorValue: string = '<p>I AM A PRE-RENDERED VALUE</p><h1>TEST</h1>';

@@ -9,7 +9,7 @@ import { DateTimeControl, FieldInteractionApi, FormUtils, TextBoxControl } from 
     selector: 'fi-calculation-example',
     templateUrl: 'fi-calculation-example.html',
     styleUrls: ['fi-calculation-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class FiCalculationExample {
   public form: any;

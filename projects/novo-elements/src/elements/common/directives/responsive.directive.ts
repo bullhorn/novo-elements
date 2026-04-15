@@ -14,7 +14,7 @@ const ro = new ResizeObserver((entries: any[]) => {
 
 @Directive({
     selector: '[responsive]',
-    standalone: false
+    standalone: false,
 })
 export class ResizeObserverDirective implements OnDestroy {
   @Input() responsive: number[];

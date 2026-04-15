@@ -56,14 +56,6 @@ The `[timeFormat]` directive is used to specify the format the input should disp
 
 The `novo-time-picker-input` is deprecated, but it still used with the dynamic form containers. It is a convienent wrapper componet for an input with a time picker trigger. Most inputs are just pass throughs to the `novo-time-picker` instance.
 
-### Properties
-
-<props-table component="NovoTimePickerInputElement"></props-table>
-
 ## NovoTimePickerElement `novo-time-picker`
 
 The `novo-time-picker` component is used to allow the user to select the time of the day similar to the browsers native time picker. The main benefit is that we can control timezones and formatting based on user and agency configuration rather than using the computers default settings.
-
-### Properties
-
-<props-table component="NovoTimePickerElement"></props-table>

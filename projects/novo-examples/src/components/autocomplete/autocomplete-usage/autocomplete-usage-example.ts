@@ -10,7 +10,7 @@ import { map, startWith } from 'rxjs/operators';
     selector: 'autocomplete-usage-example',
     templateUrl: 'autocomplete-usage-example.html',
     styleUrls: ['autocomplete-usage-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class AutocompleteUsageExample implements OnInit {
   myControl = new UntypedFormControl();

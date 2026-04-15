@@ -72,7 +72,7 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
   `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.Default,
-  standalone: false
+  standalone: false,
 })
 export class NovoDefaultDateConditionDef extends AbstractConditionFieldDef {
   @ViewChildren(NovoPickerToggleElement)

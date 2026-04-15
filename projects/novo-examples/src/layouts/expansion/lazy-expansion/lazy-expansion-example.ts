@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
     selector: 'lazy-expansion-example',
     templateUrl: 'lazy-expansion-example.html',
     styleUrls: ['lazy-expansion-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class LazyExpansionExample {}

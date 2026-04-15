@@ -59,7 +59,7 @@ describe('Elements: NovoAutocompleteElement', () => {
     TestBed.configureTestingModule({
       imports: [FormsModule, ReactiveFormsModule, NovoChipsModule, NovoFieldModule,
         NovoCommonModule, NovoAutoCompleteModule, NovoOptionModule],
-      declarations: [TestAutocompleteComponent]
+      declarations: [TestAutocompleteComponent],
     }).compileComponents();
     fixture = TestBed.createComponent(TestAutocompleteComponent);
     testComponent = fixture.componentInstance;
@@ -80,9 +80,9 @@ describe('Elements: NovoAutocompleteElement', () => {
 
   describe('Option expansion', () => {
 
-    let options = [
+    const options = [
       { id: '1', label: 'One' },
-      { id: '2', label: 'Two' }
+      { id: '2', label: 'Two' },
     ];
 
     it('should add a chip to the list when an option is selected', () => {

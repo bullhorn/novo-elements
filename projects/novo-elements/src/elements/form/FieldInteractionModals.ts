@@ -27,7 +27,7 @@ import { NovoLabelService } from 'novo-elements/services';
       </novo-button>
     </novo-notification>
   `,
-    standalone: false
+    standalone: false,
 })
 export class ControlConfirmModal {
   constructor(private modalRef: NovoModalRef, public params: NovoModalParams, public labels: NovoLabelService) {}
@@ -57,7 +57,7 @@ export class ControlConfirmModal {
       </novo-button>
     </novo-notification>
   `,
-    standalone: false
+    standalone: false,
 })
 export class ControlPromptModal {
   constructor(private modalRef: NovoModalRef, public params: NovoModalParams, public labels: NovoLabelService) {}

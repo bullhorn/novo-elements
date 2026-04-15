@@ -30,7 +30,7 @@ import { PickerResults } from 'novo-elements/elements/picker';
     <p class="picker-null" *ngIf="!isLoading && !matches.length && !hasError">{{ labels.quickNoteEmpty }}</p>
   `,
     styleUrls: ['./QuickNoteResults.scss'],
-    standalone: false
+    standalone: false,
 })
 export class QuickNoteResults extends PickerResults {
   // Mode that the quick note is in for tagging

@@ -3,7 +3,7 @@ import { can, Helpers } from 'novo-elements/utils';
 
 @Pipe({
     name: 'groupBy',
-    standalone: false
+    standalone: false,
 })
 export class GroupByPipe implements PipeTransform {
   transform(input: any, prop: string): Array<any> {

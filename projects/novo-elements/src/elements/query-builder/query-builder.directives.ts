@@ -12,7 +12,7 @@ export interface ConditionDef {
  */
 @Directive({
     selector: '[novoConditionInputDef]',
-    standalone: false
+    standalone: false,
 })
 export class NovoConditionInputDef implements ConditionDef {
   constructor(/** @docs-private */ public template: TemplateRef<any>) {}
@@ -23,7 +23,7 @@ export class NovoConditionInputDef implements ConditionDef {
  */
 @Directive({
     selector: '[novoConditionOperatorsDef]',
-    standalone: false
+    standalone: false,
 })
 export class NovoConditionOperatorsDef implements ConditionDef {
   constructor(/** @docs-private */ public template: TemplateRef<any>) {}
@@ -84,7 +84,7 @@ export class BaseConditionFieldDef {
 
 @Directive({
     selector: '[novoConditionFieldDef]',
-    standalone: false
+    standalone: false,
 })
 export class NovoConditionFieldDef extends BaseConditionFieldDef {
   constructor(private qbs: QueryBuilderService) {

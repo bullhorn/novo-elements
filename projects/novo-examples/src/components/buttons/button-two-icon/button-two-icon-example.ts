@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
     selector: 'button-two-icon-example',
     templateUrl: 'button-two-icon-example.html',
     styleUrls: ['button-two-icon-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class ButtonTwoIconExample {}

@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
   declarations: [PopOverContent, PopOverDirective],
   exports: [PopOverContent, PopOverDirective],
   imports: [
-    CommonModule
-  ]
+    CommonModule,
+  ],
 })
 export class NovoPopOverModule {}

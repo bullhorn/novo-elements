@@ -3,7 +3,7 @@ import { Directive, ElementRef, HostBinding, Input, Renderer2 } from '@angular/c
 @Directive({
     selector:
     '[fontWeight],[lineHeight],[textAlign],[textAlign],[fontStyle],[textTransform]',
-    standalone: false
+    standalone: false,
 })
 export class TypographyDirective {
   @HostBinding('style.fontWeight')

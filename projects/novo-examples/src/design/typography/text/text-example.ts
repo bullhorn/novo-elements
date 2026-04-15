@@ -8,6 +8,6 @@ import { Component } from '@angular/core';
     selector: 'text-example',
     templateUrl: './text-example.html',
     styleUrls: ['./text-example.scss'],
-    standalone: false
+    standalone: false,
 })
 export class TextExample {}

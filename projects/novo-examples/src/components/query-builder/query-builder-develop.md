@@ -34,18 +34,9 @@ Initial Implementation
 
 All tabs must be incapsulated in a `novo-nav` container. The nav will control the context and active tab.
 
-### Properties
-
-<props-table component="QueryBuilderComponent"></props-table>
-
 ## ExpressionBuilderComponent `novo-expression-builder`
 
 All tabs must be incapsulated in a `novo-nav` container. The nav will control the context and active tab.
-
-### Properties
-
-<props-table component="ExpressionBuilderComponent"></props-table>
-
 
 # Custom Condition Field Definitions
 

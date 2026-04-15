@@ -16,13 +16,13 @@ import { NovoBaseTextElement } from '../base/base-text.component';
 
 @Component({
     selector: 'novo-text,[novo-text]',
-    template: ` <ng-content></ng-content> `,
+    template: ' <ng-content></ng-content> ',
     styleUrls: ['./text.scss'],
     encapsulation: ViewEncapsulation.None,
     host: {
         class: 'novo-text',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoText extends NovoBaseTextElement {
   @HostBinding('class.text-block')

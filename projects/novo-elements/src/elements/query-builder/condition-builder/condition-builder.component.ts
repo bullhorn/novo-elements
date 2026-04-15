@@ -17,7 +17,7 @@ import {
   ViewChild,
   ViewContainerRef,
   computed,
-  input
+  input,
 } from '@angular/core';
 import { ControlContainer, FormControl, FormGroup } from '@angular/forms';
 import { NovoLabelService } from 'novo-elements/services';
@@ -27,6 +27,7 @@ import { BaseConditionFieldDef } from '../query-builder.directives';
 import { QueryBuilderConfig, QueryBuilderService } from '../query-builder.service';
 import { NOVO_CONDITION_BUILDER } from '../query-builder.tokens';
 import { AddressCriteriaConfig, BaseFieldDef, DateCriteriaConfig, FieldConfig, QueryFilterOutlet } from '../query-builder.types';
+import { Helpers } from 'novo-elements/utils';
 
 /**
  * Provides a handle for the table to grab the view container's ng-container to insert data rows.
@@ -34,7 +35,7 @@ import { AddressCriteriaConfig, BaseFieldDef, DateCriteriaConfig, FieldConfig, Q
  */
 @Directive({
     selector: '[conditionInputOutlet]',
-    standalone: false
+    standalone: false,
 })
 export class ConditionInputOutlet implements QueryFilterOutlet {
   constructor(public viewContainer: ViewContainerRef, public elementRef: ElementRef) {}
@@ -46,7 +47,7 @@ export class ConditionInputOutlet implements QueryFilterOutlet {
  */
 @Directive({
     selector: '[conditionOperatorOutlet]',
-    standalone: false
+    standalone: false,
 })
 export class ConditionOperatorOutlet implements QueryFilterOutlet {
   constructor(public viewContainer: ViewContainerRef, public elementRef: ElementRef) {}
@@ -65,11 +66,11 @@ export class ConditionOperatorOutlet implements QueryFilterOutlet {
                     queryBuilderService = new QueryBuilderService(labelService);
                 }
                 return queryBuilderService;
-            }
-        }
+            },
+        },
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    standalone: false,
 })
 export class ConditionBuilderComponent implements OnInit, OnChanges, AfterContentInit, AfterViewInit, OnDestroy {
   @ViewChild(ConditionOperatorOutlet, { static: true }) _operatorOutlet: ConditionOperatorOutlet;
@@ -176,7 +177,7 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
   }
 
   ngOnDestroy() {
-    this.searches.unsubscribe();
+    this.searches?.unsubscribe();
     // Clear all outlets and Maps
     [this._operatorOutlet.viewContainer, this._inputOutlet.viewContainer].forEach((def) => {
       def.clear();
@@ -213,7 +214,9 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
 
   getField() {
     const field = this.parentForm?.value?.field;
-    if (!field) return null;
+    if (!field) {
+      return null;
+    }
     return this.fieldConfig.find(field);
   }
 
@@ -255,14 +258,32 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
   }
 
   private findDefinitionForField(field) {
-    if (!field) return;
-    const editType = this.editTypeFn()(field);
+    if (!field) {
+      return;
+    }
+    let editType = this.editTypeFn()(field);
     // Don't look at dataSpecialization it is no good, this misses currency, and percent
     const { name } = field;
+    if (editType.toUpperCase() === 'RADIO') {
+      editType = this.doesFieldQualifyAsBinary(field) ? 'BOOLEAN' : 'SELECT';
+    }
     const fieldDefsByName = this.queryBuilderService.getFieldDefsByName();
     // Check Fields by priority for match Field Definition
     const key = [name, editType?.toUpperCase(), 'DEFAULT'].find((it) => fieldDefsByName.has(it));
     return fieldDefsByName.get(key);
+  }
+
+  private doesFieldQualifyAsBinary(field): boolean {
+    if (field.dataType === 'Boolean') {
+      return true;
+    }
+    // If no options are presented, use True/False options.
+    const optionCount = field.options?.length
+    if (!Helpers.isNumber(optionCount) || optionCount === 0) {
+      return true;
+    }
+    // If the field uses 2 options, we can show 2 radio values for that. 1 is an invalid state, but better displayed with a Select picker.
+    return field.options.length === 2;
   }
 
   private createFieldTemplates() {

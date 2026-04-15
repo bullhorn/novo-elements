@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'date-time-input-example',
     templateUrl: 'date-time-input-example.html',
     styleUrls: ['date-time-input-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class DateTimeInputExample {
   dateTimeInput: Date = new Date('08/01/1983 12:57 PM');

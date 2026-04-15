@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
     selector: 'button-inverse-example',
     templateUrl: 'button-inverse-example.html',
     styleUrls: ['button-inverse-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class ButtonInverseExample {}

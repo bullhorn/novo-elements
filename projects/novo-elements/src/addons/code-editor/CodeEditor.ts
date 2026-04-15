@@ -1,6 +1,7 @@
 // NG2
-import { AfterViewInit, Component, ElementRef, EventEmitter, HostBinding, HostListener, Input, OnDestroy, OnInit, Output, ViewChild, forwardRef } from '@angular/core';
+import { AfterViewInit, Component, DestroyRef, ElementRef, EventEmitter, HostBinding, HostListener, Input, OnDestroy, OnInit, Output, ViewChild, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 // Vendor
 import { defaultKeymap } from '@codemirror/commands';
 import { javascript } from '@codemirror/lang-javascript';
@@ -27,7 +28,7 @@ const FormControlCodeWriter = Annotation.define();
     template: '',
     styleUrls: ['./CodeEditor.scss'],
     providers: [CODE_EDITOR_VALUE_ACCESSOR],
-    standalone: false
+    standalone: false,
 })
 export class NovoCodeEditor implements ControlValueAccessor, OnInit, OnDestroy, AfterViewInit {
   @Input()
@@ -57,13 +58,16 @@ export class NovoCodeEditor implements ControlValueAccessor, OnInit, OnDestroy, 
   @HostBinding('class.editor-disabled')
   private disabled = false;
 
-  constructor(private elementRef: ElementRef) {}
+  constructor(private elementRef: ElementRef, private destroyRef: DestroyRef) {}
 
   ngOnInit(): void {
   }
 
   ngOnDestroy(): void {
-
+    if (this.editorView) {
+      this.editorView.destroy();
+      this.editorView = null;
+    }
   }
 
   ngAfterViewInit(): void {
@@ -73,7 +77,7 @@ export class NovoCodeEditor implements ControlValueAccessor, OnInit, OnDestroy, 
   createEditorView(): void {
     const extensions = [
       basicSetup,
-      keymap.of(defaultKeymap)
+      keymap.of(defaultKeymap),
     ];
     if (this.mode === 'javascript') {
       extensions.push(javascript());
@@ -93,7 +97,7 @@ export class NovoCodeEditor implements ControlValueAccessor, OnInit, OnDestroy, 
         if (transaction.docChanged) {
           this.changed.emit(view.state.doc.toString());
         }
-      }
+      },
     });
   }
 
@@ -124,11 +128,11 @@ export class NovoCodeEditor implements ControlValueAccessor, OnInit, OnDestroy, 
   }
 
   registerOnChange(fn: any) {
-    this.changed.subscribe(fn);
+    this.changed.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(fn);
   }
 
   registerOnTouched(fn: any) {
-    this.blur.subscribe(fn);
+    this.blur.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(fn);
   }
 
   setDisabledState(isDisabled: boolean): void {

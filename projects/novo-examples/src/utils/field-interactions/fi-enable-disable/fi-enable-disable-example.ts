@@ -9,7 +9,7 @@ import { CheckboxControl, FieldInteractionApi, FormUtils, TextBoxControl } from 
     selector: 'fi-enable-disable-example',
     templateUrl: 'fi-enable-disable-example.html',
     styleUrls: ['fi-enable-disable-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class FiEnableDisableExample {
   public form: any;

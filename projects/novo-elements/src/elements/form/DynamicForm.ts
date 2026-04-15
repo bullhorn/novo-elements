@@ -25,12 +25,13 @@ import { NovoFormGroup } from './NovoFormGroup';
       <novo-icon>{{ icon?.replace('bhi-', '') }}</novo-icon
       >{{ title }}
     </novo-title>
+    <ng-content />
   `,
     styleUrls: ['./fieldset-header.scss'],
     host: {
         class: 'novo-fieldset-header',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoFieldsetHeaderElement {
   @Input()
@@ -59,7 +60,7 @@ export class NovoFieldsetHeaderElement {
       </ng-container>
     </div>
   `,
-    standalone: false
+    standalone: false,
 })
 export class NovoFieldsetElement {
   @Input()
@@ -112,7 +113,7 @@ export class NovoFieldsetElement {
     styleUrls: ['./Form.scss'],
     encapsulation: ViewEncapsulation.None,
     providers: [NovoTemplateService],
-    standalone: false
+    standalone: false,
 })
 export class NovoDynamicFormElement implements OnChanges, OnInit, AfterContentInit {
   @Input()

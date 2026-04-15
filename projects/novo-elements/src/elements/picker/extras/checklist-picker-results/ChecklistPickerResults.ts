@@ -43,7 +43,7 @@ import { BasePickerResults } from '../base-picker-results/BasePickerResults';
     <p class="picker-error" *ngIf="hasError">{{ labels.pickerError }}</p>
     <p class="picker-null-results" *ngIf="!isLoading && !matches.length && !hasError && term !== ''">{{ labels.pickerEmpty }}</p>
   `,
-    standalone: false
+    standalone: false,
 })
 export class ChecklistPickerResults extends BasePickerResults {
   filteredMatches: any;

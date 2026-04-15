@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'field-components-example',
     templateUrl: 'field-components-example.html',
     styleUrls: ['field-components-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class FieldComponentsExample {
   direction = 'horizontal';

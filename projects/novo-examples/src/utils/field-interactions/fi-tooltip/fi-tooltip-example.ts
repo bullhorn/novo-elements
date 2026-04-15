@@ -9,7 +9,7 @@ import { FieldInteractionApi, FormUtils, TextBoxControl, TilesControl } from 'no
     selector: 'fi-tooltip-example',
     templateUrl: 'fi-tooltip-example.html',
     styleUrls: ['fi-tooltip-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class FiTooltipExample {
   public form: any = {};

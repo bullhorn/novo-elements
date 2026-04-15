@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'custom-values-example',
     templateUrl: 'custom-values-example.html',
     styleUrls: ['custom-values-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class CustomValuesExample {
   staticDemo = {

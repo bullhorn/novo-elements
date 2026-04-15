@@ -37,7 +37,7 @@ import { Deferred, DeferredPromise } from 'novo-elements/utils';
     </div>
   `,
     styleUrls: ['./Toast.scss'],
-    standalone: false
+    standalone: false,
 })
 export class NovoToastElement implements OnInit, OnChanges {
   @Input()

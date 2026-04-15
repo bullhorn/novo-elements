@@ -324,7 +324,7 @@ describe('Elements: NovoDataTableCellHeader', () => {
       const mouseMoveEvent: MouseEvent = window.document.createEvent('MouseEvents');
       mouseMoveEvent.initMouseEvent('mousemove', true, true, window, 1, 50, 50, 550, 50, false, false, false, false, 0, null);
       window.document.dispatchEvent(mouseMoveEvent);
-      
+
       expect(component.setWidth).toHaveBeenCalledWith(170);
       expect(component._column.width).toEqual(170);
       window.document.dispatchEvent(mouseUpEvent);

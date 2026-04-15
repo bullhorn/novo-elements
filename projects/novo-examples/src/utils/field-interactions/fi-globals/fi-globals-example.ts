@@ -9,7 +9,7 @@ import { FieldInteractionApi, FormUtils, TextBoxControl } from 'novo-elements';
     selector: 'fi-globals-example',
     templateUrl: 'fi-globals-example.html',
     styleUrls: ['fi-globals-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class FiGlobalsExample {
   public form: any = {};

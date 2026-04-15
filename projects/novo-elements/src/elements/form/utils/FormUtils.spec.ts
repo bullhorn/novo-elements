@@ -860,9 +860,9 @@ describe('Utils: FormUtils', () => {
         },
       };
       const embeddedfields = formUtils.getEmbeddedFields(field);
-      expect(embeddedfields.every((f) => f.name.startsWith(`embeddedField.`))).toBeTruthy();
-      expect(embeddedfields[0].name).toBe(`embeddedField.field1`);
-      expect(embeddedfields[1].name).toBe(`embeddedField.field2`);
+      expect(embeddedfields.every((f) => f.name.startsWith('embeddedField.'))).toBeTruthy();
+      expect(embeddedfields[0].name).toBe('embeddedField.field1');
+      expect(embeddedfields[1].name).toBe('embeddedField.field2');
     });
     it('should not add field name to associated entity fields name if already there', () => {
       const field = {
@@ -879,9 +879,9 @@ describe('Utils: FormUtils', () => {
         },
       };
       const embeddedfields = formUtils.getEmbeddedFields(field);
-      expect(embeddedfields.every((f) => f.name.startsWith(`embeddedField.`))).toBeTruthy();
-      expect(embeddedfields[0].name).toBe(`embeddedField.field1`);
-      expect(embeddedfields[1].name).toBe(`embeddedField.field2`);
+      expect(embeddedfields.every((f) => f.name.startsWith('embeddedField.'))).toBeTruthy();
+      expect(embeddedfields[0].name).toBe('embeddedField.field1');
+      expect(embeddedfields[1].name).toBe('embeddedField.field2');
     });
   });
 });

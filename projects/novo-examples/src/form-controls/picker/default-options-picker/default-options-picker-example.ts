@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'default-options-picker-example',
     templateUrl: 'default-options-picker-example.html',
     styleUrls: ['default-options-picker-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class DefaultOptionsPickerExample {
   public placeholder: string = 'Select...';

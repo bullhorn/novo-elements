@@ -8,6 +8,6 @@ import { Component } from '@angular/core';
     selector: 'caption-example',
     templateUrl: './caption-example.html',
     styleUrls: ['./caption-example.scss'],
-    standalone: false
+    standalone: false,
 })
 export class CaptionExample {}

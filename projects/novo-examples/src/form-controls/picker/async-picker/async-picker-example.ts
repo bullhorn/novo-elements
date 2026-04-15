@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'async-picker-example',
     templateUrl: 'async-picker-example.html',
     styleUrls: ['async-picker-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class AsyncPickerExample {
   public placeholder: string = 'Select...';

@@ -17,6 +17,7 @@ export interface IDataTablePreferences {
   hasUnsavedChanges?: boolean;
   unsavedChanges?: any;
   useBooleanKeywords?: boolean;
+  cardView?: boolean;
 }
 
 export interface AutobuildEntityData {
@@ -31,6 +32,7 @@ export interface DataTableWhere {
   keywords?: SearchKeywords;
   booleanKeywords?: string;
   scoreByEntityId?: number;
+  matchMetaData?: any;
   form: any;
 }
 
@@ -194,6 +196,7 @@ export interface IDataTableService<T> {
   ): Observable<{ results: T[]; total: number }>;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface IDataTableCell<T> {}
 
 /**

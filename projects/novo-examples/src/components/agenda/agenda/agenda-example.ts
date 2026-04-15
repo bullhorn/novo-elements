@@ -27,7 +27,7 @@ const colors: any = {
     selector: 'agenda-example',
     templateUrl: 'agenda-example.html',
     styleUrls: ['agenda-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class AgendaExample {
   public views: Array<any> = [

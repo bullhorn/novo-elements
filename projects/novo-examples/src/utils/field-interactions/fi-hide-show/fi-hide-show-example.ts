@@ -9,7 +9,7 @@ import { CheckboxControl, FieldInteractionApi, FormUtils, TextBoxControl } from 
     selector: 'fi-hide-show-example',
     templateUrl: 'fi-hide-show-example.html',
     styleUrls: ['fi-hide-show-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class FiHideShowExample {
   public form: any = {};

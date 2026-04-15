@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface Global {}
 
 export abstract class GlobalRef {
@@ -18,7 +19,7 @@ export class BrowserGlobalRef extends GlobalRef {
 }
 export class NodeGlobalRef extends GlobalRef {
   get nativeGlobal(): Global {
-    throw new Error(`global doesn't compile for some reason`);
+    throw new Error('global doesn\'t compile for some reason');
   }
   get nativeWindow(): Window {
     throw new Error('Node does not have a window object');

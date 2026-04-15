@@ -24,7 +24,7 @@ import { HighlightJS } from './highlight.service';
       </novo-nav-content>
     </novo-nav-outlet>
   `,
-    standalone: false
+    standalone: false,
 })
 export class CodeSnippetComponent implements OnInit {
   @Input()

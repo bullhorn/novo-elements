@@ -61,7 +61,7 @@ export class NovoChipListChange {
  */
 @Component({
     selector: 'novo-chip-list',
-    template: `<div class="novo-chip-list-wrapper"><ng-content></ng-content></div>`,
+    template: '<div class="novo-chip-list-wrapper"><ng-content></ng-content></div>',
     styleUrls: ['./ChipList.scss'],
     exportAs: 'novoChipList',
     host: {
@@ -93,7 +93,7 @@ export class NovoChipListChange {
     // styleUrls: ['./ChipList.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    standalone: false,
 })
 export class NovoChipList
   extends _NovoChipListMixinBase
@@ -605,7 +605,7 @@ export class NovoChipList
 
   private _isInputEmpty(element: HTMLElement): boolean {
     if (element && element.nodeName.toLowerCase() === 'input') {
-      let input = element as HTMLInputElement;
+      const input = element as HTMLInputElement;
       return !input.value;
     }
 
@@ -803,7 +803,7 @@ export class NovoChipList
   /** Listens to user-generated selection events on each chip. */
   private _listenToChipsFocus(): void {
     this._chipFocusSubscription = this.chipFocusChanges.subscribe((event) => {
-      let chipIndex: number = this.chips.toArray().indexOf(event.chip);
+      const chipIndex: number = this.chips.toArray().indexOf(event.chip);
 
       if (this._isValidIndex(chipIndex)) {
         this._keyManager.updateActiveItem(chipIndex);

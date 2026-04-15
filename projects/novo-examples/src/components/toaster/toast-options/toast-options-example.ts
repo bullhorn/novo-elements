@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'toast-options-example',
     templateUrl: 'toast-options-example.html',
     styleUrls: ['toast-options-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class ToastOptionsExample {
   activeDate = new Date();

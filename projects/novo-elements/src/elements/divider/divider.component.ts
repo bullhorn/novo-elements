@@ -15,7 +15,7 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
     styleUrls: ['./divider.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    standalone: false,
 })
 export class NovoDividerComponent {
   /** Whether the divider is vertically aligned. */

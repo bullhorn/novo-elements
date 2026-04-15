@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
     selector: 'raised-icons-example',
     templateUrl: 'raised-icons-example.html',
     styleUrls: ['raised-icons-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class RaisedIconsExample {}

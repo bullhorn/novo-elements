@@ -34,7 +34,3 @@ order: 3
 ## NovoAutocompleteElement `novo-autocomplete`
 
 The `novo-autocomplete` component automatically links its list of values to the the novoInput of the `novo-field`. Subscribe to value changes inorder to update your options list.
-
-### Properties
-
-<props-table component="NovoAutocompleteElement"></props-table>

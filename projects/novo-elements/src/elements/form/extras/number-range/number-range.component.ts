@@ -26,10 +26,10 @@ import { filter, takeUntil } from 'rxjs/operators';
         {
             provide: NG_VALUE_ACCESSOR,
             useExisting: forwardRef(() => NumberRangeComponent),
-            multi: true
-        }
+            multi: true,
+        },
     ],
-    standalone: false
+    standalone: false,
 })
 export class NumberRangeComponent implements OnInit, OnDestroy, ControlValueAccessor {
   rangeForm: FormGroup;
@@ -45,7 +45,7 @@ export class NumberRangeComponent implements OnInit, OnDestroy, ControlValueAcce
     // Notify parent form when the value changes (and it's valid)
     this.rangeForm.valueChanges.pipe(
       takeUntil(this._destroyed),
-      filter(() => this.rangeForm.valid)
+      filter(() => this.rangeForm.valid),
     ).subscribe(value => this._onChange(value));
   }
 

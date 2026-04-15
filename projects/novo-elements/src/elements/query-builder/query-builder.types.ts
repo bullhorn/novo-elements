@@ -34,6 +34,7 @@ export enum Operator {
   isEmpty = 'isEmpty',
   isNull = 'isNull',
   lessThan = 'lessThan',
+  like = 'like',
   outsideRadius = 'outsideRadius',
   radius = 'radius',
   within = 'within',
@@ -48,7 +49,8 @@ export interface Condition {
   scope?: string;
   value: any;
   supportingValue?: any;
-  entity?: string,
+  entity?: string;
+  warnOnDelete?: () => Promise<boolean>;
 }
 
 export interface Criteria {

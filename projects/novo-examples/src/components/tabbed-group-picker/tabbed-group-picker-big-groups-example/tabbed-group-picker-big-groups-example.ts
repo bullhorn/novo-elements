@@ -9,7 +9,7 @@ import { ChildTab, ParentTab, TabbedGroupPickerTab } from 'novo-elements';
     selector: 'tabbed-group-picker-big-groups-example',
     templateUrl: 'tabbed-group-picker-big-groups-example.html',
     styleUrls: ['../tabbed-group-picker-example.scss'],
-    standalone: false
+    standalone: false,
 })
 export class TabbedGroupPickerBigGroupsExample {
   isPrime(number): boolean {

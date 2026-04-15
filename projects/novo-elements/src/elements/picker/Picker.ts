@@ -3,6 +3,7 @@ import {
   ChangeDetectorRef,
   Component,
   ComponentRef,
+  DestroyRef,
   ElementRef,
   EventEmitter,
   forwardRef,
@@ -20,6 +21,7 @@ import { ComponentUtils } from 'novo-elements/services';
 import { Helpers, Key, notify } from 'novo-elements/utils';
 import { NovoOverlayTemplateComponent } from 'novo-elements/elements/common';
 import { PickerResults } from './extras/picker-results/PickerResults';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 // Value accessor for the component (supports ngModel)
 const PICKER_VALUE_ACCESSOR = {
@@ -73,7 +75,7 @@ const DEFAULT_DEBOUNCE_TIME = 250;
   `,
     styleUrls: ['./Picker.scss'],
     encapsulation: ViewEncapsulation.None,
-    standalone: false
+    standalone: false,
 })
 export class NovoPickerElement implements OnInit {
   // Container for the results
@@ -159,29 +161,34 @@ export class NovoPickerElement implements OnInit {
   onModelChange: Function = () => {};
   onModelTouched: Function = () => {};
 
-  constructor(public element: ElementRef, private componentUtils: ComponentUtils, private ref: ChangeDetectorRef) {}
+
+  constructor(
+    public element: ElementRef,
+    private componentUtils: ComponentUtils,
+    private ref: ChangeDetectorRef,
+    private destroyRef: DestroyRef) {}
 
   ngOnInit() {
     if (this.overrideElement) {
       this.element = this.overrideElement;
     }
     if (this.appendToBody) {
-      notify(`'appendToBody' has been deprecated. Please remove this attribute.`);
+      notify('\'appendToBody\' has been deprecated. Please remove this attribute.');
     }
-    let debounceTimeInMilliSeconds = Number.isNaN(Number(this.config?.debounceTimeInMilliSeconds)) ? DEFAULT_DEBOUNCE_TIME : Number(this.config?.debounceTimeInMilliSeconds);
+    const debounceTimeInMilliSeconds = Number.isNaN(Number(this.config?.debounceTimeInMilliSeconds)) ? DEFAULT_DEBOUNCE_TIME : Number(this.config?.debounceTimeInMilliSeconds);
     // Custom results template
     this.resultsComponent = this.config.resultsTemplate || PickerResults;
 
-    const pasteObserver = fromEvent(this.input.nativeElement, 'paste').pipe(debounceTime(debounceTimeInMilliSeconds), distinctUntilChanged());
-    pasteObserver.subscribe(
-      (event: ClipboardEvent) => this.onDebouncedKeyup(event),
-      (err) => this.hideResults(err),
-    );
-    const keyboardObserver = fromEvent(this.input.nativeElement, 'keyup').pipe(debounceTime(debounceTimeInMilliSeconds), distinctUntilChanged());
-    keyboardObserver.subscribe(
-      (event: KeyboardEvent) => this.onDebouncedKeyup(event),
-      (err) => this.hideResults(err),
-    );
+    const pasteObserver = fromEvent(this.input.nativeElement, 'paste').pipe(takeUntilDestroyed(this.destroyRef), debounceTime(debounceTimeInMilliSeconds), distinctUntilChanged());
+    pasteObserver.subscribe({
+      next: (event: ClipboardEvent) => this.onDebouncedKeyup(event),
+      error: (err) => this.hideResults(err),
+    });
+    const keyboardObserver = fromEvent(this.input.nativeElement, 'keyup').pipe(takeUntilDestroyed(this.destroyRef), debounceTime(debounceTimeInMilliSeconds), distinctUntilChanged());
+    keyboardObserver.subscribe({
+      next: (event: KeyboardEvent) => this.onDebouncedKeyup(event),
+      error: (err) => this.hideResults(err),
+    });
   }
 
   private onDebouncedKeyup(event: KeyboardEvent | ClipboardEvent) {

@@ -11,7 +11,7 @@ import { State, STATES } from '../states.data';
     selector: 'basic-select-with-search-example',
     templateUrl: 'basic-select-with-search-example.html',
     styleUrls: ['basic-select-with-search-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class BasicSelectWithSearchExample implements OnInit, AfterViewInit, OnDestroy {
   /** list of states */

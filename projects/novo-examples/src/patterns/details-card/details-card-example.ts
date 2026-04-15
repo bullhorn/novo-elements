@@ -11,7 +11,7 @@ const HEADER_ICONS = ['company', 'job', 'candidate', 'person', 'opportunity', 'l
     selector: 'details-card-example',
     templateUrl: 'details-card-example.html',
     styleUrls: ['details-card-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class DetailsCardExample {
   public theme: string = 'company';

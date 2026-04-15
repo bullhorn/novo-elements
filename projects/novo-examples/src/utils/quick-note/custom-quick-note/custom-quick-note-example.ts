@@ -18,7 +18,7 @@ const DATA = {
     selector: 'custom-quick-note-example',
     templateUrl: 'custom-quick-note-example.html',
     styleUrls: ['custom-quick-note-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class CustomQuickNoteExample {
   public note: any;

@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'hide-chips-example',
     templateUrl: 'hide-chips-example.html',
     styleUrls: ['hide-chips-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class HideChipsExample {
   public placeholder: string = 'Select...';
@@ -117,7 +117,7 @@ export class HideChipsExample {
     this.hideDemo = {
       format: '$firstName $lastName',
       options: collaborators,
-      hiddenChipsLimit: 3
+      hiddenChipsLimit: 3,
     };
 
     this.model = [{

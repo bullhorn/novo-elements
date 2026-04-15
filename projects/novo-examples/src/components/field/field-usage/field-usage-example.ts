@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'field-usage-example',
     templateUrl: 'field-usage-example.html',
     styleUrls: ['field-usage-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class FieldUsageExample {
   time = '14:00';

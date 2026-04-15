@@ -25,7 +25,7 @@ import { WeekViewEvent } from 'novo-elements/utils';
     >
     </ng-template>
   `,
-    standalone: false
+    standalone: false,
 })
 export class NovoAgendaWeekEventElement {
   @Input()

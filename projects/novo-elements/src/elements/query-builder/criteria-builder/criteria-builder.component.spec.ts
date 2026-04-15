@@ -9,102 +9,102 @@ const testAddressValue: AddressData[] = [{
   address_components: [{
     long_name: '8485',
     short_name: '8485',
-    types: ['street_number']
+    types: ['street_number'],
   }, {
     long_name: 'Mexico Road',
     short_name: 'Mexico Rd',
-    types: ['route']
+    types: ['route'],
   }, {
     long_name: 'O\'Fallon',
     short_name: 'O\'Fallon',
-    types: ['locality', 'political']
+    types: ['locality', 'political'],
   }, {
     long_name: 'Dardenne Township',
     short_name: 'Dardenne Township',
-    types: ['administrative_area_level_3', 'political']
+    types: ['administrative_area_level_3', 'political'],
   }, {
     long_name: 'St. Charles County',
     short_name: 'St Charles County',
-    types: ['administrative_area_level_2', 'political']
+    types: ['administrative_area_level_2', 'political'],
   }, {
     long_name: 'Missouri',
     short_name: 'MO',
-    types: ['administrative_area_level_1', 'political']
+    types: ['administrative_area_level_1', 'political'],
   }, {
     long_name: 'United States',
     short_name: 'US',
-    types: ['country', 'political']
+    types: ['country', 'political'],
   }, {
     long_name: '63366',
     short_name: '63366',
-    types: ['postal_code']
+    types: ['postal_code'],
   }],
   formatted_address: '8485 Mexico Rd, O\'Fallon, MO 63366, USA',
   geometry: {
     location: {
       lat: 38.791613,
-      lng: -90.6925924
+      lng: -90.6925924,
     },
     viewport: {
       south: 38.79027026970849,
       west: -90.6939395302915,
       north: 38.79296823029149,
-      east: -90.6912415697085
-    }
+      east: -90.6912415697085,
+    },
   },
   place_id: 'ChIJ2cLuK-nQ3ocRh1uhB7-g30A',
   radius: {
     value: 30,
     units: 'miles',
-  }
+  },
 }, {
   address_components: [{
     long_name: 'Texas',
     short_name: 'TX',
-    types: ['administrative_area_level_1', 'political']
+    types: ['administrative_area_level_1', 'political'],
   }, {
     long_name: 'United States',
     short_name: 'US',
-    types: ['country', 'political']
+    types: ['country', 'political'],
   }],
   formatted_address: 'Texas, USA',
   geometry: {
     location: {
       lat: 31.9685988,
-      lng: -99.9018131
+      lng: -99.9018131,
     },
     viewport: {
       south: 25.83711645856708,
       west: -106.6456460547471,
       north: 36.50112613904738,
-      east: -93.50803894473373
-    }
+      east: -93.50803894473373,
+    },
   },
-  place_id: 'ChIJSTKCCzZwQIYRPN4IGI8c6xY'
+  place_id: 'ChIJSTKCCzZwQIYRPN4IGI8c6xY',
 }, {
   address_components: [{
     long_name: 'United States',
     short_name: 'US',
-    types: ['country', 'political']
+    types: ['country', 'political'],
   }],
   formatted_address: 'United States',
   geometry: {
     location: {
       lat: 37.09024,
-      lng: -95.712891
+      lng: -95.712891,
     },
     viewport: {
       south: 15.7760139,
       west: -173.2992296,
       north: 72.7087158,
-      east: -66.3193754
-    }
+      east: -66.3193754,
+    },
   },
   place_id: 'ChIJCzYy5IS16lQRQrfeQ5K5Oxw',
   radius: {
     value: 30,
     units: 'miles',
-  }
+  },
 }];
 
 const condition1: Condition = {
@@ -163,8 +163,8 @@ describe('CriteriaBuilderComponent', () => {
       ],
       imports: [
         NovoQueryBuilderModule,
-        NovoFlexModule
-      ]
+        NovoFlexModule,
+      ],
     }).compileComponents();
     fixture = TestBed.createComponent(CriteriaBuilderComponent);
     component = fixture.debugElement.componentInstance;
@@ -215,6 +215,45 @@ describe('CriteriaBuilderComponent', () => {
       });
       expect(result.toString()).toEqual(expected.toString());
     });
+
+    it('should initialize EMPTY_CONDITION with warnOnDelete as null and check all fields', () => {
+      const result = component.newCondition();
+      expect(result.get('conditionType')?.value).toBe('$and');
+      expect(result.get('field')?.value).toBeNull();
+      expect(result.get('operator')?.value).toBeNull();
+      expect(result.get('scope')?.value).toBeNull();
+      expect(result.get('value')?.value).toBeNull();
+      expect(result.get('supportingValue')?.value).toBeNull();
+      expect(result.get('entity')?.value).toBeNull();
+      expect(result.get('warnOnDelete')?.value).toBeNull();
+    });
+
+    it('should set all values when passed a complete condition', () => {
+      const mockWarnFunction = jest.fn().mockResolvedValue(true);
+      const testCondition: Condition = {
+        field: 'Candidate.email',
+        operator: 'contains',
+        scope: 'Candidate',
+        value: 'test@example.com',
+        supportingValue: 'supportValue',
+        entity: 'Candidate',
+        warnOnDelete: mockWarnFunction,
+      };
+      component.config = {
+        fields: [
+          { value: 'Candidate', entity: 'Candidate', label: 'Candidate' },
+        ],
+      };
+      const result = component.newCondition(testCondition);
+      expect(result.get('conditionType')?.value).toBe('$and');
+      expect(result.get('field')?.value).toBe('Candidate.email');
+      expect(result.get('operator')?.value).toBe('contains');
+      expect(result.get('scope')?.value).toBe('Candidate');
+      expect(result.get('value')?.value).toBe('test@example.com');
+      expect(result.get('supportingValue')?.value).toBe('supportValue');
+      expect(result.get('entity')?.value).toBe('Candidate');
+      expect(result.get('warnOnDelete')?.value).toBe(mockWarnFunction);
+    });
   });
 
   describe('Function: onFieldSelect(field)', () => {
@@ -255,8 +294,8 @@ describe('CriteriaBuilderComponent', () => {
         fields: [
           { value: 'user', entity: 'User' },
           { value: 'company', entity: 'Company' },
-          { value: 'contact', entity: 'Contact' }
-        ]
+          { value: 'contact', entity: 'Contact' },
+        ],
       };
       const scope = 'company';
 
@@ -268,8 +307,8 @@ describe('CriteriaBuilderComponent', () => {
       const fieldConfigs = {
         fields: [
           { value: 'user', entity: 'User' },
-          { value: 'company', entity: 'Company' }
-        ]
+          { value: 'company', entity: 'Company' },
+        ],
       };
       const scope = 'nonexistent';
 
@@ -295,7 +334,7 @@ describe('CriteriaBuilderComponent', () => {
     });
     it('should return null when fieldConfigs.fields is not an array', () => {
       const fieldConfigs = {
-        fields: 'not an array'
+        fields: 'not an array',
       };
       const scope = 'user';
 
@@ -305,7 +344,7 @@ describe('CriteriaBuilderComponent', () => {
     });
     it('should return null when fieldConfigs.fields is null', () => {
       const fieldConfigs = {
-        fields: null
+        fields: null,
       };
       const scope = 'user';
 
@@ -315,7 +354,7 @@ describe('CriteriaBuilderComponent', () => {
     });
     it('should return undefined when fieldConfigs.fields is an empty array', () => {
       const fieldConfigs = {
-        fields: []
+        fields: [],
       };
       const scope = 'user';
 
@@ -328,8 +367,8 @@ describe('CriteriaBuilderComponent', () => {
         fields: [
           { value: 'user', entity: 'User' },
           { value: 'user', entity: 'UserProfile' },
-          { value: 'company', entity: 'Company' }
-        ]
+          { value: 'company', entity: 'Company' },
+        ],
       };
       const scope = 'user';
 
@@ -341,8 +380,8 @@ describe('CriteriaBuilderComponent', () => {
       const fieldConfigs = {
         fields: [
           { value: 'user' },
-          { value: 'company', entity: 'Company' }
-        ]
+          { value: 'company', entity: 'Company' },
+        ],
       };
       const scope = 'user';
 
@@ -354,8 +393,8 @@ describe('CriteriaBuilderComponent', () => {
       const fieldConfigs = {
         fields: [
           { value: 'user', entity: 'User' },
-          { value: null, entity: 'NullScope' }
-        ]
+          { value: null, entity: 'NullScope' },
+        ],
       };
       const scope = null;
 
@@ -367,8 +406,8 @@ describe('CriteriaBuilderComponent', () => {
       const fieldConfigs = {
         fields: [
           { value: 'user', entity: 'User' },
-          { value: undefined, entity: 'UndefinedScope' }
-        ]
+          { value: undefined, entity: 'UndefinedScope' },
+        ],
       };
       const scope = undefined;
 

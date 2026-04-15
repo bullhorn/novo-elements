@@ -10,7 +10,7 @@ import { NovoModalRef, NovoModalService } from 'novo-elements';
       <button theme="primary" icon="check" (click)="close()">Sweet.</button>
     </novo-notification>
   `,
-    standalone: false
+    standalone: false,
 })
 export class ModalCustomDemo {
   constructor(private modalRef: NovoModalRef) {}
@@ -26,7 +26,7 @@ export class ModalCustomDemo {
     selector: 'custom-modal-example',
     templateUrl: 'custom-modal-example.html',
     styleUrls: ['custom-modal-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class CustomModalExample {
   constructor(private modalService: NovoModalService) {}

@@ -36,7 +36,7 @@ const CHIPS_VALUE_ACCESSOR = {
         '(focus)': 'focus()',
         '(blur)': '_blur()',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoRowChipElement extends NovoChipElement {
   onSelect(e) {
@@ -105,7 +105,7 @@ export class NovoRowChipElement extends NovoChipElement {
     </div>
   `,
     styleUrls: ['./RowChips.scss'],
-    standalone: false
+    standalone: false,
 })
 export class NovoRowChipsElement extends NovoChipsElement {
   @Input()

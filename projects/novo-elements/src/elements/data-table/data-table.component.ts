@@ -39,7 +39,7 @@ import { StaticDataTableService } from './services/static-data-table.service';
 import { DataTableState } from './state/data-table-state.service';
 import { NovoDragFinishEvent } from 'novo-elements/elements/drag-drop';
 
-export type DataTablePreferenceUpdateSrc = 'columndrag' | 'input' | 'statesortchange' | 'pagination';
+export type DataTablePreferenceUpdateSrc = 'columndrag' | 'input' | 'statesortchange' | 'pagination' | 'other';
 export interface IDataTablePreferencesChangeEvent extends IDataTablePreferences {
   eventSrc: DataTablePreferenceUpdateSrc
 }
@@ -58,7 +58,7 @@ export interface IDataTablePreferencesChangeEvent extends IDataTablePreferences 
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [DataTableState, { provide: NOVO_DATA_TABLE_REF, useExisting: NovoDataTable }],
-    standalone: false
+    standalone: false,
 })
 export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   @HostBinding('class.global-search-hidden') globalSearchHiddenClassToggle: boolean = false;
@@ -253,7 +253,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
             where: event.where,
             savedSearchName: event.savedSearchName,
             appliedSearchType: event.appliedSearchType,
-            eventSrc: 'statesortchange'
+            eventSrc: 'statesortchange',
           });
           this.performInteractions('change');
         } else {

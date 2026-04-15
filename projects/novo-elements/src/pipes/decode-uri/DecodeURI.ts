@@ -5,7 +5,7 @@ import { Helpers } from 'novo-elements/utils';
 
 @Pipe({
     name: 'decodeURI',
-    standalone: false
+    standalone: false,
 })
 @Injectable()
 export class DecodeURIPipe implements PipeTransform {

@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'button-radio-example',
     templateUrl: 'button-radio-example.html',
     styleUrls: ['button-radio-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class ButtonRadioExample {
   onChange(change: Event): void {

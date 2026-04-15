@@ -9,7 +9,7 @@ import { FieldInteractionApi, FormUtils, TextBoxControl, TilesControl } from 'no
     selector: 'fi-popover-example',
     templateUrl: 'fi-popover-example.html',
     styleUrls: ['fi-popover-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class FiPopoverExample {
   public form: any = {};

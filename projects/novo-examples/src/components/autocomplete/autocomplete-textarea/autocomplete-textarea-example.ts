@@ -11,7 +11,7 @@ import { map, startWith } from 'rxjs/operators';
     selector: 'autocomplete-textarea-example',
     templateUrl: 'autocomplete-textarea-example.html',
     styleUrls: ['autocomplete-textarea-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class AutocompleteTextareaExample implements OnInit {
   myControl = new UntypedFormControl();

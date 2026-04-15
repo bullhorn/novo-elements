@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'tooltip-overflow-example',
     templateUrl: 'tooltip-overflow-example.html',
     styleUrls: ['tooltip-overflow-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class TooltipOverflowExample {
   public tooltipActive: boolean = true;

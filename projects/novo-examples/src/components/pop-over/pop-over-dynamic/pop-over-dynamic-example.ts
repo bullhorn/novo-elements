@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
     selector: 'pop-over-dynamic-example',
     templateUrl: 'pop-over-dynamic-example.html',
     styleUrls: ['pop-over-dynamic-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class PopOverDynamicExample {}

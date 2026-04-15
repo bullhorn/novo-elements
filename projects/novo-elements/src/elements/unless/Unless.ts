@@ -1,18 +1,28 @@
 // NG2
-import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
+import { DestroyRef, Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 // App
 import { Security } from 'novo-elements/services';
 
 @Directive({
     selector: '[bhUnless]',
-    standalone: false
+    standalone: false,
 })
 export class Unless {
   permissions: string = '';
   isDisplayed: boolean = false;
 
-  constructor(public templateRef: TemplateRef<any>, public viewContainer: ViewContainerRef, public security: Security) {
-    this.security.subscribe(this.check.bind(this));
+  constructor(
+    public templateRef: TemplateRef<any>,
+    public viewContainer: ViewContainerRef,
+    public security: Security,
+    private destroyRef: DestroyRef) {
+    const sub = this.security.subscribe(this.check.bind(this));
+    this.destroyRef.onDestroy(() => {
+      // If Security uses an old definition, subscribe will return void/undefined.
+      try {
+        sub?.unsubscribe();
+      } catch {}
+    });
   }
 
   @Input()

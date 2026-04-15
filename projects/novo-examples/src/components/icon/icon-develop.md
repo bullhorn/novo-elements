@@ -26,7 +26,3 @@ order: 3
 ## NovoIconComponent `novo-icon`
 
 The `novo-icon` component is used as a convience wrapper for all the bullhorn icons. This is to enable consistent styling when using the icons in various usecase, ie. inline, headers, buttons, etc...
-
-### Properties
-
-<props-table component="NovoIconComponent"></props-table>

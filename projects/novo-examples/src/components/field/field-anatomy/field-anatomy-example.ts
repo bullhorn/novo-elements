@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'field-anatomy-example',
     templateUrl: 'field-anatomy-example.html',
     styleUrls: ['field-anatomy-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class FieldAnatomyExample {
   hide = true;

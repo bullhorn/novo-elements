@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'basic-timezone-example',
     templateUrl: 'basic-timezone-example.html',
     styleUrls: ['basic-timezone-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class BasicTimezoneExample {
   items: any[] = [

@@ -76,7 +76,7 @@ const CHIPS_VALUE_ACCESSOR = {
         '[class.with-value]': 'items.length > 0',
         '[class.disabled]': 'disablePickerInput',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoChipsElement implements OnInit, ControlValueAccessor {
   readonly CHIPS_SHOWN_MAX = 999;
@@ -276,8 +276,9 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
 
   updateHiddenChips() {
     this.hiddenChipsCount = Math.max(0, this.items.length - this._hiddenChipsLimit);
-    if (!this.hiddenChipsCount && this.hiddenChipsLimit === this.CHIPS_SHOWN_MAX)
+    if (!this.hiddenChipsCount && this.hiddenChipsLimit === this.CHIPS_SHOWN_MAX) {
       this.hiddenChipsLimit = this._hiddenChipsLimit; // reset hiddenChipsLimit to original #
+    }
   }
 
   toggleHiddenChips() {

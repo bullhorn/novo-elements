@@ -52,7 +52,7 @@ const MULTI_DATE_VALUE_ACCESSOR = {
     </novo-overlay-template>
   `,
     styleUrls: ['./MultiDateInput.scss'],
-    standalone: false
+    standalone: false,
 })
 export class NovoMultiDateInputElement implements OnInit, ControlValueAccessor {
   public formattedStartDate: string = '';

@@ -22,7 +22,7 @@ import { ConfigureColumnsModal, MockData } from '../extras';
     templateUrl: 'data-table-remote-example.html',
     styleUrls: ['data-table-remote-example.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    standalone: false,
 })
 export class DataTableRemoteExample {
   // Table configuration
@@ -406,11 +406,11 @@ class RemoteMockDataService extends RemoteDataTableService<MockData> {
   }
 
   private parseQueryValue(key: string, value: any, isNot: boolean = false) {
-    const clauses: Array<string> = [],
-      IN = isNot ? ' NOT IN ' : ' IN ',
-      EQ = isNot ? '<>' : '=',
-      GT = isNot ? '<' : '>=',
-      LT = isNot ? '>=' : '<';
+    const clauses: Array<string> = [];
+    const IN = isNot ? ' NOT IN ' : ' IN ';
+    const EQ = isNot ? '<>' : '=';
+    const GT = isNot ? '<' : '>=';
+    const LT = isNot ? '>=' : '<';
     if (Array.isArray(value)) {
       clauses.push(`${key}${IN}(${this.writeQueryValues(value)})`);
     } else if (value instanceof Object) {
@@ -469,7 +469,7 @@ class RemoteMockDataService extends RemoteDataTableService<MockData> {
     if (typeof values[0] === 'number' || typeof values[0] === 'boolean') {
       return `${values.join(',')}`;
     } else {
-      return `'${values.join(`','`)}'`;
+      return `'${values.join('\',\'')}'`;
     }
   }
 

@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'basic-expansion-example',
     templateUrl: 'basic-expansion-example.html',
     styleUrls: ['basic-expansion-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class BasicExpansionExample {
   public isDisabled: boolean = false;

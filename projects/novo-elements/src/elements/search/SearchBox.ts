@@ -60,7 +60,7 @@ const SEARCH_VALUE_ACCESSOR = {
     </novo-overlay-template>
   `,
     styleUrls: ['./SearchBox.scss'],
-    standalone: false
+    standalone: false,
 })
 export class NovoSearchBoxElement implements ControlValueAccessor, OnInit {
   @Input()

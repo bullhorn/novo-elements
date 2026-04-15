@@ -9,9 +9,32 @@ import {
   CriteriaBuilderComponent,
   Operator,
 } from 'novo-elements';
+import { NovoModalRef, NovoModalService } from 'novo-elements/elements/modal';
 import { ReplaySubject, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { MockCandidateMeta, MockNoteMeta } from './MockMeta';
+
+@Component({
+    selector: 'delete-filter-modal-demo',
+    template: `
+    <novo-notification type="warning">
+      <h1>Delete this filter?</h1>
+      <h2>Are you sure you wish to continue?</h2>
+      <button theme="standard" (click)="cancel()">Cancel</button>
+      <button theme="primary" color="negative" icon="delete" (click)="confirm()">Delete</button>
+    </novo-notification>
+  `,
+    standalone: false,
+})
+export class DeleteFilterModalDemo {
+  constructor(private modalRef: NovoModalRef) {}
+  confirm() {
+    this.modalRef.close(true);
+  }
+  cancel() {
+    this.modalRef.close(false);
+  }
+}
 
 @Component({
     selector: 'custom-picker-condition-def',
@@ -38,7 +61,7 @@ import { MockCandidateMeta, MockNoteMeta } from './MockMeta';
   `,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.Default,
-    standalone: false
+    standalone: false,
 })
 export class CustomPickerConditionDef extends AbstractConditionFieldDef implements OnInit {
   defaultOperator = Operator.includeAny;
@@ -77,7 +100,7 @@ export class CustomPickerConditionDef extends AbstractConditionFieldDef implemen
     selector: 'just-criteria-example',
     templateUrl: 'just-criteria-example.html',
     styleUrls: ['just-criteria-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class JustCriteriaExample implements OnInit {
   criteriaBuilder = viewChild(CriteriaBuilderComponent);
@@ -91,7 +114,7 @@ export class JustCriteriaExample implements OnInit {
 
   addressConfig: AddressCriteriaConfig = {
     radiusEnabled: true,
-    radiusUnits: 'miles'
+    radiusUnits: 'miles',
   };
   addressRadiusEnabled: boolean = false;
   addressRadiusEnabledOptions: { label: string, value: boolean }[] = [
@@ -102,28 +125,32 @@ export class JustCriteriaExample implements OnInit {
   useNoteMeta: boolean = false;
   useNoteMetaOptions = [
     { label: 'True', value: true },
-    { label: 'False', value: false }
+    { label: 'False', value: false },
   ];
 
   hideFirstOperator: boolean = true;
   hideFirstOperatorOptions = [
     { label: 'True', value: true },
-    { label: 'False', value: false }
+    { label: 'False', value: false },
   ];
 
   canBeEmpty: boolean = false;
   canBeEmptyOptions = [
     { label: 'True', value: true },
-    { label: 'False', value: false }
+    { label: 'False', value: false },
   ];
 
   editTypeFn = (field: any) => {
-    if (field.optionsType === 'Brewery') return 'custom';
+    if (field.optionsType === 'Brewery') {
+      return 'custom';
+    }
     if (field.dataSpecialization === 'DATE') {
       return field.dataSpecialization;
     }
     return (field.inputType || field.dataType || field.type).toLowerCase();
   };
+
+  private modalService = inject(NovoModalService);
 
   constructor(private formBuilder: UntypedFormBuilder, private cdr: ChangeDetectorRef) {}
 
@@ -160,6 +187,14 @@ export class JustCriteriaExample implements OnInit {
     });
   }
 
+  private createWarnOnDeleteFn = (): (() => Promise<boolean>) => {
+    return async () => {
+      const modalRef = this.modalService.open(DeleteFilterModalDemo);
+      const result = await modalRef.onClosed;
+      return result;
+    };
+  };
+
   prepopulateForm(addAdditionalScope = false) {
     const prepopulatedData: any = [
       {
@@ -170,6 +205,7 @@ export class JustCriteriaExample implements OnInit {
             scope: 'Candidate',
             entity: 'Person',
             value: 123,
+            warnOnDelete: this.createWarnOnDeleteFn(),
           }, {
             field: 'availability',
             operator: 'includeAny',
@@ -195,7 +231,7 @@ export class JustCriteriaExample implements OnInit {
             scope: 'Candidate',
             entity: 'Person',
             value: null,
-          }
+          },
         ],
       },
     ];

@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'tabs-basic-example',
     templateUrl: 'tabs-basic-example.html',
     styleUrls: ['tabs-basic-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class TabsBasicExample {
   tabSelected() {

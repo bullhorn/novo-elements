@@ -3327,6 +3327,40 @@ export const MockCandidateMeta = {
       shouldAddCustomEntityLabel: false,
     },
     {
+      name: 'Multi Radio',
+      type: 'SCALAR',
+      dataType: 'String',
+      maxLength: 100,
+      confidential: false,
+      optional: true,
+      label: 'multiRadio',
+      required: false,
+      readOnly: true,
+      multiValue: false,
+      inputType: 'RADIO',
+      options: [
+        {
+          value: 'option1',
+          label: 'Option 1',
+        },
+        {
+          value: 'option2',
+          label: 'Option 2',
+        },
+        {
+          value: 'option3',
+          label: 'Option 3',
+        },
+      ],
+      hideFromSearch: false,
+      sortOrder: 169,
+      hint: '',
+      description: '',
+      systemRequired: false,
+      shouldAddCustomEntityLabel: false,
+      allowCustomFilterValues: true,
+    },
+    {
       name: 'customText2',
       type: 'SCALAR',
       dataType: 'String',
@@ -9292,39 +9326,39 @@ export const MockNoteMeta = {
       options: [
         {
           value: 'Outbound Call',
-          label: 'Outbound Call'
+          label: 'Outbound Call',
         },
         {
           value: 'Inbound Call',
-          label: 'Inbound Call'
+          label: 'Inbound Call',
         },
         {
           value: 'Left Message',
-          label: 'Left Message'
+          label: 'Left Message',
         },
         {
           value: 'Email',
-          label: 'Email'
+          label: 'Email',
         },
         {
           value: 'Appointment',
-          label: 'Appointment'
+          label: 'Appointment',
         },
         {
           value: 'Recruiter Interview',
-          label: 'Recruiter Interview'
+          label: 'Recruiter Interview',
         },
         {
           value: 'Technical Interview',
-          label: 'Technical Interview'
+          label: 'Technical Interview',
         },
         {
           value: 'Manager Interview',
-          label: 'Manager Interview'
+          label: 'Manager Interview',
         },
         {
           value: 'Reference Check',
-          label: 'Reference Check'
+          label: 'Reference Check',
         },
       ],
       defaultValue: 'Outbound Call',
@@ -9333,7 +9367,7 @@ export const MockNoteMeta = {
       hint: 0,
       description: 0,
       systemRequired: false,
-      shouldAddCustomEntityLabel: false
+      shouldAddCustomEntityLabel: false,
     },
     {
       name: 'notes.commentingPerson',
@@ -9364,7 +9398,7 @@ export const MockNoteMeta = {
             type: 'ID',
             dataType: 'Integer',
             optional: false,
-            label: 'ID'
+            label: 'ID',
           },
           {
             name: 'firstName',
@@ -9379,7 +9413,7 @@ export const MockNoteMeta = {
             multiValue: false,
             hideFromSearch: false,
             systemRequired: false,
-            shouldAddCustomEntityLabel: false
+            shouldAddCustomEntityLabel: false,
           },
           {
             name: 'lastName',
@@ -9394,10 +9428,10 @@ export const MockNoteMeta = {
             multiValue: false,
             hideFromSearch: false,
             systemRequired: false,
-            shouldAddCustomEntityLabel: false
-          }
-        ]
-      }
+            shouldAddCustomEntityLabel: false,
+          },
+        ],
+      },
     },
     {
       name: 'notes.dateAdded',
@@ -9415,7 +9449,7 @@ export const MockNoteMeta = {
       hint: 0,
       description: 0,
       systemRequired: false,
-      shouldAddCustomEntityLabel: false
-    }
+      shouldAddCustomEntityLabel: false,
+    },
   ],
 };

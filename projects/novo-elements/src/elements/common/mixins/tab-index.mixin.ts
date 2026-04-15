@@ -31,7 +31,7 @@ export function mixinTabIndex<T extends AbstractConstructor<CanDisable>>(base: T
     }
 
     constructor(...args: any[]) {
-      super(...args);
+      super(...args); // eslint-disable-line
     }
   }
 

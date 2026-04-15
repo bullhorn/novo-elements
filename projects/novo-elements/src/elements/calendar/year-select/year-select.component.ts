@@ -1,14 +1,13 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NovoLabelService } from 'novo-elements/services';
-import type { DateLike } from 'novo-elements/utils';
-import { DateUtil } from 'novo-elements/utils';
+import { DateUtil, type DateLike } from 'novo-elements/utils';
 
 @Component({
     selector: 'novo-year-select',
     templateUrl: './year-select.component.html',
     styleUrls: ['./year-select.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    standalone: false,
 })
 export class NovoYearSelectElement implements OnInit {
   @Input()

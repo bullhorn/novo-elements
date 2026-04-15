@@ -37,6 +37,3 @@ _none_
 ## TooltipDirective `[tooltip]`
 
 Adds a tooltip to the element the directive is attached too. Use the input option to align and control how the tooltip displays.
-### Properties
-
-<props-table component="TooltipDirective"></props-table>

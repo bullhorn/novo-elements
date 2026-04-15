@@ -8,7 +8,7 @@ import { SourceConfig } from './Breadcrumb.types';
     templateUrl: './Breadcrumb.html',
     styleUrls: ['./Breadcrumb.scss'],
     providers: [{ provide: NOVO_BREADCRUMB_REF, useExisting: BreadcrumbElement }],
-    standalone: false
+    standalone: false,
 })
 export class BreadcrumbElement {
   @Input() separatorIcon: TemplateRef<any>;

@@ -9,7 +9,7 @@ const CKEDITOR_CONTROL_VALUE_ACCESSOR = {
   multi: true,
 };
 
-declare var CKEDITOR: any;
+declare const CKEDITOR: any;
 declare global {
   interface Window {
     CKEDITOR: any;
@@ -18,7 +18,7 @@ declare global {
 // Prevents CKEDITOR from querying the page for all [contenteditable] elements (fixes a conflict against Codemirror Editor)
 try {
   CKEDITOR.disableAutoInline = true;
-} catch(err) {
+} catch (err) {
   // may be running in a context without CKEDITOR - ignore
 }
 
@@ -32,7 +32,7 @@ try {
     providers: [CKEDITOR_CONTROL_VALUE_ACCESSOR],
     template: '<textarea [name]="name" [id]="name" #host></textarea>',
     styleUrls: ['./CKEditor.scss'],
-    standalone: false
+    standalone: false,
 })
 export class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlValueAccessor {
   @Input()

@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'tooltip-toggle-example',
     templateUrl: 'tooltip-toggle-example.html',
     styleUrls: ['tooltip-toggle-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class TooltipToggleExample {
   public tooltipActive: boolean;

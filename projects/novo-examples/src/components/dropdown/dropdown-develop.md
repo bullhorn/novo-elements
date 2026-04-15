@@ -39,7 +39,3 @@ order: 3
 ## NovoDropdownElement `novo-dropdown`
 
 The `novo-dropdown` component expects 1 `button` or `novo-button` as the trigger for the menu list which is comprised of all the `novo-option` or `novo-optgroup` child components.
-
-### Properties
-
-<props-table component="NovoDropdownElement"></props-table>

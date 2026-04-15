@@ -92,7 +92,7 @@ describe('Elements: NovoChipsElement', () => {
 
   describe('Method: updateHiddenChips()', () => {
     it('should update hiddenChipsCount based on the items length and the hiddenChipsLimit property', () => {
-      component.items = ['A','B','C','D','E','F'];
+      component.items = ['A', 'B', 'C', 'D', 'E', 'F'];
       component.hiddenChipsLimit = 4;
       component._hiddenChipsLimit = component.hiddenChipsLimit;
       component.updateHiddenChips();
@@ -103,7 +103,7 @@ describe('Elements: NovoChipsElement', () => {
     });
 
     it('should reset the hiddenChipsLimit to the original limit if: currently showing all chips BUT there are no longer any extra chips to hide', () => {
-      component.items = ['A','B','C','D'];
+      component.items = ['A', 'B', 'C', 'D'];
       component._hiddenChipsLimit = 3;
       component.hiddenChipsLimit = component.CHIPS_SHOWN_MAX; // currently showing all chips
       component.items.pop(); // ['A', 'B', 'C']

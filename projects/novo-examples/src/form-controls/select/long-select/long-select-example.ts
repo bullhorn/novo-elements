@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'long-select-example',
     templateUrl: 'long-select-example.html',
     styleUrls: ['long-select-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class LongSelectExample {
   public placeholder: string = 'Select...';

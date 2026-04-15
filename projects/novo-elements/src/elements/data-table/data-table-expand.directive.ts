@@ -6,7 +6,7 @@ import { DataTableState } from './state/data-table-state.service';
 
 @Directive({
     selector: '[novoDataTableExpand]',
-    standalone: false
+    standalone: false,
 })
 export class NovoDataTableExpandDirective<T> implements OnDestroy {
   @Input()

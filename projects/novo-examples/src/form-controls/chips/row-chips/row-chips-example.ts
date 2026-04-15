@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     selector: 'row-chips-example',
     templateUrl: 'row-chips-example.html',
     styleUrls: ['row-chips-example.css'],
-    standalone: false
+    standalone: false,
 })
 export class RowChipsExample {
   public placeholder: string = 'Select...';

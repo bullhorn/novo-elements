@@ -16,12 +16,12 @@ import { TypographyWeight } from '../text.types';
 
 @Component({
     selector: 'novo-title,[novo-title]',
-    template: ` <ng-content></ng-content> `,
+    template: ' <ng-content></ng-content> ',
     styleUrls: ['./title.scss'],
     host: {
         class: 'novo-title',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoTitle extends NovoBaseTextElement {
   weight: TypographyWeight = 'medium';

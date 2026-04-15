@@ -32,7 +32,7 @@ export interface IMaskOptions {
 
 @Directive({
     selector: 'textarea[autosize]',
-    standalone: false
+    standalone: false,
 })
 export class NovoAutoSize implements AfterContentInit {
   @HostListener('input', ['$event.target'])
@@ -249,7 +249,7 @@ export class NovoAutoSize implements AfterContentInit {
         '[class.inline-embedded]': 'control.isInlineEmbedded',
         '[class.embedded]': 'control.isEmbedded',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoControlElement extends OutsideClick implements OnInit, OnDestroy, AfterViewInit, AfterContentInit {
   @Input()

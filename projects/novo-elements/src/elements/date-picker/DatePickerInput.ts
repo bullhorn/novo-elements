@@ -3,6 +3,7 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
+  DestroyRef,
   ElementRef,
   EventEmitter,
   HostBinding,
@@ -12,7 +13,7 @@ import {
   Output,
   SimpleChanges,
   ViewChild,
-  forwardRef
+  forwardRef,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // Vendor
@@ -21,6 +22,7 @@ import { isValid } from 'date-fns';
 import { NovoOverlayTemplateComponent } from 'novo-elements/elements/common';
 import { DateFormatService, NovoLabelService } from 'novo-elements/services';
 import { BooleanInput, DateUtil, Helpers, Key } from 'novo-elements/utils';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 // Value accessor for the component (supports ngModel)
 const DATE_VALUE_ACCESSOR = {
@@ -82,7 +84,7 @@ const DATE_VALUE_ACCESSOR = {
     </novo-overlay-template>
   `,
     styleUrls: ['./DatePickerInput.scss'],
-    standalone: false
+    standalone: false,
 })
 export class NovoDatePickerInputElement implements OnInit, OnChanges, AfterViewInit, ControlValueAccessor {
   public value: any;
@@ -204,6 +206,7 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, AfterViewI
     public labels: NovoLabelService,
     private _changeDetectorRef: ChangeDetectorRef,
     public dateFormatService: DateFormatService,
+    private destroyRef: DestroyRef,
   ) {
     this.placeholder = this.labels.localizedDatePlaceholder();
   }
@@ -218,7 +221,7 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, AfterViewI
   }
 
   ngAfterViewInit(): void {
-    this.overlay.panelClosingActions.subscribe(this._handleOverlayClickout.bind(this));
+    this.overlay.panelClosingActions.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(this._handleOverlayClickout.bind(this));
   }
 
   _initFormatOptions() {
@@ -273,7 +276,7 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, AfterViewI
   }
 
   _handleOverlayClickout(): void {
-    this.handleInvalidDate(/*fromPanelClose:*/true);
+    this.handleInvalidDate(/* fromPanelClose: */true);
     this.blurEvent.emit();
   }
 
@@ -377,7 +380,7 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, AfterViewI
 
   private _setCalendarValue(value: any): void {
     if (value instanceof Date && this.value instanceof Date) {
-      let newDate = new Date(value);
+      const newDate = new Date(value);
       newDate.setHours(0, 0, 0, 0);
       this.value = newDate;
       return;

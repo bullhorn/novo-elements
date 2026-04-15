@@ -70,7 +70,7 @@ const NovoChipMixinBase: CanSizeCtor & CanColorCtor & HasTabIndexCtor & typeof N
 @Directive({
     selector: 'novo-chip-avatar, [novoChipAvatar]',
     host: { class: 'novo-chip-avatar' },
-    standalone: false
+    standalone: false,
 })
 export class NovoChipAvatar {}
 
@@ -91,7 +91,7 @@ export class NovoChipAvatar {}
         class: 'novo-chip-remove',
         '(click)': '_handleClick($event)',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoChipRemove {
   constructor(@Inject(REMOVABLE_REF) private _parentChip: IRemovable, elementRef: ElementRef<HTMLElement>) {
@@ -120,8 +120,8 @@ export class NovoChipRemove {
  * Chip component. Used inside the NovoChipList component.
  */
 @Component({
-    selector: `novo-chip, [novo-chip]`,
-    template: `<ng-content></ng-content>`,
+    selector: 'novo-chip, [novo-chip]',
+    template: '<ng-content></ng-content>',
     styleUrls: ['./Chip.scss'],
     encapsulation: ViewEncapsulation.None,
     inputs: ['color', 'tabIndex', 'size'],
@@ -146,7 +146,7 @@ export class NovoChipRemove {
         '(focus)': 'focus()',
         '(blur)': '_blur()',
     },
-    standalone: false
+    standalone: false,
 })
 export class NovoChipElement extends NovoChipMixinBase implements FocusableOption, OnDestroy, CanColor, HasTabIndex {
   /** Whether the chip has focus. */
@@ -366,6 +366,9 @@ export class NovoChipElement extends NovoChipMixinBase implements FocusableOptio
         }
         // Always prevent space from scrolling the page since the list has focus
         event.preventDefault();
+        break;
+      default:
+        // No default action for other keys
         break;
     }
   }

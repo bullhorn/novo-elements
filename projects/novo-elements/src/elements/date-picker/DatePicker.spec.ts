@@ -304,7 +304,7 @@ describe('NovoDatePickerElement', () => {
       const consoleSpy = jest.spyOn(console, 'warn').mockImplementation();
       component.range = true;
       expect(consoleSpy).toHaveBeenCalledWith(
-        expect.stringContaining('deprecated')
+        expect.stringContaining('deprecated'),
       );
       consoleSpy.mockRestore();
     });
@@ -332,7 +332,7 @@ describe('NovoDatePickerElement', () => {
       const consoleSpy = jest.spyOn(console, 'warn').mockImplementation();
       component.weekRangeSelect = true;
       expect(consoleSpy).toHaveBeenCalledWith(
-        expect.stringContaining('deprecated')
+        expect.stringContaining('deprecated'),
       );
       consoleSpy.mockRestore();
     });
@@ -524,7 +524,7 @@ describe('NovoDatePickerElement', () => {
           expect.objectContaining({
             startDate: expect.any(Date),
             endDate: expect.any(Date),
-          })
+          }),
         );
       });
 
@@ -568,9 +568,13 @@ describe('NovoDatePickerElement', () => {
 
   describe('eventData', () => {
     it('should return event data object', () => {
-      labels.formatDateWithFormat.mockImplementation((date, format) => {
-        if (format.month === 'long') return 'January';
-        if (format.weekday === 'long') return 'Sunday';
+      labels.formatDateWithFormat.mockImplementation((dateArg, format) => {
+        if (format.month === 'long') {
+          return 'January';
+        }
+        if (format.weekday === 'long') {
+          return 'Sunday';
+        }
         return '15';
       });
 
@@ -627,7 +631,7 @@ describe('NovoDatePickerElement', () => {
           month: expect.any(String),
           day: expect.any(String),
           date: expect.any(Date),
-        })
+        }),
       );
     });
 
@@ -661,7 +665,7 @@ describe('NovoDatePickerElement', () => {
         expect.objectContaining({
           startDate: expect.any(Object),
           endDate: expect.any(Object),
-        })
+        }),
       );
     });
 
@@ -697,7 +701,7 @@ describe('NovoDatePickerElement', () => {
       const updateSelectionSpy = jest.spyOn(component, 'updateSelection');
       component.setToday();
       expect(updateSelectionSpy).toHaveBeenCalledWith(
-        expect.arrayContaining([expect.any(Date)])
+        expect.arrayContaining([expect.any(Date)]),
       );
       updateSelectionSpy.mockRestore();
     });
