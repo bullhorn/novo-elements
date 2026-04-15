@@ -4,12 +4,14 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  DestroyRef,
   ElementRef,
   Inject,
   NgZone,
   ViewEncapsulation,
 } from '@angular/core';
 import { NOVO_LAYOUT_CONTAINER } from '../layout.constants';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'novo-layout-content',
@@ -29,12 +31,13 @@ export class NovoLayoutContent extends CdkScrollable implements AfterContentInit
     elementRef: ElementRef<HTMLElement>,
     scrollDispatcher: ScrollDispatcher,
     ngZone: NgZone,
+    private destroyRef: DestroyRef,
   ) {
     super(elementRef, scrollDispatcher, ngZone);
   }
 
   ngAfterContentInit() {
-    this._container._contentMarginChanges.subscribe(() => {
+    this._container._contentMarginChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
       this._changeDetectorRef.markForCheck();
     });
   }

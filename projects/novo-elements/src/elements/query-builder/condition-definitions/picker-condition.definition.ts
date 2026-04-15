@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { UntypedFormGroup } from '@angular/forms';
 import { NovoLabelService } from 'novo-elements/services';
 import { BaseFieldDef, Operator } from '../query-builder.types';
 import { AbstractConditionFieldDef } from './abstract-condition.definition';
@@ -26,7 +27,7 @@ type FieldOption = BaseFieldDef['options'][number];
             <novo-option [disabled]="!meta?.allowCustomFilterValues" [hidden]="!meta?.allowCustomFilterValues">
               <novo-select-search #filterInput allowDeselectDuringFilter></novo-select-search>
             </novo-option>
-            <!-- WHat about optionUrl/optionType -->
+            <!-- What about optionUrl/optionType -->
             @for (option of meta?.options; track optionTracker) {
               <novo-option [hidden]="hideOption(option, filterInput?.value)" [value]="option.value" [attr.data-automation-value]="option.label">
                 {{ option.label}}
@@ -64,6 +65,18 @@ export class NovoDefaultPickerConditionDef extends AbstractConditionFieldDef {
     this.defineOperatorEditGroup(Operator.includeAny, Operator.includeAll, Operator.excludeAny);
   }
 
+  override onOperatorSelect(formGroup: UntypedFormGroup): void {
+    super.onOperatorSelect(formGroup);
+    // For multi-select operators, ensure value is an array, not null/boolean
+    const newOperator = formGroup.get('operator').value;
+    if ([Operator.includeAny, Operator.includeAll, Operator.excludeAny].includes(newOperator)) {
+      const currentValue = formGroup.get('value').value;
+      if (!Array.isArray(currentValue)) {
+        formGroup.get('value').setValue([]);
+      }
+    }
+  }
+
   showAddOption(meta, select, filterValue: string): boolean {
     if (!(meta?.allowCustomFilterValues)) {
       return false;
@@ -72,7 +85,7 @@ export class NovoDefaultPickerConditionDef extends AbstractConditionFieldDef {
     if (!filterValue) {
       return false;
     }
-    if (select.value && select.value.find(selectValue => selectValue.trim().toLowerCase() === filterValue)) {
+    if (select?.value && Array.isArray(select.value) && select.value.find(selectValue => selectValue.trim().toLowerCase() === filterValue)) {
       return false;
     }
     return meta?.options && meta.options.find(opt => {
@@ -91,7 +104,10 @@ export class NovoDefaultPickerConditionDef extends AbstractConditionFieldDef {
   }
 
   customOptions(options: FieldOption[], select: NovoSelectElement): FieldOption[] {
-    return select.value?.filter((selectedOption: string) => {
+    if (!Array.isArray(select.value)) {
+      return [];
+    }
+    return select.value.filter((selectedOption: string) => {
       return (!options || !(options.find(option => option.value === selectedOption)));
     }).map(value => ({
       value,

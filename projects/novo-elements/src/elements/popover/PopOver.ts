@@ -7,10 +7,12 @@ import {
   HostListener,
   Input,
   OnChanges,
+  OnDestroy,
   Output,
   SimpleChange,
   ViewContainerRef,
 } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { PopOverContent } from './PopOverContent';
 
 @Directive({
@@ -21,10 +23,11 @@ import { PopOverContent } from './PopOverContent';
     selector: '[popover], [novoPopover]',
     standalone: false,
 })
-export class PopOverDirective implements OnChanges {
+export class PopOverDirective implements OnChanges, OnDestroy {
   protected PopoverComponent = PopOverContent;
   protected popover: ComponentRef<PopOverContent>;
   protected visible: boolean;
+  private subscriptions = new Subscription();
 
   constructor(protected viewContainerRef: ViewContainerRef, protected resolver: ComponentFactoryResolver) {}
 
@@ -98,6 +101,10 @@ export class PopOverDirective implements OnChanges {
     }
   }
 
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+  }
+
   toggle() {
     if (!this.visible) {
       this.show();
@@ -137,7 +144,7 @@ export class PopOverDirective implements OnChanges {
         popover.title = this.popoverTitle;
       }
 
-      popover.onCloseFromOutside.subscribe(() => this.hide());
+      this.subscriptions.add(popover.onCloseFromOutside.subscribe(() => this.hide()));
       if (this.popoverDismissTimeout > 0) {
         setTimeout(() => this.hide(), this.popoverDismissTimeout);
       }
@@ -154,7 +161,7 @@ export class PopOverDirective implements OnChanges {
         popover.title = this.popoverTitle;
       }
 
-      popover.onCloseFromOutside.subscribe(() => this.hide());
+      this.subscriptions.add(popover.onCloseFromOutside.subscribe(() => this.hide()));
       if (this.popoverDismissTimeout > 0) {
         setTimeout(() => this.hide(), this.popoverDismissTimeout);
       }

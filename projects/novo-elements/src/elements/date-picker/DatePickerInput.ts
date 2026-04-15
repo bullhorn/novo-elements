@@ -3,6 +3,7 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
+  DestroyRef,
   ElementRef,
   EventEmitter,
   HostBinding,
@@ -21,6 +22,7 @@ import { isValid } from 'date-fns';
 import { NovoOverlayTemplateComponent } from 'novo-elements/elements/common';
 import { DateFormatService, NovoLabelService } from 'novo-elements/services';
 import { BooleanInput, DateUtil, Helpers, Key } from 'novo-elements/utils';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 // Value accessor for the component (supports ngModel)
 const DATE_VALUE_ACCESSOR = {
@@ -204,6 +206,7 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, AfterViewI
     public labels: NovoLabelService,
     private _changeDetectorRef: ChangeDetectorRef,
     public dateFormatService: DateFormatService,
+    private destroyRef: DestroyRef,
   ) {
     this.placeholder = this.labels.localizedDatePlaceholder();
   }
@@ -218,7 +221,7 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, AfterViewI
   }
 
   ngAfterViewInit(): void {
-    this.overlay.panelClosingActions.subscribe(this._handleOverlayClickout.bind(this));
+    this.overlay.panelClosingActions.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(this._handleOverlayClickout.bind(this));
   }
 
   _initFormatOptions() {

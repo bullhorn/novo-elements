@@ -1,5 +1,6 @@
 // NG2
 import { EventEmitter, Injectable } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class Security {
@@ -40,8 +41,8 @@ export class Security {
     this.change.emit(this.credentials);
   }
 
-  subscribe(fn: any): void {
-    this.change.subscribe(fn);
+  subscribe(fn: any): Subscription {
+    return this.change.subscribe(fn);
   }
 
   checkRoutes(

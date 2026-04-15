@@ -16,6 +16,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  DestroyRef,
   ElementRef,
   EventEmitter,
   inject,
@@ -29,6 +30,7 @@ import {
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 // Vendor
 import { Helpers } from 'novo-elements/utils';
 import { fromEvent, merge, Observable, of as observableOf, Subscription } from 'rxjs';
@@ -94,6 +96,7 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
   protected closingActionsSubscription: Subscription;
   private _parent: ElementRef;
   private overlayContainer: OverlayContainer = inject(OverlayContainer);
+  private destroyRef = inject(DestroyRef);
   private overlayContext: string;
 
   constructor(
@@ -234,7 +237,7 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
   protected createOverlay(template: TemplateRef<any>): void {
     this.portal = new TemplatePortal(template, this.viewContainerRef);
     this.overlayRef = this.overlay.create(this.getOverlayConfig());
-    this.overlayRef.backdropClick().subscribe(() => {
+    this.overlayRef.backdropClick().pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
       this.backDropClicked.emit(true);
       this.closePanel();
     });

@@ -4,8 +4,7 @@ import { NovoToastService } from './ToastService';
 
 describe('Elements: NovoToastService', () => {
   describe('Service: ', () => {
-    const resolver: any = null;
-    const utils = new ComponentUtils(resolver);
+    const utils = new ComponentUtils();
     const service = new NovoToastService(utils);
 
     it('should be defined.', () => {

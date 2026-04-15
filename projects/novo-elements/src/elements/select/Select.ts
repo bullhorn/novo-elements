@@ -55,8 +55,8 @@ import {
   NOVO_OPTION_PARENT_COMPONENT,
   _countGroupLabelsBeforeOption,
   _getOptionScrollPosition,
+  NovoOverlayTemplateComponent,
 } from 'novo-elements/elements/common';
-import { NovoOverlayTemplateComponent } from 'novo-elements/elements/common';
 import { NOVO_FORM_FIELD, NovoFieldControl, NovoFieldElement } from 'novo-elements/elements/field';
 
 /** Change event object that is emitted when the select value has changed. */

@@ -14,8 +14,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 // Vendor
 import { addDays, Day as DateFnsDay, isToday } from 'date-fns';
 import { NovoLabelService } from 'novo-elements/services';
-import { BooleanInput, DateUtil } from 'novo-elements/utils';
-import type { DateLike, Day, OverlayDate } from 'novo-elements/utils';
+import { BooleanInput, DateUtil, type DateLike, type Day, type OverlayDate } from 'novo-elements/utils';
 
 @Component({
     selector: 'novo-month-view',
