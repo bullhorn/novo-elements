@@ -808,9 +808,54 @@ export class v6Page {
 
 @Component({
   selector: 'v13-page',
-  template: `<h1>📢  RELEASE MONTH TBD (version 13)</h1>
-<h2>Ace Editor</h2>
-<p>The Ace Editor, which has been deprecated since v8, has been removed. If your code has not been migrated, it should instead use the Novo Code Editor, which makes use of &#64;codemirror.</p>
+  template: `<h1>🎉 April 2026 (version 13)</h1>
+<p><strong>Announcement</strong>: Novo Elements v13 removes long-deprecated components and upgrades to ES-Module compatible dependencies.</p>
+<p>Some key highlights include:</p>
+<ul>
+<li>Complete removal of the deprecated Ace Editor add-on.</li>
+<li>Upgrade to <code>novo-design-tokens</code> v0.1.x with new package export mappings.</li>
+<li>Removal of the <code>brace</code> dependency.</li>
+<li>GitHub Actions CI infrastructure modernized to Node.js 24 compatible versions.</li>
+</ul>
+<h2>Upgrading to v13</h2>
+<ul>
+<li>If your application is still using the Novo Elements <code>AceEditor</code> add-on, you <strong>must</strong> migrate to the <a href="https://bullhorn.github.io/novo-elements/docs/#/utils/code%20editor">Code Editor</a> which uses &#64;codemirror. The Ace Editor has been deprecated since v8 and is now fully removed.</li>
+<li>The <code>brace</code> package is no longer a dependency. If your application imported it through novo-elements, add it directly to your own <code>package.json</code>.</li>
+<li>Update your <code>novo-design-tokens</code> dependency to <code>^0.1.4</code>.</li>
+</ul>
+<h2 id="notable-changes">Notable changes <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v13-announce#notable-changes">#</a></h2>
+<h3>Removed Features</h3>
+<ul>
+<li>Ace Editor: Completely removed the deprecated Ace Editor add-on, module, and form control</li>
+<li>Removed the <code>brace</code> dependency from the project</li>
+</ul>
+<h3>Condition Builder</h3>
+<ul>
+<li>Allow ability to not recreate templates when calling reset on condition builder <a href="https://github.com/bullhorn/novo-elements/pull/1771">#1771</a></li>
+<li>Add clear condition function <a href="https://github.com/bullhorn/novo-elements/pull/1771">#1771</a></li>
+<li>Add <code>allowEmptyField</code> input <a href="https://github.com/bullhorn/novo-elements/pull/1771">#1771</a></li>
+<li>Check for field definition before setting default operator <a href="https://github.com/bullhorn/novo-elements/pull/1771">#1771</a></li>
+</ul>
+<h3>Bug Fixes</h3>
+<ul>
+<li>Memory: Change modalService and toastService to avoid maintaining ViewContainerRefs longer than needed <a href="https://github.com/bullhorn/novo-elements/pull/1790">#1790</a></li>
+<li>ToastService: Added <code>ownViewContainer</code> function for better lifecycle management</li>
+<li>Dependencies: Adjust <code>post-robot</code> dependency to be more permissive</li>
+</ul>
+<h3>Code Quality</h3>
+<ul>
+<li>Remove wildcard imports and add lint rules to prevent them <a href="https://github.com/bullhorn/novo-elements/pull/1777">#1777</a></li>
+<li>Add lint rule for extra semi-colons <a href="https://github.com/bullhorn/novo-elements/pull/1777">#1777</a></li>
+</ul>
+<h3>Dependencies</h3>
+<ul>
+<li>Upgraded <code>novo-design-tokens</code> from <code>^0.0.10</code> to <code>^0.1.4</code></li>
+</ul>
+<h3>Infrastructure</h3>
+<ul>
+<li>Updated GitHub Actions (<code>checkout</code>, <code>setup-node</code>, <code>upload-artifact</code>, <code>download-artifact</code>) to Node.js 24 compatible versions</li>
+<li>Pinned npm version in CI workflows for consistent builds</li>
+</ul>
 `,
   host: { class: 'markdown-page' },
   standalone: false,
