@@ -15,6 +15,7 @@ export const COMPONENT_URLS = {
     CALENDAR: 'calendar',
     DATA_TABLE: 'data-table',
     DROPDOWN: 'dropdown',
+    ICON: 'icon',
     LOADING: 'loading',
     MENU: 'menu',
     NON_IDEAL_STATE: 'non ideal state',
