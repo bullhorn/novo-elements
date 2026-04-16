@@ -3,10 +3,11 @@ import { COMPONENT_URLS, examplesUrl, getURLs } from '../utils/EnvironmentUtil';
 import { elements } from '../utils/SelectorUtil';
 import { verifyPresent, verifyText } from '../utils/VerifyUtil';
 import {
-    loadingLineComponent,
-    loadingLineExample,
+    loading,
     loadingSizeLineRadio,
     loadingColorLineRadio,
+    loadingSizeSpinnerRadio,
+    loadingColorSpinnerRadio,
 } from '../utils/LoadingUtil';
 
 describe('Loading Demo Page', () => {
@@ -27,87 +28,63 @@ describe('Loading Demo Page', () => {
         });
 
         it('should display loading-line example section', async () => {
-            await verifyPresent(loadingLineExample());
+            await scrollIntoView(loading.lineExample);
+            await verifyPresent(loading.lineExample);
+            await verifyPresent(loading.lineComponent);
         });
 
-        it('should display loading-line component', async () => {
-            await scrollIntoView(loadingLineExample());
-            await verifyPresent(loadingLineComponent());
-        });
-    });
-
-    describe('Line Loader - Size Control', () => {
-        beforeEach(async () => {
-            await scrollIntoView(loadingLineExample());
-        });
-
-        it('should have small size option', async () => {
-            await verifyPresent(loadingSizeLineRadio('small'));
-        });
-
-        it('should have medium size option', async () => {
-            await verifyPresent(loadingSizeLineRadio('medium'));
-        });
-
-        it('should have large size option', async () => {
-            await verifyPresent(loadingSizeLineRadio('large'));
-        });
-
-        it('should select small size', async () => {
-            await click(loadingSizeLineRadio('small'));
-            await verifyPresent(loadingLineComponent());
-        });
-
-        it('should select medium size', async () => {
-            await click(loadingSizeLineRadio('medium'));
-            await verifyPresent(loadingLineComponent());
-        });
-
-        it('should select large size', async () => {
-            await click(loadingSizeLineRadio('large'));
-            await verifyPresent(loadingLineComponent());
+        it('should display loading-circle example section', async () => {
+            await scrollIntoView(loading.circleExample);
+            await verifyPresent(loading.circleExample);
+            await verifyPresent(loading.spinnerComponent);
         });
     });
 
-    describe('Line Loader - Color Control', () => {
+    describe('Line Loader', () => {
         beforeEach(async () => {
-            await scrollIntoView(loadingLineExample());
+            await scrollIntoView(loading.lineExample);
         });
 
-        it('should have grapefruit color option', async () => {
-            await verifyPresent(loadingColorLineRadio('grapefruit'));
+        it('should allow selecting all size options', async () => {
+            const sizes = ['small', 'medium', 'large'];
+            for (const size of sizes) {
+                await verifyPresent(loadingSizeLineRadio(size));
+                await click(loadingSizeLineRadio(size));
+                await verifyPresent(loading.lineComponent);
+            }
         });
 
-        it('should have aqua color option', async () => {
-            await verifyPresent(loadingColorLineRadio('aqua'));
+        it('should allow selecting all color options', async () => {
+            const colors = ['grapefruit', 'aqua', 'mint', 'ocean'];
+            for (const color of colors) {
+                await verifyPresent(loadingColorLineRadio(color));
+                await click(loadingColorLineRadio(color));
+                await verifyPresent(loading.lineComponent);
+            }
+        });
+    });
+
+    describe('Spinner', () => {
+        beforeEach(async () => {
+            await scrollIntoView(loading.circleExample);
         });
 
-        it('should have mint color option', async () => {
-            await verifyPresent(loadingColorLineRadio('mint'));
+        it('should allow selecting all size options', async () => {
+            const sizes = ['small', 'medium', 'large'];
+            for (const size of sizes) {
+                await verifyPresent(loadingSizeSpinnerRadio(size));
+                await click(loadingSizeSpinnerRadio(size));
+                await verifyPresent(loading.spinnerComponent);
+            }
         });
 
-        it('should have ocean color option', async () => {
-            await verifyPresent(loadingColorLineRadio('ocean'));
-        });
-
-        it('should select grapefruit color', async () => {
-            await click(loadingColorLineRadio('grapefruit'));
-            await verifyPresent(loadingLineComponent());
-        });
-
-        it('should select aqua color', async () => {
-            await click(loadingColorLineRadio('aqua'));
-            await verifyPresent(loadingLineComponent());
-        });
-
-        it('should select mint color', async () => {
-            await click(loadingColorLineRadio('mint'));
-            await verifyPresent(loadingLineComponent());
-        });
-
-        it('should select ocean color', async () => {
-            await click(loadingColorLineRadio('ocean'));
-            await verifyPresent(loadingLineComponent());
+        it('should allow selecting all color options', async () => {
+            const colors = ['grapefruit', 'aqua', 'mint', 'ocean'];
+            for (const color of colors) {
+                await verifyPresent(loadingColorSpinnerRadio(color));
+                await click(loadingColorSpinnerRadio(color));
+                await verifyPresent(loading.spinnerComponent);
+            }
         });
     });
 });
