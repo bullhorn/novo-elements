@@ -16,6 +16,7 @@ export const COMPONENT_URLS = {
     DATA_TABLE: 'data-table',
     DROPDOWN: 'dropdown',
     LOADING: 'loading',
+    MENU: 'menu',
     NON_IDEAL_STATE: 'non ideal state',
     QUERY_BUILDER: 'query builder',
 };
