@@ -1,15 +1,15 @@
-<button [theme]="weekStart === 0 ? 'primary' : 'secondary'" (click)="setWeekStart(0)">Sunday</button>
-<button [theme]="weekStart === 1 ? 'primary' : 'secondary'" (click)="setWeekStart(1)">Monday</button>
-<button [theme]="weekStart === 2 ? 'primary' : 'secondary'" (click)="setWeekStart(2)">Tuesday</button>
-<button [theme]="weekStart === 3 ? 'primary' : 'secondary'" (click)="setWeekStart(3)">Wednesday</button>
-<button [theme]="weekStart === 4 ? 'primary' : 'secondary'" (click)="setWeekStart(4)">Thursday</button>
-<button [theme]="weekStart === 5 ? 'primary' : 'secondary'" (click)="setWeekStart(5)">Friday</button>
-<button [theme]="weekStart === 6 ? 'primary' : 'secondary'" (click)="setWeekStart(6)">Saturday</button>
+<button [theme]="weekStart === 0 ? 'primary' : 'secondary'" (click)="setWeekStart(0)" data-automation-id="week-start-sun">Sunday</button>
+<button [theme]="weekStart === 1 ? 'primary' : 'secondary'" (click)="setWeekStart(1)" data-automation-id="week-start-mon">Monday</button>
+<button [theme]="weekStart === 2 ? 'primary' : 'secondary'" (click)="setWeekStart(2)" data-automation-id="week-start-tue">Tuesday</button>
+<button [theme]="weekStart === 3 ? 'primary' : 'secondary'" (click)="setWeekStart(3)" data-automation-id="week-start-wed">Wednesday</button>
+<button [theme]="weekStart === 4 ? 'primary' : 'secondary'" (click)="setWeekStart(4)" data-automation-id="week-start-thu">Thursday</button>
+<button [theme]="weekStart === 5 ? 'primary' : 'secondary'" (click)="setWeekStart(5)" data-automation-id="week-start-fri">Friday</button>
+<button [theme]="weekStart === 6 ? 'primary' : 'secondary'" (click)="setWeekStart(6)" data-automation-id="week-start-sat">Saturday</button>
 <br/>
 <br/>
-<div class="date-picker-demo-side-by-side">
+<div class="date-picker-demo-side-by-side" data-automation-id="week-start-picker-container">
     <p>
         <label>Value</label> {{(weekStartDate | date) || 'N/A'}}
     </p>
-    <novo-date-picker [(ngModel)]="weekStartDate" [weekStart]="weekStart"></novo-date-picker>
+    <novo-date-picker [(ngModel)]="weekStartDate" [weekStart]="weekStart" data-automation-id="week-start-picker"></novo-date-picker>
 </div>

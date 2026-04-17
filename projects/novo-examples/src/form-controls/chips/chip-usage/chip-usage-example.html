@@ -1,42 +1,42 @@
 <novo-stack gap="md">
   <novo-row gap="md">
-    <novo-chip [size]="size.value">Standard</novo-chip>
-    <novo-chip [size]="size.value">
+    <novo-chip [size]="size.value" data-automation-id="chip-usage-standard">Standard</novo-chip>
+    <novo-chip [size]="size.value" data-automation-id="chip-usage-icon">
       <novo-icon>bell</novo-icon>
     </novo-chip>
-    <novo-chip [size]="size.value">
+    <novo-chip [size]="size.value" data-automation-id="chip-usage-removable">
       <novo-text>Removable</novo-text>
       <novo-icon novoChipRemove>x</novo-icon>
     </novo-chip>
-    <novo-chip [size]="size.value" disabled>
+    <novo-chip [size]="size.value" disabled data-automation-id="chip-usage-disabled">
       <novo-icon>candidate</novo-icon>
       <novo-text>Disabled</novo-text>
     </novo-chip>
   </novo-row>
   <novo-row gap="md">
-    <novo-chip color="success" [size]="size.value">Standard</novo-chip>
-    <novo-chip color="negative" [size]="size.value">
+    <novo-chip color="success" [size]="size.value" data-automation-id="chip-usage-success">Standard</novo-chip>
+    <novo-chip color="negative" [size]="size.value" data-automation-id="chip-usage-negative">
       <novo-icon>bell</novo-icon>
     </novo-chip>
-    <novo-chip color="ocean" [size]="size.value">
+    <novo-chip color="ocean" [size]="size.value" data-automation-id="chip-usage-ocean">
       <novo-text>Removable</novo-text>
       <novo-icon novoChipRemove>x</novo-icon>
     </novo-chip>
-    <novo-chip color="candidate" [size]="size.value" disabled>
+    <novo-chip color="candidate" [size]="size.value" disabled data-automation-id="chip-usage-candidate">
       <novo-icon>candidate</novo-icon>
       <novo-text>Disabled</novo-text>
     </novo-chip>
   </novo-row>
   <novo-row gap="md">
-    <novo-chip accent="success" [size]="size.value">Standard</novo-chip>
-    <novo-chip accent="negative" [size]="size.value">
+    <novo-chip accent="success" [size]="size.value" data-automation-id="chip-usage-accent-success">Standard</novo-chip>
+    <novo-chip accent="negative" [size]="size.value" data-automation-id="chip-usage-accent-negative">
       <novo-icon>bell</novo-icon>
     </novo-chip>
-    <novo-chip accent="ocean" [size]="size.value">
+    <novo-chip accent="ocean" [size]="size.value" data-automation-id="chip-usage-accent-ocean">
       <novo-text>Removable</novo-text>
       <novo-icon novoChipRemove>x</novo-icon>
     </novo-chip>
-    <novo-chip accent="candidate" [size]="size.value" disabled>
+    <novo-chip accent="candidate" [size]="size.value" disabled data-automation-id="chip-usage-accent-candidate">
       <novo-icon>candidate</novo-icon>
       <novo-text>Disabled</novo-text>
     </novo-chip>
@@ -44,14 +44,14 @@
 
 </novo-stack>
 
-<section>
+<section data-automation-id="chip-usage-size-section">
   <novo-label>Size</novo-label>
-  <novo-radio-group #size appearance="vertical" value="md">
-    <novo-radio name="size" value="xs">xs</novo-radio>
-    <novo-radio name="size" value="sm">sm</novo-radio>
-    <novo-radio name="size" value="md">md</novo-radio>
-    <novo-radio name="size" value="lg">lg</novo-radio>
-    <novo-radio name="size" value="xl">xl</novo-radio>
+  <novo-radio-group #size appearance="vertical" value="md" data-automation-id="chip-usage-size-group">
+    <novo-radio name="size" value="xs" data-automation-id="chip-usage-size-xs">xs</novo-radio>
+    <novo-radio name="size" value="sm" data-automation-id="chip-usage-size-sm">sm</novo-radio>
+    <novo-radio name="size" value="md" data-automation-id="chip-usage-size-md">md</novo-radio>
+    <novo-radio name="size" value="lg" data-automation-id="chip-usage-size-lg">lg</novo-radio>
+    <novo-radio name="size" value="xl" data-automation-id="chip-usage-size-xl">xl</novo-radio>
   </novo-radio-group>
 
 

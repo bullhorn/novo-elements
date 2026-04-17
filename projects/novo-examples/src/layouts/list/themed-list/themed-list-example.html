@@ -1,6 +1,6 @@
-<header>
-    <novo-list theme="navigation" direction="vertical">
-        <novo-list-item *ngFor="let item of pulseItems">
+<header data-automation-id="list-themed-header">
+    <novo-list theme="navigation" direction="vertical" data-automation-id="list-themed">
+        <novo-list-item *ngFor="let item of pulseItems; let i = index" [attr.data-automation-id]="'list-themed-item-' + i">
             <item-header>
                 <item-avatar [icon]="item.type"></item-avatar>
                 <item-title>{{item.name}}</item-title>

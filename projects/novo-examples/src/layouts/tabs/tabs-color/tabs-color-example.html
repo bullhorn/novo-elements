@@ -1,5 +1,5 @@
-<novo-toolbar>
-  <novo-toolbar-row accent="orange" gap="md">
+<novo-toolbar data-automation-id="tabs-color-toolbar">
+  <novo-toolbar-row accent="orange" gap="md" data-automation-id="tabs-color-header">
     <novo-icon>bull</novo-icon>
     <novo-title>Tab Example</novo-title>
     <span class="example-spacer"></span>
@@ -9,7 +9,7 @@
   </novo-toolbar-row>
 
   <novo-toolbar-row>
-    <novo-nav [outlet]="outlet" direction="horizontal" [(selectedIndex)]="selected">
+    <novo-nav [outlet]="outlet" direction="horizontal" [(selectedIndex)]="selected" data-automation-id="tabs-color-group">
       <novo-tab>
         <novo-icon>person</novo-icon>
         <novo-label>Tab 1</novo-label>

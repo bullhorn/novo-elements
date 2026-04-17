@@ -3,32 +3,33 @@
   [(ngModel)]="selectedDates"
   [mode]="mode.value"
   [numberOfMonths]="months.value"
-  [weekStart]="weekStart.value">
+  [weekStart]="weekStart.value"
+  data-automation-id="date-picker-picker">
 </novo-date-picker>
 
-<section>
+<section data-automation-id="date-picker-value-section">
   <novo-label>Selected Values:</novo-label>
-  <div>{{selectedDates | json}}</div>
+  <div data-automation-id="date-picker-value">{{selectedDates | json}}</div>
 </section>
 
-<section>
+<section data-automation-id="date-picker-options">
   <novo-label>Selection mode</novo-label>
-  <novo-radio-group #mode appearance="vertical" value="single">
-    <novo-radio name="mode" value="single">single</novo-radio>
-    <novo-radio name="mode" value="multiple">multiple</novo-radio>
-    <novo-radio name="mode" value="range">range</novo-radio>
-    <novo-radio name="mode" value="week">week</novo-radio>
+  <novo-radio-group #mode appearance="vertical" value="single" data-automation-id="date-picker-mode-group">
+    <novo-radio name="mode" value="single" data-automation-id="date-picker-mode-single">single</novo-radio>
+    <novo-radio name="mode" value="multiple" data-automation-id="date-picker-mode-multiple">multiple</novo-radio>
+    <novo-radio name="mode" value="range" data-automation-id="date-picker-mode-range">range</novo-radio>
+    <novo-radio name="mode" value="week" data-automation-id="date-picker-mode-week">week</novo-radio>
   </novo-radio-group>
 
   <novo-label># of Months</novo-label>
-  <novo-radio-group #months appearance="vertical" value="1">
-    <novo-radio name="months" value="1">1</novo-radio>
-    <novo-radio name="months" value="2">2</novo-radio>
+  <novo-radio-group #months appearance="vertical" value="1" data-automation-id="date-picker-months-group">
+    <novo-radio name="months" value="1" data-automation-id="date-picker-months-1">1</novo-radio>
+    <novo-radio name="months" value="2" data-automation-id="date-picker-months-2">2</novo-radio>
   </novo-radio-group>
 
   <novo-label>Week Start</novo-label>
-  <novo-radio-group #weekStart appearance="vertical" value="0">
-    <novo-radio name="weekStart" value="0">Sun</novo-radio>
-    <novo-radio name="weekStart" value="1">Mon</novo-radio>
+  <novo-radio-group #weekStart appearance="vertical" value="0" data-automation-id="date-picker-weekstart-group">
+    <novo-radio name="weekStart" value="0" data-automation-id="date-picker-weekstart-sun">Sun</novo-radio>
+    <novo-radio name="weekStart" value="1" data-automation-id="date-picker-weekstart-mon">Mon</novo-radio>
   </novo-radio-group>
 </section>

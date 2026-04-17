@@ -1,9 +1,9 @@
-<novo-editor [name]="'demoEditor'" [(ngModel)]="editorValue" #editor></novo-editor>
+<novo-editor [name]="'demoEditor'" [(ngModel)]="editorValue" #editor data-automation-id="ck-editor-basic"></novo-editor>
 
-<button theme="primary" (click)="insertText(editor)">Insert "Hello World" at Cursor</button>
+<button theme="primary" (click)="insertText(editor)" data-automation-id="ck-editor-basic-insert">Insert "Hello World" at Cursor</button>
 
-<p>Value:</p>
-<p [innerHtml]="editorValue"></p>
+<p data-automation-id="ck-editor-basic-value-label">Value:</p>
+<p [innerHtml]="editorValue" data-automation-id="ck-editor-basic-value"></p>
 
-<p>HTML:</p>
-<pre><code>{{editorValue}}</code></pre>
+<p data-automation-id="ck-editor-basic-html-label">HTML:</p>
+<pre data-automation-id="ck-editor-basic-html"><code>{{editorValue}}</code></pre>

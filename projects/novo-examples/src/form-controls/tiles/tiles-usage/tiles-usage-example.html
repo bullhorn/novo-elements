@@ -3,29 +3,33 @@ Default:
 <novo-tiles
   [options]="demoTilesDefault"
   (onChange)="select('Default', $event)"
-  [(ngModel)]="valueDefault" />
+  [(ngModel)]="valueDefault"
+  data-automation-id="tiles-default" />
 <hr />
 Icons:
 <br />
 <novo-tiles
   [options]="demoTilesIcons"
   (onChange)="select('Icons', $event)"
-  [(ngModel)]="valueIcons" />
+  [(ngModel)]="valueIcons"
+  data-automation-id="tiles-icons" />
 <hr />
 Disabled:
 <br />
 <novo-tiles disabled
   [options]="demoTilesDisabled"
   (onChange)="select('Disabled', $event)"
-  [(ngModel)]="valueDisabled" />
+  [(ngModel)]="valueDisabled"
+  data-automation-id="tiles-disabled" />
 <hr />
 Custom Colors:
 <br />
 <novo-tiles
   [options]="demoTilesColor"
   (onChange)="select('Color', $event)"
-  [(ngModel)]="valueColor" />
-<novo-row gap="md" justify="end">
-    <button theme="primary" type="button" name="addButton" (click)="addTile()">Add Tile</button>
-    <button theme="secondary" type="button" name="resetButton" (click)="resetTiles()">Reset</button>
+  [(ngModel)]="valueColor"
+  data-automation-id="tiles-colors" />
+<novo-row gap="md" justify="end" data-automation-id="tiles-buttons">
+    <button theme="primary" type="button" name="addButton" (click)="addTile()" data-automation-id="tiles-add">Add Tile</button>
+    <button theme="secondary" type="button" name="resetButton" (click)="resetTiles()" data-automation-id="tiles-reset">Reset</button>
 </novo-row>

@@ -8,27 +8,28 @@
   [close]="close"
   (onRefresh)="onRefresh()"
   (onClose)="onClose()"
-  [padding]="padding">
+  [padding]="padding"
+  data-automation-id="card-all-attributes">
   This is the ALL attribute card content!
 </novo-card>
 
 
-<novo-row gap="lg">
-  <novo-card inline padding="lg">
+<novo-row gap="lg" data-automation-id="card-inline-group">
+  <novo-card inline padding="lg" data-automation-id="card-inline-interviews">
     <novo-stack align="center">
       <novo-title larger>500</novo-title>
       <novo-caption>Interviews</novo-caption>
     </novo-stack>
   </novo-card>
 
-  <novo-card inline padding="lg">
+  <novo-card inline padding="lg" data-automation-id="card-inline-ratio">
     <novo-stack align="center">
       <novo-caption>1st Interviews to Placements</novo-caption>
       <novo-title larger>10 : 1</novo-title>
     </novo-stack>
   </novo-card>
 
-  <novo-card inline padding="lg">
+  <novo-card inline padding="lg" data-automation-id="card-inline-cvs">
     <novo-stack align="center">
       <novo-caption>CVs Sent to 1st Interviews</novo-caption>
       <novo-title larger>83%</novo-title>
@@ -37,7 +38,7 @@
 
 </novo-row>
 
-<novo-card inline inset="large">
+<novo-card inline inset="large" data-automation-id="card-sales">
   <novo-row justify="space-between">
     <novo-text bold>Total Sales</novo-text>
     <novo-text bold>$10k</novo-text>
@@ -45,7 +46,7 @@
   <novo-row align="center">
     <novo-caption>Target $50k</novo-caption>
   </novo-row>
-  <novo-progress appearance="radial" total="60" mx="2xl">
+  <novo-progress appearance="radial" total="60" mx="2xl" data-automation-id="card-sales-progress">
     <novo-progress-bar value="50" color="success"></novo-progress-bar>
     <novo-progress-bar value="40" color="negative"></novo-progress-bar>
     <novo-progress-bar value="30" color="warning"></novo-progress-bar>

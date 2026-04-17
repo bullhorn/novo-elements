@@ -1,4 +1,4 @@
-<div>
+<div data-automation-id="security-permissions">
     <p *bhUnless="'A'">Shown if has permission <strong>A</strong></p>
     <p *bhUnless="'B'">Shown if has permission <strong>B</strong></p>
     <p *bhUnless="'C'">Shown if has permission <strong>C</strong></p>
@@ -7,5 +7,5 @@
     <p *bhUnless="'A && B && C'">Shown if has permissions <strong>A && B && C</strong></p>
     <p *bhUnless="'A || B'">Shown if has permissions <strong>A || B</strong></p>
     <p> Permissions are : <strong>{{ perms | json }}</strong></p>
-    <button (click)="shufflePermissions()">Shuffle</button>
+    <button (click)="shufflePermissions()" data-automation-id="security-shuffle">Shuffle</button>
 </div>

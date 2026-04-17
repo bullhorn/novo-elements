@@ -1,30 +1,30 @@
-<section>
+<section data-automation-id="date-picker-limits-inputs">
   <novo-label>EFFECTIVE START DATE</novo-label>
-  <novo-date-picker-input [(ngModel)]="startDate"></novo-date-picker-input>
+  <novo-date-picker-input [(ngModel)]="startDate" data-automation-id="date-picker-limits-start"></novo-date-picker-input>
   <br/>
   <novo-label>EFFECTIVE END DATE</novo-label>
-  <novo-date-picker-input [(ngModel)]="endDate"></novo-date-picker-input>
+  <novo-date-picker-input [(ngModel)]="endDate" data-automation-id="date-picker-limits-end"></novo-date-picker-input>
 </section>
 
-<section>
+<section data-automation-id="date-picker-limits-values">
   <section>
     <novo-label>Effective Start Date Value:</novo-label>
-    <div>{{ startDate | json }}</div>
+    <div data-automation-id="date-picker-limits-start-value">{{ startDate | json }}</div>
   </section>
   <br/>
   <section>
     <novo-label>Effective End Date Value:</novo-label>
-    <div>{{ endDate | json }}</div>
+    <div data-automation-id="date-picker-limits-end-value">{{ endDate | json }}</div>
   </section>
 </section>
 
-<section>
-  <novo-date-picker [start]="startDate" [end]="endDate" [disabledDateMessage]="tooltip"></novo-date-picker>
+<section data-automation-id="date-picker-limits-picker">
+  <novo-date-picker [start]="startDate" [end]="endDate" [disabledDateMessage]="tooltip" data-automation-id="date-picker-limits-calendar"></novo-date-picker>
 
   <br/><br/>
-  <novo-form [form]="formGroup">
+  <novo-form [form]="formGroup" data-automation-id="date-picker-limits-form">
     <novo-control-group key="horizontal" [initialValue]="initValue" [form]="formGroup" [controls]="controls"></novo-control-group>
   </novo-form>
 
-  <button theme="primary" (click)="updateInitialValue()">Update tooltip</button>
+  <button theme="primary" (click)="updateInitialValue()" data-automation-id="date-picker-limits-update-button">Update tooltip</button>
 </section>
