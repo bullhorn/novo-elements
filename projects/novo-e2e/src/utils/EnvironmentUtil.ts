@@ -19,6 +19,7 @@ export const COMPONENT_URLS = {
     LOADING: 'loading',
     MENU: 'menu',
     NON_IDEAL_STATE: 'non ideal state',
+    PROGRESS: 'progress',
     QUERY_BUILDER: 'query builder',
 };
 
