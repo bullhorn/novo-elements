@@ -1,5 +1,5 @@
-<novo-radio-group appearance="vertical">
-  <novo-radio [checked]="false" name="vertical" value="one" (change)="onChange($event)">Make me anything!</novo-radio>
-  <novo-radio [checked]="true" name="vertical" value="two" (change)="onChange($event)" [disabled]="true">I'm disabled!</novo-radio>
-  <novo-radio [checked]="false" name="vertical" value="three" (change)="onChange($event)">REALLY!</novo-radio>
+<novo-radio-group appearance="vertical" data-automation-id="radio-vertical-group">
+  <novo-radio [checked]="false" name="vertical" value="one" (change)="onChange($event)" data-automation-id="radio-vertical-one">Make me anything!</novo-radio>
+  <novo-radio [checked]="true" name="vertical" value="two" (change)="onChange($event)" [disabled]="true" data-automation-id="radio-vertical-two">I'm disabled!</novo-radio>
+  <novo-radio [checked]="false" name="vertical" value="three" (change)="onChange($event)" data-automation-id="radio-vertical-three">REALLY!</novo-radio>
 </novo-radio-group>

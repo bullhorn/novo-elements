@@ -1,4 +1,4 @@
 <h6>Mixed Options Example</h6>
 <p>Some primary options have no secondary option, some have static secondary options, and some have dynamic secondary options</p>
-<div class="selected-value">Selected Value: {{ mixedPickerValue | json }}</div>
-<novo-picker [config]="mixedPicker" [placeholder]="placeholder" [(ngModel)]="mixedPickerValue" (changed)="onChanged($event)"></novo-picker>
+<div class="selected-value" data-automation-id="picker-mixed-value">Selected Value: {{ mixedPickerValue | json }}</div>
+<novo-picker [config]="mixedPicker" [placeholder]="placeholder" [(ngModel)]="mixedPickerValue" (changed)="onChanged($event)" data-automation-id="picker-mixed-input"></novo-picker>

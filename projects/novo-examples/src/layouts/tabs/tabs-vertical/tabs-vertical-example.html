@@ -1,20 +1,20 @@
-<novo-nav theme="white" [outlet]="colorVert" direction="vertical">
-  <novo-tab>
+<novo-nav theme="white" [outlet]="colorVert" direction="vertical" data-automation-id="tabs-vertical">
+  <novo-tab data-automation-id="tabs-vertical-tab-1">
       <span>
           <i class="bhi-person"></i>Tab 1</span>
   </novo-tab>
-  <novo-tab>
+  <novo-tab data-automation-id="tabs-vertical-tab-2">
       <span>
           <i class="bhi-person"></i>Tab 2</span>
   </novo-tab>
-  <novo-tab [disabled]="true">
+  <novo-tab [disabled]="true" data-automation-id="tabs-vertical-tab-3">
       <span>
           <i class="bhi-person"></i>Tab 3</span>
   </novo-tab>
 </novo-nav>
 
 <novo-nav-outlet #colorVert>
-  <novo-nav-content>
+  <novo-nav-content data-automation-id="tabs-vertical-content-1">
       <h1>Tab 1 Content</h1>
 
       <p>
@@ -33,7 +33,7 @@
           scenester small batch.
       </p>
   </novo-nav-content>
-  <novo-nav-content>
+  <novo-nav-content data-automation-id="tabs-vertical-content-2">
       <h1>Tab 2 Content</h1>
 
       <p>

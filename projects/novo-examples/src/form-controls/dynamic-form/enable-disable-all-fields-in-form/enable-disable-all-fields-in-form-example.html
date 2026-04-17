@@ -1,2 +1,2 @@
-<novo-dynamic-form class="dynamic" [fieldsets]="controls" [(form)]="form" #myform></novo-dynamic-form>
-<button theme="primary" (click)="toggleEnableDisableAllFields()">Toggle fields</button>
+<novo-dynamic-form class="dynamic" [fieldsets]="controls" [(form)]="form" #myform data-automation-id="dynamic-form-toggle"></novo-dynamic-form>
+<button theme="primary" (click)="toggleEnableDisableAllFields()" data-automation-id="dynamic-form-toggle-button">Toggle fields</button>

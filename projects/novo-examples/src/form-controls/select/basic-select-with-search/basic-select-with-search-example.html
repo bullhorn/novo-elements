@@ -1,18 +1,18 @@
 <h3>Single selection</h3>
 <p>
-  <novo-field>
+  <novo-field data-automation-id="select-search-field">
     <novo-label>State</novo-label>
-    <novo-select [formControl]="stateCtrl" placeholder="Select" displayIcon="globe-o" #singleSelect>
+    <novo-select [formControl]="stateCtrl" placeholder="Select" displayIcon="globe-o" #singleSelect data-automation-id="select-search-input">
       <novo-option>
-        <novo-select-search [formControl]="stateFilterCtrl"></novo-select-search>
+        <novo-select-search [formControl]="stateFilterCtrl" data-automation-id="select-search-filter"></novo-select-search>
       </novo-option>
 
-      <novo-option *ngFor="let state of filteredStates | async" [value]="state">
+      <novo-option *ngFor="let state of filteredStates | async; let i = index" [value]="state" [attr.data-automation-id]="'select-search-option-' + i">
         {{state.name}}
       </novo-option>
     </novo-select>
   </novo-field>
 </p>
-<p>
+<p data-automation-id="select-search-result">
   Selected Bank: {{stateCtrl.value?.name}}
 </p>

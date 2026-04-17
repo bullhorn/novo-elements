@@ -1,2 +1,2 @@
-<div class="selected-value">Selected Value: {{value}}</div>
-<novo-chips [closeOnSelect]="true" [source]="formatted" [placeholder]="placeholder" [(ngModel)]="value" (changed)="onChanged($event)"></novo-chips>
+<div class="selected-value" data-automation-id="chips-close-select-value">Selected Value: {{value}}</div>
+<novo-chips [closeOnSelect]="true" [source]="formatted" [placeholder]="placeholder" [(ngModel)]="value" (changed)="onChanged($event)" data-automation-id="chips-close-select-input"></novo-chips>

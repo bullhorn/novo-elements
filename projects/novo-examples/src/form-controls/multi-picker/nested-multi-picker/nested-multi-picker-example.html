@@ -1,9 +1,10 @@
-<div class="selected-value">Selected Departments: <span *ngFor="let item of parentChildValue.departments">{{item}} </span>
-    Selected Users: <span *ngFor="let item of parentChildValue.users">{{item}} </span></div>
+<div class="selected-value" data-automation-id="multi-picker-nested-value">Selected Departments: <span *ngFor="let item of parentChildValue.departments; let i = index" [attr.data-automation-id]="'multi-picker-nested-dept-' + i">{{item}} </span>
+    Selected Users: <span *ngFor="let item of parentChildValue.users; let i = index" [attr.data-automation-id]="'multi-picker-nested-user-' + i">{{item}} </span></div>
 <multi-picker
     [source]="parentChild"
     [placeholder]="placeholder"
     [types]="parentChildTypes"
     [(ngModel)]="parentChildValue"
-    (changed)="onChanged($event)">
+    (changed)="onChanged($event)"
+    data-automation-id="multi-picker-nested">
 </multi-picker>

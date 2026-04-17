@@ -1,14 +1,14 @@
-<header>
-  <novo-nav theme="white" router>
-      <novo-tab-link>
+<header data-automation-id="tabs-router-header">
+  <novo-nav theme="white" router data-automation-id="tabs-router">
+      <novo-tab-link data-automation-id="tabs-router-1">
           <span>
               <i class="bhi-person"></i>Tab 1</span>
       </novo-tab-link>
-      <novo-tab-link>
+      <novo-tab-link data-automation-id="tabs-router-2">
           <span>
               <i class="bhi-person"></i>Tab 2</span>
       </novo-tab-link>
-       <novo-tab-link [disabled]="true">
+       <novo-tab-link [disabled]="true" data-automation-id="tabs-router-3">
           <span>
               <i class="bhi-person"></i>Tab 3</span>
       </novo-tab-link>

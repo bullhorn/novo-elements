@@ -1,8 +1,9 @@
-<div *ngFor="let item of items">
+<div *ngFor="let item of items; let i = index">
   <novo-checkbox
     [label]="item.name"
     [(ngModel)]="item.isChecked"
     [disabled]="item.disabled"
     [indeterminate]="item.indeterminate"
-    (onSelect)="onChange($event, item)"></novo-checkbox>
+    (onSelect)="onChange($event, item)"
+    [attr.data-automation-id]="'checkbox-basic-' + i"></novo-checkbox>
 </div>
