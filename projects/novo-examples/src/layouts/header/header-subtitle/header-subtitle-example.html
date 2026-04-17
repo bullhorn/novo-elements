@@ -1,9 +1,9 @@
-<novo-header [theme]="theme">
-  <novo-action icon="convert" tooltip="Change Theme" (click)="changeTheme()"></novo-action>
-  <novo-action icon="refresh" tooltip="Show Popup" (click)="catchEv('refresh', $event)"></novo-action>
-  <novo-action icon="times" tooltip="Show Popup" (click)="catchEv('close', $event)"></novo-action>
+<novo-header [theme]="theme" data-automation-id="header-subtitle">
+  <novo-action icon="convert" tooltip="Change Theme" (click)="changeTheme()" data-automation-id="header-subtitle-theme"></novo-action>
+  <novo-action icon="refresh" tooltip="Show Popup" (click)="catchEv('refresh', $event)" data-automation-id="header-subtitle-refresh"></novo-action>
+  <novo-action icon="times" tooltip="Show Popup" (click)="catchEv('close', $event)" data-automation-id="header-subtitle-close"></novo-action>
 
-  <novo-icon>{{icon}}</novo-icon>
-  <novo-title>Header</novo-title>
-  <novo-title size="sm">with subtitle</novo-title>
+  <novo-icon data-automation-id="header-subtitle-icon">{{icon}}</novo-icon>
+  <novo-title data-automation-id="header-subtitle-title">Header</novo-title>
+  <novo-title size="sm" data-automation-id="header-subtitle-text">with subtitle</novo-title>
 </novo-header>

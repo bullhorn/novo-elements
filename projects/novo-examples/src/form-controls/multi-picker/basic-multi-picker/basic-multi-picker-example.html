@@ -1,9 +1,10 @@
-<div class="selected-value">Selected States: <span *ngFor="let item of value.states">{{item}} </span>
-    Selected Collaborators: <span *ngFor="let item of value.collaborators">{{item}} </span></div>
+<div class="selected-value" data-automation-id="multi-picker-basic-value">Selected States: <span *ngFor="let item of value.states; let i = index" [attr.data-automation-id]="'multi-picker-basic-state-' + i">{{item}} </span>
+    Selected Collaborators: <span *ngFor="let item of value.collaborators; let i = index" [attr.data-automation-id]="'multi-picker-basic-collaborator-' + i">{{item}} </span></div>
 <multi-picker
     [source]="staticDemo"
     [placeholder]="placeholder"
     [types]="types"
     [(ngModel)]="value"
-    (changed)="onChanged($event)">
+    (changed)="onChanged($event)"
+    data-automation-id="multi-picker-basic">
 </multi-picker>

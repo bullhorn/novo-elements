@@ -1,29 +1,29 @@
-<novo-horizontal-stepper [linear]="isLinear" #stepper>
-  <novo-step [stepControl]="firstFormGroup" label="Fill out your name" theme="candidate" icon="candidate" #step1>
-    <form [formGroup]="firstFormGroup">
-      <input placeholder="Last name, First name" formControlName="firstCtrl" required />
-      <div>Form Valid? {{firstFormGroup?.valid}}</div>
+<novo-horizontal-stepper [linear]="isLinear" #stepper data-automation-id="stepper-horizontal">
+  <novo-step [stepControl]="firstFormGroup" label="Fill out your name" theme="candidate" icon="candidate" #step1 data-automation-id="stepper-step-1">
+    <form [formGroup]="firstFormGroup" data-automation-id="stepper-form-1">
+      <input placeholder="Last name, First name" formControlName="firstCtrl" required data-automation-id="stepper-input-1" />
+      <div data-automation-id="stepper-valid-1">Form Valid? {{firstFormGroup?.valid}}</div>
       <div>
-        <button (click)="next(stepper, step1)">Next</button>
+        <button (click)="next(stepper, step1)" data-automation-id="stepper-next-1">Next</button>
       </div>
     </form>
   </novo-step>
-  <novo-step [stepControl]="secondFormGroup" theme="contact">
-    <form [formGroup]="secondFormGroup">
+  <novo-step [stepControl]="secondFormGroup" theme="contact" data-automation-id="stepper-step-2">
+    <form [formGroup]="secondFormGroup" data-automation-id="stepper-form-2">
       <ng-template novoStepLabel>Fill out your address</ng-template>
-      <input placeholder="Address" formControlName="secondCtrl" required />
+      <input placeholder="Address" formControlName="secondCtrl" required data-automation-id="stepper-input-2" />
       <div>
-        <button (click)="stepper.previous()">Back</button>
-        <button (click)="stepper.next()">Next</button>
+        <button (click)="stepper.previous()" data-automation-id="stepper-back-2">Back</button>
+        <button (click)="stepper.next()" data-automation-id="stepper-next-2">Next</button>
       </div>
     </form>
   </novo-step>
-  <novo-step>
+  <novo-step data-automation-id="stepper-step-3">
     <ng-template novoStepLabel>Done</ng-template>
     You are now done.
     <div>
-      <button novo-button (click)="stepper.previous()">Back</button>
-      <button novo-button (click)="stepper.complete()">Done</button>
+      <button novo-button (click)="stepper.previous()" data-automation-id="stepper-back-3">Back</button>
+      <button novo-button (click)="stepper.complete()" data-automation-id="stepper-complete">Done</button>
     </div>
   </novo-step>
 </novo-horizontal-stepper>

@@ -1,4 +1,4 @@
-<novo-form [form]="form" layout="vertical">
+<novo-form [form]="form" layout="vertical" data-automation-id="fi-messaging-form">
     <div class="novo-form-row">
         <novo-control [form]="form" [control]="controls.tipControl"></novo-control>
     </div>
@@ -12,6 +12,6 @@
         <novo-control [form]="form" [control]="controls.promptControl"></novo-control>
     </div>
 </novo-form>
-<div class="final-value">Form Value - {{ form.value | json }}</div>
-<div class="final-value">Form Dirty - {{ form.dirty | json }}</div>
-<div class="final-value">Is Form Valid? - {{ form.valid | json }}</div>
+<div class="final-value" data-automation-id="fi-messaging-form-value">Form Value - {{ form.value | json }}</div>
+<div class="final-value" data-automation-id="fi-messaging-form-dirty">Form Dirty - {{ form.dirty | json }}</div>
+<div class="final-value" data-automation-id="fi-messaging-form-valid">Is Form Valid? - {{ form.valid | json }}</div>

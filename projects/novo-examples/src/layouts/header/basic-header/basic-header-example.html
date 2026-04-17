@@ -1,23 +1,23 @@
-<header [accent]="theme">
-  <novo-action icon="convert" tooltip="Change Theme" (click)="changeTheme()"></novo-action>
-  <novo-action icon="refresh" tooltip="Show Popup" (click)="catchEv('refresh', $event)"></novo-action>
-  <novo-action icon="times" tooltip="Show Popup" (click)="catchEv('close', $event)"></novo-action>
+<header [accent]="theme" data-automation-id="header-basic">
+  <novo-action icon="convert" tooltip="Change Theme" (click)="changeTheme()" data-automation-id="header-basic-theme"></novo-action>
+  <novo-action icon="refresh" tooltip="Show Popup" (click)="catchEv('refresh', $event)" data-automation-id="header-basic-refresh"></novo-action>
+  <novo-action icon="times" tooltip="Show Popup" (click)="catchEv('close', $event)" data-automation-id="header-basic-close"></novo-action>
 
-  <novo-title larger>
+  <novo-title larger data-automation-id="header-basic-title">
     <novo-icon>{{icon}}</novo-icon>
     <span>Ferdinand del Toro</span>
   </novo-title>
-  <section>
+  <section data-automation-id="header-basic-info">
     Extra Info
   </section>
-  <novo-nav direction="horizontal">
-    <novo-tab>
+  <novo-nav direction="horizontal" data-automation-id="header-basic-nav">
+    <novo-tab data-automation-id="header-basic-overview">
       <span>Overview</span>
     </novo-tab>
-    <novo-tab>
+    <novo-tab data-automation-id="header-basic-activity">
       <span>Activity</span>
     </novo-tab>
-    <novo-tab>
+    <novo-tab data-automation-id="header-basic-email">
       <span>Email</span>
     </novo-tab>
   </novo-nav>

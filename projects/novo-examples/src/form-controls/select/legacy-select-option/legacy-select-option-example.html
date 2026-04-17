@@ -1,9 +1,9 @@
-<novo-field>
-  <novo-label>
+<novo-field data-automation-id="select-legacy-field">
+  <novo-label data-automation-id="select-legacy-value">
     <span class="caption">Selected Value:</span> {{value}}
   </novo-label>
-  <novo-select [placeholder]="placeholder" [(ngModel)]="value">
-    <novo-option *ngFor="let option of options" [value]="option">
+  <novo-select [placeholder]="placeholder" [(ngModel)]="value" data-automation-id="select-legacy-input">
+    <novo-option *ngFor="let option of options; let i = index" [value]="option" [attr.data-automation-id]="'select-legacy-option-' + i">
       {{option}}
     </novo-option>
   </novo-select>

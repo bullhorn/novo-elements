@@ -1,5 +1,5 @@
-<novo-row-chips [source]="rowDemo" [placeholder]="placeholder" [(ngModel)]="rowValue" (changed)="onChanged($event)">
+<novo-row-chips [source]="rowDemo" [placeholder]="placeholder" [(ngModel)]="rowValue" (changed)="onChanged($event)" data-automation-id="chips-row-input">
 </novo-row-chips>
 
 <br />
-<div class="selected-value">Selected Value: {{rowValue | json}}</div>
+<div class="selected-value" data-automation-id="chips-row-value">Selected Value: {{rowValue | json}}</div>

@@ -1,14 +1,14 @@
-<header [theme]="theme">
-  <novo-icon size="2xl">{{icon}}</novo-icon>
-  <novo-title size="2xl">Header</novo-title>
-  <section class="header-content">
-    <novo-search [theme]="theme"></novo-search>
+<header [theme]="theme" data-automation-id="header-search">
+  <novo-icon size="2xl" data-automation-id="header-search-icon">{{icon}}</novo-icon>
+  <novo-title size="2xl" data-automation-id="header-search-title">Header</novo-title>
+  <section class="header-content" data-automation-id="header-search-content">
+    <novo-search [theme]="theme" data-automation-id="header-search-input"></novo-search>
   </section>
 
-  <novo-action icon="convert" tooltip="Change Theme" (click)="changeTheme()"></novo-action>
-  <novo-action icon="refresh" tooltip="Show Popup" (click)="catchEv('refresh', $event)"></novo-action>
-  <novo-action icon="times" tooltip="Show Popup" (click)="catchEv('close', $event)"></novo-action>
+  <novo-action icon="convert" tooltip="Change Theme" (click)="changeTheme()" data-automation-id="header-search-theme"></novo-action>
+  <novo-action icon="refresh" tooltip="Show Popup" (click)="catchEv('refresh', $event)" data-automation-id="header-search-refresh"></novo-action>
+  <novo-action icon="times" tooltip="Show Popup" (click)="catchEv('close', $event)" data-automation-id="header-search-close"></novo-action>
 
 </header>
 <br />
-<novo-checkbox label="Always Open?" [(ngModel)]="isChecked"></novo-checkbox>
+<novo-checkbox label="Always Open?" [(ngModel)]="isChecked" data-automation-id="header-search-always-open"></novo-checkbox>

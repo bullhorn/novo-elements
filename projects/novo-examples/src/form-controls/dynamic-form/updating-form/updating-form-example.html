@@ -1,8 +1,8 @@
-<button theme="secondary" (click)="toggleEnabled()">Toggle Enabled</button>
-<button theme="secondary" (click)="toggleRequired()">Toggle Required</button>
-<button theme="secondary" (click)="markAsInvalid()">Mark As Invalid</button>
+<button theme="secondary" (click)="toggleEnabled()" data-automation-id="dynamic-form-update-enabled">Toggle Enabled</button>
+<button theme="secondary" (click)="toggleRequired()" data-automation-id="dynamic-form-update-required">Toggle Required</button>
+<button theme="secondary" (click)="markAsInvalid()" data-automation-id="dynamic-form-update-invalid">Mark As Invalid</button>
 <br/><br/>
-<novo-dynamic-form layout="vertical" [controls]="updatingFormControls" [(form)]="updatingForm" #updatingFormRef></novo-dynamic-form>
-<div class="final-value">Valid: {{updatingFormRef.isValid | json}}</div>
-<div class="final-value">Values: {{updatingFormRef.values | json}}</div>
-<div class="final-value">Updated Values: {{updatingFormRef.updatedValues() | json}}</div>
+<novo-dynamic-form layout="vertical" [controls]="updatingFormControls" [(form)]="updatingForm" #updatingFormRef data-automation-id="dynamic-form-updating"></novo-dynamic-form>
+<div class="final-value" data-automation-id="dynamic-form-updating-valid">Valid: {{updatingFormRef.isValid | json}}</div>
+<div class="final-value" data-automation-id="dynamic-form-updating-values">Values: {{updatingFormRef.values | json}}</div>
+<div class="final-value" data-automation-id="dynamic-form-updating-updated">Updated Values: {{updatingFormRef.updatedValues() | json}}</div>

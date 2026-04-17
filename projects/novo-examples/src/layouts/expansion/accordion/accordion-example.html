@@ -1,22 +1,24 @@
 <novo-accordion
   [displayMode]="isFlat ? 'flat' : 'default'"
-  [multi]="isMulti">
-  <novo-expansion-panel>
-    <novo-expansion-panel-header>
+  [multi]="isMulti"
+  data-automation-id="accordion">
+  <novo-expansion-panel data-automation-id="accordion-panel-1">
+    <novo-expansion-panel-header data-automation-id="accordion-panel-1-header">
       This is the expansion 1 title
     </novo-expansion-panel-header>
-    <section>
+    <section data-automation-id="accordion-panel-1-nested">
       <novo-accordion
         [displayMode]="isFlat ? 'flat' : 'default'"
-        [multi]="isMulti">
-        <novo-expansion-panel>
-          <novo-expansion-panel-header>
+        [multi]="isMulti"
+        data-automation-id="accordion-nested">
+        <novo-expansion-panel data-automation-id="accordion-nested-1">
+          <novo-expansion-panel-header data-automation-id="accordion-nested-1-header">
             This is the expansion 1 title
           </novo-expansion-panel-header>
           <p>This the expansion 1 content</p>
         </novo-expansion-panel>
-        <novo-expansion-panel>
-          <novo-expansion-panel-header>
+        <novo-expansion-panel data-automation-id="accordion-nested-2">
+          <novo-expansion-panel-header data-automation-id="accordion-nested-2-header">
             This is the expansion 2 title
           </novo-expansion-panel-header>
           <p>This the expansion 2 content</p>
@@ -30,17 +32,17 @@
     </section>
   </novo-expansion-panel>
 
-  <novo-expansion-panel>
-    <novo-expansion-panel-header>
+  <novo-expansion-panel data-automation-id="accordion-panel-2">
+    <novo-expansion-panel-header data-automation-id="accordion-panel-2-header">
       This is the expansion 2 title
     </novo-expansion-panel-header>
     <p>This the expansion 2 content</p>
   </novo-expansion-panel>
 </novo-accordion>
-<div>
+<div data-automation-id="accordion-options">
   <br />
   <span>Flat Expansion</span>
-  <novo-switch theme="grapefruit" [(ngModel)]="isFlat"></novo-switch>
+  <novo-switch theme="grapefruit" [(ngModel)]="isFlat" data-automation-id="accordion-flat-toggle"></novo-switch>
   <span>Multiple Expansion</span>
-  <novo-switch theme="grapefruit" [(ngModel)]="isMulti"></novo-switch>
+  <novo-switch theme="grapefruit" [(ngModel)]="isMulti" data-automation-id="accordion-multi-toggle"></novo-switch>
 </div>

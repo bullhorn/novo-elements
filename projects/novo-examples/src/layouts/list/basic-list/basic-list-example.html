@@ -1,17 +1,17 @@
-<header>
-    <novo-list direction="vertical">
-        <novo-list-item *ngFor="let item of pulseItems">
-            <item-header>
-                <item-avatar [icon]="item.type"></item-avatar>
-                <item-title>{{item.name}}</item-title>
-                <item-header-end>
+<header data-automation-id="list-basic-header">
+    <novo-list direction="vertical" data-automation-id="list-basic">
+        <novo-list-item *ngFor="let item of pulseItems; let i = index" [attr.data-automation-id]="'list-basic-item-' + i">
+            <item-header data-automation-id="list-basic-item-header">
+                <item-avatar [icon]="item.type" data-automation-id="list-basic-item-avatar"></item-avatar>
+                <item-title data-automation-id="list-basic-item-title">{{item.name}}</item-title>
+                <item-header-end data-automation-id="list-basic-item-time">
                     <span>
                         <i class="bhi-clock"></i>
                         {{item.timeAgo | date: 'shortTime'}}
                     </span>
                 </item-header-end>
             </item-header>
-            <item-content direction="vertical">
+            <item-content direction="vertical" data-automation-id="list-basic-item-content">
                 <p>
                     <i *ngIf="item.icon.name" class="{{item.icon.name}} {{item.icon.sentiment}}"></i>
                     {{item.comment}}
