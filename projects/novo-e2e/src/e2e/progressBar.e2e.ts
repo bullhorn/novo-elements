@@ -1,4 +1,3 @@
-import { scrollIntoView } from '../utils/ElementActionUtil';
 import { COMPONENT_URLS, examplesUrl, getURLs } from '../utils/EnvironmentUtil';
 import { elements } from '../utils/SelectorUtil';
 import { verifyPresent, verifyText, verifyClassPresent } from '../utils/VerifyUtil';

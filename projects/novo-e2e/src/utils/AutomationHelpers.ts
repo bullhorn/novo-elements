@@ -39,6 +39,6 @@ export async function acceptAlertIfPresent(): Promise<void> {
     try {
         await browser.acceptAlert();
     } catch (error) {
-        console.log('No alert present.');
+        console.error('No alert present.');
     }
 }
