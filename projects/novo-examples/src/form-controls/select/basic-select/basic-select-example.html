@@ -1,5 +1,5 @@
 <novo-field data-automation-id="select-basic-field-1">
-  <novo-label>
+  <novo-label data-automation-id="select-basic-value-1">
     <span class="caption">Selected Value:</span> {{value}}
   </novo-label>
   <novo-select [placeholder]="placeholder" [(ngModel)]="value" data-automation-id="select-basic-options">
@@ -9,7 +9,7 @@
   </novo-select>
 </novo-field>
 <novo-field data-automation-id="select-basic-field-2">
-  <novo-label>
+  <novo-label data-automation-id="select-basic-value-2">
     <span class="caption">Selected Value:</span> {{withNumbersValue.label}}
   </novo-label>
   <novo-select [options]="withNumbers" [(ngModel)]="withNumbersValue" data-automation-id="select-basic-numbers"></novo-select>

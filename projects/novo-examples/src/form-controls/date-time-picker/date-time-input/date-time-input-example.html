@@ -1,7 +1,7 @@
 <div class="date-picker-demo-side-by-side" data-automation-id="date-time-input-container">
     <p data-automation-id="date-time-input-values">
-        <label data-automation-id="date-time-input-label-1">Date-Time</label> {{(dateTimeInput | date:'medium') || 'N/A'}}
-        <label data-automation-id="date-time-input-label-2">Date-Time 2</label> {{(dateTimeInput2 | date:'medium') || 'N/A'}}
+        <label>Date-Time</label> {{(dateTimeInput | date:'medium') || 'N/A'}}
+        <label>Date-Time 2</label> {{(dateTimeInput2 | date:'medium') || 'N/A'}}
     </p>
     <div data-automation-id="date-time-input-inputs">
         <novo-date-time-picker-input [(ngModel)]="dateTimeInput" data-automation-id="date-time-input-1"></novo-date-time-picker-input>

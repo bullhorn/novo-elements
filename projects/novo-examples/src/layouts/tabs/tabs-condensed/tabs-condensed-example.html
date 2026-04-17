@@ -1,21 +1,21 @@
 <novo-nav theme="white" [outlet]="condensed" condensed="true" data-automation-id="tabs-condensed">
-  <novo-tab>
+  <novo-tab data-automation-id="tabs-condensed-tab-1">
       <span><i class="bhi-person"></i>Tab 1</span>
   </novo-tab>
-  <novo-tab>
+  <novo-tab data-automation-id="tabs-condensed-tab-2">
       <span><i class="bhi-person"></i>Tab 2</span>
   </novo-tab>
-  <novo-tab [disabled]="true">
+  <novo-tab [disabled]="true" data-automation-id="tabs-condensed-tab-3">
       <span><i class="bhi-person"></i>Tab 3</span>
   </novo-tab>
 </novo-nav>
 
 
 <novo-nav-outlet #condensed>
-  <novo-nav-content>
+  <novo-nav-content data-automation-id="tabs-condensed-content-1">
       <h1>Tab 1 Content</h1>
   </novo-nav-content>
-  <novo-nav-content>
+  <novo-nav-content data-automation-id="tabs-condensed-content-2">
       <h1>Tab 2 Content</h1>
   </novo-nav-content>
 </novo-nav-outlet>

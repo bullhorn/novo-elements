@@ -1,12 +1,12 @@
 <div class="date-picker-demo-side-by-side" data-automation-id="multi-date-container">
-  <section data-automation-id="multi-date-picker-section">
+  <section>
     <p>
       <label>Dates</label>
       <span *ngFor="let dt of multi; let i = index" [attr.data-automation-id]="'multi-date-value-' + i">{{(dt | date) || 'N/A'}}</span>
     </p>
     <novo-date-picker [(ngModel)]="multi" mode="multiple" data-automation-id="multi-date-picker"></novo-date-picker>
   </section>
-  <section data-automation-id="multi-date-input-section">
+  <section>
     <novo-multi-date-input [(ngModel)]="input" data-automation-id="multi-date-input"></novo-multi-date-input>
   </section>
 </div>

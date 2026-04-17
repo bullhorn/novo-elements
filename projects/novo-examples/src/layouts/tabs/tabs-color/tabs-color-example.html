@@ -10,15 +10,15 @@
 
   <novo-toolbar-row>
     <novo-nav [outlet]="outlet" direction="horizontal" [(selectedIndex)]="selected" data-automation-id="tabs-color-group">
-      <novo-tab>
+      <novo-tab data-automation-id="tabs-color-tab-1">
         <novo-icon>person</novo-icon>
         <novo-label>Tab 1</novo-label>
       </novo-tab>
-      <novo-tab>
+      <novo-tab data-automation-id="tabs-color-tab-2">
         <novo-icon>person</novo-icon>
         <novo-label>Tab 2</novo-label>
       </novo-tab>
-      <novo-tab disabled>
+      <novo-tab disabled data-automation-id="tabs-color-tab-3">
         <novo-icon>person</novo-icon>
         <novo-label>Tab 3</novo-label>
       </novo-tab>
@@ -28,13 +28,13 @@
 
 
 <novo-nav-outlet #outlet>
-  <novo-nav-content>
+  <novo-nav-content data-automation-id="tabs-color-content-1">
     <h1>Tab 1 Content</h1>
   </novo-nav-content>
-  <novo-nav-content>
+  <novo-nav-content data-automation-id="tabs-color-content-2">
     <h1>Tab 2 Content</h1>
   </novo-nav-content>
-  <novo-nav-content>
+  <novo-nav-content data-automation-id="tabs-color-content-3">
     <h1>Tab 3 Content</h1>
   </novo-nav-content>
 </novo-nav-outlet>

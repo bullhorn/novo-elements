@@ -1,4 +1,4 @@
-<section data-automation-id="date-picker-limits-inputs">
+<section>
   <novo-label>EFFECTIVE START DATE</novo-label>
   <novo-date-picker-input [(ngModel)]="startDate" data-automation-id="date-picker-limits-start"></novo-date-picker-input>
   <br/>
@@ -6,7 +6,7 @@
   <novo-date-picker-input [(ngModel)]="endDate" data-automation-id="date-picker-limits-end"></novo-date-picker-input>
 </section>
 
-<section data-automation-id="date-picker-limits-values">
+<section>
   <section>
     <novo-label>Effective Start Date Value:</novo-label>
     <div data-automation-id="date-picker-limits-start-value">{{ startDate | json }}</div>
@@ -18,7 +18,7 @@
   </section>
 </section>
 
-<section data-automation-id="date-picker-limits-picker">
+<section>
   <novo-date-picker [start]="startDate" [end]="endDate" [disabledDateMessage]="tooltip" data-automation-id="date-picker-limits-calendar"></novo-date-picker>
 
   <br/><br/>

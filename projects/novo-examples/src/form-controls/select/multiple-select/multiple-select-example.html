@@ -1,5 +1,5 @@
 <novo-field data-automation-id="select-multiple-field">
-  <novo-label>Selected Value: <span class="caption">{{selected}}</span></novo-label>
+  <novo-label data-automation-id="select-multiple-value">Selected Value: <span class="caption">{{selected}}</span></novo-label>
   <novo-select [placeholder]="placeholder" [(ngModel)]="selected" multiple data-automation-id="select-multiple-input">
     <novo-option *ngFor="let state of states; let i = index" [value]="state" [attr.data-automation-id]="'select-multiple-option-' + i">{{state}}</novo-option>
   </novo-select>

@@ -7,12 +7,12 @@
   data-automation-id="date-picker-picker">
 </novo-date-picker>
 
-<section data-automation-id="date-picker-value-section">
+<section>
   <novo-label>Selected Values:</novo-label>
   <div data-automation-id="date-picker-value">{{selectedDates | json}}</div>
 </section>
 
-<section data-automation-id="date-picker-options">
+<section>
   <novo-label>Selection mode</novo-label>
   <novo-radio-group #mode appearance="vertical" value="single" data-automation-id="date-picker-mode-group">
     <novo-radio name="mode" value="single" data-automation-id="date-picker-mode-single">single</novo-radio>

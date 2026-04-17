@@ -1,11 +1,11 @@
 <div class="date-picker-demo-side-by-side" data-automation-id="date-time-container">
-  <section data-automation-id="date-time-12hr">
-    <p>
+  <section>
+    <p data-automation-id="date-time-value-12hr">
       <label>Date-Time</label> {{(dateTime | date:'medium') || 'N/A'}}
     </p>
     <novo-date-time-picker [(ngModel)]="dateTime" data-automation-id="date-time-picker-12hr"></novo-date-time-picker>
   </section>
-  <section data-automation-id="date-time-24hr">
+  <section>
     <label>24hr Time</label>
     <novo-date-time-picker [(ngModel)]="dateTime" military="true" data-automation-id="date-time-picker-24hr"></novo-date-time-picker>
   </section>
