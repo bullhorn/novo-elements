@@ -21,6 +21,7 @@ export const COMPONENT_URLS = {
     NON_IDEAL_STATE: 'non ideal state',
     PROGRESS: 'progress',
     QUERY_BUILDER: 'query builder',
+    SWITCH: 'switch',
 };
 
 export function examplesUrl(component: string): string {
