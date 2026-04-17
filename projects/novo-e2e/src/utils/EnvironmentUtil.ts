@@ -31,3 +31,8 @@ export function componentsUrl(component: string): string {
     const urls = getURLs();
     return `${urls.BASE}${component}`;
 }
+
+export function formControlsExamplesUrl(control: string): string {
+    const baseUrl = (global as any).E2E_BASE_URL || 'https://bullhorn.github.io/novo-elements/docs';
+    return `${baseUrl}/#/form-controls/${control}/examples`;
+}
