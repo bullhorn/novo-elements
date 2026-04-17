@@ -3,6 +3,7 @@ import { COMPONENT_URLS, examplesUrl, getURLs } from '../utils/EnvironmentUtil';
 import { elements } from '../utils/SelectorUtil';
 import { verifyPresent, verifyText, verifyDisabled, verifyEnabled } from '../utils/VerifyUtil';
 import { menu, closeMenu } from '../utils/MenuUtil';
+import { acceptAlertIfPresent } from '../utils/AutomationHelpers';
 
 describe('Menu Demo Page', () => {
     const url = examplesUrl(COMPONENT_URLS.MENU);
@@ -49,14 +50,14 @@ describe('Menu Demo Page', () => {
         it('should allow clicking preview menu item action', async () => {
             await click(menu.basicMenuButton);
             await click(menu.basicMenuPreview);
-            await browser.acceptAlert();
+            await acceptAlertIfPresent();
             await closeMenu();
         });
 
         it('should allow clicking delete menu item action', async () => {
             await click(menu.basicMenuButton);
             await click(menu.basicMenuDelete);
-            await browser.acceptAlert();
+            await acceptAlertIfPresent();
             await closeMenu();
         });
     });
@@ -75,14 +76,14 @@ describe('Menu Demo Page', () => {
         it('should allow clicking icon menu preview action', async () => {
             await click(menu.iconMenuButton);
             await click(menu.iconMenuPreview);
-            await browser.acceptAlert();
+            await acceptAlertIfPresent();
             await closeMenu();
         });
 
         it('should allow clicking icon menu delete action', async () => {
             await click(menu.iconMenuButton);
             await click(menu.iconMenuDelete);
-            await browser.acceptAlert();
+            await acceptAlertIfPresent();
             await closeMenu();
         });
     });
@@ -110,7 +111,7 @@ describe('Menu Demo Page', () => {
         it('should allow clicking nested menu preview action', async () => {
             await click(menu.nestedMenuButton);
             await click(menu.nestedMenuPreview);
-            await browser.acceptAlert();
+            await acceptAlertIfPresent();
             await closeMenu();
         });
     });
@@ -138,7 +139,7 @@ describe('Menu Demo Page', () => {
         it('should allow clicking context menu preview for apples', async () => {
             await click(menu.contextMenuButton('apple'));
             await click(menu.contextMenuPreview);
-            await browser.acceptAlert();
+            await acceptAlertIfPresent();
             await closeMenu();
         });
 
@@ -154,7 +155,7 @@ describe('Menu Demo Page', () => {
         it('should allow clicking context menu preview for oranges', async () => {
             await click(menu.contextMenuButton('orange'));
             await click(menu.contextMenuPreview);
-            await browser.acceptAlert();
+            await acceptAlertIfPresent();
             await closeMenu();
         });
     });
