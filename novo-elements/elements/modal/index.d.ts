@@ -79,7 +79,6 @@ declare class NovoModalModule {
 declare class NovoModalService {
     private injector;
     private overlay;
-    _parentViewContainer: ViewContainerRef;
     overlayRef: OverlayRef;
     set parentViewContainer(view: ViewContainerRef);
     constructor(injector: Injector, overlay: Overlay);

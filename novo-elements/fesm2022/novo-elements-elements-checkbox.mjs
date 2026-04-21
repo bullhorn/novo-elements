@@ -185,8 +185,8 @@ class NovoCheckboxElement {
             nativeCheckbox.nativeElement.indeterminate = value;
         }
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoCheckboxElement, deps: [{ token: i0.ChangeDetectorRef }, { token: i1.FocusMonitor }, { token: 'tabindex', attribute: true }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.17", type: NovoCheckboxElement, isStandalone: false, selector: "novo-checkbox", inputs: { ariaLabel: ["aria-label", "ariaLabel"], ariaLabelledby: ["aria-labelledby", "ariaLabelledby"], ariaDescribedby: ["aria-describedby", "ariaDescribedby"], id: "id", name: "name", label: "label", disabled: "disabled", layoutOptions: "layoutOptions", color: "color", value: "value", tabIndex: "tabIndex", required: "required", checked: "checked", indeterminate: "indeterminate" }, outputs: { change: "change", indeterminateChange: "indeterminateChange", onSelect: "onSelect" }, host: { properties: { "class.has-label": "label" }, classAttribute: "novo-checkbox" }, providers: [CHECKBOX_VALUE_ACCESSOR], viewQueries: [{ propertyName: "_inputElement", first: true, predicate: ["input"], descendants: true }], ngImport: i0, template: `
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoCheckboxElement, deps: [{ token: i0.ChangeDetectorRef }, { token: i1.FocusMonitor }, { token: 'tabindex', attribute: true }], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.18", type: NovoCheckboxElement, isStandalone: false, selector: "novo-checkbox", inputs: { ariaLabel: ["aria-label", "ariaLabel"], ariaLabelledby: ["aria-labelledby", "ariaLabelledby"], ariaDescribedby: ["aria-describedby", "ariaDescribedby"], id: "id", name: "name", label: "label", disabled: "disabled", layoutOptions: "layoutOptions", color: "color", value: "value", tabIndex: "tabIndex", required: "required", checked: "checked", indeterminate: "indeterminate" }, outputs: { change: "change", indeterminateChange: "indeterminateChange", onSelect: "onSelect" }, host: { properties: { "class.has-label": "label" }, classAttribute: "novo-checkbox" }, providers: [CHECKBOX_VALUE_ACCESSOR], viewQueries: [{ propertyName: "_inputElement", first: true, predicate: ["input"], descendants: true }], ngImport: i0, template: `
     <div class="novo-checkbox-group" [class.checked]="checked" [class.disabled]="disabled">
       <input
         #input
@@ -230,7 +230,7 @@ __decorate([
     __metadata("design:type", Boolean),
     __metadata("design:paramtypes", [Boolean])
 ], NovoCheckboxElement.prototype, "indeterminate", null);
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoCheckboxElement, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoCheckboxElement, decorators: [{
             type: Component,
             args: [{ selector: 'novo-checkbox', providers: [CHECKBOX_VALUE_ACCESSOR], template: `
     <div class="novo-checkbox-group" [class.checked]="checked" [class.disabled]="disabled">
@@ -379,8 +379,8 @@ class NovoCheckListElement {
     setDisabledState(disabled) {
         this.disabled = disabled;
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoCheckListElement, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.17", type: NovoCheckListElement, isStandalone: false, selector: "novo-check-list", inputs: { name: "name", options: "options", disabled: "disabled" }, outputs: { onSelect: "onSelect" }, providers: [CHECKLIST_VALUE_ACCESSOR], ngImport: i0, template: `
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoCheckListElement, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.18", type: NovoCheckListElement, isStandalone: false, selector: "novo-check-list", inputs: { name: "name", options: "options", disabled: "disabled" }, outputs: { onSelect: "onSelect" }, providers: [CHECKLIST_VALUE_ACCESSOR], ngImport: i0, template: `
     <div
       class="novo-checkbox-group"
       *ngFor="let option of _options; let i = index"
@@ -404,7 +404,7 @@ class NovoCheckListElement {
     </div>
   `, isInline: true, styles: [":host{display:flex;flex-flow:row wrap;gap:1rem}:host.hasLabel [class*=-group]{margin-right:15px}:host .novo-checkbox-group{cursor:pointer;position:relative}:host .novo-checkbox-group:hover:not(.disabled) label i.bhi-checkbox-empty,:host .novo-checkbox-group:hover:not(.disabled) label i.bhi-radio-empty{color:#4a89dc}:host .novo-checkbox-group.checked label{color:var(--text-main)}:host .novo-checkbox-group.checked label i{animation:iconEnter .16s ease-in-out}:host .novo-checkbox-group.disabled{pointer-events:auto}:host .novo-checkbox-group.disabled label{cursor:not-allowed;opacity:.4}:host .novo-checkbox-group input[type=checkbox]{appearance:none!important;height:0!important;border:none!important;position:absolute}:host .novo-checkbox-group input[type=checkbox]:focus+label i.bhi-checkbox-empty,:host .novo-checkbox-group input[type=checkbox]:focus+label i.bhi-checkbox-filled{color:#4a89dc}:host .novo-checkbox-group label{color:#868686;margin-left:0;cursor:pointer;transition:all .2s ease-in-out;display:flex;align-items:baseline}:host .novo-checkbox-group label i{margin-right:5px;transition:all .2s ease-in-out}:host .novo-checkbox-group label i.bhi-checkbox-empty,:host .novo-checkbox-group label i.bhi-radio-empty,:host .novo-checkbox-group label i.bhi-circle-o{color:#d2d2d2}:host .novo-checkbox-group label i.bhi-check{background:#d2d2d2;color:#fff;padding:.15em 0 0 .3em;font-size:1em;width:20px;height:20px;border-radius:50%}:host .novo-checkbox-group label i.bhi-checkbox-filled,:host .novo-checkbox-group label i.bhi-radio-filled{color:#4a89dc}:host .novo-checkbox-group label span{display:inline-block}\n"], dependencies: [{ kind: "directive", type: i1$1.NgClass, selector: "[ngClass]", inputs: ["class", "ngClass"] }, { kind: "directive", type: i1$1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i2.CheckboxControlValueAccessor, selector: "input[type=checkbox][formControlName],input[type=checkbox][formControl],input[type=checkbox][ngModel]" }, { kind: "directive", type: i2.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i2.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoCheckListElement, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoCheckListElement, decorators: [{
             type: Component,
             args: [{ selector: 'novo-check-list', providers: [CHECKLIST_VALUE_ACCESSOR], template: `
     <div
@@ -440,11 +440,11 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImpo
             }] } });
 
 class NovoCheckboxModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoCheckboxModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.3.17", ngImport: i0, type: NovoCheckboxModule, declarations: [NovoCheckboxElement, NovoCheckListElement], imports: [CommonModule, A11yModule, FormsModule], exports: [NovoCheckboxElement, NovoCheckListElement] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoCheckboxModule, imports: [CommonModule, A11yModule, FormsModule] }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoCheckboxModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.3.18", ngImport: i0, type: NovoCheckboxModule, declarations: [NovoCheckboxElement, NovoCheckListElement], imports: [CommonModule, A11yModule, FormsModule], exports: [NovoCheckboxElement, NovoCheckListElement] }); }
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoCheckboxModule, imports: [CommonModule, A11yModule, FormsModule] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoCheckboxModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoCheckboxModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [CommonModule, A11yModule, FormsModule],

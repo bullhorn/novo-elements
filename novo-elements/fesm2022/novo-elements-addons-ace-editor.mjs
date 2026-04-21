@@ -1,7 +1,7 @@
 import * as i0 from '@angular/core';
 import { forwardRef, EventEmitter, Output, Input, Component, NgModule } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import * as ace from 'brace';
+import { edit } from 'brace';
 import 'brace/ext/language_tools.js';
 import 'brace/mode/javascript';
 import 'brace/theme/chrome';
@@ -54,7 +54,7 @@ class NovoAceEditor {
     }
     initializeEditor() {
         const el = this.elementRef.nativeElement;
-        this.editor = ace.edit(el);
+        this.editor = edit(el);
         this.editor.$blockScrolling = Infinity;
     }
     initializeOptions() {
@@ -109,10 +109,10 @@ class NovoAceEditor {
     registerOnTouched(fn) {
         this.onTouched = fn;
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoAceEditor, deps: [{ token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.17", type: NovoAceEditor, isStandalone: false, selector: "novo-ace-editor", inputs: { theme: "theme", options: "options", mode: "mode", name: "name" }, outputs: { blur: "blur", focus: "focus" }, providers: [ACE_VALUE_ACCESSOR], ngImport: i0, template: '', isInline: true, styles: [":host{display:block;width:100%;min-height:200px}\n"] }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoAceEditor, deps: [{ token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.18", type: NovoAceEditor, isStandalone: false, selector: "novo-ace-editor", inputs: { theme: "theme", options: "options", mode: "mode", name: "name" }, outputs: { blur: "blur", focus: "focus" }, providers: [ACE_VALUE_ACCESSOR], ngImport: i0, template: '', isInline: true, styles: [":host{display:block;width:100%;min-height:200px}\n"] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoAceEditor, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoAceEditor, decorators: [{
             type: Component,
             args: [{ selector: 'novo-ace-editor', template: '', providers: [ACE_VALUE_ACCESSOR], standalone: false, styles: [":host{display:block;width:100%;min-height:200px}\n"] }]
         }], ctorParameters: () => [{ type: i0.ElementRef }], propDecorators: { theme: [{
@@ -131,11 +131,11 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImpo
 
 // NG2
 class NovoAceEditorModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoAceEditorModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.3.17", ngImport: i0, type: NovoAceEditorModule, declarations: [NovoAceEditor], imports: [CommonModule], exports: [NovoAceEditor] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoAceEditorModule, imports: [CommonModule] }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoAceEditorModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.3.18", ngImport: i0, type: NovoAceEditorModule, declarations: [NovoAceEditor], imports: [CommonModule], exports: [NovoAceEditor] }); }
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoAceEditorModule, imports: [CommonModule] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoAceEditorModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoAceEditorModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [CommonModule],

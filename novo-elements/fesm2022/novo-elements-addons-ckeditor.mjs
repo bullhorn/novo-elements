@@ -1,6 +1,7 @@
 import * as i0 from '@angular/core';
 import { forwardRef, EventEmitter, Input, ViewChild, Output, Component, NgModule } from '@angular/core';
 import { NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
+import { fixCkEditorInputEvent } from 'novo-elements/utils';
 import { CommonModule } from '@angular/common';
 
 // NG2
@@ -48,6 +49,7 @@ class NovoCKEditorElement {
     ngOnDestroy() {
         if (this.instance) {
             this.instance.focusManager.blur(true); // Remove focus from editor
+            this._ckEditorFixRemoveListener?.();
             setTimeout(() => {
                 this.instance.removeAllListeners();
                 const aInstance = CKEDITOR.instances[this.instance.name];
@@ -84,6 +86,7 @@ class NovoCKEditorElement {
         }
         // CKEditor replace textarea
         this.instance = CKEDITOR.replace(this.host.nativeElement, config);
+        this._ckEditorFixRemoveListener = fixCkEditorInputEvent(this.instance);
         // Set initial value
         this.instance.setData(this.value);
         // listen for instanceReady event
@@ -217,10 +220,10 @@ class NovoCKEditorElement {
         const trimmedText = text.trim();
         this.instance.insertText(trimmedText);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoCKEditorElement, deps: [{ token: i0.NgZone }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.17", type: NovoCKEditorElement, isStandalone: false, selector: "novo-editor", inputs: { config: "config", debounce: "debounce", name: "name", minimal: "minimal", startupFocus: "startupFocus", fileBrowserImageUploadUrl: "fileBrowserImageUploadUrl", disabled: "disabled", value: "value" }, outputs: { change: "change", ready: "ready", blur: "blur", focus: "focus", paste: "paste", loaded: "loaded" }, providers: [CKEDITOR_CONTROL_VALUE_ACCESSOR], viewQueries: [{ propertyName: "host", first: true, predicate: ["host"], descendants: true }], ngImport: i0, template: '<textarea [name]="name" [id]="name" #host></textarea>', isInline: true, styles: [":host ::ng-deep .cke{font:inherit!important;box-shadow:none;border-color:var(--background-muted)}:host ::ng-deep .cke .cke_top,:host ::ng-deep .cke .cke_bottom{background:var(--background-muted) none;box-shadow:none}:host ::ng-deep .cke .cke_bottom{border-top:none}.cke_dialog_background_cover{background-color:#000!important}.cke_dialog .cke_dialog_title{text-shadow:none;background:var(--background-muted) none;box-shadow:none;border-bottom:none}.cke_dialog .cke_dialog_footer{text-shadow:none;background:var(--background-muted) none;box-shadow:none;border-top:none}:host-context(.theme-dark) ::ng-deep .cke_button{filter:invert(1)}:host-context(.theme-dark) ::ng-deep .cke_combo a.cke_combo_button:hover,:host-context(.theme-dark) ::ng-deep .cke_combo a.cke_combo_button:active,:host-context(.theme-dark) ::ng-deep .cke_combo a.cke_combo_button:focus,:host-context(.theme-dark) ::ng-deep .cke_combo a.cke_combo_button.cke_combo_on{background:var(--background-main);border:1px solid var(--border)}:host-context(.theme-dark) ::ng-deep .cke_combo a.cke_combo_button .cke_combo_text{color:#fff}:host-context(.theme-dark) ::ng-deep .cke_combo a.cke_combo_button .cke_combo_arrow{border-top-color:#fff}\n"] }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoCKEditorElement, deps: [{ token: i0.NgZone }], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.18", type: NovoCKEditorElement, isStandalone: false, selector: "novo-editor", inputs: { config: "config", debounce: "debounce", name: "name", minimal: "minimal", startupFocus: "startupFocus", fileBrowserImageUploadUrl: "fileBrowserImageUploadUrl", disabled: "disabled", value: "value" }, outputs: { change: "change", ready: "ready", blur: "blur", focus: "focus", paste: "paste", loaded: "loaded" }, providers: [CKEDITOR_CONTROL_VALUE_ACCESSOR], viewQueries: [{ propertyName: "host", first: true, predicate: ["host"], descendants: true }], ngImport: i0, template: '<textarea [name]="name" [id]="name" #host></textarea>', isInline: true, styles: [":host ::ng-deep .cke{font:inherit!important;box-shadow:none;border-color:var(--background-muted)}:host ::ng-deep .cke .cke_top,:host ::ng-deep .cke .cke_bottom{background:var(--background-muted) none;box-shadow:none}:host ::ng-deep .cke .cke_bottom{border-top:none}.cke_dialog_background_cover{background-color:#000!important}.cke_dialog .cke_dialog_title{text-shadow:none;background:var(--background-muted) none;box-shadow:none;border-bottom:none}.cke_dialog .cke_dialog_footer{text-shadow:none;background:var(--background-muted) none;box-shadow:none;border-top:none}:host-context(.theme-dark) ::ng-deep .cke_button{filter:invert(1)}:host-context(.theme-dark) ::ng-deep .cke_combo a.cke_combo_button:hover,:host-context(.theme-dark) ::ng-deep .cke_combo a.cke_combo_button:active,:host-context(.theme-dark) ::ng-deep .cke_combo a.cke_combo_button:focus,:host-context(.theme-dark) ::ng-deep .cke_combo a.cke_combo_button.cke_combo_on{background:var(--background-main);border:1px solid var(--border)}:host-context(.theme-dark) ::ng-deep .cke_combo a.cke_combo_button .cke_combo_text{color:#fff}:host-context(.theme-dark) ::ng-deep .cke_combo a.cke_combo_button .cke_combo_arrow{border-top-color:#fff}\n"] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoCKEditorElement, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoCKEditorElement, decorators: [{
             type: Component,
             args: [{ selector: 'novo-editor', providers: [CKEDITOR_CONTROL_VALUE_ACCESSOR], template: '<textarea [name]="name" [id]="name" #host></textarea>', standalone: false, styles: [":host ::ng-deep .cke{font:inherit!important;box-shadow:none;border-color:var(--background-muted)}:host ::ng-deep .cke .cke_top,:host ::ng-deep .cke .cke_bottom{background:var(--background-muted) none;box-shadow:none}:host ::ng-deep .cke .cke_bottom{border-top:none}.cke_dialog_background_cover{background-color:#000!important}.cke_dialog .cke_dialog_title{text-shadow:none;background:var(--background-muted) none;box-shadow:none;border-bottom:none}.cke_dialog .cke_dialog_footer{text-shadow:none;background:var(--background-muted) none;box-shadow:none;border-top:none}:host-context(.theme-dark) ::ng-deep .cke_button{filter:invert(1)}:host-context(.theme-dark) ::ng-deep .cke_combo a.cke_combo_button:hover,:host-context(.theme-dark) ::ng-deep .cke_combo a.cke_combo_button:active,:host-context(.theme-dark) ::ng-deep .cke_combo a.cke_combo_button:focus,:host-context(.theme-dark) ::ng-deep .cke_combo a.cke_combo_button.cke_combo_on{background:var(--background-main);border:1px solid var(--border)}:host-context(.theme-dark) ::ng-deep .cke_combo a.cke_combo_button .cke_combo_text{color:#fff}:host-context(.theme-dark) ::ng-deep .cke_combo a.cke_combo_button .cke_combo_arrow{border-top-color:#fff}\n"] }]
         }], ctorParameters: () => [{ type: i0.NgZone }], propDecorators: { config: [{
@@ -258,11 +261,11 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImpo
 
 // NG2
 class NovoNovoCKEditorModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoNovoCKEditorModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.3.17", ngImport: i0, type: NovoNovoCKEditorModule, declarations: [NovoCKEditorElement], imports: [CommonModule, FormsModule], exports: [NovoCKEditorElement] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoNovoCKEditorModule, imports: [CommonModule, FormsModule] }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoNovoCKEditorModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.3.18", ngImport: i0, type: NovoNovoCKEditorModule, declarations: [NovoCKEditorElement], imports: [CommonModule, FormsModule], exports: [NovoCKEditorElement] }); }
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoNovoCKEditorModule, imports: [CommonModule, FormsModule] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoNovoCKEditorModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoNovoCKEditorModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [CommonModule, FormsModule],

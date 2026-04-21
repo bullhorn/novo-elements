@@ -399,6 +399,8 @@ declare function getDayViewHourGrid({ viewDate, hourSegments, dayStart, dayEnd, 
     dayEnd: any;
 }): DayViewHour[];
 
+declare function fixCkEditorInputEvent(ckEditorInstance: any): () => void;
+
 interface RGB {
     r: number;
     g: number;
@@ -1627,5 +1629,5 @@ declare class OutsideClick implements OnDestroy {
     static ɵprov: i0.ɵɵInjectableDeclaration<OutsideClick>;
 }
 
-export { AppBridge, AppBridgeHandler, AppBridgeService, BaseRenderer, BooleanInput, COUNTRIES, CalendarEventResponse, Can, Color, DateRange, DateUtil, Deferred, DevAppBridge, DevAppBridgeService, HTTP_VERBS, Helpers, Key, KeyCodes, MESSAGE_TYPES, OutsideClick, binarySearch, can, convertTokens, findByCountryCode, findByCountryId, findByCountryName, formatZonedTime, getCountries, getDayView, getDayViewHourGrid, getMonthView, getStateObjects, getStates, getWeekView, getWeekViewEventOffset, getWeekViewHeader, isAlphaNumeric, legacyParse, notify, splitDateString };
+export { AppBridge, AppBridgeHandler, AppBridgeService, BaseRenderer, BooleanInput, COUNTRIES, CalendarEventResponse, Can, Color, DateRange, DateUtil, Deferred, DevAppBridge, DevAppBridgeService, HTTP_VERBS, Helpers, Key, KeyCodes, MESSAGE_TYPES, OutsideClick, binarySearch, can, convertTokens, findByCountryCode, findByCountryId, findByCountryName, fixCkEditorInputEvent, formatZonedTime, getCountries, getDayView, getDayViewHourGrid, getMonthView, getStateObjects, getStates, getWeekView, getWeekViewEventOffset, getWeekViewHeader, isAlphaNumeric, legacyParse, notify, splitDateString };
 export type { AlleyLinkColors, CalendarEvent, CalendarEventTimesChangedEvent, Country, DataTableRangeModel, DateLike, DateParseOptions, DatePickerSelectModes, DatePickerValueFormats, Day, DayView, DayViewEvent, DayViewHour, DayViewHourSegment, DeferredPromise, EventAction, EventColor, GetDayViewArgs, GetEventsInPeriodArgs, HSL, HSLA, HSV, HSVA, HttpVerb, IAppBridgeOpenEvent, IAppBridgeOpenListEvent, IAppBridgeRequestDataEvent, IsEventInPeriodArgs, LegacyParseOptions, MessageType$1 as MessageType, MonthView, MonthViewDay, MosaicLists, NovoApps, NovoDataType, NovoDateSelectEvent, NovoDateSelectionStrategy, NovoMonthSelectEvent, NovoYearSelectEvent, OverlayDate, PostRobotEvent, RGB, RGBA, RangeModel, State, WeekDay, WeekViewEvent, WeekViewEventRow, modelTypes, rangeSelectModes };

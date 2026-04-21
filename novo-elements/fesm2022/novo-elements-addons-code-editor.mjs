@@ -102,10 +102,10 @@ class NovoCodeEditor {
     setDisabledState(isDisabled) {
         this.disabled = isDisabled;
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoCodeEditor, deps: [{ token: i0.ElementRef }, { token: i0.DestroyRef }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.17", type: NovoCodeEditor, isStandalone: false, selector: "novo-code-editor", inputs: { theme: "theme", lineNumbers: "lineNumbers", name: "name", mode: "mode" }, outputs: { blur: "blur", focus: "focus" }, host: { listeners: { "focus": "onFocus()", "blur": "onBlur()" }, properties: { "class.editor-disabled": "this.disabled" } }, providers: [CODE_EDITOR_VALUE_ACCESSOR], viewQueries: [{ propertyName: "editorRoot", first: true, predicate: ["editorRoot"], descendants: true }], ngImport: i0, template: '', isInline: true, styles: [":host{height:200px;display:block;overflow:auto}\n"] }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoCodeEditor, deps: [{ token: i0.ElementRef }, { token: i0.DestroyRef }], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.18", type: NovoCodeEditor, isStandalone: false, selector: "novo-code-editor", inputs: { theme: "theme", lineNumbers: "lineNumbers", name: "name", mode: "mode" }, outputs: { blur: "blur", focus: "focus" }, host: { listeners: { "focus": "onFocus()", "blur": "onBlur()" }, properties: { "class.editor-disabled": "this.disabled" } }, providers: [CODE_EDITOR_VALUE_ACCESSOR], viewQueries: [{ propertyName: "editorRoot", first: true, predicate: ["editorRoot"], descendants: true }], ngImport: i0, template: '', isInline: true, styles: [":host{height:200px;display:block;overflow:auto}\n"] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoCodeEditor, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoCodeEditor, decorators: [{
             type: Component,
             args: [{ selector: 'novo-code-editor', template: '', providers: [CODE_EDITOR_VALUE_ACCESSOR], standalone: false, styles: [":host{height:200px;display:block;overflow:auto}\n"] }]
         }], ctorParameters: () => [{ type: i0.ElementRef }, { type: i0.DestroyRef }], propDecorators: { theme: [{
@@ -135,11 +135,11 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImpo
             }] } });
 
 class NovoCodeEditorModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoCodeEditorModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.3.17", ngImport: i0, type: NovoCodeEditorModule, declarations: [NovoCodeEditor], imports: [CommonModule, FormsModule], exports: [NovoCodeEditor] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoCodeEditorModule, imports: [CommonModule, FormsModule] }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoCodeEditorModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.3.18", ngImport: i0, type: NovoCodeEditorModule, declarations: [NovoCodeEditor], imports: [CommonModule, FormsModule], exports: [NovoCodeEditor] }); }
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoCodeEditorModule, imports: [CommonModule, FormsModule] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoCodeEditorModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoCodeEditorModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [CommonModule, FormsModule],

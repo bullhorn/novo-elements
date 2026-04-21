@@ -312,6 +312,7 @@ declare class ConditionBuilderComponent implements OnInit, OnChanges, AfterConte
     groupIndex: number;
     addressConfig: AddressCriteriaConfig;
     dateConfig: DateCriteriaConfig;
+    allowEmptyField: boolean;
     hideOperator: i0.InputSignal<boolean>;
     conditionType: i0.InputSignal<unknown>;
     inputConfig: i0.InputSignal<QueryBuilderConfig>;
@@ -343,15 +344,32 @@ declare class ConditionBuilderComponent implements OnInit, OnChanges, AfterConte
      */
     changeFieldOptions(fieldConfig: FieldConfig<BaseFieldDef>): void;
     /**
-     * Resets the input and operator view containers, regenerates the field templates,
-     * and marks the component for change detection.
+     * Resets the input and operator view containers and marks the component for change detection.
      *
      * Use this method after updating form controls to reinitialize the input and
      * operator fields so that the view reflects the latest form control changes.
      *
+     * @param recreateTemplates - If true (default), regenerates the field templates.
+     *                           If false, only clears the outlets without recreating templates.
      * @returns void
      */
-    resetInputAndOperator(): void;
+    resetInputAndOperator(recreateTemplates?: boolean): void;
+    /**
+     * Clears the entire condition (field, operator, value) and resets the condition builder UI.
+     *
+     * This method performs a complete reset of the condition builder:
+     * - Clears all form values (field, operator, value, supportingValue)
+     * - Allows empty field selection (prevents auto-restoration to default)
+     * - Resets the field search term
+     * - Clears internal state (_lastContext) to force re-detection of field changes
+     * - Updates field selection and clears UI outlets
+     *
+     * Use this method when you need to completely clear a condition and start fresh,
+     * such as when toggling a filter off or resetting a form group.
+     *
+     * @returns void
+     */
+    clearCondition(): void;
     getField(): BaseFieldDef;
     getDefaultField(): string;
     updateFieldSelection(): void;
@@ -362,7 +380,7 @@ declare class ConditionBuilderComponent implements OnInit, OnChanges, AfterConte
     private createFieldOperators;
     private createFieldInput;
     static ɵfac: i0.ɵɵFactoryDeclaration<ConditionBuilderComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<ConditionBuilderComponent, "novo-condition-builder", never, { "label": { "alias": "label"; "required": false; }; "scope": { "alias": "scope"; "required": false; }; "andIndex": { "alias": "andIndex"; "required": false; }; "groupIndex": { "alias": "groupIndex"; "required": false; }; "addressConfig": { "alias": "addressConfig"; "required": false; }; "dateConfig": { "alias": "dateConfig"; "required": false; }; "hideOperator": { "alias": "hideOperator"; "required": false; "isSignal": true; }; "conditionType": { "alias": "conditionType"; "required": false; "isSignal": true; }; "inputConfig": { "alias": "config"; "required": false; "isSignal": true; }; "inputEditTypeFn": { "alias": "editTypeFn"; "required": false; "isSignal": true; }; }, {}, never, ["*"], false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<ConditionBuilderComponent, "novo-condition-builder", never, { "label": { "alias": "label"; "required": false; }; "scope": { "alias": "scope"; "required": false; }; "andIndex": { "alias": "andIndex"; "required": false; }; "groupIndex": { "alias": "groupIndex"; "required": false; }; "addressConfig": { "alias": "addressConfig"; "required": false; }; "dateConfig": { "alias": "dateConfig"; "required": false; }; "allowEmptyField": { "alias": "allowEmptyField"; "required": false; }; "hideOperator": { "alias": "hideOperator"; "required": false; "isSignal": true; }; "conditionType": { "alias": "conditionType"; "required": false; "isSignal": true; }; "inputConfig": { "alias": "config"; "required": false; "isSignal": true; }; "inputEditTypeFn": { "alias": "editTypeFn"; "required": false; "isSignal": true; }; }, {}, never, ["*"], false, never>;
 }
 
 declare abstract class AbstractConditionFieldDef implements OnDestroy, OnInit, AfterViewInit {

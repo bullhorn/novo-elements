@@ -114,8 +114,8 @@ class NovoDateTimePickerElement {
     registerOnTouched(fn) {
         this._onTouched = fn;
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoDateTimePickerElement, deps: [{ token: i1.NovoLabelService }, { token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.17", type: NovoDateTimePickerElement, isStandalone: false, selector: "novo-date-time-picker", inputs: { defaultTime: "defaultTime", minYear: "minYear", maxYear: "maxYear", start: "start", end: "end", military: "military", weekStart: "weekStart", disabledDateMessage: "disabledDateMessage" }, outputs: { onSelect: "onSelect" }, providers: [DATE_TIME_PICKER_VALUE_ACCESSOR], ngImport: i0, template: `
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoDateTimePickerElement, deps: [{ token: i1.NovoLabelService }, { token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.18", type: NovoDateTimePickerElement, isStandalone: false, selector: "novo-date-time-picker", inputs: { defaultTime: "defaultTime", minYear: "minYear", maxYear: "maxYear", start: "start", end: "end", military: "military", weekStart: "weekStart", disabledDateMessage: "disabledDateMessage" }, outputs: { onSelect: "onSelect" }, providers: [DATE_TIME_PICKER_VALUE_ACCESSOR], ngImport: i0, template: `
     <div class="date-time-container">
       <div class="date-time-tabs">
         <span
@@ -195,7 +195,7 @@ class NovoDateTimePickerElement {
             ]),
         ] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoDateTimePickerElement, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoDateTimePickerElement, decorators: [{
             type: Component,
             args: [{ selector: 'novo-date-time-picker', providers: [DATE_TIME_PICKER_VALUE_ACCESSOR], animations: [
                         trigger('dateTextState', [
@@ -393,8 +393,8 @@ class NovoDateTimePickerInputElement {
     get hasValue() {
         return !Helpers.isEmpty(this.value);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoDateTimePickerInputElement, deps: [{ token: i0.ElementRef }, { token: i1.NovoLabelService }, { token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.17", type: NovoDateTimePickerInputElement, isStandalone: false, selector: "novo-date-time-picker-input", inputs: { name: "name", start: "start", end: "end", placeholder: "placeholder", maskOptions: "maskOptions", military: "military", disabled: "disabled", format: "format", weekStart: "weekStart", disabledDateMessage: "disabledDateMessage" }, outputs: { blurEvent: "blurEvent", focusEvent: "focusEvent", changeEvent: "changeEvent" }, providers: [DATE_VALUE_ACCESSOR], ngImport: i0, template: `
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoDateTimePickerInputElement, deps: [{ token: i0.ElementRef }, { token: i1.NovoLabelService }, { token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.18", type: NovoDateTimePickerInputElement, isStandalone: false, selector: "novo-date-time-picker-input", inputs: { name: "name", start: "start", end: "end", placeholder: "placeholder", maskOptions: "maskOptions", military: "military", disabled: "disabled", format: "format", weekStart: "weekStart", disabledDateMessage: "disabledDateMessage" }, outputs: { blurEvent: "blurEvent", focusEvent: "focusEvent", changeEvent: "changeEvent" }, providers: [DATE_VALUE_ACCESSOR], ngImport: i0, template: `
     <novo-date-picker-input
       [ngModel]="datePart"
       (ngModelChange)="updateDate($event)"
@@ -417,7 +417,7 @@ class NovoDateTimePickerInputElement {
     ></novo-time-picker-input>
   `, isInline: true, styles: [":host{flex:1;position:relative;display:flex;flex-flow:row nowrap;max-width:340px}:host novo-date-picker-input{margin-right:20px}:host novo-time-picker-input{max-width:130px}\n"], dependencies: [{ kind: "directive", type: i3.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i3.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }, { kind: "component", type: i4.NovoDatePickerInputElement, selector: "novo-date-picker-input", inputs: ["name", "start", "end", "placeholder", "maskOptions", "format", "textMaskEnabled", "allowInvalidDate", "overlayOnElement", "hideFooter", "hideToday", "hasButtons", "disabled", "disabledDateMessage", "dateForInitialView", "weekStart"], outputs: ["blurEvent", "focusEvent", "changeEvent", "onSave", "onCancel", "valueCleared"] }, { kind: "component", type: i5.NovoTimePickerInputElement, selector: "novo-time-picker-input", inputs: ["name", "placeholder", "military", "maskOptions", "disabled", "hasButtons", "saveDisabled", "overlayOnElement", "analog"], outputs: ["blurEvent", "focusEvent", "changeEvent", "onSave", "onCancel"] }] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoDateTimePickerInputElement, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoDateTimePickerInputElement, decorators: [{
             type: Component,
             args: [{ selector: 'novo-date-time-picker-input', providers: [DATE_VALUE_ACCESSOR], template: `
     <novo-date-picker-input
@@ -471,11 +471,11 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImpo
 
 // NG2
 class NovoDateTimePickerModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoDateTimePickerModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.3.17", ngImport: i0, type: NovoDateTimePickerModule, declarations: [NovoDateTimePickerElement, NovoDateTimePickerInputElement], imports: [CommonModule, FormsModule, NovoDatePickerModule, NovoTimePickerModule, IMaskModule, NovoOverlayModule], exports: [NovoDateTimePickerElement, NovoDateTimePickerInputElement] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoDateTimePickerModule, imports: [CommonModule, FormsModule, NovoDatePickerModule, NovoTimePickerModule, IMaskModule, NovoOverlayModule] }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoDateTimePickerModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.3.18", ngImport: i0, type: NovoDateTimePickerModule, declarations: [NovoDateTimePickerElement, NovoDateTimePickerInputElement], imports: [CommonModule, FormsModule, NovoDatePickerModule, NovoTimePickerModule, IMaskModule, NovoOverlayModule], exports: [NovoDateTimePickerElement, NovoDateTimePickerInputElement] }); }
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoDateTimePickerModule, imports: [CommonModule, FormsModule, NovoDatePickerModule, NovoTimePickerModule, IMaskModule, NovoOverlayModule] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoDateTimePickerModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoDateTimePickerModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [CommonModule, FormsModule, NovoDatePickerModule, NovoTimePickerModule, IMaskModule, NovoOverlayModule],

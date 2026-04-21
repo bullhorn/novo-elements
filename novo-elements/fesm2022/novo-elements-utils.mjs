@@ -1787,6 +1787,26 @@ function getDayViewHourGrid({ viewDate, hourSegments, dayStart, dayEnd, }) {
     return hours;
 }
 
+function fixCkEditorInputEvent(ckEditorInstance) {
+    let debounceInputTimeout;
+    const onCkBodyInput = (event) => {
+        if (debounceInputTimeout) {
+            clearTimeout(debounceInputTimeout);
+        }
+        debounceInputTimeout = setTimeout(() => {
+            // change event did not process this input event (first known from spellcheck menu options)
+            ckEditorInstance.fire('change');
+            debounceInputTimeout = null;
+        }, 250);
+    };
+    ckEditorInstance.on('instanceReady', (event) => {
+        ckEditorInstance.document.$.body.addEventListener('input', onCkBodyInput);
+    });
+    return () => {
+        ckEditorInstance.document.$.body.removeEventListener('input', onCkBodyInput);
+    };
+}
+
 class Color {
     constructor(value) {
         this.isValid = true;
@@ -22238,6 +22258,8 @@ class OutsideClick {
      */
     ngOnDestroy() {
         window.removeEventListener('click', this.onOutsideClick);
+        delete this.onOutsideClick;
+        delete this.otherElement;
     }
     /**
      * Toggles the element as active and adds/removes the outside click handler
@@ -22268,10 +22290,10 @@ class OutsideClick {
             this.toggleActive(event, false);
         }
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: OutsideClick, deps: [{ token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: OutsideClick }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: OutsideClick, deps: [{ token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: OutsideClick }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: OutsideClick, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: OutsideClick, decorators: [{
             type: Injectable
         }], ctorParameters: () => [{ type: i0.ElementRef }] });
 
@@ -22279,5 +22301,5 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImpo
  * Generated bundle index. Do not edit.
  */
 
-export { AppBridge, AppBridgeHandler, AppBridgeService, BaseRenderer, BooleanInput, COUNTRIES, CalendarEventResponse, Can, Color, DateRange, DateUtil, Deferred, DevAppBridge, DevAppBridgeService, HTTP_VERBS, Helpers, KeyCodes, MESSAGE_TYPES, OutsideClick, binarySearch, can, convertTokens, findByCountryCode, findByCountryId, findByCountryName, formatZonedTime, getCountries, getDayView, getDayViewHourGrid, getMonthView, getStateObjects, getStates, getWeekView, getWeekViewEventOffset, getWeekViewHeader, isAlphaNumeric, legacyParse, notify, splitDateString };
+export { AppBridge, AppBridgeHandler, AppBridgeService, BaseRenderer, BooleanInput, COUNTRIES, CalendarEventResponse, Can, Color, DateRange, DateUtil, Deferred, DevAppBridge, DevAppBridgeService, HTTP_VERBS, Helpers, KeyCodes, MESSAGE_TYPES, OutsideClick, binarySearch, can, convertTokens, findByCountryCode, findByCountryId, findByCountryName, fixCkEditorInputEvent, formatZonedTime, getCountries, getDayView, getDayViewHourGrid, getMonthView, getStateObjects, getStates, getWeekView, getWeekViewEventOffset, getWeekViewHeader, isAlphaNumeric, legacyParse, notify, splitDateString };
 //# sourceMappingURL=novo-elements-utils.mjs.map

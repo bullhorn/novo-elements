@@ -60,6 +60,7 @@ declare class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy
     private debounceTimeout;
     private placeholderVisible;
     private _placeholderElement;
+    private _ckEditorFixRemoveListener?;
     private static TOOLBAR_HEIGHT;
     private onModelChange;
     private onModelTouched;

@@ -19,10 +19,10 @@ class WeekdayPipe {
     transform(date, locale = this.locale, method = 'short') {
         return new Intl.DateTimeFormat(locale, { weekday: method }).format(date);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: WeekdayPipe, deps: [{ token: LOCALE_ID }], target: i0.ɵɵFactoryTarget.Pipe }); }
-    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "20.3.17", ngImport: i0, type: WeekdayPipe, isStandalone: false, name: "weekday" }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: WeekdayPipe, deps: [{ token: LOCALE_ID }], target: i0.ɵɵFactoryTarget.Pipe }); }
+    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "20.3.18", ngImport: i0, type: WeekdayPipe, isStandalone: false, name: "weekday" }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: WeekdayPipe, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: WeekdayPipe, decorators: [{
             type: Pipe,
             args: [{
                     name: 'weekday',
@@ -40,10 +40,10 @@ class DayOfMonthPipe {
     transform(date, locale = this.locale, method = 'numeric') {
         return new Intl.DateTimeFormat(locale, { day: method }).format(date);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: DayOfMonthPipe, deps: [{ token: LOCALE_ID }], target: i0.ɵɵFactoryTarget.Pipe }); }
-    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "20.3.17", ngImport: i0, type: DayOfMonthPipe, isStandalone: false, name: "dayofmonth" }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: DayOfMonthPipe, deps: [{ token: LOCALE_ID }], target: i0.ɵɵFactoryTarget.Pipe }); }
+    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "20.3.18", ngImport: i0, type: DayOfMonthPipe, isStandalone: false, name: "dayofmonth" }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: DayOfMonthPipe, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: DayOfMonthPipe, decorators: [{
             type: Pipe,
             args: [{
                     name: 'dayofmonth',
@@ -61,10 +61,10 @@ class MonthPipe {
     transform(date, locale = this.locale, method = 'long') {
         return new Intl.DateTimeFormat(locale, { month: method }).format(date);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: MonthPipe, deps: [{ token: LOCALE_ID }], target: i0.ɵɵFactoryTarget.Pipe }); }
-    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "20.3.17", ngImport: i0, type: MonthPipe, isStandalone: false, name: "month" }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: MonthPipe, deps: [{ token: LOCALE_ID }], target: i0.ɵɵFactoryTarget.Pipe }); }
+    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "20.3.18", ngImport: i0, type: MonthPipe, isStandalone: false, name: "month" }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: MonthPipe, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: MonthPipe, decorators: [{
             type: Pipe,
             args: [{
                     name: 'month',
@@ -82,10 +82,10 @@ class MonthDayPipe {
     transform(date, locale = this.locale, method = 'short') {
         return new Intl.DateTimeFormat(locale, { month: method, day: 'numeric' }).format(date);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: MonthDayPipe, deps: [{ token: LOCALE_ID }], target: i0.ɵɵFactoryTarget.Pipe }); }
-    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "20.3.17", ngImport: i0, type: MonthDayPipe, isStandalone: false, name: "monthday" }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: MonthDayPipe, deps: [{ token: LOCALE_ID }], target: i0.ɵɵFactoryTarget.Pipe }); }
+    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "20.3.18", ngImport: i0, type: MonthDayPipe, isStandalone: false, name: "monthday" }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: MonthDayPipe, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: MonthDayPipe, decorators: [{
             type: Pipe,
             args: [{
                     name: 'monthday',
@@ -103,10 +103,10 @@ class YearPipe {
     transform(date, locale = this.locale, method = 'numeric') {
         return new Intl.DateTimeFormat(locale, { year: method }).format(date);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: YearPipe, deps: [{ token: LOCALE_ID }], target: i0.ɵɵFactoryTarget.Pipe }); }
-    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "20.3.17", ngImport: i0, type: YearPipe, isStandalone: false, name: "year" }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: YearPipe, deps: [{ token: LOCALE_ID }], target: i0.ɵɵFactoryTarget.Pipe }); }
+    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "20.3.18", ngImport: i0, type: YearPipe, isStandalone: false, name: "year" }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: YearPipe, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: YearPipe, decorators: [{
             type: Pipe,
             args: [{
                     name: 'year',
@@ -127,10 +127,10 @@ class EndOfWeekDisplayPipe {
         }
         return new Intl.DateTimeFormat(locale, { month: method, day: 'numeric' }).format(endOfWeek);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: EndOfWeekDisplayPipe, deps: [{ token: LOCALE_ID }], target: i0.ɵɵFactoryTarget.Pipe }); }
-    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "20.3.17", ngImport: i0, type: EndOfWeekDisplayPipe, isStandalone: false, name: "endofweekdisplay" }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: EndOfWeekDisplayPipe, deps: [{ token: LOCALE_ID }], target: i0.ɵɵFactoryTarget.Pipe }); }
+    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "20.3.18", ngImport: i0, type: EndOfWeekDisplayPipe, isStandalone: false, name: "endofweekdisplay" }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: EndOfWeekDisplayPipe, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: EndOfWeekDisplayPipe, decorators: [{
             type: Pipe,
             args: [{
                     name: 'endofweekdisplay',
@@ -172,8 +172,8 @@ class NovoAgendaDateChangeElement {
     get endOfWeek() {
         return DateUtil.endOfWeek(this.viewDate);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoAgendaDateChangeElement, deps: [{ token: LOCALE_ID }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.17", type: NovoAgendaDateChangeElement, isStandalone: false, selector: "novo-agenda-date-change", inputs: { view: "view", viewDate: "viewDate", locale: "locale" }, outputs: { viewDateChange: "viewDateChange" }, ngImport: i0, template: `
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoAgendaDateChangeElement, deps: [{ token: LOCALE_ID }], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.18", type: NovoAgendaDateChangeElement, isStandalone: false, selector: "novo-agenda-date-change", inputs: { view: "view", viewDate: "viewDate", locale: "locale" }, outputs: { viewDateChange: "viewDateChange" }, ngImport: i0, template: `
     <div class="cal-date-change">
       <i class="bhi-arrow-left" (click)="subtractDate()"></i>
       <span [ngSwitch]="view">
@@ -189,7 +189,7 @@ class NovoAgendaDateChangeElement {
     </div>
   `, isInline: true, styles: [":host{display:inline-block}:host .cal-date-change{border-radius:3px;border:1px solid #e1e1e1;background-color:#fff;position:relative;padding:10px 15px;text-align:center}:host .cal-date-change>span{padding:5px;color:#000}:host .cal-date-change>i{cursor:pointer;padding:2px;font-size:.9em}\n"], dependencies: [{ kind: "directive", type: i1.NgSwitch, selector: "[ngSwitch]", inputs: ["ngSwitch"] }, { kind: "directive", type: i1.NgSwitchCase, selector: "[ngSwitchCase]", inputs: ["ngSwitchCase"] }, { kind: "pipe", type: WeekdayPipe, name: "weekday" }, { kind: "pipe", type: DayOfMonthPipe, name: "dayofmonth" }, { kind: "pipe", type: MonthPipe, name: "month" }, { kind: "pipe", type: MonthDayPipe, name: "monthday" }, { kind: "pipe", type: YearPipe, name: "year" }, { kind: "pipe", type: EndOfWeekDisplayPipe, name: "endofweekdisplay" }] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoAgendaDateChangeElement, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoAgendaDateChangeElement, decorators: [{
             type: Component,
             args: [{ selector: 'novo-agenda-date-change', template: `
     <div class="cal-date-change">
@@ -223,8 +223,8 @@ class NovoEventTypeLegendElement {
     constructor() {
         this.eventTypeClicked = new EventEmitter();
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoEventTypeLegendElement, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.17", type: NovoEventTypeLegendElement, isStandalone: false, selector: "novo-event-type-legend", inputs: { events: "events", customTemplate: "customTemplate" }, outputs: { eventTypeClicked: "eventTypeClicked" }, ngImport: i0, template: `
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoEventTypeLegendElement, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.18", type: NovoEventTypeLegendElement, isStandalone: false, selector: "novo-event-type-legend", inputs: { events: "events", customTemplate: "customTemplate" }, outputs: { eventTypeClicked: "eventTypeClicked" }, ngImport: i0, template: `
     <ng-template #defaultTemplate>
       <div class="cal-event-legend">
         <div
@@ -244,7 +244,7 @@ class NovoEventTypeLegendElement {
     </ng-template>
   `, isInline: true, dependencies: [{ kind: "directive", type: i1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i1.NgTemplateOutlet, selector: "[ngTemplateOutlet]", inputs: ["ngTemplateOutletContext", "ngTemplateOutlet", "ngTemplateOutletInjector"] }, { kind: "pipe", type: i2.GroupByPipe, name: "groupBy" }] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoEventTypeLegendElement, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoEventTypeLegendElement, decorators: [{
             type: Component,
             args: [{
                     selector: 'novo-event-type-legend',
@@ -281,8 +281,8 @@ class NovoAgendaAllDayEventElement {
     constructor() {
         this.eventClicked = new EventEmitter();
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoAgendaAllDayEventElement, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.17", type: NovoAgendaAllDayEventElement, isStandalone: false, selector: "novo-agenda-all-day-event", inputs: { event: "event", customTemplate: "customTemplate" }, outputs: { eventClicked: "eventClicked" }, ngImport: i0, template: `
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoAgendaAllDayEventElement, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.18", type: NovoAgendaAllDayEventElement, isStandalone: false, selector: "novo-agenda-all-day-event", inputs: { event: "event", customTemplate: "customTemplate" }, outputs: { eventClicked: "eventClicked" }, ngImport: i0, template: `
     <ng-template #defaultTemplate>
       <div class="cal-all-day-event" [style.backgroundColor]="event.color.secondary" [style.borderColor]="event.color.primary">
         {{ event.title }}
@@ -298,7 +298,7 @@ class NovoAgendaAllDayEventElement {
     </ng-template>
   `, isInline: true, dependencies: [{ kind: "directive", type: i1.NgTemplateOutlet, selector: "[ngTemplateOutlet]", inputs: ["ngTemplateOutletContext", "ngTemplateOutlet", "ngTemplateOutletInjector"] }] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoAgendaAllDayEventElement, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoAgendaAllDayEventElement, decorators: [{
             type: Component,
             args: [{
                     selector: 'novo-agenda-all-day-event',
@@ -331,8 +331,8 @@ class NovoAgendaDayEventElement {
     constructor() {
         this.eventClicked = new EventEmitter();
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoAgendaDayEventElement, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.17", type: NovoAgendaDayEventElement, isStandalone: false, selector: "novo-agenda-day-event", inputs: { dayEvent: "dayEvent", tooltipPosition: "tooltipPosition", customTemplate: "customTemplate" }, outputs: { eventClicked: "eventClicked" }, ngImport: i0, template: `
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoAgendaDayEventElement, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.18", type: NovoAgendaDayEventElement, isStandalone: false, selector: "novo-agenda-day-event", inputs: { dayEvent: "dayEvent", tooltipPosition: "tooltipPosition", customTemplate: "customTemplate" }, outputs: { eventClicked: "eventClicked" }, ngImport: i0, template: `
     <ng-template #defaultTemplate>
       <div
         class="cal-event"
@@ -358,7 +358,7 @@ class NovoAgendaDayEventElement {
     </ng-template>
   `, isInline: true, dependencies: [{ kind: "directive", type: i1.NgClass, selector: "[ngClass]", inputs: ["class", "ngClass"] }, { kind: "directive", type: i1.NgTemplateOutlet, selector: "[ngTemplateOutlet]", inputs: ["ngTemplateOutletContext", "ngTemplateOutlet", "ngTemplateOutletInjector"] }, { kind: "directive", type: i2$1.TooltipDirective, selector: "[tooltip]", inputs: ["tooltip", "tooltipPosition", "tooltipType", "tooltipSize", "tooltipBounce", "tooltipNoAnimate", "tooltipRounded", "tooltipAlways", "tooltipPreline", "removeTooltipArrow", "tooltipAutoPosition", "tooltipIsHTML", "tooltipCloseOnClick", "tooltipOnOverflow", "tooltipActive"] }] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoAgendaDayEventElement, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoAgendaDayEventElement, decorators: [{
             type: Component,
             args: [{
                     selector: 'novo-agenda-day-event',
@@ -406,10 +406,10 @@ class HoursPipe {
     transform(date, locale = this.locale, method = 'numeric') {
         return new Intl.DateTimeFormat(locale, { hour: method }).format(date);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: HoursPipe, deps: [{ token: LOCALE_ID }], target: i0.ɵɵFactoryTarget.Pipe }); }
-    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "20.3.17", ngImport: i0, type: HoursPipe, isStandalone: false, name: "hours" }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: HoursPipe, deps: [{ token: LOCALE_ID }], target: i0.ɵɵFactoryTarget.Pipe }); }
+    static { this.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "14.0.0", version: "20.3.18", ngImport: i0, type: HoursPipe, isStandalone: false, name: "hours" }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: HoursPipe, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: HoursPipe, decorators: [{
             type: Pipe,
             args: [{
                     name: 'hours',
@@ -421,8 +421,8 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImpo
                 }] }] });
 
 class NovoAgendaHourSegmentElement {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoAgendaHourSegmentElement, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.17", type: NovoAgendaHourSegmentElement, isStandalone: false, selector: "novo-agenda-day-hour-segment", inputs: { segment: "segment", locale: "locale", customTemplate: "customTemplate" }, ngImport: i0, template: `
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoAgendaHourSegmentElement, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.18", type: NovoAgendaHourSegmentElement, isStandalone: false, selector: "novo-agenda-day-hour-segment", inputs: { segment: "segment", locale: "locale", customTemplate: "customTemplate" }, ngImport: i0, template: `
     <ng-template #defaultTemplate>
       <div
         class="cal-hour-segment"
@@ -445,7 +445,7 @@ class NovoAgendaHourSegmentElement {
     </ng-template>
   `, isInline: true, dependencies: [{ kind: "directive", type: i1.NgClass, selector: "[ngClass]", inputs: ["class", "ngClass"] }, { kind: "directive", type: i1.NgTemplateOutlet, selector: "[ngTemplateOutlet]", inputs: ["ngTemplateOutletContext", "ngTemplateOutlet", "ngTemplateOutletInjector"] }, { kind: "pipe", type: HoursPipe, name: "hours" }] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoAgendaHourSegmentElement, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoAgendaHourSegmentElement, decorators: [{
             type: Component,
             args: [{
                     selector: 'novo-agenda-day-hour-segment',
@@ -710,8 +710,8 @@ class NovoAgendaDayViewElement {
         this.refreshHourGrid();
         this.refreshView();
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoAgendaDayViewElement, deps: [{ token: i0.ChangeDetectorRef }, { token: LOCALE_ID }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.17", type: NovoAgendaDayViewElement, isStandalone: false, selector: "novo-agenda-day", inputs: { viewDate: "viewDate", events: "events", hourSegments: "hourSegments", dayStartHour: "dayStartHour", dayStartMinute: "dayStartMinute", dayEndHour: "dayEndHour", dayEndMinute: "dayEndMinute", eventWidth: "eventWidth", refresh: "refresh", locale: "locale", hourSegmentModifier: "hourSegmentModifier", eventSnapSize: "eventSnapSize", tooltipPosition: "tooltipPosition", hourSegmentTemplate: "hourSegmentTemplate", allDayEventTemplate: "allDayEventTemplate", eventTemplate: "eventTemplate" }, outputs: { eventClicked: "eventClicked", hourSegmentClicked: "hourSegmentClicked", eventTimesChanged: "eventTimesChanged" }, usesOnChanges: true, ngImport: i0, template: `
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoAgendaDayViewElement, deps: [{ token: i0.ChangeDetectorRef }, { token: LOCALE_ID }], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.18", type: NovoAgendaDayViewElement, isStandalone: false, selector: "novo-agenda-day", inputs: { viewDate: "viewDate", events: "events", hourSegments: "hourSegments", dayStartHour: "dayStartHour", dayStartMinute: "dayStartMinute", dayEndHour: "dayEndHour", dayEndMinute: "dayEndMinute", eventWidth: "eventWidth", refresh: "refresh", locale: "locale", hourSegmentModifier: "hourSegmentModifier", eventSnapSize: "eventSnapSize", tooltipPosition: "tooltipPosition", hourSegmentTemplate: "hourSegmentTemplate", allDayEventTemplate: "allDayEventTemplate", eventTemplate: "eventTemplate" }, outputs: { eventClicked: "eventClicked", hourSegmentClicked: "hourSegmentClicked", eventTimesChanged: "eventTimesChanged" }, usesOnChanges: true, ngImport: i0, template: `
     <div class="cal-day-view" #dayViewContainer>
       <novo-agenda-all-day-event
         *ngFor="let event of view.allDayEvents"
@@ -754,7 +754,7 @@ class NovoAgendaDayViewElement {
     </div>
   `, isInline: true, styles: [":host ::ng-deep .cal-day-view .cal-event-container{position:absolute}:host ::ng-deep .cal-day-view novo-agenda-day-event{height:inherit}:host ::ng-deep .cal-day-view novo-agenda-day-event .cal-event{height:inherit;font-size:12px;margin-left:2px;margin-right:2px;min-height:30px;display:flex;flex-flow:row nowrap;background-color:#f7f7f7}:host ::ng-deep .cal-day-view novo-agenda-day-event .cal-event .cal-event-ribbon{width:4px;min-height:100%}:host ::ng-deep .cal-day-view novo-agenda-day-event .cal-event .cal-event-group{overflow:hidden;flex:1;padding:2px 10px;display:flex;flex-flow:column}:host ::ng-deep .cal-day-view novo-agenda-day-event .cal-event .cal-event-title{line-height:26px}:host ::ng-deep .cal-day-view novo-agenda-day-event .cal-event .cal-event-description{font-size:10px;line-height:13px}:host ::ng-deep .cal-day-view .cal-draggable{cursor:move}:host ::ng-deep .cal-day-view .cal-all-day-event{padding:8px;border:solid 1px}\n", "@charset \"UTF-8\";:host ::ng-deep .cal-day-view .cal-hour-rows,:host ::ng-deep .cal-week-view .cal-hour-rows{width:100%;border:solid 1px #e1e1e1;overflow-x:scroll;position:relative}:host ::ng-deep .cal-day-view .cal-hour:nth-child(2n),:host ::ng-deep .cal-week-view .cal-hour:nth-child(2n){background-color:#f7f7f7}:host ::ng-deep .cal-day-view .cal-hour:nth-child(odd),:host ::ng-deep .cal-week-view .cal-hour:nth-child(odd){background-color:#fff}:host ::ng-deep .cal-day-view .cal-hour-segment,:host ::ng-deep .cal-week-view .cal-hour-segment{height:30px}:host ::ng-deep .cal-day-view .cal-hour-segment:after,:host ::ng-deep .cal-week-view .cal-hour-segment:after{content:\"\\a0\"}:host ::ng-deep .cal-day-view .cal-hour:not(:last-child) .cal-hour-segment,:host ::ng-deep .cal-day-view .cal-hour:last-child :not(:last-child) .cal-hour-segment,:host ::ng-deep .cal-week-view .cal-hour:not(:last-child) .cal-hour-segment,:host ::ng-deep .cal-week-view .cal-hour:last-child :not(:last-child) .cal-hour-segment{border-bottom:thin dashed #e1e1e1}:host ::ng-deep .cal-day-view .cal-time,:host ::ng-deep .cal-week-view .cal-time{font-weight:700;padding-top:5px;width:70px;text-align:center;color:#9e9e9e}:host ::ng-deep .cal-day-view .cal-hour-segment.cal-after-hour-start .cal-time,:host ::ng-deep .cal-week-view .cal-hour-segment.cal-after-hour-start .cal-time{display:none}:host ::ng-deep .cal-day-view .cal-hour-segment:hover,:host ::ng-deep .cal-day-view .cal-drag-over .cal-hour-segment,:host ::ng-deep .cal-week-view .cal-hour-segment:hover,:host ::ng-deep .cal-week-view .cal-drag-over .cal-hour-segment{background-color:#ededed}\n"], dependencies: [{ kind: "directive", type: i1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "component", type: NovoAgendaDayEventElement, selector: "novo-agenda-day-event", inputs: ["dayEvent", "tooltipPosition", "customTemplate"], outputs: ["eventClicked"] }, { kind: "component", type: NovoAgendaHourSegmentElement, selector: "novo-agenda-day-hour-segment", inputs: ["segment", "locale", "customTemplate"] }, { kind: "component", type: NovoAgendaAllDayEventElement, selector: "novo-agenda-all-day-event", inputs: ["event", "customTemplate"], outputs: ["eventClicked"] }] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoAgendaDayViewElement, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoAgendaDayViewElement, decorators: [{
             type: Component,
             args: [{ selector: 'novo-agenda-day', template: `
     <div class="cal-day-view" #dayViewContainer>
@@ -869,8 +869,8 @@ class NovoAgendaMonthDayElement {
             return evt.response === CalendarEventResponse.Maybe;
         });
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoAgendaMonthDayElement, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.17", type: NovoAgendaMonthDayElement, isStandalone: false, selector: "novo-agenda-month-day", inputs: { day: "day", locale: "locale", tooltipPosition: "tooltipPosition", customTemplate: "customTemplate" }, outputs: { eventClicked: "eventClicked" }, host: { properties: { "class": "\"agenda-cell agenda-day-cell \" + day?.cssClass", "class.agenda-day-accepted": "accepted.length", "class.agenda-day-rejected": "rejected.length", "class.agenda-past": "day.isPast", "class.agenda-today": "day.isToday", "class.agenda-future": "day.isFuture", "class.agenda-weekend": "day.isWeekend", "class.agenda-in-month": "day.inMonth", "class.agenda-out-month": "!day.inMonth", "class.agenda-has-events": "day.events.length > 0", "style.backgroundColor": "day.backgroundColor" } }, ngImport: i0, template: `
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoAgendaMonthDayElement, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.18", type: NovoAgendaMonthDayElement, isStandalone: false, selector: "novo-agenda-month-day", inputs: { day: "day", locale: "locale", tooltipPosition: "tooltipPosition", customTemplate: "customTemplate" }, outputs: { eventClicked: "eventClicked" }, host: { properties: { "class": "\"agenda-cell agenda-day-cell \" + day?.cssClass", "class.agenda-day-accepted": "accepted.length", "class.agenda-day-rejected": "rejected.length", "class.agenda-past": "day.isPast", "class.agenda-today": "day.isToday", "class.agenda-future": "day.isFuture", "class.agenda-weekend": "day.isWeekend", "class.agenda-in-month": "day.inMonth", "class.agenda-out-month": "!day.inMonth", "class.agenda-has-events": "day.events.length > 0", "style.backgroundColor": "day.backgroundColor" } }, ngImport: i0, template: `
     <ng-template #defaultTemplate>
       <div class="agenda-day-top">
         <span class="agenda-day-badge" *ngIf="day.badgeTotal > 0">{{ day.badgeTotal }}</span>
@@ -903,7 +903,7 @@ class NovoAgendaMonthDayElement {
     </ng-template>
   `, isInline: true, dependencies: [{ kind: "directive", type: i1.NgClass, selector: "[ngClass]", inputs: ["class", "ngClass"] }, { kind: "directive", type: i1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i1.NgTemplateOutlet, selector: "[ngTemplateOutlet]", inputs: ["ngTemplateOutletContext", "ngTemplateOutlet", "ngTemplateOutletInjector"] }, { kind: "pipe", type: i2.GroupByPipe, name: "groupBy" }, { kind: "pipe", type: DayOfMonthPipe, name: "dayofmonth" }] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoAgendaMonthDayElement, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoAgendaMonthDayElement, decorators: [{
             type: Component,
             args: [{
                     selector: 'novo-agenda-month-day',
@@ -979,8 +979,8 @@ class NovoAgendaMonthHeaderElement {
     nextMonth(event) {
         this.viewDateChange.emit(addMonths(this.viewDate, 1));
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoAgendaMonthHeaderElement, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.17", type: NovoAgendaMonthHeaderElement, isStandalone: false, selector: "novo-agenda-month-header", inputs: { viewDate: "viewDate", days: "days", locale: "locale", customTemplate: "customTemplate" }, outputs: { viewDateChange: "viewDateChange" }, ngImport: i0, template: `
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoAgendaMonthHeaderElement, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.18", type: NovoAgendaMonthHeaderElement, isStandalone: false, selector: "novo-agenda-month-header", inputs: { viewDate: "viewDate", days: "days", locale: "locale", customTemplate: "customTemplate" }, outputs: { viewDateChange: "viewDateChange" }, ngImport: i0, template: `
     <ng-template #defaultTemplate>
       <div class="agenda-header">
         <div class="agenda-header-top">
@@ -1009,7 +1009,7 @@ class NovoAgendaMonthHeaderElement {
     </ng-template>
   `, isInline: true, dependencies: [{ kind: "directive", type: i1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i1.NgTemplateOutlet, selector: "[ngTemplateOutlet]", inputs: ["ngTemplateOutletContext", "ngTemplateOutlet", "ngTemplateOutletInjector"] }, { kind: "component", type: i2$2.NovoButtonElement, selector: "novo-button,button[theme]", inputs: ["color", "side", "size", "theme", "loading", "icon", "secondIcon", "disabled"] }, { kind: "pipe", type: WeekdayPipe, name: "weekday" }, { kind: "pipe", type: MonthPipe, name: "month" }] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoAgendaMonthHeaderElement, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoAgendaMonthHeaderElement, decorators: [{
             type: Component,
             args: [{
                     selector: 'novo-agenda-month-header',
@@ -1170,8 +1170,8 @@ class NovoAgendaMonthViewElement {
         this.refreshBody();
         this.viewDateChange.emit(this.viewDate);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoAgendaMonthViewElement, deps: [{ token: i0.ChangeDetectorRef }, { token: LOCALE_ID }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.17", type: NovoAgendaMonthViewElement, isStandalone: false, selector: "novo-agenda-month", inputs: { viewDate: "viewDate", events: "events", excludeDays: "excludeDays", dayModifier: "dayModifier", refresh: "refresh", locale: "locale", tooltipPosition: "tooltipPosition", weekStartsOn: "weekStartsOn", headerTemplate: "headerTemplate", cellTemplate: "cellTemplate" }, outputs: { dayClicked: "dayClicked", eventClicked: "eventClicked", eventTimesChanged: "eventTimesChanged", viewDateChange: "viewDateChange" }, usesOnChanges: true, ngImport: i0, template: `
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoAgendaMonthViewElement, deps: [{ token: i0.ChangeDetectorRef }, { token: LOCALE_ID }], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.18", type: NovoAgendaMonthViewElement, isStandalone: false, selector: "novo-agenda-month", inputs: { viewDate: "viewDate", events: "events", excludeDays: "excludeDays", dayModifier: "dayModifier", refresh: "refresh", locale: "locale", tooltipPosition: "tooltipPosition", weekStartsOn: "weekStartsOn", headerTemplate: "headerTemplate", cellTemplate: "cellTemplate" }, outputs: { dayClicked: "dayClicked", eventClicked: "eventClicked", eventTimesChanged: "eventTimesChanged", viewDateChange: "viewDateChange" }, usesOnChanges: true, ngImport: i0, template: `
     <div class="agenda-month-view">
       <novo-agenda-month-header
         [(viewDate)]="viewDate"
@@ -1199,7 +1199,7 @@ class NovoAgendaMonthViewElement {
     </div>
   `, isInline: true, styles: [":host ::ng-deep .agenda-month-view{background-color:#fff}:host ::ng-deep .agenda-month-view .agenda-header{display:flex;flex-flow:column;text-align:center;font-weight:bolder;border-bottom:2px solid #e1e1e1}:host ::ng-deep .agenda-month-view .agenda-header .agenda-header-top{display:flex;flex-flow:row nowrap;align-items:center;justify-content:space-around}:host ::ng-deep .agenda-month-view .agenda-header .agenda-header-top .agenda-month{font-size:180%}:host ::ng-deep .agenda-month-view .agenda-header .agenda-header-top .agenda-year{color:#999}:host ::ng-deep .agenda-month-view .agenda-header .agenda-weekdays{display:flex;flex-flow:row nowrap}:host ::ng-deep .agenda-month-view .agenda-header .agenda-weekdays .agenda-weekday{padding:5px 0;overflow:hidden;text-overflow:ellipsis;display:block;white-space:nowrap;flex:1}:host ::ng-deep .agenda-month-view .agenda-cell-row{display:flex}:host ::ng-deep .agenda-month-view .agenda-cell-row:hover{background-color:#fafafa}:host ::ng-deep .agenda-month-view .agenda-cell-row .agenda-cell:hover,:host ::ng-deep .agenda-month-view .agenda-cell.agenda-has-events.agenda-open{background-color:#ededed}:host ::ng-deep .agenda-month-view .agenda-days{border:1px solid #e1e1e1;border-bottom:0}:host ::ng-deep .agenda-month-view .agenda-day-top{display:flex;flex-flow:row nowrap;align-items:center;justify-content:flex-end}:host ::ng-deep .agenda-month-view .agenda-cell:hover .agenda-actions{display:flex}:host ::ng-deep .agenda-month-view .agenda-cell{float:left;flex:1;display:flex;flex-direction:column;align-items:stretch;position:relative}:host ::ng-deep .agenda-month-view .agenda-day-cell{min-height:56px}:host ::ng-deep .agenda-month-view .agenda-day-cell:not(:last-child){border-right:1px solid #e1e1e1}:host ::ng-deep .agenda-month-view .agenda-days .agenda-cell-row{border-bottom:1px solid #e1e1e1}:host ::ng-deep .agenda-month-view .agenda-day-badge{background-color:#b94a48;display:inline-block;min-width:10px;padding:3px 7px;font-size:12px;font-weight:700;line-height:1;color:#fff;text-align:center;white-space:nowrap;vertical-align:middle;border-radius:10px}:host ::ng-deep .agenda-month-view .agenda-day-number{font-size:1.2em;font-weight:400;opacity:.5;padding:4px}:host ::ng-deep .agenda-month-view .agenda-event{width:22px;height:22px;border-radius:4px;display:inline-block;margin:2px;vertical-align:middle;text-align:center;line-height:22px;font-size:12px;color:#fff}:host ::ng-deep .agenda-month-view .agenda-day-cell.agenda-in-month.agenda-has-events{cursor:pointer}:host ::ng-deep .agenda-month-view .agenda-day-cell.agenda-out-month .agenda-day-number{opacity:.1;cursor:default}:host ::ng-deep .agenda-month-view .agenda-day-cell.agenda-weekend .agenda-day-number{color:#8b0000}:host ::ng-deep .agenda-month-view .agenda-day-cell.agenda-today{background-color:#e8fde7}:host ::ng-deep .agenda-month-view .agenda-day-cell.agenda-today .agenda-day-number{color:#3d464d}:host ::ng-deep .agenda-month-view .agenda-day-cell.agenda-drag-over{background-color:#e0e0e0!important}:host ::ng-deep .agenda-month-view .agenda-open-day-events{padding:15px;color:#fff;background-color:#555;box-shadow:inset 0 0 15px #00000080}:host ::ng-deep .agenda-month-view .agenda-open-day-events .agenda-event{position:relative;top:2px}:host ::ng-deep .agenda-month-view .agenda-event-title{color:#fff}:host ::ng-deep .agenda-month-view .agenda-out-month .agenda-day-badge,:host ::ng-deep .agenda-month-view .agenda-out-month .agenda-event{opacity:.3}\n"], dependencies: [{ kind: "directive", type: i1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "component", type: NovoAgendaMonthHeaderElement, selector: "novo-agenda-month-header", inputs: ["viewDate", "days", "locale", "customTemplate"], outputs: ["viewDateChange"] }, { kind: "component", type: NovoAgendaMonthDayElement, selector: "novo-agenda-month-day", inputs: ["day", "locale", "tooltipPosition", "customTemplate"], outputs: ["eventClicked"] }, { kind: "pipe", type: i1.SlicePipe, name: "slice" }] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoAgendaMonthViewElement, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoAgendaMonthViewElement, decorators: [{
             type: Component,
             args: [{ selector: 'novo-agenda-month', template: `
     <div class="agenda-month-view">
@@ -1265,8 +1265,8 @@ class NovoAgendaWeekEventElement {
     constructor() {
         this.eventClicked = new EventEmitter();
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoAgendaWeekEventElement, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.17", type: NovoAgendaWeekEventElement, isStandalone: false, selector: "novo-agenda-week-event", inputs: { weekEvent: "weekEvent", tooltipPosition: "tooltipPosition", customTemplate: "customTemplate" }, outputs: { eventClicked: "eventClicked" }, ngImport: i0, template: `
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoAgendaWeekEventElement, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.18", type: NovoAgendaWeekEventElement, isStandalone: false, selector: "novo-agenda-week-event", inputs: { weekEvent: "weekEvent", tooltipPosition: "tooltipPosition", customTemplate: "customTemplate" }, outputs: { eventClicked: "eventClicked" }, ngImport: i0, template: `
     <ng-template #defaultTemplate>
       <div
         class="cal-event"
@@ -1289,7 +1289,7 @@ class NovoAgendaWeekEventElement {
     </ng-template>
   `, isInline: true, dependencies: [{ kind: "directive", type: i1.NgClass, selector: "[ngClass]", inputs: ["class", "ngClass"] }, { kind: "directive", type: i1.NgTemplateOutlet, selector: "[ngTemplateOutlet]", inputs: ["ngTemplateOutletContext", "ngTemplateOutlet", "ngTemplateOutletInjector"] }, { kind: "directive", type: i2$1.TooltipDirective, selector: "[tooltip]", inputs: ["tooltip", "tooltipPosition", "tooltipType", "tooltipSize", "tooltipBounce", "tooltipNoAnimate", "tooltipRounded", "tooltipAlways", "tooltipPreline", "removeTooltipArrow", "tooltipAutoPosition", "tooltipIsHTML", "tooltipCloseOnClick", "tooltipOnOverflow", "tooltipActive"] }] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoAgendaWeekEventElement, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoAgendaWeekEventElement, decorators: [{
             type: Component,
             args: [{
                     selector: 'novo-agenda-week-event',
@@ -1332,8 +1332,8 @@ class NovoAgendaWeekHeaderElement {
         this.dayClicked = new EventEmitter();
         this.eventDropped = new EventEmitter();
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoAgendaWeekHeaderElement, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.17", type: NovoAgendaWeekHeaderElement, isStandalone: false, selector: "novo-agenda-week-header", inputs: { days: "days", locale: "locale", customTemplate: "customTemplate" }, outputs: { dayClicked: "dayClicked", eventDropped: "eventDropped" }, ngImport: i0, template: `
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoAgendaWeekHeaderElement, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.18", type: NovoAgendaWeekHeaderElement, isStandalone: false, selector: "novo-agenda-week-header", inputs: { days: "days", locale: "locale", customTemplate: "customTemplate" }, outputs: { dayClicked: "dayClicked", eventDropped: "eventDropped" }, ngImport: i0, template: `
     <ng-template #defaultTemplate>
       <div class="cal-day-headers">
         <div
@@ -1363,7 +1363,7 @@ class NovoAgendaWeekHeaderElement {
     </ng-template>
   `, isInline: true, dependencies: [{ kind: "directive", type: i1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i1.NgTemplateOutlet, selector: "[ngTemplateOutlet]", inputs: ["ngTemplateOutletContext", "ngTemplateOutlet", "ngTemplateOutletInjector"] }, { kind: "pipe", type: WeekdayPipe, name: "weekday" }, { kind: "pipe", type: MonthDayPipe, name: "monthday" }] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoAgendaWeekHeaderElement, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoAgendaWeekHeaderElement, decorators: [{
             type: Component,
             args: [{
                     selector: 'novo-agenda-week-header',
@@ -1577,8 +1577,8 @@ class NovoAgendaWeekViewElement {
         this.refreshHourGrid();
         this.refreshBody();
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoAgendaWeekViewElement, deps: [{ token: i0.ChangeDetectorRef }, { token: LOCALE_ID }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.17", type: NovoAgendaWeekViewElement, isStandalone: false, selector: "novo-agenda-week", inputs: { viewDate: "viewDate", events: "events", excludeDays: "excludeDays", refresh: "refresh", locale: "locale", tooltipPosition: "tooltipPosition", weekStartsOn: "weekStartsOn", headerTemplate: "headerTemplate", eventTemplate: "eventTemplate", precision: "precision", hourSegments: "hourSegments", dayStartHour: "dayStartHour", dayStartMinute: "dayStartMinute", dayEndHour: "dayEndHour", dayEndMinute: "dayEndMinute", hourSegmentTemplate: "hourSegmentTemplate" }, outputs: { hourSegmentClicked: "hourSegmentClicked", dayClicked: "dayClicked", eventClicked: "eventClicked", eventTimesChanged: "eventTimesChanged" }, usesOnChanges: true, ngImport: i0, template: `
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoAgendaWeekViewElement, deps: [{ token: i0.ChangeDetectorRef }, { token: LOCALE_ID }], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.18", type: NovoAgendaWeekViewElement, isStandalone: false, selector: "novo-agenda-week", inputs: { viewDate: "viewDate", events: "events", excludeDays: "excludeDays", refresh: "refresh", locale: "locale", tooltipPosition: "tooltipPosition", weekStartsOn: "weekStartsOn", headerTemplate: "headerTemplate", eventTemplate: "eventTemplate", precision: "precision", hourSegments: "hourSegments", dayStartHour: "dayStartHour", dayStartMinute: "dayStartMinute", dayEndHour: "dayEndHour", dayEndMinute: "dayEndMinute", hourSegmentTemplate: "hourSegmentTemplate" }, outputs: { hourSegmentClicked: "hourSegmentClicked", dayClicked: "dayClicked", eventClicked: "eventClicked", eventTimesChanged: "eventTimesChanged" }, usesOnChanges: true, ngImport: i0, template: `
     <div class="cal-week-view" #weekViewContainer>
       <novo-agenda-week-header [days]="days" [locale]="locale" [customTemplate]="headerTemplate" (dayClicked)="dayClicked.emit($event)">
       </novo-agenda-week-header>
@@ -1614,7 +1614,7 @@ class NovoAgendaWeekViewElement {
     </div>
   `, isInline: true, styles: [":host ::ng-deep .cal-week-view{position:relative}:host ::ng-deep .cal-week-view .cal-day-headers{display:flex;border:1px solid #e1e1e1}:host ::ng-deep .cal-week-view .cal-day-headers .cal-header{flex:1;text-align:center;padding:5px;background-color:#f7f7f7}:host ::ng-deep .cal-week-view .cal-day-headers .cal-header:not(:last-child){border-right:1px solid #e1e1e1}:host ::ng-deep .cal-week-view .cal-day-headers .cal-header:hover,:host ::ng-deep .cal-week-view .cal-day-headers .cal-drag-over{background-color:#ededed}:host ::ng-deep .cal-week-view .cal-day-headers span{font-weight:400;opacity:.5}:host ::ng-deep .cal-week-view .cal-event-container{position:absolute}:host ::ng-deep .cal-week-view .cal-event-container:nth-child(n+2){border-left:1px solid #3d464d}:host ::ng-deep .cal-week-view .cal-event-container novo-agenda-week-event{height:inherit}:host ::ng-deep .cal-week-view .cal-event-container novo-agenda-week-event .cal-event{height:inherit;font-size:12px;min-height:30px;display:flex;flex-flow:column;background-color:#f7f7f7}:host ::ng-deep .cal-week-view .cal-event-container novo-agenda-week-event .cal-event .cal-event-ribbon{min-height:4px;width:100%}:host ::ng-deep .cal-week-view .cal-event-container novo-agenda-week-event .cal-event .cal-event-title{padding:0 0 0 10px;line-height:26px;overflow:hidden;text-overflow:ellipsis}:host ::ng-deep .cal-week-view .cal-event-container novo-agenda-week-event .cal-event .cal-event-description{font-size:10px;line-height:13px;padding:0 0 0 10px;overflow:hidden;text-overflow:ellipsis}:host ::ng-deep .cal-week-view .cal-draggable{cursor:move}:host ::ng-deep .cal-week-view .cal-header.cal-today{background-color:#e8fde7}:host ::ng-deep .cal-week-view .cal-header.cal-weekend span{color:#8b0000}:host ::ng-deep .cal-week-view .cal-event,:host ::ng-deep .cal-week-view .cal-header{text-overflow:ellipsis;white-space:nowrap}\n", "@charset \"UTF-8\";:host ::ng-deep .cal-day-view .cal-hour-rows,:host ::ng-deep .cal-week-view .cal-hour-rows{width:100%;border:solid 1px #e1e1e1;overflow-x:scroll;position:relative}:host ::ng-deep .cal-day-view .cal-hour:nth-child(2n),:host ::ng-deep .cal-week-view .cal-hour:nth-child(2n){background-color:#f7f7f7}:host ::ng-deep .cal-day-view .cal-hour:nth-child(odd),:host ::ng-deep .cal-week-view .cal-hour:nth-child(odd){background-color:#fff}:host ::ng-deep .cal-day-view .cal-hour-segment,:host ::ng-deep .cal-week-view .cal-hour-segment{height:30px}:host ::ng-deep .cal-day-view .cal-hour-segment:after,:host ::ng-deep .cal-week-view .cal-hour-segment:after{content:\"\\a0\"}:host ::ng-deep .cal-day-view .cal-hour:not(:last-child) .cal-hour-segment,:host ::ng-deep .cal-day-view .cal-hour:last-child :not(:last-child) .cal-hour-segment,:host ::ng-deep .cal-week-view .cal-hour:not(:last-child) .cal-hour-segment,:host ::ng-deep .cal-week-view .cal-hour:last-child :not(:last-child) .cal-hour-segment{border-bottom:thin dashed #e1e1e1}:host ::ng-deep .cal-day-view .cal-time,:host ::ng-deep .cal-week-view .cal-time{font-weight:700;padding-top:5px;width:70px;text-align:center;color:#9e9e9e}:host ::ng-deep .cal-day-view .cal-hour-segment.cal-after-hour-start .cal-time,:host ::ng-deep .cal-week-view .cal-hour-segment.cal-after-hour-start .cal-time{display:none}:host ::ng-deep .cal-day-view .cal-hour-segment:hover,:host ::ng-deep .cal-day-view .cal-drag-over .cal-hour-segment,:host ::ng-deep .cal-week-view .cal-hour-segment:hover,:host ::ng-deep .cal-week-view .cal-drag-over .cal-hour-segment{background-color:#ededed}\n"], dependencies: [{ kind: "directive", type: i1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "component", type: NovoAgendaWeekHeaderElement, selector: "novo-agenda-week-header", inputs: ["days", "locale", "customTemplate"], outputs: ["dayClicked", "eventDropped"] }, { kind: "component", type: NovoAgendaWeekEventElement, selector: "novo-agenda-week-event", inputs: ["weekEvent", "tooltipPosition", "customTemplate"], outputs: ["eventClicked"] }, { kind: "component", type: NovoAgendaHourSegmentElement, selector: "novo-agenda-day-hour-segment", inputs: ["segment", "locale", "customTemplate"] }] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoAgendaWeekViewElement, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoAgendaWeekViewElement, decorators: [{
             type: Component,
             args: [{ selector: 'novo-agenda-week', template: `
     <div class="cal-week-view" #weekViewContainer>
@@ -1698,8 +1698,8 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImpo
 
 // NG2
 class NovoAgendaModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoAgendaModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.3.17", ngImport: i0, type: NovoAgendaModule, declarations: [NovoEventTypeLegendElement,
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoAgendaModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.3.18", ngImport: i0, type: NovoAgendaModule, declarations: [NovoEventTypeLegendElement,
             NovoAgendaMonthViewElement,
             NovoAgendaMonthHeaderElement,
             NovoAgendaMonthDayElement,
@@ -1736,9 +1736,9 @@ class NovoAgendaModule {
             YearPipe,
             HoursPipe,
             EndOfWeekDisplayPipe] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoAgendaModule, imports: [CommonModule, NovoButtonModule, NovoTooltipModule, NovoPipesModule] }); }
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoAgendaModule, imports: [CommonModule, NovoButtonModule, NovoTooltipModule, NovoPipesModule] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.17", ngImport: i0, type: NovoAgendaModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoAgendaModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [CommonModule, NovoButtonModule, NovoTooltipModule, NovoPipesModule],

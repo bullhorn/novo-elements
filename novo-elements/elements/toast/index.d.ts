@@ -1,5 +1,5 @@
 import * as i0 from '@angular/core';
-import { OnInit, OnChanges, EventEmitter, SimpleChanges } from '@angular/core';
+import { OnInit, OnChanges, EventEmitter, SimpleChanges, ViewContainerRef, DestroyRef } from '@angular/core';
 import { SafeHtml, DomSanitizer } from '@angular/platform-browser';
 import { DeferredPromise } from 'novo-elements/utils';
 import * as i2 from '@angular/common';
@@ -79,6 +79,7 @@ declare class NovoToastService {
     };
     constructor(componentUtils: ComponentUtils);
     set parentViewContainer(view: any);
+    ownViewContainer(view: ViewContainerRef, destroyRef: DestroyRef): void;
     alert(options: ToastOptions, toastElement?: any): Promise<any>;
     isVisible(toast: any): any;
     hide(toast: any): void;

@@ -11236,6 +11236,7 @@ declare class BreadcrumbSourceUsageExample {
         title: string;
         showMenu: boolean;
         link: string;
+        automationId: string;
         noNavigation?: undefined;
         isSearch?: undefined;
         menuList?: undefined;
@@ -11245,6 +11246,7 @@ declare class BreadcrumbSourceUsageExample {
         showMenu: boolean;
         noNavigation: boolean;
         isSearch: boolean;
+        automationId: string;
         menuList: ({
             name: string;
             link: string;

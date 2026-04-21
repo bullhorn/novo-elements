@@ -28,6 +28,7 @@ declare class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlVa
     _value: string;
     instance: any;
     debounceTimeout: any;
+    private _ckEditorFixRemoveListener?;
     constructor(zone: NgZone);
     get value(): string;
     set value(v: string);
