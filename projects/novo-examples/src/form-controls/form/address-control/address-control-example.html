@@ -1,10 +1,10 @@
-<novo-form [form]="addressForm">
-  <div class="novo-form-row">
+<novo-form [form]="addressForm" data-automation-id="form-address">
+  <div class="novo-form-row" data-automation-id="form-address-primary">
     <novo-control [form]="addressForm" [control]="addressControl"></novo-control>
   </div>
-  <div class="novo-form-row">
+  <div class="novo-form-row" data-automation-id="form-address-secondary">
     <novo-control [form]="addressForm" [control]="secondaryAddressControl"></novo-control>
   </div>
 </novo-form>
 
-<div class="final-value">Value: {{addressForm.value | json}}</div>
+<div class="final-value" data-automation-id="form-address-value">Value: {{addressForm.value | json}}</div>

@@ -1,10 +1,10 @@
-<button theme="secondary" *ngIf="!myform.showingAllFields && !(myform.allFieldsRequired || myform.allFieldsNotRequired)" (click)="myform.showAllFields()">Show All Fields</button>
-<button theme="secondary" *ngIf="!myform.showingRequiredFields && !(myform.allFieldsRequired || myform.allFieldsNotRequired)" (click)="myform.showOnlyRequired(false)">Show Required Fields</button>
-<novo-dynamic-form [autoFocusFirstField]="true" class="dynamic" [fieldsets]="dynamic" [(form)]="dynamicForm" #myform></novo-dynamic-form>
-<footer class="dynamic-demo-footer">
-    <button (click)="save(myform)" theme="primary" icon="check">Save</button>
-    <button (click)="clear()" theme="secondary" icon="check">Clear</button>
+<button theme="secondary" *ngIf="!myform.showingAllFields && !(myform.allFieldsRequired || myform.allFieldsNotRequired)" (click)="myform.showAllFields()" data-automation-id="dynamic-form-show-all">Show All Fields</button>
+<button theme="secondary" *ngIf="!myform.showingRequiredFields && !(myform.allFieldsRequired || myform.allFieldsNotRequired)" (click)="myform.showOnlyRequired(false)" data-automation-id="dynamic-form-show-required">Show Required Fields</button>
+<novo-dynamic-form [autoFocusFirstField]="true" class="dynamic" [fieldsets]="dynamic" [(form)]="dynamicForm" #myform data-automation-id="dynamic-form"></novo-dynamic-form>
+<footer class="dynamic-demo-footer" data-automation-id="dynamic-form-footer">
+    <button (click)="save(myform)" theme="primary" icon="check" data-automation-id="dynamic-form-save">Save</button>
+    <button (click)="clear()" theme="secondary" icon="check" data-automation-id="dynamic-form-clear">Clear</button>
 </footer>
-<div class="final-value">Valid: {{myform.isValid | json}}</div>
-<div class="final-value">Values: {{myform.values | json}}</div>
-<div class="final-value">Updated Values: {{myform.updatedValues() | json}}</div>
+<div class="final-value" data-automation-id="dynamic-form-valid">Valid: {{myform.isValid | json}}</div>
+<div class="final-value" data-automation-id="dynamic-form-values">Values: {{myform.values | json}}</div>
+<div class="final-value" data-automation-id="dynamic-form-updated">Updated Values: {{myform.updatedValues() | json}}</div>

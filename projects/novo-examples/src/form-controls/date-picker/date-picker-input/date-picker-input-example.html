@@ -1,35 +1,36 @@
-<div>
+<div data-automation-id="date-picker-input-container">
   <novo-date-picker-input
     [(ngModel)]="selected"
     [format]="format.value"
     [weekStart]="weekStart.value"
-    [disabled]="disabled.value">
+    [disabled]="disabled.value"
+    data-automation-id="date-picker-input">
   </novo-date-picker-input>
 </div>
 
 <section>
   <novo-label>Selected Values:</novo-label>
-  <div>{{selected | json}}</div>
+  <div data-automation-id="date-picker-input-value">{{selected | json}}</div>
 </section>
 
 <section>
   <novo-label>Format</novo-label>
-  <novo-radio-group #format appearance="vertical" value="ddd MMM DD, YYYY">
-    <novo-radio name="format" value="MM-DD-YYYY">MM-DD-YYYY</novo-radio>
-    <novo-radio name="format" value="DD-MM-YYYY">DD-MM-YYYY</novo-radio>
-    <novo-radio name="format" value="MMM DD, YYYY">MMM DD, YYYY</novo-radio>
-    <novo-radio name="format" value="ddd MMM DD, YYYY">ddd MMM DD, YYYY</novo-radio>
+  <novo-radio-group #format appearance="vertical" value="ddd MMM DD, YYYY" data-automation-id="date-picker-input-format-group">
+    <novo-radio name="format" value="MM-DD-YYYY" data-automation-id="date-picker-input-format-1">MM-DD-YYYY</novo-radio>
+    <novo-radio name="format" value="DD-MM-YYYY" data-automation-id="date-picker-input-format-2">DD-MM-YYYY</novo-radio>
+    <novo-radio name="format" value="MMM DD, YYYY" data-automation-id="date-picker-input-format-3">MMM DD, YYYY</novo-radio>
+    <novo-radio name="format" value="ddd MMM DD, YYYY" data-automation-id="date-picker-input-format-4">ddd MMM DD, YYYY</novo-radio>
   </novo-radio-group>
 
   <novo-label>Week Start</novo-label>
-  <novo-radio-group #weekStart appearance="vertical" value="0">
-    <novo-radio name="weekStart" value="0">Sun</novo-radio>
-    <novo-radio name="weekStart" value="1">Mon</novo-radio>
+  <novo-radio-group #weekStart appearance="vertical" value="0" data-automation-id="date-picker-input-weekstart-group">
+    <novo-radio name="weekStart" value="0" data-automation-id="date-picker-input-weekstart-sun">Sun</novo-radio>
+    <novo-radio name="weekStart" value="1" data-automation-id="date-picker-input-weekstart-mon">Mon</novo-radio>
   </novo-radio-group>
 
   <novo-label>Enabled</novo-label>
-  <novo-radio-group #disabled appearance="vertical" [value]="false">
-    <novo-radio name="disabled" [value]="false">Enabled</novo-radio>
-    <novo-radio name="disabled" [value]="true">Disabled</novo-radio>
+  <novo-radio-group #disabled appearance="vertical" [value]="false" data-automation-id="date-picker-input-state-group">
+    <novo-radio name="disabled" [value]="false" data-automation-id="date-picker-input-enabled">Enabled</novo-radio>
+    <novo-radio name="disabled" [value]="true" data-automation-id="date-picker-input-disabled">Disabled</novo-radio>
   </novo-radio-group>
 </section>

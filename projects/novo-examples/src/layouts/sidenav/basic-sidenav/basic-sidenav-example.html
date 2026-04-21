@@ -1,6 +1,6 @@
-<div class="sidenav-example">
-  <novo-toolbar color="navigation">
-    <novo-action icon="menu" (click)="sidenav.toggle()"></novo-action>
+<div class="sidenav-example" data-automation-id="sidenav-example">
+  <novo-toolbar color="navigation" data-automation-id="sidenav-toolbar">
+    <novo-action icon="menu" (click)="sidenav.toggle()" data-automation-id="sidenav-menu"></novo-action>
     <novo-divider vertical></novo-divider>
     <img class="logo" src="assets/images/bullhorn-logo.svg" width="120" height="32" />
 
@@ -40,22 +40,23 @@
       [mode]="isMobile ? 'over' : 'side'"
       [opened]="!isMobile"
       [disableClose]="!isMobile"
-      theme="navigation">
-      <novo-header theme="navigation" [condensed]="true">
-        <div novo-title>Application Menu</div>
+      theme="navigation"
+      data-automation-id="sidenav">
+      <novo-header theme="navigation" [condensed]="true" data-automation-id="sidenav-header">
+        <div novo-title data-automation-id="sidenav-title">Application Menu</div>
       </novo-header>
-      <novo-list theme="navigation" direction="vertical">
+      <novo-list theme="navigation" direction="vertical" data-automation-id="sidenav-list">
         <novo-divider></novo-divider>
-        <novo-list-item><a>Job Orders</a></novo-list-item>
-        <button list-item>Companies</button>
-        <novo-list-item>Placements</novo-list-item>
-        <novo-list-item>Contacts</novo-list-item>
-        <novo-list-item>Candidates</novo-list-item>
+        <novo-list-item data-automation-id="sidenav-orders"><a>Job Orders</a></novo-list-item>
+        <button list-item data-automation-id="sidenav-companies">Companies</button>
+        <novo-list-item data-automation-id="sidenav-placements">Placements</novo-list-item>
+        <novo-list-item data-automation-id="sidenav-contacts">Contacts</novo-list-item>
+        <novo-list-item data-automation-id="sidenav-candidates">Candidates</novo-list-item>
         <novo-divider></novo-divider>
-        <novo-list-item>Reports</novo-list-item>
-        <novo-list-item>Settings</novo-list-item>
-        <novo-list-item>About</novo-list-item>
-        <a list-item>Users</a>
+        <novo-list-item data-automation-id="sidenav-reports">Reports</novo-list-item>
+        <novo-list-item data-automation-id="sidenav-settings">Settings</novo-list-item>
+        <novo-list-item data-automation-id="sidenav-about">About</novo-list-item>
+        <a list-item data-automation-id="sidenav-users">Users</a>
 
       </novo-list>
 

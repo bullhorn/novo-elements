@@ -1,35 +1,35 @@
 <!--Check out the FormDemo.js for more information!-->
-<button theme="secondary" (click)="form.showAllFields()">Show All Fields</button>
-<button theme="secondary" (click)="form.showOnlyRequired(false)">Show Required Fields</button>
+<button theme="secondary" (click)="form.showAllFields()" data-automation-id="form-text-show-all">Show All Fields</button>
+<button theme="secondary" (click)="form.showOnlyRequired(false)" data-automation-id="form-text-show-required">Show Required Fields</button>
 <br/>
 <br/>
-<novo-form [form]="textForm" #form>
-    <div class="novo-form-row">
+<novo-form [form]="textForm" #form data-automation-id="form-text">
+    <div class="novo-form-row" data-automation-id="form-text-input">
         <novo-control [form]="textForm" [control]="textControl"></novo-control>
     </div>
-    <div class="novo-form-row">
+    <div class="novo-form-row" data-automation-id="form-text-mask">
         <novo-control [form]="textForm" [control]="textMaskControl"></novo-control>
     </div>
-    <div class="novo-form-row">
+    <div class="novo-form-row" data-automation-id="form-text-email">
         <novo-control [autoFocus]="true" [form]="textForm" [control]="emailControl"></novo-control>
     </div>
-    <div class="novo-form-row">
+    <div class="novo-form-row" data-automation-id="form-text-number">
         <novo-control [form]="textForm" [control]="numberControl"></novo-control>
     </div>
-    <div class="novo-form-row">
+    <div class="novo-form-row" data-automation-id="form-text-currency">
         <novo-control [form]="textForm" [control]="currencyControl"></novo-control>
     </div>
-    <div class="novo-form-row">
+    <div class="novo-form-row" data-automation-id="form-text-float">
         <novo-control [form]="textForm" [control]="floatControl"></novo-control>
     </div>
-    <div class="novo-form-row">
+    <div class="novo-form-row" data-automation-id="form-text-percentage">
         <novo-control [form]="textForm" [control]="percentageControl"></novo-control>
     </div>
-    <div class="novo-form-row">
+    <div class="novo-form-row" data-automation-id="form-text-textarea">
         <novo-control [form]="textForm" [control]="textAreaControl"></novo-control>
     </div>
-    <div class="novo-form-row">
+    <div class="novo-form-row" data-automation-id="form-text-quicknote">
         <novo-control [form]="textForm" [control]="quickNoteControl"></novo-control>
     </div>
 </novo-form>
-<div class="final-value">Value: {{textForm.value | json}}</div>
+<div class="final-value" data-automation-id="form-text-value">Value: {{textForm.value | json}}</div>
