@@ -1,40 +1,40 @@
-<form class="example-container" [formGroup]="options">
+<form class="example-container" [formGroup]="options" data-automation-id="form-usage">
   <novo-fields>
-    <novo-field>
+    <novo-field data-automation-id="number-field">
       <novo-label>Pick a Number?</novo-label>
-      <input novoInput type="number" placeholder="Ex. 12" [formControl]="numberControl" min="10" />
-      <novo-error *ngIf="numberControl.invalid">Minimum: 10</novo-error>
+      <input novoInput type="number" placeholder="Ex. 12" [formControl]="numberControl" min="10" data-automation-id="number-input" />
+      <novo-error *ngIf="numberControl.invalid" data-automation-id="number-error">Minimum: 10</novo-error>
     </novo-field>
 
-    <novo-field>
+    <novo-field data-automation-id="alarm-field">
       <novo-label>Set an Alarm</novo-label>
-      <input novoInput timeFormat [picker]="timepicker" [formControl]="timeControl" />
+      <input novoInput timeFormat [picker]="timepicker" [formControl]="timeControl" data-automation-id="alarm-input" />
       <novo-picker-toggle novoSuffix icon="clock">
         <novo-time-picker #timepicker></novo-time-picker>
       </novo-picker-toggle>
     </novo-field>
 
-    <novo-field>
+    <novo-field data-automation-id="dob-field">
       <novo-label>Date of Birth</novo-label>
-      <input novoInput dateFormat [picker]="datepicker" [formControl]="dateControl" disabled="true" readonly />
+      <input novoInput dateFormat [picker]="datepicker" [formControl]="dateControl" disabled="true" readonly data-automation-id="dob-input" />
       <novo-picker-toggle novoSuffix icon="calendar">
         <novo-date-picker #datepicker></novo-date-picker>
       </novo-picker-toggle>
     </novo-field>
 
-    <novo-field>
+    <novo-field data-automation-id="appointment-field">
       <novo-label>Appointment</novo-label>
-      <input novoInput dateTimeFormat [picker]="datetimepicker" [military]="false" [formControl]="dateTimeControl" readonly />
+      <input novoInput dateTimeFormat [picker]="datetimepicker" [military]="false" [formControl]="dateTimeControl" readonly data-automation-id="appointment-input" />
       <novo-picker-toggle novoSuffix icon="calendar">
         <novo-date-time-picker #datetimepicker></novo-date-time-picker>
       </novo-picker-toggle>
     </novo-field>
 
-    <button theme="primary" [disabled]="!options.valid" (click)="onSubmit(options.value)">Submit
+    <button theme="primary" [disabled]="!options.valid" (click)="onSubmit(options.value)" data-automation-id="submit-button">Submit
       Form</button>
   </novo-fields>
 </form>
 
-<div class="example-container">
+<div class="example-container" data-automation-id="form-output">
   {{ post | json }}
 </div>

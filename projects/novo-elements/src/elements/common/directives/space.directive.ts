@@ -1,5 +1,5 @@
 import { Directive, HostBinding, Input } from '@angular/core';
-import * as tokens from 'novo-design-tokens';
+import { spacing } from 'novo-design-tokens';
 /*
 Prop	CSS Property	Theme Field
 m, margin	margin	space
@@ -39,8 +39,8 @@ const selectors = [...marginAttrs, ...paddingAttrs];
 */
 
 export const getSpacingToken = (value: string) => {
-  if (Object.keys(tokens.spacing).includes(value)) {
-    return tokens.spacing[value];
+  if (Object.keys(spacing).includes(value)) {
+    return spacing[value];
   }
   // TODO: Maybe Validate Value ie.(rem, px)
   return value;

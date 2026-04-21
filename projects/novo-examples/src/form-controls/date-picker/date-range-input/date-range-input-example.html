@@ -2,30 +2,31 @@
   [(ngModel)]="selected"
   [format]="format.value"
   [mode]="mode.value"
-  [weekStart]="weekStart.value">
+  [weekStart]="weekStart.value"
+  data-automation-id="date-range-input">
 </novo-date-range-input>
 
 <section>
   <novo-label>Selected Values:</novo-label>
-  <div>{{selected | json}}</div>
+  <div data-automation-id="date-range-value">{{selected | json}}</div>
 </section>
 
 <section>
   <novo-label>Selection mode</novo-label>
-  <novo-radio-group #mode appearance="vertical" value="week">
-    <novo-radio name="mode" value="week">week</novo-radio>
-    <novo-radio name="mode" value="range">range</novo-radio>
+  <novo-radio-group #mode appearance="vertical" value="week" data-automation-id="date-range-mode-group">
+    <novo-radio name="mode" value="week" data-automation-id="date-range-mode-week">week</novo-radio>
+    <novo-radio name="mode" value="range" data-automation-id="date-range-mode-range">range</novo-radio>
   </novo-radio-group>
 
   <novo-label>Format</novo-label>
-  <novo-radio-group #format appearance="vertical" value="MM-DD-YYYY">
-    <novo-radio name="format" value="MM-DD-YYYY">MM-dd-YYYY</novo-radio>
-    <novo-radio name="format" value="DD-MM-YYYY">dd-MM-YYYY</novo-radio>
+  <novo-radio-group #format appearance="vertical" value="MM-DD-YYYY" data-automation-id="date-range-format-group">
+    <novo-radio name="format" value="MM-DD-YYYY" data-automation-id="date-range-format-1">MM-dd-YYYY</novo-radio>
+    <novo-radio name="format" value="DD-MM-YYYY" data-automation-id="date-range-format-2">dd-MM-YYYY</novo-radio>
   </novo-radio-group>
 
   <novo-label>Week Start</novo-label>
-  <novo-radio-group #weekStart appearance="vertical" value="0">
-    <novo-radio name="weekStart" value="0">Sun</novo-radio>
-    <novo-radio name="weekStart" value="1">Mon</novo-radio>
+  <novo-radio-group #weekStart appearance="vertical" value="0" data-automation-id="date-range-weekstart-group">
+    <novo-radio name="weekStart" value="0" data-automation-id="date-range-weekstart-sun">Sun</novo-radio>
+    <novo-radio name="weekStart" value="1" data-automation-id="date-range-weekstart-mon">Mon</novo-radio>
   </novo-radio-group>
 </section>

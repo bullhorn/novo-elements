@@ -1,5 +1,5 @@
-<novo-radio-group [(ngModel)]="model" (change)="onChange($event)">
-  <novo-radio value="one">Make me anything!</novo-radio>
-  <novo-radio value="two" [disabled]="true">I'm disabled!</novo-radio>
-  <novo-radio value="three">TEST!</novo-radio>
+<novo-radio-group [(ngModel)]="model" (change)="onChange($event)" data-automation-id="radio-basic-group">
+  <novo-radio value="one" data-automation-id="radio-basic-one">Make me anything!</novo-radio>
+  <novo-radio value="two" [disabled]="true" data-automation-id="radio-basic-two">I'm disabled!</novo-radio>
+  <novo-radio value="three" data-automation-id="radio-basic-three">TEST!</novo-radio>
 </novo-radio-group>

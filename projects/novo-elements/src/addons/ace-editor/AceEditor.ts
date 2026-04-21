@@ -2,8 +2,7 @@
 import { Component, ElementRef, EventEmitter, forwardRef, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // Vendor
-// organize-imports-ignore
-import * as ace from 'brace';
+import { edit } from 'brace';
 import 'brace/ext/language_tools.js';
 import 'brace/mode/javascript';
 import 'brace/theme/chrome';
@@ -81,7 +80,7 @@ export class NovoAceEditor implements ControlValueAccessor, OnInit, OnDestroy {
 
   private initializeEditor() {
     const el = this.elementRef.nativeElement;
-    this.editor = ace.edit(el);
+    this.editor = edit(el);
     this.editor.$blockScrolling = Infinity;
   }
 

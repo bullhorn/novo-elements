@@ -1,19 +1,19 @@
-<novo-spinner [size]="size.value" [color]="color.value"></novo-spinner>
+<novo-spinner [size]="size.value" [color]="color.value" data-automation-id="spinner-component"></novo-spinner>
 
 <section>
   <novo-label>Size</novo-label>
-  <novo-radio-group #size appearance="vertical" value="medium">
-    <novo-radio name="size" value="small">small</novo-radio>
-    <novo-radio name="size" value="medium">medium</novo-radio>
-    <novo-radio name="size" value="large">large</novo-radio>
+  <novo-radio-group #size appearance="vertical" value="medium" data-automation-id="size-spinner-group">
+    <novo-radio name="size" value="small" data-automation-id="size-spinner-small">small</novo-radio>
+    <novo-radio name="size" value="medium" data-automation-id="size-spinner-medium">medium</novo-radio>
+    <novo-radio name="size" value="large" data-automation-id="size-spinner-large">large</novo-radio>
   </novo-radio-group>
 
   <novo-label>Color</novo-label>
-  <novo-radio-group #color appearance="vertical">
-    <novo-radio name="color" value="grapefruit">grapefruit</novo-radio>
-    <novo-radio name="color" value="aqua">aqua</novo-radio>
-    <novo-radio name="color" value="mint">mint</novo-radio>
-    <novo-radio name="color" value="ocean">ocean</novo-radio>
+  <novo-radio-group #color appearance="vertical" data-automation-id="color-spinner-group">
+    <novo-radio name="color" value="grapefruit" data-automation-id="color-spinner-grapefruit">grapefruit</novo-radio>
+    <novo-radio name="color" value="aqua" data-automation-id="color-spinner-aqua">aqua</novo-radio>
+    <novo-radio name="color" value="mint" data-automation-id="color-spinner-mint">mint</novo-radio>
+    <novo-radio name="color" value="ocean" data-automation-id="color-spinner-ocean">ocean</novo-radio>
   </novo-radio-group>
 
 </section>

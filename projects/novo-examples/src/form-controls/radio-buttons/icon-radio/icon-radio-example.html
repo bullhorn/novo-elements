@@ -1,12 +1,12 @@
-<novo-radio-group>
-  <novo-radio button="true" theme="icon" icon="company" name="icon" value="one" (change)="onChange($event)">
+<novo-radio-group data-automation-id="radio-icon-group">
+  <novo-radio button="true" theme="icon" icon="company" name="icon" value="one" (change)="onChange($event)" data-automation-id="radio-icon-company">
   </novo-radio>
-  <novo-radio button="true" theme="icon" icon="job" name="icon" value="two" (change)="onChange($event)">
+  <novo-radio button="true" theme="icon" icon="job" name="icon" value="two" (change)="onChange($event)" data-automation-id="radio-icon-job">
   </novo-radio>
-  <novo-radio button="true" theme="icon" icon="candidate" name="icon" value="three" (change)="onChange($event)">
+  <novo-radio button="true" theme="icon" icon="candidate" name="icon" value="three" (change)="onChange($event)" data-automation-id="radio-icon-candidate">
   </novo-radio>
-  <novo-radio button="true" theme="icon" icon="opportunity" name="icon" value="disabled" (change)="onChange($event)" [disabled]="true">
+  <novo-radio button="true" theme="icon" icon="opportunity" name="icon" value="disabled" (change)="onChange($event)" [disabled]="true" data-automation-id="radio-icon-opportunity">
   </novo-radio>
-  <novo-radio button="true" theme="icon" icon="lead" name="icon" value="alsoDisabled" (change)="onChange($event)" [checked]="true" [disabled]="true">
+  <novo-radio button="true" theme="icon" icon="lead" name="icon" value="alsoDisabled" (change)="onChange($event)" [checked]="true" [disabled]="true" data-automation-id="radio-icon-lead">
   </novo-radio>
 </novo-radio-group>

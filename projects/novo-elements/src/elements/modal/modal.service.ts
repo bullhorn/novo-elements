@@ -20,12 +20,10 @@ const DEFAULT_CONFIG: ModalConfig = {
 
 @Injectable({ providedIn: 'root' })
 export class NovoModalService {
-  _parentViewContainer: ViewContainerRef;
   overlayRef: OverlayRef;
 
   set parentViewContainer(view: ViewContainerRef) {
-    console.warn('parentViewContainer is deprecated');
-    this._parentViewContainer = view;
+    console.warn('parentViewContainer is deprecated - will be ignored');
   }
 
   constructor(private injector: Injector, private overlay: Overlay) {}

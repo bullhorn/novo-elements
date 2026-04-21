@@ -1,5 +1,5 @@
-<novo-tip-well name="Demo" [tip]="demoTip" [button]="false"></novo-tip-well>
+<novo-tip-well data-automation-id="buttonless-tip-well" name="Demo" [tip]="demoTip" [button]="false"></novo-tip-well>
 
-<p>Did you hide the TipWell?</p>
+<p data-automation-id="buttonless-tip-well-message">Did you hide the TipWell?</p>
 
-<button theme="secondary" (click)="clearLocalStorage()">Reset</button> localStorage and Reload
+<button theme="secondary" data-automation-id="buttonless-tip-well-reset-btn" (click)="clearLocalStorage()">Reset</button> localStorage and Reload

@@ -53,9 +53,9 @@ describe('Directive: NovoChipInput', () => {
         relatedTarget: mockOverlay,
     });
     testComponent.textCtrl.setValue('value');
-    spyOn(NovoFieldElement.prototype, 'blurEventIsInField').and.returnValue(false);
+    const spy = spyOn(NovoFieldElement.prototype, 'blurEventIsInField').and.returnValue(false);
     fixture.debugElement.query(By.directive(NovoChipInput)).triggerEventHandler('blur', blurEvent);
-    expect(NovoFieldElement.prototype.blurEventIsInField).toHaveBeenCalledWith(blurEvent);
+    expect(spy).toHaveBeenCalledWith(blurEvent);
     expect(testComponent.textCtrl.value).toBeFalsy();
   });
 });

@@ -1,0 +1,42 @@
+name: Run E2E Tests
+
+on:
+  workflow_dispatch:
+    inputs:
+      baseUrl:
+        description: 'Base URL to test against'
+        required: false
+        default: 'https://bullhorn.github.io/novo-elements/docs'
+        type: string
+
+jobs:
+  e2e_tests:
+    name: E2E Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup NodeJS
+        uses: actions/setup-node@v1
+        with:
+          node-version: 22.22.0
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Install Chrome dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y chromium-browser
+
+      - name: Verify Chrome installation
+        run: |
+          which chromium-browser
+          chromium-browser --version
+          ls -la /usr/bin/chromium*
+
+      - name: Run E2E Tests
+        run: |
+          E2E_BASE_URL=${{ inputs.baseUrl }} npm run e2e

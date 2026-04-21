@@ -1,5 +1,5 @@
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild } from '@angular/core';
-import * as dateFns from 'date-fns';
+import { addDays, subDays } from 'date-fns';
 import {
   IDataTableColumn,
   IDataTablePaginationOptions,
@@ -324,7 +324,7 @@ export class DataTableRowsExample implements AfterViewInit {
 
   constructor(private ref: ChangeDetectorRef, private modalService: NovoModalService) {
     for (let i = 0; i < 1000; i++) {
-      const day = i < 500 ? dateFns.subDays(new Date(), i) : dateFns.addDays(new Date(), i - 500);
+      const day = i < 500 ? subDays(new Date(), i) : addDays(new Date(), i - 500);
       this.staticDataSet1.push({
         id: i,
         embeddedObj: { id: i, test: `HMM ${i}`, another: { id: 777 } },
