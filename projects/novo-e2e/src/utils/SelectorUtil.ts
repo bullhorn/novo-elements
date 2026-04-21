@@ -137,7 +137,6 @@ export const keyboardKeys = {
 };
 
 export enum ControlType {
-    aceEditor = 'ace-editor',
     address = 'address',
     checkbox = 'checkbox',
     checklist = 'checklist',

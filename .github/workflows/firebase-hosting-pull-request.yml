@@ -5,6 +5,7 @@ on: pull_request
 env:
   IS_FORK: ${{ github.event.pull_request.head.repo.full_name != github.repository }}
   IS_DEPENDABOT: ${{ github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]' }}
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   build_and_preview:
@@ -12,12 +13,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v6
 
       - name: Setup NodeJS
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v6
         with:
           node-version: 22.22.0
+      - name: Update npm
+        run: npm install -g npm@10.9.7
 
       - name: Build project
         run: npm ci && npm run build:ci && npm run build:examples && npm run build:demo
