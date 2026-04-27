@@ -1,4 +1,4 @@
-import { Component, DebugElement, NgModule } from '@angular/core';
+import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { By } from '@angular/platform-browser';
@@ -40,7 +40,7 @@ describe('Directive: NovoInput', () => {
       inputDebugElement = fixture.debugElement.query(By.directive(NovoInput));
       novoInput = inputDebugElement.injector.get(NovoInput);
       fixture.detectChanges();
-    })
+    }),
   );
 
   describe('errorState', () => {
