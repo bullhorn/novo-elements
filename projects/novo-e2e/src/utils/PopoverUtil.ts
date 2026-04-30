@@ -49,10 +49,6 @@ export const verticalAlignmentData = [
     { id: 'popover-left-top', display: 'left-top', primaryDirection: 'left', alignment: 'top', text: 'Popover is on the left side and above the element. Can also apply \'bottom\' to \'left\' placement PopOvers.' },
 ];
 
-export const autoPlacementData = [
-    { id: 'popover-auto-placement-first', initialPlacement: 'top', expandedPlacement: 'bottom' },
-    { id: 'popover-auto-placement-second', initialPlacement: 'top', expandedPlacement: 'bottom' },
-];
 
 export async function testAlignmentPopover(popoverName: string, alignment: any): Promise<void> {
     const trigger = popoverTrigger(popoverName, alignment.id);

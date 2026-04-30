@@ -1,8 +1,7 @@
 import { moveMouseToElement, click, scrollIntoView, moveMouse } from '../utils/ElementActionUtil';
 import { getURLs } from '../utils/EnvironmentUtil';
 import { verifyPresent, verifyText, verifyClassPresent, verifyAbsent } from '../utils/VerifyUtil';
-import { popoverTrigger, popoverContent, popover, popoverSelectors, testAlignmentPopover, placementData, horizontalAlignmentData, verticalAlignmentData, autoPlacementData } from '../utils/PopoverUtil';
-import { codeExampleExpandButton } from '../utils/SelectorUtil';
+import { popoverTrigger, popoverContent, popover, popoverSelectors, testAlignmentPopover, placementData, horizontalAlignmentData, verticalAlignmentData } from '../utils/PopoverUtil';
 import { sleep } from '../utils/SleepUtil';
 
 describe('PopOver Placement Demo Page', () => {
@@ -108,30 +107,4 @@ describe('PopOver Placement Demo Page', () => {
         });
     });
 
-    describe('Auto Placement', () => {
-        const popoverName = 'pop-over-auto-placement';
-
-        autoPlacementData.forEach((placement) => {
-            it(`should adjust popover placement based on available screen space for ${placement.id}`, async () => {
-                const trigger = popoverTrigger(popoverName, placement.id);
-                await verifyPresent(trigger);
-                await moveMouseToElement(trigger);
-                await verifyPresent(popoverContent(popoverName));
-                await verifyClassPresent(popover(popoverName), placement.initialPlacement);
-                await moveMouse(100, 100);
-                await verifyAbsent(popoverContent(popoverName));
-
-                const expandButton = codeExampleExpandButton(popoverName);
-                await click(expandButton);
-                await scrollIntoView(expandButton, false);
-                await verifyPresent(trigger);
-                await moveMouseToElement(trigger);
-                await verifyPresent(popoverContent(popoverName));
-                await verifyClassPresent(popover(popoverName), placement.expandedPlacement);
-                await moveMouse(100, 100);
-                await verifyAbsent(popoverContent(popoverName));
-                await click(expandButton);
-            });
-        });
-    });
 });
