@@ -1,4 +1,4 @@
-import { moveMouseToElement, click, scrollIntoView, moveMouse } from '../utils/ElementActionUtil';
+import { moveMouseToElement, click, moveMouse } from '../utils/ElementActionUtil';
 import { getURLs } from '../utils/EnvironmentUtil';
 import { verifyPresent, verifyText, verifyClassPresent, verifyAbsent } from '../utils/VerifyUtil';
 import { popoverTrigger, popoverContent, popover, popoverSelectors, testAlignmentPopover, placementData, horizontalAlignmentData, verticalAlignmentData } from '../utils/PopoverUtil';
