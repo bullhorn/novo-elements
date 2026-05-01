@@ -1,12 +1,11 @@
 import { moveMouseToElement, click, moveMouse } from '../utils/ElementActionUtil';
-import { getURLs } from '../utils/EnvironmentUtil';
+import { COMPONENT_URLS, examplesUrl, getURLs } from '../utils/EnvironmentUtil';
 import { verifyPresent, verifyText, verifyClassPresent, verifyAbsent } from '../utils/VerifyUtil';
 import { popoverTrigger, popoverContent, popover, popoverSelectors, testAlignmentPopover, placementData, horizontalAlignmentData, verticalAlignmentData } from '../utils/PopoverUtil';
 import { sleep } from '../utils/SleepUtil';
 
 describe('PopOver Placement Demo Page', () => {
-    const baseUrl = (global as any).E2E_BASE_URL || 'https://bullhorn.github.io/novo-elements/docs';
-    const url = `${baseUrl}/#/components/pop%20over/examples`;
+    const url = examplesUrl(COMPONENT_URLS.POPOVER);
 
     before(async () => {
         await browser.navigateTo(url);
