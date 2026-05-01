@@ -5,20 +5,13 @@ import { verifyPresent, verifyText, verifyClassPresent, verifyClassAbsent } from
 import {
   calendarDate,
   calendarDateInMonth,
-  firstVisibleCalendarDate,
-  lastVisibleCalendarDate,
+  calendar,
   verifyCalendarDateSelected,
   verifyCalendarDatesSelected,
   verifyCalendarDateRangeSelected,
   verifyCalendarWeekRangeDays,
   calendarMonth,
   calendarYear,
-  calendarMonthHeader,
-  calendarYearHeader,
-  calendarNextButton,
-  calendarPreviousButton,
-  calendarMonthText,
-  calendarYearText,
   getMonthByOffset,
   getYearByOffset,
   calendarSelectionMode,
@@ -52,34 +45,34 @@ describe('Calendar Demo Page', () => {
   describe('Calendar Navigation', () => {
     it('should navigate to next month using calendar-next button', async () => {
       await scrollIntoView(elements.calendar);
-      const prevMonthHeader = await $(calendarMonthText()).getText();
-      await click(calendarNextButton());
-      const nextMonthHeader = await $(calendarMonthText()).getText();
+      const prevMonthHeader = await $(calendar.monthText).getText();
+      await click(calendar.nextButton);
+      const nextMonthHeader = await $(calendar.monthText).getText();
       expect(prevMonthHeader).not.toEqual(nextMonthHeader);
     });
 
     it('should navigate to previous month using calendar-previous button', async () => {
-      const currentMonthHeader = await $(calendarMonthText()).getText();
-      await click(calendarPreviousButton());
-      const prevMonthHeader = await $(calendarMonthText()).getText();
+      const currentMonthHeader = await $(calendar.monthText).getText();
+      await click(calendar.previousButton);
+      const prevMonthHeader = await $(calendar.monthText).getText();
       expect(currentMonthHeader).not.toEqual(prevMonthHeader);
     });
 
     it('should open and change month', async () => {
-      const initialMonth = await $(calendarMonthText()).getText();
-      await click(calendarMonthHeader());
+      const initialMonth = await $(calendar.monthText).getText();
+      await click(calendar.monthHeader);
       const targetMonth = getMonthByOffset(-2);
       await click(calendarMonth(targetMonth));
-      const newMonth = await $(calendarMonthText()).getText();
+      const newMonth = await $(calendar.monthText).getText();
       expect(initialMonth).not.toEqual(newMonth);
     });
 
     it('should open and change year', async () => {
-      const initialYear = await $(calendarYearText()).getText();
-      await click(calendarYearHeader());
+      const initialYear = await $(calendar.yearText).getText();
+      await click(calendar.yearHeader);
       const targetYear = getYearByOffset(-1);
       await click(calendarYear(targetYear));
-      const newYear = await $(calendarYearText()).getText();
+      const newYear = await $(calendar.yearText).getText();
       expect(initialYear).not.toEqual(newYear);
     });
   });
@@ -112,13 +105,13 @@ describe('Calendar Demo Page', () => {
     });
 
     it('should select the first visible day in the calendar grid', async () => {
-      await click(firstVisibleCalendarDate());
-      await verifyClassPresent(firstVisibleCalendarDate(), 'selected', 'first visible day');
+      await click(calendar.firstVisibleDate);
+      await verifyClassPresent(calendar.firstVisibleDate, 'selected', 'first visible day');
     });
 
     it('should select the last visible day in the calendar grid', async () => {
-      await click(lastVisibleCalendarDate());
-      await verifyClassPresent(lastVisibleCalendarDate(), 'selected', 'last visible day');
+      await click(calendar.lastVisibleDate);
+      await verifyClassPresent(calendar.lastVisibleDate, 'selected', 'last visible day');
     });
   });
 
@@ -206,7 +199,7 @@ describe('Calendar Demo Page', () => {
 
     it('should display two months', async () => {
       await scrollIntoView(elements.calendar);
-      const monthElements = await $$(calendarMonthText());
+      const monthElements = await $$(calendar.monthText);
       expect(monthElements.length).toBe(2);
     });
 

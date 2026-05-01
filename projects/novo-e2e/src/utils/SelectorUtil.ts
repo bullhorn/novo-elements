@@ -191,6 +191,10 @@ export function codeExample(exampleName: string): string {
     return `code-example[example="${exampleName}"]`;
 }
 
+export function codeExampleExpandButton(exampleName: string): string {
+    return `${codeExample(exampleName)} novo-button[icon="bhi-book"]`;
+}
+
 /**
  * For a switch control, returns the switch
  */
