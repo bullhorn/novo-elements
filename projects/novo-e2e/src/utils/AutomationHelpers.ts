@@ -34,3 +34,11 @@ export async function asyncMap(array: any[], mapper: Function): Promise<any> {
 export function failureMessage(message: any) {
     console.warn('      ×', message);
 }
+
+export async function acceptAlertIfPresent(): Promise<void> {
+    try {
+        await browser.acceptAlert();
+    } catch (error) {
+        console.error('No alert present.');
+    }
+}
