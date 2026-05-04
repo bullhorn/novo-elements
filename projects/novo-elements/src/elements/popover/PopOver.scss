@@ -152,6 +152,9 @@
   .popover-title {
     @include novo-title-text();
     margin-bottom: 1rem;
+    white-space: normal;
+    overflow: hidden;
+    max-width: 100%;
   }
   .popover-content {
     @include novo-body-text();
