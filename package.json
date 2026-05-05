@@ -144,6 +144,11 @@
     "vite": "^7.3.2",
     "vitest": "^4.1.5"
   },
+  "overrides": {
+    "@angular/build": {
+      "vitest": "$vitest"
+    }
+  },
   "lint-staged": {
     "*.{ts,json,scss,css,html}": [
       "prettier --write",
