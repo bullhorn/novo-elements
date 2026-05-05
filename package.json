@@ -75,7 +75,6 @@
     "zone.js": "~0.15.1"
   },
   "devDependencies": {
-    "@analogjs/vitest-angular": "^2.5.0",
     "@angular-devkit/core": "^20.3.22",
     "@angular-devkit/schematics": "^20.3.22",
     "@angular/build": "^20.3.22",
