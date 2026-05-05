@@ -1,0 +1,9 @@
+{
+  "builders": {
+    "vitest": {
+      "implementation": "./index",
+      "schema": "./schema.json",
+      "description": "Run tests with Vitest. TODO(Angular 21): Replace with @angular/build:unit-test and delete tools/vitest-builder/"
+    }
+  }
+}

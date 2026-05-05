@@ -1,8 +1,10 @@
 // NG2
-import { waitForAsync, inject, TestBed } from '@angular/core/testing';
+import { inject, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormGroup } from '@angular/forms';
+import { NovoLabelService, OptionsService } from 'novo-elements/services';
 // Vendor
 import { from } from 'rxjs';
+import { vi } from 'vitest';
 // APP
 import {
   AddressControl,
@@ -24,7 +26,6 @@ import {
 } from '../FormControls';
 import { FormField } from '../FormInterfaces';
 import { NovoFormControl } from '../NovoFormControl';
-import { NovoLabelService, OptionsService } from 'novo-elements/services';
 import { FormUtils } from './FormUtils';
 
 /**
@@ -242,7 +243,7 @@ describe('Utils: FormUtils', () => {
       });
       describe('with associated entity', () => {
         beforeEach(() => {
-          jest.spyOn(formUtils, 'hasAssociatedEntity').mockImplementation(() => true);
+          vi.spyOn(formUtils, 'hasAssociatedEntity').mockImplementation(() => true);
         });
         it('when allow multiple is disabled should return entitypicker', () => {
           const field: FormField = { ...toManyField, multiValue: false };
@@ -343,7 +344,7 @@ describe('Utils: FormUtils', () => {
     });
     it('should return the right component for WorkflowOptions and call getControlOptions with data', () => {
       const field: { type: string } = { type: 'select' };
-      jest.spyOn(formUtils, 'getControlOptions');
+      vi.spyOn(formUtils, 'getControlOptions');
       const result = formUtils.getControlForField(field, undefined, undefined, undefined, undefined, 'First');
       expect(formUtils.getControlOptions).toHaveBeenCalledWith(field, undefined, undefined, 'First');
       expect(result instanceof SelectControl).toBeTruthy();
@@ -492,7 +493,7 @@ describe('Utils: FormUtils', () => {
           },
         ],
       };
-      jest.spyOn(formUtils, 'getControlForField').mockReturnValue({});
+      vi.spyOn(formUtils, 'getControlForField').mockReturnValue({});
       formUtils.toFieldSets(meta, 'USD', {}, {}, {}, { firstName: 'First' });
       expect(formUtils.getControlForField).toHaveBeenCalledWith(meta.fields[0], {}, {}, {}, undefined, 'First');
     });

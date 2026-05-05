@@ -1,8 +1,11 @@
+import { vi } from 'vitest';
 // APP
 import { NovoLabelService } from '../novo-label-service';
 import { DateFormatService } from './DateFormat';
 
-interface IMaskRegexOpts { mask: RegExp }
+interface IMaskRegexOpts {
+  mask: RegExp;
+}
 
 describe('Service: DateFormatService', () => {
   let service: DateFormatService;
@@ -227,7 +230,7 @@ describe('Service: DateFormatService', () => {
     it('should be defined', () => {
       expect(service.parseTimeString).toBeDefined();
     });
-    it('should not parse if the string doesn\'t contain :', () => {
+    it("should not parse if the string doesn't contain :", () => {
       const [value, timeString] = service.parseTimeString('', false);
       expect(timeString).toEqual('');
     });
@@ -290,24 +293,24 @@ describe('Service: DateFormatService', () => {
     it('should call parseDateString and parseTimeString for datetime', () => {
       const dateStr = 'Tue Dec 5, 2023 3:00 PM';
       const date = new Date(dateStr);
-      jest.spyOn(service, 'parseDateString').mockReturnValue([date, 'Tue Dec 5, 2023', false]);
-      jest.spyOn(service, 'parseTimeString').mockReturnValueOnce([date, '3:00 PM']);
+      vi.spyOn(service, 'parseDateString').mockReturnValue([date, 'Tue Dec 5, 2023', false]);
+      vi.spyOn(service, 'parseTimeString').mockReturnValueOnce([date, '3:00 PM']);
       const [returnDate, returnStr] = service.parseString('a b', false, 'datetime');
       expect(returnDate.getTime()).toEqual(date.getTime());
       expect(returnStr).toEqual(dateStr);
     });
     it('should call parseDateString for dates', () => {
-      jest.spyOn(service, 'parseDateString');
+      vi.spyOn(service, 'parseDateString');
       service.parseString('a', false, 'date');
       expect(service.parseDateString).toHaveBeenCalled();
     });
     it('should call parseTimeString for time', () => {
-      jest.spyOn(service, 'parseTimeString');
+      vi.spyOn(service, 'parseTimeString');
       service.parseString('a', false, 'time');
       expect(service.parseTimeString).toHaveBeenCalledWith('a', false);
     });
     it('should immediately return null for blank values', () => {
-      jest.spyOn(service, 'parseTimeString');
+      vi.spyOn(service, 'parseTimeString');
       const retval = service.parseString('', false, 'time');
       expect(service.parseTimeString).not.toHaveBeenCalled();
       expect(retval).toBeNull();

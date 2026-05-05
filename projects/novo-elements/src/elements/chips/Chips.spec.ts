@@ -1,7 +1,8 @@
 // NG2
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { ComponentUtils, NovoLabelService } from 'novo-elements/services';
+import { vi } from 'vitest';
 // App
 import { NovoChipsElement } from './Chips';
 import { NovoChipsModule } from './Chips.module';
@@ -56,8 +57,8 @@ describe('Elements: NovoChipsElement', () => {
 
   describe('Method: onFocus(event)', () => {
     it('should remove selection', () => {
-      jest.spyOn(component, 'deselectAll');
-      jest.spyOn(component.focus, 'emit').mockImplementation(() => {});
+      vi.spyOn(component, 'deselectAll');
+      vi.spyOn(component.focus, 'emit').mockImplementation(() => {});
       component.onFocus();
       expect(component.focus.emit).toHaveBeenCalled();
       expect(component.deselectAll).toHaveBeenCalled();
@@ -69,7 +70,7 @@ describe('Elements: NovoChipsElement', () => {
       component.add({ value: 'test' });
       expect(component.items[0].value).toBe('test');
     });
-    it('should set value wih valueFomatterFunc if provided', (done) => {
+    it('should set value wih valueFomatterFunc if provided', async () => {
       component.source = {
         hiddenChipsLimit: 4,
         valueFormatter: (values) => `${values[0].label} (${values[0].value})`,
@@ -81,9 +82,7 @@ describe('Elements: NovoChipsElement', () => {
       } as any;
       component.add({ label: 'Test', value: 'test' });
       expect(component.value).toBe('Test (test)');
-      setTimeout(() => {
-        done();
-      }, 10);
+      await new Promise((r) => setTimeout(r, 10));
     });
   });
 
@@ -114,7 +113,6 @@ describe('Elements: NovoChipsElement', () => {
       component.items.pop(); // ['A', 'B', 'C']
       component.updateHiddenChips();
       expect(component.hiddenChipsLimit).toBe(component._hiddenChipsLimit);
-
     });
   });
 
@@ -127,7 +125,6 @@ describe('Elements: NovoChipsElement', () => {
       expect(component.hiddenChipsLimit).toBe(999);
     });
   });
-
 
   describe('Method: remove(event, item)', () => {
     it('should remove an item', () => {
@@ -194,16 +191,15 @@ describe('Elements: NovoChipsElement', () => {
     it('should be defined.', () => {
       expect(component.setItems).toBeDefined();
     });
-    it('should retrieve items with labels', (done) => {
+    it('should retrieve items with labels', async () => {
       component.setItems();
-      setTimeout(() => {
-        component._items.subscribe((result) => {
-          expect(result[0].label).toEqual('one');
-          done();
-        });
-      }, 1);
+      await new Promise((r) => setTimeout(r, 1));
+      const result = await new Promise((resolve) => {
+        component._items.subscribe((val) => resolve(val));
+      });
+      expect((result as any[])[0].label).toEqual('one');
     });
-    it('should handle category labels', (done) => {
+    it('should handle category labels', async () => {
       component.model = [
         {
           category: {
@@ -233,12 +229,11 @@ describe('Elements: NovoChipsElement', () => {
         ]),
       };
       component.setItems();
-      setTimeout(() => {
-        component._items.subscribe((result) => {
-          expect(result).toEqual(component.model);
-          done();
-        });
-      }, 1);
+      await new Promise((r) => setTimeout(r, 1));
+      const result = await new Promise((resolve) => {
+        component._items.subscribe((val) => resolve(val));
+      });
+      expect(result).toEqual(component.model);
     });
   });
 

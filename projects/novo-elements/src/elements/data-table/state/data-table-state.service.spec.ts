@@ -4,15 +4,18 @@ import { DataTableState } from './data-table-state.service';
 
 const mockAdaptiveQuery: AdaptiveQuery = {
   criteria: {
-    and: [{
-      status: {
-        equalTo: 'New Lead',
+    and: [
+      {
+        status: {
+          equalTo: 'New Lead',
+        },
       },
-    }, {
-      isDeleted: {
-        equalTo: 0,
+      {
+        isDeleted: {
+          equalTo: 0,
+        },
       },
-    }],
+    ],
   },
   orderBy: ['-id', 'name'],
   pagination: {
@@ -26,9 +29,9 @@ describe('Service: DataTableState', () => {
 
   describe('Method: reset', () => {
     beforeEach(() => {
-      spyOn(service.selectedRows, 'clear');
-      spyOn(service.resetSource, 'next');
-      spyOn(service.updates, 'emit');
+      vi.spyOn(service.selectedRows, 'clear');
+      vi.spyOn(service.resetSource, 'next');
+      vi.spyOn(service.updates, 'emit');
       service.filter = { id: 'test', value: 'value' };
       service.sort = { id: 'test', value: 'desc' };
       service.globalSearch = 'testing';
@@ -36,7 +39,7 @@ describe('Service: DataTableState', () => {
     });
     it('should call selectedRows.clear, resetSource.next and onSortFilterChange if retainSelected is true', () => {
       service.retainSelected = false;
-      spyOn(service, 'onSortFilterChange');
+      vi.spyOn(service, 'onSortFilterChange');
       service.reset();
       expect(service.onSortFilterChange).toHaveBeenCalled();
       expect(service.resetSource.next).toHaveBeenCalled();
@@ -82,8 +85,8 @@ describe('Service: DataTableState', () => {
 
   describe('Method: clearSort', () => {
     beforeEach(() => {
-      spyOn(service, 'reset');
-      spyOn(service.updates, 'emit');
+      vi.spyOn(service, 'reset');
+      vi.spyOn(service.updates, 'emit');
       service.filter = { id: 'test', value: 'value' };
       service.sort = { id: 'test', value: 'desc' };
       service.globalSearch = 'testing';
@@ -93,8 +96,8 @@ describe('Service: DataTableState', () => {
       service.reset();
     });
     it('should call checkRetainment, reset and onSortFilterChange', () => {
-      spyOn(service, 'checkRetainment');
-      spyOn(service, 'onSortFilterChange');
+      vi.spyOn(service, 'checkRetainment');
+      vi.spyOn(service, 'onSortFilterChange');
       service.clearSort();
       expect(service.checkRetainment).toHaveBeenCalledWith('sort');
       expect(service.reset).toHaveBeenCalledWith(true, true);
@@ -129,8 +132,8 @@ describe('Service: DataTableState', () => {
 
   describe('Method: clearFilter', () => {
     beforeEach(() => {
-      spyOn(service, 'reset');
-      spyOn(service.updates, 'emit');
+      vi.spyOn(service, 'reset');
+      vi.spyOn(service.updates, 'emit');
       service.filter = { id: 'test', value: 'value' };
       service.sort = { id: 'test', value: 'desc' };
       service.globalSearch = 'testing';
@@ -140,8 +143,8 @@ describe('Service: DataTableState', () => {
       service.reset();
     });
     it('should call checkRetainment, reset and onSortFilterChange', () => {
-      spyOn(service, 'checkRetainment');
-      spyOn(service, 'onSortFilterChange');
+      vi.spyOn(service, 'checkRetainment');
+      vi.spyOn(service, 'onSortFilterChange');
       service.clearFilter();
       expect(service.checkRetainment).toHaveBeenCalledWith('filter');
       expect(service.reset).toHaveBeenCalledWith(true, true);
@@ -176,8 +179,8 @@ describe('Service: DataTableState', () => {
 
   describe('Method: clearQuery', () => {
     beforeEach(() => {
-      spyOn(service, 'reset');
-      spyOn(service.updates, 'emit');
+      vi.spyOn(service, 'reset');
+      vi.spyOn(service.updates, 'emit');
       service.filter = { id: 'test', value: 'value' };
       service.sort = { id: 'test', value: 'desc' };
       service.globalSearch = 'testing';
@@ -187,8 +190,8 @@ describe('Service: DataTableState', () => {
       service.reset();
     });
     it('should call checkRetainment, reset and onSortFilterChange', () => {
-      spyOn(service, 'checkRetainment');
-      spyOn(service, 'onSortFilterChange');
+      vi.spyOn(service, 'checkRetainment');
+      vi.spyOn(service, 'onSortFilterChange');
       service.clearQuery();
       expect(service.checkRetainment).toHaveBeenCalledWith('where');
       expect(service.reset).toHaveBeenCalledWith(true, true);
@@ -223,16 +226,16 @@ describe('Service: DataTableState', () => {
 
   describe('Method: clearSelected', () => {
     beforeEach(() => {
-      spyOn(service, 'reset');
-      spyOn(service.updates, 'emit');
+      vi.spyOn(service, 'reset');
+      vi.spyOn(service.updates, 'emit');
       service.globalSearch = 'testing';
     });
     afterAll(() => {
       service.reset();
     });
     it('should call allMatchingSelectedSource.next, reset and onSelectionChange', () => {
-      spyOn(service.allMatchingSelectedSource, 'next');
-      spyOn(service, 'onSelectionChange');
+      vi.spyOn(service.allMatchingSelectedSource, 'next');
+      vi.spyOn(service, 'onSelectionChange');
       service.clearSelected();
       expect(service.allMatchingSelectedSource.next).toHaveBeenCalledWith(false);
       expect(service.reset).toHaveBeenCalledWith(true, true);
@@ -296,7 +299,7 @@ describe('Service: DataTableState', () => {
 
   describe('Method: onSelectionChange', () => {
     it('should call selectionSource.next with passed in targetId', () => {
-      spyOn(service.selectionSource, 'next');
+      vi.spyOn(service.selectionSource, 'next');
       service.onSelectionChange();
       expect(service.selectionSource.next).toHaveBeenCalled();
     });
@@ -304,7 +307,7 @@ describe('Service: DataTableState', () => {
 
   describe('Method: onExpandChange', () => {
     it('should call expandSource.next with passed in targetId', () => {
-      spyOn(service.expandSource, 'next');
+      vi.spyOn(service.expandSource, 'next');
       service.onExpandChange(5);
       expect(service.expandSource.next).toHaveBeenCalledWith(5);
     });
@@ -312,8 +315,8 @@ describe('Service: DataTableState', () => {
 
   describe('Method: onPaginationChange', () => {
     it('should call checkRetainment for page, and paginationSource.next', () => {
-      spyOn(service.paginationSource, 'next');
-      spyOn(service, 'checkRetainment');
+      vi.spyOn(service.paginationSource, 'next');
+      vi.spyOn(service, 'checkRetainment');
       const expected = {
         isPageSizeChange: true,
         pageSize: 5,
@@ -326,8 +329,8 @@ describe('Service: DataTableState', () => {
 
   describe('Method: onSortFilterChange', () => {
     it('should call checkRetainment for sort, filter, and where, and sortFilterSource.next', () => {
-      spyOn(service.sortFilterSource, 'next');
-      spyOn(service, 'checkRetainment');
+      vi.spyOn(service.sortFilterSource, 'next');
+      vi.spyOn(service, 'checkRetainment');
       service.filter = { id: 'test', value: 'value' };
       service.sort = { id: 'test', value: 'desc' };
       service.globalSearch = 'testing';
@@ -400,7 +403,7 @@ describe('Service: DataTableState', () => {
       expect(service.savedSearchName).toEqual('old saved search');
     });
     it('should only set values included in preferences (filter)', () => {
-      spyOn((service as any), 'transformFilters').and.callThrough();
+      vi.spyOn(service as any, 'transformFilters');
       const updatedPreferences = {
         filter: { id: 'updated', value: 'filter' },
       };
@@ -448,9 +451,9 @@ describe('Service: DataTableState', () => {
       appliedSearchType: AppliedSearchType.Saved,
     };
     beforeEach(() => {
-      spyOn(service.selectedRows, 'clear');
-      spyOn(service.resetSource, 'next');
-      spyOn(service.updates, 'emit');
+      vi.spyOn(service.selectedRows, 'clear');
+      vi.spyOn(service.resetSource, 'next');
+      vi.spyOn(service.updates, 'emit');
       service.filter = { id: 'test', value: 'value' };
       service.sort = { id: 'test', value: 'desc' };
       service.globalSearch = 'testing';
@@ -461,7 +464,7 @@ describe('Service: DataTableState', () => {
     });
     it('should call selectedRows.clear, resetSource.next and onSortFilterChange if retainSelected is true', () => {
       service.retainSelected = false;
-      spyOn(service, 'onSortFilterChange');
+      vi.spyOn(service, 'onSortFilterChange');
       service.setState(updatedPreferences);
       expect(service.onSortFilterChange).toHaveBeenCalled();
       expect(service.resetSource.next).toHaveBeenCalled();
@@ -509,7 +512,7 @@ describe('Service: DataTableState', () => {
         ...updatedPreferences,
         name: undefined,
         filter: [updatedPreferences.filter],
-      }
+      };
       expect(service.updates.emit).toHaveBeenCalledWith(expectedUpdate);
     });
     it('should not emit an update if fireUpdate is false', () => {

@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/vitest",
+    "module": "esnext",
+    "types": ["vitest/globals", "node"],
+    "skipLibCheck": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
+  },
+  "include": ["projects/**/*.spec.ts", "projects/**/*.ts", "vitest.setup.ts"]
+}

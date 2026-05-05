@@ -1,16 +1,14 @@
 import { ChangeDetectorRef, ElementRef } from '@angular/core';
 import { NovoLabelService } from 'novo-elements/services';
 import { DateUtil, Helpers } from 'novo-elements/utils';
+import { Mock, Mocked, vi } from 'vitest';
 import { NovoTimePickerElement } from './TimePicker';
-
-jest.mock('novo-elements/services');
-jest.mock('novo-elements/utils');
 
 describe('NovoTimePickerElement', () => {
   let component: NovoTimePickerElement;
-  let elementRef: jest.Mocked<ElementRef>;
-  let labels: jest.Mocked<NovoLabelService>;
-  let cdr: jest.Mocked<ChangeDetectorRef>;
+  let elementRef: Mocked<ElementRef>;
+  let labels: Mocked<NovoLabelService>;
+  let cdr: Mocked<ChangeDetectorRef>;
 
   beforeEach(() => {
     elementRef = {
@@ -24,7 +22,7 @@ describe('NovoTimePickerElement', () => {
     } as any;
 
     cdr = {
-      markForCheck: jest.fn(),
+      markForCheck: vi.fn(),
     } as any;
 
     component = new NovoTimePickerElement(elementRef, labels, cdr);
@@ -109,7 +107,7 @@ describe('NovoTimePickerElement', () => {
 
   describe('ngOnInit', () => {
     it('should call ngOnChanges', () => {
-      const ngOnChangesSpy = jest.spyOn(component, 'ngOnChanges');
+      const ngOnChangesSpy = vi.spyOn(component, 'ngOnChanges');
       component.ngOnInit();
       expect(ngOnChangesSpy).toHaveBeenCalled();
       ngOnChangesSpy.mockRestore();
@@ -185,7 +183,7 @@ describe('NovoTimePickerElement', () => {
 
   describe('ngOnChanges', () => {
     it('should call init with model when model exists', () => {
-      const initSpy = jest.spyOn(component, 'init');
+      const initSpy = vi.spyOn(component, 'init');
       component.model = new Date('2023-01-15 14:30:00');
       component.ngOnChanges();
       expect(initSpy).toHaveBeenCalledWith(component.model, false);
@@ -193,7 +191,7 @@ describe('NovoTimePickerElement', () => {
     });
 
     it('should call init with current date when model does not exist', () => {
-      const initSpy = jest.spyOn(component, 'init');
+      const initSpy = vi.spyOn(component, 'init');
       component.model = null;
       component.ngOnChanges();
       expect(initSpy).toHaveBeenCalled();
@@ -210,9 +208,9 @@ describe('NovoTimePickerElement', () => {
 
   describe('init', () => {
     beforeEach(() => {
-      jest.spyOn(component, 'setHours');
-      jest.spyOn(component, 'setMinutes');
-      jest.spyOn(component, 'checkBetween');
+      vi.spyOn(component, 'setHours');
+      vi.spyOn(component, 'setMinutes');
+      vi.spyOn(component, 'checkBetween');
     });
 
     describe('12-hour format', () => {
@@ -365,8 +363,8 @@ describe('NovoTimePickerElement', () => {
   describe('setValue', () => {
     it('should parse and set hours, minutes, and meridian', () => {
       const event = new Event('click');
-      jest.spyOn(Helpers, 'swallowEvent');
-      jest.spyOn(component, 'dispatchChange');
+      vi.spyOn(Helpers, 'swallowEvent');
+      vi.spyOn(component, 'dispatchChange');
 
       component.setValue(event, '02:30 pm');
 
@@ -378,14 +376,14 @@ describe('NovoTimePickerElement', () => {
 
     it('should call swallowEvent', () => {
       const event = new Event('click');
-      jest.spyOn(Helpers, 'swallowEvent');
+      vi.spyOn(Helpers, 'swallowEvent');
       component.setValue(event, '02:30 pm');
       expect(Helpers.swallowEvent).toHaveBeenCalledWith(event);
     });
 
     it('should call dispatchChange', () => {
       const event = new Event('click');
-      jest.spyOn(component, 'dispatchChange');
+      vi.spyOn(component, 'dispatchChange');
       component.setValue(event, '02:30 pm');
       expect(component.dispatchChange).toHaveBeenCalled();
     });
@@ -401,7 +399,7 @@ describe('NovoTimePickerElement', () => {
 
   describe('setHours', () => {
     beforeEach(() => {
-      jest.spyOn(component, 'dispatchChange').mockImplementation(()=> {});
+      vi.spyOn(component, 'dispatchChange').mockImplementation(() => {});
     });
     it('should set hours property', () => {
       component.setHours(null, 5, false);
@@ -420,7 +418,7 @@ describe('NovoTimePickerElement', () => {
 
     it('should call swallowEvent', () => {
       const event = new Event('click');
-      jest.spyOn(Helpers, 'swallowEvent');
+      vi.spyOn(Helpers, 'swallowEvent');
       component.setHours(event, 5, false);
       expect(Helpers.swallowEvent).toHaveBeenCalledWith(event);
     });
@@ -455,7 +453,7 @@ describe('NovoTimePickerElement', () => {
 
   describe('setMinutes', () => {
     beforeEach(() => {
-      jest.spyOn(component, 'dispatchChange').mockImplementation(()=> {});
+      vi.spyOn(component, 'dispatchChange').mockImplementation(() => {});
     });
 
     it('should set minutes property', () => {
@@ -474,14 +472,14 @@ describe('NovoTimePickerElement', () => {
     });
 
     it('should call checkBetween', () => {
-      jest.spyOn(component, 'checkBetween');
+      vi.spyOn(component, 'checkBetween');
       component.setMinutes(null, 30, false);
       expect(component.checkBetween).toHaveBeenCalledWith(30);
     });
 
     it('should call swallowEvent', () => {
       const event = new Event('click');
-      jest.spyOn(Helpers, 'swallowEvent');
+      vi.spyOn(Helpers, 'swallowEvent');
       component.setMinutes(event, 30, false);
       expect(Helpers.swallowEvent).toHaveBeenCalledWith(event);
     });
@@ -522,19 +520,19 @@ describe('NovoTimePickerElement', () => {
 
     it('should call swallowEvent', () => {
       const event = new Event('click');
-      jest.spyOn(Helpers, 'swallowEvent');
+      vi.spyOn(Helpers, 'swallowEvent');
       component.setPeriod(event, 'pm', false);
       expect(Helpers.swallowEvent).toHaveBeenCalledWith(event);
     });
 
     it('should call dispatchChange when dispatch is true', () => {
-      jest.spyOn(component, 'dispatchChange');
+      vi.spyOn(component, 'dispatchChange');
       component.setPeriod(null, 'pm', true);
       expect(component.dispatchChange).toHaveBeenCalled();
     });
 
     it('should not call dispatchChange when dispatch is false', () => {
-      jest.spyOn(component, 'dispatchChange');
+      vi.spyOn(component, 'dispatchChange');
       component.setPeriod(null, 'pm', false);
       expect(component.dispatchChange).not.toHaveBeenCalled();
     });
@@ -555,8 +553,8 @@ describe('NovoTimePickerElement', () => {
       component.hours = 2;
       component.minutes = 30;
       component.meridian = 'pm';
-      jest.spyOn(component.onSelect, 'next');
-      component._onChange = jest.fn();
+      vi.spyOn(component.onSelect, 'next');
+      component._onChange = vi.fn();
     });
 
     describe('12-hour format', () => {
@@ -567,14 +565,14 @@ describe('NovoTimePickerElement', () => {
       it('should convert pm hours correctly', () => {
         component.dispatchChange();
         expect(component._onChange).toHaveBeenCalledWith(expect.any(Date));
-        const callArg = (component._onChange as jest.Mock).mock.calls[0][0];
+        const callArg = (component._onChange as Mock).mock.calls[0][0];
         expect(callArg.getHours()).toBe(14);
       });
 
       it('should convert am hours correctly', () => {
         component.meridian = 'am';
         component.dispatchChange();
-        const callArg = (component._onChange as jest.Mock).mock.calls[0][0];
+        const callArg = (component._onChange as Mock).mock.calls[0][0];
         expect(callArg.getHours()).toBe(2);
       });
 
@@ -582,7 +580,7 @@ describe('NovoTimePickerElement', () => {
         component.hours = 12;
         component.meridian = 'pm';
         component.dispatchChange();
-        const callArg = (component._onChange as jest.Mock).mock.calls[0][0];
+        const callArg = (component._onChange as Mock).mock.calls[0][0];
         expect(callArg.getHours()).toBe(12);
       });
 
@@ -590,7 +588,7 @@ describe('NovoTimePickerElement', () => {
         component.hours = 12;
         component.meridian = 'am';
         component.dispatchChange();
-        const callArg = (component._onChange as jest.Mock).mock.calls[0][0];
+        const callArg = (component._onChange as Mock).mock.calls[0][0];
         expect(callArg.getHours()).toBe(0);
       });
 
@@ -598,7 +596,7 @@ describe('NovoTimePickerElement', () => {
         component.hours = 1;
         component.meridian = 'am';
         component.dispatchChange();
-        const callArg = (component._onChange as jest.Mock).mock.calls[0][0];
+        const callArg = (component._onChange as Mock).mock.calls[0][0];
         expect(callArg.getHours()).toBe(1);
       });
 
@@ -606,7 +604,7 @@ describe('NovoTimePickerElement', () => {
         component.hours = 1;
         component.meridian = 'pm';
         component.dispatchChange();
-        const callArg = (component._onChange as jest.Mock).mock.calls[0][0];
+        const callArg = (component._onChange as Mock).mock.calls[0][0];
         expect(callArg.getHours()).toBe(13);
       });
     });
@@ -619,34 +617,34 @@ describe('NovoTimePickerElement', () => {
       it('should use hours directly in military mode', () => {
         component.hours = 14;
         component.dispatchChange();
-        const callArg = (component._onChange as jest.Mock).mock.calls[0][0];
+        const callArg = (component._onChange as Mock).mock.calls[0][0];
         expect(callArg.getHours()).toBe(14);
       });
 
       it('should handle midnight in military mode', () => {
         component.hours = 0;
         component.dispatchChange();
-        const callArg = (component._onChange as jest.Mock).mock.calls[0][0];
+        const callArg = (component._onChange as Mock).mock.calls[0][0];
         expect(callArg.getHours()).toBe(0);
       });
 
       it('should handle 23:00 in military mode', () => {
         component.hours = 23;
         component.dispatchChange();
-        const callArg = (component._onChange as jest.Mock).mock.calls[0][0];
+        const callArg = (component._onChange as Mock).mock.calls[0][0];
         expect(callArg.getHours()).toBe(23);
       });
     });
 
     it('should set minutes correctly', () => {
       component.dispatchChange();
-      const callArg = (component._onChange as jest.Mock).mock.calls[0][0];
+      const callArg = (component._onChange as Mock).mock.calls[0][0];
       expect(callArg.getMinutes()).toBe(30);
     });
 
     it('should set seconds to 0', () => {
       component.dispatchChange();
-      const callArg = (component._onChange as jest.Mock).mock.calls[0][0];
+      const callArg = (component._onChange as Mock).mock.calls[0][0];
       expect(callArg.getSeconds()).toBe(0);
     });
 
@@ -675,7 +673,7 @@ describe('NovoTimePickerElement', () => {
 
     it('should include correct data in onSelect event', () => {
       component.dispatchChange();
-      const eventData = (component.onSelect.next as jest.Mock).mock.calls[0][0];
+      const eventData = (component.onSelect.next as Mock).mock.calls[0][0];
       expect(eventData.hours).toBe(14);
       expect(eventData.minutes).toBe(30);
       expect(eventData.meridian).toBe('pm');
@@ -691,20 +689,20 @@ describe('NovoTimePickerElement', () => {
     });
 
     it('should call init when value is a Date', () => {
-      const initSpy = jest.spyOn(component, 'init');
+      const initSpy = vi.spyOn(component, 'init');
       const date = new Date('2023-01-15 14:30:00');
-      jest.spyOn(Helpers, 'isDate').mockReturnValue(true);
+      vi.spyOn(Helpers, 'isDate').mockReturnValue(true);
       component.writeValue(date);
       expect(initSpy).toHaveBeenCalledWith(date, false);
       initSpy.mockRestore();
     });
 
     it('should handle string time in 12-hour format', () => {
-      const initSpy = jest.spyOn(component, 'init');
-      jest.spyOn(Helpers, 'isDate').mockReturnValue(false);
-      jest.spyOn(Helpers, 'isString').mockReturnValue(true);
-      jest.spyOn(DateUtil, 'parse').mockReturnValue(new Date('2023-01-15 14:30:00'));
-      jest.spyOn(DateUtil, 'format').mockReturnValue('2023-01-15');
+      const initSpy = vi.spyOn(component, 'init');
+      vi.spyOn(Helpers, 'isDate').mockReturnValue(false);
+      vi.spyOn(Helpers, 'isString').mockReturnValue(true);
+      vi.spyOn(DateUtil, 'parse').mockReturnValue(new Date('2023-01-15 14:30:00'));
+      vi.spyOn(DateUtil, 'format').mockReturnValue('2023-01-15');
       component.military = false;
       component.writeValue('02:30 pm');
       expect(initSpy).toHaveBeenCalled();
@@ -712,11 +710,11 @@ describe('NovoTimePickerElement', () => {
     });
 
     it('should handle string time in 24-hour format', () => {
-      const initSpy = jest.spyOn(component, 'init');
-      jest.spyOn(Helpers, 'isDate').mockReturnValue(false);
-      jest.spyOn(Helpers, 'isString').mockReturnValue(true);
-      jest.spyOn(DateUtil, 'parse').mockReturnValue(new Date('2023-01-15 14:30:00'));
-      jest.spyOn(DateUtil, 'format').mockReturnValue('2023-01-15');
+      const initSpy = vi.spyOn(component, 'init');
+      vi.spyOn(Helpers, 'isDate').mockReturnValue(false);
+      vi.spyOn(Helpers, 'isString').mockReturnValue(true);
+      vi.spyOn(DateUtil, 'parse').mockReturnValue(new Date('2023-01-15 14:30:00'));
+      vi.spyOn(DateUtil, 'format').mockReturnValue('2023-01-15');
       component.military = true;
       component.writeValue('14:30');
       expect(initSpy).toHaveBeenCalled();
@@ -738,13 +736,13 @@ describe('NovoTimePickerElement', () => {
 
   describe('registerOnChange', () => {
     it('should register onChange callback', () => {
-      const callback = jest.fn();
+      const callback = vi.fn();
       component.registerOnChange(callback);
       expect(component._onChange).toBe(callback);
     });
 
     it('should allow calling registered callback', () => {
-      const callback = jest.fn();
+      const callback = vi.fn();
       component.registerOnChange(callback);
       const date = new Date();
       component._onChange(date);
@@ -754,13 +752,13 @@ describe('NovoTimePickerElement', () => {
 
   describe('registerOnTouched', () => {
     it('should register onTouched callback', () => {
-      const callback = jest.fn();
+      const callback = vi.fn();
       component.registerOnTouched(callback);
       expect(component._onTouched).toBe(callback);
     });
 
     it('should allow calling registered callback', () => {
-      const callback = jest.fn();
+      const callback = vi.fn();
       component.registerOnTouched(callback);
       component._onTouched();
       expect(callback).toHaveBeenCalled();
@@ -831,7 +829,7 @@ describe('NovoTimePickerElement', () => {
 
   describe('save', () => {
     it('should emit onSave event', () => {
-      jest.spyOn(component.onSave, 'emit');
+      vi.spyOn(component.onSave, 'emit');
       component.save();
       expect(component.onSave.emit).toHaveBeenCalled();
     });
@@ -839,7 +837,7 @@ describe('NovoTimePickerElement', () => {
 
   describe('cancel', () => {
     it('should emit onCancel event', () => {
-      jest.spyOn(component.onCancel, 'emit');
+      vi.spyOn(component.onCancel, 'emit');
       component.cancel();
       expect(component.onCancel.emit).toHaveBeenCalled();
     });
@@ -847,7 +845,10 @@ describe('NovoTimePickerElement', () => {
 
   describe('flatten', () => {
     it('should flatten array of arrays', () => {
-      const result = component.flatten([[1, 2], [3, 4]]);
+      const result = component.flatten([
+        [1, 2],
+        [3, 4],
+      ]);
       expect(result).toEqual([1, 2, 3, 4]);
     });
 
@@ -878,7 +879,7 @@ describe('NovoTimePickerElement', () => {
       expect(component.minutes).toBe(30);
       expect(component.meridian).toBe('pm');
 
-      jest.spyOn(component.onSelect, 'next');
+      vi.spyOn(component.onSelect, 'next');
       component.dispatchChange();
 
       expect(component.onSelect.next).toHaveBeenCalledWith(
@@ -923,7 +924,7 @@ describe('NovoTimePickerElement', () => {
       component.military = false;
       component.ngOnInit();
 
-      jest.spyOn(component, 'dispatchChange');
+      vi.spyOn(component, 'dispatchChange');
 
       component.setHours(null, 3, true);
       expect(component.dispatchChange).toHaveBeenCalled();
@@ -939,10 +940,10 @@ describe('NovoTimePickerElement', () => {
       component.military = false;
       component.ngOnInit();
 
-      jest.spyOn(Helpers, 'isDate').mockReturnValue(false);
-      jest.spyOn(Helpers, 'isString').mockReturnValue(true);
-      jest.spyOn(DateUtil, 'parse').mockReturnValue(new Date('2023-01-15 14:30:00'));
-      jest.spyOn(DateUtil, 'format').mockReturnValue('2023-01-15');
+      vi.spyOn(Helpers, 'isDate').mockReturnValue(false);
+      vi.spyOn(Helpers, 'isString').mockReturnValue(true);
+      vi.spyOn(DateUtil, 'parse').mockReturnValue(new Date('2023-01-15 14:30:00'));
+      vi.spyOn(DateUtil, 'format').mockReturnValue('2023-01-15');
 
       component.writeValue('02:30 pm');
 
@@ -990,7 +991,7 @@ describe('NovoTimePickerElement', () => {
 
   describe('EventEmitters', () => {
     it('should have onSelect EventEmitter that emits correct data', () => {
-      const listener = jest.fn();
+      const listener = vi.fn();
       component.onSelect.subscribe(listener);
 
       component.hours = 2;
@@ -1010,7 +1011,7 @@ describe('NovoTimePickerElement', () => {
     });
 
     it('should have onSave EventEmitter', () => {
-      const listener = jest.fn();
+      const listener = vi.fn();
       component.onSave.subscribe(listener);
 
       component.save();
@@ -1019,7 +1020,7 @@ describe('NovoTimePickerElement', () => {
     });
 
     it('should have onCancel EventEmitter', () => {
-      const listener = jest.fn();
+      const listener = vi.fn();
       component.onCancel.subscribe(listener);
 
       component.cancel();

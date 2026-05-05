@@ -1,6 +1,7 @@
 // NG2
-import { waitForAsync, TestBed } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 import { NovoLabelService } from 'novo-elements/services';
+import { vi } from 'vitest';
 // App
 import { NovoTipWellElement } from './TipWell';
 
@@ -15,7 +16,7 @@ describe('Elements: NovoTipWellElement', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(NovoTipWellElement);
     component = fixture.debugElement.componentInstance;
-    jest.spyOn(component.sanitizer, 'bypassSecurityTrustHtml').mockReturnValue('TRUSTED_HTML');
+    vi.spyOn(component.sanitizer, 'bypassSecurityTrustHtml').mockReturnValue('TRUSTED_HTML');
   }));
 
   it('should initialize with defaults', () => {

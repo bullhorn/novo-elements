@@ -3,6 +3,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { Component } from '@angular/core';
 import { TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { provideNoopAnimations } from '@angular/platform-browser/animations';
 // App
 import { TooltipDirective } from './Tooltip.directive';
 
@@ -24,6 +25,7 @@ describe('Elements: TooltipDirective', () => {
     TestBed.configureTestingModule({
       declarations: [TooltipDirective, TestComponent],
       imports: [OverlayModule],
+      providers: [provideNoopAnimations()],
     }).compileComponents();
     fixture = TestBed.createComponent(TestComponent);
     component = fixture.debugElement.componentInstance;

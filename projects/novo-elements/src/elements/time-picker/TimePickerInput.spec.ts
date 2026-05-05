@@ -3,6 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { DateFormatService, NovoLabelService } from 'novo-elements/services';
 // App
 import { Helpers } from 'novo-elements/utils';
+import { vi } from 'vitest';
 import { NovoTimePickerModule } from './TimePicker.module';
 import { NovoTimePickerInputElement } from './TimePickerInput';
 
@@ -42,21 +43,21 @@ describe('Elements: NovoTimePickerInputElement', () => {
   describe('hasValue getter', () => {
     it('should return true when value is set', () => {
       component.value = new Date('2023-01-15 14:30:00');
-      jest.spyOn(Helpers, 'isEmpty').mockReturnValue(false);
+      vi.spyOn(Helpers, 'isEmpty').mockReturnValue(false);
 
       expect(component.hasValue).toBe(true);
     });
 
     it('should return false when value is empty', () => {
       component.value = null;
-      jest.spyOn(Helpers, 'isEmpty').mockReturnValue(true);
+      vi.spyOn(Helpers, 'isEmpty').mockReturnValue(true);
 
       expect(component.hasValue).toBe(false);
     });
 
     it('should return false when value is undefined', () => {
       component.value = undefined;
-      jest.spyOn(Helpers, 'isEmpty').mockReturnValue(true);
+      vi.spyOn(Helpers, 'isEmpty').mockReturnValue(true);
 
       expect(component.hasValue).toBe(false);
     });
@@ -86,7 +87,7 @@ describe('Elements: NovoTimePickerInputElement', () => {
 
   describe('EventEmitters', () => {
     it('should have onSave EventEmitter', () => {
-      const listener = jest.fn();
+      const listener = vi.fn();
       component.onSave.subscribe(listener);
 
       component.save();
@@ -95,7 +96,7 @@ describe('Elements: NovoTimePickerInputElement', () => {
     });
 
     it('should have onCancel EventEmitter', () => {
-      const listener = jest.fn();
+      const listener = vi.fn();
       component.onCancel.subscribe(listener);
 
       component.cancel();

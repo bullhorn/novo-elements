@@ -1,7 +1,8 @@
 // NG2
-import { waitForAsync, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { ComponentUtils } from 'novo-elements/services';
+import { vi } from 'vitest';
 import { PickerResults } from './extras/picker-results/PickerResults';
 // App
 import { NovoPickerElement } from './Picker';
@@ -77,15 +78,15 @@ describe('Elements: NovoPickerElement', () => {
     });
     it('sets the value to null when the picker input is cleared out', () => {
       component._value = '123';
-      spyOn(component, 'onModelChange');
+      vi.spyOn(component, 'onModelChange');
       component.checkTerm('');
       expect(component._value).toEqual(null);
       expect(component.onModelChange).toHaveBeenCalled();
     });
     it('does not register a change if there is no value set', () => {
       component._value = null;
-      spyOn(component, 'onModelChange');
-      spyOn(component.ref, 'markForCheck');
+      vi.spyOn(component, 'onModelChange');
+      vi.spyOn(component.ref, 'markForCheck');
       component.checkTerm('');
       expect(component.onModelChange).not.toHaveBeenCalled();
       expect(component.ref.markForCheck).toHaveBeenCalled();
@@ -296,12 +297,12 @@ describe('Elements: NovoPickerElement', () => {
       expect(component.term).toEqual('');
     }));
     it('should markForCheck once when not calling getLabels()', () => {
-      jest.spyOn(component.ref, 'markForCheck').mockImplementation(() => {});
+      vi.spyOn(component.ref, 'markForCheck').mockImplementation(() => {});
       component.writeValue('123');
       expect(component.ref.markForCheck).toHaveBeenCalledTimes(1);
     });
     it('should markForCheck when getLabels() completes', fakeAsync(() => {
-      jest.spyOn(component.ref, 'markForCheck').mockImplementation(() => {});
+      vi.spyOn(component.ref, 'markForCheck').mockImplementation(() => {});
       component.config = {
         getLabels: () =>
           new Promise((resolve) => {
@@ -324,13 +325,13 @@ describe('Elements: NovoPickerElement', () => {
         },
       };
       component.select = {
-        emit: jest.fn(),
+        emit: vi.fn(),
       } as unknown;
       component.changed = {
-        emit: jest.fn(),
+        emit: vi.fn(),
       } as unknown;
-      spyOn(component, 'onModelChange');
-      spyOn(component, 'hideResults');
+      vi.spyOn(component, 'onModelChange');
+      vi.spyOn(component, 'hideResults');
     });
 
     it('should clear the value, emit the new value, and optionally clear the term', () => {

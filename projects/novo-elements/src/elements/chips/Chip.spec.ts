@@ -1,5 +1,6 @@
-import { waitForAsync, TestBed } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
+import { vi } from 'vitest';
 import { NovoChipElement } from './Chip';
 import { NovoChipsModule } from './Chips.module';
 
@@ -26,13 +27,13 @@ describe('Elements: NovoChipElement', () => {
 
   describe('Method: remove()', () => {
     it('should emit remove event if removable', () => {
-      jest.spyOn(component.removed, 'emit').mockImplementation(() => { });
+      vi.spyOn(component.removed, 'emit').mockImplementation(() => {});
       component.removable = true;
       component.remove();
       expect(component.removed.emit).toHaveBeenCalled();
     });
     it('should not emit remove event if not removable', () => {
-      jest.spyOn(component.removed, 'emit').mockImplementation(() => { });
+      vi.spyOn(component.removed, 'emit').mockImplementation(() => {});
       component.removable = false;
       component.remove();
       expect(component.removed.emit).not.toHaveBeenCalled();

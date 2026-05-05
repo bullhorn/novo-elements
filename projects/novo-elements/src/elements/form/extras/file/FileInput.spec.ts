@@ -1,11 +1,12 @@
+// App
+import { DragDropModule } from '@angular/cdk/drag-drop';
 // NG
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NovoLoadingElement } from 'novo-elements/elements/loading';
 import { DecodeURIPipe } from 'novo-elements/pipes';
 import { GlobalRef, NovoLabelService } from 'novo-elements/services';
-// App
-import { DragDropModule } from '@angular/cdk/drag-drop';
+import { vi } from 'vitest';
 import { NovoFileInputElement } from './FileInput';
 
 describe('Elements: NovoFileInputElement', () => {
@@ -13,8 +14,8 @@ describe('Elements: NovoFileInputElement', () => {
   let component: NovoFileInputElement;
   let mockGlobal: {
     nativeWindow: {
-      open: (url, target) => {}
-    }
+      open: (url, target) => {};
+    };
   };
 
   beforeEach(waitForAsync(() => {
@@ -36,12 +37,12 @@ describe('Elements: NovoFileInputElement', () => {
   describe('Method: ngOnInit()', () => {
     it('should update layout', () => {
       expect(component.ngOnInit).toBeDefined();
-      jest.spyOn(component, 'updateLayout');
+      vi.spyOn(component, 'updateLayout');
       component.ngOnInit();
       expect(component.updateLayout).toHaveBeenCalled();
     });
     it('should setup initial files list', () => {
-      component.value = [{name: 'TestFile1'}];
+      component.value = [{ name: 'TestFile1' }];
       component.ngOnInit();
       expect(component.files[0].name).toBe('TestFile1');
     });
@@ -50,7 +51,7 @@ describe('Elements: NovoFileInputElement', () => {
     it('should set default layoutOptions and call insertTemplatesBasedOnLayout', () => {
       expect(component.updateLayout).toBeDefined();
       expect(component.layoutOptions).not.toBeDefined();
-      jest.spyOn(component, 'insertTemplatesBasedOnLayout');
+      vi.spyOn(component, 'insertTemplatesBasedOnLayout');
       component.updateLayout();
       expect(component.layoutOptions).toBeDefined();
       expect(component.layoutOptions).toEqual({
@@ -69,7 +70,7 @@ describe('Elements: NovoFileInputElement', () => {
     });
     it('should correctly insert templates by default', () => {
       expect(component.insertTemplatesBasedOnLayout).toBeDefined();
-      jest.spyOn(component.container, 'createEmbeddedView');
+      vi.spyOn(component.container, 'createEmbeddedView');
       const expected = ['fileOutput', 'fileInput'];
       const insertedOrder = component.insertTemplatesBasedOnLayout();
       expect(component.container.createEmbeddedView).toHaveBeenCalled();
@@ -78,7 +79,7 @@ describe('Elements: NovoFileInputElement', () => {
     it('should correctly insert template if order is displayFilesBelow', () => {
       component.layoutOptions.order = 'displayFilesBelow';
       expect(component.insertTemplatesBasedOnLayout).toBeDefined();
-      jest.spyOn(component.container, 'createEmbeddedView');
+      vi.spyOn(component.container, 'createEmbeddedView');
       const expected = ['fileInput', 'fileOutput'];
       const insertedOrder = component.insertTemplatesBasedOnLayout();
       expect(component.container.createEmbeddedView).toHaveBeenCalled();
@@ -88,7 +89,7 @@ describe('Elements: NovoFileInputElement', () => {
 
   describe('Method: customEdit(file)', () => {
     beforeEach(() => {
-      jest.spyOn(component.edit, 'emit');
+      vi.spyOn(component.edit, 'emit');
     });
     it('should emit an event', () => {
       component.customEdit({ name: 'file.pdf', loaded: true });
@@ -98,7 +99,7 @@ describe('Elements: NovoFileInputElement', () => {
 
   describe('Method: customSave(file)', () => {
     beforeEach(() => {
-      jest.spyOn(component.save, 'emit');
+      vi.spyOn(component.save, 'emit');
     });
     it('should emit an event', () => {
       component.customSave({ name: 'file.pdf', loaded: true });
@@ -108,7 +109,7 @@ describe('Elements: NovoFileInputElement', () => {
 
   describe('Method: customDelete(file)', () => {
     beforeEach(() => {
-      jest.spyOn(component.delete, 'emit');
+      vi.spyOn(component.delete, 'emit');
     });
     it('should emit an event', () => {
       component.customDelete({ name: 'file.pdf', loaded: true });
@@ -118,7 +119,7 @@ describe('Elements: NovoFileInputElement', () => {
 
   describe('Method: customCheck(files)', () => {
     beforeEach(() => {
-      jest.spyOn(component.upload, 'emit');
+      vi.spyOn(component.upload, 'emit');
     });
     it('should emit an event', () => {
       component.customCheck({ name: 'file.pdf', loaded: true });
@@ -166,22 +167,24 @@ describe('Elements: NovoFileInputElement', () => {
 
   describe('Drag events', () => {
     it('should rearrange items when dragged across', () => {
-      component.value = [{name: 'TestFile1'}, {name: 'TestFile2'}] as any;
+      component.value = [{ name: 'TestFile1' }, { name: 'TestFile2' }] as any;
       fixture.detectChanges();
-      fixture.debugElement.query(By.css('.file-output-group')).triggerEventHandler('cdkDropListDropped', {previousIndex: 1, currentIndex: 0});
+      fixture.debugElement
+        .query(By.css('.file-output-group'))
+        .triggerEventHandler('cdkDropListDropped', { previousIndex: 1, currentIndex: 0 });
       expect(component.files[0].name).toBe('TestFile2');
     });
   });
   describe('Method: writeValue()', () => {
-      it('should change the value', () => {
-        component.writeValue(10);
-        expect(component.model).toBe(10);
-      });
+    it('should change the value', () => {
+      component.writeValue(10);
+      expect(component.model).toBe(10);
+    });
 
-      it('should empty the file list if a falsey value is programmatically set', () => {
-          component.writeValue(undefined);
-          expect(component.files).toEqual([]);
-      });
+    it('should empty the file list if a falsey value is programmatically set', () => {
+      component.writeValue(undefined);
+      expect(component.files).toEqual([]);
+    });
   });
   describe('Method: check(files)', () => {
     beforeEach(() => {
@@ -189,7 +192,7 @@ describe('Elements: NovoFileInputElement', () => {
     });
 
     it('should clear the input value after processing', () => {
-      component.check({target: { files: [], value: 'test.txt'}});
+      component.check({ target: { files: [], value: 'test.txt' } });
       fixture.detectChanges();
       fixture.whenStable().then(() => {
         const input = fixture.debugElement.query(By.css('#file'));
@@ -198,5 +201,5 @@ describe('Elements: NovoFileInputElement', () => {
         expect(el.value).toBe('');
       });
     });
-});
+  });
 });

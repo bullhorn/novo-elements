@@ -1,12 +1,13 @@
 // NG2
-import { waitForAsync, TestBed } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { NovoLabelService } from 'novo-elements/services';
 import { NovoPickerModule } from 'novo-elements/elements/picker';
 import { NovoSelectModule } from 'novo-elements/elements/select';
 import { NovoTooltipModule } from 'novo-elements/elements/tooltip';
+import { NovoLabelService } from 'novo-elements/services';
 // App
 import { Helpers } from 'novo-elements/utils';
+import { vi } from 'vitest';
 import { NovoAddressElement } from './Address';
 
 describe('Elements: NovoAddressElement', () => {
@@ -97,7 +98,7 @@ describe('Elements: NovoAddressElement', () => {
       };
     });
     it('should set countryID and enable state field when country is selected', () => {
-      jest.spyOn(Helpers, 'interpolate').mockReturnValue('United States');
+      vi.spyOn(Helpers, 'interpolate').mockReturnValue('United States');
       const event = { rawValue: { id: 1, name: 'United States' } };
 
       component.onCountryChange(event as any);
@@ -127,9 +128,9 @@ describe('Elements: NovoAddressElement', () => {
     beforeEach(() => {
       component.disabled = {};
       component.stateOptions = () => {};
-      jest.spyOn(component, 'setStateLabel');
-      jest.spyOn(component.validityChange, 'emit');
-      jest.spyOn(component, 'onInput');
+      vi.spyOn(component, 'setStateLabel');
+      vi.spyOn(component.validityChange, 'emit');
+      vi.spyOn(component, 'onInput');
       component.config = {
         state: {
           required: false,
@@ -141,7 +142,7 @@ describe('Elements: NovoAddressElement', () => {
       component.model = {
         countryID: 1,
       };
-      stateOptionsSpy = jest.spyOn(component, 'stateOptions').mockResolvedValue(['MA']);
+      stateOptionsSpy = vi.spyOn(component, 'stateOptions').mockResolvedValue(['MA']);
     });
     it('should be defined.', () => {
       expect(component.updateStates).toBeDefined();
@@ -151,48 +152,38 @@ describe('Elements: NovoAddressElement', () => {
       component.config.state.pickerConfig.options('query');
       expect(stateOptionsSpy).toHaveBeenCalledWith('query', component.model.countryID);
     });
-    it('should set config.state.pickerConfig.defaultOptions', (done: any) => {
+    it('should set config.state.pickerConfig.defaultOptions', async () => {
       component.updateStates();
-      setTimeout(() => {
-        expect(component.config.state.pickerConfig.defaultOptions).toEqual(['MA']);
-        done();
-      });
+      await new Promise((r) => setTimeout(r));
+      expect(component.config.state.pickerConfig.defaultOptions).toEqual(['MA']);
     });
-    it('should reset tooltip and un-disable state & setStateLabel', (done: any) => {
+    it('should reset tooltip and un-disable state & setStateLabel', async () => {
       component.updateStates();
-      setTimeout(() => {
-        expect(component.tooltip.state).toBeUndefined();
-        expect(component.disabled.state).toEqual(false);
-        expect(component.setStateLabel).toHaveBeenCalled();
-        done();
-      });
+      await new Promise((r) => setTimeout(r));
+      expect(component.tooltip.state).toBeUndefined();
+      expect(component.disabled.state).toEqual(false);
+      expect(component.setStateLabel).toHaveBeenCalled();
     });
-    it('should set tooltip and disable state & set validity of state when there are no state options', (done: any) => {
-      const spy = jest.spyOn(component, 'stateOptions').mockResolvedValue([]);
+    it('should set tooltip and disable state & set validity of state when there are no state options', async () => {
+      vi.spyOn(component, 'stateOptions').mockResolvedValue([]);
       component.updateStates();
-      setTimeout(() => {
-        expect(component.tooltip.state).toEqual(component.labels.noStatesForCountry);
-        expect(component.disabled.state).toEqual(true);
-        expect(component.valid.state).toEqual(false);
-        done();
-      });
+      await new Promise((r) => setTimeout(r));
+      expect(component.tooltip.state).toEqual(component.labels.noStatesForCountry);
+      expect(component.disabled.state).toEqual(true);
+      expect(component.valid.state).toEqual(false);
     });
-    it('should set validity of state when there are no state options', (done: any) => {
-      const spy = jest.spyOn(component, 'stateOptions').mockResolvedValue([]);
+    it('should set validity of state when there are no state options', async () => {
+      vi.spyOn(component, 'stateOptions').mockResolvedValue([]);
       component.config.state.required = true;
       component.updateStates();
-      setTimeout(() => {
-        expect(component.valid.state).toEqual(false);
-        done();
-      });
+      await new Promise((r) => setTimeout(r));
+      expect(component.valid.state).toEqual(false);
     });
-    it('should emit validityChangeEvent and call onInput for state', (done: any) => {
+    it('should emit validityChangeEvent and call onInput for state', async () => {
       component.updateStates();
-      setTimeout(() => {
-        expect(component.validityChange.emit).toHaveBeenCalled();
-        expect(component.onInput).toHaveBeenCalledWith(null, 'state');
-        done();
-      });
+      await new Promise((r) => setTimeout(r));
+      expect(component.validityChange.emit).toHaveBeenCalled();
+      expect(component.onInput).toHaveBeenCalledWith(null, 'state');
     });
   });
 
@@ -210,10 +201,10 @@ describe('Elements: NovoAddressElement', () => {
           pickerConfig: {},
         },
       };
-      jest.spyOn(component.config.countryID.pickerConfig, 'getLabels').mockResolvedValue({ label: 'country name' });
-      jest.spyOn(component, 'isValid');
-      jest.spyOn(component, 'isInvalid');
-      jest.spyOn(component, 'updateStates');
+      vi.spyOn(component.config.countryID.pickerConfig, 'getLabels').mockResolvedValue({ label: 'country name' });
+      vi.spyOn(component, 'isValid');
+      vi.spyOn(component, 'isInvalid');
+      vi.spyOn(component, 'updateStates');
     });
     it('should be defined.', () => {
       expect(component.writeValue).toBeDefined();
@@ -570,8 +561,8 @@ describe('Elements: NovoAddressElement', () => {
       };
       component.initComplete = true;
       component.model = {};
-      jest.spyOn(component, 'isValid');
-      jest.spyOn(component, 'isInvalid');
+      vi.spyOn(component, 'isValid');
+      vi.spyOn(component, 'isInvalid');
     });
 
     it('should not run if initComplete is false', () => {

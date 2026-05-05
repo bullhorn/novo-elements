@@ -2,21 +2,19 @@ import { ChangeDetectorRef, ElementRef } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NovoLabelService } from 'novo-elements/services';
 import { DateUtil, Helpers } from 'novo-elements/utils';
+import { Mock, Mocked, vi } from 'vitest';
 import { NovoDatePickerElement } from './DatePicker';
-
-jest.mock('novo-elements/services');
-jest.mock('novo-elements/utils');
 
 describe('NovoDatePickerElement', () => {
   let component: NovoDatePickerElement;
-  let labels: jest.Mocked<NovoLabelService>;
-  let element: jest.Mocked<ElementRef>;
-  let cdr: jest.Mocked<ChangeDetectorRef>;
-  let sanitizer: jest.Mocked<DomSanitizer>;
+  let labels: Mocked<NovoLabelService>;
+  let element: Mocked<ElementRef>;
+  let cdr: Mocked<ChangeDetectorRef>;
+  let sanitizer: Mocked<DomSanitizer>;
 
   beforeEach(() => {
     labels = {
-      formatDateWithFormat: jest.fn((date, format) => '01/15/2023'),
+      formatDateWithFormat: vi.fn((date, format) => '01/15/2023'),
       today: 'Today',
     } as any;
 
@@ -25,18 +23,18 @@ describe('NovoDatePickerElement', () => {
     } as any;
 
     cdr = {
-      markForCheck: jest.fn(),
+      markForCheck: vi.fn(),
     } as any;
 
     sanitizer = {
-      bypassSecurityTrustHtml: jest.fn(),
+      bypassSecurityTrustHtml: vi.fn(),
     } as any;
 
-    // Mock DateUtil methods to pass through
-    (DateUtil.startOfDay as jest.Mock) = jest.fn((d) => d);
-    (DateUtil.parse as jest.Mock) = jest.fn((d) => (typeof d === 'string' ? new Date(d) : d));
-    (DateUtil.format as jest.Mock) = jest.fn((d, f) => d?.toISOString?.().split('T')[0] || '');
-    (DateUtil.isSameDay as jest.Mock) = jest.fn((d1, d2) => d1?.getTime() === d2?.getTime());
+    // Mock DateUtil methods to pass through (use spyOn so restoreMocks auto-restores)
+    vi.spyOn(DateUtil, 'startOfDay').mockImplementation((d: any) => d);
+    vi.spyOn(DateUtil, 'parse').mockImplementation((d: any) => (typeof d === 'string' ? new Date(d) : d));
+    vi.spyOn(DateUtil, 'format').mockImplementation((d: any, _f: any) => d?.toISOString?.().split('T')[0] || '');
+    vi.spyOn(DateUtil, 'isSameDay').mockImplementation((d1: any, d2: any) => d1?.getTime() === d2?.getTime());
 
     component = new NovoDatePickerElement(labels, element, cdr, sanitizer);
   });
@@ -298,18 +296,16 @@ describe('NovoDatePickerElement', () => {
     });
 
     it('should set mode to range when range is true', () => {
-      const consoleSpy = jest.spyOn(console, 'warn').mockImplementation();
+      const consoleSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
       component.range = true;
       expect(component._mode).toBe('range');
       consoleSpy.mockRestore();
     });
 
     it('should log deprecation warning', () => {
-      const consoleSpy = jest.spyOn(console, 'warn').mockImplementation();
+      const consoleSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
       component.range = true;
-      expect(consoleSpy).toHaveBeenCalledWith(
-        expect.stringContaining('deprecated'),
-      );
+      expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining('deprecated'));
       consoleSpy.mockRestore();
     });
   });
@@ -326,18 +322,16 @@ describe('NovoDatePickerElement', () => {
     });
 
     it('should set mode to week when weekRangeSelect is true', () => {
-      const consoleSpy = jest.spyOn(console, 'warn').mockImplementation();
+      const consoleSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
       component.weekRangeSelect = true;
       expect(component._mode).toBe('week');
       consoleSpy.mockRestore();
     });
 
     it('should log deprecation warning', () => {
-      const consoleSpy = jest.spyOn(console, 'warn').mockImplementation();
+      const consoleSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
       component.weekRangeSelect = true;
-      expect(consoleSpy).toHaveBeenCalledWith(
-        expect.stringContaining('deprecated'),
-      );
+      expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining('deprecated'));
       consoleSpy.mockRestore();
     });
   });
@@ -374,7 +368,7 @@ describe('NovoDatePickerElement', () => {
 
   describe('ngOnInit', () => {
     it('should call modelToSelection if model exists', () => {
-      const modelToSelectionSpy = jest.spyOn(component, 'modelToSelection');
+      const modelToSelectionSpy = vi.spyOn(component, 'modelToSelection');
       component.model = new Date('2023-01-15');
       component.ngOnInit();
       expect(modelToSelectionSpy).toHaveBeenCalledWith(component.model);
@@ -382,7 +376,7 @@ describe('NovoDatePickerElement', () => {
     });
 
     it('should call updateView with dateForInitialView if provided', () => {
-      const updateViewSpy = jest.spyOn(component, 'updateView');
+      const updateViewSpy = vi.spyOn(component, 'updateView');
       const date = new Date('2023-06-15');
       component.dateForInitialView = date;
       component.ngOnInit();
@@ -391,7 +385,7 @@ describe('NovoDatePickerElement', () => {
     });
 
     it('should call updateView with first selection if no dateForInitialView', () => {
-      const updateViewSpy = jest.spyOn(component, 'updateView');
+      const updateViewSpy = vi.spyOn(component, 'updateView');
       const date = new Date('2023-01-15');
       component._selection = [date];
       component.ngOnInit();
@@ -400,7 +394,7 @@ describe('NovoDatePickerElement', () => {
     });
 
     it('should not call updateView if no initial date available', () => {
-      const updateViewSpy = jest.spyOn(component, 'updateView');
+      const updateViewSpy = vi.spyOn(component, 'updateView');
       component.model = null;
       component.dateForInitialView = undefined;
       component._selection = [];
@@ -436,8 +430,8 @@ describe('NovoDatePickerElement', () => {
   describe('updateSelection', () => {
     beforeEach(() => {
       labels.formatDateWithFormat.mockReturnValue('Jan 15, 2023');
-      jest.spyOn(component.onSelect, 'next');
-      component._onChange = jest.fn();
+      vi.spyOn(component.onSelect, 'next');
+      component._onChange = vi.fn();
     });
 
     describe('single mode', () => {
@@ -452,7 +446,7 @@ describe('NovoDatePickerElement', () => {
       });
 
       it('should call fireSelect', () => {
-        const fireSelectSpy = jest.spyOn(component, 'fireSelect');
+        const fireSelectSpy = vi.spyOn(component, 'fireSelect');
         component.updateSelection([new Date('2023-01-15')]);
         expect(fireSelectSpy).toHaveBeenCalled();
         fireSelectSpy.mockRestore();
@@ -481,7 +475,7 @@ describe('NovoDatePickerElement', () => {
       });
 
       it('should call fireSelect', () => {
-        const fireSelectSpy = jest.spyOn(component, 'fireSelect');
+        const fireSelectSpy = vi.spyOn(component, 'fireSelect');
         component.updateSelection([new Date('2023-01-15'), new Date('2023-01-16')]);
         expect(fireSelectSpy).toHaveBeenCalled();
         fireSelectSpy.mockRestore();
@@ -506,14 +500,14 @@ describe('NovoDatePickerElement', () => {
       });
 
       it('should call fireRangeSelect when both dates selected', () => {
-        const fireRangeSelectSpy = jest.spyOn(component, 'fireRangeSelect');
+        const fireRangeSelectSpy = vi.spyOn(component, 'fireRangeSelect');
         component.updateSelection([new Date('2023-01-15'), new Date('2023-01-20')]);
         expect(fireRangeSelectSpy).toHaveBeenCalled();
         fireRangeSelectSpy.mockRestore();
       });
 
       it('should not call fireRangeSelect when only one date selected', () => {
-        const fireRangeSelectSpy = jest.spyOn(component, 'fireRangeSelect');
+        const fireRangeSelectSpy = vi.spyOn(component, 'fireRangeSelect');
         component.updateSelection([new Date('2023-01-15')]);
         expect(fireRangeSelectSpy).not.toHaveBeenCalled();
         fireRangeSelectSpy.mockRestore();
@@ -546,7 +540,7 @@ describe('NovoDatePickerElement', () => {
       });
 
       it('should call fireRangeSelect when both dates selected', () => {
-        const fireRangeSelectSpy = jest.spyOn(component, 'fireRangeSelect');
+        const fireRangeSelectSpy = vi.spyOn(component, 'fireRangeSelect');
         component.updateSelection([new Date('2023-01-15'), new Date('2023-01-20')]);
         expect(fireRangeSelectSpy).toHaveBeenCalled();
         fireRangeSelectSpy.mockRestore();
@@ -559,7 +553,7 @@ describe('NovoDatePickerElement', () => {
     });
 
     it('should not fire events when fireEvents is false', () => {
-      const fireSelectSpy = jest.spyOn(component, 'fireSelect');
+      const fireSelectSpy = vi.spyOn(component, 'fireSelect');
       component._mode = 'single';
       component.updateSelection([new Date('2023-01-15')], false);
       expect(fireSelectSpy).not.toHaveBeenCalled();
@@ -619,7 +613,7 @@ describe('NovoDatePickerElement', () => {
 
   describe('fireSelect', () => {
     beforeEach(() => {
-      jest.spyOn(component.onSelect, 'next');
+      vi.spyOn(component.onSelect, 'next');
     });
 
     it('should emit onSelect for single mode', () => {
@@ -654,7 +648,7 @@ describe('NovoDatePickerElement', () => {
 
   describe('fireRangeSelect', () => {
     beforeEach(() => {
-      jest.spyOn(component.onSelect, 'next');
+      vi.spyOn(component.onSelect, 'next');
     });
 
     it('should emit onSelect with startDate and endDate', () => {
@@ -687,7 +681,7 @@ describe('NovoDatePickerElement', () => {
       const endDate = new Date('2023-01-20');
       component._selection = [startDate, endDate];
       component.fireRangeSelect();
-      const emittedData = (component.onSelect.next as jest.Mock).mock.calls[0][0];
+      const emittedData = (component.onSelect.next as Mock).mock.calls[0][0];
       expect(emittedData.startDate).toHaveProperty('year');
       expect(emittedData.startDate).toHaveProperty('month');
       expect(emittedData.startDate).toHaveProperty('day');
@@ -699,16 +693,14 @@ describe('NovoDatePickerElement', () => {
 
   describe('setToday', () => {
     it('should set selection to today', () => {
-      const updateSelectionSpy = jest.spyOn(component, 'updateSelection');
+      const updateSelectionSpy = vi.spyOn(component, 'updateSelection');
       component.setToday();
-      expect(updateSelectionSpy).toHaveBeenCalledWith(
-        expect.arrayContaining([expect.any(Date)]),
-      );
+      expect(updateSelectionSpy).toHaveBeenCalledWith(expect.arrayContaining([expect.any(Date)]));
       updateSelectionSpy.mockRestore();
     });
 
     it('should call updateView with today', () => {
-      const updateViewSpy = jest.spyOn(component, 'updateView');
+      const updateViewSpy = vi.spyOn(component, 'updateView');
       component.setToday();
       expect(updateViewSpy).toHaveBeenCalledWith(expect.any(Date));
       updateViewSpy.mockRestore();
@@ -736,7 +728,7 @@ describe('NovoDatePickerElement', () => {
     });
 
     it('should call updateView with startDate when toggling to startDate', () => {
-      const updateViewSpy = jest.spyOn(component, 'updateView');
+      const updateViewSpy = vi.spyOn(component, 'updateView');
       component._selection = [new Date('2023-01-15'), new Date('2023-01-20')];
       component.toggleRangeSelect('startDate');
       expect(updateViewSpy).toHaveBeenCalledWith(component._selection[0]);
@@ -744,7 +736,7 @@ describe('NovoDatePickerElement', () => {
     });
 
     it('should call updateView with endDate when toggling to endDate', () => {
-      const updateViewSpy = jest.spyOn(component, 'updateView');
+      const updateViewSpy = vi.spyOn(component, 'updateView');
       component._selection = [new Date('2023-01-15'), new Date('2023-01-20')];
       component.toggleRangeSelect('endDate');
       expect(updateViewSpy).toHaveBeenCalledWith(component._selection[1]);
@@ -752,7 +744,7 @@ describe('NovoDatePickerElement', () => {
     });
 
     it('should not call updateView if selection is empty', () => {
-      const updateViewSpy = jest.spyOn(component, 'updateView');
+      const updateViewSpy = vi.spyOn(component, 'updateView');
       component._selection = [];
       component.toggleRangeSelect('startDate');
       expect(updateViewSpy).not.toHaveBeenCalled();
@@ -760,7 +752,7 @@ describe('NovoDatePickerElement', () => {
     });
 
     it('should not call updateView for endDate if only one date selected', () => {
-      const updateViewSpy = jest.spyOn(component, 'updateView');
+      const updateViewSpy = vi.spyOn(component, 'updateView');
       component._selection = [new Date('2023-01-15')];
       component.toggleRangeSelect('endDate');
       expect(updateViewSpy).not.toHaveBeenCalled();
@@ -799,7 +791,7 @@ describe('NovoDatePickerElement', () => {
       });
 
       it('should call setRangeSelection', () => {
-        const setRangeSelectionSpy = jest.spyOn(component, 'setRangeSelection');
+        const setRangeSelectionSpy = vi.spyOn(component, 'setRangeSelection');
         component.modelToSelection({} as any);
         expect(setRangeSelectionSpy).toHaveBeenCalled();
         setRangeSelectionSpy.mockRestore();
@@ -812,7 +804,7 @@ describe('NovoDatePickerElement', () => {
       });
 
       it('should call setRangeSelection', () => {
-        const setRangeSelectionSpy = jest.spyOn(component, 'setRangeSelection');
+        const setRangeSelectionSpy = vi.spyOn(component, 'setRangeSelection');
         component.modelToSelection({} as any);
         expect(setRangeSelectionSpy).toHaveBeenCalled();
         setRangeSelectionSpy.mockRestore();
@@ -828,8 +820,8 @@ describe('NovoDatePickerElement', () => {
     });
 
     it('should call modelToSelection for Date', () => {
-      const modelToSelectionSpy = jest.spyOn(component, 'modelToSelection');
-      jest.spyOn(Helpers, 'isDate').mockReturnValue(true);
+      const modelToSelectionSpy = vi.spyOn(component, 'modelToSelection');
+      vi.spyOn(Helpers, 'isDate').mockReturnValue(true);
       const date = new Date('2023-01-15');
       component.writeValue(date);
       expect(modelToSelectionSpy).toHaveBeenCalledWith(date);
@@ -837,8 +829,8 @@ describe('NovoDatePickerElement', () => {
     });
 
     it('should call updateView for Date', () => {
-      const updateViewSpy = jest.spyOn(component, 'updateView');
-      jest.spyOn(Helpers, 'isDate').mockReturnValue(true);
+      const updateViewSpy = vi.spyOn(component, 'updateView');
+      vi.spyOn(Helpers, 'isDate').mockReturnValue(true);
       const date = new Date('2023-01-15');
       component.writeValue(date);
       expect(updateViewSpy).toHaveBeenCalledWith(date);
@@ -846,20 +838,20 @@ describe('NovoDatePickerElement', () => {
     });
 
     it('should handle string date', () => {
-      const updateViewSpy = jest.spyOn(component, 'updateView');
-      jest.spyOn(Helpers, 'isDate').mockReturnValue(false);
-      jest.spyOn(Helpers, 'isString').mockReturnValue(true);
-      jest.spyOn(DateUtil, 'parse').mockReturnValue(new Date('2023-01-15'));
+      const updateViewSpy = vi.spyOn(component, 'updateView');
+      vi.spyOn(Helpers, 'isDate').mockReturnValue(false);
+      vi.spyOn(Helpers, 'isString').mockReturnValue(true);
+      vi.spyOn(DateUtil, 'parse').mockReturnValue(new Date('2023-01-15'));
       component.writeValue('2023-01-15' as any);
       expect(updateViewSpy).toHaveBeenCalled();
       updateViewSpy.mockRestore();
     });
 
     it('should handle invalid string date', () => {
-      const updateViewSpy = jest.spyOn(component, 'updateView');
-      jest.spyOn(Helpers, 'isDate').mockReturnValue(false);
-      jest.spyOn(Helpers, 'isString').mockReturnValue(true);
-      jest.spyOn(DateUtil, 'parse').mockReturnValue(new Date('invalid'));
+      const updateViewSpy = vi.spyOn(component, 'updateView');
+      vi.spyOn(Helpers, 'isDate').mockReturnValue(false);
+      vi.spyOn(Helpers, 'isString').mockReturnValue(true);
+      vi.spyOn(DateUtil, 'parse').mockReturnValue(new Date('invalid'));
       component.writeValue('invalid-date' as any);
       expect(updateViewSpy).not.toHaveBeenCalled();
       updateViewSpy.mockRestore();
@@ -939,13 +931,13 @@ describe('NovoDatePickerElement', () => {
 
   describe('registerOnChange', () => {
     it('should register onChange callback', () => {
-      const callback = jest.fn();
+      const callback = vi.fn();
       component.registerOnChange(callback);
       expect(component._onChange).toBe(callback);
     });
 
     it('should allow calling registered callback', () => {
-      const callback = jest.fn();
+      const callback = vi.fn();
       component.registerOnChange(callback);
       const date = new Date();
       component._onChange(date);
@@ -955,13 +947,13 @@ describe('NovoDatePickerElement', () => {
 
   describe('registerOnTouched', () => {
     it('should register onTouched callback', () => {
-      const callback = jest.fn();
+      const callback = vi.fn();
       component.registerOnTouched(callback);
       expect(component._onTouched).toBe(callback);
     });
 
     it('should allow calling registered callback', () => {
-      const callback = jest.fn();
+      const callback = vi.fn();
       component.registerOnTouched(callback);
       component._onTouched();
       expect(callback).toHaveBeenCalled();
@@ -972,7 +964,7 @@ describe('NovoDatePickerElement', () => {
     it('should handle complete single date selection workflow', () => {
       component._mode = 'single';
       const date = new Date('2023-01-15');
-      jest.spyOn(Helpers, 'isDate').mockReturnValue(true);
+      vi.spyOn(Helpers, 'isDate').mockReturnValue(true);
       component.writeValue(date);
       expect(component.model).toBe(date);
       expect(component.selection).toContain(date);
@@ -991,11 +983,7 @@ describe('NovoDatePickerElement', () => {
 
     it('should handle multiple date selection workflow', () => {
       component._mode = 'multiple';
-      const dates = [
-        new Date('2023-01-15'),
-        new Date('2023-01-16'),
-        new Date('2023-01-17'),
-      ];
+      const dates = [new Date('2023-01-15'), new Date('2023-01-16'), new Date('2023-01-17')];
       component.updateSelection(dates);
       expect(component.model).toEqual(dates);
     });
@@ -1023,19 +1011,19 @@ describe('NovoDatePickerElement', () => {
 
     it('should handle today button click', () => {
       component._mode = 'single';
-      jest.spyOn(component.onSelect, 'next');
+      vi.spyOn(component.onSelect, 'next');
       component.setToday();
       expect(component.onSelect.next).toHaveBeenCalled();
     });
 
     it('should handle value accessor workflow', () => {
-      const onChange = jest.fn();
-      const onTouched = jest.fn();
+      const onChange = vi.fn();
+      const onTouched = vi.fn();
       component.registerOnChange(onChange);
       component.registerOnTouched(onTouched);
 
       const date = new Date('2023-01-15');
-      jest.spyOn(Helpers, 'isDate').mockReturnValue(true);
+      vi.spyOn(Helpers, 'isDate').mockReturnValue(true);
       component.writeValue(date);
       component.updateSelection([date]);
 
@@ -1062,16 +1050,13 @@ describe('NovoDatePickerElement', () => {
     });
 
     it('should handle preselected dates', () => {
-      const preselected = [
-        new Date('2023-01-15'),
-        new Date('2023-01-20'),
-      ];
+      const preselected = [new Date('2023-01-15'), new Date('2023-01-20')];
       component.preselected = preselected;
       expect(component.preselected).toEqual(preselected);
     });
 
     it('should handle deprecated range property', () => {
-      const consoleSpy = jest.spyOn(console, 'warn').mockImplementation();
+      const consoleSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
       component.range = true;
       expect(component._mode).toBe('range');
       expect(consoleSpy).toHaveBeenCalled();
@@ -1079,7 +1064,7 @@ describe('NovoDatePickerElement', () => {
     });
 
     it('should handle deprecated weekRangeSelect property', () => {
-      const consoleSpy = jest.spyOn(console, 'warn').mockImplementation();
+      const consoleSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
       component.weekRangeSelect = true;
       expect(component._mode).toBe('week');
       expect(consoleSpy).toHaveBeenCalled();
@@ -1146,7 +1131,7 @@ describe('NovoDatePickerElement', () => {
 
   describe('EventEmitters', () => {
     it('should emit onSelect for single date selection', () => {
-      const listener = jest.fn();
+      const listener = vi.fn();
       component.onSelect.subscribe(listener);
       component._mode = 'single';
       component._selection = [new Date('2023-01-15')];
@@ -1155,7 +1140,7 @@ describe('NovoDatePickerElement', () => {
     });
 
     it('should emit onSelect for range selection', () => {
-      const listener = jest.fn();
+      const listener = vi.fn();
       component.onSelect.subscribe(listener);
       component._selection = [new Date('2023-01-15'), new Date('2023-01-20')];
       component.fireRangeSelect();
@@ -1163,13 +1148,10 @@ describe('NovoDatePickerElement', () => {
     });
 
     it('should emit onSelect for multiple selection', () => {
-      const listener = jest.fn();
+      const listener = vi.fn();
       component.onSelect.subscribe(listener);
       component._mode = 'multiple';
-      component._selection = [
-        new Date('2023-01-15'),
-        new Date('2023-01-16'),
-      ];
+      component._selection = [new Date('2023-01-15'), new Date('2023-01-16')];
       component.fireSelect();
       expect(listener).toHaveBeenCalled();
     });

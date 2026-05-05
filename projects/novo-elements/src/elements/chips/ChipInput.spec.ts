@@ -7,13 +7,11 @@ import { NovoChipInput } from './ChipInput';
 import { NovoChipsModule } from './Chips.module';
 
 @Component({
-    selector: 'test-chip-input',
-    template: `
-    <novo-field>
-        <novo-chip-list [formControl]="chipsCtrl">
-            <input novoChipInput
-              [formControl]="textCtrl">
-        </novo-chip-list>
+  selector: 'test-chip-input',
+  template: ` <novo-field>
+      <novo-chip-list [formControl]="chipsCtrl">
+        <input novoChipInput [formControl]="textCtrl" />
+      </novo-chip-list>
     </novo-field>
     <div class="mock-overlay"></div>`,
   standalone: false,
@@ -50,10 +48,10 @@ describe('Directive: NovoChipInput', () => {
   it('should clear the control value on blur', () => {
     fixture.detectChanges();
     const blurEvent = new FocusEvent('blur', {
-        relatedTarget: mockOverlay,
+      relatedTarget: mockOverlay,
     });
     testComponent.textCtrl.setValue('value');
-    const spy = spyOn(NovoFieldElement.prototype, 'blurEventIsInField').and.returnValue(false);
+    const spy = vi.spyOn(NovoFieldElement.prototype, 'blurEventIsInField').mockReturnValue(false);
     fixture.debugElement.query(By.directive(NovoChipInput)).triggerEventHandler('blur', blurEvent);
     expect(spy).toHaveBeenCalledWith(blurEvent);
     expect(testComponent.textCtrl.value).toBeFalsy();

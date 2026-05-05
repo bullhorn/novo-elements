@@ -306,7 +306,7 @@ describe('Elements: QuickNoteElement', () => {
     component.registerOnTouched(fakeParentForm.onModelTouched);
   });
 
-  xdescribe('QuickNote Functionality', () => {
+  describe.skip('QuickNote Functionality', () => {
     it('should add the selected item to the list of references and populate note.', fakeAsync(() => {
       fakeCkEditorInstance.valueSetByUser('Note about: ');
       fakeCkEditorInstance.keyEnteredByUser('@');

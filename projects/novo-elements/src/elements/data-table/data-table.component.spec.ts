@@ -1,11 +1,12 @@
 // NG2
 import { ChangeDetectorRef } from '@angular/core';
-import { waitForAsync, TestBed } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { NovoDataTable } from './data-table.component';
 import { NovoSelectModule } from 'novo-elements/elements/select';
 import { NovoTilesModule } from 'novo-elements/elements/tiles';
 import { NovoLabelService } from 'novo-elements/services';
+import { vi } from 'vitest';
+import { NovoDataTable } from './data-table.component';
 import { DataTableState } from './state/data-table-state.service';
 
 describe('Elements: NovoDataTable', () => {
@@ -27,7 +28,7 @@ describe('Elements: NovoDataTable', () => {
       component.overrideTotal = null;
       component.dataSource = {};
       Object.defineProperty(component.dataSource, 'totallyEmpty', {
-        get: jest.fn(() => true),
+        get: vi.fn(() => true),
       });
       const result = component.empty;
       expect(result).toEqual(true);
