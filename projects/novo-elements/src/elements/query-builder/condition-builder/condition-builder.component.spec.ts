@@ -1,7 +1,6 @@
-import { vi } from 'vitest';
-// NG2
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { ControlContainer, UntypedFormBuilder } from '@angular/forms';
+import { vi } from 'vitest';
 import { NovoQueryBuilderModule } from '../query-builder.module';
 import { QueryBuilderService } from '../query-builder.service';
 import { BaseFieldDef } from '../query-builder.types';
@@ -150,7 +149,7 @@ describe('ConditionBuilderComponent', () => {
 
     it('should not set default field when allowEmptyField is true and no field is selected', fakeAsync(() => {
       component.allowEmptyField = true;
-      parentForm.get('field')!.setValue(null);
+      parentForm.controls.field.setValue(null);
       const getDefaultFieldSpy = vi.spyOn(component, 'getDefaultField');
 
       tick();
@@ -164,8 +163,8 @@ describe('ConditionBuilderComponent', () => {
 
     it('should set default field when allowEmptyField is false and no field is selected', fakeAsync(() => {
       component.allowEmptyField = false;
-      parentForm.get('field')!.setValue(null);
-      const setValueSpy = vi.spyOn(parentForm.get('field')!, 'setValue');
+      parentForm.controls.field.setValue(null);
+      const setValueSpy = vi.spyOn(parentForm.controls.field, 'setValue');
 
       tick();
 
@@ -194,10 +193,10 @@ describe('ConditionBuilderComponent', () => {
       tick();
 
       // Spy on setValue to verify it's called with null
-      const fieldSetValueSpy = vi.spyOn(parentForm.get('field')!, 'setValue');
-      const operatorSetValueSpy = vi.spyOn(parentForm.get('operator')!, 'setValue');
-      const valueSetValueSpy = vi.spyOn(parentForm.get('value')!, 'setValue');
-      const supportingValueSetValueSpy = vi.spyOn(parentForm.get('supportingValue')!, 'setValue');
+      const fieldSetValueSpy = vi.spyOn(parentForm.controls.field, 'setValue');
+      const operatorSetValueSpy = vi.spyOn(parentForm.controls.operator, 'setValue');
+      const valueSetValueSpy = vi.spyOn(parentForm.controls.value, 'setValue');
+      const supportingValueSetValueSpy = vi.spyOn(parentForm.controls.supportingValue, 'setValue');
 
       // Call clearCondition
       component.clearCondition();

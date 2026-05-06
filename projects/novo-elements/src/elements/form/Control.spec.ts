@@ -1,6 +1,16 @@
 // NG2
 import { OverlayModule } from '@angular/cdk/overlay';
-import { ChangeDetectorRef, Component, DebugElement, ElementRef, ErrorHandler, EventEmitter, Inject, NO_ERRORS_SCHEMA, OnInit, } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  DebugElement,
+  ElementRef,
+  ErrorHandler,
+  EventEmitter,
+  Inject,
+  NO_ERRORS_SCHEMA,
+  OnInit,
+} from '@angular/core';
 import { ComponentFixture, fakeAsync, inject, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { IMaskModule } from 'angular-imask';
@@ -25,7 +35,6 @@ import { NovoControlTemplates } from './ControlTemplates';
 import { FieldInteractionApi } from './FieldInteractionApi';
 import { NovoFormGroup } from './NovoFormGroup';
 import { FormUtils } from './utils/FormUtils';
-
 
 @Component({
   selector: 'novo-auto-size-test-component',
