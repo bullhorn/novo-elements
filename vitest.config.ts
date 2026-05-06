@@ -1,3 +1,7 @@
+// TODO(Angular 21): Remove all SWC plugins, unplugin-swc, angularTemplateInliner,
+// resolve.alias, and tsconfig.vitest.json. Replace with @angular/build:unit-test
+// which handles Angular compilation natively. Only the test options (include/exclude/
+// timeouts/isolate) and the novo-testing alias should remain.
 import { readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import swc from 'unplugin-swc';

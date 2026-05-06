@@ -1,4 +1,6 @@
 /// <reference types="vitest/globals" />
+// TODO(Angular 21): Remove zone.js, reflect-metadata, and @angular/compiler imports.
+// Angular 21's native vitest support is zoneless-first and handles compilation internally.
 import 'zone.js';
 import 'zone.js/testing';
 import 'reflect-metadata';
