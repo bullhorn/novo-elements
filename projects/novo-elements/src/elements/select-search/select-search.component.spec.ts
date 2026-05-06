@@ -455,9 +455,7 @@ describe.skip('NovoSelectSearchComponent', () => {
       });
     });
 
-    it('set the initial selection with multi=true and filter the options available, filter the options by input "c" and select an option', (
-      done,
-    ) => {
+    it('set the initial selection with multi=true and filter the options available, filter the options by input "c" and select an option', (done) => {
       component.initialMultiSelection = [component.banks[1]];
       fixture.detectChanges();
 
