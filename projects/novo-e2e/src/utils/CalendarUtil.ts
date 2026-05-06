@@ -17,6 +17,19 @@ export const CALENDAR_MONTHS = [
     'December',
 ];
 
+export const calendar = {
+    monthHeader: automationId('header-month'),
+    yearHeader: automationId('header-year'),
+    nextButton: automationId('calendar-next'),
+    previousButton: automationId('calendar-previous'),
+    monthText: `${elements.calendar} .month`,
+    yearText: `${elements.calendar} .year`,
+    weekdayHeaders: `${elements.calendar} .calendar-th`,
+    firstVisibleDate: `${elements.calendar} .calendar-date:first-child`,
+    lastVisibleDate: `${elements.calendar} .calendar-date:last-child`,
+    selectedValues: automationId('calendar-selected-values'),
+};
+
 /**
  * Gets a month name offset from the current month
  * @param offset number of months to offset (negative for past, positive for future)
@@ -55,46 +68,6 @@ export function calendarDateInMonth(dayNumber: number | string, monthIndex: numb
     return `${elements.calendar} .month-view:nth-of-type(${monthIndex + 1}) .calendar-date${automationId(dayNumber)}`;
 }
 
-/**
- * Returns the selector for the first visible day in the calendar grid
- * (may include overflow days from previous month)
- */
-export function firstVisibleCalendarDate(): string {
-    return `${elements.calendar} .calendar-date:first-child`;
-}
-
-/**
- * Returns the selector for the last visible day in the calendar grid
- * (may include overflow days from next month)
- */
-export function lastVisibleCalendarDate(): string {
-    return `${elements.calendar} .calendar-date:last-child`;
-}
-
-export function calendarMonthHeader(): string {
-    return automationId('header-month');
-}
-
-export function calendarYearHeader(): string {
-    return automationId('header-year');
-}
-
-export function calendarNextButton(): string {
-    return automationId('calendar-next');
-}
-
-export function calendarPreviousButton(): string {
-    return automationId('calendar-previous');
-}
-
-export function calendarMonthText(): string {
-    return `${elements.calendar} .month`;
-}
-
-export function calendarYearText(): string {
-    return `${elements.calendar} .year`;
-}
-
 export function calendarMonth(monthName: string): string {
     return `div${automationId(monthName)}`;
 }
@@ -103,12 +76,26 @@ export function calendarYear(yearNumber: number): string {
     return `div${automationId(yearNumber)}`;
 }
 
+export function calendarSelectionMode(mode: string): string {
+    return `${automationId(`mode-${mode}`)} i`;
+}
+
+export function calendarNumberOfMonths(months: number): string {
+    return `${automationId(`months-${months}`)} i`;
+}
+
+/**
+ * Returns the selector for the week start radio button by day (0 for Sunday, 1 for Monday)
+ */
+export function calendarWeekStart(day: number): string {
+    return `${automationId(`weekstart-${day}`)} i`;
+}
 
 /**
  * Gets the selected values from the calendar display as a Date array
  */
 export async function getCalendarSelectedValues(): Promise<Date[]> {
-    const valueText = await $(automationId('calendar-selected-values')).getText();
+    const valueText = await $(calendar.selectedValues).getText();
     return JSON.parse(valueText);
 }
 
@@ -127,27 +114,8 @@ export async function verifyCalendarDatesSelected(dayNumbers: number[]): Promise
     expect(selectedDays).toEqual(expectedDays);
 }
 
-export function calendarSelectionMode(mode: string): string {
-    return `${automationId(`mode-${mode}`)} i`;
-}
-
-export function calendarNumberOfMonths(months: number): string {
-    return `${automationId(`months-${months}`)} i`;
-}
-
-/**
- * Returns the selector for the week start radio button by day (0 for Sunday, 1 for Monday)
- */
-export function calendarWeekStart(day: number): string {
-    return `${automationId(`weekstart-${day}`)} i`;
-}
-
-export function calendarWeekdayHeaders(): string {
-    return `${elements.calendar} .calendar-th`;
-}
-
 export async function getCalendarWeekdayHeaders(): Promise<WebdriverIO.ElementArray> {
-    return await getAllElements(calendarWeekdayHeaders());
+    return await getAllElements(calendar.weekdayHeaders);
 }
 
 export async function verifyCalendarDateRangeSelected(startDay: number, endDay: number): Promise<void> {
