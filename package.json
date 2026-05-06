@@ -147,7 +147,8 @@
   "overrides": {
     "@angular/build": {
       "vitest": "$vitest"
-    }
+    },
+    "keyv": "^5.6.0"
   },
   "lint-staged": {
     "*.{ts,json,scss,css,html}": [
