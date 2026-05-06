@@ -1,4 +1,3 @@
-// APP
 import { TimezoneControl } from './TimezoneControl';
 
 describe('Control: TimezoneControl', () => {

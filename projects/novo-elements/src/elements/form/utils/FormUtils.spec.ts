@@ -1,11 +1,8 @@
-// NG2
 import { inject, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormGroup } from '@angular/forms';
 import { NovoLabelService, OptionsService } from 'novo-elements/services';
-// Vendor
 import { from } from 'rxjs';
 import { vi } from 'vitest';
-// APP
 import {
   AddressControl,
   CheckboxControl,

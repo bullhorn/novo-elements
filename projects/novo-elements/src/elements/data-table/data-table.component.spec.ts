@@ -1,6 +1,5 @@
-// NG2
 import { ChangeDetectorRef } from '@angular/core';
-import { TestBed, waitForAsync } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { NovoSelectModule } from 'novo-elements/elements/select';
 import { NovoTilesModule } from 'novo-elements/elements/tiles';
@@ -13,7 +12,7 @@ describe('Elements: NovoDataTable', () => {
   let fixture;
   let component;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [NovoDataTable],
       imports: [FormsModule, NovoTilesModule, NovoSelectModule],
@@ -21,7 +20,7 @@ describe('Elements: NovoDataTable', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(NovoDataTable);
     component = fixture.debugElement.componentInstance;
-  }));
+  });
 
   describe('Method: empty()', () => {
     it('should call dataSource.totallyEmpty when overrideTotal is null', () => {

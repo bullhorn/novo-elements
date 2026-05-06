@@ -1,6 +1,5 @@
-// NG2
 import { EventEmitter } from '@angular/core';
-import { TestBed, waitForAsync } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { IMaskModule } from 'angular-imask';
 import { NovoButtonModule } from 'novo-elements/elements/button';
@@ -14,13 +13,11 @@ import { IDataTableColumnFilterOption } from '../interfaces';
 import { DataTableState } from '../state/data-table-state.service';
 import { NovoDataTableCellHeader } from './data-table-header-cell.component';
 
-// App
-
 describe('Elements: NovoDataTableCellHeader', () => {
   let fixture;
   let component;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [NovoDataTableCellHeader],
       imports: [FormsModule, NovoTooltipModule, NovoButtonModule, NovoDropdownModule, NovoDatePickerModule, IMaskModule],
@@ -28,7 +25,7 @@ describe('Elements: NovoDataTableCellHeader', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(NovoDataTableCellHeader);
     component = fixture.debugElement.componentInstance;
-  }));
+  });
 
   beforeEach(() => {
     component.config = {

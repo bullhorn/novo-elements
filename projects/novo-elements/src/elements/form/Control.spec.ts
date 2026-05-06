@@ -1,4 +1,3 @@
-// NG2
 import { OverlayModule } from '@angular/cdk/overlay';
 import {
   ChangeDetectorRef,
@@ -19,7 +18,6 @@ import { DateFormatService, NovoLabelService, NovoTemplateService, OptionsServic
 import { Key } from 'novo-elements/utils';
 import { vi } from 'vitest';
 import { NovoTemplate } from '../common/novo-template/novo-template.directive';
-// App
 import { NovoAutoSize, NovoControlElement } from './Control';
 import {
   AddressControl,

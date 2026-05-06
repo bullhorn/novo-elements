@@ -1,17 +1,15 @@
-// NG2
-import { TestBed, waitForAsync } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { ComponentUtils, NovoLabelService } from 'novo-elements/services';
 import { vi } from 'vitest';
 import { NovoChipsModule } from './Chips.module';
-// App
 import { NovoRowChipsElement } from './RowChips';
 
 describe('Elements: NovoRowChipsElement', () => {
   let fixture;
   let component;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [FormsModule, NovoChipsModule],
       providers: [
@@ -21,7 +19,7 @@ describe('Elements: NovoRowChipsElement', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(NovoRowChipsElement);
     component = fixture.debugElement.componentInstance;
-  }));
+  });
 
   describe('Method: onKeyDown(event)', () => {
     it('should not call select or remove.', () => {

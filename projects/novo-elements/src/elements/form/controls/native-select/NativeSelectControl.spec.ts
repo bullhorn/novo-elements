@@ -1,4 +1,3 @@
-// APP
 import { NativeSelectControl } from './NativeSelectControl';
 
 describe('Control: NativeSelectControl', () => {

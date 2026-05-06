@@ -1,4 +1,3 @@
-// APP
 import { DefaultPipe } from './Default';
 
 describe('Pipe: Default', () => {

@@ -1,4 +1,3 @@
-// APP
 import { binarySearch, Can, can, Helpers } from './Helpers';
 
 describe('Utils: Helpers', () => {
@@ -465,7 +464,7 @@ describe('Utils: Helpers', () => {
     });
 
     it('should return true for method', () => {
-      const obj = { method: function() {} };
+      const obj = { method: function () {} };
       expect(Helpers.isFunction(obj.method)).toBe(true);
     });
 
@@ -503,7 +502,7 @@ describe('Utils: Helpers', () => {
 
     it('should return false for function with no call property', () => {
       // This tests the edge case in the implementation
-      const fakeFunc = { constructor: function() {}, apply: null };
+      const fakeFunc = { constructor: function () {}, apply: null };
       expect(Helpers.isFunction(fakeFunc)).toBe(false);
     });
   });
@@ -953,126 +952,77 @@ describe('Utils: Helpers', () => {
     });
 
     it('should filter by exact match with string', () => {
-      const data = [
-        { name: 'John' },
-        { name: 'Jane' },
-        { name: 'John' },
-      ];
+      const data = [{ name: 'John' }, { name: 'Jane' }, { name: 'John' }];
       const filtered = data.filter(Helpers.filterByField('name', 'John'));
       expect(filtered.length).toBe(2);
       expect(filtered[0].name).toBe('John');
     });
 
     it('should filter by exact match with number', () => {
-      const data = [
-        { age: 25 },
-        { age: 30 },
-        { age: 25 },
-      ];
+      const data = [{ age: 25 }, { age: 30 }, { age: 25 }];
       const filtered = data.filter(Helpers.filterByField('age', 25));
       expect(filtered.length).toBe(2);
       expect(filtered[0].age).toBe(25);
     });
 
     it('should filter using array of values', () => {
-      const data = [
-        { status: 'active' },
-        { status: 'inactive' },
-        { status: 'active' },
-        { status: 'pending' },
-      ];
+      const data = [{ status: 'active' }, { status: 'inactive' }, { status: 'active' }, { status: 'pending' }];
       const filtered = data.filter(Helpers.filterByField('status', ['active', 'pending']));
       expect(filtered.length).toBe(3);
     });
 
     it('should filter using function', () => {
-      const data = [
-        { age: 25 },
-        { age: 30 },
-        { age: 35 },
-      ];
+      const data = [{ age: 25 }, { age: 30 }, { age: 35 }];
       const filtered = data.filter(Helpers.filterByField('age', (val) => val > 28));
       expect(filtered.length).toBe(2);
       expect(filtered[0].age).toBe(30);
     });
 
     it('should filter using range object with min', () => {
-      const data = [
-        { price: 10 },
-        { price: 25 },
-        { price: 50 },
-      ];
+      const data = [{ price: 10 }, { price: 25 }, { price: 50 }];
       const filtered = data.filter(Helpers.filterByField('price', { min: 20 }));
       expect(filtered.length).toBe(2);
     });
 
     it('should filter using range object with max', () => {
-      const data = [
-        { price: 10 },
-        { price: 25 },
-        { price: 50 },
-      ];
+      const data = [{ price: 10 }, { price: 25 }, { price: 50 }];
       const filtered = data.filter(Helpers.filterByField('price', { max: 30 }));
       expect(filtered.length).toBe(2);
     });
 
     it('should filter using range object with min and max', () => {
-      const data = [
-        { price: 10 },
-        { price: 25 },
-        { price: 50 },
-      ];
+      const data = [{ price: 10 }, { price: 25 }, { price: 50 }];
       const filtered = data.filter(Helpers.filterByField('price', { min: 15, max: 40 }));
       expect(filtered.length).toBe(1);
       expect(filtered[0].price).toBe(25);
     });
 
     it('should filter using any array in filter object', () => {
-      const data = [
-        { tags: ['javascript', 'nodejs'] },
-        { tags: ['python'] },
-        { tags: ['javascript', 'react'] },
-      ];
+      const data = [{ tags: ['javascript', 'nodejs'] }, { tags: ['python'] }, { tags: ['javascript', 'react'] }];
       const filtered = data.filter(Helpers.filterByField('tags', { any: ['javascript'] }));
       expect(filtered.length).toBe(2);
     });
 
     it('should filter using all array in filter object', () => {
-      const data = [
-        { tags: ['javascript', 'nodejs', 'express'] },
-        { tags: ['javascript', 'nodejs'] },
-        { tags: ['javascript'] },
-      ];
+      const data = [{ tags: ['javascript', 'nodejs', 'express'] }, { tags: ['javascript', 'nodejs'] }, { tags: ['javascript'] }];
       const filtered = data.filter(Helpers.filterByField('tags', { all: ['javascript', 'nodejs'] }));
       expect(filtered.length).toBe(2);
     });
 
     it('should filter using not in filter object', () => {
-      const data = [
-        { status: 'active' },
-        { status: 'inactive' },
-        { status: 'active' },
-      ];
+      const data = [{ status: 'active' }, { status: 'inactive' }, { status: 'active' }];
       const filtered = data.filter(Helpers.filterByField('status', { not: 'inactive' }));
       expect(filtered.length).toBe(2);
     });
 
     it('should filter using regex pattern string', () => {
-      const data = [
-        { email: 'john@example.com' },
-        { email: 'jane@test.com' },
-        { email: 'bob@example.com' },
-      ];
+      const data = [{ email: 'john@example.com' }, { email: 'jane@test.com' }, { email: 'bob@example.com' }];
       const filtered = data.filter(Helpers.filterByField('email', 'example'));
       expect(filtered.length).toBe(2);
     });
 
     it('should filter using nested property', () => {
-      const data = [
-        { user: { name: 'John' } },
-        { user: { name: 'Jane' } },
-        { user: { name: 'John' } },
-      ];
+      const data = [{ user: { name: 'John' } }, { user: { name: 'Jane' } }, { user: { name: 'John' } }];
       const filtered = data.filter(Helpers.filterByField('user.name', 'John'));
       expect(filtered.length).toBe(2);
     });
@@ -1081,51 +1031,32 @@ describe('Utils: Helpers', () => {
       const date1 = new Date('2024-01-01');
       const date2 = new Date('2024-06-01');
       const date3 = new Date('2024-12-01');
-      const data = [
-        { created: date1 },
-        { created: date2 },
-        { created: date3 },
-      ];
+      const data = [{ created: date1 }, { created: date2 }, { created: date3 }];
       const filtered = data.filter(Helpers.filterByField('created', { min: date2.getTime(), max: date3.getTime() }));
       expect(filtered.length).toBe(2);
     });
 
     it('should filter using any with non-array field', () => {
-      const data = [
-        { tag: 'javascript' },
-        { tag: 'python' },
-        { tag: 'javascript' },
-      ];
+      const data = [{ tag: 'javascript' }, { tag: 'python' }, { tag: 'javascript' }];
       const filtered = data.filter(Helpers.filterByField('tag', { any: ['javascript'] }));
       expect(filtered.length).toBe(2);
     });
 
     it('should filter using custom subkeys in filter object', () => {
-      const data = [
-        { user: { name: 'John', active: true } },
-        { user: { name: 'Jane', active: false } },
-      ];
+      const data = [{ user: { name: 'John', active: true } }, { user: { name: 'Jane', active: false } }];
       const filtered = data.filter(Helpers.filterByField('user', { active: true }));
       expect(filtered.length).toBe(1);
       expect(filtered[0].user.name).toBe('John');
     });
 
     it('should filter with only min in range object', () => {
-      const data = [
-        { price: 10 },
-        { price: 25 },
-        { price: 50 },
-      ];
+      const data = [{ price: 10 }, { price: 25 }, { price: 50 }];
       const filtered = data.filter(Helpers.filterByField('price', { min: 20 }));
       expect(filtered.length).toBe(2);
     });
 
     it('should filter with only max in range object', () => {
-      const data = [
-        { price: 10 },
-        { price: 25 },
-        { price: 50 },
-      ];
+      const data = [{ price: 10 }, { price: 25 }, { price: 50 }];
       const filtered = data.filter(Helpers.filterByField('price', { max: 30 }));
       expect(filtered.length).toBe(2);
     });
@@ -1500,14 +1431,10 @@ describe('Utils: Helpers', () => {
 
     it('should merge complex data structures', () => {
       const obj1 = {
-        users: [
-          { id: 1, name: 'Alice', tags: ['admin'] },
-        ],
+        users: [{ id: 1, name: 'Alice', tags: ['admin'] }],
       };
       const obj2 = {
-        users: [
-          { id: 1, name: 'Alice', tags: ['admin', 'user'] },
-        ],
+        users: [{ id: 1, name: 'Alice', tags: ['admin', 'user'] }],
       };
       const result = Helpers.deepAssign(obj1, obj2);
       expect(result.users[0].tags).toEqual(['admin', 'user']);

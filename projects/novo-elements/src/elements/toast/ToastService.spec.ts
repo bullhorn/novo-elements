@@ -1,4 +1,3 @@
-// App
 import { ComponentUtils } from 'novo-elements/services';
 import { vi } from 'vitest';
 import { NovoToastService } from './ToastService';

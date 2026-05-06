@@ -1,14 +1,12 @@
-// NG2
-import { TestBed, waitForAsync } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { vi } from 'vitest';
-// APP
 import { NovoTilesElement } from './Tiles';
 
 describe('Elements: NovoTilesElement', () => {
   let fixture;
   let component;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [NovoTilesElement],
     }).compileComponents();
@@ -34,7 +32,7 @@ describe('Elements: NovoTilesElement', () => {
       },
     ];
     component.ngAfterContentInit();
-  }));
+  });
 
   describe('Method: select(event, item)', () => {
     it('should set label 2 with checked equal to true', () => {

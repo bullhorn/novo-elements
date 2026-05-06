@@ -1,7 +1,5 @@
-// NG2
 import { ElementRef } from '@angular/core';
 import { vi } from 'vitest';
-// App
 import { BasePickerResults } from './BasePickerResults';
 
 class MockCDR {

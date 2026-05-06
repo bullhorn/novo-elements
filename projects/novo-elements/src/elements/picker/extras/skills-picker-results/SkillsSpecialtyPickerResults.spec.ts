@@ -1,7 +1,5 @@
-// NG2
 import { ElementRef } from '@angular/core';
-import { TestBed, waitForAsync } from '@angular/core/testing';
-// App
+import { TestBed } from '@angular/core/testing';
 import { NovoListModule } from 'novo-elements/elements/list';
 import { NovoLoadingModule } from 'novo-elements/elements/loading';
 import { NovoLabelService } from 'novo-elements/services';
@@ -12,7 +10,7 @@ describe('Components: SkillsSpecialtyPickerResults', () => {
   let fixture: any;
   let component: any;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [SkillsSpecialtyPickerResults],
       providers: [
@@ -23,7 +21,7 @@ describe('Components: SkillsSpecialtyPickerResults', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(SkillsSpecialtyPickerResults);
     component = fixture.debugElement.componentInstance;
-  }));
+  });
 
   it('should initialize correctly', () => {
     expect(component).toBeDefined();

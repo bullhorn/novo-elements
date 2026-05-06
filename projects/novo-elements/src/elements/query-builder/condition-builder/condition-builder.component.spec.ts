@@ -1,5 +1,6 @@
-import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ControlContainer, UntypedFormBuilder } from '@angular/forms';
+import { tick } from 'novo-testing';
 import { vi } from 'vitest';
 import { NovoQueryBuilderModule } from '../query-builder.module';
 import { QueryBuilderService } from '../query-builder.service';
@@ -17,8 +18,6 @@ class MockQueryBuilderService {
     return this.fieldDefs;
   }
 }
-
-// App
 
 describe('ConditionBuilderComponent', () => {
   let fixture: ComponentFixture<ConditionBuilderComponent>;
@@ -51,7 +50,7 @@ describe('ConditionBuilderComponent', () => {
     ],
   };
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [NovoQueryBuilderModule],
       providers: [
@@ -66,20 +65,20 @@ describe('ConditionBuilderComponent', () => {
     createFieldOperators = vi.spyOn(component as any, 'createFieldOperators');
     parentForm.controls.field.setValue('testradio');
     vi.spyOn(component as any, 'createFieldInput');
-  }));
+  });
 
   it('should exist', () => {
     expect(component).toBeDefined();
   });
 
-  it('should coalesce a radio input type to a boolean template', fakeAsync(() => {
+  it('should coalesce a radio input type to a boolean template', async () => {
     fixture.componentRef.setInput('config', fieldConfig);
     fixture.detectChanges();
-    tick();
+    await tick();
     expect(createFieldOperators).toHaveBeenCalledWith(queryBuilderService.getFieldDefsByName().get('BOOLEAN'));
-  }));
+  });
 
-  it('should coalesce a radio input type to a select template when 3 or 1 options are present', fakeAsync(() => {
+  it('should coalesce a radio input type to a select template when 3 or 1 options are present', async () => {
     defaultField.dataType = 'String';
     defaultField.options = [
       { value: 0, label: 'Opt1' },
@@ -89,7 +88,7 @@ describe('ConditionBuilderComponent', () => {
     fixture.componentRef.setInput('config', fieldConfig);
 
     fixture.detectChanges();
-    tick();
+    await tick();
     expect(createFieldOperators).toHaveBeenCalledWith(queryBuilderService.getFieldDefsByName().get('SELECT'));
 
     createFieldOperators.mockClear();
@@ -99,25 +98,25 @@ describe('ConditionBuilderComponent', () => {
     component.resetInputAndOperator();
 
     fixture.detectChanges();
-    tick();
+    await tick();
     expect(createFieldOperators).toHaveBeenCalledWith(queryBuilderService.getFieldDefsByName().get('SELECT'));
-  }));
+  });
 
-  it('should coalesce a radio input type to a boolean template when 2 options are present', fakeAsync(() => {
+  it('should coalesce a radio input type to a boolean template when 2 options are present', async () => {
     defaultField.options = [
       { value: 0, label: 'Opt1' },
       { value: 1, label: 'Opt2' },
     ];
     fixture.componentRef.setInput('config', fieldConfig);
     fixture.detectChanges();
-    tick();
+    await tick();
     expect(createFieldOperators).toHaveBeenCalledWith(queryBuilderService.getFieldDefsByName().get('BOOLEAN'));
-  }));
+  });
 
-  it('should skip createFieldTemplates when resetInputAndOperator is called with recreateTemplates=false', fakeAsync(() => {
+  it('should skip createFieldTemplates when resetInputAndOperator is called with recreateTemplates=false', async () => {
     fixture.componentRef.setInput('config', fieldConfig);
     fixture.detectChanges();
-    tick();
+    await tick();
 
     const createFieldTemplatesSpy = vi.spyOn(component as any, 'createFieldTemplates');
     createFieldOperators.mockClear();
@@ -125,12 +124,12 @@ describe('ConditionBuilderComponent', () => {
     component.resetInputAndOperator(false);
 
     expect(createFieldTemplatesSpy).not.toHaveBeenCalled();
-  }));
+  });
 
-  it('should call createFieldTemplates when resetInputAndOperator is called with recreateTemplates=true (default)', fakeAsync(() => {
+  it('should call createFieldTemplates when resetInputAndOperator is called with recreateTemplates=true (default)', async () => {
     fixture.componentRef.setInput('config', fieldConfig);
     fixture.detectChanges();
-    tick();
+    await tick();
 
     const createFieldTemplatesSpy = vi.spyOn(component as any, 'createFieldTemplates');
     createFieldOperators.mockClear();
@@ -138,7 +137,7 @@ describe('ConditionBuilderComponent', () => {
     component.resetInputAndOperator(true);
 
     expect(createFieldTemplatesSpy).toHaveBeenCalled();
-  }));
+  });
 
   describe('updateFieldSelection with allowEmptyField', () => {
     beforeEach(() => {
@@ -147,33 +146,33 @@ describe('ConditionBuilderComponent', () => {
       fixture.detectChanges();
     });
 
-    it('should not set default field when allowEmptyField is true and no field is selected', fakeAsync(() => {
+    it('should not set default field when allowEmptyField is true and no field is selected', async () => {
       component.allowEmptyField = true;
       parentForm.controls.field.setValue(null);
       const getDefaultFieldSpy = vi.spyOn(component, 'getDefaultField');
 
-      tick();
+      await tick();
 
       component.updateFieldSelection();
-      tick();
+      await tick();
 
       // When allowEmptyField is true, getDefaultField should not be called
       expect(getDefaultFieldSpy).not.toHaveBeenCalled();
-    }));
+    });
 
-    it('should set default field when allowEmptyField is false and no field is selected', fakeAsync(() => {
+    it('should set default field when allowEmptyField is false and no field is selected', async () => {
       component.allowEmptyField = false;
       parentForm.controls.field.setValue(null);
       const setValueSpy = vi.spyOn(parentForm.controls.field, 'setValue');
 
-      tick();
+      await tick();
 
       component.updateFieldSelection();
-      tick();
+      await tick();
 
       // When allowEmptyField is false, should try to set default field
       expect(setValueSpy).toHaveBeenCalledWith(expect.anything());
-    }));
+    });
   });
 
   describe('clearCondition', () => {
@@ -183,14 +182,14 @@ describe('ConditionBuilderComponent', () => {
       fixture.detectChanges();
     });
 
-    it('should clear all form values', fakeAsync(() => {
+    it('should clear all form values', async () => {
       // Set up form with values
       parentForm?.get('field')?.setValue('testradio');
       parentForm?.get('operator')?.setValue('equals');
       parentForm?.get('value')?.setValue('someValue');
       parentForm?.get('supportingValue')?.setValue('supportingValue');
 
-      tick();
+      await tick();
 
       // Spy on setValue to verify it's called with null
       const fieldSetValueSpy = vi.spyOn(parentForm.controls.field, 'setValue');
@@ -206,19 +205,19 @@ describe('ConditionBuilderComponent', () => {
       expect(operatorSetValueSpy).toHaveBeenCalledWith(null);
       expect(valueSetValueSpy).toHaveBeenCalledWith(null);
       expect(supportingValueSetValueSpy).toHaveBeenCalledWith(null);
-    }));
+    });
 
-    it('should reset the search term', fakeAsync(() => {
+    it('should reset the search term', async () => {
       component.searchTerm.setValue('test search');
 
-      tick();
+      await tick();
 
       const searchTermSetValueSpy = vi.spyOn(component.searchTerm, 'setValue');
 
       component.clearCondition();
 
       expect(searchTermSetValueSpy).toHaveBeenCalledWith('');
-    }));
+    });
 
     it('should reset internal state (_lastContext)', () => {
       // Mock to avoid side effects

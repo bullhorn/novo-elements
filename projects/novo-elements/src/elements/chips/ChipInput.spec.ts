@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { NovoFieldElement, NovoFieldModule } from '../field';
@@ -27,12 +27,12 @@ describe('Directive: NovoChipInput', () => {
   let directive: NovoChipInput;
   let mockOverlay: HTMLElement;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [FormsModule, NovoChipsModule, ReactiveFormsModule, NovoFieldModule],
       declarations: [TestChipInputComponent],
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TestChipInputComponent);

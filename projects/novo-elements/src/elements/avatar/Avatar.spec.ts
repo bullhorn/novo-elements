@@ -1,7 +1,5 @@
-// NG2
 import { TestBed } from '@angular/core/testing';
 import { vi } from 'vitest';
-// APP
 import { NovoAvatarElement } from './Avatar';
 
 describe('Elements: NovoAvatarElement', () => {

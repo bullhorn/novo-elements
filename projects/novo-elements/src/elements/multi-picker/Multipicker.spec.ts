@@ -1,11 +1,9 @@
-// NG2
-import { TestBed, waitForAsync } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { ComponentUtils, NovoLabelService } from 'novo-elements/services';
 import { Key } from 'novo-elements/utils';
 import { ReplaySubject } from 'rxjs';
 import { vi } from 'vitest';
-// App
 import { NovoMultiPickerElement } from './MultiPicker';
 import { NovoMultiPickerModule } from './MultiPicker.module';
 
@@ -13,7 +11,7 @@ describe('Element: NovoMultiPickerElement', () => {
   let fixture;
   let component;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
         { provide: NovoLabelService, useClass: NovoLabelService },
@@ -25,7 +23,7 @@ describe('Element: NovoMultiPickerElement', () => {
     component = fixture.debugElement.componentInstance;
     component.types = [];
     component.source = { options: [] };
-  }));
+  });
 
   describe('Method: ngOnInit()', () => {
     it('should initialize properly', () => {

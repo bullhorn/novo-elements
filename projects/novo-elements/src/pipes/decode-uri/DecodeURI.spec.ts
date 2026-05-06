@@ -1,4 +1,3 @@
-// APP
 import { DecodeURIPipe } from './DecodeURI';
 
 describe('Pipe: DecodeURIPipe', () => {

@@ -1,4 +1,3 @@
-// APP
 import { AdaptiveQuery, AppliedSearchType } from '../interfaces';
 import { DataTableState } from './data-table-state.service';
 

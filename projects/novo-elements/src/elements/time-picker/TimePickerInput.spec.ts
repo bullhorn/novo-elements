@@ -1,7 +1,5 @@
-// NG2
 import { TestBed } from '@angular/core/testing';
 import { DateFormatService, NovoLabelService } from 'novo-elements/services';
-// App
 import { Helpers } from 'novo-elements/utils';
 import { vi } from 'vitest';
 import { NovoTimePickerModule } from './TimePicker.module';

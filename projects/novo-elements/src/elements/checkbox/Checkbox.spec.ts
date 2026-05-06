@@ -1,14 +1,12 @@
-// NG2
-import { waitForAsync, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-// App
 import { NovoCheckboxElement } from './Checkbox';
 
 describe('Elements: NovoCheckboxElement', () => {
   let fixture;
   let component;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [NovoCheckboxElement],
       imports: [FormsModule],
@@ -18,7 +16,7 @@ describe('Elements: NovoCheckboxElement', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(NovoCheckboxElement);
     component = fixture.debugElement.componentInstance;
-  }));
+  });
   it('should initialize correctly.', () => {
     expect(component).toBeDefined();
   });

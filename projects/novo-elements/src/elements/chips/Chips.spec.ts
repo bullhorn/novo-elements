@@ -1,9 +1,8 @@
-// NG2
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { ComponentUtils, NovoLabelService } from 'novo-elements/services';
+import { tick } from 'novo-testing';
 import { vi } from 'vitest';
-// App
 import { NovoChipsElement } from './Chips';
 import { NovoChipsModule } from './Chips.module';
 
@@ -11,7 +10,7 @@ describe('Elements: NovoChipsElement', () => {
   let fixture: ComponentFixture<NovoChipsElement>;
   let component: NovoChipsElement;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [FormsModule, NovoChipsModule],
       providers: [
@@ -23,7 +22,7 @@ describe('Elements: NovoChipsElement', () => {
     component = fixture.debugElement.componentInstance;
     component.source = { hiddenChipsLimit: 4 };
     fixture.detectChanges();
-  }));
+  });
 
   describe('Method: ngOnInit()', () => {
     it('should initialize correctly', () => {
@@ -82,7 +81,7 @@ describe('Elements: NovoChipsElement', () => {
       } as any;
       component.add({ label: 'Test', value: 'test' });
       expect(component.value).toBe('Test (test)');
-      await new Promise((r) => setTimeout(r, 10));
+      await tick(10);
     });
   });
 
@@ -193,7 +192,7 @@ describe('Elements: NovoChipsElement', () => {
     });
     it('should retrieve items with labels', async () => {
       component.setItems();
-      await new Promise((r) => setTimeout(r, 1));
+      await tick(1);
       const result = await new Promise((resolve) => {
         component._items.subscribe((val) => resolve(val));
       });
@@ -229,7 +228,7 @@ describe('Elements: NovoChipsElement', () => {
         ]),
       };
       component.setItems();
-      await new Promise((r) => setTimeout(r, 1));
+      await tick(1);
       const result = await new Promise((resolve) => {
         component._items.subscribe((val) => resolve(val));
       });

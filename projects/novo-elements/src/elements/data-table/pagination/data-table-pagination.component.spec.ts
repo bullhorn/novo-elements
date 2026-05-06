@@ -1,6 +1,5 @@
-// NG2
 import { ChangeDetectorRef } from '@angular/core';
-import { TestBed, waitForAsync } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { NovoSelectModule } from 'novo-elements/elements/select';
 import { NovoTilesModule } from 'novo-elements/elements/tiles';
@@ -8,13 +7,11 @@ import { NovoLabelService } from 'novo-elements/services';
 import { DataTableState } from '../state/data-table-state.service';
 import { NovoDataTablePagination } from './data-table-pagination.component';
 
-// App
-
 describe('Elements: NovoDataTablePagination', () => {
   let fixture;
   let component;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [NovoDataTablePagination],
       imports: [FormsModule, NovoTilesModule, NovoSelectModule],
@@ -22,7 +19,7 @@ describe('Elements: NovoDataTablePagination', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(NovoDataTablePagination);
     component = fixture.debugElement.componentInstance;
-  }));
+  });
 
   describe('Setter: set page()', () => {
     beforeEach(() => {

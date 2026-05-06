@@ -1,8 +1,6 @@
-// NG2
 import { Renderer2 } from '@angular/core';
-import { TestBed, waitForAsync } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { vi } from 'vitest';
-// App
 import { NovoCKEditorElement } from './CKEditor';
 
 // Extend the global window object with CKEDITOR for tests
@@ -16,7 +14,7 @@ describe('Elements: NovoCKEditorElement', () => {
   let fixture;
   let component;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [NovoCKEditorElement],
       providers: [{ provide: Renderer2, useClass: Renderer2 }],
@@ -28,7 +26,7 @@ describe('Elements: NovoCKEditorElement', () => {
       ENTER_P: 1,
       ENTER_BR: 2,
     };
-  }));
+  });
 
   describe('Method: ngOnDestroy()', () => {
     it('should remove everything if we have an instance of CKEditor', () => {

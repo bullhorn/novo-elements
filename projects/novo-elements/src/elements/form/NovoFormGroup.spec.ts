@@ -1,5 +1,4 @@
 import { vi } from 'vitest';
-// App
 import { NovoFormControl } from './NovoFormControl';
 import { NovoFormGroup } from './NovoFormGroup';
 

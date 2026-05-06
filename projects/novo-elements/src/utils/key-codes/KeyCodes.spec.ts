@@ -1,4 +1,3 @@
-// APP
 import { KeyCodes } from './KeyCodes';
 
 describe('Utils: KeyCodes', () => {

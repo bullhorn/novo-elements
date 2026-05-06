@@ -1,6 +1,5 @@
-// NG2
 import { OverlayModule } from '@angular/cdk/overlay';
-import { TestBed, waitForAsync } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { NovoLabelService } from 'novo-elements/services';
 import { vi } from 'vitest';
 import { CardElement } from './Card';
@@ -10,14 +9,14 @@ describe('Elements: CardElement', () => {
   let fixture;
   let component;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [{ provide: NovoLabelService, useClass: NovoLabelService }],
       imports: [OverlayModule, NovoCardModule],
     }).compileComponents();
     fixture = TestBed.createComponent(CardElement);
     component = fixture.debugElement.componentInstance;
-  }));
+  });
 
   describe('Method: ngOnInit()', () => {
     it('should initialize correctly', () => {

@@ -1,6 +1,4 @@
-// NG2
-import { TestBed, waitForAsync } from '@angular/core/testing';
-// App
+import { TestBed } from '@angular/core/testing';
 import { DateFormatService, NovoLabelService } from 'novo-elements/services';
 import { vi } from 'vitest';
 import { NovoDatePickerModule } from './DatePicker.module';
@@ -10,7 +8,7 @@ describe('Elements: NovoDatePickerInputElement', () => {
   let fixture;
   let component;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       // declarations: [
       //     NovoDatePickerInputElement
@@ -20,7 +18,7 @@ describe('Elements: NovoDatePickerInputElement', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(NovoDatePickerInputElement);
     component = fixture.debugElement.componentInstance;
-  }));
+  });
 
   describe('Method: formatDate()', () => {
     it('should call parseString from the dateFormatService and then dispatchOnChange.', () => {

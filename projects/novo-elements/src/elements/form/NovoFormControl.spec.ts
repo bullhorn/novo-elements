@@ -1,7 +1,5 @@
-// NG
 import { Validators } from '@angular/forms';
 import { vi } from 'vitest';
-// App
 import { NovoFormControl } from './NovoFormControl';
 
 describe('Elements: NovoFormControl', () => {

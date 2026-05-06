@@ -1,12 +1,9 @@
-// NG
 import { OverlayModule } from '@angular/cdk/overlay';
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { inject, TestBed, waitForAsync } from '@angular/core/testing';
-// App
 import { NovoModalService } from 'novo-elements/elements/modal';
 import { NovoToastService } from 'novo-elements/elements/toast';
 import { ComponentUtils, NovoLabelService, OptionsService } from 'novo-elements/services';
-// Vendor
 import { of } from 'rxjs';
 import { vi } from 'vitest';
 import { FieldInteractionApi } from './FieldInteractionApi';

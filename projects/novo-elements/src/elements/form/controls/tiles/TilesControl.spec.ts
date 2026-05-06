@@ -1,4 +1,3 @@
-// APP
 import { TilesControl } from './TilesControl';
 
 describe('Control: TilesControl', () => {

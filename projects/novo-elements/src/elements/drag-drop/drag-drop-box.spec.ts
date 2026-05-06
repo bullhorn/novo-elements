@@ -1,8 +1,6 @@
-// NG2
 import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-// APP
 import { NovoDragBoxParent } from './drag-drop-box';
 import { NovoDragDropModule } from './drag-drop.module';
 

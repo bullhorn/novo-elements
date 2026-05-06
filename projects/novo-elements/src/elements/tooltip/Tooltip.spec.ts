@@ -1,16 +1,13 @@
-// NG2
 import { OverlayModule } from '@angular/cdk/overlay';
 import { Component } from '@angular/core';
-import { TestBed, waitForAsync } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { provideNoopAnimations } from '@angular/platform-browser/animations';
-// App
 import { TooltipDirective } from './Tooltip.directive';
 
 @Component({
   selector: 'test-component',
-  template: `
-    <div tooltip="test" tooltipPosition="right"></div>
+  template: ` <div tooltip="test" tooltipPosition="right"></div>
     <div tooltip="test" [tooltipCloseOnClick]="true" tooltipPosition="right"></div>`,
   standalone: false,
 })
@@ -21,7 +18,7 @@ describe('Elements: TooltipDirective', () => {
   let component;
   let tooltipHost;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TooltipDirective, TestComponent],
       imports: [OverlayModule],
@@ -30,7 +27,7 @@ describe('Elements: TooltipDirective', () => {
     fixture = TestBed.createComponent(TestComponent);
     component = fixture.debugElement.componentInstance;
     tooltipHost = fixture.debugElement.queryAll(By.directive(TooltipDirective));
-  }));
+  });
 
   it('should initialize with defaults', () => {
     expect(component).toBeDefined();
@@ -55,5 +52,4 @@ describe('Elements: TooltipDirective', () => {
       expect(fixture.debugElement.query(By.css('novo-tooltip'))).toBeFalsy();
     });
   });
-
 });

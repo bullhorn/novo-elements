@@ -1,7 +1,6 @@
-// NG2
 import { CdkColumnDef } from '@angular/cdk/table';
 import { ChangeDetectorRef } from '@angular/core';
-import { TestBed, waitForAsync } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { NovoButtonModule } from 'novo-elements/elements/button';
 import { NovoDatePickerModule } from 'novo-elements/elements/date-picker';
@@ -15,13 +14,11 @@ import { NOVO_DATA_TABLE_REF } from '../data-table.token';
 import { DataTableState } from '../state/data-table-state.service';
 import { NovoDataTableCheckboxHeaderCell } from './data-table-checkbox-header-cell.component';
 
-// App
-
 describe('Elements: NovoDataTableCheckboxHeaderCell', () => {
   let fixture;
   let component;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [NovoDataTableCheckboxHeaderCell],
       imports: [FormsModule, NovoTooltipModule, NovoButtonModule, NovoDropdownModule, NovoDatePickerModule],
@@ -46,7 +43,7 @@ describe('Elements: NovoDataTableCheckboxHeaderCell', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(NovoDataTableCheckboxHeaderCell);
     component = fixture.debugElement.componentInstance;
-  }));
+  });
 
   describe('Method: onClick(()', () => {
     beforeEach(() => {

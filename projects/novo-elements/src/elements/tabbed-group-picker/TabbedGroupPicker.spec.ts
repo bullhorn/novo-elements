@@ -1,8 +1,6 @@
-// NG2
 import { TestBed, waitForAsync } from '@angular/core/testing';
 import { ComponentUtils, NovoLabelService } from 'novo-elements/services';
 import { vi } from 'vitest';
-// App
 import { NovoTabbedGroupPickerElement, TabbedGroupPickerQuickSelect, TabbedGroupPickerTab } from './TabbedGroupPicker';
 import { NovoTabbedGroupPickerModule } from './TabbedGroupPicker.module';
 

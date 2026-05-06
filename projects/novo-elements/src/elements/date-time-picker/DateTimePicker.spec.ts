@@ -1,9 +1,7 @@
-// NG2
-import { TestBed, waitForAsync } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { NovoDatePickerModule } from 'novo-elements/elements/date-picker';
 import { NovoTimePickerModule } from 'novo-elements/elements/time-picker';
-// APP
 import { NovoLabelService } from 'novo-elements/services';
 import { vi } from 'vitest';
 import { NovoDateTimePickerElement } from './DateTimePicker';
@@ -12,7 +10,7 @@ describe('Elements: NovoDateTimePickerElement', () => {
   let fixture;
   let component: NovoDateTimePickerElement;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [NovoDateTimePickerElement],
       providers: [{ provide: NovoLabelService, useClass: NovoLabelService }],
@@ -20,7 +18,7 @@ describe('Elements: NovoDateTimePickerElement', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(NovoDateTimePickerElement);
     component = fixture.debugElement.componentInstance;
-  }));
+  });
 
   describe('Method: toggleView()', () => {
     it('should set the componentTabState', () => {

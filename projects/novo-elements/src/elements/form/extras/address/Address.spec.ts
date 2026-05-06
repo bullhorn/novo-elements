@@ -1,12 +1,11 @@
-// NG2
-import { TestBed, waitForAsync } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { NovoPickerModule } from 'novo-elements/elements/picker';
 import { NovoSelectModule } from 'novo-elements/elements/select';
 import { NovoTooltipModule } from 'novo-elements/elements/tooltip';
 import { NovoLabelService } from 'novo-elements/services';
-// App
 import { Helpers } from 'novo-elements/utils';
+import { tick } from 'novo-testing';
 import { vi } from 'vitest';
 import { NovoAddressElement } from './Address';
 
@@ -14,7 +13,7 @@ describe('Elements: NovoAddressElement', () => {
   let fixture;
   let component;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [NovoAddressElement],
       imports: [FormsModule, NovoSelectModule, NovoPickerModule, NovoTooltipModule],
@@ -22,7 +21,7 @@ describe('Elements: NovoAddressElement', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(NovoAddressElement);
     component = fixture.debugElement.componentInstance;
-  }));
+  });
   it('should initialize correctly.', () => {
     expect(component).toBeDefined();
   });
@@ -154,12 +153,12 @@ describe('Elements: NovoAddressElement', () => {
     });
     it('should set config.state.pickerConfig.defaultOptions', async () => {
       component.updateStates();
-      await new Promise((r) => setTimeout(r));
+      await tick();
       expect(component.config.state.pickerConfig.defaultOptions).toEqual(['MA']);
     });
     it('should reset tooltip and un-disable state & setStateLabel', async () => {
       component.updateStates();
-      await new Promise((r) => setTimeout(r));
+      await tick();
       expect(component.tooltip.state).toBeUndefined();
       expect(component.disabled.state).toEqual(false);
       expect(component.setStateLabel).toHaveBeenCalled();
@@ -167,7 +166,7 @@ describe('Elements: NovoAddressElement', () => {
     it('should set tooltip and disable state & set validity of state when there are no state options', async () => {
       vi.spyOn(component, 'stateOptions').mockResolvedValue([]);
       component.updateStates();
-      await new Promise((r) => setTimeout(r));
+      await tick();
       expect(component.tooltip.state).toEqual(component.labels.noStatesForCountry);
       expect(component.disabled.state).toEqual(true);
       expect(component.valid.state).toEqual(false);
@@ -176,12 +175,12 @@ describe('Elements: NovoAddressElement', () => {
       vi.spyOn(component, 'stateOptions').mockResolvedValue([]);
       component.config.state.required = true;
       component.updateStates();
-      await new Promise((r) => setTimeout(r));
+      await tick();
       expect(component.valid.state).toEqual(false);
     });
     it('should emit validityChangeEvent and call onInput for state', async () => {
       component.updateStates();
-      await new Promise((r) => setTimeout(r));
+      await tick();
       expect(component.validityChange.emit).toHaveBeenCalled();
       expect(component.onInput).toHaveBeenCalledWith(null, 'state');
     });

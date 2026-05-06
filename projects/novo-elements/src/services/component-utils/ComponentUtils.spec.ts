@@ -1,15 +1,12 @@
-// APP
-import { waitForAsync } from '@angular/core/testing';
 import { vi } from 'vitest';
 import { ComponentUtils } from './ComponentUtils';
 
 describe('Utils: ComponentUtils', () => {
   let service: ComponentUtils;
 
-  beforeAll(waitForAsync(() => {
-    const resolve = { resolveComponentFactory: ({}) => {} };
+  beforeAll(() => {
     service = new ComponentUtils();
-  }));
+  });
 
   it('function append() should call location.createComponent', () => {
     const location = { createComponent: vi.fn() };

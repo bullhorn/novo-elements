@@ -1,4 +1,3 @@
-// APP
 import {
   DataTableBigDecimalRendererPipe,
   DateTableDateRendererPipe,

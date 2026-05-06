@@ -1,7 +1,5 @@
-// App
 import { DragDropModule } from '@angular/cdk/drag-drop';
-// NG
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NovoLoadingElement } from 'novo-elements/elements/loading';
 import { DecodeURIPipe } from 'novo-elements/pipes';
@@ -18,7 +16,7 @@ describe('Elements: NovoFileInputElement', () => {
     };
   };
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [DragDropModule],
       declarations: [NovoFileInputElement, NovoLoadingElement, DecodeURIPipe],
@@ -29,7 +27,7 @@ describe('Elements: NovoFileInputElement', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(NovoFileInputElement);
     component = fixture.debugElement.componentInstance;
-  }));
+  });
   it('should initialize correctly.', () => {
     expect(component).toBeDefined();
   });

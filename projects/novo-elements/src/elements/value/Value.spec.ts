@@ -1,7 +1,5 @@
-// NG2
-import { TestBed, waitForAsync } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { vi } from 'vitest';
-// App
 import { NOVO_VALUE_THEME, NOVO_VALUE_TYPE, NovoValueElement } from './Value';
 import { NovoValueModule } from './Value.module';
 
@@ -9,13 +7,13 @@ describe('Elements: NovoValueElement', () => {
   let fixture;
   let component: any;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [NovoValueModule],
     }).compileComponents();
     fixture = TestBed.createComponent(NovoValueElement);
     component = fixture.debugElement.componentInstance;
-  }));
+  });
 
   it('should initialize correctly', () => {
     expect(component).toBeTruthy();

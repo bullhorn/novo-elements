@@ -1,4 +1,4 @@
-import { TestBed, waitForAsync } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { vi } from 'vitest';
 import { NovoChipElement } from './Chip';
@@ -8,13 +8,13 @@ describe('Elements: NovoChipElement', () => {
   let fixture;
   let component;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [FormsModule, NovoChipsModule],
     }).compileComponents();
     fixture = TestBed.createComponent(NovoChipElement);
     component = fixture.debugElement.componentInstance;
-  }));
+  });
 
   describe('Method: ngOnInit()', () => {
     it('should initialize correctly', () => {

@@ -1,4 +1,3 @@
-// APP
 import { Deferred } from './Deferred';
 
 describe('Utils: Deferred', () => {

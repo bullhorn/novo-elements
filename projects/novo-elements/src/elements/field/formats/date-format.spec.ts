@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, DebugElement, ElementRef, inject, Renderer2 } from '@angular/core';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ControlValueAccessor, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { DateFormatService, NovoLabelService } from 'novo-elements/services';
@@ -53,7 +53,7 @@ describe('NovoDateFormatDirective', () => {
   let labelService: NovoLabelService;
   let input: HTMLInputElement;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [NovoDateFormatDirective, DateFormatTestComponent],
       imports: [FormsModule, ReactiveFormsModule],
@@ -61,7 +61,7 @@ describe('NovoDateFormatDirective', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(DateFormatTestComponent);
     labelService = TestBed.inject(NovoLabelService);
-  }));
+  });
 
   beforeEach(() => {
     fixture.detectChanges();

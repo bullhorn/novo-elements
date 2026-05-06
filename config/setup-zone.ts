@@ -5,10 +5,8 @@ import 'zone.js/testing';
 
 /**
  * Patch Vitest's describe/test/beforeEach/afterEach functions so test code
- * always runs in a testZone (ProxyZone). This is required for fakeAsync/tick
- * to work in Vitest.
- *
- * Inlined from @analogjs/vitest-angular/setup-zone to avoid peer dep conflicts.
+ * always runs in a testZone (ProxyZone). This is required for Angular's
+ * waitForAsync to work in Vitest.
  */
 const Zone = (globalThis as any)['Zone'];
 
@@ -43,23 +41,15 @@ function wrapDescribeInZone(describeBody: any) {
 
 const testProxyZone = ambientZone.fork(new ProxyZoneSpec());
 function wrapTestInZone(testBody: any) {
-  if (testBody === undefined) {
-    return;
-  }
+  if (testBody === undefined) return;
   const wrappedFunc = function () {
     return testProxyZone.run(testBody, null, arguments);
   };
   try {
-    Object.defineProperty(wrappedFunc, 'length', {
-      configurable: true,
-      writable: true,
-      enumerable: false,
-    });
+    Object.defineProperty(wrappedFunc, 'length', { configurable: true, writable: true, enumerable: false });
     wrappedFunc.length = testBody.length;
   } catch (e) {
-    return testBody.length === 0
-      ? () => testProxyZone.run(testBody, null)
-      : (done: any) => testProxyZone.run(testBody, null, [done]);
+    return testBody.length === 0 ? () => testProxyZone.run(testBody, null) : (done: any) => testProxyZone.run(testBody, null, [done]);
   }
   return wrappedFunc;
 }

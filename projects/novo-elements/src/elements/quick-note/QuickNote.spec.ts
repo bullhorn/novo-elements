@@ -1,9 +1,7 @@
-// NG2
-import { fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { ComponentUtils } from 'novo-elements/services';
 import { Key, KeyCodes } from 'novo-elements/utils';
-// App
 import { QuickNoteElement } from './QuickNote';
 
 declare global {
@@ -161,11 +159,11 @@ describe('Elements: QuickNoteElement', () => {
         this.currentWord = '';
         this.previousWord = value;
         this.changeEvent();
-        tick(251);
+        // tick(251) removed - tests are skipped
       },
       userPausedAfterEntry: function (): void {
         this.changeEvent();
-        tick(251);
+        // tick(251) removed - tests are skipped
       },
       on: function (name: string, callback: any): void {
         if (name === 'key') {
@@ -307,7 +305,7 @@ describe('Elements: QuickNoteElement', () => {
   });
 
   describe.skip('QuickNote Functionality', () => {
-    it('should add the selected item to the list of references and populate note.', fakeAsync(() => {
+    it('should add the selected item to the list of references and populate note.', async () => {
       fakeCkEditorInstance.valueSetByUser('Note about: ');
       fakeCkEditorInstance.keyEnteredByUser('@');
       fakeCkEditorInstance.keyEnteredByUser('j');
@@ -345,9 +343,9 @@ describe('Elements: QuickNoteElement', () => {
       fakeCkEditorInstance.valueSetByUser('');
 
       expect(fakeParentForm.getValue()).toEqual(null);
-    }));
+    });
 
-    it('should remove references from the model when their rendered text is removed from the note.', fakeAsync(() => {
+    it('should remove references from the model when their rendered text is removed from the note.', async () => {
       fakeCkEditorInstance.valueSetByUser('Note about: ');
       fakeCkEditorInstance.keyEnteredByUser('@');
       fakeCkEditorInstance.keyEnteredByUser('j');
@@ -399,9 +397,9 @@ describe('Elements: QuickNoteElement', () => {
           ],
         },
       });
-    }));
+    });
 
-    it('should not add duplicate references to the model.', fakeAsync(() => {
+    it('should not add duplicate references to the model.', async () => {
       fakeCkEditorInstance.valueSetByUser('Note about: ');
       fakeCkEditorInstance.keyEnteredByUser('@');
       fakeCkEditorInstance.keyEnteredByUser('j');
@@ -445,9 +443,9 @@ describe('Elements: QuickNoteElement', () => {
           ],
         },
       });
-    }));
+    });
 
-    it('should handle some keyboard events within resultsComponent.', fakeAsync(() => {
+    it('should handle some keyboard events within resultsComponent.', async () => {
       fakeCkEditorInstance.valueSetByUser('Note about: ');
       fakeCkEditorInstance.keyEnteredByUser('@');
       fakeCkEditorInstance.keyEnteredByUser('j');
@@ -487,9 +485,9 @@ describe('Elements: QuickNoteElement', () => {
       fakeCkEditorInstance.keyEnteredByUser(Key.Enter, KeyCodes.ENTER);
 
       expect(fakeResultsDropdown.visible).toBe(false);
-    }));
+    });
 
-    it('should hide resultsComponent when @ is backspaced over.', fakeAsync(() => {
+    it('should hide resultsComponent when @ is backspaced over.', async () => {
       fakeCkEditorInstance.valueSetByUser('Note about: ');
       fakeCkEditorInstance.keyEnteredByUser('@');
       fakeCkEditorInstance.keyEnteredByUser('j');
@@ -508,9 +506,9 @@ describe('Elements: QuickNoteElement', () => {
       fakeCkEditorInstance.userPausedAfterEntry();
 
       expect(fakeResultsDropdown.visible).toBe(true);
-    }));
+    });
 
-    it('should handle searching with spaces.', fakeAsync(() => {
+    it('should handle searching with spaces.', async () => {
       fakeCkEditorInstance.valueSetByUser('Note about: ');
       fakeCkEditorInstance.keyEnteredByUser('@');
       fakeCkEditorInstance.keyEnteredByUser('j');
@@ -535,9 +533,9 @@ describe('Elements: QuickNoteElement', () => {
           ],
         },
       });
-    }));
+    });
 
-    it('should handle searching with a space afterwards.', fakeAsync(() => {
+    it('should handle searching with a space afterwards.', async () => {
       fakeCkEditorInstance.valueSetByUser('Note about: ');
       fakeCkEditorInstance.keyEnteredByUser('@');
       fakeCkEditorInstance.keyEnteredByUser('j');
@@ -560,9 +558,9 @@ describe('Elements: QuickNoteElement', () => {
           ],
         },
       });
-    }));
+    });
 
-    it('should show/hide placeholder text properly.', fakeAsync(() => {
+    it('should show/hide placeholder text properly.', async () => {
       fakeCkEditorInstance.valueSetByUser('');
 
       expect(fakeCkEditorInstance.isPlaceholderVisible()).toBe(true);
@@ -586,6 +584,6 @@ describe('Elements: QuickNoteElement', () => {
       fakeCkEditorInstance.blurByUser();
 
       expect(fakeCkEditorInstance.isPlaceholderVisible()).toBe(true);
-    }));
+    });
   });
 });

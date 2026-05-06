@@ -1,5 +1,4 @@
 import { vi } from 'vitest';
-// APP
 import { NovoLabelService } from '../novo-label-service';
 import { DateFormatService } from './DateFormat';
 
@@ -367,7 +366,7 @@ describe('Service: DateFormatService', () => {
     it('should fail on mismatched day-of-month format', () => {
       const value = 'Fri Dec 05, 2023';
       const format = 'ddd MMM D, YYYY';
-      const [, , isInvalidDate] = service.parseCustomDateString(value, format);
+      const [, isInvalidDate] = service.parseCustomDateString(value, format);
       expect(isInvalidDate).toBeTruthy();
     });
   });

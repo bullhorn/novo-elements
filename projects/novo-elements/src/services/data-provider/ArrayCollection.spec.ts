@@ -1,4 +1,3 @@
-// APP
 import { ArrayCollection } from './ArrayCollection';
 import { Collection } from './Collection';
 

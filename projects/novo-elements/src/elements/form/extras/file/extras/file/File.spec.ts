@@ -1,5 +1,4 @@
 import { vi } from 'vitest';
-// APP
 import { NovoFile } from './File';
 
 describe('Class: NovoFile', () => {
