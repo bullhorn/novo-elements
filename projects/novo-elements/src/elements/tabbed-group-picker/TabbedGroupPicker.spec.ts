@@ -1,4 +1,4 @@
-import { TestBed, waitForAsync } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { ComponentUtils, NovoLabelService } from 'novo-elements/services';
 import { vi } from 'vitest';
 import { NovoTabbedGroupPickerElement, TabbedGroupPickerQuickSelect, TabbedGroupPickerTab } from './TabbedGroupPicker';
@@ -19,14 +19,14 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
     ],
   });
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [{ provide: ComponentUtils, useClass: ComponentUtils }, NovoLabelService],
       imports: [NovoTabbedGroupPickerModule],
     }).compileComponents();
     fixture = TestBed.createComponent(NovoTabbedGroupPickerElement);
     component = fixture.debugElement.componentInstance;
-  }));
+  });
 
   it('should initialize correctly', () => {
     expect(component).toBeTruthy();

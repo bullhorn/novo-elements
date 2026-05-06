@@ -1,6 +1,6 @@
 import { OverlayModule } from '@angular/cdk/overlay';
 import { HttpClient, HttpHandler } from '@angular/common/http';
-import { inject, TestBed, waitForAsync } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { NovoModalService } from 'novo-elements/elements/modal';
 import { NovoToastService } from 'novo-elements/elements/toast';
 import { ComponentUtils, NovoLabelService, OptionsService } from 'novo-elements/services';
@@ -12,7 +12,7 @@ import { FormUtils } from './utils/FormUtils';
 
 describe('FieldInteractionApi', () => {
   let service: FieldInteractionApi;
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [OverlayModule],
       providers: [
@@ -34,17 +34,17 @@ describe('FieldInteractionApi', () => {
         HttpClient,
       ],
     });
-  }));
+  });
 
   let triggerEvent;
   let setProperty;
 
-  beforeEach(inject([FieldInteractionApi], (_service) => {
-    service = _service;
+  beforeEach(() => {
+    service = TestBed.inject(FieldInteractionApi);
     service.form = { controls: { doughnuts: { restrictFieldInteractions: false } } };
     triggerEvent = vi.spyOn(service as any, 'triggerEvent');
     setProperty = vi.spyOn(service as any, 'setProperty');
-  }));
+  });
 
   describe('Function: addPropertiesToPickerConfig', () => {
     it('adds properties to a picker config without deleting any', () => {

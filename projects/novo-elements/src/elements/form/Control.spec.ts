@@ -10,7 +10,8 @@ import {
   NO_ERRORS_SCHEMA,
   OnInit,
 } from '@angular/core';
-import { ComponentFixture, fakeAsync, inject, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { tick } from 'novo-testing';
 import { By } from '@angular/platform-browser';
 import { IMaskModule } from 'angular-imask';
 import { NovoElementsModule } from 'novo-elements';
@@ -60,7 +61,7 @@ describe('Elements: NovoAutoSize', () => {
     let component;
     let textarea: HTMLTextAreaElement;
 
-    beforeEach(waitForAsync(() => {
+    beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [OverlayModule],
         declarations: [NovoAutoSize, NovoAutoSizeTestComponent],
@@ -68,7 +69,7 @@ describe('Elements: NovoAutoSize', () => {
       fixture = TestBed.createComponent(NovoAutoSizeTestComponent);
       component = fixture.debugElement.componentInstance;
       textarea = fixture.debugElement.query(By.css('textarea')).nativeElement;
-    }));
+    });
 
     it('should initialize correctly', () => {
       expect(component).toBeTruthy();
@@ -286,7 +287,7 @@ describe('NovoControlElement', () => {
   });
 
   describe('Function: executeInteraction()', () => {
-    it('should setup fieldInteraction api with form and current key', fakeAsync(() => {
+    it('should setup fieldInteraction api with form and current key', async () => {
       component.control = {
         key: 'newField',
       };
@@ -301,11 +302,11 @@ describe('NovoControlElement', () => {
         script: () => {},
       };
       component.executeInteraction(interaction);
-      tick();
+      await tick();
       expect((component as any).fieldInteractionApi.form).toEqual(component.form);
       expect((component as any).fieldInteractionApi.currentKey).toEqual('newField');
       expect((component as any).fieldInteractionApi.invokeOnInit).toBeFalsy();
-    }));
+    });
   });
 
   describe('Function: updateValidity', () => {
@@ -1276,7 +1277,7 @@ describe('Novo Control with Templates', () => {
     }
   });
 
-  function makeControl(control: BaseControl) {
+  async function makeControl(control: BaseControl) {
     try {
       testComponent.control = control;
       fixture.detectChanges();
@@ -1287,7 +1288,7 @@ describe('Novo Control with Templates', () => {
       // Calling ngAfterContentInit directly, from this zone context, causes it to run fine, but doesn't match browser execution flow.
       // In the case of this test, we won't have harm in running it twice, but we are in need of a fix that correctly runs these.
       component.ngAfterContentInit();
-      tick();
+      await tick();
       fixture.detectChanges();
     } catch (err) {
       console.error(err);
@@ -1297,15 +1298,16 @@ describe('Novo Control with Templates', () => {
 
   describe('Text template', () => {
     let inputDebug: DebugElement;
-    beforeEach(fakeAsync(() => {
-      makeControl(new TextBoxControl({ key: 'text', label: 'Text Box' }));
+    beforeEach(async () => {
+      await makeControl(new TextBoxControl({ key: 'text', label: 'Text Box' }));
       inputDebug = fixture.debugElement.query(By.css('input'));
-    }));
+    });
 
-    it('should finish readying templates', inject([NovoTemplateService], (templateService: NovoTemplateService) => {
+    it('should finish readying templates', () => {
+      const templateService = TestBed.inject(NovoTemplateService);
       expect(Object.keys(templateService.getAll()).length).toBeGreaterThan(20);
       expect(component.loading).toBeFalsy();
-    }));
+    });
 
     // TODO: What should the (change) event value be? On text values it appears to be the { KeyboardEvent }. On chips, it will be the value.
     it('should receive change event', () => {
@@ -1337,10 +1339,10 @@ describe('Novo Control with Templates', () => {
 
   describe('Text template - Maxlength', () => {
     let inputDebug: DebugElement;
-    beforeEach(fakeAsync(() => {
-      makeControl(new TextBoxControl({ key: 'text', label: 'Text Box', maxlength: 20 }));
+    beforeEach(async () => {
+      await makeControl(new TextBoxControl({ key: 'text', label: 'Text Box', maxlength: 20 }));
       inputDebug = fixture.debugElement.query(By.css('input'));
-    }));
+    });
 
     it('should prevent changes beyond maxlength', () => {
       expect(inputDebug.query(By.css('.error-text'))).toBeFalsy();
@@ -1355,8 +1357,8 @@ describe('Novo Control with Templates', () => {
 
   describe('Text template - Mask', () => {
     let inputDebug: DebugElement;
-    beforeEach(fakeAsync(() => {
-      makeControl(
+    beforeEach(async () => {
+      await makeControl(
         new TextBoxControl({
           key: 'text',
           label: 'Text Box',
@@ -1369,12 +1371,13 @@ describe('Novo Control with Templates', () => {
         }),
       );
       inputDebug = fixture.debugElement.query(By.css('input'));
-    }));
+    });
 
-    it('should finish readying templates', inject([NovoTemplateService], (templateService: NovoTemplateService) => {
+    it('should finish readying templates', () => {
+      const templateService = TestBed.inject(NovoTemplateService);
       expect(Object.keys(templateService.getAll()).length).toBeGreaterThan(20);
       expect(component.loading).toBeFalsy();
-    }));
+    });
 
     it('should ignore native change event', () => {
       let lastChange: any;
@@ -1399,8 +1402,8 @@ describe('Novo Control with Templates', () => {
 
   describe('Picker (Multiple) Control', () => {
     let chipsDebug: DebugElement;
-    beforeEach(fakeAsync(() => {
-      makeControl(
+    beforeEach(async () => {
+      await makeControl(
         new PickerControl({
           key: 'chips',
           label: 'Chips Picker',
@@ -1411,7 +1414,7 @@ describe('Novo Control with Templates', () => {
         }),
       );
       chipsDebug = fixture.debugElement.query(By.css('novo-chips'));
-    }));
+    });
 
     it('should receive change event', () => {
       let lastChange: any;
@@ -1427,15 +1430,15 @@ describe('Novo Control with Templates', () => {
 
   describe('DatePicker Control', () => {
     let datePickerDebug: DebugElement;
-    beforeEach(fakeAsync(() => {
-      makeControl(
+    beforeEach(async () => {
+      await makeControl(
         new DateControl({
           key: 'datetime',
           label: 'Date picker',
         }),
       );
       datePickerDebug = fixture.debugElement.query(By.css('novo-date-picker-input'));
-    }));
+    });
 
     it('should receive change event', () => {
       let lastChange: any;
@@ -1450,15 +1453,15 @@ describe('Novo Control with Templates', () => {
   // address does not emit its change event. This might be a bug.
   describe.skip('Address Control', () => {
     let addressDebug: DebugElement;
-    beforeEach(fakeAsync(() => {
-      makeControl(
+    beforeEach(async () => {
+      await makeControl(
         new AddressControl({
           key: 'address',
           label: 'Address entry',
         }),
       );
       addressDebug = fixture.debugElement.query(By.css('novo-address'));
-    }));
+    });
 
     it('should receive change event?', () => {
       let lastChange: any;
@@ -1473,15 +1476,15 @@ describe('Novo Control with Templates', () => {
   // checkbox does not emit its change event. This might be a bug.
   describe.skip('Checkbox Control', () => {
     let checkboxDebug: DebugElement;
-    beforeEach(fakeAsync(() => {
-      makeControl(
+    beforeEach(async () => {
+      await makeControl(
         new CheckboxControl({
           key: 'checkbox',
           label: 'True/False',
         }),
       );
       checkboxDebug = fixture.debugElement.query(By.css('novo-checkbox'));
-    }));
+    });
 
     it('should receive change event', () => {
       let lastChange: any;
@@ -1495,15 +1498,15 @@ describe('Novo Control with Templates', () => {
 
   describe('Checklist Control', () => {
     let checklistDebug: DebugElement;
-    beforeEach(fakeAsync(() => {
-      makeControl(
+    beforeEach(async () => {
+      await makeControl(
         new CheckListControl({
           key: 'checkbox',
           label: 'To Do',
         }),
       );
       checklistDebug = fixture.debugElement.query(By.css('novo-check-list'));
-    }));
+    });
 
     it('should receive change event', () => {
       let lastChange: any;
@@ -1517,8 +1520,8 @@ describe('Novo Control with Templates', () => {
 
   describe('Native Input Control', () => {
     let nativeInputDebug: DebugElement;
-    beforeEach(fakeAsync(() => {
-      makeControl(
+    beforeEach(async () => {
+      await makeControl(
         new CustomControl({
           key: 'native-input',
           template: 'native-input',
@@ -1527,7 +1530,7 @@ describe('Novo Control with Templates', () => {
         }),
       );
       nativeInputDebug = fixture.debugElement.query(By.css('input'));
-    }));
+    });
 
     it('should receive change event', () => {
       let lastChange: any;

@@ -1,4 +1,4 @@
-import { inject, TestBed, waitForAsync } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { FormGroup } from '@angular/forms';
 import { NovoLabelService, OptionsService } from 'novo-elements/services';
 import { from } from 'rxjs';
@@ -46,7 +46,7 @@ function createAddress(address1, city, state, zip, countryName) {
 describe('Utils: FormUtils', () => {
   let formUtils;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     const optionsService = {
       getOptionEntity: () => {
         return '';
@@ -60,9 +60,9 @@ describe('Utils: FormUtils', () => {
         return {};
       },
     };
-  }));
+  });
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
         {
@@ -76,11 +76,11 @@ describe('Utils: FormUtils', () => {
         OptionsService,
       ],
     });
-  }));
+  });
 
-  beforeEach(inject([FormUtils], (_service) => {
-    formUtils = _service;
-  }));
+  beforeEach(() => {
+    formUtils = TestBed.inject(FormUtils);
+  });
   describe('Method: toFormGroup(controls)', () => {
     it('should create a FormGroup from a collection of controls.', () => {
       expect(formUtils.toFormGroup).toBeDefined();
