@@ -223,8 +223,6 @@ export default defineConfig({
     alias: [
       { find: /^novo-elements\/(.+)$/, replacement: resolve(__dirname, 'projects/novo-elements/src/$1') },
       { find: /^novo-elements$/, replacement: resolve(__dirname, 'projects/novo-elements/src/index') },
-      { find: /^novo-examples\/(.+)$/, replacement: resolve(__dirname, 'projects/novo-examples/src/$1') },
-      { find: /^novo-examples$/, replacement: resolve(__dirname, 'projects/novo-examples/src/index') },
       { find: /^novo-testing$/, replacement: resolve(__dirname, 'testing/tick') },
     ],
   },

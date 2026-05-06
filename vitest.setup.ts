@@ -76,19 +76,6 @@ trackListeners(document);
 // Polyfills & Browser APIs
 // ==============================================================================
 
-(globalThis as any).ngDevMode = true;
-
-try {
-  Object.defineProperty(window, 'CSS', { value: null });
-} catch {
-  /* Already defined */
-}
-
-try {
-  Object.defineProperty(document, 'doctype', { value: '<!DOCTYPE html>' });
-} catch {
-  /* Already defined */
-}
 
 if (!window.ResizeObserver) {
   Object.defineProperty(window, 'ResizeObserver', {
@@ -100,15 +87,6 @@ if (!window.ResizeObserver) {
   });
 }
 
-if (!window.IntersectionObserver) {
-  Object.defineProperty(window, 'IntersectionObserver', {
-    value: class IntersectionObserver {
-      observe() {}
-      unobserve() {}
-      disconnect() {}
-    },
-  });
-}
 
 // Force-override MutationObserver — happy-dom's implementation doesn't fully work
 // with Angular CDK's OverlayRef._detachContentWhenEmpty
@@ -124,10 +102,6 @@ Object.defineProperty(window, 'MutationObserver', {
   },
 });
 
-// Polyfill window.event
-if (typeof (globalThis as any).event === 'undefined') {
-  (globalThis as any).event = undefined;
-}
 
 // Polyfill deprecated createEvent/initMouseEvent (used by data-table specs)
 const _origCreateEvent = document.createEvent.bind(document);
@@ -162,7 +136,7 @@ const _origCreateEvent = document.createEvent.bind(document);
   return _origCreateEvent(type);
 };
 
-// Polyfill FileReader.readAsDataURL
+// Polyfill FileReader.readAsDataURL (not implemented in happy-dom)
 if (typeof FileReader !== 'undefined' && !FileReader.prototype.readAsDataURL) {
   FileReader.prototype.readAsDataURL = function (_blob: Blob) {
     setTimeout(() => {
