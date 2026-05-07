@@ -93,7 +93,9 @@ export class NovoInput extends NovoInputBase implements NovoFieldControl<any>, O
    */
   focused: boolean = false;
 
-  errorState: boolean = false;
+  get errorState(): boolean {
+    return this.ngControl && this.ngControl.invalid && (this.ngControl.dirty || this.ngControl.touched) || false;
+  }
 
   /** @docs-private Implemented as part of NovoFieldControl. */
   lastKeyValue: string = null;
