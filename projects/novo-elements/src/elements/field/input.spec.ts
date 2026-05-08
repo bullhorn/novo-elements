@@ -1,5 +1,5 @@
 import { Component, DebugElement } from '@angular/core';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { AutofillMonitor } from '@angular/cdk/text-field';
@@ -27,21 +27,19 @@ describe('Directive: NovoInput', () => {
   let inputDebugElement: DebugElement;
   let novoInput: NovoInput;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [NovoInput, TestComponent],
-        imports: [ReactiveFormsModule],
-        providers: [AutofillMonitor],
-      }).compileComponents();
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [NovoInput, TestComponent],
+      imports: [ReactiveFormsModule],
+      providers: [AutofillMonitor],
+    }).compileComponents();
 
-      fixture = TestBed.createComponent(TestComponent);
-      component = fixture.componentInstance;
-      inputDebugElement = fixture.debugElement.query(By.directive(NovoInput));
-      novoInput = inputDebugElement.injector.get(NovoInput);
-      fixture.detectChanges();
-    }),
-  );
+    fixture = TestBed.createComponent(TestComponent);
+    component = fixture.componentInstance;
+    inputDebugElement = fixture.debugElement.query(By.directive(NovoInput));
+    novoInput = inputDebugElement.injector.get(NovoInput);
+    fixture.detectChanges();
+  });
 
   describe('errorState', () => {
     it('should be false when control is valid', () => {
