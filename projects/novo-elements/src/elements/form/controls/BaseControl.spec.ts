@@ -1,4 +1,3 @@
-// APP
 import { BaseControl } from './BaseControl';
 
 const testTextMaskOptions = /^TEST_MASK_OPTIONS$/;

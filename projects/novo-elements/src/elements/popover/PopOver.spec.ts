@@ -1,7 +1,5 @@
-// NG2
 import { Component, ComponentFactory, ComponentFactoryResolver } from '@angular/core';
-import { waitForAsync, TestBed } from '@angular/core/testing';
-// App
+import { TestBed } from '@angular/core/testing';
 import { PopOverDirective } from './PopOver';
 
 @Component({
@@ -16,13 +14,13 @@ describe('Elements: PopOverDirective', () => {
     let fixture;
     let directive;
 
-    beforeEach(waitForAsync(() => {
+    beforeEach(() => {
       TestBed.configureTestingModule({
         declarations: [PopOverDirective, TestComponent],
       }).compileComponents();
       fixture = TestBed.createComponent(TestComponent);
       directive = fixture.debugElement.componentInstance;
-    }));
+    });
 
     it('should initialize correctly', () => {
       expect(directive).toBeTruthy();

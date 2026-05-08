@@ -1,4 +1,3 @@
-// APP
 import { EditorControl } from './EditorControl';
 
 describe('Control: EditorControl', () => {

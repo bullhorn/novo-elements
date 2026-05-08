@@ -1,9 +1,9 @@
-// NG2
-import { waitForAsync, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { ComponentUtils } from 'novo-elements/services';
+import { tick } from 'novo-testing';
+import { vi } from 'vitest';
 import { PickerResults } from './extras/picker-results/PickerResults';
-// App
 import { NovoPickerElement } from './Picker';
 import { NovoPickerModule } from './Picker.module';
 
@@ -11,14 +11,14 @@ describe('Elements: NovoPickerElement', () => {
   let fixture;
   let component;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [{ provide: ComponentUtils, useClass: ComponentUtils }],
       imports: [FormsModule, NovoPickerModule],
     }).compileComponents();
     fixture = TestBed.createComponent(NovoPickerElement);
     component = fixture.debugElement.componentInstance;
-  }));
+  });
 
   it('should initialize correctly', () => {
     expect(component).toBeTruthy();
@@ -77,15 +77,15 @@ describe('Elements: NovoPickerElement', () => {
     });
     it('sets the value to null when the picker input is cleared out', () => {
       component._value = '123';
-      spyOn(component, 'onModelChange');
+      vi.spyOn(component, 'onModelChange');
       component.checkTerm('');
       expect(component._value).toEqual(null);
       expect(component.onModelChange).toHaveBeenCalled();
     });
     it('does not register a change if there is no value set', () => {
       component._value = null;
-      spyOn(component, 'onModelChange');
-      spyOn(component.ref, 'markForCheck');
+      vi.spyOn(component, 'onModelChange');
+      vi.spyOn(component.ref, 'markForCheck');
       component.checkTerm('');
       expect(component.onModelChange).not.toHaveBeenCalled();
       expect(component.ref.markForCheck).toHaveBeenCalled();
@@ -162,7 +162,7 @@ describe('Elements: NovoPickerElement', () => {
       component.writeValue({ title: 'TITLE' });
       expect(component.term).toEqual('TITLE');
     });
-    it('should use getLabels for a number if present.', fakeAsync(() => {
+    it('should use getLabels for a number if present.', async () => {
       component.config = {
         getLabels: () =>
           new Promise((resolve) => {
@@ -170,10 +170,10 @@ describe('Elements: NovoPickerElement', () => {
           }),
       };
       component.writeValue(123);
-      tick();
+      await tick();
       expect(component.term).toEqual('DYNAMIC_LABEL');
-    }));
-    it('should use getLabels for a number array if present.', fakeAsync(() => {
+    });
+    it('should use getLabels for a number array if present.', async () => {
       component.config = {
         getLabels: () =>
           new Promise((resolve) => {
@@ -181,10 +181,10 @@ describe('Elements: NovoPickerElement', () => {
           }),
       };
       component.writeValue([123, 456, 789]);
-      tick();
+      await tick();
       expect(component.term).toEqual('DYNAMIC_LABEL');
-    }));
-    it('should use getLabels for a complex object if present.', fakeAsync(() => {
+    });
+    it('should use getLabels for a complex object if present.', async () => {
       component.config = {
         getLabels: () =>
           new Promise((resolve) => {
@@ -192,10 +192,10 @@ describe('Elements: NovoPickerElement', () => {
           }),
       };
       component.writeValue({ id: 123 });
-      tick();
+      await tick();
       expect(component.term).toEqual('DYNAMIC_LABEL');
-    }));
-    it('should use getLabels for a complex object if present - default value.', fakeAsync(() => {
+    });
+    it('should use getLabels for a complex object if present - default value.', async () => {
       component.config = {
         getLabels: () =>
           new Promise((resolve) => {
@@ -203,10 +203,10 @@ describe('Elements: NovoPickerElement', () => {
           }),
       };
       component.writeValue({ id: 123 });
-      tick();
+      await tick();
       expect(component.term).toEqual('');
-    }));
-    it('should use getLabels for a complex object if present - missing value.', fakeAsync(() => {
+    });
+    it('should use getLabels for a complex object if present - missing value.', async () => {
       component.config = {
         getLabels: () =>
           new Promise((resolve) => {
@@ -214,10 +214,10 @@ describe('Elements: NovoPickerElement', () => {
           }),
       };
       component.writeValue({ id: 123 });
-      tick();
+      await tick();
       expect(component.term).toEqual({ id: 123 });
-    }));
-    it('should use getLabels for a complex object if present - missing value.', fakeAsync(() => {
+    });
+    it('should use getLabels for a complex object if present - missing value.', async () => {
       component.config = {
         getLabels: () =>
           new Promise((resolve) => {
@@ -225,10 +225,10 @@ describe('Elements: NovoPickerElement', () => {
           }),
       };
       component.writeValue({ id: 123 });
-      tick();
+      await tick();
       expect(component.term).toEqual({ id: 123 });
-    }));
-    it('should call getLabels for array values that parse to integers if getLabels is present.', fakeAsync(() => {
+    });
+    it('should call getLabels for array values that parse to integers if getLabels is present.', async () => {
       component.config = {
         getLabels: () =>
           new Promise((resolve) => {
@@ -236,10 +236,10 @@ describe('Elements: NovoPickerElement', () => {
           }),
       };
       component.writeValue(['123']);
-      tick();
+      await tick();
       expect(component.term).toEqual('DYNAMIC LABEL');
-    }));
-    it('should call getLabels for multiple array values that parse to integers if getLabels is present.', fakeAsync(() => {
+    });
+    it('should call getLabels for multiple array values that parse to integers if getLabels is present.', async () => {
       component.config = {
         getLabels: () =>
           new Promise((resolve) => {
@@ -247,10 +247,10 @@ describe('Elements: NovoPickerElement', () => {
           }),
       };
       component.writeValue(['123', '345', '678']);
-      tick();
+      await tick();
       expect(component.term).toEqual('DYNAMIC LABEL');
-    }));
-    it('should call getLabels for string value if useGetLabels flag is present.', fakeAsync(() => {
+    });
+    it('should call getLabels for string value if useGetLabels flag is present.', async () => {
       component.config = {
         useGetLabels: true,
         getLabels: () =>
@@ -259,10 +259,10 @@ describe('Elements: NovoPickerElement', () => {
           }),
       };
       component.writeValue('New Value');
-      tick();
+      await tick();
       expect(component.term).toEqual('DYNAMIC LABEL');
-    }));
-    it('should not call getLabels for string value if useGetLabels is not present.', fakeAsync(() => {
+    });
+    it('should not call getLabels for string value if useGetLabels is not present.', async () => {
       component.config = {
         getLabels: () =>
           new Promise((resolve) => {
@@ -270,10 +270,10 @@ describe('Elements: NovoPickerElement', () => {
           }),
       };
       component.writeValue('New Value');
-      tick();
+      await tick();
       expect(component.term).toEqual('New Value');
-    }));
-    it('should handle getLabels that returns an array by using the first array element.', fakeAsync(() => {
+    });
+    it('should handle getLabels that returns an array by using the first array element.', async () => {
       component.config = {
         getLabels: () =>
           new Promise((resolve) => {
@@ -281,10 +281,10 @@ describe('Elements: NovoPickerElement', () => {
           }),
       };
       component.writeValue(123);
-      tick();
+      await tick();
       expect(component.term).toEqual('DYNAMIC LABEL');
-    }));
-    it('should handle getLabels that returns an array by using the first array element - empty string case.', fakeAsync(() => {
+    });
+    it('should handle getLabels that returns an array by using the first array element - empty string case.', async () => {
       component.config = {
         getLabels: () =>
           new Promise((resolve) => {
@@ -292,16 +292,16 @@ describe('Elements: NovoPickerElement', () => {
           }),
       };
       component.writeValue(123);
-      tick();
+      await tick();
       expect(component.term).toEqual('');
-    }));
+    });
     it('should markForCheck once when not calling getLabels()', () => {
-      jest.spyOn(component.ref, 'markForCheck').mockImplementation(() => {});
+      vi.spyOn(component.ref, 'markForCheck').mockImplementation(() => {});
       component.writeValue('123');
       expect(component.ref.markForCheck).toHaveBeenCalledTimes(1);
     });
-    it('should markForCheck when getLabels() completes', fakeAsync(() => {
-      jest.spyOn(component.ref, 'markForCheck').mockImplementation(() => {});
+    it('should markForCheck when getLabels() completes', async () => {
+      vi.spyOn(component.ref, 'markForCheck').mockImplementation(() => {});
       component.config = {
         getLabels: () =>
           new Promise((resolve) => {
@@ -309,9 +309,9 @@ describe('Elements: NovoPickerElement', () => {
           }),
       };
       component.writeValue(123);
-      tick();
+      await tick();
       expect(component.ref.markForCheck).toHaveBeenCalledTimes(2);
-    }));
+    });
   });
 
   describe('clearValue', () => {
@@ -324,13 +324,13 @@ describe('Elements: NovoPickerElement', () => {
         },
       };
       component.select = {
-        emit: jest.fn(),
+        emit: vi.fn(),
       } as unknown;
       component.changed = {
-        emit: jest.fn(),
+        emit: vi.fn(),
       } as unknown;
-      spyOn(component, 'onModelChange');
-      spyOn(component, 'hideResults');
+      vi.spyOn(component, 'onModelChange');
+      vi.spyOn(component, 'hideResults');
     });
 
     it('should clear the value, emit the new value, and optionally clear the term', () => {

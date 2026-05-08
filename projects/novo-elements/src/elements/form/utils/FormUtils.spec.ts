@@ -1,9 +1,8 @@
-// NG2
-import { waitForAsync, inject, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { FormGroup } from '@angular/forms';
-// Vendor
+import { NovoLabelService, OptionsService } from 'novo-elements/services';
 import { from } from 'rxjs';
-// APP
+import { vi } from 'vitest';
 import {
   AddressControl,
   CheckboxControl,
@@ -24,7 +23,6 @@ import {
 } from '../FormControls';
 import { FormField } from '../FormInterfaces';
 import { NovoFormControl } from '../NovoFormControl';
-import { NovoLabelService, OptionsService } from 'novo-elements/services';
 import { FormUtils } from './FormUtils';
 
 /**
@@ -48,7 +46,7 @@ function createAddress(address1, city, state, zip, countryName) {
 describe('Utils: FormUtils', () => {
   let formUtils;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     const optionsService = {
       getOptionEntity: () => {
         return '';
@@ -62,9 +60,9 @@ describe('Utils: FormUtils', () => {
         return {};
       },
     };
-  }));
+  });
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
         {
@@ -78,11 +76,11 @@ describe('Utils: FormUtils', () => {
         OptionsService,
       ],
     });
-  }));
+  });
 
-  beforeEach(inject([FormUtils], (_service) => {
-    formUtils = _service;
-  }));
+  beforeEach(() => {
+    formUtils = TestBed.inject(FormUtils);
+  });
   describe('Method: toFormGroup(controls)', () => {
     it('should create a FormGroup from a collection of controls.', () => {
       expect(formUtils.toFormGroup).toBeDefined();
@@ -242,7 +240,7 @@ describe('Utils: FormUtils', () => {
       });
       describe('with associated entity', () => {
         beforeEach(() => {
-          jest.spyOn(formUtils, 'hasAssociatedEntity').mockImplementation(() => true);
+          vi.spyOn(formUtils, 'hasAssociatedEntity').mockImplementation(() => true);
         });
         it('when allow multiple is disabled should return entitypicker', () => {
           const field: FormField = { ...toManyField, multiValue: false };
@@ -343,7 +341,7 @@ describe('Utils: FormUtils', () => {
     });
     it('should return the right component for WorkflowOptions and call getControlOptions with data', () => {
       const field: { type: string } = { type: 'select' };
-      jest.spyOn(formUtils, 'getControlOptions');
+      vi.spyOn(formUtils, 'getControlOptions');
       const result = formUtils.getControlForField(field, undefined, undefined, undefined, undefined, 'First');
       expect(formUtils.getControlOptions).toHaveBeenCalledWith(field, undefined, undefined, 'First');
       expect(result instanceof SelectControl).toBeTruthy();
@@ -492,7 +490,7 @@ describe('Utils: FormUtils', () => {
           },
         ],
       };
-      jest.spyOn(formUtils, 'getControlForField').mockReturnValue({});
+      vi.spyOn(formUtils, 'getControlForField').mockReturnValue({});
       formUtils.toFieldSets(meta, 'USD', {}, {}, {}, { firstName: 'First' });
       expect(formUtils.getControlForField).toHaveBeenCalledWith(meta.fields[0], {}, {}, {}, undefined, 'First');
     });

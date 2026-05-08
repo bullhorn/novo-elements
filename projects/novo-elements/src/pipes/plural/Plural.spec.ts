@@ -1,4 +1,3 @@
-// APP
 import { PluralPipe } from './Plural';
 
 describe('Pipe: Plural', () => {

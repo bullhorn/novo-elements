@@ -1,4 +1,3 @@
-// APP
 import { TextBoxControl } from './TextBoxControl';
 
 describe('Control: TextBoxControl', () => {

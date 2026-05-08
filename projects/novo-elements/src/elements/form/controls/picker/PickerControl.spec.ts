@@ -1,4 +1,3 @@
-// APP
 import { PickerControl } from './PickerControl';
 
 describe('Control: PickerControl', () => {

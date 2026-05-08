@@ -1,4 +1,3 @@
-// APP
 import { DateControl } from './DateControl';
 
 describe('Control: DateControl', () => {

@@ -1,4 +1,3 @@
-// APP
 import { FileControl } from './FileControl';
 
 describe('Control: FileControl', () => {

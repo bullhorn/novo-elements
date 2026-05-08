@@ -1,21 +1,20 @@
-// NG
-import { waitForAsync, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-// App
-import { NovoLabelService } from 'novo-elements/services';
-import { NovoOption, HasOverlay, NovoOverlayModule, NovoOptionModule } from 'novo-elements/elements/common';
-import { Key } from 'novo-elements/utils';
-import { NovoSelectElement } from './Select';
-import { NovoSelectModule } from './Select.module';
-import { SelectionModel } from '@angular/cdk/collections';
 import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
+import { SelectionModel } from '@angular/cdk/collections';
 import { TAB } from '@angular/cdk/keycodes';
 import { Component, Input, viewChild } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { HasOverlay, NovoOption, NovoOptionModule, NovoOverlayModule } from 'novo-elements/elements/common';
+import { NovoLabelService } from 'novo-elements/services';
+import { Key } from 'novo-elements/utils';
+import { tick } from 'novo-testing';
+import { vi } from 'vitest';
+import { NovoSelectElement } from './Select';
+import { NovoSelectModule } from './Select.module';
 
 @Component({
   selector: 'test-select-component',
-  template: `
-  <novo-select [value]="value">
+  template: ` <novo-select [value]="value">
     <novo-option *ngFor="let option of options" [value]="option.value">
       {{ option.label }}
     </novo-option>
@@ -25,16 +24,20 @@ import { Component, Input, viewChild } from '@angular/core';
 class TestSelectComponent {
   select = viewChild(NovoSelectElement);
   @Input()
-  options = [{
-    label: 'Option 1',
-    value: '111',
-  }, {
-    label: 'Option 2',
-    value: '222',
-  }, {
-    label: 'Option 3',
-    value: '333',
-  }];
+  options = [
+    {
+      label: 'Option 1',
+      value: '111',
+    },
+    {
+      label: 'Option 2',
+      value: '222',
+    },
+    {
+      label: 'Option 3',
+      value: '333',
+    },
+  ];
   @Input()
   value: any;
 }
@@ -45,7 +48,7 @@ describe('Elements: NovoSelectElement', () => {
   let selectionModel: SelectionModel<NovoOption>;
   let keyManager: ActiveDescendantKeyManager<NovoOption>;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [NovoSelectModule, NovoOptionModule, NovoOverlayModule],
       declarations: [TestSelectComponent],
@@ -59,7 +62,7 @@ describe('Elements: NovoSelectElement', () => {
     fixture = TestBed.createComponent(NovoSelectElement);
     comp = fixture.debugElement.componentInstance;
     selectionModel = comp._selectionModel;
-  }));
+  });
 
   beforeEach(() => {
     fixture.detectChanges();
@@ -110,10 +113,10 @@ describe('Elements: NovoSelectElement', () => {
       fixture.componentRef.setInput('options', [option]);
       fixture.detectChanges();
       expect(comp.filteredOptions[0]).not.toBe(option);
-      expect(comp.filteredOptions[0]).toEqual(jasmine.objectContaining({ value: 'clone', label: 'text2', active: false }));
+      expect(comp.filteredOptions[0]).toEqual(expect.objectContaining({ value: 'clone', label: 'text2', active: false }));
     });
     it('should invoke clear', () => {
-      spyOn(selectionModel, 'clear');
+      vi.spyOn(selectionModel, 'clear');
       const mockPlaceholder = 'Test placeholder';
       fixture.componentRef.setInput('options', ['foo', 'bar', 'baz']);
       fixture.componentRef.setInput('value', 'baz');
@@ -128,7 +131,7 @@ describe('Elements: NovoSelectElement', () => {
       expect(selectionModel.clear).toHaveBeenCalled();
     });
     it('should invoke select', () => {
-      const selectAction = spyOn(selectionModel, 'select').and.callThrough();
+      const selectAction = vi.spyOn(selectionModel, 'select');
       comp.createdItem = 'baz';
       const options = [
         { label: 'foo', value: 'foo' },
@@ -140,8 +143,8 @@ describe('Elements: NovoSelectElement', () => {
       comp.writeValue('baz');
       fixture.detectChanges();
 
-      expect(selectAction.calls.argsFor(0)[0]).toBeInstanceOf(NovoOption);
-      expect(selectAction.calls.argsFor(0)[0].value).toEqual('baz');
+      expect(selectAction.mock.calls[0][0]).toBeInstanceOf(NovoOption);
+      expect(selectAction.mock.calls[0][0].value).toEqual('baz');
       // onSelect should not fire because this selection is incoming from parent
       expect(comp.empty).toEqual(false);
     });
@@ -154,19 +157,19 @@ describe('Elements: NovoSelectElement', () => {
       comp.writeValue('baz');
       fixture.componentRef.setInput('options', options);
       fixture.detectChanges();
-      spyOn(comp.overlay, 'openPanel');
-      spyOn(keyManager, 'setActiveItem');
+      vi.spyOn(comp.overlay, 'openPanel');
+      vi.spyOn(keyManager, 'setActiveItem');
       comp.openPanel();
       expect(comp.overlay.openPanel).toHaveBeenCalled();
       expect(keyManager.setActiveItem).toHaveBeenCalledWith(2);
     });
   });
 
-  it('should propagate changes from NovoOption elements', fakeAsync(() => {
+  it('should propagate changes from NovoOption elements', async () => {
     let selected;
-    comp.onSelect.subscribe(val => selected = val);
-    spyOn(comp, 'closePanel');
-    spyOn(comp, 'focus');
+    comp.onSelect.subscribe((val) => (selected = val));
+    vi.spyOn(comp, 'closePanel');
+    vi.spyOn(comp, 'focus');
     const options = [
       { label: 'foo', value: 'foo' },
       { label: 'bar', value: 'bar' },
@@ -178,17 +181,17 @@ describe('Elements: NovoSelectElement', () => {
     fixture.detectChanges();
     expect(comp.viewOptions.length).toBe(3);
     comp.openPanel();
-    const newNovoOption = comp.viewOptions.find(option => option.value === 'foo');
+    const newNovoOption = comp.viewOptions.find((option) => option.value === 'foo');
     newNovoOption._selectViaInteraction();
-    tick();
+    await tick();
     expect(selected).toEqual({ selected: 'foo' });
     expect((comp as HasOverlay).closePanel).toHaveBeenCalled();
     expect(comp.focus).toHaveBeenCalled();
-  }));
+  });
 
   describe('Function: _handleKeydown(event)', () => {
     it('should close panel', () => {
-      jest.spyOn(comp.overlay, 'closePanel');
+      vi.spyOn(comp.overlay, 'closePanel');
       const mockEvent: any = { key: Key.Escape };
       comp.openPanel();
       comp._handleKeydown(mockEvent);
@@ -199,25 +202,25 @@ describe('Elements: NovoSelectElement', () => {
       expect(comp.overlay.closePanel).toHaveBeenCalledTimes(2);
     });
     // Possibly broken?
-    xit('should save header', () => {
+    it.skip('should save header', () => {
       const mockEvent: any = {
         key: Key.Enter,
-        preventDefault: jest.fn(),
+        preventDefault: vi.fn(),
       };
       comp.header = {
         open: true,
         value: 'foo',
         valid: true,
       };
-      fixture.componentRef.setInput('headerConfig', { onSave: jasmine.createSpy('onSave') });
+      fixture.componentRef.setInput('headerConfig', { onSave: vi.fn() });
       comp._handleKeydown(mockEvent);
       expect(comp.headerConfig.onSave).toHaveBeenCalled();
     });
     it('should open panel when key is sent to open it', () => {
-      spyOn(comp, 'openPanel');
+      vi.spyOn(comp, 'openPanel');
       const mockEvent: any = {
         key: Key.Space,
-        preventDefault: jasmine.createSpy('preventDefault'),
+        preventDefault: vi.fn(),
       };
       comp._handleKeydown(mockEvent);
       expect(comp.openPanel).toHaveBeenCalled();
@@ -226,9 +229,9 @@ describe('Elements: NovoSelectElement', () => {
     it('should forward up/down events to keyManager', () => {
       const mockEvent: any = {
         key: Key.ArrowUp,
-        preventDefault: jest.fn(),
+        preventDefault: vi.fn(),
       };
-      spyOn(keyManager, 'onKeydown');
+      vi.spyOn(keyManager, 'onKeydown');
       comp.openPanel();
       comp._handleKeydown(mockEvent);
       expect(keyManager.onKeydown).toHaveBeenCalledWith(mockEvent);
@@ -253,31 +256,31 @@ describe('Elements: NovoSelectElement', () => {
       expect(legacyOption.viewValue).toBe('bif');
     });
 
-    it('should present a disabled "legacy option" when updating the list of options (via content children) to remove a previously valid value', fakeAsync(() => {
+    it('should present a disabled "legacy option" when updating the list of options (via content children) to remove a previously valid value', async () => {
       const fixture2 = TestBed.createComponent(TestSelectComponent);
       fixture2.componentRef.setInput('value', '333');
       fixture2.detectChanges();
-      tick();
+      await tick();
       const select = fixture2.componentInstance.select() as NovoSelectElement;
       fixture2.detectChanges();
-      tick();
+      await tick();
       select.openPanel();
       fixture2.detectChanges();
-      tick();
+      await tick();
       expect(select.contentOptions.length).toBe(3);
       expect(select.contentOptions.get(2).disabled).toBeFalsy();
       fixture2.componentInstance.options.splice(2, 1);
       fixture2.detectChanges();
-      tick();
+      await tick();
       expect(select.contentOptions.length).toBe(2);
       expect(select.viewOptions.length).toBe(1);
       const legacyOption: NovoOption = select.viewOptions.get(0);
       expect(legacyOption.disabled).toBeTruthy();
       expect(legacyOption.viewValue).toBe('333');
-    }));
+    });
 
     // Expected, but currently broken (may be a niche situation)
-    xit('should present a disabled "legacy option" when updating the list of options (via input) to remove a previously valid value', () => {
+    it.skip('should present a disabled "legacy option" when updating the list of options (via input) to remove a previously valid value', () => {
       const options = [
         { label: 'foo', value: 'foo' },
         { label: 'bar', value: 'bar' },
@@ -303,7 +306,7 @@ describe('Elements: NovoSelectElement', () => {
       expect(legacyOption.viewValue).toBe('baz');
     });
 
-    it('should hide legacy options when input or signal is configured to hide them', fakeAsync(() => {
+    it('should hide legacy options when input or signal is configured to hide them', async () => {
       const options = [
         { label: 'foo', value: 'foo' },
         { label: 'bar', value: 'bar' },
@@ -316,12 +319,12 @@ describe('Elements: NovoSelectElement', () => {
       fixture.detectChanges();
       comp.openPanel();
       fixture.detectChanges();
-      tick();
+      await tick();
       expect(comp.viewOptions.length).toBe(3);
-    }));
+    });
   });
   describe('Function: _handleKeydown(event) - typeahead', () => {
-    it('should set active item when typing a letter that matches an option', fakeAsync(() => {
+    it('should set active item when typing a letter that matches an option', async () => {
       const options = [
         { label: 'Apple', value: 'apple' },
         { label: 'Banana', value: 'banana' },
@@ -329,59 +332,59 @@ describe('Elements: NovoSelectElement', () => {
       ];
       fixture.componentRef.setInput('options', options);
       fixture.detectChanges();
-      tick();
+      await tick();
 
       comp.openPanel();
       fixture.detectChanges();
-      tick();
+      await tick();
 
       const mockEvent: any = {
         key: 'b',
-        preventDefault: jest.fn(),
+        preventDefault: vi.fn(),
       };
 
       comp._handleKeydown(mockEvent);
-      tick(300); // Wait for typeahead delay + processing
+      await tick(300); // Wait for typeahead delay + processing
       fixture.detectChanges();
 
       expect(keyManager.activeItem).toBeDefined();
       expect(keyManager.activeItem.value).toBe('banana');
-    }));
+    });
 
-    it('should cycle through options starting with the same letter on repeated key presses', fakeAsync(() => {
+    it('should cycle through options starting with the same letter on repeated key presses', async () => {
       const options = [
         { label: 'Apple', value: 'apple' },
         { label: 'Banana', value: 'banana' },
         { label: 'Cantelope', value: 'cantelope' },
-        { label: 'Coconut', value: 'coconut'},
+        { label: 'Coconut', value: 'coconut' },
       ];
       fixture.componentRef.setInput('options', options);
       fixture.detectChanges();
-      tick();
+      await tick();
 
       comp.openPanel();
       fixture.detectChanges();
-      tick();
+      await tick();
       comp.writeValue(null);
       fixture.detectChanges();
-      tick();
+      await tick();
 
       const mockEvent: any = {
         key: 'c',
-        preventDefault: jest.fn(),
+        preventDefault: vi.fn(),
       };
 
       comp._handleKeydown(mockEvent);
-      tick(300);
+      await tick(300);
       fixture.detectChanges();
 
       expect(keyManager.activeItem.value).toBe('cantelope');
 
       comp._handleKeydown(mockEvent);
-      tick(300);
+      await tick(300);
       fixture.detectChanges();
 
       expect(keyManager.activeItem.value).toBe('coconut');
-    }));
+    });
   });
 });

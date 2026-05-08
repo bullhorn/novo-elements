@@ -1,4 +1,3 @@
-// APP
 import { TextAreaControl } from './TextAreaControl';
 
 describe('Control: TextAreaControl', () => {

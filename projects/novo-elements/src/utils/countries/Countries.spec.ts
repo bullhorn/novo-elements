@@ -1,4 +1,3 @@
-// APP
 import { getCountries, getStateObjects, getStates } from './Countries';
 
 describe('Utils: Countries', () => {

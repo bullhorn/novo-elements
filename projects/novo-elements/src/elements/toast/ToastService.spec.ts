@@ -1,5 +1,5 @@
-// App
 import { ComponentUtils } from 'novo-elements/services';
+import { vi } from 'vitest';
 import { NovoToastService } from './ToastService';
 
 describe('Elements: NovoToastService', () => {
@@ -23,7 +23,7 @@ describe('Elements: NovoToastService', () => {
           message: 'test message',
           header: 'test header',
         };
-        const spy = jest.spyOn(service, 'setToastOnSession');
+        const spy = vi.spyOn(service, 'setToastOnSession');
         service.handleAlert({}, options);
         expect(spy).toHaveBeenLastCalledWith(expect.any(Object), options);
         spy.mockReset();
@@ -33,7 +33,7 @@ describe('Elements: NovoToastService', () => {
         const toast = {
           isCloseable: false,
         };
-        const spy = jest.spyOn(service, 'toastTimer');
+        const spy = vi.spyOn(service, 'toastTimer');
         service.handleAlert(toast, {});
         expect(spy).toHaveBeenCalledWith(toast);
         spy.mockReset();
@@ -46,7 +46,7 @@ describe('Elements: NovoToastService', () => {
         const options = {
           isCloseable: true,
         };
-        const spy = jest.spyOn(service, 'toastTimer');
+        const spy = vi.spyOn(service, 'toastTimer');
         service.handleAlert(toast, options);
         expect(spy).not.toHaveBeenCalled();
         spy.mockReset();

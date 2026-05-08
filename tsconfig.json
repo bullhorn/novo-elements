@@ -8,7 +8,8 @@
     "target": "ES2022",
     "module": "esnext",
     "lib": ["es2020", "dom", "esnext.WeakRef"],
-    "typeRoots": ["node_modules/@types"],
+    "typeRoots": ["node_modules/@types", "node_modules"],
+    "types": ["vitest/globals", "node"],
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "bundler",
@@ -16,7 +17,6 @@
     "experimentalDecorators": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "types": ["jest"],
     "incremental": true,
     "skipLibCheck": true,
     "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo",
@@ -24,7 +24,8 @@
       "novo-elements": ["projects/novo-elements/src/index"],
       "novo-examples": ["projects/novo-examples/src/index"],
       "novo-elements/*": ["projects/novo-elements/src/*"],
-      "novo-examples/*": ["projects/novo-examples/src/*"]
+      "novo-examples/*": ["projects/novo-examples/src/*"],
+      "novo-testing": ["testing/tick"]
     },
     "useDefineForClassFields": false
   },

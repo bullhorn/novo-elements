@@ -1,4 +1,3 @@
-// APP
 import { RadioControl } from './RadioControl';
 
 describe('Control: RadioControl', () => {

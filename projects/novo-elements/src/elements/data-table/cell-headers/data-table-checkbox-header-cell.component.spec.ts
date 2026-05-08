@@ -1,7 +1,6 @@
-// NG2
 import { CdkColumnDef } from '@angular/cdk/table';
 import { ChangeDetectorRef } from '@angular/core';
-import { waitForAsync, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { NovoButtonModule } from 'novo-elements/elements/button';
 import { NovoDatePickerModule } from 'novo-elements/elements/date-picker';
@@ -9,18 +8,17 @@ import { NovoDropdownModule } from 'novo-elements/elements/dropdown';
 import { NovoToastService } from 'novo-elements/elements/toast';
 import { NovoTooltipModule } from 'novo-elements/elements/tooltip';
 import { ComponentUtils, NovoLabelService } from 'novo-elements/services';
+import { vi } from 'vitest';
 import { NovoDataTable } from '../data-table.component';
 import { NOVO_DATA_TABLE_REF } from '../data-table.token';
 import { DataTableState } from '../state/data-table-state.service';
 import { NovoDataTableCheckboxHeaderCell } from './data-table-checkbox-header-cell.component';
 
-// App
-
 describe('Elements: NovoDataTableCheckboxHeaderCell', () => {
   let fixture;
   let component;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [NovoDataTableCheckboxHeaderCell],
       imports: [FormsModule, NovoTooltipModule, NovoButtonModule, NovoDropdownModule, NovoDatePickerModule],
@@ -45,7 +43,7 @@ describe('Elements: NovoDataTableCheckboxHeaderCell', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(NovoDataTableCheckboxHeaderCell);
     component = fixture.debugElement.componentInstance;
-  }));
+  });
 
   describe('Method: onClick(()', () => {
     beforeEach(() => {
@@ -55,10 +53,10 @@ describe('Elements: NovoDataTableCheckboxHeaderCell', () => {
       component.toaster = {
         alert: () => {},
       };
-      spyOn(component, 'selectAllChanged');
-      spyOn(component, 'resetAllMatchingSelected');
-      spyOn(component.dataTable, 'selectRows');
-      spyOn(component.toaster, 'alert');
+      vi.spyOn(component, 'selectAllChanged').mockImplementation(() => {});
+      vi.spyOn(component, 'resetAllMatchingSelected').mockImplementation(() => {});
+      vi.spyOn(component.dataTable, 'selectRows').mockImplementation(() => {});
+      vi.spyOn(component.toaster as any, 'alert').mockImplementation(() => {});
     });
     it('should call dataTable.selectRows if isAtLimit is false', () => {
       component.dataTable.canSelectAll = false;
@@ -120,7 +118,7 @@ describe('Elements: NovoDataTableCheckboxHeaderCell', () => {
           emit: () => {},
         },
       };
-      spyOn(component.dataTable.allSelected, 'emit');
+      vi.spyOn(component.dataTable.allSelected, 'emit');
       component.selectAllChanged();
       expect(component.dataTable.allSelected.emit).toHaveBeenCalledWith(expected);
     });

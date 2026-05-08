@@ -1,20 +1,19 @@
-// NG2
-import { waitForAsync, TestBed } from '@angular/core/testing';
-// App
-import { NovoValueElement, NOVO_VALUE_THEME, NOVO_VALUE_TYPE } from './Value';
+import { TestBed } from '@angular/core/testing';
+import { vi } from 'vitest';
+import { NOVO_VALUE_THEME, NOVO_VALUE_TYPE, NovoValueElement } from './Value';
 import { NovoValueModule } from './Value.module';
 
 describe('Elements: NovoValueElement', () => {
   let fixture;
   let component: any;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [NovoValueModule],
     }).compileComponents();
     fixture = TestBed.createComponent(NovoValueElement);
     component = fixture.debugElement.componentInstance;
-  }));
+  });
 
   it('should initialize correctly', () => {
     expect(component).toBeTruthy();
@@ -95,11 +94,7 @@ describe('Elements: NovoValueElement', () => {
     });
 
     it('should return true for any of the three valid types', () => {
-      const validTypes = [
-        NOVO_VALUE_TYPE.INTERNAL_LINK,
-        NOVO_VALUE_TYPE.LINK,
-        NOVO_VALUE_TYPE.ENTITY_LIST,
-      ];
+      const validTypes = [NOVO_VALUE_TYPE.INTERNAL_LINK, NOVO_VALUE_TYPE.LINK, NOVO_VALUE_TYPE.ENTITY_LIST];
 
       validTypes.forEach((type) => {
         component._type = type;
@@ -154,7 +149,7 @@ describe('Elements: NovoValueElement', () => {
         onIconClick() {},
       };
       component.data = 'test';
-      jest.spyOn(icon, 'onIconClick');
+      vi.spyOn(icon, 'onIconClick');
       component.onValueClick(icon);
       expect(icon.onIconClick).toHaveBeenCalledWith(component.data, component.meta);
     });
@@ -175,7 +170,7 @@ describe('Elements: NovoValueElement', () => {
         openLink() {},
       };
       component.data = 'test';
-      jest.spyOn(component.meta, 'openLink');
+      vi.spyOn(component.meta, 'openLink');
       component.openLink();
       expect(component.meta.openLink).toHaveBeenCalledWith(component.data, component.meta);
     });

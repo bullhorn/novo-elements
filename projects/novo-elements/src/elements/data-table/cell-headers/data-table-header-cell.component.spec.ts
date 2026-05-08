@@ -1,25 +1,23 @@
-// NG2
 import { EventEmitter } from '@angular/core';
-import { waitForAsync, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { IMaskModule } from 'angular-imask';
-import { NovoLabelService } from 'novo-elements/services';
-import { Key } from 'novo-elements/utils';
 import { NovoButtonModule } from 'novo-elements/elements/button';
 import { NovoDatePickerModule } from 'novo-elements/elements/date-picker';
 import { NovoDropdownModule } from 'novo-elements/elements/dropdown';
 import { NovoTooltipModule } from 'novo-elements/elements/tooltip';
+import { NovoLabelService } from 'novo-elements/services';
+import { Key } from 'novo-elements/utils';
+import { vi } from 'vitest';
 import { IDataTableColumnFilterOption } from '../interfaces';
 import { DataTableState } from '../state/data-table-state.service';
 import { NovoDataTableCellHeader } from './data-table-header-cell.component';
-
-// App
 
 describe('Elements: NovoDataTableCellHeader', () => {
   let fixture;
   let component;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [NovoDataTableCellHeader],
       imports: [FormsModule, NovoTooltipModule, NovoButtonModule, NovoDropdownModule, NovoDatePickerModule, IMaskModule],
@@ -27,7 +25,7 @@ describe('Elements: NovoDataTableCellHeader', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(NovoDataTableCellHeader);
     component = fixture.debugElement.componentInstance;
-  }));
+  });
 
   beforeEach(() => {
     component.config = {
@@ -98,7 +96,7 @@ describe('Elements: NovoDataTableCellHeader', () => {
         component.dropdown = {
           closePanel: () => {},
         };
-        jest.spyOn(component.dropdown, 'closePanel');
+        vi.spyOn(component.dropdown, 'closePanel');
       });
       it('should reset multiSelectOptions', () => {
         component.filter = [1, 2];
@@ -254,8 +252,8 @@ describe('Elements: NovoDataTableCellHeader', () => {
       });
       it('should clear filter text and close dropdown on ESC', () => {
         const event = { key: Key.Escape, stopPropagation: () => {}, preventDefault: () => {} };
-        jest.spyOn(component.dropdown, 'closePanel');
-        jest.spyOn(component, 'clearOptionFilter');
+        vi.spyOn(component.dropdown, 'closePanel');
+        vi.spyOn(component, 'clearOptionFilter');
         component.multiSelectOptionFilterHandleKeydown(event);
         expect(component.dropdown.closePanel).toHaveBeenCalled();
         expect(component.clearOptionFilter).toHaveBeenCalled();
@@ -263,7 +261,7 @@ describe('Elements: NovoDataTableCellHeader', () => {
 
       it('should attempt to filter on ENTER', () => {
         const event = { key: Key.Enter, stopPropagation: () => {}, preventDefault: () => {} };
-        jest.spyOn(component, 'filterMultiSelect');
+        vi.spyOn(component, 'filterMultiSelect');
         component.multiSelectOptionFilterHandleKeydown(event);
         expect(component.filterMultiSelect).toHaveBeenCalled();
       });
@@ -291,11 +289,11 @@ describe('Elements: NovoDataTableCellHeader', () => {
     beforeEach(() => {
       mouseDownEvent = window.document.createEvent('MouseEvents');
       mouseDownEvent.initMouseEvent('mousedown', true, true, window, 1, 50, 50, 500, 50, false, false, false, false, 0, null);
-      jest.spyOn(mouseDownEvent, 'preventDefault');
+      vi.spyOn(mouseDownEvent, 'preventDefault');
 
       mouseUpEvent = window.document.createEvent('MouseEvents');
       mouseUpEvent.initMouseEvent('mouseup', true, true, window, 1, 50, 50, 550, 50, false, false, false, false, 0, null);
-      jest.spyOn(mouseUpEvent, 'preventDefault');
+      vi.spyOn(mouseUpEvent, 'preventDefault');
       component.elementRef = {
         nativeElement: {
           getBoundingClientRect: () => {
@@ -318,7 +316,7 @@ describe('Elements: NovoDataTableCellHeader', () => {
     });
 
     it('should change the width when moving mouse', async () => {
-      jest.spyOn(component, 'setWidth');
+      vi.spyOn(component, 'setWidth');
       component.startResize(mouseDownEvent);
 
       const mouseMoveEvent: MouseEvent = window.document.createEvent('MouseEvents');

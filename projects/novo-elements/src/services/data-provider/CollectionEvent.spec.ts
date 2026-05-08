@@ -1,4 +1,3 @@
-// APP
 import { CollectionEvent } from './CollectionEvent';
 
 describe('Service: CollectionEvent', () => {

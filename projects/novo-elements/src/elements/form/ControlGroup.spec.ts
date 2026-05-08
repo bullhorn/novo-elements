@@ -1,19 +1,18 @@
-// NG2
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ChangeDetectorRef } from '@angular/core';
-import { fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
-// App
 import { NovoLabelService, OptionsService } from 'novo-elements/services';
-import { FormUtils } from './utils/FormUtils';
+import { tick } from 'novo-testing';
 import { NovoControlGroup } from './ControlGroup';
 import { NovoFormModule } from './Form.module';
+import { FormUtils } from './utils/FormUtils';
 
 describe('Elements: NovoControlGroup', () => {
   let fixture;
   let component;
 
-  beforeEach(fakeAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [NovoFormModule, OverlayModule],
       providers: [FormUtils, FormBuilder, ChangeDetectorRef, NovoLabelService, OptionsService],
@@ -42,7 +41,7 @@ describe('Elements: NovoControlGroup', () => {
     component.key = 'myControls';
     component.canEdit = () => true;
     component.canRemove = () => true;
-  }));
+  });
 
   describe('Initialization', () => {
     it('should create empty form without initial values', () => {
@@ -121,7 +120,7 @@ describe('Elements: NovoControlGroup', () => {
 
   describe('field interaction events', () => {
     it('should call markForCheck when there are field interaction events on a nested form', () => {
-      spyOn(component.ref, 'markForCheck');
+      vi.spyOn(component.ref, 'markForCheck');
       component.initialValue = [
         { myPercent: 0.1, myString: '10%' },
         { myPercent: 0.2, myString: '20%' },
@@ -173,69 +172,69 @@ describe('Elements: NovoControlGroup', () => {
       expect(component.form.controls.myControls.controls[1].associations.index).toEqual(1);
     });
     it('should check canRemove() function after removal', () => {
-      spyOn(component, 'canRemove').and.returnValue(true);
+      vi.spyOn(component, 'canRemove').mockReturnValue(true);
       component.removeControl(0);
       expect(component.canRemove).toHaveBeenCalledWith({ myPercent: 0.2, myString: '20%' }, 0);
       expect(component.canRemove).toHaveBeenCalledWith({ myPercent: 0.3, myString: '30%' }, 1);
     });
     it('should check canRemove() function when reset', () => {
-      spyOn(component, 'canRemove').and.returnValue(false);
+      vi.spyOn(component, 'canRemove').mockReturnValue(false);
       component.resetAddRemove();
       expect(component.canRemove).toHaveBeenCalledWith({ myPercent: 0.1, myString: '10%' }, 0);
       expect(component.canRemove).toHaveBeenCalledWith({ myPercent: 0.2, myString: '20%' }, 1);
       expect(component.canRemove).toHaveBeenCalledWith({ myPercent: 0.3, myString: '30%' }, 2);
     });
-    it('should call shouldRemove() function when set and emitting events', fakeAsync(() => {
+    it('should call shouldRemove() function when set and emitting events', async () => {
       component.shouldRemove = (index: number) =>
         new Promise((resolve) => {
           // Example promise for testing that will only allow the first group to be deleted
           resolve(index === 0);
         });
-      spyOn(component, 'shouldRemove').and.callThrough();
+      vi.spyOn(component, 'shouldRemove');
       expect(component.form.controls.myControls.controls.length).toEqual(3);
 
       component.removeControl(2);
-      tick();
+      await tick();
       expect(component.shouldRemove).toHaveBeenCalledWith(2);
       expect(component.form.controls.myControls.controls.length).toEqual(3);
 
       component.removeControl(1);
-      tick();
+      await tick();
       expect(component.shouldRemove).toHaveBeenCalledWith(1);
       expect(component.form.controls.myControls.controls.length).toEqual(3);
 
       component.removeControl(0);
-      tick();
+      await tick();
       expect(component.shouldRemove).toHaveBeenCalledWith(0);
       expect(component.form.controls.myControls.controls.length).toEqual(2);
 
       component.shouldRemove = null;
-    }));
-    it('should not call shouldRemove() function when events are not being emitted', fakeAsync(() => {
+    });
+    it('should not call shouldRemove() function when events are not being emitted', async () => {
       component.shouldRemove = (index: number) =>
         new Promise((resolve) => {
           // Example promise for testing that will only allow the first group to be deleted
           resolve(index === 0);
         });
-      spyOn(component, 'shouldRemove').and.callThrough();
+      vi.spyOn(component, 'shouldRemove');
       expect(component.form.controls.myControls.controls.length).toEqual(3);
 
       component.removeControl(2, false);
-      tick();
+      await tick();
       expect(component.shouldRemove).not.toHaveBeenCalled();
       expect(component.form.controls.myControls.controls.length).toEqual(2);
 
       component.removeControl(1, false);
-      tick();
+      await tick();
       expect(component.shouldRemove).not.toHaveBeenCalled();
       expect(component.form.controls.myControls.controls.length).toEqual(1);
 
       component.removeControl(0, false);
-      tick();
+      await tick();
       expect(component.shouldRemove).not.toHaveBeenCalled();
       expect(component.form.controls.myControls.controls.length).toEqual(0);
 
       component.shouldRemove = null;
-    }));
+    });
   });
 });

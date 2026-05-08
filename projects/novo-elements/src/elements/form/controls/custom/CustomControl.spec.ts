@@ -1,4 +1,3 @@
-// APP
 import { CustomControl } from './CustomControl';
 
 describe('Control: CustomControl', () => {

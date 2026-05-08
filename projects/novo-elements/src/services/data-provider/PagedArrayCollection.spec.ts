@@ -1,4 +1,3 @@
-// APP
 import { PagedArrayCollection } from './PagedArrayCollection';
 
 describe('Service: PagedArrayCollection', () => {
