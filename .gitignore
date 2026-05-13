@@ -46,3 +46,9 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+*storybook.log
+storybook-static
+# Compodoc output generated for the Storybook docs addon — regenerated on
+# every build, never committed.
+projects/novo-elements/documentation.json

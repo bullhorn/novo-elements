@@ -11,10 +11,12 @@
       "architect": {
         "build": {
           "builder": "@angular/build:ng-packagr",
-          "outputs": ["dist/novo-elements"],
+          "outputs": [
+            "dist/novo-elements"
+          ],
           "options": {
             "tsConfig": "tsconfig.build.json",
-            "project": "projects/novo-elements/src/ng-package.json",
+            "project": "projects/novo-elements/src/ng-package.json"
           },
           "dependsOn": [
             {
@@ -27,6 +29,54 @@
           "builder": "@angular-builders/jest:run",
           "options": {
             "coverage": true
+          }
+        },
+        "storybook": {
+          "builder": "@storybook/angular:start-storybook",
+          "options": {
+            "configDir": "projects/novo-elements/.storybook",
+            "browserTarget": "demo:build",
+            "assets": [],
+            "compodoc": true,
+            "compodocArgs": [
+              "-e",
+              "json",
+              "-d",
+              "projects/novo-elements"
+            ],
+            "styles": [
+              "projects/novo-elements/src/novo-elements.scss"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "projects/novo-elements/src/styles"
+              ]
+            },
+            "port": 6006
+          }
+        },
+        "build-storybook": {
+          "builder": "@storybook/angular:build-storybook",
+          "options": {
+            "configDir": "projects/novo-elements/.storybook",
+            "browserTarget": "demo:build",
+            "assets": [],
+            "compodoc": true,
+            "compodocArgs": [
+              "-e",
+              "json",
+              "-d",
+              "projects/novo-elements"
+            ],
+            "styles": [
+              "projects/novo-elements/src/novo-elements.scss"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "projects/novo-elements/src/styles"
+              ]
+            },
+            "outputDir": "dist/storybook/novo-elements"
           }
         }
       }
@@ -41,13 +91,13 @@
           "builder": "@angular/build:ng-packagr",
           "options": {
             "tsConfig": "tsconfig.build.json",
-            "project": "projects/novo-examples/ng-package.json",
-          },
+            "project": "projects/novo-examples/ng-package.json"
+          }
         },
         "test": {
           "builder": "@angular/build:karma",
           "options": {
-            "tsConfig": "projects/novo-examples/tsconfig.spec.json",
+            "tsConfig": "projects/novo-examples/tsconfig.spec.json"
           }
         }
       }
@@ -71,12 +121,24 @@
               "projects/demo/polyfills.ts"
             ],
             "tsConfig": "projects/demo/tsconfig.app.json",
-            "assets": ["projects/demo/favicon.ico", "projects/demo/assets"],
-            "styles": ["projects/demo/styles.scss"],
+            "assets": [
+              "projects/demo/favicon.ico",
+              "projects/demo/assets"
+            ],
+            "styles": [
+              "projects/demo/styles.scss"
+            ],
             "stylePreprocessorOptions": {
-              "includePaths": ["projects/novo-elements/src"],
+              "includePaths": [
+                "projects/novo-elements/src"
+              ],
               "sass": {
-                "silenceDeprecations": ["color-functions", "global-builtin", "import", "mixed-decls"]
+                "silenceDeprecations": [
+                  "color-functions",
+                  "global-builtin",
+                  "import",
+                  "mixed-decls"
+                ]
               }
             },
             "scripts": [],
