@@ -51,6 +51,7 @@ export class NovoElementProviders {
   static forChild(): ModuleWithProviders<NovoElementProviders> {
     return {
       ngModule: NovoElementProviders,
+      providers: [],
     };
   }
 }

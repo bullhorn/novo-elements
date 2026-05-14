@@ -245,7 +245,7 @@ function getWeekDay({ date }: { date: Date }): WeekDay {
     isPast: date < today,
     isToday: DateUtil.isSameDay(date, today),
     isFuture: date > today,
-    isWeekend: WEEKEND_DAY_NUMBERS.indexOf(getDay(date)) > -1,
+    isWeekend: WEEKEND_DAY_NUMBERS.includes(getDay(date) as Day),
   };
 }
 

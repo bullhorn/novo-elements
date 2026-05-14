@@ -1,3 +1,4 @@
+import { Day } from 'date-fns';
 import { DateUtil, type DateLike, type NovoDateSelectionStrategy } from 'novo-elements/utils';
 
 export class WeekSelectionStrategy implements NovoDateSelectionStrategy<DateLike[]> {

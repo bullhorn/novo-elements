@@ -1,7 +1,7 @@
-<label>
+<label data-automation-id="switch-label">
   Toggled
-  <span>{{checked}}</span>
+  <span data-automation-id="switch-value">{{checked}}</span>
 </label>
-<novo-switch [(ngModel)]="checked" (onChange)="increment()"></novo-switch>
-<novo-switch [(ngModel)]="checked" theme="grapefruit"></novo-switch>
-<novo-switch [(ngModel)]="checked" disabled>THIS IS DISABLED</novo-switch>
+<novo-switch data-automation-id="switch-default" [(ngModel)]="checked" (onChange)="increment()"></novo-switch>
+<novo-switch data-automation-id="switch-grapefruit" [(ngModel)]="checked" theme="grapefruit"></novo-switch>
+<novo-switch data-automation-id="switch-disabled" [(ngModel)]="checked" disabled>THIS IS DISABLED</novo-switch>

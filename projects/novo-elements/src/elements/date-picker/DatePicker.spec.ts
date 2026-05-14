@@ -1,11 +1,9 @@
 import { ChangeDetectorRef, ElementRef } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { isDate, isValid, subDays } from 'date-fns';
 import { NovoLabelService } from 'novo-elements/services';
 import { DateUtil, Helpers } from 'novo-elements/utils';
 import { NovoDatePickerElement } from './DatePicker';
 
-jest.mock('date-fns');
 jest.mock('novo-elements/services');
 jest.mock('novo-elements/utils');
 
@@ -33,6 +31,12 @@ describe('NovoDatePickerElement', () => {
     sanitizer = {
       bypassSecurityTrustHtml: jest.fn(),
     } as any;
+
+    // Mock DateUtil methods to pass through
+    (DateUtil.startOfDay as jest.Mock) = jest.fn((d) => d);
+    (DateUtil.parse as jest.Mock) = jest.fn((d) => (typeof d === 'string' ? new Date(d) : d));
+    (DateUtil.format as jest.Mock) = jest.fn((d, f) => d?.toISOString?.().split('T')[0] || '');
+    (DateUtil.isSameDay as jest.Mock) = jest.fn((d1, d2) => d1?.getTime() === d2?.getTime());
 
     component = new NovoDatePickerElement(labels, element, cdr, sanitizer);
   });
@@ -346,15 +350,12 @@ describe('NovoDatePickerElement', () => {
     });
 
     it('should filter out non-date values', () => {
-      (isDate as jest.Mock).mockImplementation((val) => val instanceof Date);
       const dates = [new Date('2023-01-15'), null, new Date('2023-01-16')];
       component.selection = dates as any;
       expect(component._selection.length).toBe(2);
     });
 
     it('should call DateUtil.startOfDay on each date', () => {
-      (isDate as jest.Mock).mockReturnValue(true);
-      (DateUtil.startOfDay as jest.Mock).mockImplementation((d) => d);
       const dates = [new Date('2023-01-15')];
       component.selection = dates;
       expect(DateUtil.startOfDay).toHaveBeenCalled();
@@ -849,7 +850,6 @@ describe('NovoDatePickerElement', () => {
       jest.spyOn(Helpers, 'isDate').mockReturnValue(false);
       jest.spyOn(Helpers, 'isString').mockReturnValue(true);
       jest.spyOn(DateUtil, 'parse').mockReturnValue(new Date('2023-01-15'));
-      (isValid as jest.Mock).mockReturnValue(true);
       component.writeValue('2023-01-15' as any);
       expect(updateViewSpy).toHaveBeenCalled();
       updateViewSpy.mockRestore();
@@ -860,7 +860,6 @@ describe('NovoDatePickerElement', () => {
       jest.spyOn(Helpers, 'isDate').mockReturnValue(false);
       jest.spyOn(Helpers, 'isString').mockReturnValue(true);
       jest.spyOn(DateUtil, 'parse').mockReturnValue(new Date('invalid'));
-      (isValid as jest.Mock).mockReturnValue(false);
       component.writeValue('invalid-date' as any);
       expect(updateViewSpy).not.toHaveBeenCalled();
       updateViewSpy.mockRestore();
@@ -916,14 +915,13 @@ describe('NovoDatePickerElement', () => {
     });
 
     it('should handle DataTableRangeModel with min and max', () => {
-      (subDays as jest.Mock).mockReturnValue(new Date('2023-01-19'));
       const range = {
         min: new Date('2023-01-15'),
         max: new Date('2023-01-20'),
       };
       component.model = range;
       component.setRangeSelection();
-      expect(subDays).toHaveBeenCalledWith(range.max, 1);
+      expect(component._selection.length).toBe(2);
     });
 
     it('should handle model without startDate or min', () => {
@@ -1091,7 +1089,6 @@ describe('NovoDatePickerElement', () => {
 
   describe('Edge Cases', () => {
     it('should handle selection with null dates', () => {
-      (isDate as jest.Mock).mockImplementation((val) => val instanceof Date);
       component.selection = [new Date('2023-01-15'), null, new Date('2023-01-16')] as any;
       expect(component._selection.length).toBe(2);
     });

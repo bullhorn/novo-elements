@@ -1,15 +1,16 @@
-<div class="tabbed-group-picker-example">
+<div class="tabbed-group-picker-example" data-automation-id="tabbed-picker-big-groups-example">
   <novo-tabbed-group-picker
+    data-automation-id="tabbed-picker-big-groups"
     [tabs]="example_tab"
     [buttonConfig]="example_buttonConfig"
     (selectionChange)="onSelectionChange($event)"
   ></novo-tabbed-group-picker>
-  <div class="selected-data-wrapper">
+  <div class="selected-data-wrapper" data-automation-id="selected-data-wrapper">
     <h6>Selected Integers:</h6>
-    <div>{{ selectedIntegers.join(', ') }}</div>
+    <div data-automation-id="selected-integers">{{ selectedIntegers.join(', ') }}</div>
     <h6>Selected Divisibles:</h6>
-    <div>{{ selectedDivisibles.join(', ') }}</div>
+    <div data-automation-id="selected-divisibles">{{ selectedDivisibles.join(', ') }}</div>
     <h6>Selected Prime Factorizations:</h6>
-    <div>{{ selectedPrimeFactorizations.join(', ') }}</div>
+    <div data-automation-id="selected-prime-factorizations">{{ selectedPrimeFactorizations.join(', ') }}</div>
   </div>
 </div>

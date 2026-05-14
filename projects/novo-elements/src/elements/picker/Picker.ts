@@ -83,7 +83,7 @@ export class NovoPickerElement implements OnInit {
   results: ViewContainerRef;
 
   @Input()
-  config: any;
+  config: any = {};
   @Input()
   placeholder: string;
   @Input()
@@ -212,8 +212,10 @@ export class NovoPickerElement implements OnInit {
 
   private show(term?: string): void {
     this.openPanel();
-    // Show the results inside
-    this.showResults(term);
+    // Show the results inside - only if openPanel actually opened (will be skipped if no parent)
+    if (this.panelOpen) {
+      this.showResults(term);
+    }
   }
 
   onKeyDown(event: KeyboardEvent) {

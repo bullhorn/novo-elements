@@ -1,19 +1,19 @@
 <!--Check out the FormDemo.js for more information!-->
-<novo-form [form]="checkForm">
-  <div class="novo-form-row">
+<novo-form [form]="checkForm" data-automation-id="form-check">
+  <div class="novo-form-row" data-automation-id="form-check-checkbox">
     <novo-control [form]="checkForm" [control]="checkControl"></novo-control>
   </div>
-  <div class="novo-form-row">
+  <div class="novo-form-row" data-automation-id="form-check-list">
     <novo-control [form]="checkForm" [control]="checkListControl"></novo-control>
   </div>
-  <div class="novo-form-row">
+  <div class="novo-form-row" data-automation-id="form-check-tiles">
     <novo-control [form]="checkForm" [control]="tilesControl" (change)="onChange($event)"></novo-control>
   </div>
-  <div class="novo-form-row">
+  <div class="novo-form-row" data-automation-id="form-check-tiles-disabled">
     <novo-control [form]="checkForm" [control]="disabledTilesControl" (change)="onChange($event)"></novo-control>
   </div>
-  <div class="novo-form-row">
+  <div class="novo-form-row" data-automation-id="form-check-switch">
     <novo-control [form]="checkForm" [control]="switchControl" (change)="onChange($event)"></novo-control>
   </div>
 </novo-form>
-<div class="final-value">Value: {{checkForm.value | json}}</div>
+<div class="final-value" data-automation-id="form-check-value">Value: {{checkForm.value | json}}</div>

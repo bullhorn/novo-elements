@@ -1,12 +1,12 @@
-<novo-radio-group>
-  <novo-radio button="true" [checked]="false" name="button" value="one" (change)="onChange($event)" label="One">
+<novo-radio-group data-automation-id="radio-button-group">
+  <novo-radio button="true" [checked]="false" name="button" value="one" (change)="onChange($event)" label="One" data-automation-id="radio-button-one">
   </novo-radio>
-  <novo-radio button="true" [checked]="true" name="button" value="two" (change)="onChange($event)" label="Two">
+  <novo-radio button="true" [checked]="true" name="button" value="two" (change)="onChange($event)" label="Two" data-automation-id="radio-button-two">
   </novo-radio>
-  <novo-radio button="true" [checked]="false" name="button" value="three" (change)="onChange($event)" label="Three">
+  <novo-radio button="true" [checked]="false" name="button" value="three" (change)="onChange($event)" label="Three" data-automation-id="radio-button-three">
   </novo-radio>
-  <novo-radio button="true" [checked]="false" name="button" value="disabled" (change)="onChange($event)" label="Disabled" [disabled]="true">
+  <novo-radio button="true" [checked]="false" name="button" value="disabled" (change)="onChange($event)" label="Disabled" [disabled]="true" data-automation-id="radio-button-disabled">
   </novo-radio>
-  <novo-radio button="true" [checked]="true" name="button" value="alsoDisabled" (change)="onChange($event)" label="Also Disabled" [disabled]="true">
+  <novo-radio button="true" [checked]="true" name="button" value="alsoDisabled" (change)="onChange($event)" label="Also Disabled" [disabled]="true" data-automation-id="radio-button-also-disabled">
   </novo-radio>
 </novo-radio-group>

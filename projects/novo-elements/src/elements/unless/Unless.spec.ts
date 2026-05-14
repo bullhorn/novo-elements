@@ -28,7 +28,7 @@ describe('Unless Directive', () => {
 
     destroyRef = {
       onDestroy: jest.fn(),
-    }
+    } as any;
 
     directive = new Unless(templateRef, viewContainer, security, destroyRef);
   });

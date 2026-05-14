@@ -1,32 +1,32 @@
-<novo-button theme="secondary" icon="collapse" [menu]="menu">Actions</novo-button>
+<novo-button theme="secondary" icon="collapse" [menu]="menu" data-automation-id="menu-actions-button">Actions</novo-button>
 
 <!-- Menu Template -->
-<novo-menu #menu>
-  <novo-option id="mi-preview" *menuItem (click)="clickMe($event)">Preview</novo-option>
-  <novo-option id="mi-edit" *menuItem (click)="clickMe($event)">Edit</novo-option>
-  <novo-option id="mi-disabled" *menuItem (click)="clickMe($event)" disabled>Disabled</novo-option>
+<novo-menu #menu data-automation-id="basic-menu">
+  <novo-option id="mi-preview" *menuItem (click)="clickMe($event)" data-automation-id="menu-preview">Preview</novo-option>
+  <novo-option id="mi-edit" *menuItem (click)="clickMe($event)" data-automation-id="menu-edit">Edit</novo-option>
+  <novo-option id="mi-disabled" *menuItem (click)="clickMe($event)" disabled data-automation-id="menu-disabled">Disabled</novo-option>
   <novo-divider *menuItem></novo-divider>
-  <novo-option id="mi-delete" *menuItem (click)="clickMe($event)">
+  <novo-option id="mi-delete" *menuItem (click)="clickMe($event)" data-automation-id="menu-delete">
     <span>Delete</span>
     <novo-icon novoSuffix>delete-o</novo-icon>
   </novo-option>
 </novo-menu>
 
 
-<novo-button theme="icon" icon="more" [menu]="icons"></novo-button>
+<novo-button theme="icon" icon="more" [menu]="icons" data-automation-id="menu-icon-button"></novo-button>
 
 <!-- Menu Template -->
-<novo-menu #icons>
-  <novo-option *menuItem (click)="clickMe($event)">
+<novo-menu #icons data-automation-id="icon-menu">
+  <novo-option *menuItem (click)="clickMe($event)" data-automation-id="menu-icon-preview">
     <novo-icon>preview</novo-icon>
     <span>Preview</span>
   </novo-option>
-  <novo-option *menuItem (click)="clickMe($event)">
+  <novo-option *menuItem (click)="clickMe($event)" data-automation-id="menu-icon-edit">
     <novo-icon>edit</novo-icon>
     <span>Edit</span>
   </novo-option>
   <novo-divider *menuItem></novo-divider>
-  <novo-option *menuItem class="red" (click)="clickMe($event)">
+  <novo-option *menuItem class="red" (click)="clickMe($event)" data-automation-id="menu-icon-delete">
     <novo-icon>delete-o</novo-icon>
     <span>Delete</span>
   </novo-option>

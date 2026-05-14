@@ -1,15 +1,18 @@
-<div class="scrollable-container" cdkScrollable>
+<div class="scrollable-container" cdkScrollable data-automation-id="scrollable-container">
   <div class="scrollable-content">
-    <novo-dropdown>
+    <novo-dropdown data-automation-id="scrollable-dropdown">
       <novo-button
         theme="secondary"
         icon="collapse"
-        inverse>Inside a Scrollable Container</novo-button>
+        inverse
+        data-automation-id="scrollable-dropdown-button">Inside a Scrollable Container</novo-button>
       <novo-optgroup>
         <novo-option (click)="clickMe('This')"
-          keepOpen="true">This</novo-option>
+          keepOpen="true"
+          data-automation-id="scrollable-this-option">This</novo-option>
         <novo-option (click)="clickMe('Scrolls!')"
-          keepOpen="true">Scrolls!</novo-option>
+          keepOpen="true"
+          data-automation-id="scrollable-scrolls-option">Scrolls!</novo-option>
       </novo-optgroup>
     </novo-dropdown>
   </div>

@@ -352,9 +352,13 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
   private _updateOverlay() {
     if (this.picker?.container?.overlayRef) {
       setTimeout(() => {
-        this.picker.container.overlayRef.updatePosition();
-        this.picker.popup.instance.selected = this.picker.selected;
-        this.changeRef.detectChanges();
+        if (this.picker?.container?.overlayRef) {
+          this.picker.container.overlayRef.updatePosition();
+          if (this.picker?.popup?.instance) {
+            this.picker.popup.instance.selected = this.picker.selected;
+          }
+          this.changeRef.detectChanges();
+        }
       });
     }
   }

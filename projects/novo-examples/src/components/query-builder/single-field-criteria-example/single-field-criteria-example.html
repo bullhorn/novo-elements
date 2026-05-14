@@ -1,17 +1,18 @@
-<form [formGroup]="queryForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="queryForm" (ngSubmit)="onSubmit()" data-automation-id="condition-builder-form">
   <novo-condition-builder
+    data-automation-id="condition-builder"
     #builder
     [config]="config"
     [editTypeFn]="editTypeFn">
   </novo-condition-builder>
 </form>
 
-<novo-field mb="lg">
+<novo-field mb="lg" data-automation-id="field-selector-container">
   <novo-label>Choose single field to auto-select for criteria</novo-label>
-  <novo-select placeholder="Single field" [ngModel]="config.staticFieldSelection" (ngModelChange)="updateConfig({ staticFieldSelection: $event })">
+  <novo-select data-automation-id="field-selector" placeholder="Single field" [ngModel]="config.staticFieldSelection" (ngModelChange)="updateConfig({ staticFieldSelection: $event })">
     <novo-option value="">Show All Fields</novo-option>
     <novo-option *ngFor="let field of mockMetaFields" [value]="field.name">{{ field.label || field.name }}</novo-option>
   </novo-select>
 </novo-field>
 
-<pre><code>{{queryForm.value | json}}</code></pre>
+<pre data-automation-id="condition-builder-output"><code>{{queryForm.value | json}}</code></pre>

@@ -1,19 +1,19 @@
 <h3>Multiple selection</h3>
 <p>
-  <novo-field>
-    <novo-select [formControl]="stateMultiCtrl" placeholder="States" [multiple]="true" #multiSelect>
+  <novo-field data-automation-id="select-multi-search-field">
+    <novo-select [formControl]="stateMultiCtrl" placeholder="States" [multiple]="true" #multiSelect data-automation-id="select-multi-search-input">
       <novo-option>
-        <novo-select-search [formControl]="stateMultiFilterCtrl"></novo-select-search>
+        <novo-select-search [formControl]="stateMultiFilterCtrl" data-automation-id="select-multi-search-filter"></novo-select-search>
       </novo-option>
-      <novo-option *ngFor="let state of filteredStatesMulti | async" [value]="state">
+      <novo-option *ngFor="let state of filteredStatesMulti | async; let i = index" [value]="state" [attr.data-automation-id]="'select-multi-search-option-' + i">
         {{state.name}}
       </novo-option>
     </novo-select>
   </novo-field>
 </p>
-<p>
+<p data-automation-id="select-multi-search-results-heading">
   Selected States:
 </p>
-<ul *ngFor="let state of stateMultiCtrl?.value">
-  <li>{{state.name}}</li>
+<ul>
+  <li *ngFor="let state of stateMultiCtrl?.value; let i = index" [attr.data-automation-id]="'select-multi-search-result-' + i">{{state.name}}</li>
 </ul>

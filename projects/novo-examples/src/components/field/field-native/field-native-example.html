@@ -1,82 +1,82 @@
 <div class="example-container">
 
   <novo-label>Appearance</novo-label>
-  <novo-radio-group [(ngModel)]="appearance">
-    <novo-radio value="standard">Standard</novo-radio>
-    <novo-radio value="fill">Filled</novo-radio>
-    <novo-radio value="outline">Outlined</novo-radio>
-    <novo-radio value="list">List</novo-radio>
+  <novo-radio-group [(ngModel)]="appearance" data-automation-id="appearance-group">
+    <novo-radio value="standard" data-automation-id="appearance-standard">Standard</novo-radio>
+    <novo-radio value="fill" data-automation-id="appearance-fill">Filled</novo-radio>
+    <novo-radio value="outline" data-automation-id="appearance-outline">Outlined</novo-radio>
+    <novo-radio value="list" data-automation-id="appearance-list">List</novo-radio>
   </novo-radio-group>
 
   <novo-label>Layout</novo-label>
-  <novo-radio-group [(ngModel)]="direction">
-    <novo-radio value="horizontal">Horizontal</novo-radio>
-    <novo-radio value="vertical">Vertical</novo-radio>
+  <novo-radio-group [(ngModel)]="direction" data-automation-id="layout-group">
+    <novo-radio value="horizontal" data-automation-id="layout-horizontal">Horizontal</novo-radio>
+    <novo-radio value="vertical" data-automation-id="layout-vertical">Vertical</novo-radio>
   </novo-radio-group>
 
 
   <novo-fields [appearance]="appearance" [layout]="direction" [fullWidth]="fullWidth">
-    <novo-field>
+    <novo-field data-automation-id="fullwidth-field">
       <novo-label>Full Width?</novo-label>
-      <novo-radio-group [(ngModel)]="fullWidth">
-        <novo-radio [value]="false">Condensed</novo-radio>
-        <novo-radio [value]="true">Full Width</novo-radio>
+      <novo-radio-group [(ngModel)]="fullWidth" data-automation-id="fullwidth-group">
+        <novo-radio [value]="false" data-automation-id="fullwidth-condensed">Condensed</novo-radio>
+        <novo-radio [value]="true" data-automation-id="fullwidth-full">Full Width</novo-radio>
       </novo-radio-group>
     </novo-field>
 
-    <novo-field>
+    <novo-field data-automation-id="username-field">
       <novo-label>Username</novo-label>
-      <input novoInput type="text" />
+      <input novoInput type="text" data-automation-id="username-input" />
     </novo-field>
 
-    <novo-field>
+    <novo-field data-automation-id="email-field">
       <novo-label>Email</novo-label>
-      <input novoInput type="email" />
+      <input novoInput type="email" data-automation-id="email-input" />
     </novo-field>
 
-    <novo-field>
+    <novo-field data-automation-id="password-field">
       <novo-label>Enter your password</novo-label>
-      <input novoInput [type]="hide ? 'password' : 'text'" />
-      <novo-icon (click)="hide = !hide">{{hide ? 'overview' : 'hidden'}}</novo-icon>
+      <input novoInput [type]="hide ? 'password' : 'text'" data-automation-id="password-input" />
+      <novo-icon (click)="hide = !hide" data-automation-id="password-toggle">{{hide ? 'overview' : 'hidden'}}</novo-icon>
     </novo-field>
 
-    <novo-field>
+    <novo-field data-automation-id="color-select-field">
       <novo-label>Select your favorite color?</novo-label>
-      <select required novoInput>
-        <option value="pink">Pink</option>
-        <option value="purple">Purple</option>
-        <option value="sparkles">Sparkles</option>
+      <select required novoInput data-automation-id="color-select">
+        <option value="pink" data-automation-id="color-select-option-pink">Pink</option>
+        <option value="purple" data-automation-id="color-select-option-purple">Purple</option>
+        <option value="sparkles" data-automation-id="color-select-option-sparkles">Sparkles</option>
       </select>
     </novo-field>
 
-    <novo-field>
+    <novo-field data-automation-id="description-field">
       <novo-label>Short description...</novo-label>
-      <textarea novoInput></textarea>
+      <textarea novoInput data-automation-id="description-textarea"></textarea>
     </novo-field>
 
-    <novo-field>
+    <novo-field data-automation-id="color-picker-field">
       <novo-label>Choose your favorite color?</novo-label>
-      <input novoInput type="color" />
+      <input novoInput type="color" data-automation-id="color-picker-input" />
     </novo-field>
 
-    <novo-field>
+    <novo-field data-automation-id="volume-field">
       <novo-label>Set Volume</novo-label>
-      <input novoInput type="range" min="0" max="100" value="90" step="10" />
+      <input novoInput type="range" min="0" max="100" value="90" step="10" data-automation-id="volume-input" />
     </novo-field>
 
-    <novo-field>
+    <novo-field data-automation-id="birthday-field">
       <novo-label>Birthday</novo-label>
-      <input novoInput type="date" />
+      <input novoInput type="date" data-automation-id="birthday-input" />
     </novo-field>
 
-    <novo-field>
+    <novo-field data-automation-id="endtime-field">
       <novo-label>Scheduled End Time</novo-label>
-      <input novoInput type="time" />
+      <input novoInput type="time" data-automation-id="endtime-input" />
     </novo-field>
 
-    <novo-field>
+    <novo-field data-automation-id="appointment-field">
       <novo-label>Next Appointment Time?</novo-label>
-      <input novoInput type="datetime-local" />
+      <input novoInput type="datetime-local" data-automation-id="appointment-input" />
     </novo-field>
   </novo-fields>
 </div>

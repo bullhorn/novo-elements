@@ -1,16 +1,16 @@
-<div class="fake-card">
-  <novo-header theme="job">
-    <novo-title larger>
+<div class="fake-card" data-automation-id="toast-usage-container">
+  <novo-header theme="job" data-automation-id="toast-usage-header">
+    <novo-title larger data-automation-id="toast-usage-title">
       <novo-icon>job</novo-icon>
       <span>Apply to Bull Rider</span>
     </novo-title>
-    <novo-action icon="flag"></novo-action>
-    <novo-action icon="refresh"></novo-action>
-    <novo-action icon="times"></novo-action>
+    <novo-action icon="flag" data-automation-id="toast-usage-action-flag"></novo-action>
+    <novo-action icon="refresh" data-automation-id="toast-usage-action-refresh"></novo-action>
+    <novo-action icon="times" data-automation-id="toast-usage-action-close"></novo-action>
   </novo-header>
   <novo-toast [accent]="toast.accent" [theme]="toast.theme" [icon]="toast.icon" title="Save Failed"
-    message="Oops! Looks like you're missing some required fields"></novo-toast>
-  <div class="content">
+    message="Oops! Looks like you're missing some required fields" data-automation-id="toast-display"></novo-toast>
+  <div class="content" data-automation-id="toast-usage-content">
     <p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
       do eiusmod tempor incididunt ut labore et dolore
@@ -22,6 +22,6 @@
       sunt in culpa qui officia deserunt mollit anim id
       est laborum.
     </p>
-    <button (click)="changeToast()">Change toast!</button>
+    <button (click)="changeToast()" data-automation-id="toast-usage-change-button">Change toast!</button>
   </div>
 </div>

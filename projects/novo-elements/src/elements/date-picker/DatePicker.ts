@@ -4,7 +4,7 @@ import { ChangeDetectorRef, Component, ElementRef, EventEmitter, forwardRef, Hos
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 // Vendor
-import { isDate, isValid, subDays } from 'date-fns';
+import { Day, isDate, isValid, subDays } from 'date-fns';
 // APP
 import { NovoLabelService } from 'novo-elements/services';
 import { BooleanInput, DataTableRangeModel, DatePickerSelectModes, DateUtil, Helpers, modelTypes, RangeModel, rangeSelectModes } from 'novo-elements/utils';

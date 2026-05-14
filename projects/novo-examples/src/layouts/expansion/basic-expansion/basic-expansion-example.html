@@ -1,5 +1,5 @@
-<novo-expansion-panel [disabled]="isDisabled">
-  <novo-expansion-panel-header>
+<novo-expansion-panel [disabled]="isDisabled" data-automation-id="expansion-basic">
+  <novo-expansion-panel-header data-automation-id="expansion-basic-header">
     <novo-panel-title>
       This is the expansion title
     </novo-panel-title>
@@ -7,10 +7,10 @@
       This is a summary of the content
     </novo-panel-description>
   </novo-expansion-panel-header>
-  <p>This is the primary content of the panel.</p>
+  <p data-automation-id="expansion-basic-content">This is the primary content of the panel.</p>
 </novo-expansion-panel>
-<div>
+<div data-automation-id="expansion-basic-options">
   <br/>
   <span>Is Disabled?</span>
-  <novo-switch theme="grapefruit" [(ngModel)]="isDisabled"></novo-switch>
+  <novo-switch theme="grapefruit" [(ngModel)]="isDisabled" data-automation-id="expansion-basic-toggle"></novo-switch>
 </div>

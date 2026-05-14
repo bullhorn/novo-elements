@@ -1,28 +1,28 @@
-<header [theme]="theme" condensed>
-  <novo-action icon="convert" tooltip="Change Theme" (click)="changeTheme()"></novo-action>
-  <novo-action icon="refresh" tooltip="Show Popup" (click)="catchEv('refresh', $event)"></novo-action>
-  <novo-action icon="times" tooltip="Show Popup" (click)="catchEv('close', $event)"></novo-action>
+<header [theme]="theme" condensed data-automation-id="header-condensed">
+  <novo-action icon="convert" tooltip="Change Theme" (click)="changeTheme()" data-automation-id="header-condensed-theme"></novo-action>
+  <novo-action icon="refresh" tooltip="Show Popup" (click)="catchEv('refresh', $event)" data-automation-id="header-condensed-refresh"></novo-action>
+  <novo-action icon="times" tooltip="Show Popup" (click)="catchEv('close', $event)" data-automation-id="header-condensed-close"></novo-action>
 
-  <novo-icon color="white" [name]="icon">{{icon}}</novo-icon>
-  <novo-title>
+  <novo-icon color="white" [name]="icon" data-automation-id="header-condensed-icon">{{icon}}</novo-icon>
+  <novo-title data-automation-id="header-condensed-title">
     <span class="id">123456</span>
     <novo-divider vertical></novo-divider>
     <span class="name">Steve Jobs</span>
   </novo-title>
-  <section class="links">
-    <button theme="icon" color="white" [icon]="'google'"></button>
-    <button theme="icon" color="white" [icon]="'linkedin-f'"></button>
-    <button theme="icon" color="white" [icon]="'location'"></button>
+  <section class="links" data-automation-id="header-condensed-links">
+    <button theme="icon" color="white" [icon]="'google'" data-automation-id="header-condensed-google"></button>
+    <button theme="icon" color="white" [icon]="'linkedin-f'" data-automation-id="header-condensed-linkedin"></button>
+    <button theme="icon" color="white" [icon]="'location'" data-automation-id="header-condensed-location"></button>
   </section>
 </header>
-<novo-nav theme="white" direction="horizontal">
-  <novo-tab>
+<novo-nav theme="white" direction="horizontal" data-automation-id="header-condensed-nav">
+  <novo-tab data-automation-id="header-condensed-overview">
     <span>Overview</span>
   </novo-tab>
-  <novo-tab>
+  <novo-tab data-automation-id="header-condensed-activity">
     <span>Activity</span>
   </novo-tab>
-  <novo-tab>
+  <novo-tab data-automation-id="header-condensed-email">
     <span>Email</span>
   </novo-tab>
 </novo-nav>

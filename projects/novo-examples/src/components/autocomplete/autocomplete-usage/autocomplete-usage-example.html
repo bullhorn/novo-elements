@@ -1,13 +1,14 @@
 <form class="example-form">
-  <novo-field class="example-full-width">
+  <novo-field class="example-full-width" data-automation-id="autocomplete-usage-field">
     <novo-label>Number</novo-label>
     <input type="text"
       novoInput
       [formControl]="myControl"
       placeholder="Pick one"
-      autocomplete="off" />
-    <novo-autocomplete #auto>
-      <novo-option *ngFor="let option of filteredOptions | async" [value]="option">
+      autocomplete="off"
+      data-automation-id="autocomplete-usage-input" />
+    <novo-autocomplete #auto data-automation-id="autocomplete-usage">
+      <novo-option *ngFor="let option of filteredOptions | async; index as i" [value]="option" [attr.data-automation-id]="'autocomplete-usage-option-' + i">
         {{option}}
       </novo-option>
     </novo-autocomplete>

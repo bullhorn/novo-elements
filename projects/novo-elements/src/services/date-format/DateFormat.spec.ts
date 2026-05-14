@@ -20,17 +20,17 @@ describe('Service: DateFormatService', () => {
     });
     it('should return a mask that supports dd.MM.yyyy', () => {
       const value = '11.02.2017';
-      const dateMask = service.getDateMask() as IMaskRegexOpts;;
+      const dateMask = service.getDateMask() as IMaskRegexOpts;
       expect(dateMask.mask.test(value)).toBeTruthy();
     });
     it('should return a mask that supports d/M/yyyy', () => {
       const value = '1/2/2017';
-      const dateMask = service.getDateMask() as IMaskRegexOpts;;
+      const dateMask = service.getDateMask() as IMaskRegexOpts;
       expect(dateMask.mask.test(value)).toBeTruthy();
     });
     it('should return a mask that supports M/d/yyyy', () => {
       const value = '11/2/2017';
-      const dateMask = service.getDateMask() as IMaskRegexOpts;;
+      const dateMask = service.getDateMask() as IMaskRegexOpts;
       expect(dateMask.mask.test(value)).toBeTruthy();
     });
   });

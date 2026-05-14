@@ -1,6 +1,7 @@
 // NG2
 import { AfterViewInit, Component, EventEmitter, forwardRef, Input, NgZone, OnDestroy, Output, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { fixCkEditorInputEvent } from 'novo-elements/utils';
 
 // Value accessor for the component (supports ngModel)
 const CKEDITOR_CONTROL_VALUE_ACCESSOR = {
@@ -10,11 +11,7 @@ const CKEDITOR_CONTROL_VALUE_ACCESSOR = {
 };
 
 declare const CKEDITOR: any;
-declare global {
-  interface Window {
-    CKEDITOR: any;
-  }
-}
+
 // Prevents CKEDITOR from querying the page for all [contenteditable] elements (fixes a conflict against Codemirror Editor)
 try {
   CKEDITOR.disableAutoInline = true;
@@ -68,6 +65,7 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlVal
   _value: string = '';
   instance;
   debounceTimeout;
+  private _ckEditorFixRemoveListener?: () => void;
 
   constructor(private zone: NgZone) {}
 
@@ -86,6 +84,7 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlVal
   ngOnDestroy() {
     if (this.instance) {
       this.instance.focusManager.blur(true); // Remove focus from editor
+      this._ckEditorFixRemoveListener?.();
       setTimeout(() => {
         this.instance.removeAllListeners();
         const aInstance = CKEDITOR.instances[this.instance.name];
@@ -126,6 +125,7 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlVal
 
     // CKEditor replace textarea
     this.instance = CKEDITOR.replace(this.host.nativeElement, config);
+    this._ckEditorFixRemoveListener = fixCkEditorInputEvent(this.instance);
 
     // Set initial value
     this.instance.setData(this.value);

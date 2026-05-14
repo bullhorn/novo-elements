@@ -218,7 +218,7 @@ export class NovoSelectElement
   name: string = this._uniqueId;
   @Input()
   placeholder: string = 'Select...';
-  @Input()
+  @Input({ transform: booleanAttribute })
   readonly: boolean;
   @Input()
   headerConfig: any;
@@ -267,7 +267,7 @@ export class NovoSelectElement
   onModelTouched: Function = () => {};
   filterTerm: string = '';
   filterTermTimeout;
-  filteredOptions: any;
+  filteredOptions: any = [];
   disabled: boolean = false;
 
   /** Element for the panel containing the autocomplete options. */
@@ -469,7 +469,7 @@ export class NovoSelectElement
     this.focusMonitor.stopMonitoring(this.elementRef.nativeElement);
   }
 
-  @HostListener('click', ['$event'])
+  @HostListener('click')
   onClick() {
     this.togglePanel();
     return false;
@@ -612,7 +612,8 @@ export class NovoSelectElement
     // Simply falling back to an empty string if the display value is falsy does not work properly.
     // The display value can also be the number zero and shouldn't fall back to an empty string.
     let displayValue = toDisplay != null ? toDisplay : '';
-    if (displayValue != '') { // eslint-disable-line
+    // eslint-disable-next-line eqeqeq
+    if (displayValue != '') {
       this._lingeringDisplayValue = displayValue;
     } else if (this._lingeringDisplayValue) {
       displayValue = this._lingeringDisplayValue;
@@ -824,7 +825,8 @@ export class NovoSelectElement
         this._keyManager.setFirstItemActive();
       } else {
         const options = this._getOptions();
-        const index = options.findIndex(option => option.value == this._value) // eslint-disable-line
+        // eslint-disable-next-line eqeqeq
+        const index = options.findIndex(option => option.value == this._value)
         this._keyManager.setActiveItem(index);
       }
     }

@@ -1,5 +1,5 @@
 // NG2
-import { Injectable } from '@angular/core';
+import { DestroyRef, Injectable, ViewContainerRef } from '@angular/core';
 import { ComponentUtils } from 'novo-elements/services';
 // APP
 import { NovoToastElement } from './Toast';
@@ -31,7 +31,18 @@ export class NovoToastService {
   constructor(private componentUtils: ComponentUtils) {}
 
   set parentViewContainer(view) {
+    console.warn('parentViewContainer is deprecated. Use ownViewContainer(view, destroyRef) to promote lifecycle management');
     this._parentViewContainer = view;
+  }
+
+  ownViewContainer(view: ViewContainerRef, destroyRef: DestroyRef) {
+    this._parentViewContainer = view;
+    const weakView = new WeakRef(view);
+    destroyRef.onDestroy(() => {
+      if (this._parentViewContainer === weakView.deref()) {
+        this._parentViewContainer = null;
+      }
+    })
   }
 
   alert(options: ToastOptions, toastElement: any = NovoToastElement): Promise<any> {

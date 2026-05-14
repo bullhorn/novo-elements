@@ -1,12 +1,14 @@
 <span novoPopover="If the placement of the PopOver will make it appear off-screen, then it will be automatically adjusted to appear on the opposite side. For example: this PopOver should appear below the element.&#13;&#10; &#13;&#10; &#13;&#10;Need to make extra space so this PopOver would actually appear below the screen."
     popoverTitle="PopOver Moves to Top if near Bottom of Screen"
     popoverPlacement="bottom"
-    [popoverOnHover]="true">
+    [popoverOnHover]="true"
+    data-automation-id="popover-auto-placement-first">
     Hover Me
 </span>
 <span novoPopover="Too small to drop below screen."
     popoverTitle="PopOver Won't Change"
     popoverPlacement="bottom"
-    [popoverOnHover]="true">
+    [popoverOnHover]="true"
+    data-automation-id="popover-auto-placement-second">
     Hover Me Next
 </span>
