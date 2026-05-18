@@ -23,6 +23,7 @@ export const COMPONENT_URLS = {
     QUERY_BUILDER: 'query builder',
     SWITCH: 'switch',
     POPOVER: 'pop over',
+    TOOLBAR: 'toolbar',
 };
 
 export function examplesUrl(component: string): string {
