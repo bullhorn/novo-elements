@@ -20,7 +20,7 @@ import { NovoText } from './typography/text/text.component';
 import { NovoTitle } from './typography/title/title.component';
 
 @NgModule({
-  imports: [CommonModule, NovoOptionModule],
+  imports: [CommonModule, NovoOptionModule, ActivateDirective],
   exports: [
     NovoTemplate,
     NovoText,
@@ -49,7 +49,6 @@ import { NovoTitle } from './typography/title/title.component';
     NovoCaption,
     NovoLabel,
     NovoLink,
-    ActivateDirective,
     MarginDirective,
     PaddingDirective,
     BackgroundColorDirective,

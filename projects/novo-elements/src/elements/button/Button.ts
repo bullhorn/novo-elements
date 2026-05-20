@@ -153,6 +153,9 @@ export class NovoButtonElement implements OnChanges {
     if (this.inputTabindex) {
       return this.inputTabindex;
     }
+    if (this.disabled) {
+      return '-1';
+    }
     // If parent manages focus
     if (this.focusManagedContext) {
       // Remove native buttons from tab order
