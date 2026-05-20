@@ -58,6 +58,7 @@ import {
   NovoOverlayTemplateComponent,
 } from 'novo-elements/elements/common';
 import { NOVO_FORM_FIELD, NovoFieldControl, NovoFieldElement } from 'novo-elements/elements/field';
+import { FOCUS_MANAGED_CONTEXT } from 'novo-elements/elements/button';
 
 /** Change event object that is emitted when the select value has changed. */
 export class NovoSelectChange {
@@ -94,6 +95,7 @@ let nextId = 0;
     providers: [
         { provide: NovoFieldControl, useExisting: NovoSelectElement },
         { provide: NOVO_OPTION_PARENT_COMPONENT, useExisting: NovoSelectElement },
+        { provide: FOCUS_MANAGED_CONTEXT, useValue: true },
     ],
     template: `
     <div class="novo-select-trigger">

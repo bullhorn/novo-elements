@@ -565,7 +565,7 @@ export function focusWalker(startingPosition: HTMLElement, opts?: Partial<NextFo
   opts = { ...NEXT_FOCUS_OPTS_DEFAULT, ...opts };
   return startingPosition.ownerDocument.createTreeWalker(startingPosition, NodeFilter.SHOW_ELEMENT, {
     acceptNode(node: HTMLElement) {
-      if (!opts.allowExit && !startingPosition.contains(node)) {
+      if ((!opts.allowExit && !startingPosition.contains(node)) || !node.checkVisibility()) {
         return NodeFilter.FILTER_REJECT;
       }
       if (node.tabIndex === 0 || FOCUSABLE_ELEMENTS.includes(node.tagName)) {
