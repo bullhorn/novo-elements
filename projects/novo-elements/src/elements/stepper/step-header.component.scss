@@ -11,7 +11,9 @@ $novo-step-header-icon-size: 1em !default;
 
 :host {
   overflow: visible;
-  outline: none;
+  &:not(:focus-visible) {
+    outline: none;
+  }
   cursor: pointer;
   position: relative;
 

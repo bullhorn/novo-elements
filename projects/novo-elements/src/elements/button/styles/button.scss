@@ -65,7 +65,9 @@
   }
 
   &:focus {
-    outline: none;
+    &:not(:focus-visible) {
+      outline: none;
+    }
   }
 
   &:focus-visible {

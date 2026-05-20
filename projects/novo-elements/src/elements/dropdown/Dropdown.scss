@@ -3,7 +3,9 @@
 :host {
   display: inline-block;
   position: relative;
-  outline: none;
+  &:not(:focus-visible) {
+    outline: none;
+  }
   ::ng-deep .novo-dropdown-trigger {
     cursor: pointer;
     -webkit-appearance: none;

@@ -45,7 +45,9 @@
 
     &:focus,
     &:active {
-      outline: none;
+      &:not(:focus-visible) {
+        outline: none;
+      }
     }
   }
 
