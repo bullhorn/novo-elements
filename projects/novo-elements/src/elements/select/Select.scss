@@ -186,9 +186,7 @@
         color: #a9a9a9;
       }
       &:focus {
-        &:not(:focus-visible) {
-          outline: none;
-        }
+        outline: none;
       }
       &:hover {
         border-bottom: 1px solid $positive;

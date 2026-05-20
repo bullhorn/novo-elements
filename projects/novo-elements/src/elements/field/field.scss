@@ -62,9 +62,7 @@
         border-bottom: none !important;
 
         &:focus {
-          &:not(:focus-visible) {
-            outline: none;
-          }
+          outline: none;
         }
       }
 

@@ -14,9 +14,7 @@
     border-bottom: 1px solid $light;
     background: transparent !important;
     border-radius: 0;
-    &:not(:focus-visible) {
-      outline: none;
-    }
+    outline: none;
     height: 2rem;
     width: 100%;
     margin: 0;

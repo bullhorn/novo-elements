@@ -23,9 +23,7 @@ input[type="range"] {
 }
 
 input[type="range"]:focus {
-  &:not(:focus-visible) {
-    outline: none;
-  }
+  outline: none;
 }
 
 input[type="range"]::-webkit-slider-runnable-track {
