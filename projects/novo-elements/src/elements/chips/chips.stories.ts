@@ -258,6 +258,42 @@ export const UsageGuide: Story = {
  * bound so every control in the panel mutates the render.
  */
 export const Default: Story = {
+  parameters: {
+    docs: {
+      source: {
+        language: 'typescript',
+        code: `// component.ts
+import { Component } from '@angular/core';
+import { NovoChipsModule } from 'novo-elements';
+
+@Component({
+  selector: 'my-chip-demo',
+  imports: [NovoChipsModule],
+  templateUrl: './my-chip-demo.component.html',
+})
+export class MyChipDemoComponent {
+  color?: string;
+  size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' = 'md';
+  selectable = false;
+  selected = false;
+  removable = true;
+  disabled = false;
+}
+
+// component.html
+<novo-chip
+  [color]="color"
+  [size]="size"
+  [selectable]="selectable"
+  [selected]="selected"
+  [removable]="removable"
+  [disabled]="disabled"
+>
+  Chip Label
+</novo-chip>`,
+      },
+    },
+  },
   args: {
     color: undefined,
     size: 'md',
@@ -295,7 +331,37 @@ export const Default: Story = {
  * of that type.
  */
 export const Colors: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'typescript',
+        code: `// component.ts
+import { Component } from '@angular/core';
+import { NovoChipsModule } from 'novo-elements';
+
+@Component({
+  selector: 'my-chip-colors',
+  imports: [NovoChipsModule],
+  templateUrl: './my-chip-colors.component.html',
+})
+export class MyChipColorsComponent {}
+
+// component.html
+<novo-chip-list>
+  <novo-chip>Default</novo-chip>
+  <novo-chip color="success">Success</novo-chip>
+  <novo-chip color="negative">Negative</novo-chip>
+  <novo-chip color="warning">Warning</novo-chip>
+  <novo-chip color="info">Info</novo-chip>
+  <novo-chip color="ocean">Ocean</novo-chip>
+  <novo-chip color="candidate">Candidate</novo-chip>
+  <novo-chip color="job">Job</novo-chip>
+  <novo-chip color="company">Company</novo-chip>
+</novo-chip-list>`,
+      },
+    },
+  },
   render: () => ({
     template: `
       <novo-chip-list>
@@ -322,7 +388,31 @@ export const Colors: Story = {
  * most usages should.
  */
 export const Sizes: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'typescript',
+        code: `// component.ts
+import { Component } from '@angular/core';
+import { NovoChipsModule } from 'novo-elements';
+
+@Component({
+  selector: 'my-chip-sizes',
+  imports: [NovoChipsModule],
+  templateUrl: './my-chip-sizes.component.html',
+})
+export class MyChipSizesComponent {}
+
+// component.html
+<novo-chip size="xs">Extra small</novo-chip>
+<novo-chip size="sm">Small</novo-chip>
+<novo-chip size="md">Medium</novo-chip>
+<novo-chip size="lg">Large</novo-chip>
+<novo-chip size="xl">Extra large</novo-chip>`,
+      },
+    },
+  },
   render: () => ({
     template: `
       <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
@@ -347,7 +437,41 @@ export const Sizes: Story = {
  * corresponding value from the backing array in response.
  */
 export const WithRemove: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'typescript',
+        code: `// component.ts
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { NovoChipsModule, NovoIconModule } from 'novo-elements';
+
+// The remove icon emits (removed); the parent decides whether to tear the
+// chip down. Typical pattern: drop the value from a backing array.
+@Component({
+  selector: 'my-chips-removable',
+  imports: [CommonModule, NovoChipsModule, NovoIconModule],
+  templateUrl: './my-chips-removable.component.html',
+})
+export class MyChipsRemovableComponent {
+  tags = ['Angular', 'TypeScript', 'Storybook'];
+
+  onRemove(tag: string) {
+    this.tags = this.tags.filter((t) => t !== tag);
+  }
+}
+
+// component.html
+<novo-chip-list>
+  <novo-chip *ngFor="let tag of tags" (removed)="onRemove(tag)">
+    {{ tag }}
+    <novo-icon novoChipRemove>times</novo-icon>
+  </novo-chip>
+</novo-chip-list>`,
+      },
+    },
+  },
   render: () => ({
     template: `
       <novo-chip-list>
@@ -379,7 +503,41 @@ export const WithRemove: Story = {
  * etc.).
  */
 export const WithAvatar: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'typescript',
+        code: `// component.ts
+import { Component } from '@angular/core';
+import { NovoChipsModule, NovoIconModule } from 'novo-elements';
+
+// NovoIconModule needed for the projected <novo-icon novoChipAvatar> slot.
+@Component({
+  selector: 'my-chips-with-avatar',
+  imports: [NovoChipsModule, NovoIconModule],
+  templateUrl: './my-chips-with-avatar.component.html',
+})
+export class MyChipsWithAvatarComponent {}
+
+// component.html
+<novo-chip-list>
+  <novo-chip color="candidate">
+    <novo-icon novoChipAvatar>candidate</novo-icon>
+    Jane Doe
+  </novo-chip>
+  <novo-chip color="job">
+    <novo-icon novoChipAvatar>job</novo-icon>
+    Senior Engineer
+  </novo-chip>
+  <novo-chip color="company">
+    <novo-icon novoChipAvatar>company</novo-icon>
+    Acme Corp
+  </novo-chip>
+</novo-chip-list>`,
+      },
+    },
+  },
   render: () => ({
     template: `
       <novo-chip-list>
@@ -410,7 +568,37 @@ export const WithAvatar: Story = {
  * the `novoChipRemove` handler even if the icon is projected.
  */
 export const Disabled: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'typescript',
+        code: `// component.ts
+import { Component } from '@angular/core';
+import { NovoChipsModule, NovoIconModule } from 'novo-elements';
+
+@Component({
+  selector: 'my-chips-disabled',
+  imports: [NovoChipsModule, NovoIconModule],
+  templateUrl: './my-chips-disabled.component.html',
+})
+export class MyChipsDisabledComponent {}
+
+// component.html
+<novo-chip-list>
+  <novo-chip disabled>Disabled</novo-chip>
+  <novo-chip disabled color="success">
+    <novo-icon novoChipAvatar>check</novo-icon>
+    Disabled with avatar
+  </novo-chip>
+  <novo-chip disabled>
+    Disabled removable
+    <novo-icon novoChipRemove>times</novo-icon>
+  </novo-chip>
+</novo-chip-list>`,
+      },
+    },
+  },
   render: () => ({
     template: `
       <novo-chip-list>
@@ -438,7 +626,39 @@ export const Disabled: Story = {
  * id while showing a custom-formatted display label.
  */
 export const Formatted: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'typescript',
+        code: `// component.ts
+import { Component } from '@angular/core';
+import { NovoChipsModule, NovoIconModule } from 'novo-elements';
+
+// Project rich content as the label. Set [value] when the underlying id
+// differs from the display label.
+@Component({
+  selector: 'my-chips-formatted',
+  imports: [NovoChipsModule, NovoIconModule],
+  templateUrl: './my-chips-formatted.component.html',
+})
+export class MyChipsFormattedComponent {}
+
+// component.html
+<novo-chip-list>
+  <novo-chip color="candidate" value="1234">
+    <novo-icon novoChipAvatar>candidate</novo-icon>
+    <strong>Jane Doe</strong>&nbsp;— Senior Engineer
+    <novo-icon novoChipRemove>times</novo-icon>
+  </novo-chip>
+  <novo-chip color="info">
+    <novo-icon novoChipAvatar>bell</novo-icon>
+    3 new notifications
+  </novo-chip>
+</novo-chip-list>`,
+      },
+    },
+  },
   render: () => ({
     template: `
       <novo-chip-list>
@@ -471,6 +691,46 @@ export const Formatted: Story = {
  */
 export const Playground: Story = {
   name: '🎮 Playground',
+  parameters: {
+    docs: {
+      source: {
+        language: 'typescript',
+        code: `// component.ts
+import { Component } from '@angular/core';
+import { NovoChipsModule, NovoIconModule } from 'novo-elements';
+
+@Component({
+  selector: 'my-chip-playground',
+  imports: [NovoChipsModule, NovoIconModule],
+  templateUrl: './my-chip-playground.component.html',
+})
+export class MyChipPlaygroundComponent {
+  color?: string;
+  size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' = 'md';
+  selectable = true;
+  selected = false;
+  removable = true;
+  disabled = false;
+  value = 'chip-1';
+}
+
+// component.html
+<novo-chip
+  [color]="color"
+  [size]="size"
+  [selectable]="selectable"
+  [selected]="selected"
+  [removable]="removable"
+  [disabled]="disabled"
+  [value]="value"
+>
+  <novo-icon novoChipAvatar>candidate</novo-icon>
+  Playground Chip
+  <novo-icon novoChipRemove>times</novo-icon>
+</novo-chip>`,
+      },
+    },
+  },
   args: {
     color: undefined,
     size: 'md',

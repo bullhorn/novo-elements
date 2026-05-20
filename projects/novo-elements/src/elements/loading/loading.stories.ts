@@ -234,6 +234,15 @@ export const Default: Story = {
   args: {
     size: 'medium',
   },
+  parameters: {
+    docs: {
+      source: {
+        language: 'html',
+        code: `<!-- NovoLoadingModule -->
+<novo-loading></novo-loading>`,
+      },
+    },
+  },
   render: (args) => ({
     props: args,
     template: `
@@ -255,7 +264,15 @@ export const Default: Story = {
  * view, content inside a modal, or while refreshing a table.
  */
 export const Line: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'html',
+        code: `<novo-loading></novo-loading>`,
+      },
+    },
+  },
   render: () => ({
     template: `
       <div style="display: flex; align-items: center; min-height: 80px;">
@@ -275,7 +292,17 @@ export const Line: Story = {
  * inside a button while a save / submit is pending.
  */
 export const Spinner: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'html',
+        code: `<novo-spinner></novo-spinner>
+<novo-spinner color="ocean"></novo-spinner>
+<novo-spinner color="mint"></novo-spinner>`,
+      },
+    },
+  },
   render: () => ({
     template: `
       <div style="display: flex; align-items: center; gap: 1.5rem; min-height: 80px;">
@@ -296,7 +323,21 @@ export const Spinner: Story = {
  * leave `size` unset to inherit the default `medium`.
  */
 export const Sizes: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'html',
+        code: `<novo-loading size="small"></novo-loading>
+<novo-loading size="medium"></novo-loading>
+<novo-loading size="large"></novo-loading>
+
+<novo-spinner size="small"></novo-spinner>
+<novo-spinner size="medium"></novo-spinner>
+<novo-spinner size="large"></novo-spinner>`,
+      },
+    },
+  },
   render: () => ({
     template: `
       <div style="display: flex; gap: 1.5rem; align-items: center;">
@@ -322,7 +363,18 @@ export const Sizes: Story = {
  * default multi-color rotating animation, which is the most common choice.
  */
 export const Colors: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'html',
+        code: `<novo-loading color="grapefruit"></novo-loading>
+<novo-loading color="aqua"></novo-loading>
+<novo-loading color="mint"></novo-loading>
+<novo-loading color="ocean"></novo-loading>`,
+      },
+    },
+  },
   render: () => ({
     template: `
       <div style="display: grid; grid-template-columns: repeat(2, max-content); gap: 0.5rem 1.5rem; align-items: center;">
@@ -345,7 +397,18 @@ export const Colors: Story = {
  * when nested inside a `theme="primary"` button.
  */
 export const SpinnerInverse: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'html',
+        code: `<!-- inverse flips the dots to white so the spinner reads on dark backgrounds -->
+<novo-spinner inverse></novo-spinner>
+<novo-spinner inverse size="small"></novo-spinner>
+<novo-spinner inverse size="large"></novo-spinner>`,
+      },
+    },
+  },
   render: () => ({
     template: `
       <div style="
@@ -378,6 +441,14 @@ export const Playground: Story = {
   args: {
     color: undefined,
     size: 'medium',
+  },
+  parameters: {
+    docs: {
+      source: {
+        language: 'html',
+        code: `<novo-loading color="ocean" size="medium"></novo-loading>`,
+      },
+    },
   },
   render: (args) => ({
     props: args,

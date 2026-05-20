@@ -225,6 +225,19 @@ export const Default: Story = {
     vertical: false,
     inset: false,
   },
+  parameters: {
+    docs: {
+      source: {
+        language: 'html',
+        code: `<!-- NovoDividerModule -->
+<div>
+  <div>Content above the divider</div>
+  <novo-divider></novo-divider>
+  <div>Content below the divider</div>
+</div>`,
+      },
+    },
+  },
   render: (args) => ({
     props: args,
     template: `
@@ -246,7 +259,21 @@ export const Default: Story = {
  * width. Use to separate stacked groups of related content.
  */
 export const Horizontal: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'html',
+        code: `<div>
+  <div>First section</div>
+  <novo-divider></novo-divider>
+  <div>Second section</div>
+  <novo-divider></novo-divider>
+  <div>Third section</div>
+</div>`,
+      },
+    },
+  },
   render: () => ({
     template: `
       <div style="max-width: 360px;">
@@ -270,7 +297,21 @@ export const Horizontal: Story = {
  * between items inside a flex/inline-flex container.
  */
 export const Vertical: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'html',
+        code: `<div style="display: flex; align-items: center; height: 1.5rem;">
+  <span>Edit</span>
+  <novo-divider vertical></novo-divider>
+  <span>Duplicate</span>
+  <novo-divider vertical></novo-divider>
+  <span>Delete</span>
+</div>`,
+      },
+    },
+  },
   render: () => ({
     template: `
       <div style="display: flex; align-items: center; height: 1.5rem;">
@@ -294,7 +335,23 @@ export const Vertical: Story = {
  * with the row's content rather than the row's container.
  */
 export const Inset: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'html',
+        code: `<!-- Inset (80px) aligns the rule with the row content rather than
+     the leading avatar/icon column. -->
+<div>
+  <div class="row"><img class="avatar" /> Alex Morgan</div>
+  <novo-divider inset></novo-divider>
+  <div class="row"><img class="avatar" /> Jamie Rivera</div>
+  <novo-divider inset></novo-divider>
+  <div class="row"><img class="avatar" /> Sam Patel</div>
+</div>`,
+      },
+    },
+  },
   render: () => ({
     template: `
       <div style="max-width: 360px;">
@@ -330,6 +387,14 @@ export const Playground: Story = {
   args: {
     vertical: false,
     inset: false,
+  },
+  parameters: {
+    docs: {
+      source: {
+        language: 'html',
+        code: `<novo-divider [vertical]="false" [inset]="false"></novo-divider>`,
+      },
+    },
   },
   render: (args) => ({
     props: args,

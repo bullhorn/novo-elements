@@ -98,9 +98,49 @@ export const Skeleton: StoryObj<NovoLoadingElement & { isLoading: boolean }> = {
 
 This is required because Storybook's auto-derived `argTypes` lock to the meta component's inputs.
 
-**Form control two-way binding.** Stories for `ngModel`-bound controls (checkbox, radio, switch, etc.) need `FormsModule` in `moduleMetadata.imports` and a story-local arg the template binds with `[(ngModel)]="..."`. For Tier 2 this should be promoted to a shared decorator in `.storybook/preview.ts` rather than repeated per story.
+**Form control two-way binding.** `FormsModule` and `ReactiveFormsModule` are imported globally via the `moduleMetadata` decorator in [.storybook/preview.ts](projects/novo-elements/.storybook/preview.ts). Form-control stories can use `[(ngModel)]` and reactive bindings without per-story imports.
 
-**Composing modules in story imports.** A component's NgModule typically imports its dependencies (`NovoIconModule`, etc.) for its *own* templates but doesn't necessarily re-export them. If a story's template uses a peer component directly (e.g. `<novo-icon>` inside a `<novo-chip>` story), you must explicitly import that peer's module in `moduleMetadata.imports` alongside the primary one. Symptom when missed: the peer element renders as a bare custom element with its inner text leaking through (no Angular component lifecycle, no styling).
+**Global providers via `applicationConfig`.** A few novo-elements services are declared `@Injectable()` without `providedIn: 'root'` — the library exports a provider set (`NOVO_ELEMENTS_LABELS_PROVIDERS`) that consumers register at their application's root injector. Storybook needs the same registration via the `applicationConfig` decorator in [.storybook/preview.ts](projects/novo-elements/.storybook/preview.ts) so components like `<novo-slider>`, the date pickers, and form-error machinery don't throw NG0201 on render. When Tier 3+ components surface additional root-level provider needs (e.g. CDK `Overlay`, breakpoint observers, custom locale providers), add them to the same `providers` array — not per-story.
+
+**Wrappers (`field`, `form`).** The wrapper components don't have meaningful standalone stories — always demo them *containing* their typical contents (an input/select/etc. inside a `<novo-field>`).
+
+**Picker source data.** Stories for `<novo-select>`, `<novo-select-search>`, `<novo-autocomplete>`, and similar source-driven components use inline static option arrays per story. If duplication gets ugly later, promote to a shared mock-data module in `.storybook/`.
+
+**`play` functions for interactive open states.** Stories where the meaningful visual is *after* a user interaction (calendar open, dropdown open, modal opened, etc.) must include a `play` function that drives the open. This is what makes visual regression (Chromatic / Playwright + test-runner) snapshot the interesting frame rather than the closed initial render.
+
+```ts
+import { userEvent, within, expect } from 'storybook/test';
+
+export const Opened: Story = {
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole('button', { name: /pick a date/i }));
+    await expect(canvas.getByRole('dialog')).toBeVisible();
+  },
+};
+```
+
+**CDK overlays portal to `document.body`.** Select panels, autocomplete overlays, color/date pickers, and any other CDK-overlay-backed surface are rendered outside the story's canvas root. Queries for elements inside the overlay must run against `document.body`, not `canvasElement`:
+
+```ts
+const canvas = within(canvasElement);
+await userEvent.click(canvas.getByRole('combobox'));   // open
+
+const body = within(document.body);                    // overlay lives here
+await expect(await body.findByRole('listbox')).toBeVisible();
+```
+
+**Play parity across tiers.** Every Tier 2+ component should ship at least one play function — a smoke test that exercises the meaningful interaction (open the picker, click Next on the carousel, surface the validation error). The goal isn't coverage parity with unit tests; it's giving visual regression a deterministic interaction to snapshot per component.
+
+**Composing modules in story imports.** A component's NgModule typically imports its dependencies (`NovoIconModule`, etc.) for its *own* templates but doesn't necessarily re-export them. If a story's template uses a peer component directly (e.g. `<novo-icon>` inside a `<novo-chip>` story), you must explicitly import that peer's module in `moduleMetadata.imports` alongside the primary one. Symptom when missed: the peer element renders as a bare custom element with its inner text leaking through (no Angular component lifecycle, no styling) — no console error, so it's easy to miss until visual review. Recurring offenders worth memorizing:
+
+- `<novo-icon>` lives in `NovoIconModule`, not re-exported by `NovoChipsModule` or `NovoFieldModule`.
+- `<novo-option>` and `<novo-optgroup>` live in `NovoOptionModule` (under `novo-elements/elements/common`), not re-exported by `NovoSelectModule` / `NovoAutocompleteModule` / `NovoSelectSearchModule`.
+- `<novo-text>` lives in `NovoCommonModule`.
+
+**Escape literal braces in UsageGuide template strings.** Story `template:` strings are parsed by Angular as templates, so any literal `{` triggers interpolation parsing and crashes the story with "Unexpected character EOF" if no closing `}}` follows. When showing example object literals (`{ r: 218, g: 66, b: 83 }`) or code snippets in a UsageGuide, escape the braces as HTML entities (`&#123;` / `&#125;`) — or use the Angular-recommended `{{ '{' }}` interpolation. Pure text outside angle brackets is the most common offender.
+
+**Canonical-recipe source overrides.** Storybook's auto-extracted "Show code" for a story shows the render-function source — which includes story plumbing (helper functions used to sidestep DI, template strings with `props` references, etc.) that a consumer can't copy verbatim. When the auto-extracted source doesn't match the shape a consumer would write in their own app, override `parameters.docs.source.code` with a hand-written recipe: typically a `@Component({...})` shell with the canonical inputs and matching template. Both the Docs view's "Show code" toggle and the bottom-dock Code panel render this override. Worth doing on every story for `form`, `dynamic-form`, and any other component where the story uses helper utilities the consumer wouldn't.
 
 ### Sidebar order for Button (reference)
 
@@ -124,15 +164,19 @@ All 9 Tier 1 components have stories on `f/storybook-test`:
 | loading | Elements/Loading | UsageGuide, Default, Line, Spinner, Sizes, Colors, SpinnerInverse, Playground |
 | progress | Elements/Progress | UsageGuide, Default, Linear, Radial, Determinate, Indeterminate, Striped, Colors, MultiSegment, Disabled, Playground |
 
-### Component-improvement follow-ups surfaced during Tier 1
+### Component-improvement follow-ups
 
-Filed under Jira epic BH-101191 — Novo Elements improvements:
+Findings flagged during the Storybook rollout fall into two buckets:
+
+**Filed** — tickets under Jira epic BH-101191 — Novo Elements improvements:
 
 - BH-101192 — Avatar improvements: `background` getter crashes on undefined `source`; `ngOnInit` operator-precedence bug; `color` input is visually invisible by design; `<novo-avatar-stack>` hardcodes `+5` overflow label.
 - BH-101194 — Remove or fix Loading skeleton directive: `[isLoading]` / `[skeleton]` / `[loaded]` trio has inverted boolean semantics, fails on initial paint, and appears unused in the main app. Leaning toward delete. Skeleton story was dropped from `loading.stories.ts` pending resolution.
 - BH-101197 — Checkbox `layoutOptions`: source flags the input with `// TODO - avoid configs like this`; audit consumers, then deprecate or remove.
 - BH-101198 — Progress `flash` parent mutation: `<novo-progress-bar>` writes to its parent's `fitContainer` from `ngOnInit`; move the decision into the container.
 - BH-101199 — Loading `theme` `@deprecated` JSDoc: runtime `console.warn` exists, but no JSDoc tag so IDEs don't flag usages.
+
+**Unfiled** — see the working list for the working list of findings that haven't been promoted to tickets yet. Triage periodically: file what's worth fixing under BH-101191, delete entries that are decided-not-worth-fixing, and add new findings as they surface during story work. New issues spotted while authoring stories go into the backlog file first; only filed tickets are listed here.
 
 ---
 

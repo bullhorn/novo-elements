@@ -213,6 +213,21 @@ export const Default: Story = {
   args: {
     source: { firstName: 'Brian', lastName: 'Kimball' },
   },
+  parameters: {
+    docs: {
+      source: {
+        language: 'typescript',
+        code: `// NovoAvatarModule
+@Component({ ... })
+export class MyProfileComponent {
+  source = { firstName: 'Brian', lastName: 'Kimball' };
+}
+
+// template — source resolution: image > source.profileImage > derived initials
+<novo-avatar [source]="source"></novo-avatar>`,
+      },
+    },
+  },
   render: (args) => ({
     props: args,
     template: `
@@ -238,7 +253,31 @@ export const Default: Story = {
  * Omit `size` for the medium default.
  */
 export const Sizes: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'typescript',
+        code: `// component.ts
+import { Component } from '@angular/core';
+import { NovoAvatarModule } from 'novo-elements';
+
+@Component({
+  selector: 'my-avatar-sizes',
+  imports: [NovoAvatarModule],
+  templateUrl: './my-avatar-sizes.component.html',
+})
+export class MyAvatarSizesComponent {
+  person = { firstName: 'Aaron', lastName: 'Burr' };
+}
+
+// component.html
+<novo-avatar size="small" [source]="person"></novo-avatar>
+<novo-avatar size="medium" [source]="person"></novo-avatar>
+<novo-avatar size="large" [source]="person"></novo-avatar>`,
+      },
+    },
+  },
   render: () => ({
     template: `
       <div style="display: flex; gap: 1rem; align-items: center;">
@@ -259,7 +298,32 @@ export const Sizes: Story = {
  * change — pick by what the avatar *represents*, not by aesthetics.
  */
 export const Shapes: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'typescript',
+        code: `// component.ts
+import { Component } from '@angular/core';
+import { NovoAvatarModule } from 'novo-elements';
+
+// round for people, square for entities — pick by what the avatar represents.
+@Component({
+  selector: 'my-avatar-shapes',
+  imports: [NovoAvatarModule],
+  templateUrl: './my-avatar-shapes.component.html',
+})
+export class MyAvatarShapesComponent {
+  person = { firstName: 'Alexander', lastName: 'Hamilton' };
+  company = { name: 'Central Bank' };
+}
+
+// component.html
+<novo-avatar shape="round" [source]="person"></novo-avatar>
+<novo-avatar shape="square" [source]="company"></novo-avatar>`,
+      },
+    },
+  },
   render: () => ({
     template: `
       <div style="display: flex; gap: 1rem; align-items: center;">
@@ -281,7 +345,39 @@ export const Shapes: Story = {
  * color.
  */
 export const WithInitials: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'typescript',
+        code: `// component.ts
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { NovoAvatarModule } from 'novo-elements';
+
+// Initials derived from source.firstName + lastName, source.name's first
+// character, or a literal [label]. The gradient color is deterministic from
+// the first initial.
+@Component({
+  selector: 'my-avatar-initials',
+  imports: [CommonModule, NovoAvatarModule],
+  templateUrl: './my-avatar-initials.component.html',
+})
+export class MyAvatarInitialsComponent {
+  people = [
+    { firstName: 'Aaron', lastName: 'Burr' },
+    { firstName: 'Ben', lastName: 'Franklin' },
+    { firstName: 'Thomas', lastName: 'Jefferson' },
+  ];
+  company = { name: 'Central Bank' };
+}
+
+// component.html
+<novo-avatar *ngFor="let person of people" [source]="person"></novo-avatar>
+<novo-avatar [source]="company" shape="square"></novo-avatar>`,
+      },
+    },
+  },
   render: () => ({
     template: `
       <div style="display: flex; gap: 1rem; align-items: center;">
@@ -304,7 +400,35 @@ export const WithInitials: Story = {
  * derivable initials.
  */
 export const WithImage: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'typescript',
+        code: `// component.ts
+import { Component } from '@angular/core';
+import { NovoAvatarModule } from 'novo-elements';
+
+// [image] is a direct URL; source.profileImage (people) and source.logo
+// (companies) also work. Image takes precedence over derivable initials.
+@Component({
+  selector: 'my-avatar-image',
+  imports: [NovoAvatarModule],
+  templateUrl: './my-avatar-image.component.html',
+})
+export class MyAvatarImageComponent {
+  profileUrl = 'https://robohash.org/jgodi';
+  logoUrl = '/assets/images/logo.svg';
+  alex = { profileImage: 'https://robohash.org/alex' };
+}
+
+// component.html
+<novo-avatar [image]="profileUrl"></novo-avatar>
+<novo-avatar shape="square" [image]="logoUrl"></novo-avatar>
+<novo-avatar [source]="alex"></novo-avatar>`,
+      },
+    },
+  },
   render: () => ({
     template: `
       <div style="display: flex; gap: 1rem; align-items: center;">
@@ -342,7 +466,38 @@ export const WithImage: Story = {
  * unconditionally on init.)
  */
 export const Colors: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'typescript',
+        code: `// component.ts
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { NovoAvatarModule } from 'novo-elements';
+
+// WORKAROUND: pass [source]="{ profileImage: '' }" so the component skips
+// initials generation. Without this the host's color class is hidden by the
+// initials SVG. Tracked in the avatar improvements Jira ticket.
+@Component({
+  selector: 'my-avatar-colors',
+  imports: [CommonModule, NovoAvatarModule],
+  templateUrl: './my-avatar-colors.component.html',
+})
+export class MyAvatarColorsComponent {
+  colors = ['positive', 'negative', 'warning', 'info'];
+  emptySource = { profileImage: '' };
+}
+
+// component.html
+<novo-avatar
+  *ngFor="let c of colors"
+  [color]="c"
+  [source]="emptySource"
+></novo-avatar>`,
+      },
+    },
+  },
   render: () => ({
     template: `
       <div style="display: flex; gap: 1rem; align-items: center;">
@@ -369,7 +524,45 @@ export const Colors: Story = {
  * Controls are disabled here because the stack is a fixed matrix of children.
  */
 export const Stack: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'typescript',
+        code: `// component.ts
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { NovoAvatarModule } from 'novo-elements';
+
+// Overlap a group of avatars. [total] adds a +N overflow indicator when total
+// exceeds the projected avatar count.
+// NOTE: there's a known bug where the +N label is currently hardcoded to "+5"
+// regardless of the actual overflow — tracked in BH-101192.
+@Component({
+  selector: 'my-avatar-stack',
+  imports: [CommonModule, NovoAvatarModule],
+  templateUrl: './my-avatar-stack.component.html',
+})
+export class MyAvatarStackComponent {
+  people = [
+    { firstName: 'Aaron', lastName: 'Burr' },
+    { firstName: 'Alexander', lastName: 'Hamilton' },
+    { firstName: 'Ben', lastName: 'Franklin' },
+    { firstName: 'Thomas', lastName: 'Jefferson' },
+  ];
+}
+
+// component.html
+<novo-avatar-stack>
+  <novo-avatar *ngFor="let p of people" [source]="p"></novo-avatar>
+</novo-avatar-stack>
+
+<novo-avatar-stack [total]="8">
+  <novo-avatar *ngFor="let p of people.slice(0, 3)" [source]="p"></novo-avatar>
+</novo-avatar-stack>`,
+      },
+    },
+  },
   render: () => ({
     template: `
       <div style="display: flex; gap: 2rem; align-items: center; flex-wrap: wrap;">
@@ -400,6 +593,40 @@ export const Stack: Story = {
  */
 export const Playground: Story = {
   name: '🎮 Playground',
+  parameters: {
+    docs: {
+      source: {
+        language: 'typescript',
+        code: `// component.ts
+import { Component } from '@angular/core';
+import { NovoAvatarModule } from 'novo-elements';
+
+@Component({
+  selector: 'my-avatar-playground',
+  imports: [NovoAvatarModule],
+  templateUrl: './my-avatar-playground.component.html',
+})
+export class MyAvatarPlaygroundComponent {
+  source = { firstName: 'Brian', lastName: 'Kimball' };
+  image = '';
+  label = '';
+  size: 'small' | 'medium' | 'large' = 'large';
+  shape: 'round' | 'square' = 'round';
+  color?: string;
+}
+
+// component.html
+<novo-avatar
+  [source]="source"
+  [image]="image"
+  [label]="label"
+  [size]="size"
+  [shape]="shape"
+  [color]="color"
+></novo-avatar>`,
+      },
+    },
+  },
   args: {
     source: { firstName: 'Brian', lastName: 'Kimball' },
     image: '',

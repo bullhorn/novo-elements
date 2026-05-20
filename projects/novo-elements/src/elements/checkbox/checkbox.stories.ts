@@ -238,6 +238,21 @@ export const Default: Story = {
     disabled: false,
     required: false,
   },
+  parameters: {
+    docs: {
+      source: {
+        language: 'typescript',
+        code: `// NovoCheckboxModule + FormsModule
+@Component({ ... })
+export class MyTermsComponent {
+  accepted = false;
+}
+
+// template
+<novo-checkbox label="I agree to the terms" [(ngModel)]="accepted"></novo-checkbox>`,
+      },
+    },
+  },
   render: (args) => ({
     props: args,
     template: `
@@ -269,7 +284,32 @@ export const Default: Story = {
  * value remains boolean.
  */
 export const States: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'typescript',
+        code: `// component.ts
+import { Component } from '@angular/core';
+import { NovoCheckboxModule } from 'novo-elements';
+
+@Component({
+  selector: 'my-checkbox-states',
+  imports: [NovoCheckboxModule],
+  templateUrl: './my-checkbox-states.component.html',
+})
+export class MyCheckboxStatesComponent {}
+
+// component.html
+<novo-checkbox label="Unchecked"></novo-checkbox>
+<novo-checkbox label="Checked" [checked]="true"></novo-checkbox>
+<novo-checkbox label="Indeterminate" [checked]="true" [indeterminate]="true"></novo-checkbox>
+<novo-checkbox label="Disabled" [disabled]="true"></novo-checkbox>
+<novo-checkbox label="Disabled and Checked" [checked]="true" [disabled]="true"></novo-checkbox>
+<novo-checkbox label="Disabled and Indeterminate" [checked]="true" [indeterminate]="true" [disabled]="true"></novo-checkbox>`,
+      },
+    },
+  },
   render: () => ({
     template: `
       <div style="display: flex; flex-direction: column; gap: 0.5rem; align-items: flex-start;">
@@ -295,7 +335,54 @@ export const States: Story = {
  * on the next user click, so you only need to drive it from your child state.
  */
 export const Indeterminate: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'typescript',
+        code: `// component.ts
+import { Component } from '@angular/core';
+import { NovoCheckboxModule } from 'novo-elements';
+
+// Parent checkbox reflecting mixed child state. Drive [indeterminate] from
+// your child selection; the component auto-clears it on the next click.
+@Component({
+  selector: 'my-indeterminate-checkbox',
+  imports: [NovoCheckboxModule],
+  templateUrl: './my-indeterminate-checkbox.component.html',
+})
+export class MyIndeterminateCheckboxComponent {
+  children = [
+    { label: 'Option A', checked: true },
+    { label: 'Option B', checked: false },
+    { label: 'Option C', checked: true },
+  ];
+
+  get parentChecked() {
+    return this.children.every((c) => c.checked);
+  }
+  get parentIndeterminate() {
+    const checked = this.children.filter((c) => c.checked).length;
+    return checked > 0 && checked < this.children.length;
+  }
+}
+
+// component.html
+<novo-checkbox
+  label="Select all"
+  [checked]="parentChecked"
+  [indeterminate]="parentIndeterminate"
+></novo-checkbox>
+<div style="padding-left: 1.5rem;">
+  <novo-checkbox
+    *ngFor="let child of children"
+    [label]="child.label"
+    [(ngModel)]="child.checked"
+  ></novo-checkbox>
+</div>`,
+      },
+    },
+  },
   render: () => ({
     props: {
       parentChecked: true,
@@ -322,7 +409,34 @@ export const Indeterminate: Story = {
  * markup as content. The label still toggles the box on click.
  */
 export const ProjectedLabel: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'typescript',
+        code: `// component.ts
+import { Component } from '@angular/core';
+import { NovoCheckboxModule } from 'novo-elements';
+
+// Omit [label] and project markup as content. Clicking the label toggles the box.
+@Component({
+  selector: 'my-projected-label-checkbox',
+  imports: [NovoCheckboxModule],
+  templateUrl: './my-projected-label-checkbox.component.html',
+})
+export class MyProjectedLabelCheckboxComponent {}
+
+// component.html
+<novo-checkbox>
+  I accept the <a href="/terms" (click)="$event.stopPropagation()">Terms of Service</a>
+</novo-checkbox>
+
+<novo-checkbox>
+  <strong>Email me</strong> about product updates
+</novo-checkbox>`,
+      },
+    },
+  },
   render: () => ({
     template: `
       <div style="display: flex; flex-direction: column; gap: 0.5rem; align-items: flex-start;">
@@ -348,7 +462,28 @@ export const ProjectedLabel: Story = {
  * `ngModel` is the array of selected `value`s.
  */
 export const CheckList: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'typescript',
+        code: `// <novo-check-list> implements ControlValueAccessor; ngModel emits the
+// array of selected \`value\`s.
+@Component({ ... })
+export class MyChecklistComponent {
+  options = [
+    { label: 'Unchecked', checked: false, value: 1 },
+    { label: 'Checked',   checked: true,  value: 2 },
+    { label: 'Another option', checked: false, value: 3 },
+  ];
+  selected: number[] = [];
+}
+
+// template
+<novo-check-list [options]="options" [(ngModel)]="selected"></novo-check-list>`,
+      },
+    },
+  },
   render: () => ({
     props: {
       options1: [
@@ -386,6 +521,37 @@ export const CheckList: Story = {
  */
 export const Playground: Story = {
   name: '🎮 Playground',
+  parameters: {
+    docs: {
+      source: {
+        language: 'typescript',
+        code: `// component.ts
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { NovoCheckboxModule } from 'novo-elements';
+
+@Component({
+  selector: 'my-checkbox-playground',
+  imports: [FormsModule, NovoCheckboxModule],
+  templateUrl: './my-checkbox-playground.component.html',
+})
+export class MyCheckboxPlaygroundComponent {
+  label = 'Playground checkbox';
+  checked = false;
+  indeterminate = false;
+  disabled = false;
+}
+
+// component.html
+<novo-checkbox
+  [label]="label"
+  [(ngModel)]="checked"
+  [indeterminate]="indeterminate"
+  [disabled]="disabled"
+></novo-checkbox>`,
+      },
+    },
+  },
   args: {
     label: 'Playground checkbox',
     checked: false,

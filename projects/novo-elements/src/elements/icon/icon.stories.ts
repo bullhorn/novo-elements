@@ -189,6 +189,15 @@ export const Default: Story = {
   args: {
     name: 'candidate',
   },
+  parameters: {
+    docs: {
+      source: {
+        language: 'html',
+        code: `<!-- NovoIconModule -->
+<novo-icon name="candidate"></novo-icon>`,
+      },
+    },
+  },
   render: (args) => ({
     props: args,
     template: `
@@ -217,7 +226,21 @@ export const Default: Story = {
  * the entity itself.
  */
 export const Entities: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'html',
+        code: `<novo-icon theme="candidate" alt="Candidate">candidate</novo-icon>
+<novo-icon theme="job" alt="Job">job</novo-icon>
+<novo-icon theme="company" alt="Company">company</novo-icon>
+<novo-icon theme="lead" alt="Lead">lead</novo-icon>
+<novo-icon theme="opportunity" alt="Opportunity">opportunity</novo-icon>
+<novo-icon theme="submission" alt="Submission">star-o</novo-icon>
+<novo-icon theme="placement" alt="Placement">star</novo-icon>`,
+      },
+    },
+  },
   render: () => ({
     template: `
       <div style="display: flex; gap: 1rem; align-items: center; font-size: 2rem;">
@@ -246,7 +269,23 @@ export const Entities: Story = {
  * the parent already has a size set.
  */
 export const Sizes: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'html',
+        code: `<!-- Prefer the t-shirt scale (xs..4xl). small/medium/large are deprecated aliases. -->
+<novo-icon size="xs" alt="xs">candidate</novo-icon>
+<novo-icon size="sm" alt="sm">candidate</novo-icon>
+<novo-icon size="md" alt="md">candidate</novo-icon>
+<novo-icon size="lg" alt="lg">candidate</novo-icon>
+<novo-icon size="xl" alt="xl">candidate</novo-icon>
+<novo-icon size="2xl" alt="2xl">candidate</novo-icon>
+<novo-icon size="3xl" alt="3xl">candidate</novo-icon>
+<novo-icon size="4xl" alt="4xl">candidate</novo-icon>`,
+      },
+    },
+  },
   render: () => ({
     template: `
       <div style="display: flex; gap: 1rem; align-items: baseline; flex-wrap: wrap;">
@@ -273,7 +312,18 @@ export const Sizes: Story = {
  * warning, negative).
  */
 export const Colors: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'html',
+        code: `<novo-icon color="positive" alt="Success">check</novo-icon>
+<novo-icon color="warning" alt="Warning">caution-o</novo-icon>
+<novo-icon color="negative" alt="Error">times</novo-icon>
+<novo-icon color="info" alt="Info">info</novo-icon>`,
+      },
+    },
+  },
   render: () => ({
     template: `
       <div style="display: flex; gap: 1rem; align-items: center; font-size: 2rem;">
@@ -296,7 +346,20 @@ export const Colors: Story = {
  * iconography.
  */
 export const Raised: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'html',
+        code: `<!-- raised puts the icon on a filled background using the theme color -->
+<novo-icon theme="candidate" raised alt="Candidate">candidate</novo-icon>
+<novo-icon theme="job" raised alt="Job">job</novo-icon>
+<novo-icon theme="company" raised alt="Company">company</novo-icon>
+<novo-icon theme="submission" raised alt="Submission">star-o</novo-icon>
+<novo-icon theme="placement" raised alt="Placement">star</novo-icon>`,
+      },
+    },
+  },
   render: () => ({
     template: `
       <div style="display: flex; gap: 1rem; align-items: center;">
@@ -319,6 +382,14 @@ export const Raised: Story = {
  */
 export const Playground: Story = {
   name: '🎮 Playground',
+  parameters: {
+    docs: {
+      source: {
+        language: 'html',
+        code: `<novo-icon name="candidate" size="lg" alt="Candidate"></novo-icon>`,
+      },
+    },
+  },
   args: {
     name: 'candidate',
     theme: undefined,

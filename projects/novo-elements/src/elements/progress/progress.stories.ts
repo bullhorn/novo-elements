@@ -244,6 +244,17 @@ export const Default: Story = {
     striped: false,
     disabled: false,
   },
+  parameters: {
+    docs: {
+      source: {
+        language: 'html',
+        code: `<!-- NovoProgressModule -->
+<novo-progress [total]="100">
+  <novo-progress-bar [value]="40"></novo-progress-bar>
+</novo-progress>`,
+      },
+    },
+  },
   render: (args) => ({
     props: { ...args, value: 40 },
     template: `
@@ -270,7 +281,18 @@ export const Default: Story = {
  * defaults to `100`, so the child `value` reads directly as a percent.
  */
 export const Linear: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'html',
+        code: `<novo-progress><novo-progress-bar value="10"></novo-progress-bar></novo-progress>
+<novo-progress><novo-progress-bar value="40"></novo-progress-bar></novo-progress>
+<novo-progress><novo-progress-bar value="75"></novo-progress-bar></novo-progress>
+<novo-progress><novo-progress-bar value="100"></novo-progress-bar></novo-progress>`,
+      },
+    },
+  },
   render: () => ({
     template: `
       <div style="display: flex; flex-direction: column; gap: 1rem;">
@@ -301,7 +323,24 @@ export const Linear: Story = {
  * each child's radius automatically steps down by 5px so they don't overlap.
  */
 export const Radial: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'html',
+        code: `<novo-progress appearance="radial">
+  <novo-progress-bar value="70"></novo-progress-bar>
+</novo-progress>
+
+<!-- Multiple bars in one radial container render as concentric rings -->
+<novo-progress appearance="radial" total="60">
+  <novo-progress-bar value="50" color="success"></novo-progress-bar>
+  <novo-progress-bar value="40" color="negative"></novo-progress-bar>
+  <novo-progress-bar value="30" color="warning"></novo-progress-bar>
+</novo-progress>`,
+      },
+    },
+  },
   render: () => ({
     template: `
       <div style="display: flex; gap: 2rem; align-items: center;">
@@ -327,7 +366,17 @@ export const Radial: Story = {
  * Use whenever you can measure how much of the task is complete.
  */
 export const Determinate: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'html',
+        code: `<novo-progress><novo-progress-bar value="25"></novo-progress-bar></novo-progress>
+<novo-progress><novo-progress-bar value="60"></novo-progress-bar></novo-progress>
+<novo-progress><novo-progress-bar value="90"></novo-progress-bar></novo-progress>`,
+      },
+    },
+  },
   render: () => ({
     template: `
       <div style="display: flex; flex-direction: column; gap: 1rem;">
@@ -358,7 +407,22 @@ export const Determinate: Story = {
  * highlight across the container, auto-fitting it to the parent width.
  */
 export const Indeterminate: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'html',
+        code: `<novo-progress>
+  <novo-progress-bar indeterminate="true"></novo-progress-bar>
+</novo-progress>
+
+<!-- flash is a lighter sweep that auto-fits the parent width -->
+<novo-progress>
+  <novo-progress-bar flash="true"></novo-progress-bar>
+</novo-progress>`,
+      },
+    },
+  },
   render: () => ({
     template: `
       <div style="display: flex; flex-direction: column; gap: 1.5rem;">
@@ -389,7 +453,22 @@ export const Indeterminate: Story = {
  * work while still showing a measurable value.
  */
 export const Striped: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'html',
+        code: `<novo-progress striped="true">
+  <novo-progress-bar value="40"></novo-progress-bar>
+</novo-progress>
+
+<!-- animated on the bar makes the stripes scroll -->
+<novo-progress striped="true">
+  <novo-progress-bar value="70" animated="true"></novo-progress-bar>
+</novo-progress>`,
+      },
+    },
+  },
   render: () => ({
     template: `
       <div style="display: flex; flex-direction: column; gap: 1rem;">
@@ -414,7 +493,18 @@ export const Striped: Story = {
  * so meaning doesn't rely on color alone.
  */
 export const Colors: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'html',
+        code: `<novo-progress><novo-progress-bar value="60" color="success"></novo-progress-bar></novo-progress>
+<novo-progress><novo-progress-bar value="60" color="warning"></novo-progress-bar></novo-progress>
+<novo-progress><novo-progress-bar value="60" color="negative"></novo-progress-bar></novo-progress>
+<novo-progress><novo-progress-bar value="60" color="info"></novo-progress-bar></novo-progress>`,
+      },
+    },
+  },
   render: () => ({
     template: `
       <div style="display: flex; flex-direction: column; gap: 1rem;">
@@ -446,7 +536,25 @@ export const Colors: Story = {
  * read as "120 of 300" + "40 of 300").
  */
 export const MultiSegment: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'html',
+        code: `<!-- Stack bars in one container for a multi-segment fill. total acts as the denominator. -->
+<novo-progress total="300">
+  <novo-progress-bar value="120" color="success"></novo-progress-bar>
+  <novo-progress-bar value="40" color="negative"></novo-progress-bar>
+</novo-progress>
+
+<novo-progress appearance="radial" total="60">
+  <novo-progress-bar value="50" color="success"></novo-progress-bar>
+  <novo-progress-bar value="40" color="negative"></novo-progress-bar>
+  <novo-progress-bar value="30" color="warning"></novo-progress-bar>
+</novo-progress>`,
+      },
+    },
+  },
   render: () => ({
     template: `
       <div style="display: flex; flex-direction: column; gap: 1.5rem;">
@@ -473,7 +581,21 @@ export const MultiSegment: Story = {
  * Bars also accept their own `disabled` for per-segment control.
  */
 export const Disabled: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'html',
+        code: `<novo-progress disabled="true">
+  <novo-progress-bar value="40"></novo-progress-bar>
+</novo-progress>
+
+<novo-progress disabled="true" appearance="radial">
+  <novo-progress-bar value="70"></novo-progress-bar>
+</novo-progress>`,
+      },
+    },
+  },
   render: () => ({
     template: `
       <div style="display: flex; flex-direction: column; gap: 1rem;">
@@ -499,6 +621,16 @@ export const Disabled: Story = {
  */
 export const Playground: Story = {
   name: '🎮 Playground',
+  parameters: {
+    docs: {
+      source: {
+        language: 'html',
+        code: `<novo-progress appearance="linear" [total]="100" [striped]="false" [disabled]="false">
+  <novo-progress-bar [value]="40"></novo-progress-bar>
+</novo-progress>`,
+      },
+    },
+  },
   args: {
     appearance: 'linear' as any,
     total: 100,

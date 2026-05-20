@@ -198,6 +198,21 @@ export const Default: Story = {
     icons: ['x', 'check'],
     disabled: false,
   },
+  parameters: {
+    docs: {
+      source: {
+        language: 'typescript',
+        code: `// NovoSwitchModule + FormsModule
+@Component({ ... })
+export class MyToggleComponent {
+  checked = false;
+}
+
+// template
+<novo-switch [(ngModel)]="checked">Notify me</novo-switch>`,
+      },
+    },
+  },
   render: (args) => ({
     props: { ...args, checked: false },
     template: `
@@ -225,7 +240,35 @@ export const Default: Story = {
  * settings.
  */
 export const Themes: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'typescript',
+        code: `// component.ts
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { NovoSwitchModule } from 'novo-elements';
+
+// theme sets the active-state color (analytics palette + dark/light).
+@Component({
+  selector: 'my-switch-themes',
+  imports: [FormsModule, NovoSwitchModule],
+  templateUrl: './my-switch-themes.component.html',
+})
+export class MySwitchThemesComponent {
+  checked = true;
+}
+
+// component.html
+<novo-switch [(ngModel)]="checked" theme="ocean">Ocean (default)</novo-switch>
+<novo-switch [(ngModel)]="checked" theme="mint">Mint</novo-switch>
+<novo-switch [(ngModel)]="checked" theme="grapefruit">Grapefruit</novo-switch>
+<novo-switch [(ngModel)]="checked" theme="lavender">Lavender</novo-switch>
+<!-- Any analytics color works: aqua, grass, sunflower, bittersweet, carnation, mountain, dark, light -->`,
+      },
+    },
+  },
   render: () => ({
     props: { checked: true },
     template: `
@@ -257,7 +300,34 @@ export const Themes: Story = {
  * since the active-state color still applies when checked.
  */
 export const States: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'typescript',
+        code: `// component.ts
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { NovoSwitchModule } from 'novo-elements';
+
+@Component({
+  selector: 'my-switch-states',
+  imports: [FormsModule, NovoSwitchModule],
+  templateUrl: './my-switch-states.component.html',
+})
+export class MySwitchStatesComponent {
+  off = false;
+  on = true;
+}
+
+// component.html
+<novo-switch [(ngModel)]="off">Off</novo-switch>
+<novo-switch [(ngModel)]="on">On</novo-switch>
+<novo-switch [ngModel]="false" disabled>Disabled (off)</novo-switch>
+<novo-switch [ngModel]="true" disabled>Disabled (on)</novo-switch>`,
+      },
+    },
+  },
   render: () => ({
     props: { off: false, on: true },
     template: `
@@ -281,7 +351,35 @@ export const States: Story = {
  * the control has an accessible name.
  */
 export const WithLabel: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'typescript',
+        code: `// component.ts
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { NovoSwitchModule } from 'novo-elements';
+
+// Project any markup as the label; or supply an aria-label for unlabelled toggles.
+@Component({
+  selector: 'my-switch-with-label',
+  imports: [FormsModule, NovoSwitchModule],
+  templateUrl: './my-switch-with-label.component.html',
+})
+export class MySwitchWithLabelComponent {
+  emailEnabled = true;
+  showArchived = false;
+  blockSharing = true;
+}
+
+// component.html
+<novo-switch [(ngModel)]="emailEnabled">Email notifications</novo-switch>
+<novo-switch [(ngModel)]="showArchived">Show archived records</novo-switch>
+<novo-switch [(ngModel)]="blockSharing" theme="grapefruit">Block external sharing</novo-switch>`,
+      },
+    },
+  },
   render: () => ({
     props: { a: true, b: false, c: true },
     template: `
@@ -304,7 +402,35 @@ export const WithLabel: Story = {
  * the thumb is small, so subtle distinctions won't read.
  */
 export const CustomIcons: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'typescript',
+        code: `// component.ts
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { NovoSwitchModule } from 'novo-elements';
+
+// [icons] is [offIcon, onIcon]; both are Bullhorn icon names (no bhi- prefix).
+@Component({
+  selector: 'my-switch-custom-icons',
+  imports: [FormsModule, NovoSwitchModule],
+  templateUrl: './my-switch-custom-icons.component.html',
+})
+export class MySwitchCustomIconsComponent {
+  locked = true;
+  previewing = false;
+  audio = true;
+}
+
+// component.html
+<novo-switch [(ngModel)]="locked" [icons]="['lock', 'unlock']">Lock record</novo-switch>
+<novo-switch [(ngModel)]="previewing" [icons]="['eye-closed', 'eye']" theme="aqua">Show preview</novo-switch>
+<novo-switch [(ngModel)]="audio" [icons]="['mute', 'speaker']" theme="grass">Audio alerts</novo-switch>`,
+      },
+    },
+  },
   render: () => ({
     props: { a: true, b: false, c: true },
     template: `
@@ -327,6 +453,26 @@ export const CustomIcons: Story = {
  */
 export const Playground: Story = {
   name: '🎮 Playground',
+  parameters: {
+    docs: {
+      source: {
+        language: 'typescript',
+        code: `@Component({ ... })
+export class MyToggleComponent {
+  checked = true;
+}
+
+// template
+<novo-switch
+  [(ngModel)]="checked"
+  theme="ocean"
+  [icons]="['x', 'check']"
+>
+  Playground
+</novo-switch>`,
+      },
+    },
+  },
   args: {
     theme: 'ocean',
     icons: ['x', 'check'],

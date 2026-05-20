@@ -2,6 +2,11 @@ import type { Preview } from '@storybook/angular';
 import { applicationConfig, moduleMetadata } from '@storybook/angular';
 import { setCompodocJson } from '@storybook/addon-docs/angular';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideHttpClient } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserGlobalRef, ComponentUtils, DateFormatService, GlobalRef, NOVO_ELEMENTS_LABELS_PROVIDERS, OptionsService } from 'novo-elements/services';
+import { FieldInteractionApi, FormUtils } from 'novo-elements/elements/form';
+import { NovoToastService } from 'novo-elements/elements/toast';
 import docJson from '../documentation.json';
 
 setCompodocJson(docJson);
@@ -9,10 +14,46 @@ setCompodocJson(docJson);
 const preview: Preview = {
   decorators: [
     applicationConfig({
-      providers: [provideAnimations()],
+      providers: [
+        provideAnimations(),
+        // `FieldInteractionApi` depends on `HttpClient` (presumably for
+        // dynamic-form remote validation hooks). Provide it the standard
+        // Angular way so the form/dynamic-form stories instantiate.
+        provideHttpClient(),
+        // Several novo-elements services are `@Injectable()` without
+        // `providedIn: 'root'`; the library expects consumers to register
+        // them at the root injector. Add them here as stories surface
+        // demand.
+        //
+        //   NovoLabelService — used by sliders, date pickers, form error
+        //     copy. Bundled as NOVO_ELEMENTS_LABELS_PROVIDERS.
+        //   DateFormatService — injected directly by NovoDatePickerInput,
+        //     NovoDateTimePickerInput, etc.
+        //   FieldInteractionApi — injected by NovoControlElement (form
+        //     controls). Without it, form/dynamic-form stories crash.
+        //   NovoToastService — transitively required by FieldInteractionApi.
+        //   ComponentUtils — transitively required by NovoToastService.
+        //   FormUtils — also required by FieldInteractionApi.
+        //   OptionsService — transitively required by FormUtils.
+        //   GlobalRef → BrowserGlobalRef — injected by `<novo-file-input>`
+        //     (and presumably other window-aware components). Without it
+        //     the FileControl renders blank in the form story.
+        ...NOVO_ELEMENTS_LABELS_PROVIDERS,
+        DateFormatService,
+        FieldInteractionApi,
+        NovoToastService,
+        ComponentUtils,
+        FormUtils,
+        OptionsService,
+        { provide: GlobalRef, useClass: BrowserGlobalRef },
+      ],
     }),
     moduleMetadata({
-      imports: [],
+      // Forms modules are available globally — form-control stories
+      // (Checkbox / Radio / Switch / Chips / Select / Date pickers / …)
+      // can use `[(ngModel)]` and reactive bindings without per-story
+      // module imports.
+      imports: [FormsModule, ReactiveFormsModule],
     }),
   ],
   parameters: {

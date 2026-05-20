@@ -340,6 +340,15 @@ export const Default: Story = {
   args: {
     theme: 'primary',
   },
+  parameters: {
+    docs: {
+      source: {
+        language: 'html',
+        code: `<!-- NovoButtonModule -->
+<novo-button theme="primary">Click me</novo-button>`,
+      },
+    },
+  },
   render: (args) => ({
     props: args,
     template: `
@@ -369,7 +378,18 @@ export const Default: Story = {
  * progress, `dialogue` when less visual weight is needed.
  */
 export const Themes: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'html',
+        code: `<novo-button theme="standard">Standard</novo-button>
+<novo-button theme="primary">Primary</novo-button>
+<novo-button theme="secondary">Secondary</novo-button>
+<novo-button theme="dialogue">Dialogue</novo-button>`,
+      },
+    },
+  },
   render: () => ({
     template: `
       <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
@@ -390,7 +410,17 @@ export const Themes: Story = {
  * Three sizes. Omit `size` for the default medium — most usages should.
  */
 export const Sizes: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'html',
+        code: `<novo-button theme="primary" size="sm">Small</novo-button>
+<novo-button theme="primary">Default</novo-button>
+<novo-button theme="primary" size="lg">Large</novo-button>`,
+      },
+    },
+  },
   render: () => ({
     template: `
       <div style="display: flex; gap: 0.5rem; align-items: center;">
@@ -412,7 +442,17 @@ export const Sizes: Story = {
  * from the focus order.
  */
 export const States: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'html',
+        code: `<novo-button theme="primary">Default</novo-button>
+<novo-button theme="primary" [loading]="true">Loading</novo-button>
+<novo-button theme="primary" [disabled]="true">Disabled</novo-button>`,
+      },
+    },
+  },
   render: () => ({
     template: `
       <div style="display: flex; gap: 0.5rem; align-items: center;">
@@ -435,7 +475,18 @@ export const States: Story = {
  * (*"Save"*).
  */
 export const WithIcons: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'html',
+        code: `<!-- side controls icon position; default 'right'. -->
+<novo-button theme="primary" icon="add" side="left">Add</novo-button>
+<novo-button theme="primary" icon="chevron-right" side="right">Next</novo-button>
+<novo-button theme="secondary" icon="search" secondIcon="caret">Search</novo-button>`,
+      },
+    },
+  },
   render: () => ({
     template: `
       <div style="display: flex; gap: 0.5rem; align-items: center;">
@@ -461,7 +512,18 @@ export const WithIcons: Story = {
  * (e.g. an Edit button that opens a configuration submenu).
  */
 export const TwoIcons: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'html',
+        code: `<!-- secondIcon auto-takes the opposite side of the primary icon. -->
+<novo-button theme="primary" icon="edit" secondIcon="arrow-right">Two Icons</novo-button>
+<novo-button theme="primary" icon="bolt" secondIcon="configure-o" side="right">Two Icons</novo-button>
+<novo-button theme="secondary" icon="search" secondIcon="caret">Search</novo-button>`,
+      },
+    },
+  },
   render: () => ({
     template: `
       <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
@@ -487,7 +549,20 @@ export const TwoIcons: Story = {
  * to announce.
  */
 export const IconOnly: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'html',
+        code: `<!-- Icon-only buttons must always carry an aria-label. -->
+<novo-button theme="icon" icon="print" aria-label="Print"></novo-button>
+<novo-button theme="icon" icon="edit" aria-label="Edit"></novo-button>
+<novo-button theme="icon" icon="trash-o" aria-label="Delete"></novo-button>
+<novo-button theme="icon" icon="search" aria-label="Search"></novo-button>
+<novo-button theme="icon" icon="more-vert" aria-label="More options"></novo-button>`,
+      },
+    },
+  },
   render: () => ({
     template: `
       <div style="display: flex; gap: 0.5rem; align-items: center;">
@@ -514,7 +589,20 @@ export const IconOnly: Story = {
  * As with `icon`-themed buttons, supply an `aria-label`.
  */
 export const Fab: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'html',
+        code: `<!-- FAB always carries an icon and an aria-label; color conveys intent. -->
+<novo-button theme="fab" color="success" icon="check" aria-label="Confirm"></novo-button>
+<novo-button theme="fab" color="warning" icon="caution-o" aria-label="Warning"></novo-button>
+<novo-button theme="fab" color="negative" icon="times" aria-label="Cancel"></novo-button>
+<novo-button theme="fab" icon="add" aria-label="Add" inverse></novo-button>
+<novo-button theme="fab" icon="neutral" aria-label="Disabled" disabled></novo-button>`,
+      },
+    },
+  },
   render: () => ({
     template: `
       <div style="display: flex; gap: 0.5rem; align-items: center;">
@@ -538,6 +626,14 @@ export const Fab: Story = {
  */
 export const Playground: Story = {
   name: '🎮 Playground',
+  parameters: {
+    docs: {
+      source: {
+        language: 'html',
+        code: `<novo-button theme="primary" side="right">Playground</novo-button>`,
+      },
+    },
+  },
   args: {
     theme: 'primary',
     size: undefined,

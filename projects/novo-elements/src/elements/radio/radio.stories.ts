@@ -239,6 +239,26 @@ export const Default: Story = {
     disabled: false,
     required: false,
   },
+  parameters: {
+    docs: {
+      source: {
+        language: 'typescript',
+        code: `// NovoRadioModule + FormsModule
+@Component({ ... })
+export class MyRadioComponent {
+  selected = 'two';
+}
+
+// template — <novo-radio-group> owns selection via ngModel;
+// <novo-radio> items declare their value.
+<novo-radio-group [(ngModel)]="selected">
+  <novo-radio value="one">Option one</novo-radio>
+  <novo-radio value="two">Option two</novo-radio>
+  <novo-radio value="three">Option three</novo-radio>
+</novo-radio-group>`,
+      },
+    },
+  },
   render: (args) => ({
     props: { ...args, model: 'two' },
     template: `
@@ -268,7 +288,34 @@ export const Default: Story = {
  * when the group is the dominant element in its column.
  */
 export const Vertical: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'typescript',
+        code: `// component.ts
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { NovoRadioModule } from 'novo-elements';
+
+@Component({
+  selector: 'my-vertical-radio',
+  imports: [FormsModule, NovoRadioModule],
+  templateUrl: './my-vertical-radio.component.html',
+})
+export class MyVerticalRadioComponent {
+  selected: 'one' | 'two' | 'three' = 'two';
+}
+
+// component.html
+<novo-radio-group appearance="vertical" [(ngModel)]="selected">
+  <novo-radio value="one">Make me anything!</novo-radio>
+  <novo-radio value="two" [disabled]="true">I'm disabled!</novo-radio>
+  <novo-radio value="three">Really!</novo-radio>
+</novo-radio-group>`,
+      },
+    },
+  },
   render: () => ({
     props: { model: 'two' },
     template: `
@@ -292,7 +339,36 @@ export const Vertical: Story = {
  * formal.
  */
 export const ButtonStyle: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'typescript',
+        code: `// component.ts
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { NovoRadioModule } from 'novo-elements';
+
+// button="true" renders the group as a segmented button picker.
+@Component({
+  selector: 'my-button-radio',
+  imports: [FormsModule, NovoRadioModule],
+  templateUrl: './my-button-radio.component.html',
+})
+export class MyButtonRadioComponent {
+  selected: 'one' | 'two' | 'three' | 'disabled' = 'two';
+}
+
+// component.html
+<novo-radio-group [(ngModel)]="selected">
+  <novo-radio button="true" value="one" label="One"></novo-radio>
+  <novo-radio button="true" value="two" label="Two"></novo-radio>
+  <novo-radio button="true" value="three" label="Three"></novo-radio>
+  <novo-radio button="true" value="disabled" label="Disabled" [disabled]="true"></novo-radio>
+</novo-radio-group>`,
+      },
+    },
+  },
   render: () => ({
     props: { model: 'two' },
     template: `
@@ -317,7 +393,36 @@ export const ButtonStyle: Story = {
  * a screen reader to announce.
  */
 export const WithIcons: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'typescript',
+        code: `// component.ts
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { NovoRadioModule } from 'novo-elements';
+
+// Always supply aria-label on icon-only radios — the icon alone has no text.
+@Component({
+  selector: 'my-icon-radio',
+  imports: [FormsModule, NovoRadioModule],
+  templateUrl: './my-icon-radio.component.html',
+})
+export class MyIconRadioComponent {
+  selected: 'company' | 'job' | 'candidate' | 'opportunity' = 'company';
+}
+
+// component.html
+<novo-radio-group [(ngModel)]="selected">
+  <novo-radio button="true" theme="icon" icon="company" value="company" aria-label="Company"></novo-radio>
+  <novo-radio button="true" theme="icon" icon="job" value="job" aria-label="Job"></novo-radio>
+  <novo-radio button="true" theme="icon" icon="candidate" value="candidate" aria-label="Candidate"></novo-radio>
+  <novo-radio button="true" theme="icon" icon="opportunity" value="opportunity" [disabled]="true" aria-label="Opportunity"></novo-radio>
+</novo-radio-group>`,
+      },
+    },
+  },
   render: () => ({
     props: { model: 'one' },
     template: `
@@ -342,7 +447,42 @@ export const WithIcons: Story = {
  * focus order.
  */
 export const Disabled: Story = {
-  parameters: { controls: { disable: true } },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      source: {
+        language: 'typescript',
+        code: `// component.ts
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { NovoRadioModule } from 'novo-elements';
+
+// Disable individual items via [disabled] on <novo-radio>, or disable the
+// whole group via [disabled] on the wrapper.
+@Component({
+  selector: 'my-disabled-radio',
+  imports: [FormsModule, NovoRadioModule],
+  templateUrl: './my-disabled-radio.component.html',
+})
+export class MyDisabledRadioComponent {
+  value: 'one' | 'two' | 'three' = 'one';
+}
+
+// component.html
+<novo-radio-group [(ngModel)]="value">
+  <novo-radio value="one">Enabled</novo-radio>
+  <novo-radio value="two" [disabled]="true">Disabled</novo-radio>
+  <novo-radio value="three">Enabled</novo-radio>
+</novo-radio-group>
+
+<novo-radio-group [(ngModel)]="value" [disabled]="true">
+  <novo-radio value="one">Option one</novo-radio>
+  <novo-radio value="two">Option two</novo-radio>
+  <novo-radio value="three">Option three</novo-radio>
+</novo-radio-group>`,
+      },
+    },
+  },
   render: () => ({
     props: { individual: 'one', allDisabled: 'two' },
     template: `
@@ -378,6 +518,35 @@ export const Disabled: Story = {
  */
 export const Playground: Story = {
   name: '🎮 Playground',
+  parameters: {
+    docs: {
+      source: {
+        language: 'typescript',
+        code: `// component.ts
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { NovoRadioModule } from 'novo-elements';
+
+@Component({
+  selector: 'my-radio-playground',
+  imports: [FormsModule, NovoRadioModule],
+  templateUrl: './my-radio-playground.component.html',
+})
+export class MyRadioPlaygroundComponent {
+  selected: 'one' | 'two' | 'three' = 'two';
+  appearance: 'horizontal' | 'vertical' = 'horizontal';
+  disabled = false;
+}
+
+// component.html
+<novo-radio-group [(ngModel)]="selected" [appearance]="appearance" [disabled]="disabled">
+  <novo-radio value="one">Option one</novo-radio>
+  <novo-radio value="two">Option two</novo-radio>
+  <novo-radio value="three">Option three</novo-radio>
+</novo-radio-group>`,
+      },
+    },
+  },
   args: {
     appearance: 'horizontal',
     name: '',
