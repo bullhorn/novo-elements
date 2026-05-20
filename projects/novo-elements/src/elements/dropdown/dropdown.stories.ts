@@ -367,68 +367,70 @@ export const Placements: Story = {
       },
     },
   },
+  // `<novo-dropdown>` is `display: inline-block` by default (see
+  // Dropdown.scss). Inside a `display: flex` parent it gets *blockified* to
+  // `block` (CSS flex rules), so it stretches to fill the flex line and the
+  // overlay then anchors to the bottom of the full host rather than the
+  // trigger button — symptom: panel pops up 200+ px below the button. We
+  // wrap each dropdown in a plain `<span>` so the flex layout slots
+  // `<span>`s (blockified harmlessly) and `<novo-dropdown>` keeps its
+  // intrinsic inline-block sizing inside the span.
   render: () => ({
     template: `
-      <div style="
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 1rem 1.5rem;
-        padding: 4rem 2rem;
-        min-height: 480px;
-      ">
-        <novo-dropdown side="default">
+      <div style="display: flex; flex-wrap: wrap; gap: 3rem 4rem; padding: 1.5rem; min-height: 360px;">
+        <span><novo-dropdown side="default">
           <novo-button theme="secondary" icon="collapse">default</novo-button>
           <novo-optgroup>
             <novo-option>Action A</novo-option>
             <novo-option>Action B</novo-option>
             <novo-option>Action C</novo-option>
           </novo-optgroup>
-        </novo-dropdown>
+        </novo-dropdown></span>
 
-        <novo-dropdown side="right">
+        <span><novo-dropdown side="right">
           <novo-button theme="secondary" icon="collapse">right</novo-button>
           <novo-optgroup>
             <novo-option>Action A</novo-option>
             <novo-option>Action B</novo-option>
             <novo-option>Action C</novo-option>
           </novo-optgroup>
-        </novo-dropdown>
+        </novo-dropdown></span>
 
-        <novo-dropdown side="above-below">
+        <span><novo-dropdown side="above-below">
           <novo-button theme="secondary" icon="collapse">above-below</novo-button>
           <novo-optgroup>
             <novo-option>Action A</novo-option>
             <novo-option>Action B</novo-option>
             <novo-option>Action C</novo-option>
           </novo-optgroup>
-        </novo-dropdown>
+        </novo-dropdown></span>
 
-        <novo-dropdown side="bottom-left">
+        <span><novo-dropdown side="bottom-left">
           <novo-button theme="secondary" icon="collapse">bottom-left</novo-button>
           <novo-optgroup>
             <novo-option>Action A</novo-option>
             <novo-option>Action B</novo-option>
             <novo-option>Action C</novo-option>
           </novo-optgroup>
-        </novo-dropdown>
+        </novo-dropdown></span>
 
-        <novo-dropdown side="bottom-right">
+        <span><novo-dropdown side="bottom-right">
           <novo-button theme="secondary" icon="collapse">bottom-right</novo-button>
           <novo-optgroup>
             <novo-option>Action A</novo-option>
             <novo-option>Action B</novo-option>
             <novo-option>Action C</novo-option>
           </novo-optgroup>
-        </novo-dropdown>
+        </novo-dropdown></span>
 
-        <novo-dropdown side="center">
+        <span><novo-dropdown side="center">
           <novo-button theme="secondary" icon="collapse">center</novo-button>
           <novo-optgroup>
             <novo-option>Action A</novo-option>
             <novo-option>Action B</novo-option>
             <novo-option>Action C</novo-option>
           </novo-optgroup>
-        </novo-dropdown>
+        </novo-dropdown></span>
       </div>
     `,
   }),
@@ -452,7 +454,7 @@ export const IconTrigger: Story = {
         language: 'html',
         code: `<!-- Icon-only triggers must carry aria-label. -->
 <novo-dropdown side="right">
-  <novo-button theme="icon" icon="more-vert" aria-label="Row actions"></novo-button>
+  <novo-button theme="icon" icon="more" aria-label="Row actions"></novo-button>
   <novo-optgroup>
     <novo-option (click)="onEdit()">Edit</novo-option>
     <novo-option (click)="onDuplicate()">Duplicate</novo-option>
@@ -467,7 +469,7 @@ export const IconTrigger: Story = {
     template: `
       <div style="padding: 1rem; min-height: 220px;">
         <novo-dropdown side="right">
-          <novo-button theme="icon" icon="more-vert" aria-label="Row actions"></novo-button>
+          <novo-button theme="icon" icon="more" aria-label="Row actions"></novo-button>
           <novo-optgroup>
             <novo-option>Edit</novo-option>
             <novo-option>Duplicate</novo-option>
@@ -689,7 +691,7 @@ export const Multiple: Story = {
   },
   render: () => ({
     template: `
-      <div style="padding: 1rem; min-height: 300px;">
+      <div style="padding: 1rem; min-height: 360px;">
         <novo-dropdown side="right" multiple>
           <novo-button theme="secondary" icon="overview" side="left">Hide / Show columns</novo-button>
           <novo-option>Name</novo-option>
@@ -702,6 +704,35 @@ export const Multiple: Story = {
       </div>
     `,
   }),
+  // Open the panel and click two options. The user-visible signal for the
+  // multi-select pattern is that **the panel stays open across clicks**
+  // (single-select dropdowns close on selection). Asserting "panel still
+  // open after two clicks" captures the practical contract.
+  //
+  // Caveat: the option's pseudo-checkbox visual *does not render* inside
+  // `<novo-dropdown>`. `<novo-option>.selectable` requires its parent to
+  // provide `NOVO_OPTION_PARENT_COMPONENT`, which `<novo-dropdown>` does
+  // not — see the ISSUES_BACKLOG entry. Until the dropdown wires up that
+  // provider, multi-select dropdowns have no per-row check indicator.
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const trigger = await canvas.findByRole('button', { name: /hide \/ show columns/i });
+    await userEvent.click(trigger);
+
+    const body = within(document.body);
+    const name = await body.findByText('Name');
+    await userEvent.click(name);
+
+    // Panel must still be open after clicking an item — that's what makes
+    // it a multi-select. (A single-select dropdown closes on click.)
+    await expect(await body.findByText('Email')).toBeInTheDocument();
+
+    const email = await body.findByText('Email');
+    await userEvent.click(email);
+
+    // Still open after a second click.
+    await expect(await body.findByText('Phone')).toBeInTheDocument();
+  },
 };
 
 /* -------------------------------------------------------------------------- */

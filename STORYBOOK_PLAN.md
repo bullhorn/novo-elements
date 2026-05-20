@@ -141,6 +141,14 @@ await expect(await body.findByRole('listbox')).toBeVisible();
 
 **Avoid `.toBeVisible()` during Angular animations.** Components like `<novo-expansion-panel>` use CSS height transitions on a wrapper while content nodes are recreated. A `findByText` that lands on a transitional empty `<p>` fails `toBeVisible` even though the panel is mid-open. Prefer `.toBeInTheDocument()` and assert the canonical ARIA signal (e.g. `aria-expanded="true"`) — wait on the signal, not on visual layout.
 
+**`<novo-dropdown>` overlay anchors to the host element, not the trigger.** The dropdown uses `<novo-overlay-template [parent]="element">` where `element` is the `<novo-dropdown>` host. The host is `display: inline-block` by default, but CSS *blockifies* flex / grid children — putting `<novo-dropdown>` directly inside a `display: flex` or `display: grid` parent flips it to `display: block` and it stretches to fill the available row/cell. The overlay then anchors to the bottom of the full host, not just below the trigger button — symptom: panel pops up far below the trigger; in stretchy containers the panel can land hundreds of pixels off. Fixes (use whichever fits the story layout):
+
+- Prefer a block-flow wrapper (plain divs / inline-block dropdowns flowing naturally) — no blockification, host sizes to trigger.
+- If you need a flex/grid layout for spacing, wrap each `<novo-dropdown>` in a plain `<span>` (or other inline element) so the *span* gets blockified instead and the dropdown keeps its intrinsic shrink-wrapping.
+- Inline `style="display: inline-block;"` on `<novo-dropdown>` itself does **not** work inside flex/grid — blockification overrides the inline style. Use the wrapper-span pattern.
+
+Pre-selecting state for selection-based components (multi-select dropdown, indeterminate checkboxes, etc.) reads better at-a-glance than a play that toggles a few items, but for visual-regression you usually want both: pre-select for the static snapshot, and use `play` to open the panel so the selected state is actually visible.
+
 **Composing modules in story imports.** A component's NgModule typically imports its dependencies (`NovoIconModule`, etc.) for its *own* templates but doesn't necessarily re-export them. If a story's template uses a peer component directly (e.g. `<novo-icon>` inside a `<novo-chip>` story), you must explicitly import that peer's module in `moduleMetadata.imports` alongside the primary one. Symptom when missed: the peer element renders as a bare custom element with its inner text leaking through (no Angular component lifecycle, no styling) — no console error, so it's easy to miss until visual review. Recurring offenders worth memorizing:
 
 - `<novo-icon>` lives in `NovoIconModule`, not re-exported by `NovoChipsModule` or `NovoFieldModule`.
