@@ -22,9 +22,7 @@
       background: transparent;
       border: none;
       border-radius: 0;
-      &:not(:focus-visible) {
-        outline: none;
-      }
+      outline: none;
       height: 2rem;
       width: 95%;
       padding: 0;
