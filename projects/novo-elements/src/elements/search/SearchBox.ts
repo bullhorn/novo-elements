@@ -36,11 +36,11 @@ const SEARCH_VALUE_ACCESSOR = {
     <novo-icon (click)="showSearch($event)" [tooltip]="hint" tooltipPosition="bottom">{{ icon }}</novo-icon>
     <!-- SEARCH INPUT -->
     <input
+      tabindex="-1"
       type="text"
       [attr.name]="name"
       [attr.value]="displayValue"
       [attr.placeholder]="placeholder"
-      (focus)="onFocus()"
       (blur)="onBlur()"
       (keydown)="_handleKeydown($event)"
       (input)="_handleInput($event)"
@@ -111,7 +111,7 @@ export class NovoSearchBoxElement implements ControlValueAccessor, OnInit {
   @ViewChild(NovoOverlayTemplateComponent)
   overlay: any;
   @ViewChild('input', { static: true })
-  input: any;
+  input: ElementRef<HTMLInputElement>;
 
   private debounceSearchChange: any;
 
@@ -145,13 +145,13 @@ export class NovoSearchBoxElement implements ControlValueAccessor, OnInit {
     } else {
       this.closePanel();
     }
-  }
+  }/*
   onFocus() {
     this._zone.run(() => {
       this.focused = true;
       this.openPanel();
     });
-  }
+  }*/
   onBlur() {
     if (!this.keepOpen || !this.panelOpen) {
       this.focused = false;
