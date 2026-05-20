@@ -56,7 +56,9 @@
       color: var(--text-main, $dark);
 
       &:focus {
-        outline: none;
+        &:not(:focus-visible) {
+          outline: none;
+        }
       }
       &:disabled {
         color: var(--text-disabled);

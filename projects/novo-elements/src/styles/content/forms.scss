@@ -83,7 +83,9 @@ input[type="button"] {
   font-family: inherit;
   font-size: inherit;
   padding: 0.5em 1em;
-  outline: none;
+  &:not(:focus-visible) {
+    outline: none;
+  }
   border: none;
   border-radius: 4px;
 }

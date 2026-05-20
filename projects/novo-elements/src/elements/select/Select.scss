@@ -17,7 +17,9 @@
   }
 
   &:focus {
-    outline: none;
+    &:not(:focus-visible) {
+      outline: none;
+    }
   }
 
   .novo-select-trigger {
@@ -184,7 +186,9 @@
         color: #a9a9a9;
       }
       &:focus {
-        outline: none;
+        &:not(:focus-visible) {
+          outline: none;
+        }
       }
       &:hover {
         border-bottom: 1px solid $positive;

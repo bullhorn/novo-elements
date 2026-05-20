@@ -24,7 +24,9 @@ $icon-border-radius: 0.3em;
     width: 1em;
     height: 1em;
     color: inherit;
-    outline: none;
+    &:not(:focus-visible) {
+      outline: none;
+    }
     &:before {
       color: inherit;
     }

@@ -84,7 +84,9 @@
     align-items: center;
     text-align: center;
     user-select: none;
-    outline: none;
+    &:not(:focus-visible) {
+      outline: none;
+    }
     white-space: nowrap;
     text-transform: uppercase;
     overflow: hidden;

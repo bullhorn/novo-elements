@@ -86,7 +86,9 @@
         border-left: 1px solid $off-white;
         border-radius: 0;
         border-radius: 0;
-        outline: none;
+        &:not(:focus-visible) {
+          outline: none;
+        }
         width: 100%;
         margin: 0;
         box-shadow: none;

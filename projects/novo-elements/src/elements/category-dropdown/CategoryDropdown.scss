@@ -44,7 +44,9 @@
         border: none;
         border-bottom: 1px solid lighten($dark, 45%);
         border-radius: 0;
-        outline: none;
+        &:not(:focus-visible) {
+          outline: none;
+        }
         height: 2rem;
         width: 95%;
         margin: 0;

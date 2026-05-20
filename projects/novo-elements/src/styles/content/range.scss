@@ -23,7 +23,9 @@ input[type="range"] {
 }
 
 input[type="range"]:focus {
-  outline: none;
+  &:not(:focus-visible) {
+    outline: none;
+  }
 }
 
 input[type="range"]::-webkit-slider-runnable-track {

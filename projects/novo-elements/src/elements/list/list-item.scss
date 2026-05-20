@@ -7,7 +7,9 @@
     color: $contrast;
     border: unset;
     border-bottom: 1px solid rgba(#fff, 0.1);
-    outline: none;
+    &:not(:focus-visible) {
+      outline: none;
+    }
     item-title h6,
     i {
       color: $contrast;
