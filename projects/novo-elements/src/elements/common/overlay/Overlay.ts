@@ -33,7 +33,7 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 // Vendor
-import { Helpers } from 'novo-elements/utils';
+import { focusWalker, Helpers } from 'novo-elements/utils';
 import { fromEvent, merge, Observable, of as observableOf, Subscription } from 'rxjs';
 import { filter, first, switchMap } from 'rxjs/operators';
 
@@ -80,6 +80,8 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
   public closeOnSelect: boolean = true;
   @Input()
   public hasBackdrop: boolean = false;
+  @Input()
+  public permitEscapeKeyExit: boolean = true;
 
   @Output()
   public select: EventEmitter<any> = new EventEmitter();
@@ -99,6 +101,8 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
   private overlayContainer: OverlayContainer = inject(OverlayContainer);
   private destroyRef = inject(DestroyRef);
   private overlayContext: string;
+  private previouslyFocusedElement: HTMLElement | null = null;
+  private escapeKeySubscription: Subscription;
 
   constructor(
     protected overlay: Overlay,
@@ -132,6 +136,9 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
     if (!this.parent?.nativeElement) {
       return;
     }
+    // Store the currently focused element before opening the overlay
+    this.previouslyFocusedElement = this.document.activeElement as HTMLElement;
+
     if (!this.overlayRef) {
       this.createOverlay(this.template);
     } else {
@@ -155,6 +162,11 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
             this.overlayRef.updatePosition();
           }
         });
+        const focusFinder = focusWalker(this.overlayRef.overlayElement);
+        (focusFinder.nextNode() as HTMLElement)?.focus();
+
+        // Subscribe to escape key presses within the overlay
+        this.subscribeToEscapeKey();
       }
     });
   }
@@ -164,6 +176,9 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
       if (this.overlayRef?.hasAttached()) {
         this.overlayRef.detach();
         this.closingActionsSubscription.unsubscribe();
+      }
+      if (this.escapeKeySubscription) {
+        this.escapeKeySubscription.unsubscribe();
       }
       this.closing.emit(false);
       if (this.panelOpen) {
@@ -371,6 +386,31 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
       return false;
     }
     return true;
+  }
+
+  private subscribeToEscapeKey(): void {
+    if (!this.overlayRef || !this.document || !this.permitEscapeKeyExit) {
+      return;
+    }
+    this.escapeKeySubscription = fromEvent<KeyboardEvent>(this.overlayRef.overlayElement, 'keydown')
+      .pipe(
+        filter((event: KeyboardEvent) => event.key === 'Escape'),
+        takeUntilDestroyed(this.destroyRef),
+      )
+      .subscribe((event: KeyboardEvent) => {
+        event.preventDefault();
+        this.closePanel();
+        // Restore focus to the previously focused element
+        this.restoreFocus();
+      });
+  }
+
+  private restoreFocus(): void {
+    if (this.previouslyFocusedElement && this.previouslyFocusedElement.focus) {
+      this.zone.run(() => {
+        this.previouslyFocusedElement?.focus();
+      });
+    }
   }
 
   protected elementIsInNestedOverlay(el): boolean {
