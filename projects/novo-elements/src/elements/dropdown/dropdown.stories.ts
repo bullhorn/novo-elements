@@ -719,19 +719,36 @@ export const Multiple: Story = {
     const trigger = await canvas.findByRole('button', { name: /hide \/ show columns/i });
     await userEvent.click(trigger);
 
-    const body = within(document.body);
-    const name = await body.findByText('Name');
+    // Scope to the dropdown's overlay panel — `within(document.body)` would
+    // match the code/source panel that also renders the option labels as
+    // plain text, throwing on multi-element ambiguity.
+    const panel = await waitFor(() => {
+      const el = document.querySelector<HTMLElement>('.dropdown-container');
+      if (!el) throw new Error('dropdown panel not yet rendered');
+      return el;
+    });
+    const inPanel = within(panel);
+
+    const name = await inPanel.findByText('Name');
     await userEvent.click(name);
 
     // Panel must still be open after clicking an item — that's what makes
     // it a multi-select. (A single-select dropdown closes on click.)
-    await expect(await body.findByText('Email')).toBeInTheDocument();
+    await expect(await inPanel.findByText('Email')).toBeInTheDocument();
+    expect(document.querySelector('.dropdown-container')).not.toBeNull();
 
-    const email = await body.findByText('Email');
+    const email = await inPanel.findByText('Email');
     await userEvent.click(email);
 
-    // Still open after a second click.
-    await expect(await body.findByText('Phone')).toBeInTheDocument();
+    // Still open after a second click; confirm via aria-selected on both
+    // rows (the model-level signal — the visual `novo-selected` class is
+    // gated on the option's `_parent`, which `<novo-dropdown>` doesn't
+    // provide; see ISSUES_BACKLOG).
+    expect(document.querySelector('.dropdown-container')).not.toBeNull();
+    const nameOption = name.closest('novo-option')!;
+    const emailOption = email.closest('novo-option')!;
+    await expect(nameOption).toHaveAttribute('aria-selected', 'true');
+    await expect(emailOption).toHaveAttribute('aria-selected', 'true');
   },
 };
 
