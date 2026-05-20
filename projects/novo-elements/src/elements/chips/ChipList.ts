@@ -391,7 +391,6 @@ export class NovoChipList
 
   ngAfterContentInit() {
     this._keyManager = new FocusKeyManager<NovoChipElement>(this.chips)
-      .withWrap()
       .withVerticalOrientation()
       .withHomeAndEnd()
       .withHorizontalOrientation(this._dir ? this._dir.value : 'ltr');
@@ -562,6 +561,24 @@ export class NovoChipList
       this._keyManager.setLastItemActive();
       event.preventDefault();
     } else if (target && target.classList.contains('novo-chip')) {
+      const isLastChip = this._keyManager.activeItemIndex === this.chips.length - 1;
+      const isRtl = this._dir?.value === 'rtl';
+
+      // Navigate to input when at the end of the chip list
+      // In LTR: Right arrow on last chip goes to input
+      if (event.key === Key.ArrowRight && isLastChip && !isRtl) {
+        this._focusInput();
+        event.preventDefault();
+        return;
+      }
+
+      // In RTL: Left arrow on last chip goes to input
+      if (event.key === Key.ArrowLeft && isLastChip && isRtl) {
+        this._focusInput();
+        event.preventDefault();
+        return;
+      }
+
       this._keyManager.onKeydown(event);
       this.stateChanges.next();
     }
