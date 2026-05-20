@@ -138,6 +138,11 @@ export class NovoButtonElement implements OnChanges {
   @HostBinding('attr.disabled')
   disabledAttr: undefined | '' = undefined;
 
+  @HostBinding('attr.tabindex')
+  get tabindex(): string | null {
+    return this.element.nativeElement.tagName === 'NOVO-BUTTON' ? '0' : null;
+  }
+
   private _icon: WritableSignal<string> = signal(undefined);
 
   private _secondIcon: WritableSignal<string> = signal(undefined);
