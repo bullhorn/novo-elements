@@ -36,11 +36,11 @@ const SEARCH_VALUE_ACCESSOR = {
     <novo-icon (click)="showSearch($event)" [tooltip]="hint" tooltipPosition="bottom">{{ icon }}</novo-icon>
     <!-- SEARCH INPUT -->
     <input
-      tabindex="-1"
       type="text"
       [attr.name]="name"
       [attr.value]="displayValue"
       [attr.placeholder]="placeholder"
+      (focus)="onFocus()"
       (blur)="onBlur()"
       (keydown)="_handleKeydown($event)"
       (input)="_handleInput($event)"
@@ -111,7 +111,7 @@ export class NovoSearchBoxElement implements ControlValueAccessor, OnInit {
   @ViewChild(NovoOverlayTemplateComponent)
   overlay: any;
   @ViewChild('input', { static: true })
-  input: ElementRef<HTMLInputElement>;
+  input: any;
 
   private debounceSearchChange: any;
 
@@ -135,7 +135,8 @@ export class NovoSearchBoxElement implements ControlValueAccessor, OnInit {
   showSearch(event?: any, forceClose: boolean = false) {
     if (!this.panelOpen) {
       // Reset search
-      // Set focus on search
+      // Set focus on search and open panel
+      this.openPanel();
       setTimeout(() => {
         const element = this.input.nativeElement;
         if (element) {
@@ -145,13 +146,12 @@ export class NovoSearchBoxElement implements ControlValueAccessor, OnInit {
     } else {
       this.closePanel();
     }
-  }/*
+  }
   onFocus() {
     this._zone.run(() => {
       this.focused = true;
-      this.openPanel();
     });
-  }*/
+  }
   onBlur() {
     if (!this.keepOpen || !this.panelOpen) {
       this.focused = false;
@@ -180,6 +180,15 @@ export class NovoSearchBoxElement implements ControlValueAccessor, OnInit {
   /** END: Convenient Panel Methods. */
 
   _handleKeydown(event: KeyboardEvent): void {
+    // Open panel on down arrow key
+    if (event.key === 'ArrowDown' && !this.panelOpen) {
+      this._zone.run(() => {
+        this.openPanel();
+      });
+      event.preventDefault();
+      return;
+    }
+
     if ((event.key === Key.Escape || event.key === Key.Enter || event.key === Key.Tab) && this.panelOpen) {
       if (event.keyCode === ENTER) {
         this.applySearch.emit(event);
@@ -194,6 +203,13 @@ export class NovoSearchBoxElement implements ControlValueAccessor, OnInit {
     if (document.activeElement === event.target) {
       this.value = (event.target as HTMLInputElement).value;
       this._onChange((event.target as HTMLInputElement).value);
+
+      // Open panel when user starts typing
+      if (!this.panelOpen && this.value) {
+        this._zone.run(() => {
+          this.openPanel();
+        });
+      }
 
       if (this.debounceSearchChange) {
         clearTimeout(this.debounceSearchChange);

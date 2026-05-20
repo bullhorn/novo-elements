@@ -24,7 +24,7 @@ import {
 import { merge, of, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 // App
-import { NovoButtonElement } from 'novo-elements/elements/button';
+import { NovoButtonElement, FOCUS_MANAGED_CONTEXT } from 'novo-elements/elements/button';
 import {
   CanDisableCtor,
   HasOverlayCtor,
@@ -75,6 +75,7 @@ const NovoDropdownMixins: HasOverlayCtor & CanDisableCtor & HasTabIndexCtor & ty
     host: {
         '[attr.tabIndex]': 'disabled ? -1 : 0',
     },
+    providers: [{ provide: FOCUS_MANAGED_CONTEXT, useValue: true }],
     standalone: false,
 })
 export class NovoDropdownElement extends NovoDropdownMixins implements OnInit, AfterContentInit, AfterViewInit, OnDestroy {
