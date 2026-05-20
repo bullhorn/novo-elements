@@ -132,6 +132,15 @@ await expect(await body.findByRole('listbox')).toBeVisible();
 
 **Play parity across tiers.** Every Tier 2+ component should ship at least one play function — a smoke test that exercises the meaningful interaction (open the picker, click Next on the carousel, surface the validation error). The goal isn't coverage parity with unit tests; it's giving visual regression a deterministic interaction to snapshot per component.
 
+**`<novo-button>` doesn't render a native `<button>` — click it by role, not by wrapper.** `<novo-button>` sets `role="button"` on its own host element and listens via `@HostListener('click')`. Two consequences for play functions:
+
+- Use `canvas.findByRole('button', { name: /<text>/i })` to grab the trigger. `getByRole`/`findByRole` correctly resolves the novo-button host element.
+- Do **not** put the `data-testid` on a wrapper (e.g. a custom `<demo-modal-trigger>`) and then `userEvent.click(wrapper)`. Clicks dispatched on a wrapper bubble *up* — they never reach the novo-button's click listener, so the play silently waits forever. Put the testid on the `<novo-button>` itself, or query by role.
+
+**Scope overlay assertions to `.cdk-overlay-container`, not all of `document.body`.** When the trigger button text happens to match modal/popover content (e.g. trigger says "Edit Candidate", modal title says "Edit Candidate"), `within(document.body).findByText(...)` resolves both and throws on the ambiguity. Use `const overlay = within(document.querySelector('.cdk-overlay-container'))` to constrain queries to the popped-up content.
+
+**Avoid `.toBeVisible()` during Angular animations.** Components like `<novo-expansion-panel>` use CSS height transitions on a wrapper while content nodes are recreated. A `findByText` that lands on a transitional empty `<p>` fails `toBeVisible` even though the panel is mid-open. Prefer `.toBeInTheDocument()` and assert the canonical ARIA signal (e.g. `aria-expanded="true"`) — wait on the signal, not on visual layout.
+
 **Composing modules in story imports.** A component's NgModule typically imports its dependencies (`NovoIconModule`, etc.) for its *own* templates but doesn't necessarily re-export them. If a story's template uses a peer component directly (e.g. `<novo-icon>` inside a `<novo-chip>` story), you must explicitly import that peer's module in `moduleMetadata.imports` alongside the primary one. Symptom when missed: the peer element renders as a bare custom element with its inner text leaking through (no Angular component lifecycle, no styling) — no console error, so it's easy to miss until visual review. Recurring offenders worth memorizing:
 
 - `<novo-icon>` lives in `NovoIconModule`, not re-exported by `NovoChipsModule` or `NovoFieldModule`.
