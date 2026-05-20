@@ -1,4 +1,5 @@
 export * from './common.module';
+export * from './directives/activate.directive';
 export * from './directives/accent.directive';
 export * from './directives/bg.directive';
 export * from './directives/border.directive';
