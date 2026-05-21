@@ -1,13 +1,13 @@
-import { click, scrollIntoView } from '../utils/ElementActionUtil';
+import { clickRadio, scrollIntoView } from '../utils/ElementActionUtil';
 import { COMPONENT_URLS, examplesUrl, getURLs } from '../utils/EnvironmentUtil';
 import { elements } from '../utils/SelectorUtil';
 import { verifyPresent, verifyText } from '../utils/VerifyUtil';
 import {
     loading,
-    loadingSizeLineRadio,
-    loadingColorLineRadio,
-    loadingSizeSpinnerRadio,
-    loadingColorSpinnerRadio,
+    loadingSizeLineSelector,
+    loadingColorLineSelector,
+    loadingSizeSpinnerSelector,
+    loadingColorSpinnerSelector,
 } from '../utils/LoadingUtil';
 
 describe('Loading Demo Page', () => {
@@ -48,8 +48,8 @@ describe('Loading Demo Page', () => {
         it('should allow selecting all size options', async () => {
             const sizes = ['small', 'medium', 'large'];
             for (const size of sizes) {
-                await verifyPresent(loadingSizeLineRadio(size));
-                await click(loadingSizeLineRadio(size));
+                await verifyPresent(loadingSizeLineSelector(size));
+                await clickRadio(loadingSizeLineSelector(size));
                 await verifyPresent(loading.lineComponent);
             }
         });
@@ -57,8 +57,8 @@ describe('Loading Demo Page', () => {
         it('should allow selecting all color options', async () => {
             const colors = ['grapefruit', 'aqua', 'mint', 'ocean'];
             for (const color of colors) {
-                await verifyPresent(loadingColorLineRadio(color));
-                await click(loadingColorLineRadio(color));
+                await verifyPresent(loadingColorLineSelector(color));
+                await clickRadio(loadingColorLineSelector(color));
                 await verifyPresent(loading.lineComponent);
             }
         });
@@ -72,8 +72,8 @@ describe('Loading Demo Page', () => {
         it('should allow selecting all size options', async () => {
             const sizes = ['small', 'medium', 'large'];
             for (const size of sizes) {
-                await verifyPresent(loadingSizeSpinnerRadio(size));
-                await click(loadingSizeSpinnerRadio(size));
+                await verifyPresent(loadingSizeSpinnerSelector(size));
+                await clickRadio(loadingSizeSpinnerSelector(size));
                 await verifyPresent(loading.spinnerComponent);
             }
         });
@@ -81,8 +81,8 @@ describe('Loading Demo Page', () => {
         it('should allow selecting all color options', async () => {
             const colors = ['grapefruit', 'aqua', 'mint', 'ocean'];
             for (const color of colors) {
-                await verifyPresent(loadingColorSpinnerRadio(color));
-                await click(loadingColorSpinnerRadio(color));
+                await verifyPresent(loadingColorSpinnerSelector(color));
+                await clickRadio(loadingColorSpinnerSelector(color));
                 await verifyPresent(loading.spinnerComponent);
             }
         });
