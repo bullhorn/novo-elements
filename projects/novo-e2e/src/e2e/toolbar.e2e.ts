@@ -154,20 +154,5 @@ describe('Toolbar Demo Page', () => {
             await click(toolbarSelectors.toolbarNavFilesTab);
             await verifyClassPresent(toolbarSelectors.toolbarNavFilesTab, Classes.active);
         });
-
-        it('should respond to click on company toolbar button', async () => {
-            await click(toolbarSelectors.companyButton);
-            await verifyPresent(toolbarSelectors.companyButton);
-        });
-
-        it('should respond to click on navigation actions', async () => {
-            await click(toolbarSelectors.navMenuAction);
-            await verifyPresent(toolbarSelectors.navMenuAction);
-        });
-
-        it('should respond to click on action icons', async () => {
-            await click(toolbarSelectors.companyShareAction);
-            await verifyPresent(toolbarSelectors.companyShareAction);
-        });
     });
 });

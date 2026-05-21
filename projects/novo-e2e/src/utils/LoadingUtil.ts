@@ -11,18 +11,18 @@ export const loading = {
     spinnerColorGroup: automationId('color-spinner-group'),
 };
 
-export function loadingSizeLineRadio(size: string): string {
-    return `${automationId(`size-line-${size}`)} i`;
+export function loadingSizeLineSelector(size: string): string {
+    return automationId(`size-line-${size}`);
 }
 
-export function loadingColorLineRadio(color: string): string {
-    return `${automationId(`color-line-${color}`)} i`;
+export function loadingColorLineSelector(color: string): string {
+    return automationId(`color-line-${color}`);
 }
 
-export function loadingSizeSpinnerRadio(size: string): string {
-    return `${automationId(`size-spinner-${size}`)} i`;
+export function loadingSizeSpinnerSelector(size: string): string {
+    return automationId(`size-spinner-${size}`);
 }
 
-export function loadingColorSpinnerRadio(color: string): string {
-    return `${automationId(`color-spinner-${color}`)} i`;
+export function loadingColorSpinnerSelector(color: string): string {
+    return automationId(`color-spinner-${color}`);
 }
