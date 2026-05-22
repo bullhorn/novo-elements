@@ -1,4 +1,5 @@
 // Angular
+import { FocusTrap } from '@angular/cdk/a11y';
 import {
   ConnectedPosition,
   FlexibleConnectedPositionStrategy,
@@ -33,7 +34,7 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 // Vendor
-import { focusWalker, Helpers } from 'novo-elements/utils';
+import { BooleanInput, focusWalker, Helpers } from 'novo-elements/utils';
 import { fromEvent, merge, Observable, of as observableOf, Subscription } from 'rxjs';
 import { filter, first, switchMap } from 'rxjs/operators';
 
@@ -42,7 +43,7 @@ import { filter, first, switchMap } from 'rxjs/operators';
     styleUrls: ['Overlay.scss'],
     template: `
     <ng-template>
-      <div class="novo-overlay-panel" role="listbox" [id]="id" #panel><ng-content></ng-content></div>
+      <div class="novo-overlay-panel" [cdkTrapFocus]="trapKeyboardFocus" role="listbox" [id]="id" #panel><ng-content></ng-content></div>
     </ng-template>
   `,
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -82,6 +83,8 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
   public hasBackdrop: boolean = false;
   @Input()
   public permitEscapeKeyExit: boolean = true;
+  @Input()
+  public trapKeyboardFocus: boolean = true;
 
   @Output()
   public select: EventEmitter<any> = new EventEmitter();
