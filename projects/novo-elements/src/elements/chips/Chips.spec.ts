@@ -284,4 +284,74 @@ describe('Elements: NovoChipsElement', () => {
       expect(component.registerOnTouched).toBeDefined();
     });
   });
+
+  describe('Integration: classFunction in source', () => {
+    it('should pass classFunction from source to rendered chips', async () => {
+      const classFunc = vi.fn((value) => `status-${value.status}`);
+      component.source = {
+        hiddenChipsLimit: 4,
+        classFunction: classFunc,
+      };
+      component.model = [{ value: 1, status: 'active', label: 'Item 1' }];
+      component.setItems();
+      fixture.detectChanges();
+      await tick(10);
+
+      const chipElement = fixture.nativeElement.querySelector('novo-chip');
+      expect(chipElement).toBeTruthy();
+      // Verify the chip component received the source with classFunction
+      const chip = fixture.debugElement.query((el) => el.name === 'novo-chip');
+      expect(chip.componentInstance.source).toBe(component.source);
+      expect(chip.componentInstance.source.classFunction).toBe(classFunc);
+    });
+
+    it('should pass value and label to chips from model', async () => {
+      component.source = {
+        hiddenChipsLimit: 4,
+        classFunction: (value, label) => `${label}`,
+      };
+      component.model = [{ value: 1, priority: 'high', label: 'Item 1' }];
+      component.setItems();
+      fixture.detectChanges();
+      await tick(10);
+
+      const chipDebugElement = fixture.debugElement.query((el) => el.name === 'novo-chip');
+      expect(chipDebugElement).toBeTruthy();
+      // Verify value and label are passed to chip
+      expect(chipDebugElement.componentInstance.value).toBeDefined();
+      expect(chipDebugElement.componentInstance.source.classFunction).toBeDefined();
+      // Item should have label property from setItems transformation
+      expect(chipDebugElement.componentInstance.value.label).toBe('Item 1');
+    });
+
+    it('should compute dynamicClasses from classFunction on chip', async () => {
+      component.source = {
+        hiddenChipsLimit: 4,
+        classFunction: (value) => (value.priority === 'high' ? 'priority-high' : 'priority-low'),
+      };
+      component.model = [{ value: 1, priority: 'high', label: 'Item 1' }];
+      component.setItems();
+      fixture.detectChanges();
+      await tick(10);
+
+      const chipDebugElement = fixture.debugElement.query((el) => el.name === 'novo-chip');
+      expect(chipDebugElement).toBeTruthy();
+      expect(chipDebugElement.componentInstance.dynamicClasses).toBe('priority-high');
+    });
+
+    it('should handle multiple classes in array from classFunction', async () => {
+      component.source = {
+        hiddenChipsLimit: 4,
+        classFunction: (value) => [`priority-${value.priority}`, `type-${value.type}`],
+      };
+      component.model = [{ value: 1, priority: 'high', type: 'warning', label: 'Item 1' }];
+      component.setItems();
+      fixture.detectChanges();
+      await tick(10);
+
+      const chipDebugElement = fixture.debugElement.query((el) => el.name === 'novo-chip');
+      expect(chipDebugElement).toBeTruthy();
+      expect(chipDebugElement.componentInstance.dynamicClasses).toBe('priority-high type-warning');
+    });
+  });
 });
