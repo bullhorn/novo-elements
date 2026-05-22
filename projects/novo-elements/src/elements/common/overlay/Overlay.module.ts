@@ -6,9 +6,10 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 // APP
 import { NovoOverlayTemplateComponent } from './Overlay';
+import { A11yModule } from '@angular/cdk/a11y';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, OverlayModule, ScrollingModule],
+  imports: [CommonModule, FormsModule, OverlayModule, ScrollingModule, A11yModule],
   declarations: [NovoOverlayTemplateComponent],
   exports: [NovoOverlayTemplateComponent, ScrollingModule],
 })
