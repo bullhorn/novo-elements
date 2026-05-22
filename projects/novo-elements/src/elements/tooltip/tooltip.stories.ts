@@ -270,7 +270,10 @@ export const UsageGuide: Story = {
 
 /**
  * A button with a hover tooltip. The directive binds to the button host;
- * hover the trigger in the canvas to see the overlay.
+ * the play function drives the hover on render so the canvas shows the
+ * tooltip immediately — without it, the story would just render a button
+ * and require the user to hover to see anything. (Real consumers don't
+ * need a play function; the tooltip appears on real `mouseenter`.)
  */
 export const Default: Story = {
   args: {
@@ -294,6 +297,12 @@ export const Default: Story = {
   },
   render: (args) => ({
     props: args,
+    // Bind only the args this story sets. Earlier the template bound every
+    // tooltip input (`[tooltipActive]`, `[tooltipSize]`, …) even though args
+    // didn't supply them, which left `tooltipActive` resolving to `undefined`
+    // — the directive treats undefined as inactive and the tooltip never
+    // shows on `mouseenter`. The full input surface is covered by the
+    // Playground story instead.
     template: `
       <div style="padding: 4rem 2rem; display: flex; justify-content: center;">
         <novo-button
@@ -301,22 +310,21 @@ export const Default: Story = {
           [tooltip]="tooltip"
           [tooltipPosition]="position"
           [tooltipType]="type"
-          [tooltipSize]="size"
-          [tooltipRounded]="rounded"
-          [tooltipBounce]="bounce"
-          [tooltipNoAnimate]="noAnimate"
-          [tooltipPreline]="preline"
-          [removeTooltipArrow]="removeArrow"
-          [tooltipAutoPosition]="autoPosition"
-          [tooltipIsHTML]="isHTML"
-          [tooltipCloseOnClick]="closeOnClick"
-          [tooltipActive]="active"
         >
           Hover me
         </novo-button>
       </div>
     `,
   }),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const trigger = await canvas.findByRole('button', { name: /hover me/i });
+    await userEvent.hover(trigger);
+
+    // Tooltip portals into document.body via CDK overlay.
+    const body = within(document.body);
+    await waitFor(() => expect(body.getByText('Edit candidate')).toBeInTheDocument());
+  },
 };
 
 /* -------------------------------------------------------------------------- */
