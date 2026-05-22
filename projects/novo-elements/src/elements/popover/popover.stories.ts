@@ -293,9 +293,12 @@ export const UsageGuide: Story = {
  */
 export const Default: Story = {
   args: {
-    popoverContent: 'A popover surfaces supplemental content anchored to the trigger that opened it.',
+    popoverContent:
+      'Popovers surface supplemental information anchored to the trigger that opened them. Reach for one when a short ' +
+      'block of help text, a definition, or a context-specific action shouldn’t take the user out of their flow but ' +
+      'is too rich for a tooltip.',
     popoverTitle: 'About popovers',
-    popoverPlacement: 'right',
+    popoverPlacement: 'bottom',
     popoverOnHover: false,
     popoverDisabled: false,
     popoverAnimation: true,
@@ -572,24 +575,40 @@ export const RichHtmlContent: Story = {
     docs: {
       source: {
         language: 'html',
-        code: `<novo-button
+        code: `<!-- The directive selector is [popover], [novoPopover]. Even when
+     you only want HTML content, you must include \`novoPopover=""\` (or a
+     bound string) to actually attach the directive to the host. -->
+<novo-button
   theme="primary"
+  novoPopover=""
   popoverTitle="Release notes"
-  [popoverHtmlContent]="'<p>Two changes shipped this week:</p><ul><li>Title text now wraps.</li><li>New corner placements.</li></ul>'"
+  [popoverHtmlContent]="html"
   popoverPlacement="bottom"
 >
   What's new
-</novo-button>`,
+</novo-button>
+
+// component.ts
+html = '<p>Two changes shipped this week:</p><ul><li>Title text now wraps.</li><li>New corner placements.</li></ul>';`,
       },
     },
   },
   render: () => ({
+    props: {
+      releaseHtml:
+        '<p style="margin:0 0 .5rem;">Two changes shipped this week:</p>' +
+        '<ul style="margin:0;padding-left:1.25rem;">' +
+        '<li>Title text now wraps within the popover bounds.</li>' +
+        '<li>New corner placements for fine-grained anchoring.</li>' +
+        '</ul>',
+    },
     template: `
       <div style="padding: 6rem 4rem; display: flex; justify-content: center;">
         <novo-button
           theme="primary"
+          novoPopover=""
           popoverTitle="Release notes"
-          [popoverHtmlContent]="'<p style=&quot;margin:0 0 .5rem;&quot;>Two changes shipped this week:</p><ul style=&quot;margin:0;padding-left:1.25rem;&quot;><li>Title text now wraps within the popover bounds.</li><li>New corner placements for fine-grained anchoring.</li></ul>'"
+          [popoverHtmlContent]="releaseHtml"
           popoverPlacement="bottom"
         >
           What's new
@@ -615,44 +634,52 @@ export const ScrollableContent: Story = {
     docs: {
       source: {
         language: 'html',
-        code: `<!-- Wrap the body in a scroll container via popoverHtmlContent. -->
+        code: `<!-- Long bodies: use the <popover-content> template form. The template
+     projects via <ng-content>, so inline styles (max-height / overflow)
+     are preserved — unlike [popoverHtmlContent], which Angular sanitises
+     and strips style attributes from. -->
+<popover-content
+  #changelog
+  title="Changelog"
+  placement="bottom"
+>
+  <div style="max-height: 16rem; overflow-y: auto;">
+    <p *ngFor="let v of versions">...</p>
+  </div>
+</popover-content>
+
 <novo-button
   theme="standard"
-  popoverTitle="Changelog"
-  [popoverHtmlContent]="scrollableHtml"
-  popoverPlacement="right"
+  [novoPopover]="changelog"
 >
   Long content
 </novo-button>`,
       },
     },
   },
-  render: () => ({
-    props: {
-      scrollableHtml: `
-        <div style="max-height: 16rem; overflow-y: auto; padding-right: 0.5rem;">
-          ${Array.from({ length: 12 })
-            .map(
-              (_, i) =>
-                `<p style="margin:0 0 .75rem;"><strong>v1.${i}.0</strong> — Sample changelog entry describing the headline change for this release, padded out so the body needs to scroll inside the popover container.</p>`,
-            )
-            .join('')}
-        </div>
-      `,
-    },
-    template: `
+  render: () => {
+    const entries = Array.from({ length: 12 }).map(
+      (_, i) =>
+        `<p style="margin:0 0 .75rem;"><strong>v1.${i}.0</strong> — Sample changelog entry describing the headline change for this release, padded out so the body needs to scroll inside the popover container.</p>`,
+    );
+    return {
+      props: { entriesHtml: entries.join('') },
+      template: `
       <div style="padding: 6rem 4rem; display: flex; justify-content: center;">
+        <popover-content #changelog title="Changelog" placement="bottom">
+          <div style="max-height: 16rem; overflow-y: auto; padding-right: 0.5rem;" [innerHTML]="entriesHtml"></div>
+        </popover-content>
+
         <novo-button
           theme="standard"
-          popoverTitle="Changelog"
-          [popoverHtmlContent]="scrollableHtml"
-          popoverPlacement="right"
+          [novoPopover]="changelog"
         >
           Long content
         </novo-button>
       </div>
     `,
-  }),
+    };
+  },
 };
 
 /* -------------------------------------------------------------------------- */
