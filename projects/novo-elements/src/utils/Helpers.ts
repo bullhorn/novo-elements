@@ -556,7 +556,7 @@ export interface NextFocusOpts {
 }
 
 const NEXT_FOCUS_OPTS_DEFAULT = {
-  allowExit: false
+  allowExit: false,
 };
 
 const FOCUSABLE_ELEMENTS = ['BUTTON', 'INPUT', 'A', 'SELECT', 'TEXTAREA'];
@@ -573,7 +573,6 @@ export function focusWalker(startingPosition: HTMLElement, opts?: Partial<NextFo
       } else {
         return NodeFilter.FILTER_SKIP;
       }
-    }
+    },
   });
 }
-const x = focusWalker(document.body);

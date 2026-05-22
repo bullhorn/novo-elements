@@ -1,5 +1,4 @@
 // Angular
-import { FocusTrap } from '@angular/cdk/a11y';
 import {
   ConnectedPosition,
   FlexibleConnectedPositionStrategy,
@@ -34,7 +33,7 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 // Vendor
-import { BooleanInput, focusWalker, Helpers } from 'novo-elements/utils';
+import { focusWalker, Helpers } from 'novo-elements/utils';
 import { fromEvent, merge, Observable, of as observableOf, Subscription } from 'rxjs';
 import { filter, first, switchMap } from 'rxjs/operators';
 

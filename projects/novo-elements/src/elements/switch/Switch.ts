@@ -2,7 +2,7 @@
 import { ChangeDetectorRef, Component, EventEmitter, forwardRef, HostBinding, HostListener, Input, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ActivateDirective } from 'novo-elements/elements/common';
-import { BooleanInput, Key } from 'novo-elements/utils';
+import { BooleanInput } from 'novo-elements/utils';
 
 // Value accessor for the component (supports ngModel)
 const SWITCH_VALUE_ACCESSOR = {
@@ -38,7 +38,7 @@ const SWITCH_VALUE_ACCESSOR = {
     },
     hostDirectives: [{
       directive: ActivateDirective,
-      outputs: ['novoActivate']
+      outputs: ['novoActivate'],
     }],
     standalone: false,
 })
