@@ -109,8 +109,8 @@ class NovoTilesElement {
     setDisabledState(disabled) {
         this.disabled = disabled;
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoTilesElement, deps: [{ token: i0.ElementRef }, { token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.18", type: NovoTilesElement, isStandalone: false, selector: "novo-tiles", inputs: { name: "name", options: "options", required: "required", disabled: ["controlDisabled", "disabled"] }, outputs: { onChange: "onChange", onSelectedOptionClick: "onSelectedOptionClick", onDisabledOptionClick: "onDisabledOptionClick" }, providers: [TILES_VALUE_ACCESSOR], usesOnChanges: true, ngImport: i0, template: `
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.19", ngImport: i0, type: NovoTilesElement, deps: [{ token: i0.ElementRef }, { token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.19", type: NovoTilesElement, isStandalone: false, selector: "novo-tiles", inputs: { name: "name", options: "options", required: "required", disabled: ["controlDisabled", "disabled"] }, outputs: { onChange: "onChange", onSelectedOptionClick: "onSelectedOptionClick", onDisabledOptionClick: "onDisabledOptionClick" }, providers: [TILES_VALUE_ACCESSOR], usesOnChanges: true, ngImport: i0, template: `
     <div class="tile-container" [class.active]="focused" [class.disabled]="disabled">
       <button class="tile" type="button"
         *ngFor="let option of _options; let i = index"
@@ -139,7 +139,7 @@ class NovoTilesElement {
     </div>
   `, isInline: true, styles: [":host{display:inline-block}:host input{appearance:none!important;height:0!important;border:none!important;position:absolute}:host>.tile-container{background:#fff;display:flex;border:solid thin #707070;border-radius:3px}:host>.tile-container .tile{margin:2px;gap:.5rem}:host>.tile-container .tile:not(:last-child){margin-right:3px}:host>.tile-container .tile.defaultColor.active{background:#1f57a1}:host>.tile-container .tile.disabled{cursor:not-allowed;opacity:.4}:host>.tile-container .tile ::ng-deep span{text-transform:none}:host>.tile-container .tile ::ng-deep span label{cursor:inherit}:host>.tile-container.disabled{border-color:#d1d1d1;opacity:.4;pointer-events:auto;cursor:not-allowed}:host>.tile-container.disabled .tile{pointer-events:none;opacity:1}\n"], dependencies: [{ kind: "directive", type: i1.NgClass, selector: "[ngClass]", inputs: ["class", "ngClass"] }, { kind: "directive", type: i1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "component", type: i2.NovoButtonElement, selector: "novo-button,button[theme]", inputs: ["color", "side", "size", "theme", "loading", "icon", "secondIcon", "disabled"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoTilesElement, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.19", ngImport: i0, type: NovoTilesElement, decorators: [{
             type: Component,
             args: [{ selector: 'novo-tiles', providers: [TILES_VALUE_ACCESSOR], template: `
     <div class="tile-container" [class.active]="focused" [class.disabled]="disabled">
@@ -188,11 +188,11 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImpo
 
 // NG2
 class NovoTilesModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoTilesModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.3.18", ngImport: i0, type: NovoTilesModule, declarations: [NovoTilesElement], imports: [CommonModule, NovoButtonModule, ReactiveFormsModule], exports: [NovoTilesElement] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoTilesModule, imports: [CommonModule, NovoButtonModule, ReactiveFormsModule] }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.19", ngImport: i0, type: NovoTilesModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.3.19", ngImport: i0, type: NovoTilesModule, declarations: [NovoTilesElement], imports: [CommonModule, NovoButtonModule, ReactiveFormsModule], exports: [NovoTilesElement] }); }
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.3.19", ngImport: i0, type: NovoTilesModule, imports: [CommonModule, NovoButtonModule, ReactiveFormsModule] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoTilesModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.19", ngImport: i0, type: NovoTilesModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [CommonModule, NovoButtonModule, ReactiveFormsModule],

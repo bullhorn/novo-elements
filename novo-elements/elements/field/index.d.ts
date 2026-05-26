@@ -188,7 +188,7 @@ declare class NovoInput extends NovoInputBase implements NovoFieldControl<any>, 
      * @docs-private
      */
     focused: boolean;
-    errorState: boolean;
+    get errorState(): boolean;
     /** @docs-private Implemented as part of NovoFieldControl. */
     lastKeyValue: string;
     /** @docs-private Implemented as part of NovoFieldControl.*/

@@ -11,7 +11,7 @@ import { NovoToastService, ToastOptions } from 'novo-elements/elements/toast';
 import { BooleanInput } from '@angular/cdk/coercion';
 import * as i5 from '@angular/forms';
 import { UntypedFormGroup, FormBuilder, FormControl, ControlValueAccessor, NgForm, FormGroupDirective, NgControl, FormGroup } from '@angular/forms';
-import * as i30 from 'novo-elements/elements/common';
+import * as i29 from 'novo-elements/elements/common';
 import { NovoTemplate, CanUpdateErrorStateCtor, ErrorStateMatcher } from 'novo-elements/elements/common';
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import * as i13 from '@angular/cdk/drag-drop';
@@ -40,10 +40,9 @@ import * as i21 from 'novo-elements/elements/header';
 import * as i23 from 'novo-elements/elements/popover';
 import * as i24 from 'angular-imask';
 import * as i25 from 'novo-elements/elements/tip-well';
-import * as i28 from 'novo-elements/addons/ace-editor';
-import * as i29 from 'novo-elements/addons/code-editor';
-import * as i32 from 'novo-elements/elements/icon';
-import * as i33 from 'novo-elements/elements/switch';
+import * as i28 from 'novo-elements/addons/code-editor';
+import * as i31 from 'novo-elements/elements/icon';
+import * as i32 from 'novo-elements/elements/switch';
 
 interface NovoFieldset {
     title?: string;
@@ -311,11 +310,6 @@ declare class BaseControl extends ControlConfig {
     __type: string;
     __config: NovoControlConfig;
     constructor(type?: string, config?: NovoControlConfig);
-}
-
-declare class AceEditorControl extends BaseControl {
-    controlType: string;
-    constructor(config: NovoControlConfig);
 }
 
 declare class AddressControl extends BaseControl {
@@ -1281,7 +1275,7 @@ declare class NovoFormElement implements AfterContentInit, OnInit {
 
 declare class NovoFormModule {
     static ɵfac: i0.ɵɵFactoryDeclaration<NovoFormModule, never>;
-    static ɵmod: i0.ɵɵNgModuleDeclaration<NovoFormModule, [typeof NovoAutoSize, typeof NovoControlElement, typeof NovoDynamicFormElement, typeof NovoFormElement, typeof NovoFieldsetElement, typeof NovoFieldsetHeaderElement, typeof ControlConfirmModal, typeof ControlPromptModal, typeof NovoControlGroup, typeof NovoControlTemplates], [typeof i4.CommonModule, typeof i8$1.OverlayModule, typeof i5.ReactiveFormsModule, typeof i10$1.NovoRadioModule, typeof i11$1.NovoTilesModule, typeof i8.NovoSelectModule, typeof i9.NovoPickerModule, typeof i14$1.NovoChipsModule, typeof i15$1.NovoDatePickerModule, typeof i16.NovoTimePickerModule, typeof i17.NovoDateTimePickerModule, typeof i18.NovoNovoCKEditorModule, typeof NovoFormExtrasModule, typeof i20.NovoQuickNoteModule, typeof i17.NovoDateTimePickerModule, typeof i21.NovoHeaderModule, typeof i11.NovoTooltipModule, typeof i23.NovoPopOverModule, typeof i24.IMaskModule, typeof i25.NovoTipWellModule, typeof i26.NovoModalModule, typeof i7.NovoButtonModule, typeof i28.NovoAceEditorModule, typeof i29.NovoCodeEditorModule, typeof i30.NovoCommonModule, typeof i12.NovoCheckboxModule, typeof i32.NovoIconModule, typeof i10$1.NovoRadioModule, typeof i33.NovoSwitchModule], [typeof NovoAutoSize, typeof NovoDynamicFormElement, typeof NovoControlElement, typeof NovoFormElement, typeof NovoFieldsetHeaderElement, typeof NovoControlGroup, typeof NovoControlTemplates]>;
+    static ɵmod: i0.ɵɵNgModuleDeclaration<NovoFormModule, [typeof NovoAutoSize, typeof NovoControlElement, typeof NovoDynamicFormElement, typeof NovoFormElement, typeof NovoFieldsetElement, typeof NovoFieldsetHeaderElement, typeof ControlConfirmModal, typeof ControlPromptModal, typeof NovoControlGroup, typeof NovoControlTemplates], [typeof i4.CommonModule, typeof i8$1.OverlayModule, typeof i5.ReactiveFormsModule, typeof i10$1.NovoRadioModule, typeof i11$1.NovoTilesModule, typeof i8.NovoSelectModule, typeof i9.NovoPickerModule, typeof i14$1.NovoChipsModule, typeof i15$1.NovoDatePickerModule, typeof i16.NovoTimePickerModule, typeof i17.NovoDateTimePickerModule, typeof i18.NovoNovoCKEditorModule, typeof NovoFormExtrasModule, typeof i20.NovoQuickNoteModule, typeof i17.NovoDateTimePickerModule, typeof i21.NovoHeaderModule, typeof i11.NovoTooltipModule, typeof i23.NovoPopOverModule, typeof i24.IMaskModule, typeof i25.NovoTipWellModule, typeof i26.NovoModalModule, typeof i7.NovoButtonModule, typeof i28.NovoCodeEditorModule, typeof i29.NovoCommonModule, typeof i12.NovoCheckboxModule, typeof i31.NovoIconModule, typeof i10$1.NovoRadioModule, typeof i32.NovoSwitchModule], [typeof NovoAutoSize, typeof NovoDynamicFormElement, typeof NovoControlElement, typeof NovoFormElement, typeof NovoFieldsetHeaderElement, typeof NovoControlGroup, typeof NovoControlTemplates]>;
     static ɵinj: i0.ɵɵInjectorDeclaration<NovoFormModule>;
 }
 
@@ -1308,5 +1302,5 @@ declare class FormValidators {
     };
 }
 
-export { AceEditorControl, AddressControl, BaseControl, CheckListControl, CheckboxControl, CodeEditorControl, ControlConfirmModal, ControlFactory, ControlPromptModal, CustomControl, DateControl, DateTimeControl, EditState, EditorControl, FieldInteractionApi, FileControl, FormUtils, FormValidators, GroupedControl, NativeSelectControl, NovoAddressElement, NovoAutoSize, NovoControlElement, NovoControlGroup, NovoControlTemplates, NovoDynamicFormElement, NovoFieldsetElement, NovoFieldsetHeaderElement, NovoFile, NovoFileInputElement, NovoFormControl, NovoFormElement, NovoFormExtrasModule, NovoFormGroup, NovoFormModule, NumberRangeComponent, PickerControl, QuickNoteControl, RadioControl, ReadOnlyControl, SelectControl, SwitchControl, TablePickerControl, TextAreaControl, TextBoxControl, TilesControl, TimeControl, TimezoneControl };
+export { AddressControl, BaseControl, CheckListControl, CheckboxControl, CodeEditorControl, ControlConfirmModal, ControlFactory, ControlPromptModal, CustomControl, DateControl, DateTimeControl, EditState, EditorControl, FieldInteractionApi, FileControl, FormUtils, FormValidators, GroupedControl, NativeSelectControl, NovoAddressElement, NovoAutoSize, NovoControlElement, NovoControlGroup, NovoControlTemplates, NovoDynamicFormElement, NovoFieldsetElement, NovoFieldsetHeaderElement, NovoFile, NovoFileInputElement, NovoFormControl, NovoFormElement, NovoFormExtrasModule, NovoFormGroup, NovoFormModule, NumberRangeComponent, PickerControl, QuickNoteControl, RadioControl, ReadOnlyControl, SelectControl, SwitchControl, TablePickerControl, TextAreaControl, TextBoxControl, TilesControl, TimeControl, TimezoneControl };
 export type { CustomHttp, FormField, IFieldInteractionEvent, IMaskOptions, ModifyPickerConfigArgs, NovoAddressConfig, NovoAddressSubfieldConfig, NovoControlConfig, NovoControlGroupAddConfig, NovoControlGroupRowConfig, NovoFieldset, NovoGroupedControlConfig, OptionsFunction, ResultsTemplateType };

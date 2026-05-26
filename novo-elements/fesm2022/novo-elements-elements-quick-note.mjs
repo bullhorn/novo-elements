@@ -112,8 +112,8 @@ class QuickNoteResults extends PickerResults {
         }
         return false;
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: QuickNoteResults, deps: [{ token: i0.ElementRef }, { token: i1.NovoLabelService }, { token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.18", type: QuickNoteResults, isStandalone: false, selector: "quick-note-results", host: { classAttribute: "active" }, usesInheritance: true, ngImport: i0, template: `
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.19", ngImport: i0, type: QuickNoteResults, deps: [{ token: i0.ElementRef }, { token: i1.NovoLabelService }, { token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.19", type: QuickNoteResults, isStandalone: false, selector: "quick-note-results", host: { classAttribute: "active" }, usesInheritance: true, ngImport: i0, template: `
     <novo-loading theme="line" *ngIf="isLoading && !matches.length"></novo-loading>
     <novo-list *ngIf="matches.length > 0">
       <novo-list-item
@@ -131,7 +131,7 @@ class QuickNoteResults extends PickerResults {
     <p class="picker-null" *ngIf="!isLoading && !matches.length && !hasError">{{ labels.quickNoteEmpty }}</p>
   `, isInline: true, styles: [":host{position:absolute;z-index:z(overlay);box-shadow:0 3px 1px -2px #0003,0 2px 2px #00000024,0 1px 5px #0000001f;top:0;left:0;right:0;max-width:100%;min-width:100%;align-items:center;display:flex;justify-content:center;padding:0!important;border:none!important}:host novo-list{box-shadow:none}\n"], dependencies: [{ kind: "directive", type: i2.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i2.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "component", type: i3.NovoLoadingElement, selector: "novo-loading", inputs: ["theme", "color", "size"] }, { kind: "component", type: i4.NovoListElement, selector: "novo-list", inputs: ["theme", "direction"] }, { kind: "component", type: i4.NovoListItemElement, selector: "novo-list-item, a[list-item], button[list-item]" }, { kind: "component", type: i4.NovoItemContentElement, selector: "item-content, novo-item-content", inputs: ["direction"] }, { kind: "pipe", type: i5.HighlightPipe, name: "highlight" }] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: QuickNoteResults, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.19", ngImport: i0, type: QuickNoteResults, decorators: [{
             type: Component,
             args: [{ selector: 'quick-note-results', host: {
                         class: 'active',
@@ -688,10 +688,10 @@ class QuickNoteElement extends OutsideClick {
         }
         return this._placeholderElement;
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: QuickNoteElement, deps: [{ token: i0.NgZone }, { token: i0.ElementRef }, { token: i1.ComponentUtils }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.18", type: QuickNoteElement, isStandalone: false, selector: "novo-quick-note", inputs: { config: "config", startupFocus: "startupFocus", placeholder: "placeholder" }, outputs: { focus: "focus", blur: "blur", change: "change" }, providers: [QUICK_NOTE_VALUE_ACCESSOR], viewQueries: [{ propertyName: "wrapper", first: true, predicate: ["wrapper"], descendants: true, static: true }, { propertyName: "host", first: true, predicate: ["host"], descendants: true, static: true }, { propertyName: "results", first: true, predicate: ["results"], descendants: true, read: ViewContainerRef, static: true }], usesInheritance: true, ngImport: i0, template: ' <div class="quick-note-wrapper" #wrapper><textarea #host></textarea> <span #results></span></div> ', isInline: true, styles: [":host,.quick-note-wrapper{width:100%;height:200px;position:relative}:host ::ng-deep .cke_top,.quick-note-wrapper ::ng-deep .cke_top{padding:4px 3px 0}:host ::ng-deep .cke_top .cke_toolbar .cke_combo_text,.quick-note-wrapper ::ng-deep .cke_top .cke_toolbar .cke_combo_text{padding-left:7px}:host ::ng-deep .cke_top .cke_toolbar .cke_combo_open,.quick-note-wrapper ::ng-deep .cke_top .cke_toolbar .cke_combo_open{margin-left:4px}:host ::ng-deep .cke_top .cke_toolbar .cke_combo__fontsize .cke_combo_text,.quick-note-wrapper ::ng-deep .cke_top .cke_toolbar .cke_combo__fontsize .cke_combo_text{width:27px}\n"] }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.19", ngImport: i0, type: QuickNoteElement, deps: [{ token: i0.NgZone }, { token: i0.ElementRef }, { token: i1.ComponentUtils }], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.19", type: QuickNoteElement, isStandalone: false, selector: "novo-quick-note", inputs: { config: "config", startupFocus: "startupFocus", placeholder: "placeholder" }, outputs: { focus: "focus", blur: "blur", change: "change" }, providers: [QUICK_NOTE_VALUE_ACCESSOR], viewQueries: [{ propertyName: "wrapper", first: true, predicate: ["wrapper"], descendants: true, static: true }, { propertyName: "host", first: true, predicate: ["host"], descendants: true, static: true }, { propertyName: "results", first: true, predicate: ["results"], descendants: true, read: ViewContainerRef, static: true }], usesInheritance: true, ngImport: i0, template: ' <div class="quick-note-wrapper" #wrapper><textarea #host></textarea> <span #results></span></div> ', isInline: true, styles: [":host,.quick-note-wrapper{width:100%;height:200px;position:relative}:host ::ng-deep .cke_top,.quick-note-wrapper ::ng-deep .cke_top{padding:4px 3px 0}:host ::ng-deep .cke_top .cke_toolbar .cke_combo_text,.quick-note-wrapper ::ng-deep .cke_top .cke_toolbar .cke_combo_text{padding-left:7px}:host ::ng-deep .cke_top .cke_toolbar .cke_combo_open,.quick-note-wrapper ::ng-deep .cke_top .cke_toolbar .cke_combo_open{margin-left:4px}:host ::ng-deep .cke_top .cke_toolbar .cke_combo__fontsize .cke_combo_text,.quick-note-wrapper ::ng-deep .cke_top .cke_toolbar .cke_combo__fontsize .cke_combo_text{width:27px}\n"] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: QuickNoteElement, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.19", ngImport: i0, type: QuickNoteElement, decorators: [{
             type: Component,
             args: [{ selector: 'novo-quick-note', providers: [QUICK_NOTE_VALUE_ACCESSOR], template: ' <div class="quick-note-wrapper" #wrapper><textarea #host></textarea> <span #results></span></div> ', standalone: false, styles: [":host,.quick-note-wrapper{width:100%;height:200px;position:relative}:host ::ng-deep .cke_top,.quick-note-wrapper ::ng-deep .cke_top{padding:4px 3px 0}:host ::ng-deep .cke_top .cke_toolbar .cke_combo_text,.quick-note-wrapper ::ng-deep .cke_top .cke_toolbar .cke_combo_text{padding-left:7px}:host ::ng-deep .cke_top .cke_toolbar .cke_combo_open,.quick-note-wrapper ::ng-deep .cke_top .cke_toolbar .cke_combo_open{margin-left:4px}:host ::ng-deep .cke_top .cke_toolbar .cke_combo__fontsize .cke_combo_text,.quick-note-wrapper ::ng-deep .cke_top .cke_toolbar .cke_combo__fontsize .cke_combo_text{width:27px}\n"] }]
         }], ctorParameters: () => [{ type: i0.NgZone }, { type: i0.ElementRef }, { type: i1.ComponentUtils }], propDecorators: { wrapper: [{
@@ -719,11 +719,11 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImpo
 
 // NG2
 class NovoQuickNoteModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoQuickNoteModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.3.18", ngImport: i0, type: NovoQuickNoteModule, declarations: [QuickNoteElement, QuickNoteResults], imports: [CommonModule, FormsModule, NovoLoadingModule, NovoListModule, NovoPipesModule], exports: [QuickNoteElement, QuickNoteResults] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoQuickNoteModule, imports: [CommonModule, FormsModule, NovoLoadingModule, NovoListModule, NovoPipesModule] }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.19", ngImport: i0, type: NovoQuickNoteModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.3.19", ngImport: i0, type: NovoQuickNoteModule, declarations: [QuickNoteElement, QuickNoteResults], imports: [CommonModule, FormsModule, NovoLoadingModule, NovoListModule, NovoPipesModule], exports: [QuickNoteElement, QuickNoteResults] }); }
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.3.19", ngImport: i0, type: NovoQuickNoteModule, imports: [CommonModule, FormsModule, NovoLoadingModule, NovoListModule, NovoPipesModule] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoQuickNoteModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.19", ngImport: i0, type: NovoQuickNoteModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [CommonModule, FormsModule, NovoLoadingModule, NovoListModule, NovoPipesModule],

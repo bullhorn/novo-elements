@@ -2,7 +2,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import * as i0 from '@angular/core';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NovoNovoCKEditorModule, NovoAceEditorModule, NovoCodeEditorModule } from 'novo-elements/addons';
+import { NovoNovoCKEditorModule, NovoCodeEditorModule } from 'novo-elements/addons';
 export * from 'novo-elements/addons';
 import { NovoAsideModule, NovoAutoCompleteModule, NovoAvatarModule, NovoButtonModule, NovoLoadingModule, NovoCardModule, NovoAgendaModule, NovoCalendarModule, NovoCheckboxModule, NovoFlexModule, NovoLayoutModule, NovoDividerModule, NovoToastModule, NovoTooltipModule, NovoHeaderModule, NovoTabModule, NovoTilesModule, NovoModalModule, NovoQuickNoteModule, NovoRadioModule, NovoDropdownModule, NovoSelectModule, NovoListModule, NovoSwitchModule, NovoSliderModule, NovoPickerModule, NovoChipsModule, NovoDatePickerModule, NovoTimePickerModule, NovoDateTimePickerModule, NovoTipWellModule, NovoSimpleTableModule, NovoFormModule, NovoFormExtrasModule, NovoCategoryDropdownModule, NovoMultiPickerModule, NovoPopOverModule, NovoDataTableModule, NovoSearchBoxModule, NovoProgressModule, NovoOverlayModule, NovoDragDropModule, GooglePlacesModule, NovoValueModule, NovoIconModule, NovoExpansionModule, UnlessModule, NovoCommonModule, NovoOptionModule, NovoStepperModule, NovoToolbarModule, NovoTabbedGroupPickerModule, NovoNonIdealStateModule, NovoBreadcrumbModule, NovoFieldModule, NovoColorPickerModule, NovoMenuModule, NovoSelectSearchModule, NovoQueryBuilderModule, GooglePlacesService, FormUtils, NovoAsideService, NovoModalService, NovoToastService, FieldInteractionApi, MENU_OPTIONS } from 'novo-elements/elements';
 export * from 'novo-elements/elements';
@@ -14,8 +14,8 @@ export * from 'novo-elements/utils';
 
 // NG2
 class NovoElementsModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoElementsModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.3.18", ngImport: i0, type: NovoElementsModule, imports: [ReactiveFormsModule], exports: [NovoAsideModule,
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.19", ngImport: i0, type: NovoElementsModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.3.19", ngImport: i0, type: NovoElementsModule, imports: [ReactiveFormsModule], exports: [NovoAsideModule,
             NovoAutoCompleteModule,
             NovoAvatarModule,
             NovoPipesModule,
@@ -61,7 +61,6 @@ class NovoElementsModule {
             NovoDragDropModule,
             GooglePlacesModule,
             NovoValueModule,
-            NovoAceEditorModule,
             NovoCodeEditorModule,
             NovoIconModule,
             NovoExpansionModule,
@@ -79,7 +78,7 @@ class NovoElementsModule {
             NovoMenuModule,
             NovoSelectSearchModule,
             NovoQueryBuilderModule] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoElementsModule, providers: [
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.3.19", ngImport: i0, type: NovoElementsModule, providers: [
             { provide: ComponentUtils, useClass: ComponentUtils },
             { provide: DateFormatService, useClass: DateFormatService },
             { provide: NovoLabelService, useClass: NovoLabelService },
@@ -134,7 +133,6 @@ class NovoElementsModule {
             NovoDragDropModule,
             GooglePlacesModule,
             NovoValueModule,
-            NovoAceEditorModule,
             NovoCodeEditorModule,
             NovoIconModule,
             NovoExpansionModule,
@@ -153,7 +151,7 @@ class NovoElementsModule {
             NovoSelectSearchModule,
             NovoQueryBuilderModule] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoElementsModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.19", ngImport: i0, type: NovoElementsModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [ReactiveFormsModule],
@@ -204,7 +202,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImpo
                         NovoDragDropModule,
                         GooglePlacesModule,
                         NovoValueModule,
-                        NovoAceEditorModule,
                         NovoCodeEditorModule,
                         NovoIconModule,
                         NovoExpansionModule,
@@ -268,11 +265,11 @@ class NovoElementProviders {
             providers: [],
         };
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoElementProviders, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.3.18", ngImport: i0, type: NovoElementProviders }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoElementProviders }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.19", ngImport: i0, type: NovoElementProviders, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.3.19", ngImport: i0, type: NovoElementProviders }); }
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.3.19", ngImport: i0, type: NovoElementProviders }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoElementProviders, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.19", ngImport: i0, type: NovoElementProviders, decorators: [{
             type: NgModule,
             args: [{
                     imports: [],

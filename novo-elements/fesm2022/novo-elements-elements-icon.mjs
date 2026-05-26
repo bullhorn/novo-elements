@@ -47,8 +47,8 @@ class NovoIconComponent {
         this.name = this.element.nativeElement.textContent.trim();
         this.cdr.detectChanges();
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoIconComponent, deps: [{ token: i0.ElementRef }, { token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.18", type: NovoIconComponent, isStandalone: false, selector: "novo-icon", inputs: { raised: "raised", theme: "theme", shape: "shape", color: "color", size: "size", smaller: "smaller", larger: "larger", alt: "alt", name: "name" }, host: { properties: { "class.novo-icon-raised": "this.raised", "attr.theme": "this.theme", "attr.shape": "this.shape", "attr.role": "this.role", "attr.aria-label": "this.ariaLabel", "class.icon-size-smaller": "this.smaller", "class.icon-size-larger": "this.larger", "class": "this.hb_classBinding" }, classAttribute: "novo-icon" }, ngImport: i0, template: `
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.19", ngImport: i0, type: NovoIconComponent, deps: [{ token: i0.ElementRef }, { token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.19", type: NovoIconComponent, isStandalone: false, selector: "novo-icon", inputs: { raised: "raised", theme: "theme", shape: "shape", color: "color", size: "size", smaller: "smaller", larger: "larger", alt: "alt", name: "name" }, host: { properties: { "class.novo-icon-raised": "this.raised", "attr.theme": "this.theme", "attr.shape": "this.shape", "attr.role": "this.role", "attr.aria-label": "this.ariaLabel", "class.icon-size-smaller": "this.smaller", "class.icon-size-larger": "this.larger", "class": "this.hb_classBinding" }, classAttribute: "novo-icon" }, ngImport: i0, template: `
     <i [class]="iconName"
       ><span (cdkObserveContent)="projectContentChanged($event)"><ng-content></ng-content></span
     ></i>
@@ -62,7 +62,7 @@ __decorate([
     BooleanInput(),
     __metadata("design:type", Boolean)
 ], NovoIconComponent.prototype, "larger", void 0);
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoIconComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.19", ngImport: i0, type: NovoIconComponent, decorators: [{
             type: Component,
             args: [{ selector: 'novo-icon', changeDetection: ChangeDetectionStrategy.OnPush, template: `
     <i [class]="iconName"
@@ -116,11 +116,11 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImpo
             }] } });
 
 class NovoIconModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoIconModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.3.18", ngImport: i0, type: NovoIconModule, declarations: [NovoIconComponent], imports: [ObserversModule], exports: [NovoIconComponent] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoIconModule, imports: [ObserversModule] }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.19", ngImport: i0, type: NovoIconModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.3.19", ngImport: i0, type: NovoIconModule, declarations: [NovoIconComponent], imports: [ObserversModule], exports: [NovoIconComponent] }); }
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.3.19", ngImport: i0, type: NovoIconModule, imports: [ObserversModule] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoIconModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.19", ngImport: i0, type: NovoIconModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [ObserversModule],

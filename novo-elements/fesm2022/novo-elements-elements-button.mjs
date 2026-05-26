@@ -74,8 +74,8 @@ class NovoButtonElement {
     focus(options) {
         this.element.nativeElement.focus(options);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoButtonElement, deps: [{ token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.18", type: NovoButtonElement, isStandalone: false, selector: "novo-button,button[theme]", inputs: { color: "color", side: "side", size: "size", theme: "theme", loading: "loading", icon: "icon", secondIcon: "secondIcon", disabled: "disabled" }, host: { listeners: { "keydown": "handleKeydown($event)" }, properties: { "attr.theme": "theme", "attr.color": "color", "attr.icon": "icon", "attr.loading": "loading", "attr.side": "side", "attr.size": "size", "attr.role": "'button'", "class.novo-button-disabled": "this.disabled", "attr.disabled": "this.disabledAttr" }, classAttribute: "novo-button" }, usesOnChanges: true, ngImport: i0, template: `
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.19", ngImport: i0, type: NovoButtonElement, deps: [{ token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.19", type: NovoButtonElement, isStandalone: false, selector: "novo-button,button[theme]", inputs: { color: "color", side: "side", size: "size", theme: "theme", loading: "loading", icon: "icon", secondIcon: "secondIcon", disabled: "disabled" }, host: { listeners: { "keydown": "handleKeydown($event)" }, properties: { "attr.theme": "theme", "attr.color": "color", "attr.icon": "icon", "attr.loading": "loading", "attr.side": "side", "attr.size": "size", "attr.role": "'button'", "class.novo-button-disabled": "this.disabled", "attr.disabled": "this.disabledAttr" }, classAttribute: "novo-button" }, usesOnChanges: true, ngImport: i0, template: `
     <!--Left Icon-->
     <i *ngIf="((icon && side === 'left') || (secondIcon && secondSide() === 'left')) && !loading" [ngClass]="leftSideIconClass()" class="novo-button-icon novo-button-icon-left"></i>
     <!--Transcluded Content-->
@@ -116,7 +116,7 @@ __decorate([
     BooleanInput(),
     __metadata("design:type", Boolean)
 ], NovoButtonElement.prototype, "disabled", void 0);
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoButtonElement, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.19", ngImport: i0, type: NovoButtonElement, decorators: [{
             type: Component,
             args: [{ selector: 'novo-button,button[theme]', host: {
                         class: 'novo-button',
@@ -192,11 +192,11 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImpo
 
 // NG2
 class NovoButtonModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoButtonModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.3.18", ngImport: i0, type: NovoButtonModule, declarations: [NovoButtonElement], imports: [CommonModule], exports: [NovoButtonElement] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoButtonModule, imports: [CommonModule] }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.19", ngImport: i0, type: NovoButtonModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "20.3.19", ngImport: i0, type: NovoButtonModule, declarations: [NovoButtonElement], imports: [CommonModule], exports: [NovoButtonElement] }); }
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "20.3.19", ngImport: i0, type: NovoButtonModule, imports: [CommonModule] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.18", ngImport: i0, type: NovoButtonModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.19", ngImport: i0, type: NovoButtonModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [CommonModule],
