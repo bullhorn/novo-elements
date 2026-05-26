@@ -1,11 +1,11 @@
 const tsParser = require('@typescript-eslint/parser');
 const tsPlugin = require('@typescript-eslint/eslint-plugin');
 const unusedImportsPlugin = require('eslint-plugin-unused-imports');
-const jestPlugin = require('eslint-plugin-jest');
+const vitestPlugin = require('@vitest/eslint-plugin');
 
 module.exports = [
   {
-    ignores: ['dist/**', 'node_modules/**', 'projects/schematics/**']
+    ignores: ['dist/**', 'node_modules/**', 'projects/schematics/**'],
   },
   {
     files: ['projects/**/*.{ts,tsx}'],
@@ -13,8 +13,8 @@ module.exports = [
       parser: tsParser,
       parserOptions: {
         ecmaVersion: 2020,
-        sourceType: 'module'
-      }
+        sourceType: 'module',
+      },
     },
     plugins: {
       '@typescript-eslint': tsPlugin,
@@ -46,10 +46,10 @@ module.exports = [
       '@typescript-eslint/naming-convention': [
         'error',
         {
-            selector: 'variable',
-            format: ['camelCase', 'UPPER_CASE', 'PascalCase'],
-            leadingUnderscore: 'allow',
-            trailingUnderscore: 'forbid',
+          selector: 'variable',
+          format: ['camelCase', 'UPPER_CASE', 'PascalCase'],
+          leadingUnderscore: 'allow',
+          trailingUnderscore: 'forbid',
         },
       ],
       'no-var': 'error',
@@ -57,7 +57,7 @@ module.exports = [
       'use-isnan': 'error',
       'spaced-comment': ['error', 'always', { markers: ['/'] }],
       radix: 'error',
-      'quotes': ['error', 'single', { avoidEscape: true }],
+      quotes: ['error', 'single', { avoidEscape: true }],
       'one-var': ['error', 'never'],
       'no-unused-labels': 'error',
       'no-undef-init': 'error',
@@ -83,15 +83,15 @@ module.exports = [
       'space-infix-ops': 'error',
       'comma-spacing': 'error',
       'no-extra-semi': 'error',
-    }
+    },
   },
   {
     files: ['**/*.{test,spec}.{ts,tsx}'],
     plugins: {
-      jest: jestPlugin,
+      vitest: vitestPlugin,
     },
     rules: {
-      'jest/no-focused-tests': 'error',
-    }
-  }
+      'vitest/no-focused-tests': 'error',
+    },
+  },
 ];

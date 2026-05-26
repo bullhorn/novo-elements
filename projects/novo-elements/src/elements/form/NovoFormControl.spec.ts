@@ -1,6 +1,5 @@
-// NG
 import { Validators } from '@angular/forms';
-// App
+import { vi } from 'vitest';
 import { NovoFormControl } from './NovoFormControl';
 
 describe('Elements: NovoFormControl', () => {
@@ -36,8 +35,8 @@ describe('Elements: NovoFormControl', () => {
 
   describe('Method: setRequired(isRequired)', () => {
     beforeEach(() => {
-      jest.spyOn(component, 'setValidators');
-      jest.spyOn(component, 'updateValueAndValidity');
+      vi.spyOn(component, 'setValidators');
+      vi.spyOn(component, 'updateValueAndValidity');
     });
     it("should add new a validator and update the value and validity if it wasn't required before.", () => {
       expect(component.setRequired).toBeDefined();
@@ -62,8 +61,8 @@ describe('Elements: NovoFormControl', () => {
 
   describe('Method: setValue(value, config)', () => {
     beforeEach(() => {
-      jest.spyOn(component, 'markAsDirty');
-      jest.spyOn(component, 'markAsTouched');
+      vi.spyOn(component, 'markAsDirty');
+      vi.spyOn(component, 'markAsTouched');
     });
     it('should update the value of the control and mark it as dirty and touched.', () => {
       expect(component.setValue).toBeDefined();
@@ -75,7 +74,7 @@ describe('Elements: NovoFormControl', () => {
 
   describe('Method: setReadOnly(isReadOnly)', () => {
     it('should set readOnly to true when called with true.', () => {
-      jest.spyOn(component, 'disable').mockImplementation(() => {});
+      vi.spyOn(component, 'disable').mockImplementation(() => {});
       expect(component.setReadOnly).toBeDefined();
       component.setReadOnly(true);
       expect(component.readOnly).toBe(true);
@@ -83,7 +82,7 @@ describe('Elements: NovoFormControl', () => {
     });
 
     it('should set readOnly to true when called with false.', () => {
-      jest.spyOn(component, 'enable').mockImplementation(() => {});
+      vi.spyOn(component, 'enable').mockImplementation(() => {});
       expect(component.setReadOnly).toBeDefined();
       component.setReadOnly(false);
       expect(component.readOnly).toBe(false);
@@ -93,9 +92,9 @@ describe('Elements: NovoFormControl', () => {
 
   describe('Method: markAsInvalid(message) / markAsValid()', () => {
     beforeEach(() => {
-      jest.spyOn(component, 'markAsDirty');
-      jest.spyOn(component, 'markAsTouched');
-      jest.spyOn(component, 'setErrors');
+      vi.spyOn(component, 'markAsDirty');
+      vi.spyOn(component, 'markAsTouched');
+      vi.spyOn(component, 'setErrors');
     });
     it('should mark the control as having an error.', () => {
       expect(component.markAsInvalid).toBeDefined();

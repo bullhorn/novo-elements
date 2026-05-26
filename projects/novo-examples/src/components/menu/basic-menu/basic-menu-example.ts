@@ -10,7 +10,8 @@ import { Component } from '@angular/core';
     standalone: false,
 })
 export class BasicMenuExample {
-  public clickMe(event?: string) {
-    window.alert(event);
+  public clickMe(event?: any) {
+    const menuItem = event?.target?.textContent || 'Menu item';
+    window.alert(`You selected: ${menuItem.trim()}`);
   }
 }

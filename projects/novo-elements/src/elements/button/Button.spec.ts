@@ -1,9 +1,7 @@
-// NG2
+import { Component, Input } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-// APP
 import { NovoButtonElement } from './Button';
-import { Component, Input } from '@angular/core';
 
 describe('Elements: NovoButtonElement', () => {
   let fixture: ComponentFixture<NovoButtonElement>;
@@ -44,13 +42,10 @@ describe('<button> with NovoButtonElement directive', () => {
   let fixture: ComponentFixture<TestButtonContainer>;
   let component;
 
-  beforeAll(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [NovoButtonElement, TestButtonContainer],
     }).compileComponents();
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(TestButtonContainer);
     component = fixture.componentInstance;
   });

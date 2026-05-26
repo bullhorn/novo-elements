@@ -15,8 +15,15 @@ export const COMPONENT_URLS = {
     CALENDAR: 'calendar',
     DATA_TABLE: 'data-table',
     DROPDOWN: 'dropdown',
+    ICON: 'icon',
+    LOADING: 'loading',
+    MENU: 'menu',
     NON_IDEAL_STATE: 'non ideal state',
+    PROGRESS: 'progress',
     QUERY_BUILDER: 'query builder',
+    SWITCH: 'switch',
+    POPOVER: 'pop over',
+    TOOLBAR: 'toolbar',
 };
 
 export function examplesUrl(component: string): string {
@@ -27,4 +34,9 @@ export function examplesUrl(component: string): string {
 export function componentsUrl(component: string): string {
     const urls = getURLs();
     return `${urls.BASE}${component}`;
+}
+
+export function formControlsExamplesUrl(control: string): string {
+    const baseUrl = (global as any).E2E_BASE_URL || 'https://bullhorn.github.io/novo-elements/docs';
+    return `${baseUrl}/#/form-controls/${control}/examples`;
 }

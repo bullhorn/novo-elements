@@ -1,22 +1,21 @@
-// NG2
-import { waitForAsync, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { NovoLabelService } from 'novo-elements/services';
-// App
+import { vi } from 'vitest';
 import { NovoTipWellElement } from './TipWell';
 
 describe('Elements: NovoTipWellElement', () => {
   let fixture;
   let component: NovoTipWellElement | any;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [NovoTipWellElement],
       providers: [{ provide: NovoLabelService, useClass: NovoLabelService }],
     }).compileComponents();
     fixture = TestBed.createComponent(NovoTipWellElement);
     component = fixture.debugElement.componentInstance;
-    jest.spyOn(component.sanitizer, 'bypassSecurityTrustHtml').mockReturnValue('TRUSTED_HTML');
-  }));
+    vi.spyOn(component.sanitizer, 'bypassSecurityTrustHtml').mockReturnValue('TRUSTED_HTML');
+  });
 
   it('should initialize with defaults', () => {
     expect(component).toBeDefined();

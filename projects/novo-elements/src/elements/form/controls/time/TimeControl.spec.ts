@@ -1,4 +1,3 @@
-// APP
 import { TimeControl } from './TimeControl';
 
 describe('Control: TimeControl', () => {

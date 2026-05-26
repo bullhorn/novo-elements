@@ -1,7 +1,6 @@
-// NG2
-import { waitForAsync, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { ComponentUtils, NovoLabelService } from 'novo-elements/services';
-// App
+import { vi } from 'vitest';
 import { NovoTabbedGroupPickerElement, TabbedGroupPickerQuickSelect, TabbedGroupPickerTab } from './TabbedGroupPicker';
 import { NovoTabbedGroupPickerModule } from './TabbedGroupPicker.module';
 
@@ -20,14 +19,14 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
     ],
   });
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [{ provide: ComponentUtils, useClass: ComponentUtils }, NovoLabelService],
       imports: [NovoTabbedGroupPickerModule],
     }).compileComponents();
     fixture = TestBed.createComponent(NovoTabbedGroupPickerElement);
     component = fixture.debugElement.componentInstance;
-  }));
+  });
 
   it('should initialize correctly', () => {
     expect(component).toBeTruthy();
@@ -151,7 +150,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       const parent = { children: null } as any;
       const sortedData: any[] = [];
       const compareFunction = (a: any, b: any): 0 | 1 | -1 => 0;
-      const warnFunction = jasmine.createSpy('warnFunction');
+      const warnFunction = vi.fn();
 
       expect(() => {
         component.replaceChildrenWithReferences(parent, sortedData, compareFunction, warnFunction);
@@ -163,7 +162,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       const parent = { children: undefined } as any;
       const sortedData: any[] = [];
       const compareFunction = (a: any, b: any): 0 | 1 | -1 => 0;
-      const warnFunction = jasmine.createSpy('warnFunction');
+      const warnFunction = vi.fn();
 
       expect(() => {
         component.replaceChildrenWithReferences(parent, sortedData, compareFunction, warnFunction);
@@ -175,7 +174,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       const parent = { children: 'not-an-array' } as any;
       const sortedData: any[] = [];
       const compareFunction = (a: any, b: any): 0 | 1 | -1 => 0;
-      const warnFunction = jasmine.createSpy('warnFunction');
+      const warnFunction = vi.fn();
 
       expect(() => {
         component.replaceChildrenWithReferences(parent, sortedData, compareFunction, warnFunction);
@@ -524,10 +523,10 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
     it('should emit an activation, not selectionChange event when activation mode is enabled', () => {
       let activation: any;
       let selection: any;
-      component.activation.subscribe(item => {
+      component.activation.subscribe((item) => {
         activation = item;
       });
-      component.selectionChange.subscribe(newSelection => {
+      component.selectionChange.subscribe((newSelection) => {
         selection = newSelection;
       });
       const chickenTab = getChickenTab();
@@ -543,15 +542,13 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
 
   describe('function: cancel', () => {
     it('should revert to original state and emit cancel event with current tabs', () => {
-      spyOn(component, 'revertState');
-      spyOn(component.cancelChange, 'emit');
+      vi.spyOn(component, 'revertState').mockImplementation(() => {});
+      vi.spyOn(component.cancelChange, 'emit').mockImplementation(() => {});
       component.dropdown = {
         closePanel: () => {},
       } as any;
       const chickenTab = getChickenTab();
-      component.tabs = [
-        chickenTab,
-      ];
+      component.tabs = [chickenTab];
 
       component.cancel();
       expect(component.revertState).toHaveBeenCalled();

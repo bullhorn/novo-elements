@@ -1,6 +1,4 @@
-// NG2
-import { waitForAsync, TestBed } from '@angular/core/testing';
-// App
+import { TestBed } from '@angular/core/testing';
 import { NovoListModule } from 'novo-elements/elements/list';
 import { NovoLoadingElement } from 'novo-elements/elements/loading';
 import { NovoLabelService } from 'novo-elements/services';
@@ -10,7 +8,7 @@ describe('Elements: PickerResults', () => {
   let fixture;
   let component: PickerResults;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [NovoListModule],
       declarations: [PickerResults, NovoLoadingElement],
@@ -18,7 +16,7 @@ describe('Elements: PickerResults', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(PickerResults);
     component = fixture.debugElement.componentInstance;
-  }));
+  });
 
   it('should be defined.', () => {
     expect(component).toBeDefined();

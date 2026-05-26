@@ -1,6 +1,5 @@
-// NG2
 import { TestBed } from '@angular/core/testing';
-// APP
+import { vi } from 'vitest';
 import { NovoAvatarElement } from './Avatar';
 
 describe('Elements: NovoAvatarElement', () => {
@@ -24,7 +23,7 @@ describe('Elements: NovoAvatarElement', () => {
 
   describe('ngOnInit()', () => {
     beforeEach(() => {
-      jest.spyOn(component.sanitizer, 'bypassSecurityTrustUrl').mockImplementation(() => {});
+      vi.spyOn(component.sanitizer, 'bypassSecurityTrustUrl').mockImplementation(() => {});
     });
 
     it('should set the source to a logo image if that property is available.', () => {

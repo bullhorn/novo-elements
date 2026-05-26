@@ -1,17 +1,16 @@
-// NG2
-import { waitForAsync, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-// APP
-import { NovoLabelService } from 'novo-elements/services';
 import { NovoDatePickerModule } from 'novo-elements/elements/date-picker';
 import { NovoTimePickerModule } from 'novo-elements/elements/time-picker';
+import { NovoLabelService } from 'novo-elements/services';
+import { vi } from 'vitest';
 import { NovoDateTimePickerElement } from './DateTimePicker';
 
 describe('Elements: NovoDateTimePickerElement', () => {
   let fixture;
   let component: NovoDateTimePickerElement;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [NovoDateTimePickerElement],
       providers: [{ provide: NovoLabelService, useClass: NovoLabelService }],
@@ -19,7 +18,7 @@ describe('Elements: NovoDateTimePickerElement', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(NovoDateTimePickerElement);
     component = fixture.debugElement.componentInstance;
-  }));
+  });
 
   describe('Method: toggleView()', () => {
     it('should set the componentTabState', () => {
@@ -67,7 +66,7 @@ describe('Elements: NovoDateTimePickerElement', () => {
 
   describe('Method: setDateLabels()', () => {
     beforeEach(() => {
-      jest.spyOn(component.labels, 'formatDateWithFormat').mockReturnValue('LABEL');
+      vi.spyOn(component.labels, 'formatDateWithFormat').mockReturnValue('LABEL');
     });
     it('should set the selectedLabel', () => {
       component.setDateLabels(new Date());
@@ -78,9 +77,9 @@ describe('Elements: NovoDateTimePickerElement', () => {
   describe('Method: onDateSelected()', () => {
     const now = new Date();
     beforeEach(() => {
-      jest.spyOn(component, 'setDateLabels');
-      jest.spyOn(component.onSelect, 'emit');
-      jest.spyOn(component, 'createFullDateValue').mockReturnValue(now);
+      vi.spyOn(component, 'setDateLabels');
+      vi.spyOn(component.onSelect, 'emit');
+      vi.spyOn(component, 'createFullDateValue').mockReturnValue(now);
     });
     it('should call and set everything right', () => {
       component.onDateSelected({ date: now });
@@ -93,9 +92,9 @@ describe('Elements: NovoDateTimePickerElement', () => {
   describe('Method: onTimeSelected()', () => {
     const now = new Date();
     beforeEach(() => {
-      jest.spyOn(component, 'setTimeLabels');
-      jest.spyOn(component.onSelect, 'emit');
-      jest.spyOn(component, 'createFullDateValue').mockReturnValue(now);
+      vi.spyOn(component, 'setTimeLabels');
+      vi.spyOn(component.onSelect, 'emit');
+      vi.spyOn(component, 'createFullDateValue').mockReturnValue(now);
     });
     it('should call and set everything right', () => {
       component.onTimeSelected({ date: now });
@@ -107,8 +106,8 @@ describe('Elements: NovoDateTimePickerElement', () => {
 
   describe('Method: writeValue()', () => {
     beforeEach(() => {
-      jest.spyOn(component, 'setDateLabels');
-      jest.spyOn(component, 'setTimeLabels');
+      vi.spyOn(component, 'setDateLabels');
+      vi.spyOn(component, 'setTimeLabels');
     });
     it('set the model and labels with correct date', () => {
       const now = new Date();

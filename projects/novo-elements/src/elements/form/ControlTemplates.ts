@@ -144,18 +144,6 @@ import { NovoTemplateService } from 'novo-elements/services';
       </div>
     </ng-template>
 
-    <!--AceEditor-->
-    <ng-template novoTemplate="ace-editor" let-control let-form="form" let-errors="errors" let-methods="methods">
-      <div [formGroup]="form">
-        <novo-ace-editor
-          [name]="control.key"
-          [formControlName]="control.key"
-          (focus)="methods.handleFocus($event)"
-          (blur)="methods.handleBlur($event)"
-        ></novo-ace-editor>
-      </div>
-    </ng-template>
-
     <!--CodeEditor-->
     <ng-template novoTemplate="code-editor" let-control let-form="form" let-errors="errors" let-methods="methods">
       <div [formGroup]="form">

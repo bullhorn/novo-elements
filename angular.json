@@ -14,7 +14,7 @@
           "outputs": ["dist/novo-elements"],
           "options": {
             "tsConfig": "tsconfig.build.json",
-            "project": "projects/novo-elements/src/ng-package.json",
+            "project": "projects/novo-elements/src/ng-package.json"
           },
           "dependsOn": [
             {
@@ -24,10 +24,8 @@
           ]
         },
         "test": {
-          "builder": "@angular-builders/jest:run",
-          "options": {
-            "coverage": true
-          }
+          "builder": "./tools/vitest-builder:vitest",
+          "options": {}
         }
       }
     },
@@ -41,13 +39,7 @@
           "builder": "@angular/build:ng-packagr",
           "options": {
             "tsConfig": "tsconfig.build.json",
-            "project": "projects/novo-examples/ng-package.json",
-          },
-        },
-        "test": {
-          "builder": "@angular/build:karma",
-          "options": {
-            "tsConfig": "projects/novo-examples/tsconfig.spec.json",
+            "project": "projects/novo-examples/ng-package.json"
           }
         }
       }
@@ -67,9 +59,7 @@
               "browser": "."
             },
             "index": "projects/demo/index.html",
-            "polyfills": [
-              "projects/demo/polyfills.ts"
-            ],
+            "polyfills": ["projects/demo/polyfills.ts"],
             "tsConfig": "projects/demo/tsconfig.app.json",
             "assets": ["projects/demo/favicon.ico", "projects/demo/assets"],
             "styles": ["projects/demo/styles.scss"],

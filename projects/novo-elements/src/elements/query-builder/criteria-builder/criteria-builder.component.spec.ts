@@ -1,119 +1,135 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ControlContainer, UntypedFormBuilder, Validators } from '@angular/forms';
+import { vi } from 'vitest';
 import { NovoLabelService } from '../../../services';
 import { AddressData, Condition, Criteria, NovoFlexModule, NovoQueryBuilderModule, Operator } from '../../index';
 import { QueryBuilderService } from '../query-builder.service';
 import { CriteriaBuilderComponent } from './criteria-builder.component';
 
-const testAddressValue: AddressData[] = [{
-  address_components: [{
-    long_name: '8485',
-    short_name: '8485',
-    types: ['street_number'],
-  }, {
-    long_name: 'Mexico Road',
-    short_name: 'Mexico Rd',
-    types: ['route'],
-  }, {
-    long_name: 'O\'Fallon',
-    short_name: 'O\'Fallon',
-    types: ['locality', 'political'],
-  }, {
-    long_name: 'Dardenne Township',
-    short_name: 'Dardenne Township',
-    types: ['administrative_area_level_3', 'political'],
-  }, {
-    long_name: 'St. Charles County',
-    short_name: 'St Charles County',
-    types: ['administrative_area_level_2', 'political'],
-  }, {
-    long_name: 'Missouri',
-    short_name: 'MO',
-    types: ['administrative_area_level_1', 'political'],
-  }, {
-    long_name: 'United States',
-    short_name: 'US',
-    types: ['country', 'political'],
-  }, {
-    long_name: '63366',
-    short_name: '63366',
-    types: ['postal_code'],
-  }],
-  formatted_address: '8485 Mexico Rd, O\'Fallon, MO 63366, USA',
-  geometry: {
-    location: {
-      lat: 38.791613,
-      lng: -90.6925924,
+const testAddressValue: AddressData[] = [
+  {
+    address_components: [
+      {
+        long_name: '8485',
+        short_name: '8485',
+        types: ['street_number'],
+      },
+      {
+        long_name: 'Mexico Road',
+        short_name: 'Mexico Rd',
+        types: ['route'],
+      },
+      {
+        long_name: "O'Fallon",
+        short_name: "O'Fallon",
+        types: ['locality', 'political'],
+      },
+      {
+        long_name: 'Dardenne Township',
+        short_name: 'Dardenne Township',
+        types: ['administrative_area_level_3', 'political'],
+      },
+      {
+        long_name: 'St. Charles County',
+        short_name: 'St Charles County',
+        types: ['administrative_area_level_2', 'political'],
+      },
+      {
+        long_name: 'Missouri',
+        short_name: 'MO',
+        types: ['administrative_area_level_1', 'political'],
+      },
+      {
+        long_name: 'United States',
+        short_name: 'US',
+        types: ['country', 'political'],
+      },
+      {
+        long_name: '63366',
+        short_name: '63366',
+        types: ['postal_code'],
+      },
+    ],
+    formatted_address: "8485 Mexico Rd, O'Fallon, MO 63366, USA",
+    geometry: {
+      location: {
+        lat: 38.791613,
+        lng: -90.6925924,
+      },
+      viewport: {
+        south: 38.79027026970849,
+        west: -90.6939395302915,
+        north: 38.79296823029149,
+        east: -90.6912415697085,
+      },
     },
-    viewport: {
-      south: 38.79027026970849,
-      west: -90.6939395302915,
-      north: 38.79296823029149,
-      east: -90.6912415697085,
-    },
-  },
-  place_id: 'ChIJ2cLuK-nQ3ocRh1uhB7-g30A',
-  radius: {
-    value: 30,
-    units: 'miles',
-  },
-}, {
-  address_components: [{
-    long_name: 'Texas',
-    short_name: 'TX',
-    types: ['administrative_area_level_1', 'political'],
-  }, {
-    long_name: 'United States',
-    short_name: 'US',
-    types: ['country', 'political'],
-  }],
-  formatted_address: 'Texas, USA',
-  geometry: {
-    location: {
-      lat: 31.9685988,
-      lng: -99.9018131,
-    },
-    viewport: {
-      south: 25.83711645856708,
-      west: -106.6456460547471,
-      north: 36.50112613904738,
-      east: -93.50803894473373,
+    place_id: 'ChIJ2cLuK-nQ3ocRh1uhB7-g30A',
+    radius: {
+      value: 30,
+      units: 'miles',
     },
   },
-  place_id: 'ChIJSTKCCzZwQIYRPN4IGI8c6xY',
-}, {
-  address_components: [{
-    long_name: 'United States',
-    short_name: 'US',
-    types: ['country', 'political'],
-  }],
-  formatted_address: 'United States',
-  geometry: {
-    location: {
-      lat: 37.09024,
-      lng: -95.712891,
+  {
+    address_components: [
+      {
+        long_name: 'Texas',
+        short_name: 'TX',
+        types: ['administrative_area_level_1', 'political'],
+      },
+      {
+        long_name: 'United States',
+        short_name: 'US',
+        types: ['country', 'political'],
+      },
+    ],
+    formatted_address: 'Texas, USA',
+    geometry: {
+      location: {
+        lat: 31.9685988,
+        lng: -99.9018131,
+      },
+      viewport: {
+        south: 25.83711645856708,
+        west: -106.6456460547471,
+        north: 36.50112613904738,
+        east: -93.50803894473373,
+      },
     },
-    viewport: {
-      south: 15.7760139,
-      west: -173.2992296,
-      north: 72.7087158,
-      east: -66.3193754,
+    place_id: 'ChIJSTKCCzZwQIYRPN4IGI8c6xY',
+  },
+  {
+    address_components: [
+      {
+        long_name: 'United States',
+        short_name: 'US',
+        types: ['country', 'political'],
+      },
+    ],
+    formatted_address: 'United States',
+    geometry: {
+      location: {
+        lat: 37.09024,
+        lng: -95.712891,
+      },
+      viewport: {
+        south: 15.7760139,
+        west: -173.2992296,
+        north: 72.7087158,
+        east: -66.3193754,
+      },
+    },
+    place_id: 'ChIJCzYy5IS16lQRQrfeQ5K5Oxw',
+    radius: {
+      value: 30,
+      units: 'miles',
     },
   },
-  place_id: 'ChIJCzYy5IS16lQRQrfeQ5K5Oxw',
-  radius: {
-    value: 30,
-    units: 'miles',
-  },
-}];
+];
 
 const condition1: Condition = {
   field: 'Candidate.email',
   operator: 'excludeAny',
-  value: [
-    'cba',
-    'fed',
-  ],
+  value: ['cba', 'fed'],
 };
 
 const condition2: Condition = {
@@ -125,10 +141,7 @@ const condition2: Condition = {
 const condition3: Condition = {
   field: 'Candidate.email',
   operator: Operator.includeAny,
-  value: [
-    'abc',
-    'def',
-  ],
+  value: ['abc', 'def'],
 };
 
 const condition4: Condition = {
@@ -138,9 +151,11 @@ const condition4: Condition = {
 };
 
 const testCriteria: Criteria = {
-  criteria: [{
-    $and: [condition1, condition2, condition3, condition4],
-  }],
+  criteria: [
+    {
+      $and: [condition1, condition2, condition3, condition4],
+    },
+  ],
 };
 
 describe('CriteriaBuilderComponent', () => {
@@ -161,22 +176,21 @@ describe('CriteriaBuilderComponent', () => {
         { provide: ControlContainer, useClass: MockControlContainer },
         { provide: NovoLabelService, useClass: NovoLabelService },
       ],
-      imports: [
-        NovoQueryBuilderModule,
-        NovoFlexModule,
-      ],
+      imports: [NovoQueryBuilderModule, NovoFlexModule],
     }).compileComponents();
     fixture = TestBed.createComponent(CriteriaBuilderComponent);
     component = fixture.debugElement.componentInstance;
     component.controlName = 'criteria';
-    component.config = [{
-      value: 'value',
-      label: 'label',
-    }];
+    component.config = [
+      {
+        value: 'value',
+        label: 'label',
+      },
+    ];
     const mockPicker = {
-        dropdown: {
-            closePanel() {},
-        },
+      dropdown: {
+        closePanel() {},
+      },
     };
     component.innerForm = formBuilder.group({ criteria: formBuilder.array([]) });
     component.scopedFieldPicker = (() => mockPicker) as any;
@@ -229,7 +243,7 @@ describe('CriteriaBuilderComponent', () => {
     });
 
     it('should set all values when passed a complete condition', () => {
-      const mockWarnFunction = jest.fn().mockResolvedValue(true);
+      const mockWarnFunction = vi.fn().mockResolvedValue(true);
       const testCondition: Condition = {
         field: 'Candidate.email',
         operator: 'contains',
@@ -240,9 +254,7 @@ describe('CriteriaBuilderComponent', () => {
         warnOnDelete: mockWarnFunction,
       };
       component.config = {
-        fields: [
-          { value: 'Candidate', entity: 'Candidate', label: 'Candidate' },
-        ],
+        fields: [{ value: 'Candidate', entity: 'Candidate', label: 'Candidate' }],
       };
       const result = component.newCondition(testCondition);
       expect(result.get('conditionType')?.value).toBe('$and');
@@ -270,19 +282,19 @@ describe('CriteriaBuilderComponent', () => {
       scope: 'differentScope',
     };
     it('should close the dropdown', () => {
-      spyOn(component.scopedFieldPicker().dropdown, 'closePanel');
+      vi.spyOn(component.scopedFieldPicker().dropdown, 'closePanel');
       component.onFieldSelect(MOCK_FIELD);
       expect(component.scopedFieldPicker().dropdown.closePanel).toHaveBeenCalled();
     });
     it('if a scoped group already exists for the field, add the condition to that group', () => {
-      spyOn(MOCK_CONDITION_GROUP_1, 'addCondition');
-      spyOn(component, 'conditionGroups').and.returnValue([MOCK_CONDITION_GROUP_1, MOCK_CONDITION_GROUP_2]);
+      vi.spyOn(MOCK_CONDITION_GROUP_1, 'addCondition');
+      vi.spyOn(component, 'conditionGroups').mockReturnValue([MOCK_CONDITION_GROUP_1, MOCK_CONDITION_GROUP_2]);
       component.onFieldSelect(MOCK_FIELD);
       expect(MOCK_CONDITION_GROUP_1.addCondition).toHaveBeenCalled();
     });
     it('if a scoped group does not already exist for the field, add a new group with the condition', () => {
-      spyOn(component, 'addConditionGroup');
-      spyOn(component, 'conditionGroups').and.returnValue([MOCK_CONDITION_GROUP_2]);
+      vi.spyOn(component, 'addConditionGroup');
+      vi.spyOn(component, 'conditionGroups').mockReturnValue([MOCK_CONDITION_GROUP_2]);
       component.onFieldSelect(MOCK_FIELD);
       expect(component.addConditionGroup).toHaveBeenCalled();
     });
@@ -378,10 +390,7 @@ describe('CriteriaBuilderComponent', () => {
     });
     it('should handle fields without entity property gracefully', () => {
       const fieldConfigs = {
-        fields: [
-          { value: 'user' },
-          { value: 'company', entity: 'Company' },
-        ],
+        fields: [{ value: 'user' }, { value: 'company', entity: 'Company' }],
       };
       const scope = 'user';
 

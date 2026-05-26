@@ -1,6 +1,4 @@
-// NG2
 import { ElementRef } from '@angular/core';
-// APP
 import { OutsideClick } from './OutsideClick';
 
 describe('Util: OutsideClick', () => {

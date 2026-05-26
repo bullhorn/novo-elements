@@ -608,7 +608,6 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         'address',
         'file',
         'editor',
-        'ace-editor',
         'code-editor',
         'radio',
         'text-area',

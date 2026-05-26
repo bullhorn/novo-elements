@@ -2,15 +2,16 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { DOWN_ARROW } from '@angular/cdk/keycodes';
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { NovoFieldModule } from 'novo-elements/elements/field';
+import { FormUtils } from 'novo-elements/elements/form';
+import { NovoSelectElement, NovoSelectModule } from 'novo-elements/elements/select';
+import { NovoLabelService } from 'novo-elements/services';
 import { ReplaySubject, Subject } from 'rxjs';
 import { delay, take, takeUntil } from 'rxjs/operators';
-import { NovoLabelService } from 'novo-elements/services';
-import { FormUtils } from 'novo-elements/elements/form';
-import { NovoFieldModule } from 'novo-elements/elements/field';
-import { NovoSelectElement, NovoSelectModule } from 'novo-elements/elements/select';
+import { vi } from 'vitest';
 import { NovoSelectSearchComponent } from './select-search.component';
 import { NovoSelectSearchModule } from './select-search.module';
 
@@ -216,11 +217,11 @@ export class NovoSelectSearchTestComponent implements OnInit, OnDestroy, AfterVi
   }
 }
 
-xdescribe('NovoSelectSearchComponent', () => {
+describe.skip('NovoSelectSearchComponent', () => {
   let component: NovoSelectSearchTestComponent;
   let fixture: ComponentFixture<NovoSelectSearchTestComponent>;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [CommonModule, NoopAnimationsModule, ReactiveFormsModule, NovoFieldModule, NovoSelectModule, NovoSelectSearchModule],
       declarations: [NovoSelectSearchTestComponent],
@@ -228,14 +229,14 @@ xdescribe('NovoSelectSearchComponent', () => {
         {
           provide: LiveAnnouncer,
           useValue: {
-            announce: jest.fn(),
+            announce: vi.fn(),
           },
         },
         { provide: NovoLabelService, useClass: NovoLabelService },
         { provide: FormUtils, useClass: FormUtils },
       ],
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(NovoSelectSearchTestComponent);
@@ -251,7 +252,7 @@ xdescribe('NovoSelectSearchComponent', () => {
       expect(component).toBeTruthy();
     });
 
-    it('should show a search field and focus it when opening the select', (done) => {
+    it('should show a search field and focus it when opening the select', async () => {
       component.filteredBanks.pipe(take(1), delay(1)).subscribe(() => {
         // when the filtered banks are initialized
         fixture.detectChanges();
@@ -271,13 +272,11 @@ xdescribe('NovoSelectSearchComponent', () => {
           const optionElements = document.querySelectorAll('novo-option');
           expect(component.novoSelect.contentOptions.length).toBe(4);
           expect(optionElements.length).toBe(4);
-
-          done();
         });
       });
     });
 
-    it('should filter the options available and hightlight the first option in the list, filter the options by input "c" and reset the list', (done) => {
+    it('should filter the options available and hightlight the first option in the list, filter the options by input "c" and reset the list', async () => {
       component.filteredBanks.pipe(take(1), delay(1)).subscribe(() => {
         // when the filtered banks are initialized
         fixture.detectChanges();
@@ -321,8 +320,6 @@ xdescribe('NovoSelectSearchComponent', () => {
                 } else {
                   expect(component.novoSelect.contentOptions.length).toBe(2);
                 }
-
-                done();
               });
             });
           });
@@ -330,7 +327,7 @@ xdescribe('NovoSelectSearchComponent', () => {
       });
     });
 
-    it('should not announce active option if there are no options', (done) => {
+    it('should not announce active option if there are no options', async () => {
       const announcer = TestBed.inject(LiveAnnouncer);
       component.filteredBanks.pipe(take(1), delay(1)).subscribe(() => {
         // when the filtered banks are initialized
@@ -352,7 +349,6 @@ xdescribe('NovoSelectSearchComponent', () => {
 
               component.novoSelectSearch._handleKeyup({ keyCode: DOWN_ARROW } as KeyboardEvent);
               expect(announcer.announce).not.toHaveBeenCalled();
-              done();
             });
           });
         });
@@ -360,7 +356,7 @@ xdescribe('NovoSelectSearchComponent', () => {
     });
 
     describe('inside novo-option', () => {
-      it('should show a search field and focus it when opening the select', (done) => {
+      it('should show a search field and focus it when opening the select', async () => {
         component.filteredBanksMatOption.pipe(take(1), delay(1)).subscribe(() => {
           // when the filtered banks are initialized
           fixture.detectChanges();
@@ -380,13 +376,11 @@ xdescribe('NovoSelectSearchComponent', () => {
             const optionElements = document.querySelectorAll('novo-option');
             expect(component.novoSelectOption.contentOptions.length).toBe(5);
             expect(optionElements.length).toBe(5);
-
-            done();
           });
         });
       });
 
-      it('should filter the options available and hightlight the first option in the list, filter the options by input "c" and reset the list', (done) => {
+      it('should filter the options available and hightlight the first option in the list, filter the options by input "c" and reset the list', async () => {
         component.filteredBanksMatOption.pipe(take(1), delay(1)).subscribe(() => {
           // when the filtered banks are initialized
           fixture.detectChanges();
@@ -426,8 +420,6 @@ xdescribe('NovoSelectSearchComponent', () => {
                 component.filteredBanks.pipe(take(1)).subscribe(() => {
                   fixture.detectChanges();
                   expect(component.novoSelectOption.contentOptions.length).toBe(5);
-
-                  done();
                 });
               });
             });
@@ -438,7 +430,7 @@ xdescribe('NovoSelectSearchComponent', () => {
   });
 
   describe('with initial selection', () => {
-    it('should set the initial selection of NovoSelectElement', waitForAsync((done) => {
+    it('should set the initial selection of NovoSelectElement', async () => {
       component.initialSingleSelection = component.banks[3];
       fixture.detectChanges();
 
@@ -457,17 +449,13 @@ xdescribe('NovoSelectSearchComponent', () => {
               expect(opened).toBe(true);
               expect(component.novoSelect.value).toEqual(component.banks[3]);
               expect(component.bankCtrl.value).toEqual(component.banks[3]);
-
-              done();
             });
           });
         });
       });
-    }));
+    });
 
-    it('set the initial selection with multi=true and filter the options available, filter the options by input "c" and select an option', waitForAsync((
-      done,
-    ) => {
+    it('set the initial selection with multi=true and filter the options available, filter the options by input "c" and select an option', () => {
       component.initialMultiSelection = [component.banks[1]];
       fixture.detectChanges();
 
@@ -543,7 +531,6 @@ xdescribe('NovoSelectSearchComponent', () => {
                           fixture.detectChanges();
                           expect(component.novoSelectMulti.value).toEqual([component.banks[1], component.banks[2], component.banks[3]]);
                           expect(component.bankMultiCtrl.value).toEqual([component.banks[1], component.banks[2], component.banks[3]]);
-                          done();
                         });
                       });
                     });
@@ -554,6 +541,6 @@ xdescribe('NovoSelectSearchComponent', () => {
           });
         });
       });
-    }));
+    });
   });
 });

@@ -14,7 +14,9 @@ export class MenuContextExample {
   public orange = 'Context is Orange';
   public isOrange = (item) => item === this.orange;
 
-  public clickMe(event?: string) {
-    window.alert(event);
+  public clickMe(item?: any, event?: any) {
+    const menuItem = event?.target?.textContent || 'Menu item';
+    const context = item || 'unknown';
+    window.alert(`You selected: ${menuItem.trim()} (${context})`);
   }
 }

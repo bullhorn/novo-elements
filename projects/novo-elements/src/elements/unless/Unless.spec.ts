@@ -1,33 +1,32 @@
 import { DestroyRef, TemplateRef, ViewContainerRef } from '@angular/core';
 import { Security } from 'novo-elements/services';
+import { Mock, Mocked, vi } from 'vitest';
 import { Unless } from './Unless';
-
-jest.mock('novo-elements/services');
 
 describe('Unless Directive', () => {
   let directive: Unless;
-  let templateRef: jest.Mocked<TemplateRef<any>>;
-  let viewContainer: jest.Mocked<ViewContainerRef>;
-  let security: jest.Mocked<Security>;
-  let destroyRef: jest.Mocked<DestroyRef>;
+  let templateRef: Mocked<TemplateRef<any>>;
+  let viewContainer: Mocked<ViewContainerRef>;
+  let security: Mocked<Security>;
+  let destroyRef: Mocked<DestroyRef>;
 
   beforeEach(() => {
     templateRef = {
-      createEmbeddedView: jest.fn(),
+      createEmbeddedView: vi.fn(),
     } as any;
 
     viewContainer = {
-      createEmbeddedView: jest.fn(),
-      clear: jest.fn(),
+      createEmbeddedView: vi.fn(),
+      clear: vi.fn(),
     } as any;
 
     security = {
-      subscribe: jest.fn(),
-      has: jest.fn(),
+      subscribe: vi.fn(),
+      has: vi.fn(),
     } as any;
 
     destroyRef = {
-      onDestroy: jest.fn(),
+      onDestroy: vi.fn(),
     } as any;
 
     directive = new Unless(templateRef, viewContainer, security, destroyRef);
@@ -51,7 +50,7 @@ describe('Unless Directive', () => {
     });
 
     it('should bind check method to security subscription', () => {
-      const callbackFn = (security.subscribe as jest.Mock).mock.calls[0][0];
+      const callbackFn = (security.subscribe as Mock).mock.calls[0][0];
       expect(typeof callbackFn).toBe('function');
     });
 
@@ -90,7 +89,7 @@ describe('Unless Directive', () => {
     });
 
     it('should call check method when permissions are set', () => {
-      const checkSpy = jest.spyOn(directive, 'check');
+      const checkSpy = vi.spyOn(directive, 'check');
       directive.bhUnless = 'admin';
       expect(checkSpy).toHaveBeenCalled();
       checkSpy.mockRestore();
@@ -474,7 +473,7 @@ describe('Unless Directive', () => {
     });
 
     it('should handle security subscription callback', () => {
-      const subscriptionCallback = (security.subscribe as jest.Mock).mock.calls[0][0];
+      const subscriptionCallback = (security.subscribe as Mock).mock.calls[0][0];
       security.has.mockImplementation((perm: string) => perm === 'admin');
       directive.bhUnless = 'admin';
       directive.isDisplayed = false;
@@ -485,7 +484,7 @@ describe('Unless Directive', () => {
 
     it('should safely dispose even if Security is using old void implementation', () => {
       security.subscribe.mockImplementation((() => {}) as any);
-      (destroyRef.onDestroy as jest.Mock).mock.calls[0][0]();
+      (destroyRef.onDestroy as Mock).mock.calls[0][0]();
       // Expect no error
     });
 

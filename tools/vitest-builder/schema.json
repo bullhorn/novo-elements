@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Vitest builder",
+  "description": "Delegates ng test to Vitest",
+  "type": "object",
+  "properties": {
+    "include": {
+      "type": "string",
+      "description": "Glob or file path to include"
+    },
+    "reporters": {
+      "type": "string",
+      "description": "Vitest reporter module path"
+    },
+    "coverage": {
+      "type": "boolean",
+      "description": "Enable coverage",
+      "default": false
+    }
+  },
+  "additionalProperties": true
+}

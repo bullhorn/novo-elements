@@ -1,4 +1,3 @@
-// APP
 import { NovoLabelService } from './novo-label-service';
 
 describe('Service: NovoLabelService', () => {

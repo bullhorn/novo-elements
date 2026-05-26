@@ -1,16 +1,14 @@
-// NG2
-import { waitForAsync, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-// App
-import { NovoLabelService } from 'novo-elements/services';
 import { NovoSelectModule } from 'novo-elements/elements/select';
+import { NovoLabelService } from 'novo-elements/services';
 import { Pagination } from './PaginationOld';
 
 describe('Elements: NovoTable', () => {
   let fixture;
   let component;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [Pagination],
       imports: [FormsModule, NovoSelectModule],
@@ -18,7 +16,7 @@ describe('Elements: NovoTable', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(Pagination);
     component = fixture.debugElement.componentInstance;
-  }));
+  });
 
   it('should initialize with defaults', () => {
     expect(component).toBeDefined();

@@ -1,4 +1,3 @@
-// APP
 import { FormValidators } from './FormValidators';
 
 /**

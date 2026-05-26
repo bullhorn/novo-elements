@@ -1,16 +1,14 @@
-// NG2
-import { waitForAsync, TestBed } from '@angular/core/testing';
-import { NovoLabelService } from 'novo-elements/services';
+import { TestBed } from '@angular/core/testing';
 import { NovoItemContentElement, NovoItemEndElement, NovoListElement, NovoListItemElement } from 'novo-elements/elements/list';
 import { NovoNavContentElement, NovoNavElement, NovoNavOutletElement, NovoTabElement } from 'novo-elements/elements/tabs';
-// App
+import { NovoLabelService } from 'novo-elements/services';
 import { NovoCategoryDropdownElement } from './CategoryDropdown';
 
 describe('Elements: NovoCategoryDropdownElement', () => {
   let fixture;
   let component;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
         NovoCategoryDropdownElement,
@@ -27,7 +25,7 @@ describe('Elements: NovoCategoryDropdownElement', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(NovoCategoryDropdownElement);
     component = fixture.debugElement.componentInstance;
-  }));
+  });
 
   describe('Method: ngOnInit()', () => {
     it('should initialize correctly', () => {
