@@ -8,6 +8,7 @@ import {
   EventEmitter,
   forwardRef,
   HostBinding,
+  HostListener,
   Input,
   NgZone,
   OnInit,
@@ -17,7 +18,7 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // APP
 import { NovoLabelService } from 'novo-elements/services';
-import { Key } from 'novo-elements/utils';
+import { BooleanInput, Key } from 'novo-elements/utils';
 import { NovoOverlayTemplateComponent } from 'novo-elements/elements/common';
 
 // Value accessor for the component (supports ngModel)
@@ -51,6 +52,7 @@ const SEARCH_VALUE_ACCESSOR = {
     <novo-overlay-template
       [parent]="element"
       [closeOnSelect]="closeOnSelect"
+      [trapKeyboardFocus]="trapKeyboardFocus"
       [position]="position"
       [hasBackdrop]="hasBackdrop"
       (select)="onSelect()"
@@ -94,6 +96,9 @@ export class NovoSearchBoxElement implements ControlValueAccessor, OnInit {
   public allowPropagation: boolean = false;
   @Input()
   public overrideElement: ElementRef;
+  @BooleanInput()
+  @Input()
+  public trapKeyboardFocus = false;
   @Output()
   public searchChanged: EventEmitter<string> = new EventEmitter<string>();
   @Output()
@@ -109,7 +114,7 @@ export class NovoSearchBoxElement implements ControlValueAccessor, OnInit {
 
   /** Element for the panel containing the autocomplete options. */
   @ViewChild(NovoOverlayTemplateComponent)
-  overlay: any;
+  overlay: NovoOverlayTemplateComponent;
   @ViewChild('input', { static: true })
   input: any;
 
@@ -151,6 +156,13 @@ export class NovoSearchBoxElement implements ControlValueAccessor, OnInit {
     this._zone.run(() => {
       this.focused = true;
     });
+  }
+  @HostListener('click')
+  onClick() {
+    if (!this.panelOpen) {
+      this.focused = true;
+      this.openPanel();
+    }
   }
   onBlur() {
     if (!this.keepOpen || !this.panelOpen) {

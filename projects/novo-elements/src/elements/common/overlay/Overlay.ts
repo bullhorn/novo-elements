@@ -17,6 +17,7 @@ import {
   ChangeDetectorRef,
   Component,
   DestroyRef,
+  DOCUMENT,
   ElementRef,
   EventEmitter,
   inject,
@@ -29,11 +30,10 @@ import {
   TemplateRef,
   ViewChild,
   ViewContainerRef,
-  DOCUMENT,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 // Vendor
-import { focusWalker, Helpers } from 'novo-elements/utils';
+import { Helpers } from 'novo-elements/utils';
 import { fromEvent, merge, Observable, of as observableOf, Subscription } from 'rxjs';
 import { filter, first, switchMap } from 'rxjs/operators';
 
@@ -83,7 +83,7 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
   @Input()
   public permitEscapeKeyExit: boolean = true;
   @Input()
-  public trapKeyboardFocus: boolean = true;
+  public trapKeyboardFocus: boolean = false;
 
   @Output()
   public select: EventEmitter<any> = new EventEmitter();
@@ -164,8 +164,6 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
             this.overlayRef.updatePosition();
           }
         });
-        const focusFinder = focusWalker(this.overlayRef.overlayElement);
-        (focusFinder.nextNode() as HTMLElement)?.focus();
 
         // Subscribe to escape key presses within the overlay
         this.subscribeToEscapeKey();
