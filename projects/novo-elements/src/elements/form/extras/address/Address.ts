@@ -2,6 +2,7 @@
 import { Component, DoCheck, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // APP
+import { Settings } from 'novo-elements/elements/places';
 import { NovoLabelService } from 'novo-elements/services';
 import { COUNTRIES, findByCountryId, getStates, Helpers } from 'novo-elements/utils';
 
@@ -11,6 +12,42 @@ const ADDRESS_VALUE_ACCESSOR = {
   useExisting: forwardRef(() => NovoAddressElement),
   multi: true,
 };
+
+export interface AddressLookupPrediction {
+  referenceId?: string;
+  displayAddress?: string;
+  primaryText?: string;
+  secondaryText?: string;
+  types?: string[];
+}
+
+export interface AddressLookupPredictionResponse {
+  predictions: AddressLookupPrediction[];
+  count: number;
+}
+
+export interface AddressLookupResult {
+  address1?: string;
+  address2?: string;
+  city?: string;
+  state?: string;
+  zip?: string;
+  countryName?: string;
+  countryCode?: string;
+  formattedAddress?: string;
+  location?: { latitude: number; longitude: number };
+  viewport?: {
+    northeast: { latitude: number; longitude: number };
+    southwest: { latitude: number; longitude: number };
+  };
+  referenceId?: string;
+  types?: string[];
+  postalCodes?: string[];
+}
+
+export interface AddressLookupDetailResponse {
+  address: AddressLookupResult;
+}
 
 export interface NovoAddressSubfieldConfig {
   label: string;
@@ -34,9 +71,26 @@ export interface NovoAddressConfig {
 }
 
 @Component({
-    selector: 'novo-address',
-    providers: [ADDRESS_VALUE_ACCESSOR],
-    template: `
+  selector: 'novo-address',
+  providers: [ADDRESS_VALUE_ACCESSOR],
+  template: `
+    <span *ngIf="placesSettings" class="address-autocomplete">
+      <input
+        type="text"
+        class="address-search-input"
+        [placeholder]="'Search for an address...'"
+        [(ngModel)]="autocompleteSearch"
+        [ngModelOptions]="{ standalone: true }"
+        (ngModelChange)="onAutocompleteTermChange($event)"
+      />
+      <google-places-list
+        *ngIf="autocompleteSearch"
+        [(term)]="autocompleteSearch"
+        [userSettings]="placesSettings"
+        (select)="onPlaceSelected($event)"
+      >
+      </google-places-list>
+    </span>
     <span
       *ngIf="!config?.address1?.hidden"
       class="street-address"
@@ -184,32 +238,18 @@ export interface NovoAddressConfig {
       ></novo-picker>
     </span>
   `,
-    styleUrls: ['./Address.scss'],
-    standalone: false,
+  styleUrls: ['./Address.scss'],
+  standalone: false,
 })
 export class NovoAddressElement implements ControlValueAccessor, OnInit, DoCheck {
   @Input()
   config: NovoAddressConfig;
-  private _readOnly = false;
   @Input()
-  set readOnly(readOnly: boolean) {
-    this._readOnly = readOnly;
-    this.fieldList.forEach((field: string) => {
-      this.disabled[field] = this._readOnly;
-    });
-    if (this.model) {
-      this.updateStates();
-    }
-  }
-  get readOnly(): boolean {
-    return this._readOnly;
-  }
-  private previousRequiredState: Record<string, boolean> = {};
+  placesSettings: Settings;
+  autocompleteSearch: string = '';
   states: Array<any> = [];
   fieldList: Array<string> = ['address1', 'address2', 'city', 'state', 'zip', 'countryID'];
   model: any;
-  onModelChange: Function = () => {};
-  onModelTouched: Function = () => {};
   focused: any = {};
   invalid: any = {};
   disabled: any = {};
@@ -226,8 +266,30 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit, DoCheck
   blur: EventEmitter<any> = new EventEmitter();
   @Output()
   validityChange: EventEmitter<any> = new EventEmitter();
+  private previousRequiredState: Record<string, boolean> = {};
 
   constructor(public labels: NovoLabelService) {}
+
+  private _readOnly = false;
+
+  get readOnly(): boolean {
+    return this._readOnly;
+  }
+
+  @Input()
+  set readOnly(readOnly: boolean) {
+    this._readOnly = readOnly;
+    this.fieldList.forEach((field: string) => {
+      this.disabled[field] = this._readOnly;
+    });
+    if (this.model) {
+      this.updateStates();
+    }
+  }
+
+  onModelChange: Function = () => {};
+
+  onModelTouched: Function = () => {};
 
   ngOnInit() {
     if (!this.config) {
@@ -420,6 +482,35 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit, DoCheck
     this.model.state = state;
     this.updateControl();
     this.onInput(null, 'state');
+  }
+
+  onAutocompleteTermChange(term: string): void {
+    this.autocompleteSearch = term;
+  }
+
+  onPlaceSelected(placeDetail: AddressLookupResult): void {
+    if (!placeDetail) {
+      return;
+    }
+
+    this.model.address1 = placeDetail.address1 || '';
+    this.model.address2 = placeDetail.address2 || '';
+    this.model.city = placeDetail.city || '';
+    this.model.state = placeDetail.state || '';
+    this.model.zip = placeDetail.zip || '';
+
+    if (placeDetail.countryCode) {
+      const country = COUNTRIES.find((c) => c.code === placeDetail.countryCode);
+      if (country) {
+        this.model.countryID = country.id;
+        this.model.countryName = country.name;
+      }
+    }
+
+    this.updateStates();
+    this.updateControl();
+    this.fieldList.forEach((field) => this.onInput(null, field));
+    this.autocompleteSearch = '';
   }
 
   setStateLabel(model: any) {

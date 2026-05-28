@@ -25,6 +25,7 @@ class ControlConfig {
   closeOnSelect: boolean;
   config: any;
   controlType: string;
+  placesSettings?: any;
   currencyFormat: string;
   customControl?: any;
   customControlConfig?: any;
@@ -159,6 +160,7 @@ export class BaseControl extends ControlConfig {
     this.endDate = config.endDate;
     this.restrictFieldInteractions = !!config.restrictFieldInteractions;
     this.highlighted = !!config.highlighted;
+    this.placesSettings = config.placesSettings;
     if (!Helpers.isEmpty(config.warning)) {
       this.warning = config.warning;
     }

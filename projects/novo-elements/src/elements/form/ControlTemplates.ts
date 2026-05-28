@@ -1,9 +1,10 @@
 import { AfterViewInit, Component, QueryList, ViewChildren } from '@angular/core';
 import { NovoTemplate } from 'novo-elements/elements/common';
 import { NovoTemplateService } from 'novo-elements/services';
+
 @Component({
-    selector: 'novo-control-templates',
-    template: `
+  selector: 'novo-control-templates',
+  template: `
     <!---Readonly--->
     <ng-template novoTemplate="read-only" let-form="form" let-control>
       <div>{{ form.getRawValue()[control.key] }}</div>
@@ -577,6 +578,7 @@ import { NovoTemplateService } from 'novo-elements/services';
         <novo-address
           [formControlName]="control.key"
           [config]="control?.config"
+          [placesSettings]="control?.placesSettings"
           [readOnly]="control?.readOnly"
           (change)="methods.handleAddressChange($event)"
           (focus)="methods.handleFocus($event.event, $event.field)"
@@ -693,7 +695,7 @@ import { NovoTemplateService } from 'novo-elements/services';
       </div>
     </ng-template>
   `,
-    standalone: false,
+  standalone: false,
 })
 export class NovoControlTemplates implements AfterViewInit {
   @ViewChildren(NovoTemplate)

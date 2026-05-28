@@ -4,6 +4,29 @@
   display: flex;
   flex-flow: row wrap;
   align-items: center;
+  .address-autocomplete {
+    flex: 1 1 100%;
+    position: relative;
+    padding: 0 0 10px;
+    .address-search-input {
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid #afb9c0;
+      padding: 5px 0;
+      font-size: inherit;
+      &:focus {
+        outline: none;
+        border-bottom-color: $positive;
+      }
+    }
+    google-places-list {
+      position: absolute;
+      z-index: 100;
+      width: 100%;
+      background: white;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    }
+  }
   &.ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) {
     .street-address,
     .apt,
