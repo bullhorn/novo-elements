@@ -51,22 +51,40 @@ describe('Elements: NovoChipElement', () => {
       expect(component.dynamicClasses).toBe('');
     });
 
-    it('should apply single class returned by classFunction', () => {
+    it('should apply single class returned by classFunction to the host element', () => {
       component.value = { status: 'active' };
       component.source = {
         classFunction: (value) => (value.status === 'active' ? 'status-active' : 'status-inactive'),
       };
       fixture.detectChanges();
       expect(component.dynamicClasses).toBe('status-active');
+      expect(fixture.nativeElement.classList).toContain('status-active');
     });
 
-    it('should apply multiple classes as array', () => {
+    it('should join an array return from classFunction and apply each class to the host element', () => {
       component.value = { priority: 'high', type: 'warning' };
       component.source = {
         classFunction: (value) => [`priority-${value.priority}`, `type-${value.type}`],
       };
       fixture.detectChanges();
       expect(component.dynamicClasses).toBe('priority-high type-warning');
+      expect(fixture.nativeElement.classList).toContain('priority-high');
+      expect(fixture.nativeElement.classList).toContain('type-warning');
+    });
+
+    it('should apply only truthy keys when classFunction returns an object', () => {
+      component.value = { status: 'archived', featured: true };
+      component.source = {
+        classFunction: (value) => ({
+          archived: value.status === 'archived',
+          featured: value.featured,
+          recent: false,
+        }),
+      };
+      fixture.detectChanges();
+      expect(fixture.nativeElement.classList).toContain('archived');
+      expect(fixture.nativeElement.classList).toContain('featured');
+      expect(fixture.nativeElement.classList).not.toContain('recent');
     });
 
     it('should handle null return from classFunction', () => {
@@ -95,37 +113,41 @@ describe('Elements: NovoChipElement', () => {
       fixture.detectChanges();
       expect(component.dynamicClasses).toBe('test-class');
       expect(classFunc).toHaveBeenCalledWith({ id: 1 }, 'Test Label');
+      expect(fixture.nativeElement.classList).toContain('test-class');
     });
 
-    it('should react to value changes', () => {
+    it('should swap the host class when the bound value changes', () => {
       component.source = {
         classFunction: (value) => (value?.priority === 'high' ? 'priority-high' : 'priority-low'),
       };
       component.value = { priority: 'low' };
       fixture.detectChanges();
-      expect(component.dynamicClasses).toBe('priority-low');
+      expect(fixture.nativeElement.classList).toContain('priority-low');
+      expect(fixture.nativeElement.classList).not.toContain('priority-high');
 
       component.value = { priority: 'high' };
       fixture.detectChanges();
-      expect(component.dynamicClasses).toBe('priority-high');
+      expect(fixture.nativeElement.classList).toContain('priority-high');
+      expect(fixture.nativeElement.classList).not.toContain('priority-low');
     });
 
-    it('should react to source changes', () => {
+    it('should swap the host class when the source is replaced', () => {
       component.value = { status: 'active' };
       component.source = {
-        classFunction: (value) => 'class-v1',
+        classFunction: () => 'class-v1',
       };
       fixture.detectChanges();
-      expect(component.dynamicClasses).toBe('class-v1');
+      expect(fixture.nativeElement.classList).toContain('class-v1');
 
       component.source = {
-        classFunction: (value) => 'class-v2',
+        classFunction: () => 'class-v2',
       };
       fixture.detectChanges();
-      expect(component.dynamicClasses).toBe('class-v2');
+      expect(fixture.nativeElement.classList).toContain('class-v2');
+      expect(fixture.nativeElement.classList).not.toContain('class-v1');
     });
 
-    it('should handle empty string return from classFunction', () => {
+    it('should return empty string when classFunction returns an empty string', () => {
       component.source = {
         classFunction: () => '',
       };
@@ -133,7 +155,7 @@ describe('Elements: NovoChipElement', () => {
       expect(component.dynamicClasses).toBe('');
     });
 
-    it('should handle empty array return from classFunction', () => {
+    it('should return empty string when classFunction returns an empty array', () => {
       component.source = {
         classFunction: () => [],
       };

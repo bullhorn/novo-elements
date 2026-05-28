@@ -136,7 +136,7 @@ export class NovoChipRemove {
         '[class.novo-chip-with-trailing-icon]': 'removeIcon',
         '[class.novo-chip-disabled]': 'disabled',
         '[class._novo-animation-noopable]': '_animationsDisabled',
-        '[ngClass]': 'dynamicClasses',
+        '[class]': 'dynamicClasses',
         '[attr.tabindex]': 'disabled ? null : tabIndex',
         '[attr.disabled]': 'disabled || null',
         '[attr.aria-disabled]': 'disabled.toString()',
@@ -264,17 +264,33 @@ export class NovoChipElement extends NovoChipMixinBase implements FocusableOptio
     return this.selectable && (this._chipListMultiple || this.selected) ? this.selected.toString() : null;
   }
 
-  /** Dynamic classes from source.classFunction */
+  /**
+   * Dynamic classes from `source.classFunction`. Normalizes the function's return
+   * value (string, string[], or {[k: string]: boolean}) into a space-separated
+   * class string suitable for the host element's `[class]` binding.
+   */
   get dynamicClasses(): string {
     const classFunction = this.source?.classFunction;
     if (!classFunction || typeof classFunction !== 'function') {
       return '';
     }
     const result = classFunction(this.value, this.label);
-    if (!result) {
+    if (result == null) {
       return '';
     }
-    return Array.isArray(result) ? result.join(' ') : result;
+    if (typeof result === 'string') {
+      return result;
+    }
+    if (Array.isArray(result)) {
+      return result.filter(Boolean).join(' ');
+    }
+    if (typeof result === 'object') {
+      return Object.entries(result)
+        .filter(([, v]) => v)
+        .map(([k]) => k)
+        .join(' ');
+    }
+    return '';
   }
 
   constructor(
