@@ -4,6 +4,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { notify } from 'novo-elements/utils';
 import type { IMaskOptions } from './Control';
 // APP
+import type { PlacesSettings } from 'novo-elements/elements/places';
 import { NovoControlConfig } from './FormControls';
 
 export class NovoFormControl extends FormControl {
@@ -76,6 +77,7 @@ export class NovoFormControl extends FormControl {
   warning?: string;
   highlighted?: boolean;
   disabledDateMessage?: string;
+  placesSettings?: PlacesSettings;
   private historyTimeout: any;
 
   constructor(value: any, control: NovoControlConfig) {

@@ -8,7 +8,7 @@ import { Key } from 'novo-elements/utils';
 import { Observable } from 'rxjs';
 import { GooglePlacesService } from './places.service';
 
-export interface Settings {
+export interface PlacesSettings {
   geoPredictionServerUrl?: string;
   geoLatLangServiceUrl?: string;
   geoLocDetailServerUrl?: string;
@@ -59,7 +59,7 @@ const PLACES_VALUE_ACCESSOR = {
 })
 export class PlacesListComponent extends BasePickerResults implements OnInit, OnChanges, ControlValueAccessor {
   @Input()
-  userSettings: Settings;
+  userSettings: PlacesSettings;
   @Output()
   termChange: EventEmitter<any> = new EventEmitter<any>();
   @Output()
@@ -71,12 +71,12 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
   public recentDropdownOpen: boolean = false;
   public isSettingsError: boolean = false;
   public settingsErrorMsg: string = '';
-  public settings: Settings = {};
+  public settings: PlacesSettings = {};
   private moduleinit: boolean = false;
   private selectedDataIndex: number = -1;
   private recentSearchData: any = [];
   private userSelectedOption: any = '';
-  private defaultSettings: Settings = {
+  private defaultSettings: PlacesSettings = {
     geoPredictionServerUrl: '',
     geoLatLangServiceUrl: '',
     geoLocDetailServerUrl: '',
@@ -276,7 +276,7 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
   }
 
   // function to set user settings if it is available.
-  private setUserSettings(): Settings {
+  private setUserSettings(): PlacesSettings {
     const _tempObj: any = {};
     if (this.userSettings && typeof this.userSettings === 'object') {
       const keys: string[] = Object.keys(this.defaultSettings);

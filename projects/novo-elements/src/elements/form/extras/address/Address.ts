@@ -2,7 +2,7 @@
 import { Component, DoCheck, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // APP
-import { Settings } from 'novo-elements/elements/places';
+import { PlacesSettings } from 'novo-elements/elements/places';
 import { NovoLabelService } from 'novo-elements/services';
 import { COUNTRIES, findByCountryId, getStates, Helpers } from 'novo-elements/utils';
 
@@ -245,7 +245,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit, DoCheck
   @Input()
   config: NovoAddressConfig;
   @Input()
-  placesSettings: Settings;
+  placesSettings: PlacesSettings;
   autocompleteSearch: string = '';
   states: Array<any> = [];
   fieldList: Array<string> = ['address1', 'address2', 'city', 'state', 'zip', 'countryID'];
