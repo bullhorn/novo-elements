@@ -266,8 +266,8 @@ export class NovoChipElement extends NovoChipMixinBase implements FocusableOptio
 
   /**
    * Dynamic classes from `source.classFunction`. Normalizes the function's return
-   * value (string, string[], or {[k: string]: boolean}) into a space-separated
-   * class string suitable for the host element's `[class]` binding.
+   * value (string, string[], or {[className: string]: boolean}) into a
+   * space-separated class string suitable for the host element's `[class]` binding.
    */
   get dynamicClasses(): string {
     const classFunction = this.source?.classFunction;
@@ -286,8 +286,8 @@ export class NovoChipElement extends NovoChipMixinBase implements FocusableOptio
     }
     if (typeof result === 'object') {
       return Object.entries(result)
-        .filter(([, v]) => v)
-        .map(([k]) => k)
+        .filter(([, include]) => include)
+        .map(([className]) => className)
         .join(' ');
     }
     return '';
