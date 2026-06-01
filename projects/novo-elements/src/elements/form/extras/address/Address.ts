@@ -1,6 +1,8 @@
 // NG2
-import { Component, DoCheck, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
+import { Component, DoCheck, EventEmitter, forwardRef, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Subject, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 // APP
 import { PlacesSettings } from 'novo-elements/elements/places';
 import { NovoLabelService } from 'novo-elements/services';
@@ -84,8 +86,8 @@ export interface NovoAddressConfig {
         (ngModelChange)="onAutocompleteTermChange($event)"
       />
       <google-places-list
-        *ngIf="autocompleteSearch"
-        [(term)]="autocompleteSearch"
+        *ngIf="debouncedSearch"
+        [term]="debouncedSearch"
         [userSettings]="placesSettings"
         (select)="onPlaceSelected($event)"
       >
@@ -241,12 +243,15 @@ export interface NovoAddressConfig {
   styleUrls: ['./Address.scss'],
   standalone: false,
 })
-export class NovoAddressElement implements ControlValueAccessor, OnInit, DoCheck {
+export class NovoAddressElement implements ControlValueAccessor, OnInit, DoCheck, OnDestroy {
   @Input()
   config: NovoAddressConfig;
   @Input()
   placesSettings: PlacesSettings;
   autocompleteSearch: string = '';
+  debouncedSearch: string = '';
+  private searchTerms$ = new Subject<string>();
+  private searchSubscription: Subscription;
   states: Array<any> = [];
   fieldList: Array<string> = ['address1', 'address2', 'city', 'state', 'zip', 'countryID'];
   model: any;
@@ -304,6 +309,18 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit, DoCheck
     }
     if (Helpers.isBlank(this.model.countryID)) {
       this.updateStates();
+    }
+    this.searchSubscription = this.searchTerms$.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+    ).subscribe(term => {
+      this.debouncedSearch = term;
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.searchSubscription) {
+      this.searchSubscription.unsubscribe();
     }
   }
 
@@ -485,7 +502,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit, DoCheck
   }
 
   onAutocompleteTermChange(term: string): void {
-    this.autocompleteSearch = term;
+    this.searchTerms$.next(term);
   }
 
   onPlaceSelected(placeDetail: AddressLookupResult): void {
@@ -511,6 +528,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit, DoCheck
     this.updateControl();
     this.fieldList.forEach((field) => this.onInput(null, field));
     this.autocompleteSearch = '';
+    this.debouncedSearch = '';
   }
 
   setStateLabel(model: any) {
