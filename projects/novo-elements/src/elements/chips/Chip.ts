@@ -136,7 +136,6 @@ export class NovoChipRemove {
         '[class.novo-chip-with-trailing-icon]': 'removeIcon',
         '[class.novo-chip-disabled]': 'disabled',
         '[class._novo-animation-noopable]': '_animationsDisabled',
-        '[class]': 'dynamicClasses',
         '[attr.tabindex]': 'disabled ? null : tabIndex',
         '[attr.disabled]': 'disabled || null',
         '[attr.aria-disabled]': 'disabled.toString()',
@@ -176,10 +175,6 @@ export class NovoChipElement extends NovoChipMixinBase implements FocusableOptio
   @ContentChild(NovoChipRemove) removeIcon: NovoChipRemove;
 
   @Input() type: string;
-  /** Source config object that may contain classFunction */
-  @Input() source: any;
-  /** Label displayed in the chip (used by classFunction) */
-  @Input() label: string;
   /** Whether the chip is selected. */
   @Input()
   get selected(): boolean {
@@ -262,35 +257,6 @@ export class NovoChipElement extends NovoChipMixinBase implements FocusableOptio
     // Remove the `aria-selected` when the chip is deselected in single-selection mode, because
     // it adds noise to NVDA users where "not selected" will be read out for each chip.
     return this.selectable && (this._chipListMultiple || this.selected) ? this.selected.toString() : null;
-  }
-
-  /**
-   * Dynamic classes from `source.classFunction`. Normalizes the function's return
-   * value (string, string[], or {[className: string]: boolean}) into a
-   * space-separated class string suitable for the host element's `[class]` binding.
-   */
-  get dynamicClasses(): string {
-    const classFunction = this.source?.classFunction;
-    if (!classFunction || typeof classFunction !== 'function') {
-      return '';
-    }
-    const result = classFunction(this.value, this.label);
-    if (result == null) {
-      return '';
-    }
-    if (typeof result === 'string') {
-      return result;
-    }
-    if (Array.isArray(result)) {
-      return result.filter(Boolean).join(' ');
-    }
-    if (typeof result === 'object') {
-      return Object.entries(result)
-        .filter(([, include]) => include)
-        .map(([className]) => className)
-        .join(' ');
-    }
-    return '';
   }
 
   constructor(

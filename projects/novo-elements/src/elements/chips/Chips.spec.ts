@@ -285,46 +285,56 @@ describe('Elements: NovoChipsElement', () => {
     });
   });
 
-  describe('Integration: classFunction in source', () => {
-    it('should pass classFunction from source to rendered chips', async () => {
-      const classFunc = vi.fn((value) => `status-${value.status}`);
-      component.source = {
-        hiddenChipsLimit: 4,
-        classFunction: classFunc,
-      };
-      component.model = [{ value: 1, status: 'active', label: 'Item 1' }];
-      component.setItems();
-      fixture.detectChanges();
-      await tick(10);
-
-      const chipElement = fixture.nativeElement.querySelector('novo-chip');
-      expect(chipElement).toBeTruthy();
-      // Verify the chip component received the source with classFunction
-      const chip = fixture.debugElement.query((el) => el.name === 'novo-chip');
-      expect(chip.componentInstance.source).toBe(component.source);
-      expect(chip.componentInstance.source.classFunction).toBe(classFunc);
+  describe('Method: getDynamicClasses(item)', () => {
+    it('should return null when source has no classFunction', () => {
+      component.source = { hiddenChipsLimit: 4 };
+      expect(component.getDynamicClasses({ value: { id: 1 } })).toBeNull();
     });
 
-    it('should pass value and label to chips from model', async () => {
-      component.source = {
-        hiddenChipsLimit: 4,
-        classFunction: (value, label) => `${label}`,
-      };
-      component.model = [{ value: 1, priority: 'high', label: 'Item 1' }];
-      component.setItems();
-      fixture.detectChanges();
-      await tick(10);
-
-      const chipDebugElement = fixture.debugElement.query((el) => el.name === 'novo-chip');
-      expect(chipDebugElement).toBeTruthy();
-      // Verify value and label are passed to chip
-      expect(chipDebugElement.componentInstance.value).toBeDefined();
-      expect(chipDebugElement.componentInstance.source.classFunction).toBeDefined();
-      // Item should have label property from setItems transformation
-      expect(chipDebugElement.componentInstance.value.label).toBe('Item 1');
+    it('should return null when classFunction returns null', () => {
+      component.source = { classFunction: () => null };
+      expect(component.getDynamicClasses({ value: { id: 1 } })).toBeNull();
     });
 
-    it('should compute dynamicClasses from classFunction on chip', async () => {
+    it('should return null when classFunction returns undefined', () => {
+      component.source = { classFunction: () => undefined };
+      expect(component.getDynamicClasses({ value: { id: 1 } })).toBeNull();
+    });
+
+    it('should pass the unwrapped value to classFunction', () => {
+      const classFunc = vi.fn((value) => 'called');
+      component.source = { classFunction: classFunc };
+      component.getDynamicClasses({ value: { id: 1, status: 'active' } });
+      expect(classFunc).toHaveBeenCalledWith({ id: 1, status: 'active' });
+    });
+
+    it('should fall back to the whole item when item.value is missing', () => {
+      const classFunc = vi.fn((value) => 'called');
+      component.source = { classFunction: classFunc };
+      const item = { id: 42, label: 'no value field' };
+      component.getDynamicClasses(item);
+      expect(classFunc).toHaveBeenCalledWith(item);
+    });
+
+    it('should pass classFunction string returns through unchanged', () => {
+      component.source = { classFunction: () => 'status-active' };
+      expect(component.getDynamicClasses({ value: { id: 1 } })).toBe('status-active');
+    });
+
+    it('should pass classFunction array returns through unchanged', () => {
+      component.source = { classFunction: () => ['a', 'b'] };
+      expect(component.getDynamicClasses({ value: { id: 1 } })).toEqual(['a', 'b']);
+    });
+
+    it('should pass classFunction object returns through unchanged', () => {
+      component.source = { classFunction: () => ({ archived: true, recent: false }) };
+      expect(component.getDynamicClasses({ value: { id: 1 } }))
+        .toEqual({ archived: true, recent: false });
+    });
+  });
+
+  describe('Integration: classFunction renders classes on the chip host', () => {
+    it('should apply the string return to the rendered chip', async () => {
       component.source = {
         hiddenChipsLimit: 4,
         classFunction: (value) => (value.priority === 'high' ? 'priority-high' : 'priority-low'),
@@ -334,12 +344,12 @@ describe('Elements: NovoChipsElement', () => {
       fixture.detectChanges();
       await tick(10);
 
-      const chipDebugElement = fixture.debugElement.query((el) => el.name === 'novo-chip');
-      expect(chipDebugElement).toBeTruthy();
-      expect(chipDebugElement.componentInstance.dynamicClasses).toBe('priority-high');
+      const chip = fixture.nativeElement.querySelector('novo-chip');
+      expect(chip).toBeTruthy();
+      expect(chip.classList).toContain('priority-high');
     });
 
-    it('should handle multiple classes in array from classFunction', async () => {
+    it('should apply each class from an array return to the rendered chip', async () => {
       component.source = {
         hiddenChipsLimit: 4,
         classFunction: (value) => [`priority-${value.priority}`, `type-${value.type}`],
@@ -349,9 +359,31 @@ describe('Elements: NovoChipsElement', () => {
       fixture.detectChanges();
       await tick(10);
 
-      const chipDebugElement = fixture.debugElement.query((el) => el.name === 'novo-chip');
-      expect(chipDebugElement).toBeTruthy();
-      expect(chipDebugElement.componentInstance.dynamicClasses).toBe('priority-high type-warning');
+      const chip = fixture.nativeElement.querySelector('novo-chip');
+      expect(chip).toBeTruthy();
+      expect(chip.classList).toContain('priority-high');
+      expect(chip.classList).toContain('type-warning');
+    });
+
+    it('should apply only truthy keys from an object return to the rendered chip', async () => {
+      component.source = {
+        hiddenChipsLimit: 4,
+        classFunction: (value) => ({
+          archived: value.status === 'archived',
+          featured: value.featured,
+          recent: false,
+        }),
+      };
+      component.model = [{ value: 1, status: 'archived', featured: true, label: 'Item 1' }];
+      component.setItems();
+      fixture.detectChanges();
+      await tick(10);
+
+      const chip = fixture.nativeElement.querySelector('novo-chip');
+      expect(chip).toBeTruthy();
+      expect(chip.classList).toContain('archived');
+      expect(chip.classList).toContain('featured');
+      expect(chip.classList).not.toContain('recent');
     });
   });
 });

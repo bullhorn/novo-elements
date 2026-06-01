@@ -23,13 +23,12 @@ const CHIPS_VALUE_ACCESSOR = {
     <div class="novo-chip-container">
       <novo-chip
         *ngFor="let item of _items | async | slice: 0:hiddenChipsLimit"
+        [ngClass]="getDynamicClasses(item)"
         [class.selected]="item == selected"
         [selectable]="true"
         [disabled]="disablePickerInput"
         [size]="size"
-        [source]="source"
         [value]="item.value || item"
-        [label]="item.label"
         (removed)="remove($event, item)"
         (selectionChange)="select($event, item)"
         (deselect)="deselect($event, item)"
@@ -169,6 +168,14 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
     this._items.next(this.items);
     this.value = null;
     this._propagateChanges();
+  }
+
+  getDynamicClasses(item: any): string | string[] | { [className: string]: boolean } | null {
+    const classFunction = this.source?.classFunction;
+    if (typeof classFunction !== 'function') {
+      return null;
+    }
+    return classFunction(item?.value || item) ?? null;
   }
 
   setItems() {
