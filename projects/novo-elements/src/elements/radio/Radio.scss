@@ -10,7 +10,7 @@
     }
     &[theme="icon"] {
       margin-right: 0;
-      border: 1px solid $positive;
+      border: 1px solid var(--color-positive);
     }
   }
   &:first-child {
@@ -57,7 +57,7 @@
       i {
         &.bhi-radio-empty,
         &.bhi-radio-filled {
-          color: $positive;
+          color: var(--color-positive);
         }
       }
     }
@@ -77,7 +77,7 @@
       }
       &.bhi-checkbox-filled,
       &.bhi-radio-filled {
-        color: $positive;
+        color: var(--color-positive);
       }
     }
     &.disabled {
@@ -91,12 +91,12 @@
   }
   novo-button[theme].has-icon {
     transition: all 100ms ease-in-out;
-    color: $positive;
+    color: var(--color-positive);
     background: $white;
     opacity: 1;
     &.checked {
       color: $white;
-      background: $positive;
+      background: var(--color-positive);
     }
 
     @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {

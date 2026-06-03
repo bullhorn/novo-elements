@@ -22,10 +22,10 @@
   .novo-tab-link {
     @include novo-label-text();
     font-size: var(--font-size-tab);
-    padding: $spacing-md;
+    padding: var(--spacing-md);
     display: flex;
     align-items: center;
-    gap: $spacing-xs;
+    gap: var(--spacing-xs);
     cursor: pointer;
     text-transform: uppercase;
     &:focus {
@@ -76,7 +76,7 @@
     width: 100%;
     display: flex;
     flex-flow: row nowrap;
-    gap: $spacing-xs;
+    gap: var(--spacing-xs);
     max-width: 90%;
     white-space: nowrap;
     overflow: hidden;
@@ -185,6 +185,6 @@
 :host-context(novo-nav.condensed) {
   font-size: 1rem;
   .novo-tab-link {
-    padding: $spacing-sm;
+    padding: var(--spacing-sm);
   }
 }

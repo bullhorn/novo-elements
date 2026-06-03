@@ -34,7 +34,7 @@
   @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
     &.avatar-color-#{$name} {
       color: getContrastColor($name);
-      background-color: $color;
+      background-color: var(--color-#{$name});
     }
   }
 }

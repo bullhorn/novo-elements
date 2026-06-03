@@ -11,10 +11,10 @@
     }
 
     .cal-hour:nth-child(even) {
-      background-color: $off-white;
+      background-color: var(--background-main);
     }
     .cal-hour:nth-child(odd) {
-      background-color: $white;
+      background-color: var(--background-body);
     }
 
     .cal-hour-segment {

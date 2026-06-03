@@ -7,7 +7,7 @@
 $black: $color-black;
 $white: $color-white;
 $grey: $color-grey;
-$off-white: $color-off-white;
+// $off-white: $color-off-white;
 $light: $color-light;
 $navy: $color-navy;
 $pulse: $color-pulse;
@@ -53,27 +53,27 @@ $billableCharge: $color-billable-charge;
 $payableCharge: $color-payable-charge;
 // Color Applications
 $dark: $color-dark;
-$navigation: $color-navigation;
-$positive: $ocean;
+/*$navigation: $color-navigation;
+var(--color-positive): $ocean;
 $success: $grass;
-$negative: $grapefruit;
+var(--color-negative): $grapefruit;
 $warning: $sunflower;
 $background: $off-white;
 $background-dark: #e2e2e2;
 $neutral: $color-neutral;
 $empty: $color-empty;
-$disabled: $color-stone;
+$disabled: $color-stone;*/
 
 // Spacing
 // --------------------------------------------------
 $spacing-rules: (
   "none": $spacing-none,
-  "px": $spacing-px,
-  "xs": $spacing-xs,
-  "sm": $spacing-sm,
-  "md": $spacing-md,
-  "lg": $spacing-lg,
-  "xl": $spacing-xl,
+  "px": var(--spacing-px),
+  "xs": var(--spacing-xs),
+  "sm": var(--spacing-sm),
+  "md": var(--spacing-md),
+  "lg": var(--spacing-lg),
+  "xl": var(--spacing-xl),
 );
 
 // Sizes
@@ -123,7 +123,7 @@ $entity-colors: (
   "earnCode": $color-earn-code,
   "billableCharge": $color-billable-charge,
   "payableCharge": $color-payable-charge,
-  "complianceManager": $color-positive,
+  "complianceManager": var(--color-positive),
   "invoiceStatement": $color-invoice-statement,
 );
 // Generic Color Map

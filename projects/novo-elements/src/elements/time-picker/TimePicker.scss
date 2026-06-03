@@ -277,7 +277,7 @@
     margin-left: 1px;
     display: block;
     position: absolute;
-    background-color: $background;
+    background-color: var(--background-main);
   }
   .analog--hour,
   .analog--minute {

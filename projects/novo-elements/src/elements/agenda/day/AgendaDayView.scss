@@ -17,7 +17,7 @@
         min-height: 30px;
         display: flex;
         flex-flow: row nowrap;
-        background-color: $off-white;
+        background-color: var(--background-main);
 
         .cal-event-ribbon {
           width: 4px;

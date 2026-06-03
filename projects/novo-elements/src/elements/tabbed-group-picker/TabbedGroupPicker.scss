@@ -94,7 +94,7 @@
               &:hover {
                 .novo-tab-link {
                   font-weight: 400;
-                  color: $positive;
+                  color: var(--color-positive);
                 }
               }
             }
@@ -119,14 +119,14 @@
 
           .quick-select-label {
             padding: 0.7em 1.9em 0 1.9em;
-            background: lighten($light, 10%);
+            background: brightenLive('--color-light', 10);
             text-transform: uppercase;
             font-size: 0.8em;
           }
 
           .quick-select-list {
             .quick-select-item {
-              background: lighten($light, 10%);
+              background: brightenLive('--color-light', 10);
               padding: 0.5em 0.8em;
               border-bottom: none;
             }
@@ -143,7 +143,7 @@
 
           novo-option {
             &:hover.novo-option-inert {
-              background: var(--background-main, rgba($ocean, 0.1));
+              background: var(--background-main, rgb(from var(--color-ocean) r g b / 0.1));
             }
           }
         }
