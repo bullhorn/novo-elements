@@ -12,8 +12,8 @@
 
   > .novo-button.modal-close {
     position: absolute;
-    right: $spacing-xl;
-    top: $spacing-xl;
+    right: var(--spacing-xl);
+    top: var(--spacing-xl);
   }
 
   > ::ng-deep header {
@@ -28,7 +28,7 @@
   }
 
   > ::ng-deep section {
-    padding: $spacing-md $spacing-xl;
+    padding: var(--spacing-md) var(--spacing-xl);
     max-height: 500px;
     overflow: auto;
   }
@@ -37,8 +37,8 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    padding: $spacing-md;
-    gap: $spacing-md;
+    padding: var(--spacing-md);
+    gap: var(--spacing-md);
     ::ng-deep button {
       min-width: 10rem;
     }

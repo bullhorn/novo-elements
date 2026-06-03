@@ -66,21 +66,21 @@ starting at line 82. >>
   }
   section {
     &.design {
-      background: $white;
+      background: var(--color-white);
     }
     > aside {
-      background: $background;
+      background: var(--color-background);
       padding: 10px 20px;
       border-radius: 3px;
       display: inline-block;
-      border: 2px solid darken($background, 2%);
+      border: 2px solid darkenLive('--theme-background-main', 2);
       h6 {
-        color: $mint;
+        color: var(--color-mint);
         margin-bottom: 5px;
       }
       &.design-principle {
         h6 {
-          border-bottom: 1px solid darken($background, 5%);
+          border-bottom: 1px solid darkenLive('--theme-background-main', 5);
           padding-bottom: 8px;
           span {
             font-weight: 300;
@@ -88,13 +88,13 @@ starting at line 82. >>
         }
         .hint {
           display: block;
-          color: darken($background, 50%);
+          color: darkenLive('--theme-background-main', 50);
           margin: 5px 0;
           padding: 10px;
           font-size: 0.9em;
           border-radius: 3px;
-          background: darken($background, 5%);
-          border: 1px solid darken($background, 10%);
+          background: darkenLive('--theme-background-main', 5);
+          border: 1px solid darkenLive('--theme-background-main', 10);
           i {
             margin-right: 10px;
           }
@@ -119,10 +119,10 @@ starting at line 82. >>
     margin-top: 15px;
   }
   .not-accepted {
-    color: $negative;
+    color: var(--color-negative);
   }
   .accepted {
-    color: $success;
+    color: var(--color-success);
   } // Custom page element initial display reset
   color,
   home,
@@ -131,7 +131,7 @@ starting at line 82. >>
   typography {
     display: block;
     & > header {
-      background: $off-white;
+      background: var(--color-off)-white;
     }
     & > section.design.container {
       article {

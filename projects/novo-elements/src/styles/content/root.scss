@@ -5,6 +5,7 @@ html {
   scrollbar-width: none;
   font-family: var(--font-family-base);
   font-size: var(--font-size-base, 10px);
+  // TODO: Can we remove this? Doesn't appear to be used
   color: var(--font-color-base, #333);
 }
 

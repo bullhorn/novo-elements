@@ -163,8 +163,8 @@
 
       &.inPreview .day {
         border-radius: 0;
-        border-top: 1px dashed $positive;
-        border-bottom: 1px dashed $positive;
+        border-top: 1px dashed var(--color-positive);
+        border-bottom: 1px dashed var(--color-positive);
       }
 
       &.previewStart .day {
@@ -172,14 +172,14 @@
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
         box-shadow: none !important;
-        border-left: 1px dashed $positive;
+        border-left: 1px dashed var(--color-positive);
       }
       &.previewEnd .day {
         border-radius: 50%;
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
         box-shadow: none !important;
-        border-right: 1px dashed $positive;
+        border-right: 1px dashed var(--color-positive);
       }
     }
   }

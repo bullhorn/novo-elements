@@ -29,8 +29,8 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 0 $spacing-lg;
-    gap: $spacing-sm;
+    padding: 0 var(--spacing-lg);
+    gap: var(--spacing-sm);
     box-sizing: border-box;
     // line-height: 4rem;
 
@@ -40,7 +40,7 @@
     div.header-title {
       display: flex;
       align-items: center;
-      gap: $spacing-sm;
+      gap: var(--spacing-sm);
       // making room for ellipsis
       padding-inline-end: 2em;
       // prevent pushing other flex content
@@ -83,7 +83,7 @@
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      gap: $spacing-sm;
+      gap: var(--spacing-sm);
     }
 
     ::ng-deep .novo-action {

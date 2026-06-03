@@ -42,13 +42,13 @@ $novo-step-header-icon-size: 1em !default;
 
   .novo-step-icon {
     .novo-step-number {
-      background: $positive;
+      background: var(--color-positive);
       color: $white;
     }
   }
   .novo-step-icon-not-touched {
     .novo-step-number {
-      background: $submission;
+      background: var(--color-submission);
       color: $white;
     }
   }
@@ -131,15 +131,15 @@ $novo-step-header-icon-size: 1em !default;
         }
         &.edit {
           &:before {
-            border-bottom: 1px solid $positive;
+            border-bottom: 1px solid var(--color-positive);
           }
         }
         &.done {
           &:before {
-            border-bottom: 1px solid $positive;
+            border-bottom: 1px solid var(--color-positive);
           }
           &:after {
-            border-top: 1px solid $positive;
+            border-top: 1px solid var(--color-positive);
           }
         }
       }

@@ -42,7 +42,8 @@
         font-size: 1em;
         background: transparent !important;
         border: none;
-        border-bottom: 1px solid lighten($dark, 45%);
+        // TODO: semantic role TBD - rec border, more in the same file
+        border-bottom: 1px solid brightenLive('--color-dark', 45);
         border-radius: 0;
         outline: none;
         height: 2rem;
@@ -55,10 +56,10 @@
         color: #26282b;
         margin-left: 10px;
         &:hover {
-          border-bottom: 1px solid lighten($dark, 15%);
+          border-bottom: 1px solid brightenLive('--color-dark', 15);
         }
         &:focus {
-          border-bottom: 1px solid $positive;
+          border-bottom: 1px solid var(--color-positive);
         }
         &::placeholder {
           color: var(--form-placeholder);
@@ -99,6 +100,7 @@
     novo-nav {
       max-height: 140px;
       overflow: auto;
+      // TODO: semantic role TBD - rec border
       border-bottom: 1px solid #ccc;
       > novo-tab {
         height: 30px;
@@ -124,15 +126,15 @@
       font-size: 0.9em;
       &:focus,
       &:hover {
-        background: lighten($light, 10%);
-        color: darken($light, 55%);
+        background: brightenLive('--color-light', 10);
+        color: darkenLive('--color-light', 55);
         .novo-category-dropdown-hover {
           display: block;
         }
       }
       .novo-category-dropdown-hover {
         display: none;
-        color: $positive;
+        color: var(--color-positive);
         font-size: 0.9em;
         > i {
           font-size: 0.9em;

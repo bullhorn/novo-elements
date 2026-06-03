@@ -18,7 +18,7 @@
           i {
             &.bhi-checkbox-empty,
             &.bhi-radio-empty {
-              color: $color-positive;
+              color: var(--color-positive);
             }
           }
         }
@@ -48,12 +48,13 @@
         i {
           &.bhi-checkbox-empty,
           &.bhi-checkbox-filled {
-            color: $color-positive;
+            color: var(--color-positive);
           }
         }
       }
     }
     label {
+      // TODO: semantic role TBD - rec text-muted
       color: darken(#d2d2d2, 30%);
       margin-left: 0;
       cursor: pointer;
@@ -79,7 +80,7 @@
         }
         &.bhi-checkbox-filled,
         &.bhi-radio-filled {
-          color: $color-positive;
+          color: var(--color-positive);
         }
       }
       span {

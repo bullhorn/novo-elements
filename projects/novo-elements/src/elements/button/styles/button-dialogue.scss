@@ -5,16 +5,17 @@
   &[theme="dialogue"] {
     @include theme-text-colors("color");
     background: transparent;
-    color: $positive;
+    color: var(--color-positive);
     i {
       line-height: 1.2;
     }
-    &:hover,
-    &:focus {
-      background: lighten($light, 7%);
+    &[color=text] {
+      color: inherit;
     }
+    &:hover,
+    &:focus,
     &:active {
-      background: lighten($light, 2%);
+      background: var(--background-faded);
     }
     &[inverse] {
       &:hover,

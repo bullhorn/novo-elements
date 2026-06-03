@@ -23,7 +23,7 @@
 
     ::ng-deep a {
       @extend .novo-breadcrumb-font-style;
-      color: $ocean;
+      color: var(--links);
       cursor: pointer;
       &:focus {
         text-decoration: none;

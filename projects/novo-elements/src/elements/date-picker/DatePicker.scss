@@ -15,7 +15,7 @@
 
     .month-view + .month-view {
       border-collapse: unset;
-      border-left: 1px solid $light;
+      border-left: 1px solid var(--border);
       margin-left: 0.5rem;
       padding-left: 0.5rem;
     }
@@ -23,15 +23,15 @@
     .calendar-top {
       display: flex;
       flex-flow: column;
-      background: $positive;
-      color: #fff;
+      background: var(--color-positive);
+      color: var(--color-contrast-positive);
       font-size: 14px;
       border-top-right-radius: 4px;
       border-top-left-radius: 4px;
       h1 {
         font-weight: 600;
         font-size: 4.2em;
-        color: #fff;
+        color: var(--color-contrast-positive);
         margin: 0;
         padding: 0;
       }
@@ -55,7 +55,7 @@
       }
     }
     .date-range-tabs {
-      border-bottom: 1px solid $off-white;
+      border-bottom: 1px solid var(--border-2);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -64,6 +64,7 @@
       &.week-select-mode {
         & > span {
           cursor: default;
+          // TODO: Do we need this color var? Should be text-main
           color: $font-color-base;
           pointer-events: none;
           opacity: 1 !important;
@@ -73,7 +74,7 @@
         }
       }
       & > span {
-        color: $positive;
+        color: var(--color-positive);
         text-align: center;
         flex: 1;
         cursor: pointer;
@@ -90,7 +91,7 @@
         height: 2px;
         bottom: 0;
         left: 0;
-        background: $positive;
+        background: var(--color-positive);
         transition: transform 200ms ease-in-out;
       }
     }
@@ -103,7 +104,7 @@
       -webkit-user-select: none;
       justify-content: space-between;
       cursor: default;
-      border-bottom: 1px solid $off-white;
+      border-bottom: 1px solid var(--border-2);
       .previous {
         width: 30px;
         height: 15px;
@@ -120,7 +121,7 @@
           width: 0;
         }
         &:hover:after {
-          border-right: 4px solid $positive;
+          border-right: 4px solid var(--color-positive);
           cursor: pointer;
         }
       }
@@ -128,13 +129,13 @@
         flex: 1;
         display: inline-block;
         vertical-align: middle;
-        color: $positive;
+        color: var(--color-positive);
         font-weight: 600;
         .month {
           border-radius: 2px;
           padding: 3px 8px;
           &:hover {
-            background: $positive;
+            background: var(--color-positive);
             color: #fff;
             cursor: pointer;
           }
@@ -143,7 +144,7 @@
           border-radius: 2px;
           padding: 3px 8px;
           &:hover {
-            background: $positive;
+            background: var(--color-positive);
             color: #fff;
             cursor: pointer;
           }
@@ -166,7 +167,7 @@
         }
         &:hover:before {
           opacity: 1;
-          border-left: 4px solid $positive;
+          border-left: 4px solid var(--color-positive);
           cursor: pointer;
         }
       }

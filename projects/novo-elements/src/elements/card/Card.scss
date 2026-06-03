@@ -64,7 +64,8 @@
       }
     }
     .actions {
-      color: lighten($dark, 15%);
+      // TODO: semantic role TBD - rec text-main
+      color: brightenLive('--color-dark', 15);
       white-space: nowrap;
     }
   }
@@ -74,12 +75,13 @@
     max-width: inherit;
     text-align: center;
     line-height: 25px;
-    color: lighten($grey, 10%);
+    // TODO: semantic role TBD - rec new "text-secondary"
+    color: brightenLive('--color-grey', 10);
     i {
       display: block;
       font-size: 24px;
       margin: 0 0 0.5em;
-      color: lighten($grey, 20%);
+      color: brightenLive('--color-grey', 20);
     }
   }
 
@@ -97,22 +99,22 @@
     padding: 0;
   }
   &.novo-card-inset-small {
-    padding: $spacing-sm;
+    padding: var(--spacing-sm);
   }
   &.novo-card-inset-medium {
-    padding: $spacing-md;
+    padding: var(--spacing-md);
   }
   &.novo-card-inset-large {
-    padding: $spacing-lg;
+    padding: var(--spacing-lg);
   }
 
   ::ng-deep .novo-card-header + .novo-card-content.condensed,
   ::ng-deep .novo-card-header + :not(.novo-card-content) {
-    margin-top: $spacing-sm;
+    margin-top: var(--spacing-sm);
   }
 
   ::ng-deep [novo-card-image] {
     width: calc(100%);
-    margin: $spacing-md 0;
+    margin: var(--spacing-md) 0;
   }
 }

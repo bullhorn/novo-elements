@@ -6,7 +6,7 @@
   align-items: center;
   flex-wrap: wrap;
   justify-content: flex-start;
-  border-bottom: 1px solid lighten($dark, 45%);
+  border-bottom: 1px solid brightenLive('--color-dark', 45);
   transition: all 200ms ease-in-out;
   position: relative;
   padding: 2px 0;
@@ -21,13 +21,14 @@
     margin-bottom: 20px;
   }
   &:hover {
-    border-bottom: 1px solid lighten($dark, 15%);
+    // TODO: semantic role TBD - rec border, same elsewhere in this file
+    border-bottom: 1px solid brightenLive('--color-dark', 15);
   }
   &.selected,
   &.selected:hover {
-    border-bottom: 1px solid $positive;
+    border-bottom: 1px solid var(--color-positive);
     & + i {
-      color: $positive;
+      color: var(--color-positive);
     }
   }
   &.disabled {
@@ -64,7 +65,7 @@
     right: 0;
     bottom: -20px;
     font-size: 0.9rem;
-    color: $negative;
+    color: var(--color-negative);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -122,10 +123,10 @@
           width: 100%;
         }
         &.active {
-          background-color: lighten($positive, 35%);
+          background-color: brightenLive('--color-positive', 35);
         }
         &:hover {
-          background-color: lighten($positive, 35%);
+          background-color: brightenLive('--color-positive', 35);
         }
         item-content {
           flex-flow: row wrap;

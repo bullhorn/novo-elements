@@ -8,10 +8,10 @@
   align-content: center;
   align-items: center;
   position: relative;
-  background: $navy;
-  color: $white;
-  padding: $spacing-md;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  background: var(--color-toast);
+  color: var(--text-bg-contrast);
+  padding: var(--spacing-md);
+  box-shadow: var(--shadow-1);
 
   &.show {
     display: grid !important;
@@ -60,7 +60,7 @@
         input {
           background: transparent !important;
           border: none;
-          border-bottom: 1px solid lighten($dark, 45%);
+          border-bottom: 1px solid brightenLive('--color-dark', 45);
           border-radius: 0;
           outline: none;
           height: 2rem;
@@ -73,10 +73,10 @@
           color: $white;
           text-overflow: ellipsis;
           &:focus {
-            background-color: $positive;
+            background-color: var(--color-positive);
           }
           &:hover {
-            border-bottom: 1px solid lighten($dark, 15%);
+            border-bottom: 1px solid brightenLive('--color-dark', 15);
           }
         }
       }
@@ -104,19 +104,19 @@
   }
 
   &.text {
-    background: $dark;
+    background: var(--color-dark);
   }
   &.neutral {
-    background: $neutral;
+    background: var(--color-neutral);
   }
   &.background {
-    background: $off-white;
+    background: var(--background-main);
     .toast-content > h5 {
-      color: $dark !important;
+      color: var(--text-main) !important;
     }
     i,
     p {
-      color: $dark;
+      color: var(--text-main);
     }
   }
 

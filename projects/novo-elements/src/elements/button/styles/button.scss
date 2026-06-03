@@ -5,7 +5,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  padding: 0 $spacing-md;
+  padding: 0 var(--spacing-md);
   font-size: var(--font-size-button);
   height: 3rem;
   border: none;
@@ -14,7 +14,7 @@
   border-radius: 3px;
   text-transform: uppercase;
   transition: all 200ms ease-in-out;
-  gap: $spacing-md;
+  gap: var(--spacing-md);
   cursor: pointer;
   user-select: none;
   text-overflow: clip;
@@ -41,9 +41,9 @@
   &[size="small"],
   &[size="sm"] {
     font-size: 1rem;
-    padding: 0 $spacing-md;
+    padding: 0 var(--spacing-md);
     height: 2.4rem;
-    gap: $spacing-sm;
+    gap: var(--spacing-sm);
     .button-contents,
     i {
       height: 1rem;
@@ -53,9 +53,9 @@
   &[size="large"],
   &[size="lg"] {
     font-size: 1.6rem;
-    padding: 0 $spacing-lg;
+    padding: 0 var(--spacing-lg);
     height: 3.6rem;
-    gap: $spacing-lg;
+    gap: var(--spacing-lg);
     .button-contents,
     i {
       height: 1.6rem;

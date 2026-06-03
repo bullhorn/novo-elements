@@ -23,7 +23,7 @@
   }
 
   &[theme="white"] {
-    background-color: $white;
+    background-color: var(--background-body);
     &[direction="vertical"] {
       background: transparent;
     }

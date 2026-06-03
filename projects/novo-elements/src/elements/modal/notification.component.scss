@@ -13,15 +13,15 @@
 
   & > .novo-button.modal-close {
     position: absolute;
-    right: $spacing-xl;
-    top: $spacing-xl;
+    right: var(--spacing-xl);
+    top: var(--spacing-xl);
   }
 
   ::ng-deep .novo-notification-body {
     display: flex;
     flex-direction: column;
-    padding: 0 $spacing-xl;
-    margin: $spacing-lg 0 55px;
+    padding: 0 var(--spacing-xl);
+    margin: var(--spacing-lg) 0 55px;
 
     & > img {
       width: 100%;
@@ -61,7 +61,7 @@
       border: 1px solid var(--text-muted);
       font-size: $font-size-2xl;
       border-radius: 50%;
-      padding: $spacing-md;
+      padding: var(--spacing-md);
       margin: 2rem auto;
       align-self: center;
     }
@@ -70,8 +70,8 @@
   &[type="success"] {
     .novo-notification-body {
       i.indicator {
-        color: $success;
-        border-color: $success;
+        color: var(--color-success);
+        border-color: var(--color-success);
       }
     }
   }
@@ -79,8 +79,8 @@
   &[type="warning"] {
     .novo-notification-body {
       i.indicator {
-        color: $warning;
-        border-color: $warning;
+        color: var(--color-warning);
+        border-color: var(--color-warning);
       }
     }
   }
@@ -88,8 +88,8 @@
   &[type="error"] {
     .novo-notification-body {
       i.indicator {
-        color: $negative;
-        border-color: $negative;
+        color: var(--color-negative);
+        border-color: var(--color-negative);
       }
     }
   }
@@ -98,8 +98,8 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    padding: $spacing-md;
-    gap: $spacing-md;
+    padding: var(--spacing-md);
+    gap: var(--spacing-md);
 
     button {
       min-width: 10rem;
