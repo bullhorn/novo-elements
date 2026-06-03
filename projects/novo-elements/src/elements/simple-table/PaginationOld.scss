@@ -47,7 +47,7 @@ novo-pagination {
       text-align: center;
       list-style-type: none;
       cursor: pointer;
-      color: $company;
+      color: var(--color-company);
       &:last-child {
         padding-right: 0;
       }
@@ -57,8 +57,8 @@ novo-pagination {
       }
     }
     .page.active {
-      color: $company;
-      background-color: $off-white;
+      color: var(--color-company);
+      background-color: var(--background-main);
       opacity: 1;
     }
   }

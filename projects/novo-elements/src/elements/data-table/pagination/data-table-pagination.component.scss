@@ -108,21 +108,22 @@ $breakpoint: 1000px;
         border-radius: 2px;
         list-style-type: none;
         cursor: pointer;
-        color: $company;
+        color: var(--color-company);
         &.disabled {
           opacity: 0.3;
           pointer-events: none;
         }
       }
       .page.active {
-        color: $company;
+        color: var(--color-company);
         background-color: rgba($black, 0.1);
         opacity: 1;
       }
     }
     .novo-data-table-of-total-amount {
-      color: $slate;
-      font-size: 12px;
+      // TODO: semantic role TBD - rec color-disabled
+      color: var(--color-slate);
+      font-size: var(--font-size-sm);
     }
   }
 }

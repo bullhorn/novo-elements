@@ -3,7 +3,7 @@
 
 :host {
   &.novo-field-appearance-outline {
-    border: 1px solid lighten($dark, 45%) !important;
+    border: 1px solid brightenLive('--color-dark', 45) !important;
     border-radius: 0.4rem;
     padding: 0.5rem;
 
@@ -21,10 +21,10 @@
       border: 1px solid $dark !important;
     }
     &.novo-focused {
-      border: 1px solid $positive !important;
+      border: 1px solid var(--color-positive) !important;
     }
     &.novo-field-invalid {
-      border: 1px solid $negative !important;
+      border: 1px solid var(--color-negative) !important;
     }
   }
 }

@@ -75,14 +75,14 @@ header {
   novo-search.always-open:not(.focused) {
     button {
       background: rgba($white, 0.25) !important;
-      color: rgba($positive, 0.25) !important;
+      color: rgb(from var(--color-positive) r g b / 0.25) !important;
     }
     input {
       background-color: rgba($white, 0.25) !important;
       border-color: rgba($white, 0.25) !important;
-      color: rgba($positive, 0.25) !important;
+      color: rgb(from var(--color-positive) r g b / 0.25) !important;
       &::placeholder {
-        color: $empty !important;
+        color: var(--color-empty) !important;
       }
     }
   }

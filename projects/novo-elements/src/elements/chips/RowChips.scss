@@ -24,7 +24,8 @@
       align-items: center;
       background: transparent !important;
       border: none;
-      border-bottom: 1px dashed lighten($dark, 30%);
+      // TODO: semantic role TBD - rec border-solid?
+      border-bottom: 1px dashed brightenLive('--color-dark', 30);
       border-radius: 0;
       outline: none;
       height: 2em;
@@ -62,7 +63,7 @@
       }
     }
     i.bhi-delete-o {
-      color: $negative;
+      color: var(--color-negative);
     }
   }
   .novo-chip.novo-row-chip {

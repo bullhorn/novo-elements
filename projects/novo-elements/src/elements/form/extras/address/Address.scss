@@ -14,7 +14,7 @@
       &.invalid {
         ::ng-deep input,
         ::ng-deep novo-select div[type="button"] {
-          border-bottom: 1px solid $negative !important;
+          border-bottom: 1px solid var(--color-negative) !important;
         }
       }
     }
@@ -36,7 +36,7 @@
     justify-content: space-between;
     align-items: flex-end;
     input.invalid {
-      border-bottom: 1px solid $negative;
+      border-bottom: 1px solid var(--color-negative);
     }
   }
   .street-address {
@@ -84,7 +84,7 @@
     pointer-events: none;
     input {
       &::placeholder {
-        color: lighten($dark, 30%) !important;
+        color: brightenLive('--color-dark', 30) !important;
       }
       border-bottom-style: dashed !important;
     }
@@ -123,11 +123,11 @@
     .country-name {
       &:hover:not(.invalid) i.required-indicator.bhi-circle,
       &:hover:not(.invalid) i.required-indicator.bhi-check {
-        border-bottom: 1px solid lighten($dark, 15%);
+        border-bottom: 1px solid brightenLive('--color-dark', 15);
       }
       &.focus:not(.invalid) i.required-indicator.bhi-circle,
       &.focus:not(.invalid) i.required-indicator.bhi-check {
-        border-bottom: 1px solid $positive;
+        border-bottom: 1px solid var(--color-positive);
       }
     }
     i.required-indicator {
@@ -144,7 +144,7 @@
     }
     .invalid i.required-indicator,
     .invalid i.required-indicator {
-      border-bottom: 1px solid $negative;
+      border-bottom: 1px solid var(--color-negative);
     }
   }
 }
