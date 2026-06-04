@@ -39,14 +39,15 @@
       min-width: 0;
       flex: 1;
       ::ng-deep i.bhi-move {
-        color: $light;
+        // TODO: semantic role TBD 
+        color: var(--font-color-secondary);
         margin-right: 0.3em;
         cursor: pointer;
       }
       h1,
       h2,
       h3 {
-        font-size: $font-size-lg;
+        font-size: var(--font-size-lg);
         font-weight: 500;
         line-height: 1.5;
         color: var(--text-main, #3d464d);

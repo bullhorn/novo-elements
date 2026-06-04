@@ -45,6 +45,7 @@
       }
       &.novo-field-disabled {
         .novo-field-input {
+          // TODO: semantic role TBD - rec color-shade-disabled
           color: $grey !important;
           // TODO: // TODO: semantic role TBD - rec define a new border color
           border-bottom: 1px dashed $grey !important;

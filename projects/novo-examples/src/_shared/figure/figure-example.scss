@@ -2,7 +2,7 @@
 .figure-example {
   display: flex;
   flex-direction: column;
-  font-size: 1.2rem;
+  font-size: var(--font-size-sm);
   gap: 1rem;
 
   .figure-content {

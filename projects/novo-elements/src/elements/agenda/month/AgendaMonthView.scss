@@ -94,7 +94,7 @@
       display: inline-block;
       min-width: 10px;
       padding: 3px 7px;
-      font-size: 12px;
+      font-size: var(--font-size-sm);
       font-weight: 700;
       line-height: 1;
       color: white;
@@ -121,7 +121,7 @@
       vertical-align: middle;
       text-align: center;
       line-height: 22px;
-      font-size: 12px;
+      font-size: var(--font-size-sm);
       color: var(--text-bg-contrast);
     }
 
@@ -145,7 +145,7 @@
 
     .agenda-day-cell.agenda-today .agenda-day-number {
       // TODO: semantic role TBD - Should likely be text-main
-      color: $dark;
+      color: var(--font-color-base);
     }
 
     .agenda-day-cell.agenda-drag-over {

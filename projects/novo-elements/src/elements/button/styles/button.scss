@@ -41,7 +41,7 @@
 
   &[size="small"],
   &[size="sm"] {
-    font-size: 1rem;
+    font-size: var(--font-size-xs);
     padding: 0 var(--spacing-md);
     height: 2.4rem;
     gap: var(--spacing-sm);

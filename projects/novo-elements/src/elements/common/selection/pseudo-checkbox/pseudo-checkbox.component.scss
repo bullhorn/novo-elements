@@ -28,7 +28,7 @@ $_novo-pseudo-checkmark-size: $novo-checkbox-size - (2 * $_novo-pseudo-checkbox-
   }
 
   i {
-    font-size: 1.4rem;
+    font-size: var(--font-size-novo-default);
     line-height: 1rem;
   }
 }

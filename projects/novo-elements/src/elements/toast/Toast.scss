@@ -49,7 +49,7 @@
   .close-icon i {
     display: flex;
     position: relative;
-    font-size: 1.2rem;
+    font-size: var(--font-size-sm);
     line-height: 1.2;
   }
 
@@ -262,7 +262,7 @@
     &.novo-accent-#{$name} {
       border: 1px solid $color;
       background: getPaleColor($name);
-      color: $dark;
+      color: var(--font-color-base);
     }
   }
 }

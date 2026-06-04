@@ -1,7 +1,7 @@
 @import "../../styles/variables.scss";
 
 :host(.layout-horizontal) {
-  font-size: 1.2rem;
+  font-size: var(--font-size-sm);
 
   .calendar-content {
     flex-flow: row nowrap;
@@ -9,9 +9,9 @@
 
   .month-view + .month-view {
     border-collapse: unset;
-    border-left: 1px solid $light;
-    margin-left: 0.5rem;
-    padding-left: 0.5rem;
+    border-left: 1px solid var(--color-border);
+    margin-left: var(--spacing-sm);
+    padding-left: var(--spacing-sm);
   }
 }
 :host(.layout-vertical) {

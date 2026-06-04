@@ -6,7 +6,7 @@
   &.novo-radio-group-appearance-horizontal {
     novo-radio:not(:last-child) {
       .novo-radio-button-label {
-        margin-right: 1rem;
+        margin-right: var(--spacing-md);
       }
     }
   }
