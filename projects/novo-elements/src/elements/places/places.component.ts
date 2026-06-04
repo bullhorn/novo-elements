@@ -48,9 +48,9 @@ const PLACES_VALUE_ACCESSOR = {
       <novo-list-item *ngFor="let data of matches; let $index = index" (click)="selectedListNode($event, $index)" [ngClass]="{ active: data === activeMatch }">
         <item-header>
           <item-avatar icon="location"></item-avatar>
-          <item-title>{{ data.structured_formatting?.main_text ? data.structured_formatting.main_text : data.description }}</item-title>
+          <item-title>{{ getPrimaryText(data) }}</item-title>
         </item-header>
-        <item-content>{{ data.structured_formatting?.secondary_text }}</item-content>
+        <item-content>{{ getSecondaryText(data) }}</item-content>
       </novo-list-item>
     </novo-list>
   `,
@@ -409,6 +409,38 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
     this._googlePlacesService.getRecentList(this.settings.recentStorageName).then((data: any) => {
       this.recentSearchData = data && data.length ? data : [];
     });
+  }
+
+  // Handle both Google Places API format and REST backend format
+  getPrimaryText(data: any): string {
+    // REST backend format (camelCase)
+    if (data.primaryText) {
+      return data.primaryText;
+    }
+    // Google Places API format (snake_case)
+    if (data.structured_formatting?.main_text) {
+      return data.structured_formatting.main_text;
+    }
+    // Fallback to display address
+    if (data.displayAddress) {
+      return data.displayAddress;
+    }
+    if (data.description) {
+      return data.description;
+    }
+    return '';
+  }
+
+  getSecondaryText(data: any): string {
+    // REST backend format (camelCase)
+    if (data.secondaryText) {
+      return data.secondaryText;
+    }
+    // Google Places API format (snake_case)
+    if (data.structured_formatting?.secondary_text) {
+      return data.structured_formatting.secondary_text;
+    }
+    return '';
   }
 
   onKeyDown(event: KeyboardEvent) {
