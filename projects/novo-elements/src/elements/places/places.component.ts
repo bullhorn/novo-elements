@@ -368,14 +368,15 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
 
   // function to retrieve the location info based on google place id.
   private getPlaceLocationInfo(selectedData: any): any {
+    const placeId = selectedData.placeId || selectedData.place_id;
     if (this.settings.useGoogleGeoApi) {
-      this._googlePlacesService.getGeoPlaceDetail(selectedData.place_id).then((data: any) => {
+      this._googlePlacesService.getGeoPlaceDetail(placeId).then((data: any) => {
         if (data) {
           this.setRecentLocation(data);
         }
       });
     } else {
-      this._googlePlacesService.getPlaceDetails(this.settings.geoLocDetailServerUrl, selectedData.place_id).then((result: any) => {
+      this._googlePlacesService.getPlaceDetails(this.settings.geoLocDetailServerUrl, placeId).then((result: any) => {
         if (result) {
           result = this.extractServerList(this.settings.serverResponseDetailHierarchy, result);
           this.setRecentLocation(result);
@@ -387,7 +388,7 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
   // function to store the selected user search in the localstorage.
   private setRecentLocation(data: any): any {
     data = JSON.parse(JSON.stringify(data));
-    data.description = data.description ? data.description : data.formatted_address;
+    data.description = data.description ? data.description : (data.formattedAddress || data.formatted_address);
     data.active = false;
     this.selectedDataIndex = -1;
     this.locationInput = data.description;
