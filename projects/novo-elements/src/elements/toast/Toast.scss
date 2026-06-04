@@ -31,6 +31,7 @@
     width: 32px;
     height: 32px;
     background: rgba(0, 0, 0, 0.15);
+    // TODO: semantic role TBD - could be border-radius or border-radius-small
     border-radius: 3px;
   }
 
@@ -173,6 +174,7 @@
   }
 
   &[class*="growl"] {
+    // TODO: semantic role TBD - could be border-radius or border-radius-small
     border-radius: 3px;
     max-width: 350px;
   }

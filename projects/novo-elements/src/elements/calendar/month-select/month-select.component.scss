@@ -7,7 +7,7 @@
   .month {
     padding: 1rem;
     cursor: pointer;
-    border-radius: 0.4rem;
+    border-radius: var(--border-radius-round);
     &.selected {
       background-color: var(--color-positive);
       color: #fff;

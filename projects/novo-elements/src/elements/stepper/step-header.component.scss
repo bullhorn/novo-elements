@@ -36,6 +36,7 @@ $novo-step-header-icon-size: 1em !default;
       display: flex;
       align-items: center;
       justify-content: center;
+      // TODO: semantic role TBD - could be border-radius or border-radius-small
       border-radius: 4px;
     }
   }

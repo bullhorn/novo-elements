@@ -3,6 +3,8 @@
 :host {
   display: block;
   .date-picker-container {
+    // TODO: semantic role TBD
+    // TODO: semantic role TBD - could be border-radius or border-radius-small
     border-radius: 4px;
     width: min-content;
     text-align: center;
@@ -132,6 +134,7 @@
         color: var(--color-positive);
         font-weight: 600;
         .month {
+          // TODO: semantic role TBD - could be border-radius or border-radius-small
           border-radius: 2px;
           padding: 3px 8px;
           &:hover {
@@ -141,6 +144,7 @@
           }
         }
         .year {
+          // TODO: semantic role TBD - could be border-radius or border-radius-small
           border-radius: 2px;
           padding: 3px 8px;
           &:hover {

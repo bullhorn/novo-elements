@@ -5,7 +5,7 @@
   flex-flow: column;
   background-color: var(--background-bright, $color-white);
   box-shadow: $shadow-card;
-  border-radius: 0.4em;
+  border-radius: var(--border-radius-round);
   position: relative;
   overflow-x: hidden;
 
@@ -19,7 +19,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    border-radius: 0.4em;
+    border-radius: var(--border-radius-round);
     background-color: var(--background-bright, $color-white);
     display: flex;
     flex-direction: column;

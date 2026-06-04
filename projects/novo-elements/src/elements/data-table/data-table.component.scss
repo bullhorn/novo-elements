@@ -238,6 +238,7 @@ cdk-table {
     cursor: pointer;
     font-size: 1.2em;
     padding: 0.5em;
+    // TODO: semantic role TBD - could be border-radius or border-radius-small
     border-radius: 3px;
     &.disabled {
       pointer-events: none;

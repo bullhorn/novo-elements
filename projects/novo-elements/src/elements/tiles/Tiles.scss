@@ -12,6 +12,7 @@
     background: var(--background-bright);
     display: flex;
     border: solid thin var(--color-slate);
+    // TODO: semantic role TBD - could be border-radius or border-radius-small
     border-radius: 3px;
     .tile {
       margin: 2px;

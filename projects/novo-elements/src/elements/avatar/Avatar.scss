@@ -25,10 +25,11 @@
     height: 40px;
   }
   &.avatar-shape-round {
+    // TODO: semantic role TBD
     border-radius: 2em;
   }
   &.avatar-shape-square {
-    border-radius: 0.4em;
+    border-radius: var(--border-radius-round);
   }
 
   @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {

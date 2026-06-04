@@ -6,7 +6,7 @@ novo-control-group {
   background: var(--background-bright, $color-white);
 
   &.novo-control-group-appearance-card {
-    border-radius: 0.4rem;
+    border-radius: var(--border-radius-round);
     box-shadow: rgba(0, 0, 0, 0.09) 0px 1px 7px 0px, rgba(0, 0, 0, 0.2) 0px 1px 3px 0px;
   }
 
@@ -20,7 +20,7 @@ novo-control-group {
     align-items: center;
     justify-content: space-between;
     font-weight: 600;
-    border-radius: 0.4rem 0.4rem 0 0;
+    border-radius: var(--border-radius-round) 0.4rem 0 0;
 
     button {
       padding: 3px 15px;

@@ -30,6 +30,7 @@
       text-overflow: ellipsis;
       margin: 5px;
       font-weight: normal;
+      // TODO: semantic role TBD - could be border-radius or border-radius-small
       border-radius: 3px;
       &.selected {
         background-color: var(--selection);

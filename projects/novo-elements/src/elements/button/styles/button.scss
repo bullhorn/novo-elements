@@ -11,6 +11,7 @@
   border: none;
   color: var(--text-main, $dark);
   background: transparent;
+  // TODO: semantic role TBD - could be border-radius or border-radius-small
   border-radius: 3px;
   text-transform: uppercase;
   transition: all 200ms ease-in-out;

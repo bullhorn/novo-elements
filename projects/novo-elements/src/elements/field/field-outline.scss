@@ -4,7 +4,7 @@
 :host {
   &.novo-field-appearance-outline {
     border: 1px solid brightenLive('--color-dark', 45) !important;
-    border-radius: 0.4rem;
+    border-radius: var(--border-radius-round);
     padding: 0.5rem;
 
     &.novo-field-layout-vertical {
