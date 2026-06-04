@@ -105,6 +105,7 @@ $breakpoint: 1000px;
         width: 2.4rem;
         height: 2.4rem;
         font-size: var(--font-size-text);
+        // TODO: semantic role TBD - could be border-radius or border-radius-small
         border-radius: 2px;
         list-style-type: none;
         cursor: pointer;

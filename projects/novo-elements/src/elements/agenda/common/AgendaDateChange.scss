@@ -4,6 +4,8 @@
   display: inline-block;
 
   .cal-date-change {
+    // TODO: semantic role TBD - could be border-radius-small
+    // TODO: semantic role TBD - could be border-radius or border-radius-small
     border-radius: 3px;
     border: 1px solid #e1e1e1;
     background-color: var(--background-body);

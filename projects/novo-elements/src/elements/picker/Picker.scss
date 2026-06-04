@@ -64,6 +64,7 @@ novo-picker {
     top: 2px;
     background: var(--background-main);
     font-size: 1em;
+    // TODO: semantic role TBD - could be border-radius or border-radius-small
     border-radius: 3px;
     padding: 3px;
   }
@@ -72,6 +73,7 @@ novo-picker {
     left: 5px;
     top: 3px;
     font-size: 1em;
+    // TODO: semantic role TBD - could be border-radius or border-radius-small
     border-radius: 3px;
     padding: 3px;
     color: $white;

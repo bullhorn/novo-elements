@@ -87,6 +87,7 @@ address {
 
 mark {
   background-color: var(--highlight);
+  // TODO: semantic role TBD - could be border-radius or border-radius-small
   border-radius: 2px;
   padding: 0 2px 0 2px;
   color: #000;

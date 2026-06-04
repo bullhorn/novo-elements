@@ -53,6 +53,7 @@ $switch-thumb-size: 20px !default;
     width: $switch-width - 2px;
     top: calc($switch-height / 2) - calc($switch-bar-height / 2);
     height: $switch-bar-height;
+    // TODO: semantic role TBD - could be border-radius or border-radius-small
     border-radius: 8px;
     position: absolute;
   }
