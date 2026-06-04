@@ -155,7 +155,7 @@ $chip-spacing: (
     $height: map-get($chip-height, $size);
     &.novo-size-#{$size} {
       font-size: map-get($chip-fontsize, $size);
-      border-radius: 0.4rem;
+      border-radius: var(--border-radius-round);
       padding: var(--spacing-none) $spacing;
       min-height: $height;
       gap: $spacing;

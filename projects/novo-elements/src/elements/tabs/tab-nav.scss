@@ -10,6 +10,7 @@
 
   &[type="button-bar"] {
     display: inline-flex;
+    // TODO: semantic role TBD - could be border-radius or border-radius-small
     border-radius: 3px;
     border: 2px solid #fff;
   }
