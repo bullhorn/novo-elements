@@ -31,6 +31,7 @@
   }
 
   .novo-expansion-panel-header[aria-disabled="true"] {
+    // TODO: semantic role TBD - rec color-shade-disabled
     color: $grey;
     pointer-events: none;
 

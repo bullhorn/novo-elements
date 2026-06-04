@@ -42,7 +42,7 @@
 
         .cal-event {
           height: inherit;
-          font-size: 12px;
+          font-size: var(--font-size-sm);
           min-height: 30px;
           display: flex;
           flex-flow: column;
@@ -59,7 +59,7 @@
             text-overflow: ellipsis;
           }
           .cal-event-description {
-            font-size: 10px;
+            font-size: var(--font-size-xs);
             line-height: 13px;
             padding: 0px 0px 0px 10px;
             overflow: hidden;

@@ -72,12 +72,12 @@
         bottom: 15px;
         right: 5px;
         color: #aaaaaa;
-        font-size: 1.2rem;
+        font-size: var(--font-size-sm);
         margin-right: 10px;
       }
       i.bhi-times {
         cursor: pointer;
-        font-size: 1.2rem;
+        font-size: var(--font-size-sm);
       }
     }
     footer {

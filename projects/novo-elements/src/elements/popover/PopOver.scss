@@ -21,7 +21,7 @@
       }
     }
     &.right {
-      margin-left: 1rem;
+      margin-left: var(--spacing-md);
       &.virtual-area {
         left: -1.1rem;
       }

@@ -20,7 +20,7 @@
       box-shadow: $shadow-multi;
       :hover {
         background: rgb(from var(--color-positive) r g b / 0.1);
-        color: $dark;
+        color: var(--font-color-base);
       }
       :active {
         background: rgb(from var(--color-positive) r g b / 0.4);

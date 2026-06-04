@@ -161,6 +161,8 @@
 :host-context(novo-nav[theme="color"]),
 :host-context(novo-nav[theme="neutral"]) {
   .novo-tab-link {
+    // TODO: This is difficult theming-wise. These themes only darken the parent region a little bit, but we don't know what base background we're working with
+    // in order to contrast it. "inherit" is a possible value - issuing font color decisions to the element applying the background
     color: #fff;
   }
   &.active,
@@ -183,7 +185,7 @@
 }
 
 :host-context(novo-nav.condensed) {
-  font-size: 1rem;
+  font-size: var(--font-size-xs);
   .novo-tab-link {
     padding: var(--spacing-sm);
   }

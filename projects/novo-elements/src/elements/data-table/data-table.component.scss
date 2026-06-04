@@ -169,7 +169,7 @@ cdk-table {
     color: var(--text-muted);
     background: transparent;
     pointer-events: all;
-    margin-left: 0.5rem;
+    margin-left: var(--spacing-sm);
     line-height: 1em;
     outline: none;
     &:hover {
@@ -181,7 +181,7 @@ cdk-table {
   }
 
   button.active {
-    color: $white;
+    color: var(--color-contrast-positive);
     background: var(--color-positive);
     &:hover,
     &:active,
@@ -459,6 +459,7 @@ novo-data-table {
     display: flex;
     align-items: center;
     justify-content: center;
+    // TODO: semantic role TBD - rec font-secondary
     color: $grey;
     z-index: 5;
   }

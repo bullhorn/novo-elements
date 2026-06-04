@@ -38,7 +38,7 @@
 :host-context(novo-radio-group.novo-radio-group-appearance-horizontal) {
   :host:not(:last-child) {
     .novo-radio-button-label {
-      margin-right: 1rem;
+      margin-right: var(--spacing-md);
     }
   }
 }
