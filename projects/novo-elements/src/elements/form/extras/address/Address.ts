@@ -16,7 +16,7 @@ const ADDRESS_VALUE_ACCESSOR = {
 };
 
 export interface AddressLookupPrediction {
-  referenceId?: string;
+  placeId?: string;
   displayAddress?: string;
   primaryText?: string;
   secondaryText?: string;
