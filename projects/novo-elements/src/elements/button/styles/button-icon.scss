@@ -8,7 +8,7 @@
     font-size: 1.4rem;
     height: 2.4rem;
     &[inverse] {
-      color: #fff;
+      color: var(--color-contrast-text);
     }
     i {
       display: contents;
@@ -26,7 +26,7 @@
     }
     &[size="small"] {
       padding: var(--spacing-sm);
-      font-size: 1.2rem;
+      font-size: var(--font-size-sm);
       height: 2rem;
     }
     &[size="medium"] {

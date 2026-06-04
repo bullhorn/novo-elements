@@ -21,7 +21,7 @@ $novo-stepper-line-gap: 8px !default;
     margin-bottom: 1em;
     background: var(--background-main);
     .novo-stepper-horizontal-line {
-      border-bottom: $novo-stepper-line-width solid $light;
+      border-bottom: $novo-stepper-line-width solid var(--color-border);
       flex: auto;
       min-width: 0px;
       height: $novo-horizontal-stepper-header-height;
@@ -66,7 +66,7 @@ $novo-stepper-line-gap: 8px !default;
       z-index: z(below);
       border-left-width: $novo-stepper-line-width;
       border-left-style: solid;
-      border-left-color: $light;
+      border-left-color: var(--color-border);
 
       [dir="rtl"] & {
         left: auto;

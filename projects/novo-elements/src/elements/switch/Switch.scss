@@ -130,6 +130,7 @@ $switch-thumb-size: 20px !default;
   }
 
   .novo-switch-thumb {
+    // TODO: semantic role TBD - rec background-bright
     background-color: $light;
   }
   .novo-switch-bar {
@@ -138,7 +139,7 @@ $switch-thumb-size: 20px !default;
 
   &:focus {
     .novo-switch-label:not(:empty) {
-      border: 1px dotted $light;
+      border: 1px dotted var(--color-border);
     }
   }
 }

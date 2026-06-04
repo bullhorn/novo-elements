@@ -29,7 +29,7 @@ $tooltip-success-color: var(--color-shade-success, #458746);
     color: var(--color-white, #fff);
     border-radius: var(--tooltip-border-radius, 4px);
     padding: 8px 10px;
-    font-size: 12px;
+    font-size: var(--font-size-sm);
     line-height: 12px;
     white-space: nowrap;
     box-shadow: var(--shadow-2);

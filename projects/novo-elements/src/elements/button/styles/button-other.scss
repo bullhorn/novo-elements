@@ -4,13 +4,13 @@
   // Field Themed Button
   &[theme="field"] {
     background: transparent;
-    color: $dark;
+    color: var(--font-color-base);
     border: none;
     border-radius: 0;
     border-bottom: 1px solid var(--border);
     margin-bottom: 4px;
     padding: var(--spacing-xs) var(--spacing-sm);
-    font-size: 1.2rem;
+    font-size: var(--font-size-sm);
     height: 1.8rem;
     text-align: left;
     &:hover,
@@ -39,7 +39,7 @@
     width: 100%;
     z-index: z("default");
     text-transform: none;
-    font-size: 1.2rem;
+    font-size: var(--font-size-sm);
     height: 1.8rem;
 
     &.empty {

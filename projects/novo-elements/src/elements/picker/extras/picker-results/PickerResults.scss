@@ -125,7 +125,7 @@ quick-note-results,
         color: brightenLive('--color-dark', 35);
         strong {
           font-weight: 400;
-          color: $dark;
+          color: var(--font-color-base);
         }
       }
       &.active,

@@ -5,7 +5,7 @@
   &[theme="primary"] {
     @include theme-backgrounds-live();
     background: var(--color-positive);
-    color: #fff;
+    color: var(--color-contrast-positive);
     text-align: left;
 
     &:hover,

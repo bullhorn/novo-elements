@@ -88,18 +88,18 @@ novo-picker {
   i.bhi-times {
     position: absolute;
     right: 0;
-    color: $dark;
+    color: var(--font-color-base);
     &.entity-selected {
       right: 5px;
     }
   }
   i.bhi-search {
     top: 0px;
-    font-size: 1.2rem;
+    font-size: var(--font-size-sm);
   }
   i.bhi-times {
     top: 0px;
     cursor: pointer;
-    font-size: 1.2rem;
+    font-size: var(--font-size-sm);
   }
 }

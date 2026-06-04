@@ -67,7 +67,7 @@ $breakpoint: 1000px;
     }
     h5.rows {
       padding: 0;
-      font-size: 12px;
+      font-size: var(--font-size-sm);
       opacity: 0.75;
       letter-spacing: 0.1px;
     }

@@ -10,8 +10,8 @@
     &.novo-field-layout-vertical {
       .novo-field-label {
         background: white;
-        margin-top: -1.5rem;
-        margin-left: 0.5rem;
+        margin-top: calc(-1 * var(--spacing-xl));
+        margin-left: var(--spacing-sm);
         width: max-content;
         padding: 0.5rem;
       }

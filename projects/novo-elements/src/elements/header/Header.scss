@@ -51,7 +51,7 @@
       }
 
       ::ng-deep novo-icon {
-        margin-right: 1rem;
+        margin-right: var(--spacing-md);
       }
     }
     .header-titles {
@@ -112,7 +112,7 @@
       ::ng-deep .novo-title {
         color: inherit;
         overflow: hidden;
-        padding-right: 0.5rem;
+        padding-right: var(--spacing-sm);
       }
       ::ng-deep .novo-action {
         button,

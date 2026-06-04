@@ -43,7 +43,7 @@
   }
   .chip-input-container {
     flex: 1 15rem;
-    padding-left: 1rem;
+    padding-left: var(--spacing-md);
     input {
       padding-top: 0;
       border: none;
@@ -80,7 +80,7 @@
     bottom: 8px;
     right: 0;
     font-size: 1.1em;
-    color: $dark;
+    color: var(--font-color-base);
   }
 
   & + i {

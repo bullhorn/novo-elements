@@ -3,6 +3,7 @@
 
 .novo-optgroup-label {
   @include novo-label-text();
+  // TODO: semantic role TBD - rec font-secondary
   color: $grey;
   cursor: default;
   flex: 1;

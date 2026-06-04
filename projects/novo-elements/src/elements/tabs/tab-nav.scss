@@ -29,7 +29,7 @@
       background: transparent;
     }
     &[type="button-bar"] {
-      border: 2px solid $light;
+      border: 2px solid var(--color-border);
     }
   }
 

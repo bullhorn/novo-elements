@@ -29,38 +29,38 @@
     }
 
     h1 {
-      font-size: $font-size-2xl;
+      font-size: var(--font-size-2xl);
       margin: 10px auto 0;
     }
     h2 {
-      font-size: $font-size-xl;
+      font-size: var(--font-size-xl);
       color: var(--text-muted);
       margin: 0 auto;
       padding: 0;
     }
     h3 {
-      font-size: $font-size-lg;
+      font-size: var(--font-size-lg);
       margin: 0 auto;
     }
     h4 {
-      font-size: $font-size-lg;
+      font-size: var(--font-size-lg);
       color: var(--text-muted);
       margin: 0 auto;
       padding: 0;
     }
     h5 {
-      font-size: $font-size-md;
+      font-size: var(--font-size-md);
       margin: 0 auto;
     }
     h6 {
-      font-size: $font-size-md;
+      font-size: var(--font-size-md);
       margin: 0 auto;
     }
 
     i.indicator {
       color: var(--text-muted);
       border: 1px solid var(--text-muted);
-      font-size: $font-size-2xl;
+      font-size: var(--font-size-2xl);
       border-radius: 50%;
       padding: var(--spacing-md);
       margin: 2rem auto;

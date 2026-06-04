@@ -30,7 +30,7 @@ novo-control-group {
       align-items: center;
     }
     label.novo-control-group-description {
-      font-size: 1rem;
+      font-size: var(--font-size-xs);
       font-weight: 500;
       padding-right: 10px;
     }
@@ -118,7 +118,7 @@ novo-control-group {
         flex: 1;
         > span {
           color: var(--text-muted);
-          font-size: 1rem;
+          font-size: var(--font-size-xs);
           font-weight: 500;
           text-transform: uppercase;
           overflow: hidden;
@@ -168,7 +168,7 @@ novo-control-group {
         width: 3rem;
         min-height: 3rem;
         min-width: 3rem;
-        margin-left: 1rem;
+        margin-left: var(--spacing-md);
         i.bhi-delete-o {
           color: var(--color-negative);
           font-size: 1.2em;

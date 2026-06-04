@@ -18,8 +18,8 @@
     .month-view + .month-view {
       border-collapse: unset;
       border-left: 1px solid var(--border);
-      margin-left: 0.5rem;
-      padding-left: 0.5rem;
+      margin-left: var(--spacing-sm);
+      padding-left: var(--spacing-sm);
     }
 
     .calendar-top {

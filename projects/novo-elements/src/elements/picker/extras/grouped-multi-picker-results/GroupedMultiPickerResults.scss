@@ -109,7 +109,7 @@
         position: absolute;
         right: 10px;
         top: 12px;
-        font-size: 1.2rem;
+        font-size: var(--font-size-sm);
         &.disabled {
           pointer-events: none;
           opacity: 0.4;
