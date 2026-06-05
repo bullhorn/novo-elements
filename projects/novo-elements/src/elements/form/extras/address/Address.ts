@@ -42,9 +42,7 @@ export interface AddressLookupResult {
     northeast: { latitude: number; longitude: number };
     southwest: { latitude: number; longitude: number };
   };
-  referenceId?: string;
-  types?: string[];
-  postalCodes?: string[];
+  placeId?: string;
 }
 
 export interface AddressLookupDetailResponse {
