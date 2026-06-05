@@ -23,11 +23,6 @@ export interface AddressLookupPrediction {
   types?: string[];
 }
 
-export interface AddressLookupPredictionResponse {
-  predictions: AddressLookupPrediction[];
-  count: number;
-}
-
 export interface AddressLookupResult {
   address1?: string;
   address2?: string;
@@ -43,10 +38,6 @@ export interface AddressLookupResult {
     southwest: { latitude: number; longitude: number };
   };
   placeId?: string;
-}
-
-export interface AddressLookupDetailResponse {
-  address: AddressLookupResult;
 }
 
 export interface NovoAddressSubfieldConfig {
