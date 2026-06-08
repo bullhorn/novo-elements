@@ -1,10 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
+import { NovoOverlayModule } from 'novo-elements/elements/common';
 import { NovoPickerModule } from 'novo-elements/elements/picker';
+import { GooglePlacesModule } from 'novo-elements/elements/places';
 import { NovoSelectModule } from 'novo-elements/elements/select';
 import { NovoTooltipModule } from 'novo-elements/elements/tooltip';
 import { NovoLabelService } from 'novo-elements/services';
-import { Helpers } from 'novo-elements/utils';
+import { Helpers, Key } from 'novo-elements/utils';
 import { tick } from 'novo-testing';
 import { vi } from 'vitest';
 import { NovoAddressElement } from './Address';
@@ -16,7 +18,7 @@ describe('Elements: NovoAddressElement', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [NovoAddressElement],
-      imports: [FormsModule, NovoSelectModule, NovoPickerModule, NovoTooltipModule],
+      imports: [FormsModule, NovoSelectModule, NovoPickerModule, NovoTooltipModule, GooglePlacesModule, NovoOverlayModule],
       providers: [{ provide: NovoLabelService, useClass: NovoLabelService }],
     }).compileComponents();
     fixture = TestBed.createComponent(NovoAddressElement);
@@ -598,6 +600,154 @@ describe('Elements: NovoAddressElement', () => {
       component.ngDoCheck();
       expect(component.isValid).not.toHaveBeenCalled();
       expect(component.isInvalid).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('Address 1 autocomplete', () => {
+    beforeEach(() => {
+      component.config = {
+        address1: { required: false },
+        address2: { required: false },
+        city: { required: false },
+        state: { required: false },
+        zip: { required: false },
+        countryID: { required: false },
+      };
+      component.model = {};
+      component.overlay = { openPanel: vi.fn(), closePanel: vi.fn(), panelOpen: false };
+      component.placesList = { onKeyDown: vi.fn() };
+      vi.spyOn(component, 'onInput').mockImplementation(() => {});
+    });
+
+    describe('Method: onPlaceSelected()', () => {
+      beforeEach(() => {
+        vi.spyOn(component, 'updateStates').mockImplementation(() => {});
+        vi.spyOn(component, 'updateControl').mockImplementation(() => {});
+      });
+
+      it('should no-op on null/undefined', () => {
+        component.model = { address1: 'keep' };
+        component.onPlaceSelected(null);
+        component.onPlaceSelected(undefined);
+        expect(component.model.address1).toEqual('keep');
+        expect(component.updateControl).not.toHaveBeenCalled();
+      });
+
+      it('should overwrite returned fields and map countryCode to countryID/countryName', () => {
+        component.onPlaceSelected({
+          address1: '100 Summer Street',
+          city: 'Boston',
+          state: 'MA',
+          zip: '02110',
+          countryCode: 'US',
+        });
+        expect(component.model.address1).toEqual('100 Summer Street');
+        expect(component.model.city).toEqual('Boston');
+        expect(component.model.state).toEqual('MA');
+        expect(component.model.zip).toEqual('02110');
+        expect(component.model.countryID).toEqual(1);
+        expect(component.model.countryName).toEqual('United States');
+        expect(component.updateStates).toHaveBeenCalled();
+        expect(component.updateControl).toHaveBeenCalled();
+      });
+
+      it('should persist a field the API omits (address2 with no unit)', () => {
+        component.model = { address2: 'Suite 500' };
+        component.onPlaceSelected({ address1: '100 Summer Street', city: 'Boston' });
+        expect(component.model.address2).toEqual('Suite 500');
+        expect(component.model.address1).toEqual('100 Summer Street');
+      });
+
+      it('should clear a field when the API returns an empty string', () => {
+        component.model = { address2: 'Suite 500' };
+        component.onPlaceSelected({ address1: '100 Summer Street', address2: '' });
+        expect(component.model.address2).toEqual('');
+      });
+
+      it('should close the overlay and clear the debounced term', () => {
+        component.debouncedSearch = '100 Sum';
+        component.onPlaceSelected({ address1: '100 Summer Street' });
+        expect(component.debouncedSearch).toEqual('');
+        expect(component.overlay.closePanel).toHaveBeenCalled();
+      });
+    });
+
+    describe('Method: onMatchesUpdated()', () => {
+      it('should open the overlay when there are matches', () => {
+        component.onMatchesUpdated([{ placeId: '1' }]);
+        expect(component.overlay.openPanel).toHaveBeenCalled();
+        expect(component.overlay.closePanel).not.toHaveBeenCalled();
+      });
+
+      it('should close the overlay when there are no matches', () => {
+        component.onMatchesUpdated([]);
+        expect(component.overlay.closePanel).toHaveBeenCalled();
+        expect(component.overlay.openPanel).not.toHaveBeenCalled();
+      });
+    });
+
+    describe('Method: onAddress1Input()', () => {
+      const inputEvent = (value: string) => ({ target: { value } }) as unknown as Event;
+
+      it('should read the live input value (not the possibly-stale model), open the panel, and debounce it', async () => {
+        component.ngOnInit();
+        // model.address1 is intentionally different to prove we read the event value.
+        component.model.address1 = 'stale';
+        const event = inputEvent('100 Summer');
+        component.onAddress1Input(event);
+        expect(component.onInput).toHaveBeenCalledWith(event, 'address1');
+        expect(component.overlay.openPanel).toHaveBeenCalled();
+        await tick(350);
+        expect(component.debouncedSearch).toEqual('100 Summer');
+      });
+
+      it('should clear the term and close the overlay when the field is empty', () => {
+        component.onAddress1Input(inputEvent(''));
+        expect(component.debouncedSearch).toEqual('');
+        expect(component.overlay.closePanel).toHaveBeenCalled();
+      });
+
+      it('should re-fire the same term after a selection reset debouncedSearch (no distinctUntilChanged swallow)', async () => {
+        component.ngOnInit();
+        component.onAddress1Input(inputEvent('100 Summer'));
+        await tick(350);
+        expect(component.debouncedSearch).toEqual('100 Summer');
+        // Simulate a selection clearing the debounced term, then searching the same text again.
+        component.debouncedSearch = '';
+        component.onAddress1Input(inputEvent('100 Summer'));
+        await tick(350);
+        expect(component.debouncedSearch).toEqual('100 Summer');
+      });
+    });
+
+    describe('Method: onAddress1Keydown()', () => {
+      it('should do nothing when the panel is closed', () => {
+        component.overlay.panelOpen = false;
+        component.onAddress1Keydown({ key: Key.ArrowDown } as KeyboardEvent);
+        expect(component.placesList.onKeyDown).not.toHaveBeenCalled();
+      });
+
+      it('should close the overlay on Escape', () => {
+        component.overlay.panelOpen = true;
+        component.onAddress1Keydown({ key: Key.Escape } as KeyboardEvent);
+        expect(component.overlay.closePanel).toHaveBeenCalled();
+      });
+
+      it('should forward arrow keys to the places list', () => {
+        component.overlay.panelOpen = true;
+        const event = { key: Key.ArrowDown } as KeyboardEvent;
+        component.onAddress1Keydown(event);
+        expect(component.placesList.onKeyDown).toHaveBeenCalledWith(event);
+      });
+
+      it('should prevent default and forward on Enter', () => {
+        component.overlay.panelOpen = true;
+        const preventDefault = vi.fn();
+        const event = { key: Key.Enter, preventDefault } as unknown as KeyboardEvent;
+        component.onAddress1Keydown(event);
+        expect(preventDefault).toHaveBeenCalled();
+        expect(component.placesList.onKeyDown).toHaveBeenCalledWith(event);
+      });
     });
   });
 });

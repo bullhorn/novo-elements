@@ -14,7 +14,8 @@ export class GooglePlacesService {
 
   getPredictions(url: string, query: string): Promise<any> {
     return new Promise((resolve) => {
-      this._http.get(url + '?query=' + query).subscribe((data: any) => {
+      const separator = url.includes('?') ? '&' : '?';
+      this._http.get(url + separator + 'query=' + query).subscribe((data: any) => {
         if (data) {
           resolve(data);
         } else {
@@ -26,7 +27,8 @@ export class GooglePlacesService {
 
   getLatLngDetail(url: string, lat: number, lng: number): Promise<any> {
     return new Promise((resolve) => {
-      this._http.get(url + '?lat=' + lat + '&lng=' + lng).subscribe((data: any) => {
+      const separator = url.includes('?') ? '&' : '?';
+      this._http.get(url + separator + 'lat=' + lat + '&lng=' + lng).subscribe((data: any) => {
         if (data) {
           resolve(data);
         } else {
@@ -38,7 +40,8 @@ export class GooglePlacesService {
 
   getPlaceDetails(url: string, placeId: string): Promise<any> {
     return new Promise((resolve) => {
-      this._http.get(url + '?query=' + placeId).subscribe((data: any) => {
+      const separator = url.includes('?') ? '&' : '?';
+      this._http.get(url + separator + 'query=' + placeId).subscribe((data: any) => {
         if (data) {
           resolve(data);
         } else {

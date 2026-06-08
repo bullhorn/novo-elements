@@ -8,7 +8,7 @@ import { Key } from 'novo-elements/utils';
 import { Observable } from 'rxjs';
 import { GooglePlacesService } from './places.service';
 
-export interface Settings {
+export interface PlacesSettings {
   geoPredictionServerUrl?: string;
   geoLatLangServiceUrl?: string;
   geoLocDetailServerUrl?: string;
@@ -48,9 +48,9 @@ const PLACES_VALUE_ACCESSOR = {
       <novo-list-item *ngFor="let data of matches; let $index = index" (click)="selectedListNode($event, $index)" [ngClass]="{ active: data === activeMatch }">
         <item-header>
           <item-avatar icon="location"></item-avatar>
-          <item-title>{{ data.structured_formatting?.main_text ? data.structured_formatting.main_text : data.description }}</item-title>
+          <item-title>{{ getPrimaryText(data) }}</item-title>
         </item-header>
-        <item-content>{{ data.structured_formatting?.secondary_text }}</item-content>
+        <item-content>{{ getSecondaryText(data) }}</item-content>
       </novo-list-item>
     </novo-list>
   `,
@@ -59,11 +59,13 @@ const PLACES_VALUE_ACCESSOR = {
 })
 export class PlacesListComponent extends BasePickerResults implements OnInit, OnChanges, ControlValueAccessor {
   @Input()
-  userSettings: Settings;
+  userSettings: PlacesSettings;
   @Output()
   termChange: EventEmitter<any> = new EventEmitter<any>();
   @Output()
   select: EventEmitter<any> = new EventEmitter<any>();
+  @Output()
+  matchesUpdated: EventEmitter<any[]> = new EventEmitter<any[]>();
 
   public locationInput: string = '';
   public gettingCurrentLocationFlag: boolean = false;
@@ -71,12 +73,12 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
   public recentDropdownOpen: boolean = false;
   public isSettingsError: boolean = false;
   public settingsErrorMsg: string = '';
-  public settings: Settings = {};
+  public settings: PlacesSettings = {};
   private moduleinit: boolean = false;
   private selectedDataIndex: number = -1;
   private recentSearchData: any = [];
   private userSelectedOption: any = '';
-  private defaultSettings: Settings = {
+  private defaultSettings: PlacesSettings = {
     geoPredictionServerUrl: '',
     geoLatLangServiceUrl: '',
     geoLocDetailServerUrl: '',
@@ -276,7 +278,7 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
   }
 
   // function to set user settings if it is available.
-  private setUserSettings(): Settings {
+  private setUserSettings(): PlacesSettings {
     const _tempObj: any = {};
     if (this.userSettings && typeof this.userSettings === 'object') {
       const keys: string[] = Object.keys(this.defaultSettings);
@@ -329,8 +331,12 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
   // function to update the predicted list.
   private updateListItem(listData: any): any {
     this.matches = listData ? listData : [];
+    // Reset the highlighted match for the new result set so Enter doesn't act on a
+    // stale prediction from a previous query (nothing is selected until arrowed to).
+    this.activeMatch = undefined;
     this.dropdownOpen = true;
     this.cdr.detectChanges();
+    this.matchesUpdated.emit(this.matches);
   }
 
   // function to show the recent search result.
@@ -368,14 +374,15 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
 
   // function to retrieve the location info based on google place id.
   private getPlaceLocationInfo(selectedData: any): any {
+    const placeId = selectedData.placeId || selectedData.place_id;
     if (this.settings.useGoogleGeoApi) {
-      this._googlePlacesService.getGeoPlaceDetail(selectedData.place_id).then((data: any) => {
+      this._googlePlacesService.getGeoPlaceDetail(placeId).then((data: any) => {
         if (data) {
           this.setRecentLocation(data);
         }
       });
     } else {
-      this._googlePlacesService.getPlaceDetails(this.settings.geoLocDetailServerUrl, selectedData.place_id).then((result: any) => {
+      this._googlePlacesService.getPlaceDetails(this.settings.geoLocDetailServerUrl, placeId).then((result: any) => {
         if (result) {
           result = this.extractServerList(this.settings.serverResponseDetailHierarchy, result);
           this.setRecentLocation(result);
@@ -387,7 +394,7 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
   // function to store the selected user search in the localstorage.
   private setRecentLocation(data: any): any {
     data = JSON.parse(JSON.stringify(data));
-    data.description = data.description ? data.description : data.formatted_address;
+    data.description = data.description ? data.description : (data.formattedAddress || data.formatted_address);
     data.active = false;
     this.selectedDataIndex = -1;
     this.locationInput = data.description;
@@ -410,6 +417,38 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
     });
   }
 
+  // Handle both Google Places API format and REST backend format
+  getPrimaryText(data: any): string {
+    // REST backend format (camelCase)
+    if (data.primaryText) {
+      return data.primaryText;
+    }
+    // Google Places API format (snake_case)
+    if (data.structured_formatting?.main_text) {
+      return data.structured_formatting.main_text;
+    }
+    // Fallback to display address
+    if (data.displayAddress) {
+      return data.displayAddress;
+    }
+    if (data.description) {
+      return data.description;
+    }
+    return '';
+  }
+
+  getSecondaryText(data: any): string {
+    // REST backend format (camelCase)
+    if (data.secondaryText) {
+      return data.secondaryText;
+    }
+    // Google Places API format (snake_case)
+    if (data.structured_formatting?.secondary_text) {
+      return data.structured_formatting.secondary_text;
+    }
+    return '';
+  }
+
   onKeyDown(event: KeyboardEvent) {
     if (this.dropdownOpen) {
       if (event.key === Key.ArrowUp) {
@@ -421,7 +460,11 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
         return;
       }
       if (event.key === Key.Enter) {
-        this.selectMatch(this.activeMatch);
+        // Only select when a prediction is actually highlighted; pressing Enter
+        // with nothing active must not attempt to resolve an undefined match.
+        if (this.activeMatch) {
+          this.selectMatch(this.activeMatch);
+        }
         return;
       }
     }
