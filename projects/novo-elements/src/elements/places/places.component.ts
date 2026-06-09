@@ -33,6 +33,22 @@ export interface PlacesSettings {
   locationIconUrl?: string;
 }
 
+/**
+ * Internal, normalized shape for an address prediction (an autocomplete suggestion).
+ * Raw provider records — Google's snake_case `AutocompletePrediction`, a REST backend's
+ * camelCase prediction, or a stored recent search — are mapped into this via
+ * `normalizePrediction` so the template and selection logic never branch on provider format.
+ */
+export interface AddressLookupPrediction {
+  placeId?: string;
+  primaryText?: string;
+  secondaryText?: string;
+  displayAddress?: string;
+  types?: string[];
+  /** The original provider record, retained so selecting a recent search re-emits full detail. */
+  raw?: any;
+}
+
 // Value accessor for the component (supports ngModel)
 const PLACES_VALUE_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
@@ -48,9 +64,9 @@ const PLACES_VALUE_ACCESSOR = {
       <novo-list-item *ngFor="let data of matches; let $index = index" (click)="selectedListNode($event, $index)" [ngClass]="{ active: data === activeMatch }">
         <item-header>
           <item-avatar icon="location"></item-avatar>
-          <item-title>{{ getPrimaryText(data) }}</item-title>
+          <item-title>{{ data.primaryText }}</item-title>
         </item-header>
-        <item-content>{{ getSecondaryText(data) }}</item-content>
+        <item-content>{{ data.secondaryText }}</item-content>
       </novo-list-item>
     </novo-list>
   `,
@@ -65,7 +81,7 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
   @Output()
   select: EventEmitter<any> = new EventEmitter<any>();
   @Output()
-  matchesUpdated: EventEmitter<any[]> = new EventEmitter<any[]>();
+  matchesUpdated: EventEmitter<AddressLookupPrediction[]> = new EventEmitter<AddressLookupPrediction[]>();
 
   public locationInput: string = '';
   public gettingCurrentLocationFlag: boolean = false;
@@ -185,10 +201,12 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
   }
 
   // function to execute when user selects a match.
-  selectMatch(match: any): any {
+  selectMatch(match: AddressLookupPrediction): any {
     this.dropdownOpen = false;
     if (this.recentDropdownOpen) {
-      this.setRecentLocation(match);
+      // Recent items carry the full stored detail on `raw`; the detail (not the
+      // display-only prediction) is what downstream consumers need to map fields.
+      this.setRecentLocation(match.raw ?? match);
     } else {
       this.getPlaceLocationInfo(match);
     }
@@ -330,7 +348,7 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
 
   // function to update the predicted list.
   private updateListItem(listData: any): any {
-    this.matches = listData ? listData : [];
+    this.matches = (listData || []).map((item: any) => this.normalizePrediction(item));
     // Reset the highlighted match for the new result set so Enter doesn't act on a
     // stale prediction from a previous query (nothing is selected until arrowed to).
     this.activeMatch = undefined;
@@ -344,11 +362,7 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
     this.recentDropdownOpen = true;
     this.dropdownOpen = true;
     this._googlePlacesService.getRecentList(this.settings.recentStorageName).then((result: any) => {
-      if (result) {
-        this.matches = result;
-      } else {
-        this.matches = [];
-      }
+      this.matches = (result || []).map((item: any) => this.normalizePrediction(item));
     });
   }
 
@@ -373,8 +387,8 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
   }
 
   // function to retrieve the location info based on google place id.
-  private getPlaceLocationInfo(selectedData: any): any {
-    const placeId = selectedData.placeId || selectedData.place_id;
+  private getPlaceLocationInfo(selectedData: AddressLookupPrediction): any {
+    const placeId = selectedData.placeId;
     if (this.settings.useGoogleGeoApi) {
       this._googlePlacesService.getGeoPlaceDetail(placeId).then((data: any) => {
         if (data) {
@@ -417,36 +431,19 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
     });
   }
 
-  // Handle both Google Places API format and REST backend format
-  getPrimaryText(data: any): string {
-    // REST backend format (camelCase)
-    if (data.primaryText) {
-      return data.primaryText;
-    }
-    // Google Places API format (snake_case)
-    if (data.structured_formatting?.main_text) {
-      return data.structured_formatting.main_text;
-    }
-    // Fallback to display address
-    if (data.displayAddress) {
-      return data.displayAddress;
-    }
-    if (data.description) {
-      return data.description;
-    }
-    return '';
-  }
-
-  getSecondaryText(data: any): string {
-    // REST backend format (camelCase)
-    if (data.secondaryText) {
-      return data.secondaryText;
-    }
-    // Google Places API format (snake_case)
-    if (data.structured_formatting?.secondary_text) {
-      return data.structured_formatting.secondary_text;
-    }
-    return '';
+  // Fold a raw provider record into the internal AddressLookupPrediction shape. Handles
+  // Google's snake_case AutocompletePrediction, a REST backend's camelCase prediction, and
+  // stored recent searches (which carry a `description`). Falls through in preference order
+  // so the most specific label available is used for display.
+  normalizePrediction(raw: any): AddressLookupPrediction {
+    return {
+      placeId: raw?.placeId || raw?.place_id,
+      primaryText: raw?.primaryText || raw?.structured_formatting?.main_text || raw?.displayAddress || raw?.description || '',
+      secondaryText: raw?.secondaryText || raw?.structured_formatting?.secondary_text || '',
+      displayAddress: raw?.displayAddress || raw?.description,
+      types: raw?.types,
+      raw,
+    };
   }
 
   onKeyDown(event: KeyboardEvent) {

@@ -16,14 +16,6 @@ const ADDRESS_VALUE_ACCESSOR = {
   multi: true,
 };
 
-export interface AddressLookupPrediction {
-  placeId?: string;
-  displayAddress?: string;
-  primaryText?: string;
-  secondaryText?: string;
-  types?: string[];
-}
-
 export interface AddressLookupResult {
   address1?: string;
   address2?: string;
