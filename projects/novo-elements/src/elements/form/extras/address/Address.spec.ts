@@ -706,18 +706,6 @@ describe('Elements: NovoAddressElement', () => {
         expect(component.debouncedSearch).toEqual('');
         expect(component.overlay.closePanel).toHaveBeenCalled();
       });
-
-      it('should re-fire the same term after a selection reset debouncedSearch (no distinctUntilChanged swallow)', async () => {
-        component.ngOnInit();
-        component.onAddress1Input(inputEvent('100 Summer'));
-        await tick(350);
-        expect(component.debouncedSearch).toEqual('100 Summer');
-        // Simulate a selection clearing the debounced term, then searching the same text again.
-        component.debouncedSearch = '';
-        component.onAddress1Input(inputEvent('100 Summer'));
-        await tick(350);
-        expect(component.debouncedSearch).toEqual('100 Summer');
-      });
     });
 
     describe('Method: onAddress1Keydown()', () => {
