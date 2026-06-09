@@ -533,8 +533,10 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit, DoCheck
     // backend. Normalize the Google shape into flat fields before applying.
     const result: AddressLookupResult = placeDetail.address_components ? this.parseGooglePlaceDetail(placeDetail) : placeDetail;
 
-    // Overwrite each field the API returns (including an explicit empty string);
-    // fields the API omits (undefined) persist — e.g. address2 when no unit/suite.
+    // Overwrite each field the result defines, including an explicit empty string — the
+    // Google parser resolves omitted components to '' so a partial selection (e.g. a
+    // state/country only) clears the finer fields. A REST result may instead leave a field
+    // undefined to mean "unspecified", in which case the existing model value persists.
     if (result.address1 !== undefined) {
       this.model.address1 = result.address1;
     }
@@ -566,15 +568,16 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit, DoCheck
     this.overlay?.closePanel();
   }
 
-  // Map a raw Google Places detail into the flat AddressLookupResult shape. Returns
-  // undefined for components the result omits so existing model fields persist; the
+  // Map a raw Google Places detail into the flat AddressLookupResult shape. A selected
+  // place is the complete address, so components it omits resolve to '' (an explicit clear)
+  // rather than undefined — selecting e.g. "Texas, USA" blanks address1/city/zip. The
   // country/state names use long_name to match COUNTRIES.code and getStates() labels.
   private parseGooglePlaceDetail(place: { address_components?: any[]; formatted_address?: string; place_id?: string }): AddressLookupResult {
     const components: Array<{ long_name: string; short_name: string; types: string[] }> = place.address_components || [];
-    const find = (type: string, useShort = false): string | undefined => {
+    const find = (type: string, useShort = false): string => {
       const match = components.find((component) => component.types.includes(type));
       if (!match) {
-        return undefined;
+        return '';
       }
       return useShort ? match.short_name : match.long_name;
     };

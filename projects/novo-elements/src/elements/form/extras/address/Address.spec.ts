@@ -712,10 +712,29 @@ describe('Elements: NovoAddressElement', () => {
         expect(component.model.address2).toEqual('Suite 500');
       });
 
-      it('should leave an existing address2 untouched when the result has no subpremise', () => {
+      it('should blank an existing address2 when the selected place has no subpremise', () => {
         component.model = { address2: 'Suite 500' };
         component.onPlaceSelected(usPlace as any);
-        expect(component.model.address2).toEqual('Suite 500');
+        expect(component.model.address2).toEqual('');
+      });
+
+      it('should clear the finer fields when a partial place (state/country only) is selected', () => {
+        component.model = { address1: '100 Summer Street', address2: 'Suite 500', city: 'Boston', state: 'Massachusetts', zip: '02110' };
+        const statePlace = {
+          address_components: [
+            { long_name: 'Texas', short_name: 'TX', types: ['administrative_area_level_1', 'political'] },
+            { long_name: 'United States', short_name: 'US', types: ['country', 'political'] },
+          ],
+          formatted_address: 'Texas, USA',
+        };
+        component.onPlaceSelected(statePlace as any);
+        expect(component.model.address1).toEqual('');
+        expect(component.model.address2).toEqual('');
+        expect(component.model.city).toEqual('');
+        expect(component.model.zip).toEqual('');
+        expect(component.model.state).toEqual('Texas');
+        expect(component.model.countryID).toEqual(1);
+        expect(component.model.countryName).toEqual('United States');
       });
 
       it('should fall back to postal_town for city when locality is absent', () => {
