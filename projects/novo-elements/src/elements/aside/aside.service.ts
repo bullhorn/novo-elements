@@ -29,7 +29,7 @@ export class NovoAsideService {
 
     // Instantiate remote control
     const asideRef = new NovoAsideRef<typeof params, R>(component, params, overlayRef);
-    asideRef.draggable = draggable;
+    asideRef.draggable.set(draggable);
 
     const overlayComponent = this.attachAsideContainer(AsideComponent, overlayRef, asideConfig, asideRef);
 

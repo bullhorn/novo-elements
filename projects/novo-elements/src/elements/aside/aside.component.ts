@@ -15,7 +15,7 @@ export class AsideComponent {
   @Output() animationStateChanged = new EventEmitter<AnimationEvent>();
 
   animationState: 'void' | 'enter' | 'leave' = 'enter';
-  draggable = false;
+  draggable = signal(false);
   disableDrag = signal(true);
   component: Portal<any>;
 
@@ -34,7 +34,7 @@ export class AsideComponent {
   }
 
   startExitAnimation() {
-    if (this.draggable) {
+    if (this.draggable()) {
       this.onAnimationDone({ phaseName: 'done', toState: 'leave' } as any);
     }
     this.animationState = 'leave';

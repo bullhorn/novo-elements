@@ -1,5 +1,5 @@
 /** CSS for this example */
-:host {
+aside-usage-example {
   display: block;
   background: rgba(0, 0, 0, 0.55);
   padding: 35px 0;
@@ -7,6 +7,10 @@
   text-align: center;
 }
 
-.example-spacer {
+.aside-overlay-panel {
+    width: 100%;
+}
+
+novo-aside .example-spacer {
   flex: 1 1 100%;
 }

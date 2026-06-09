@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { NovoAsideRef, NovoAsideService } from 'novo-elements';
 
 interface CustomParams {
@@ -14,6 +14,7 @@ interface CustomParams {
         <novo-icon>candidate</novo-icon>
         <novo-title>{{ ref.params.name }}</novo-title>
         <span class="example-spacer" flex="1"></span>
+        <novo-action icon="columns" (click)="toggleDock()" aria-label="dock/undock the aside"></novo-action>
         <novo-action icon="times" (click)="close()" aria-label="close the aside icon"></novo-action>
       </novo-toolbar-row>
       <novo-toolbar-row>
@@ -51,6 +52,11 @@ export class AsideWidgetDemo {
     { label: 'Address', data: 'Boston, MA' },
   ];
   constructor(public ref: NovoAsideRef<CustomParams, string>) {}
+
+  toggleDock() {
+    this.ref.draggable.set(!this.ref.draggable());
+  }
+
   close() {
     this.ref.close(`successfully closed: ${this.ref.params.name}`);
   }
@@ -71,6 +77,7 @@ export class AsideWidgetDemo {
   selector: 'aside-widget-example',
   templateUrl: 'aside-widget-example.html',
   styleUrls: ['aside-widget-example.css'],
+  encapsulation: ViewEncapsulation.None,
   standalone: false,
 })
 export class AsideWidgetExample {
