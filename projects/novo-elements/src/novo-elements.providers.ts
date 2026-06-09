@@ -46,8 +46,7 @@ export class NovoElementProviders {
           provide: MENU_OPTIONS,
           useValue: options && options.menu,
         },
-        // Only register the address config when supplied. A bare `forRoot()` in a
-        // lazy module must NOT shadow a root-level provider with `undefined`.
+        // Only register when supplied, so a bare forRoot() doesn't shadow a root provider with undefined.
         ...(options?.address ? [{ provide: NOVO_ADDRESS_CONFIG, useValue: options.address }] : []),
       ],
     };

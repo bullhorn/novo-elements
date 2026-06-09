@@ -528,15 +528,10 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit, DoCheck
       return;
     }
 
-    // google-places-list emits the raw Google Places detail (snake_case address_components)
-    // when using the Google API directly, or a pre-parsed AddressLookupResult from a REST
-    // backend. Normalize the Google shape into flat fields before applying.
+    // Normalize the raw Google detail into flat fields; REST results arrive pre-parsed.
     const result: AddressLookupResult = placeDetail.address_components ? this.parseGooglePlaceDetail(placeDetail) : placeDetail;
 
-    // Overwrite each field the result defines, including an explicit empty string — the
-    // Google parser resolves omitted components to '' so a partial selection (e.g. a
-    // state/country only) clears the finer fields. A REST result may instead leave a field
-    // undefined to mean "unspecified", in which case the existing model value persists.
+    // Set fields the result defines (including '' to clear); undefined leaves the model value.
     if (result.address1 !== undefined) {
       this.model.address1 = result.address1;
     }
@@ -568,10 +563,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit, DoCheck
     this.overlay?.closePanel();
   }
 
-  // Map a raw Google Places detail into the flat AddressLookupResult shape. A selected
-  // place is the complete address, so components it omits resolve to '' (an explicit clear)
-  // rather than undefined — selecting e.g. "Texas, USA" blanks address1/city/zip. The
-  // country/state names use long_name to match COUNTRIES.code and getStates() labels.
+  // Map a raw Google detail to flat fields; omitted components resolve to '' so partial selections clear finer fields.
   private parseGooglePlaceDetail(place: { address_components?: any[]; formatted_address?: string; place_id?: string }): AddressLookupResult {
     const components: Array<{ long_name: string; short_name: string; types: string[] }> = place.address_components || [];
     const find = (type: string, useShort = false): string => {

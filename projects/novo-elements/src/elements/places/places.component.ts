@@ -33,19 +33,14 @@ export interface PlacesSettings {
   locationIconUrl?: string;
 }
 
-/**
- * Internal, normalized shape for an address prediction (an autocomplete suggestion).
- * Raw provider records — Google's snake_case `AutocompletePrediction`, a REST backend's
- * camelCase prediction, or a stored recent search — are mapped into this via
- * `normalizePrediction` so the template and selection logic never branch on provider format.
- */
+/** Normalized address prediction; raw provider records are mapped into this via normalizePrediction. */
 export interface AddressLookupPrediction {
   placeId?: string;
   primaryText?: string;
   secondaryText?: string;
   displayAddress?: string;
   types?: string[];
-  /** The original provider record, retained so selecting a recent search re-emits full detail. */
+  /** Original provider record, retained so recent-search selection re-emits full detail. */
   raw?: any;
 }
 
@@ -204,8 +199,7 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
   selectMatch(match: AddressLookupPrediction): any {
     this.dropdownOpen = false;
     if (this.recentDropdownOpen) {
-      // Recent items carry the full stored detail on `raw`; the detail (not the
-      // display-only prediction) is what downstream consumers need to map fields.
+      // Recent items carry full detail on `raw`, which downstream consumers need.
       this.setRecentLocation(match.raw ?? match);
     } else {
       this.getPlaceLocationInfo(match);
@@ -349,8 +343,7 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
   // function to update the predicted list.
   private updateListItem(listData: any): any {
     this.matches = (listData || []).map((item: any) => this.normalizePrediction(item));
-    // Reset the highlighted match for the new result set so Enter doesn't act on a
-    // stale prediction from a previous query (nothing is selected until arrowed to).
+    // Reset highlight so Enter can't act on a stale prediction.
     this.activeMatch = undefined;
     this.dropdownOpen = true;
     this.cdr.detectChanges();
@@ -431,10 +424,7 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
     });
   }
 
-  // Fold a raw provider record into the internal AddressLookupPrediction shape. Handles
-  // Google's snake_case AutocompletePrediction, a REST backend's camelCase prediction, and
-  // stored recent searches (which carry a `description`). Falls through in preference order
-  // so the most specific label available is used for display.
+  // Fold a raw Google/REST/recent record into the internal AddressLookupPrediction shape.
   normalizePrediction(raw: any): AddressLookupPrediction {
     return {
       placeId: raw?.placeId || raw?.place_id,
@@ -457,8 +447,7 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
         return;
       }
       if (event.key === Key.Enter) {
-        // Only select when a prediction is actually highlighted; pressing Enter
-        // with nothing active must not attempt to resolve an undefined match.
+        // Only select when a prediction is highlighted.
         if (this.activeMatch) {
           this.selectMatch(this.activeMatch);
         }
