@@ -672,6 +672,75 @@ describe('Elements: NovoAddressElement', () => {
       });
     });
 
+    describe('Method: onPlaceSelected() — Google Places raw format', () => {
+      // The raw shape emitted by google-places-list when using the Google API directly.
+      const usPlace = {
+        address_components: [
+          { long_name: '100', short_name: '100', types: ['street_number'] },
+          { long_name: 'Summer Street', short_name: 'Summer St', types: ['route'] },
+          { long_name: 'Boston', short_name: 'Boston', types: ['locality', 'political'] },
+          { long_name: 'Massachusetts', short_name: 'MA', types: ['administrative_area_level_1', 'political'] },
+          { long_name: '02110', short_name: '02110', types: ['postal_code'] },
+          { long_name: 'United States', short_name: 'US', types: ['country', 'political'] },
+        ],
+        formatted_address: '100 Summer St, Boston, MA 02110, USA',
+        place_id: 'ChIJexample',
+      };
+
+      beforeEach(() => {
+        vi.spyOn(component, 'updateStates').mockImplementation(() => {});
+        vi.spyOn(component, 'updateControl').mockImplementation(() => {});
+      });
+
+      it('should map raw address_components into the flat model fields', () => {
+        component.onPlaceSelected(usPlace as any);
+        expect(component.model.address1).toEqual('100 Summer Street'); // street_number + route
+        expect(component.model.city).toEqual('Boston'); // locality
+        expect(component.model.state).toEqual('Massachusetts'); // admin_area_level_1 long_name, not 'MA'
+        expect(component.model.zip).toEqual('02110'); // postal_code
+        expect(component.model.countryID).toEqual(1); // country short_name 'US' -> COUNTRIES.code
+        expect(component.model.countryName).toEqual('United States');
+        expect(component.updateStates).toHaveBeenCalled();
+        expect(component.updateControl).toHaveBeenCalled();
+      });
+
+      it('should map subpremise into address2', () => {
+        const place = {
+          address_components: [...usPlace.address_components, { long_name: 'Suite 500', short_name: 'Suite 500', types: ['subpremise'] }],
+        };
+        component.onPlaceSelected(place as any);
+        expect(component.model.address2).toEqual('Suite 500');
+      });
+
+      it('should leave an existing address2 untouched when the result has no subpremise', () => {
+        component.model = { address2: 'Suite 500' };
+        component.onPlaceSelected(usPlace as any);
+        expect(component.model.address2).toEqual('Suite 500');
+      });
+
+      it('should fall back to postal_town for city when locality is absent', () => {
+        const ukPlace = {
+          address_components: [
+            { long_name: '10', short_name: '10', types: ['street_number'] },
+            { long_name: 'Downing Street', short_name: 'Downing St', types: ['route'] },
+            { long_name: 'London', short_name: 'London', types: ['postal_town'] },
+            { long_name: 'SW1A 2AA', short_name: 'SW1A 2AA', types: ['postal_code'] },
+            { long_name: 'United Kingdom', short_name: 'GB', types: ['country', 'political'] },
+          ],
+        };
+        component.onPlaceSelected(ukPlace as any);
+        expect(component.model.city).toEqual('London');
+      });
+
+      it('should pass through formattedAddress, placeId, and the country code/name', () => {
+        const result = component.parseGooglePlaceDetail(usPlace);
+        expect(result.formattedAddress).toEqual('100 Summer St, Boston, MA 02110, USA');
+        expect(result.placeId).toEqual('ChIJexample');
+        expect(result.countryCode).toEqual('US'); // short_name
+        expect(result.countryName).toEqual('United States'); // long_name
+      });
+    });
+
     describe('Method: onMatchesUpdated()', () => {
       it('should open the overlay when there are matches', () => {
         component.onMatchesUpdated([{ placeId: '1' }]);

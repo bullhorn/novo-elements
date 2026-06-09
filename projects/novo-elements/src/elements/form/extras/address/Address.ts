@@ -531,31 +531,36 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit, DoCheck
     }
   }
 
-  onPlaceSelected(placeDetail: AddressLookupResult): void {
+  onPlaceSelected(placeDetail: AddressLookupResult & { address_components?: any[]; formatted_address?: string }): void {
     if (!placeDetail) {
       return;
     }
 
+    // google-places-list emits the raw Google Places detail (snake_case address_components)
+    // when using the Google API directly, or a pre-parsed AddressLookupResult from a REST
+    // backend. Normalize the Google shape into flat fields before applying.
+    const result: AddressLookupResult = placeDetail.address_components ? this.parseGooglePlaceDetail(placeDetail) : placeDetail;
+
     // Overwrite each field the API returns (including an explicit empty string);
     // fields the API omits (undefined) persist — e.g. address2 when no unit/suite.
-    if (placeDetail.address1 !== undefined) {
-      this.model.address1 = placeDetail.address1;
+    if (result.address1 !== undefined) {
+      this.model.address1 = result.address1;
     }
-    if (placeDetail.address2 !== undefined) {
-      this.model.address2 = placeDetail.address2;
+    if (result.address2 !== undefined) {
+      this.model.address2 = result.address2;
     }
-    if (placeDetail.city !== undefined) {
-      this.model.city = placeDetail.city;
+    if (result.city !== undefined) {
+      this.model.city = result.city;
     }
-    if (placeDetail.state !== undefined) {
-      this.model.state = placeDetail.state;
+    if (result.state !== undefined) {
+      this.model.state = result.state;
     }
-    if (placeDetail.zip !== undefined) {
-      this.model.zip = placeDetail.zip;
+    if (result.zip !== undefined) {
+      this.model.zip = result.zip;
     }
 
-    if (placeDetail.countryCode) {
-      const country = COUNTRIES.find((c) => c.code === placeDetail.countryCode);
+    if (result.countryCode) {
+      const country = COUNTRIES.find((c) => c.code === result.countryCode);
       if (country) {
         this.model.countryID = country.id;
         this.model.countryName = country.name;
@@ -567,6 +572,32 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit, DoCheck
     this.fieldList.forEach((field) => this.onInput(null, field));
     this.debouncedSearch = '';
     this.overlay?.closePanel();
+  }
+
+  // Map a raw Google Places detail into the flat AddressLookupResult shape. Returns
+  // undefined for components the result omits so existing model fields persist; the
+  // country/state names use long_name to match COUNTRIES.code and getStates() labels.
+  private parseGooglePlaceDetail(place: { address_components?: any[]; formatted_address?: string; place_id?: string }): AddressLookupResult {
+    const components: Array<{ long_name: string; short_name: string; types: string[] }> = place.address_components || [];
+    const find = (type: string, useShort = false): string | undefined => {
+      const match = components.find((component) => component.types.includes(type));
+      if (!match) {
+        return undefined;
+      }
+      return useShort ? match.short_name : match.long_name;
+    };
+    const street = [find('street_number'), find('route')].filter(Boolean).join(' ');
+    return {
+      address1: street,
+      address2: find('subpremise'),
+      city: find('locality') || find('postal_town') || find('sublocality') || find('sublocality_level_1'),
+      state: find('administrative_area_level_1'),
+      zip: find('postal_code'),
+      countryName: find('country'),
+      countryCode: find('country', true),
+      formattedAddress: place.formatted_address,
+      placeId: place.place_id,
+    };
   }
 
   setStateLabel(model: any) {
