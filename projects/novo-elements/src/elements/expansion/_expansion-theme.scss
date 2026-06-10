@@ -44,7 +44,7 @@
   .novo-expansion-panel.novo-expanded {
     @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
       &[theme="#{$name}"] {
-        border-top: 3px solid $color;
+        border-top: 3px solid getCssVarname($name);
       }
     }
   }

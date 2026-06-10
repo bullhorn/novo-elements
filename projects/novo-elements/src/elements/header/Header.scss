@@ -96,17 +96,17 @@
       .header-titles,
       .header-title {
         ::ng-deep .novo-icon {
-          color: $color;
+          color: getCssVarname($name);
         }
       }
       & > section:first-of-type {
-        border-bottom: 2px solid $color;
+        border-bottom: 2px solid getCssVarname($name);
       }
     }
     &.novo-theme-#{$name} {
       & > section:first-of-type {
-        background: $color;
-        color: $contrast;
+        background: getCssVarname($name);
+        color: getContrastColor($name);
         border-bottom: none;
       }
       ::ng-deep .novo-title {

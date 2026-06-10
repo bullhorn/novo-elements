@@ -120,7 +120,7 @@
 @mixin text-colors() {
   @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
     &.text-color-#{$name} {
-      color: $color;
+      color: getCssVarname($name)
     }
   }
 }

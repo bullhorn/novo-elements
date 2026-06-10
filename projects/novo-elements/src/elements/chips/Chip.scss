@@ -175,15 +175,15 @@ $chip-spacing: (
   @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
     &.novo-color-#{$name} {
       color: getContrastColor($name);
-      background: $color;
+      background: getCssVarname($name);
       & > * {
         color: inherit;
       }
     }
 
     &.novo-accent-#{$name} {
-      border: 1px solid $color;
-      color: $color;
+      border: 1px solid getCssVarname($name);
+      color: getCssVarname($name);
     }
   }
 }
