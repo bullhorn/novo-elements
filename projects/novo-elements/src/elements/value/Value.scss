@@ -10,7 +10,7 @@
   padding: 8px;
   @include entity-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
     i.#{$name} {
-      color: $color;
+      color: getCssVarname($name);
     }
   }
   &.horizontal {
@@ -51,7 +51,7 @@
     display: block;
     @include entity-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
       i.#{$name} {
-        color: $color;
+        color: getCssVarname($name);
       }
     }
     .entity {

@@ -3,14 +3,14 @@
 @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
   $contrast: getContrastColor($name);
   :host-context([theme="#{$name}"]) {
-    background: $color;
-    color: $contrast;
+    background: getCssVarname($name);
+    color: getContrastColor($name);
     border: unset;
     border-bottom: 1px solid rgba(#fff, 0.1);
     outline: none;
     item-title h6,
     i {
-      color: $contrast;
+      color: getContrastColor($name);
     }
     item-content {
       > * {

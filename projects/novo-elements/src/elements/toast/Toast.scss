@@ -257,10 +257,10 @@
   @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
     &.#{$name} {
       color: getContrastColor($name);
-      background: $color;
+      background: getCssVarname($name);
     }
     &.novo-accent-#{$name} {
-      border: 1px solid $color;
+      border: 1px solid getCssVarname($name);
       background: getPaleColor($name);
       color: var(--font-color-base);
     }

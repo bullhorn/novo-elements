@@ -51,7 +51,7 @@
     @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
       &[color="#{$name}"] {
         svg circle {
-          stroke: $color;
+          stroke: getCssVarname($name);
         }
       }
     }
