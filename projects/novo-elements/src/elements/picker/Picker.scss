@@ -80,7 +80,7 @@ novo-picker {
 
     @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
       &.#{$name} {
-        background: $color;
+        background: getCssVarname($name);
       }
     }
   }

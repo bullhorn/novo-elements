@@ -67,25 +67,25 @@
 
   @if index($excluded, $name) == null {
     .novo-background-#{$name} {
-      background: $color;
-      color: $contrast;
+      background: getCssVarname($name);
+      color: getContrastColor($name);
     }
     .novo-text-#{$name} {
-      color: $color;
+      color: getCssVarname($name);
     }
 
     .bgc-#{$name} {
-      background: $color;
+      background: getCssVarname($name);
       color: $contrast;
     }
 
     .bgc-#{$name}-striped {
       & > *:nth-child(odd) {
-        background: $color;
+        background: getCssVarname($name);
       }
     }
     .txc-#{$name} {
-      color: $color;
+      color: getCssVarname($name);
     }
   }
 }

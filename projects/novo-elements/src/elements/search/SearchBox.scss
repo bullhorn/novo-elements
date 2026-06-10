@@ -63,7 +63,7 @@
     @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
       &[color="#{$name}"] {
         > novo-icon {
-          color: $color !important;
+          color: getCssVarname($name) !important;
         }
       }
     }
