@@ -1,4 +1,3 @@
-// APP
 import { CheckboxControl } from './CheckboxControl';
 
 describe('Control: CheckboxControl', () => {

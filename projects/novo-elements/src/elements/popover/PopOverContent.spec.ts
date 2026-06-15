@@ -1,19 +1,17 @@
-// NG2
-import { waitForAsync, TestBed } from '@angular/core/testing';
-// APP
+import { TestBed } from '@angular/core/testing';
 import { PopOverContent } from './PopOverContent';
 
 describe('Elements: PopOverContent', () => {
   let fixture;
   let component;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [PopOverContent],
     }).compileComponents();
     fixture = TestBed.createComponent(PopOverContent);
     component = fixture.debugElement.componentInstance;
-  }));
+  });
 
   it('should initialize correctly', () => {
     expect(component).toBeTruthy();

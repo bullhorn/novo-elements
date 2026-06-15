@@ -1,7 +1,4 @@
-// NG2
 import { inject, TestBed } from '@angular/core/testing';
-// Vendor
-// APP
 import { OptionsService } from './OptionsService';
 
 describe('Element: OptionsService', () => {

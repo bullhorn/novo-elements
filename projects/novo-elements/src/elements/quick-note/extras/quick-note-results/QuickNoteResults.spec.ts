@@ -1,6 +1,4 @@
-// NG2
-import { waitForAsync, TestBed } from '@angular/core/testing';
-// App
+import { TestBed } from '@angular/core/testing';
 import { NovoItemContentElement, NovoListElement, NovoListItemElement } from 'novo-elements/elements/list';
 import { NovoLoadingElement } from 'novo-elements/elements/loading';
 import { NovoLabelService } from 'novo-elements/services';
@@ -11,14 +9,14 @@ describe('Elements: QuickNoteResults', () => {
     let fixture;
     let component;
 
-    beforeEach(waitForAsync(() => {
+    beforeEach(() => {
       TestBed.configureTestingModule({
         declarations: [QuickNoteResults, NovoLoadingElement, NovoListElement, NovoListItemElement, NovoItemContentElement],
         providers: [{ provide: NovoLabelService, useClass: NovoLabelService }],
       }).compileComponents();
       fixture = TestBed.createComponent(QuickNoteResults);
       component = fixture.debugElement.componentInstance;
-    }));
+    });
 
     it('should initialize correctly', () => {
       expect(component).toBeTruthy();

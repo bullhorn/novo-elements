@@ -1,13 +1,12 @@
-// NG2
-import { waitForAsync, TestBed } from '@angular/core/testing';
-// APP
+import { TestBed } from '@angular/core/testing';
+import { vi } from 'vitest';
 import { NovoTilesElement } from './Tiles';
 
 describe('Elements: NovoTilesElement', () => {
   let fixture;
   let component;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [NovoTilesElement],
     }).compileComponents();
@@ -33,7 +32,7 @@ describe('Elements: NovoTilesElement', () => {
       },
     ];
     component.ngAfterContentInit();
-  }));
+  });
 
   describe('Method: select(event, item)', () => {
     it('should set label 2 with checked equal to true', () => {
@@ -62,7 +61,7 @@ describe('Elements: NovoTilesElement', () => {
     });
 
     it('should emit event but not allow disabled tiles to be checked', () => {
-      jest.spyOn(component.onDisabledOptionClick, 'emit');
+      vi.spyOn(component.onDisabledOptionClick, 'emit');
       component.select(false, component.options[0]);
       expect(component.options[0].checked).toBeTruthy();
       expect(component.options[1].checked).toBeFalsy();
@@ -77,7 +76,7 @@ describe('Elements: NovoTilesElement', () => {
     });
 
     it('should emit event when checked tiles are clicked', () => {
-      jest.spyOn(component.onSelectedOptionClick, 'emit');
+      vi.spyOn(component.onSelectedOptionClick, 'emit');
       component.select(false, component.options[0]);
       expect(component.options[0].checked).toBeTruthy();
       expect(component.options[1].checked).toBeFalsy();

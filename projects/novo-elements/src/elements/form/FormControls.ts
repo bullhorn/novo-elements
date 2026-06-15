@@ -1,4 +1,3 @@
-export { AceEditorControl } from './controls/ace-editor/AceEditorControl';
 export { AddressControl } from './controls/address/AddressControl';
 export { BaseControl, NovoControlConfig, NovoGroupedControlConfig } from './controls/BaseControl';
 export { CheckListControl } from './controls/check-list/CheckListControl';

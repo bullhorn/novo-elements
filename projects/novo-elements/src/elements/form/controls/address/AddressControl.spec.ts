@@ -1,4 +1,3 @@
-// APP
 import { AddressControl } from './AddressControl';
 
 describe('Control: AddressControl', () => {

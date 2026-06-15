@@ -1,0 +1,5 @@
+{
+    "name": "vitest-builder",
+    "version": "0.0.1",
+    "builders": "./builders.json"
+}

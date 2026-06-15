@@ -1,4 +1,3 @@
-// APP
 import { SwitchControl } from './SwitchControl';
 
 describe('Control: SwitchControl', () => {

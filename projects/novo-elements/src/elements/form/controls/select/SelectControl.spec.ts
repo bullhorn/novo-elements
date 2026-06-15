@@ -1,4 +1,3 @@
-// APP
 import { SelectControl } from './SelectControl';
 
 describe('Control: SelectControl', () => {

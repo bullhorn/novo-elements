@@ -1,6 +1,5 @@
-// NG2
 import { ElementRef } from '@angular/core';
-// App
+import { vi } from 'vitest';
 import { BasePickerResults } from './BasePickerResults';
 
 class MockCDR {
@@ -54,7 +53,7 @@ describe('Elements: BasePickerResults', () => {
       expect(component.selectActiveMatch).toBeDefined();
     });
     it('should call selectMatch.', () => {
-      const spy = jest.spyOn(component, 'selectMatch');
+      const spy = vi.spyOn(component, 'selectMatch');
       component.selectActiveMatch();
       expect(spy).toHaveBeenCalled();
     });
@@ -66,7 +65,7 @@ describe('Elements: BasePickerResults', () => {
       component.prevActiveMatch();
     });
     it('should scroll to active.', () => {
-      jest.spyOn(component, 'scrollToActive');
+      vi.spyOn(component, 'scrollToActive');
       component.prevActiveMatch();
       expect(component.scrollToActive).toHaveBeenCalled();
     });
@@ -105,8 +104,8 @@ describe('Elements: BasePickerResults', () => {
     });
     it('should prevent events from bubbling up', () => {
       const mockEvent: any = {
-        stopPropagation: jest.fn(() => true),
-        preventDefault: jest.fn(() => true),
+        stopPropagation: vi.fn(() => true),
+        preventDefault: vi.fn(() => true),
       };
       component.selectMatch(mockEvent);
       expect(mockEvent.stopPropagation).toHaveBeenCalled();
@@ -121,7 +120,7 @@ describe('Elements: BasePickerResults', () => {
     it('should handle closeOnSelect', () => {
       component.parent = {
         closeOnSelect: true,
-        hideResults: jest.fn(() => true),
+        hideResults: vi.fn(() => true),
       };
       component.activeMatch = 'Stuff';
       component.selectMatch();

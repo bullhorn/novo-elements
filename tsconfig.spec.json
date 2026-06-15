@@ -2,16 +2,9 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/spec",
-    "module": "commonjs",
-    "types": [
-      "jest",
-      "node"
-    ],
+    "module": "esnext",
+    "types": ["vitest/globals", "node"],
     "skipLibCheck": true
   },
-  "files": [],
-  "include": [
-    "**/*.spec.ts",
-    "**/*.d.ts"
-  ]
+  "include": ["**/*.spec.ts", "**/*.d.ts"]
 }

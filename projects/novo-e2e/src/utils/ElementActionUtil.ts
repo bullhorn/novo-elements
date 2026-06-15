@@ -108,3 +108,8 @@ export async function dragAndDropOnElement(selector: string, targetElement: stri
 export async function dragAndDropOnCoordinate(selector: string, xCoord: number, yCoord: number, dragDuration) {
     await $(selector).dragAndDrop({x: xCoord, y: yCoord}, dragDuration);
 }
+
+export async function clickRadio(radioSelector: string, index: number = 0): Promise<void> {
+    const radioIcon = `${radioSelector} i`;
+    await click(radioIcon, index);
+}

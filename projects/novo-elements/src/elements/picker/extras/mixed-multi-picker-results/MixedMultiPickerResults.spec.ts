@@ -1,17 +1,15 @@
 import { ChangeDetectorRef, ElementRef } from '@angular/core';
 import { NovoLabelService } from 'novo-elements/services';
+import { Mocked, vi } from 'vitest';
 import { BasePickerResults } from '../base-picker-results/BasePickerResults';
 import { MixedMultiPickerResults } from './MixedMultiPickerResults';
 
-jest.mock('novo-elements/services');
-jest.mock('novo-elements/utils');
-
 describe('MixedMultiPickerResults', () => {
   let component: MixedMultiPickerResults;
-  let elementRef: jest.Mocked<ElementRef>;
-  let renderer: jest.Mocked<any>;
-  let labels: jest.Mocked<NovoLabelService>;
-  let ref: jest.Mocked<ChangeDetectorRef>;
+  let elementRef: Mocked<ElementRef>;
+  let renderer: Mocked<any>;
+  let labels: Mocked<NovoLabelService>;
+  let ref: Mocked<ChangeDetectorRef>;
 
   beforeEach(() => {
     elementRef = {
@@ -19,7 +17,7 @@ describe('MixedMultiPickerResults', () => {
     } as any;
 
     renderer = {
-      setProperty: jest.fn(),
+      setProperty: vi.fn(),
     } as any;
 
     labels = {
@@ -27,7 +25,7 @@ describe('MixedMultiPickerResults', () => {
     } as any;
 
     ref = {
-      markForCheck: jest.fn(),
+      markForCheck: vi.fn(),
     } as any;
 
     component = new MixedMultiPickerResults(elementRef, renderer, labels, ref);
@@ -87,7 +85,7 @@ describe('MixedMultiPickerResults', () => {
     it('should focus input element', () => {
       const inputElement = document.createElement('input');
       (component as any).inputElement = { nativeElement: inputElement } as any;
-      const selectMatchSpy = jest.spyOn(BasePickerResults.prototype, 'selectMatch');
+      const selectMatchSpy = vi.spyOn(BasePickerResults.prototype, 'selectMatch');
 
       component.selectMatch();
 
@@ -111,7 +109,7 @@ describe('MixedMultiPickerResults', () => {
       const option = {
         value: 'opt1',
         label: 'Option 1',
-        getSecondaryOptionsAsync: jest.fn(),
+        getSecondaryOptionsAsync: vi.fn(),
       };
 
       expect(component.optionHasSecondaryOptions(option)).toBe(true);
@@ -240,7 +238,7 @@ describe('MixedMultiPickerResults', () => {
 
   describe('ngOnDestroy', () => {
     it('should unsubscribe from keyboardSubscription', () => {
-      const subscription = { unsubscribe: jest.fn() };
+      const subscription = { unsubscribe: vi.fn() };
       component['keyboardSubscription'] = subscription as any;
 
       component.ngOnDestroy();
@@ -249,7 +247,7 @@ describe('MixedMultiPickerResults', () => {
     });
 
     it('should unsubscribe from clearSecondaryOptions', () => {
-      const subscription = { unsubscribe: jest.fn() };
+      const subscription = { unsubscribe: vi.fn() };
       const option = {
         value: 'opt1',
         label: 'Option 1',

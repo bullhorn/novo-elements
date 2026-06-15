@@ -1,33 +1,31 @@
 import { ChangeDetectorRef } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { NovoLabelService } from 'novo-elements/services';
-import { findByCountryId } from 'novo-elements/utils';
+import { Mocked, vi } from 'vitest';
 import { RenderPipe } from './Render';
-
-jest.mock('novo-elements/utils');
 
 describe('RenderPipe', () => {
   let pipe: RenderPipe;
-  let changeDetectorRef: jest.Mocked<ChangeDetectorRef>;
-  let sanitizationService: jest.Mocked<DomSanitizer>;
-  let labels: jest.Mocked<NovoLabelService>;
+  let changeDetectorRef: Mocked<ChangeDetectorRef>;
+  let sanitizationService: Mocked<DomSanitizer>;
+  let labels: Mocked<NovoLabelService>;
 
   beforeEach(() => {
     changeDetectorRef = {
-      markForCheck: jest.fn(),
+      markForCheck: vi.fn(),
     } as any;
 
     sanitizationService = {
-      bypassSecurityTrustHtml: jest.fn((html: string) => html as SafeHtml),
+      bypassSecurityTrustHtml: vi.fn((html: string) => html as SafeHtml),
     } as any;
 
     labels = {
-      formatDateShort: jest.fn((date) => '01/01/2023'),
-      formatDate: jest.fn((date) => '01/01/2023'),
-      formatTimeWithFormat: jest.fn((time, format) => '10:30 AM'),
-      formatCurrency: jest.fn((value) => `$${value}.00`),
-      formatNumber: jest.fn((value, options) => value.toString()),
-      getToManyPlusMore: jest.fn((obj) => `+ ${obj.quantity} more`),
+      formatDateShort: vi.fn((date) => '01/01/2023'),
+      formatDate: vi.fn((date) => '01/01/2023'),
+      formatTimeWithFormat: vi.fn((time, format) => '10:30 AM'),
+      formatCurrency: vi.fn((value) => `$${value}.00`),
+      formatNumber: vi.fn((value, options) => value.toString()),
+      getToManyPlusMore: vi.fn((obj) => `+ ${obj.quantity} more`),
     } as any;
 
     pipe = new RenderPipe(changeDetectorRef, sanitizationService, labels);
@@ -110,11 +108,33 @@ describe('RenderPipe', () => {
       });
 
       it('should handle nested arrays', () => {
-        expect(pipe.equals([[1, 2], [3, 4]], [[1, 2], [3, 4]])).toBe(true);
+        expect(
+          pipe.equals(
+            [
+              [1, 2],
+              [3, 4],
+            ],
+            [
+              [1, 2],
+              [3, 4],
+            ],
+          ),
+        ).toBe(true);
       });
 
       it('should return false for nested arrays with different values', () => {
-        expect(pipe.equals([[1, 2], [3, 4]], [[1, 2], [3, 5]])).toBe(false);
+        expect(
+          pipe.equals(
+            [
+              [1, 2],
+              [3, 4],
+            ],
+            [
+              [1, 2],
+              [3, 5],
+            ],
+          ),
+        ).toBe(false);
       });
     });
 
@@ -381,24 +401,21 @@ describe('RenderPipe', () => {
 
     describe('Country type', () => {
       it('should detect Country type by field name', () => {
-        (findByCountryId as jest.Mock).mockReturnValue({ name: 'United States' });
         const args = { name: 'address.countryID' };
         const result = pipe.render(1, args);
         expect(result).toBe('United States');
       });
 
       it('should detect Country type by optionsType', () => {
-        (findByCountryId as jest.Mock).mockReturnValue({ name: 'Canada' });
         const args = { optionsType: 'Country' };
-        const result = pipe.render(2, args);
-        expect(result).toBe('Canada');
+        const result = pipe.render(1, args);
+        expect(result).toBe('United States');
       });
 
       it('should handle country not found', () => {
-        (findByCountryId as jest.Mock).mockReturnValue(null);
         const args = { optionsType: 'Country' };
-        const result = pipe.render(999, args);
-        expect(result).toBe(999);
+        const result = pipe.render(999999, args);
+        expect(result).toBe(999999);
       });
     });
 
@@ -473,7 +490,7 @@ describe('RenderPipe', () => {
 
     describe('Custom formatter', () => {
       it('should use custom formatter if provided', () => {
-        const formatter = jest.fn().mockReturnValue('formatted');
+        const formatter = vi.fn().mockReturnValue('formatted');
         const args = { formatter };
         const value = 'test';
         const result = pipe.render(value, args);
@@ -488,7 +505,6 @@ describe('RenderPipe', () => {
       sanitizationService.bypassSecurityTrustHtml.mockReturnValue('html' as SafeHtml);
     });
     it('should render Address type', () => {
-      (findByCountryId as jest.Mock).mockReturnValue({ name: 'USA' });
       const args = { dataType: 'Address' };
       const value = {
         address1: '123 Main St',
@@ -503,7 +519,6 @@ describe('RenderPipe', () => {
     });
 
     it('should render Address1 type', () => {
-      (findByCountryId as jest.Mock).mockReturnValue({ name: 'USA' });
       const args = { dataType: 'Address1' };
       const value = {
         address1: '123 Main St',
@@ -518,7 +533,6 @@ describe('RenderPipe', () => {
     });
 
     it('should handle Address with missing fields', () => {
-      (findByCountryId as jest.Mock).mockReturnValue(null);
       const args = { dataType: 'Address' };
       const value = {
         address1: '',
@@ -533,7 +547,6 @@ describe('RenderPipe', () => {
     });
 
     it('should handle SecondaryAddress type', () => {
-      (findByCountryId as jest.Mock).mockReturnValue({ name: 'USA' });
       const args = { dataType: 'SecondaryAddress' };
       const value = {
         address1: '456 Oak Ave',
@@ -548,7 +561,6 @@ describe('RenderPipe', () => {
     });
 
     it('should handle BillingAddress type', () => {
-      (findByCountryId as jest.Mock).mockReturnValue({ name: 'USA' });
       const args = { dataType: 'BillingAddress' };
       const value = {
         address1: '789 Pine Rd',
@@ -889,9 +901,7 @@ describe('RenderPipe', () => {
       const args = { dataSpecialization: 'HTML' };
       const value = '<a href="#">link</a>';
       pipe.render(value, args);
-      expect(sanitizationService.bypassSecurityTrustHtml).toHaveBeenCalledWith(
-        expect.stringContaining('target="_blank"'),
-      );
+      expect(sanitizationService.bypassSecurityTrustHtml).toHaveBeenCalledWith(expect.stringContaining('target="_blank"'));
     });
 
     it('should trim string values by default', () => {
@@ -1086,7 +1096,7 @@ describe('RenderPipe', () => {
       const args = { dataType: 'String' };
       const value = 'test';
       pipe.transform(value, args);
-      const updateValueSpy = jest.spyOn(pipe, 'updateValue');
+      const updateValueSpy = vi.spyOn(pipe, 'updateValue');
       const result = pipe.transform(value, args);
       expect(updateValueSpy).not.toHaveBeenCalled();
       expect(result).toBe(pipe.value);
@@ -1096,7 +1106,7 @@ describe('RenderPipe', () => {
     it('should update value if value changes', () => {
       const args = { dataType: 'String' };
       pipe.transform('test1', args);
-      const updateValueSpy = jest.spyOn(pipe, 'updateValue');
+      const updateValueSpy = vi.spyOn(pipe, 'updateValue');
       pipe.transform('test2', args);
       expect(updateValueSpy).toHaveBeenCalled();
       updateValueSpy.mockRestore();
@@ -1105,7 +1115,7 @@ describe('RenderPipe', () => {
     it('should update value if args change', () => {
       const value = 'test';
       pipe.transform(value, { dataType: 'String' });
-      const updateValueSpy = jest.spyOn(pipe, 'updateValue');
+      const updateValueSpy = vi.spyOn(pipe, 'updateValue');
       pipe.transform(value, { dataType: 'Integer' });
       expect(updateValueSpy).toHaveBeenCalled();
       updateValueSpy.mockRestore();
@@ -1195,7 +1205,6 @@ describe('RenderPipe', () => {
     });
 
     it('should handle address rendering with country lookup', () => {
-      (findByCountryId as jest.Mock).mockReturnValue({ name: 'United States' });
       sanitizationService.bypassSecurityTrustHtml.mockReturnValue('html' as SafeHtml);
       const args = { dataType: 'Address' };
       const value = {

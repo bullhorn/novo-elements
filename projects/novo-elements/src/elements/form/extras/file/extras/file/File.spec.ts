@@ -1,4 +1,4 @@
-// APP
+import { vi } from 'vitest';
 import { NovoFile } from './File';
 
 describe('Class: NovoFile', () => {
@@ -25,7 +25,7 @@ describe('Class: NovoFile', () => {
   describe('Method: read()', () => {
     it('should read files.', async () => {
       return new Promise((resolve) => {
-        jest.spyOn(file.reader, 'readAsDataURL').mockImplementation(() => {});
+        vi.spyOn(file.reader, 'readAsDataURL').mockImplementation(() => {});
         file.read().then(() => {
           expect(file.fileContents).toEqual('The contents');
           resolve(true);

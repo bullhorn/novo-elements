@@ -1,7 +1,6 @@
-// NG2
 import { Renderer2 } from '@angular/core';
-import { waitForAsync, TestBed } from '@angular/core/testing';
-// App
+import { TestBed } from '@angular/core/testing';
+import { vi } from 'vitest';
 import { NovoCKEditorElement } from './CKEditor';
 
 // Extend the global window object with CKEDITOR for tests
@@ -15,7 +14,7 @@ describe('Elements: NovoCKEditorElement', () => {
   let fixture;
   let component;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [NovoCKEditorElement],
       providers: [{ provide: Renderer2, useClass: Renderer2 }],
@@ -27,7 +26,7 @@ describe('Elements: NovoCKEditorElement', () => {
       ENTER_P: 1,
       ENTER_BR: 2,
     };
-  }));
+  });
 
   describe('Method: ngOnDestroy()', () => {
     it('should remove everything if we have an instance of CKEditor', () => {
@@ -37,7 +36,7 @@ describe('Elements: NovoCKEditorElement', () => {
 
   describe('Method: ngAfterViewInit()', () => {
     beforeEach(() => {
-      jest.spyOn(component, 'ckeditorInit').mockImplementation(() => {});
+      vi.spyOn(component, 'ckeditorInit').mockImplementation(() => {});
     });
 
     it('should be defined', () => {
@@ -45,13 +44,13 @@ describe('Elements: NovoCKEditorElement', () => {
     });
 
     it('should set the base config', () => {
-      jest.spyOn(component, 'getBaseConfig').mockReturnValue({ test: true });
+      vi.spyOn(component, 'getBaseConfig').mockReturnValue({ test: true });
       component.ngAfterViewInit();
       expect(component.ckeditorInit).toHaveBeenCalledWith({ test: true });
     });
 
     it('should use the passed in config to overwrite and add to base config', () => {
-      jest.spyOn(component, 'getBaseConfig').mockReturnValue({ base: true, default: false });
+      vi.spyOn(component, 'getBaseConfig').mockReturnValue({ base: true, default: false });
       component.config = { default: true, another: true };
       component.ngAfterViewInit();
       expect(component.ckeditorInit).toHaveBeenCalledWith({ base: true, default: true, another: true });
@@ -71,8 +70,8 @@ describe('Elements: NovoCKEditorElement', () => {
 
     it('should update the instance', () => {
       component.instance = {
-        setData: jest.fn(),
-      }
+        setData: vi.fn(),
+      };
       component.writeValue({});
       expect(component.instance.setData).toHaveBeenCalledWith({});
       // reset to null to not affect other tests

@@ -1,4 +1,3 @@
-// App
 import { Security } from './Security';
 
 describe('Services: Security', () => {

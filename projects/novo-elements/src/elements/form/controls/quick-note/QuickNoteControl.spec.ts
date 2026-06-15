@@ -1,4 +1,3 @@
-// APP
 import { QuickNoteControl } from './QuickNoteControl';
 
 describe('Control: QuickNoteControl', () => {

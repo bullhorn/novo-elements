@@ -137,7 +137,6 @@ export const keyboardKeys = {
 };
 
 export enum ControlType {
-    aceEditor = 'ace-editor',
     address = 'address',
     checkbox = 'checkbox',
     checklist = 'checklist',
@@ -190,6 +189,10 @@ export const novoAdvancedSearchOperator = {
 
 export function codeExample(exampleName: string): string {
     return `code-example[example="${exampleName}"]`;
+}
+
+export function codeExampleExpandButton(exampleName: string): string {
+    return `${codeExample(exampleName)} novo-button[icon="bhi-book"]`;
 }
 
 /**

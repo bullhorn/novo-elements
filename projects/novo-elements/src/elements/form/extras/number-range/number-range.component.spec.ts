@@ -20,7 +20,7 @@ describe('NumberRangeComponent', () => {
 
   beforeEach(() => {
     fixture.detectChanges();
-  })
+  });
 
   describe('Function: minLessThanMaxValidator(group)', () => {
     const testCases: { min: number; max: number; expected: { [key: string]: boolean } | null }[] = [
@@ -34,7 +34,7 @@ describe('NumberRangeComponent', () => {
       { min: -10, max: -15, expected: { minGreaterThanMax: true } },
     ];
     test.each(testCases)('should combine adaptive criteria', (config) => {
-      component.rangeForm.setValue({ min: config.min, max: config.max })
+      component.rangeForm.setValue({ min: config.min, max: config.max });
       const actual = component.minLessThanMaxValidator(component.rangeForm);
       expect(actual).toEqual(config.expected);
     });
