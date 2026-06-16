@@ -24,7 +24,7 @@ import {
 import { merge, of, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 // App
-import { NovoButtonElement } from 'novo-elements/elements/button';
+import { NovoButtonElement, FOCUS_MANAGED_CONTEXT } from 'novo-elements/elements/button';
 import {
   CanDisableCtor,
   HasOverlayCtor,
@@ -75,6 +75,7 @@ const NovoDropdownMixins: HasOverlayCtor & CanDisableCtor & HasTabIndexCtor & ty
     host: {
         '[attr.tabIndex]': 'disabled ? -1 : 0',
     },
+    providers: [{ provide: FOCUS_MANAGED_CONTEXT, useValue: true }],
     standalone: false,
 })
 export class NovoDropdownElement extends NovoDropdownMixins implements OnInit, AfterContentInit, AfterViewInit, OnDestroy {
@@ -249,7 +250,7 @@ export class NovoDropdownElement extends NovoDropdownMixins implements OnInit, A
     const key = event.key;
     const isArrowKey = key === Key.ArrowDown || key === Key.ArrowUp;
     const isTyping = manager.isTyping();
-    const isInputField = event.target;
+    const isInputField = (event.target as HTMLElement).nodeName === 'INPUT';
     if (isArrowKey && event.altKey) {
       // Close the dropdown on ALT + arrow key to match the native <select>
       event.preventDefault();
@@ -259,7 +260,7 @@ export class NovoDropdownElement extends NovoDropdownMixins implements OnInit, A
     } else if (!isTyping && (key === Key.Enter || key === Key.Space) && manager.activeItem && !hasModifierKey(event)) {
       event.preventDefault();
       this._multiple ? manager.activeItem._selectViaInteraction() : manager.activeItem._clickViaInteraction();
-    } else if (!isTyping && this._multiple && ['a', 'A'].includes(key) && event.ctrlKey) {
+    } else if (!isTyping && this._multiple && ['a', 'A'].includes(key) && event.ctrlKey && !isInputField) {
       event.preventDefault();
       const hasDeselectedOptions = this.options.some((opt) => !opt.disabled && !opt.selected);
       this.options.forEach((option) => {

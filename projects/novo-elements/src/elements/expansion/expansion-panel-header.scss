@@ -8,7 +8,9 @@
 
   &:focus,
   &:hover {
-    outline: none;
+    &:not(:focus-visible) {
+      outline: none;
+    }
   }
 
   &.novo-expanded:focus,

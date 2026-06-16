@@ -5,11 +5,15 @@ import {
   ElementRef,
   HostBinding,
   HostListener,
+  inject,
   Input,
+  InjectionToken,
   OnChanges, signal, Signal,
   SimpleChanges, WritableSignal,
 } from '@angular/core';
 import { BooleanInput, Helpers, Key } from 'novo-elements/utils';
+
+export const FOCUS_MANAGED_CONTEXT = new InjectionToken<boolean>('novo.focusManagedContext');
 
 @Component({
     selector: 'novo-button,button[theme]',
@@ -137,6 +141,33 @@ export class NovoButtonElement implements OnChanges {
 
   @HostBinding('attr.disabled')
   disabledAttr: undefined | '' = undefined;
+
+  private focusManagedContext = inject(FOCUS_MANAGED_CONTEXT, { optional: true });
+
+  @Input({ alias: 'tabindex'})
+  inputTabindex = '';
+
+  @HostBinding('attr.tabindex')
+  get tabindex(): string | null {
+    // Explicit tabindex input takes precedence
+    if (this.inputTabindex) {
+      return this.inputTabindex;
+    }
+    if (this.disabled) {
+      return '-1';
+    }
+    // If parent manages focus
+    if (this.focusManagedContext) {
+      // Remove native buttons from tab order
+      if (this.element.nativeElement.tagName === 'BUTTON') {
+        return '-1';
+      }
+      // Custom novo-button is managed by parent
+      return null;
+    }
+    // No focus management context
+    return this.element.nativeElement.tagName === 'NOVO-BUTTON' ? '0' : null;
+  }
 
   private _icon: WritableSignal<string> = signal(undefined);
 

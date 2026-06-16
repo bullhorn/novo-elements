@@ -63,7 +63,9 @@
   }
 
   &:focus {
-    outline: none;
+    &:not(:focus-visible) {
+      outline: none;
+    }
   }
 
   &[disabled],

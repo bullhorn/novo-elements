@@ -1,7 +1,8 @@
 // NG2
-import { ChangeDetectorRef, Component, EventEmitter, forwardRef, HostBinding, Input, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, forwardRef, HostBinding, HostListener, Input, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { BooleanInput, Key } from 'novo-elements/utils';
+import { ActivateDirective } from 'novo-elements/elements/common';
+import { BooleanInput } from 'novo-elements/utils';
 
 // Value accessor for the component (supports ngModel)
 const SWITCH_VALUE_ACCESSOR = {
@@ -14,7 +15,7 @@ const SWITCH_VALUE_ACCESSOR = {
     selector: 'novo-switch',
     providers: [SWITCH_VALUE_ACCESSOR],
     template: `
-    <div (click)="toggle($event)">
+    <div>
       <div class="novo-switch-container">
         <div class="novo-switch-bar"></div>
         <div class="novo-switch-thumb-container">
@@ -33,9 +34,12 @@ const SWITCH_VALUE_ACCESSOR = {
         class: 'novo-switch',
         '[attr.aria-checked]': 'value',
         '[attr.aria-disabled]': 'disabled',
-        '(keydown)': 'onKeydown($event)',
         '[class]': 'theme',
     },
+    hostDirectives: [{
+      directive: ActivateDirective,
+      outputs: ['novoActivate'],
+    }],
     standalone: false,
 })
 export class NovoSwitchElement implements ControlValueAccessor {
@@ -63,16 +67,23 @@ export class NovoSwitchElement implements ControlValueAccessor {
   onModelChange: Function = () => {};
   onModelTouched: Function = () => {};
 
-  constructor(private ref: ChangeDetectorRef) {}
-
-  onKeydown(event: KeyboardEvent) {
-    if (event.key === Key.Space) {
-      event.preventDefault();
-      this.toggle(event);
+  @HostBinding('attr.tabindex')
+  get tabindex(): string | null {
+    if (this.disabled) {
+      return '-1';
     }
+    return '0';
   }
 
-  toggle(event) {
+  constructor(private ref: ChangeDetectorRef) {}
+
+  // novoActivate encompasses keyboard and click functionality for non-native buttons.
+  @HostListener('novoActivate', ['$event'])
+  onActivate(event: Event) {
+    this.toggle(event);
+  }
+
+  toggle(event: Event) {
     if (event) {
       event.stopPropagation();
       event.preventDefault();

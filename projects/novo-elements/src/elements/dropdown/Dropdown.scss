@@ -3,7 +3,13 @@
 :host {
   display: inline-block;
   position: relative;
-  outline: none;
+  outline-style: none;
+  &:focus-visible ::ng-deep {
+    button, novo-button {
+      outline-style: solid;
+      outline-color: inherit;
+    }
+  }
   ::ng-deep .novo-dropdown-trigger {
     cursor: pointer;
     -webkit-appearance: none;

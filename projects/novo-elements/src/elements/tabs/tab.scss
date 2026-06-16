@@ -29,7 +29,9 @@
     cursor: pointer;
     text-transform: uppercase;
     &:focus {
-      outline: none;
+      &:not(:focus-visible) {
+        outline: none;
+      }
     }
   }
   .indicator {
@@ -58,7 +60,9 @@
     }
   }
   &:focus {
-    outline: none;
+    &:not(:focus-visible) {
+      outline: none;
+    }
   }
 }
 

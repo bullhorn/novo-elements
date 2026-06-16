@@ -155,7 +155,9 @@ quick-note-results,
     z-index: z(overlay);
   }
   &:focus {
-    outline: none;
+    &:not(:focus-visible) {
+      outline: none;
+    }
   }
 }
 

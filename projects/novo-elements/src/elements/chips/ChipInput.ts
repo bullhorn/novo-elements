@@ -1,4 +1,5 @@
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { Directionality } from '@angular/cdk/bidi';
 import { hasModifierKey } from '@angular/cdk/keycodes';
 import { Directive, ElementRef, EventEmitter, forwardRef, Inject, Input, OnChanges, OnDestroy, Optional, Output, Self } from '@angular/core';
 import { NgControl } from '@angular/forms';
@@ -107,6 +108,7 @@ export class NovoChipInput implements NovoChipTextControl, OnChanges, OnDestroy 
     @Optional() @Inject(NovoFieldElement) private readonly _field: NovoFieldElement,
     @Inject(forwardRef(() => NovoChipList)) private readonly _chipList: NovoChipList,
     @Optional() @Self() protected ngControl: NgControl,
+    @Optional() private _dir: Directionality,
   ) {
     this._inputElement = this._elementRef.nativeElement;
     this._chipList.registerInput(this);
@@ -122,11 +124,27 @@ export class NovoChipInput implements NovoChipTextControl, OnChanges, OnDestroy 
   }
 
   /** Utility method to make host definition/tests more clear. */
-  _keydown(event?: KeyboardEvent) {
-    // Allow the user's focus to escape when they're tabbing forward. Note that we don't
-    // want to do this when going backwards, because focus should go back to the first chip.
-    if (event && event.key === Key.Tab && !hasModifierKey(event, 'shiftKey')) {
+  _keydown(event: KeyboardEvent) {
+    // Allow the user's focus to escape when they're tabbing (both directions)
+    if (event.key === Key.Tab) {
       this._chipList._allowFocusEscape();
+    }
+
+    // Left arrow when empty - navigate to last chip
+    if (event.key === Key.ArrowLeft && this._isInputEmpty() && this._isCaretAtStart()) {
+      this._chipList._keyManager.setLastItemActive();
+      event.preventDefault();
+    }
+
+    // Right arrow when empty and in RTL - navigate to first chip
+    if (
+      event.key === Key.ArrowRight &&
+      this._isInputEmpty() &&
+      this._isCaretAtEnd() &&
+      this._dir?.value === 'rtl'
+    ) {
+      this._chipList._keyManager.setFirstItemActive();
+      event.preventDefault();
     }
 
     this._emitChipEnd(event);
@@ -185,6 +203,21 @@ export class NovoChipInput implements NovoChipTextControl, OnChanges, OnDestroy 
   /** Checks whether a keycode is one of the configured separators. */
   private _isSeparatorKey(event: KeyboardEvent) {
     return !hasModifierKey(event) && new Set(this.separatorKeyCodes).has(event.key);
+  }
+
+  /** Checks if input is empty. */
+  private _isInputEmpty(): boolean {
+    return !this._inputElement.value;
+  }
+
+  /** Checks if caret is at the start of input. */
+  private _isCaretAtStart(): boolean {
+    return this._inputElement.selectionStart === 0;
+  }
+
+  /** Checks if caret is at the end of input. */
+  private _isCaretAtEnd(): boolean {
+    return this._inputElement.selectionStart === this._inputElement.value.length;
   }
 
   static readonly ngAcceptInputType_addOnBlur: BooleanInput;
