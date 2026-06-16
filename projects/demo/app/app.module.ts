@@ -46,7 +46,7 @@ export function provideAppBridgeService(http) {
         ScrollingModule,
         // Vendor
         NovoElementsModule,
-        NovoElementProviders.forRoot(),
+        NovoElementProviders.forRoot({ address: {} }),
         // APP
         NovoExamplesRoutesModule], providers: [
         // NovoTemplateService,
