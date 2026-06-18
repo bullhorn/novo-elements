@@ -185,17 +185,16 @@ All 9 Tier 1 components have stories on `f/storybook-test`:
 
 ### Component-improvement follow-ups
 
-Findings flagged during the Storybook rollout fall into two buckets:
+Findings flagged during the Storybook rollout. Filed against the team's
+internal issue tracker; the highlights below capture each one's substance:
 
-**Filed** — tickets under Jira epic BH-101191 — Novo Elements improvements:
+- **Avatar** — `background` getter crashes on undefined `source`; `ngOnInit` operator-precedence bug; `color` input is visually invisible by design; `<novo-avatar-stack>` hardcodes `+5` overflow label.
+- **Loading skeleton directive** — `[isLoading]` / `[skeleton]` / `[loaded]` trio has inverted boolean semantics, fails on initial paint, and appears unused in the main app. Leaning toward delete. Skeleton story was dropped from `loading.stories.ts` pending resolution.
+- **Checkbox `layoutOptions`** — source flags the input with `// TODO - avoid configs like this`; audit consumers, then deprecate or remove.
+- **Progress `flash` parent mutation** — `<novo-progress-bar>` writes to its parent's `fitContainer` from `ngOnInit`; move the decision into the container.
+- **Loading `theme` `@deprecated` JSDoc** — runtime `console.warn` exists, but no JSDoc tag so IDEs don't flag usages.
 
-- BH-101192 — Avatar improvements: `background` getter crashes on undefined `source`; `ngOnInit` operator-precedence bug; `color` input is visually invisible by design; `<novo-avatar-stack>` hardcodes `+5` overflow label.
-- BH-101194 — Remove or fix Loading skeleton directive: `[isLoading]` / `[skeleton]` / `[loaded]` trio has inverted boolean semantics, fails on initial paint, and appears unused in the main app. Leaning toward delete. Skeleton story was dropped from `loading.stories.ts` pending resolution.
-- BH-101197 — Checkbox `layoutOptions`: source flags the input with `// TODO - avoid configs like this`; audit consumers, then deprecate or remove.
-- BH-101198 — Progress `flash` parent mutation: `<novo-progress-bar>` writes to its parent's `fitContainer` from `ngOnInit`; move the decision into the container.
-- BH-101199 — Loading `theme` `@deprecated` JSDoc: runtime `console.warn` exists, but no JSDoc tag so IDEs don't flag usages.
-
-**Unfiled** — see the working list for the working list of findings that haven't been promoted to tickets yet. Triage periodically: file what's worth fixing under BH-101191, delete entries that are decided-not-worth-fixing, and add new findings as they surface during story work. New issues spotted while authoring stories go into the backlog file first; only filed tickets are listed here.
+A working list of unfiled findings surfaced during story work is maintained outside the public repo; promote items into the tracker as they're worth fixing.
 
 ---
 

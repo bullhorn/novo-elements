@@ -52,3 +52,9 @@ storybook-static
 # Compodoc output generated for the Storybook docs addon — regenerated on
 # every build, never committed.
 projects/novo-elements/documentation.json
+# Working list of unfiled novo-elements issues surfaced during Storybook
+# authoring — kept locally so the file can be added to as new findings
+# appear without leaking internal triage notes into the public repo.
+# Promote items into the team's internal tracker as they become worth
+# fixing.
+ISSUES_BACKLOG.md
