@@ -45,6 +45,21 @@ If using SCSS/SASS you will need to include the following includes: `node_module
     # Automatically rebuild changes to the examples project
     npm run build:examples:watch
 
+## Storybook
+
+A Storybook lives alongside the library and covers every component shipped from `novo-elements/elements`. Each component has a `📖 Usage Guide` (when to use, anatomy, accessibility), a Default story, focused matrix/showcase stories, and a `🎮 Playground` with every input wired to a control. Interactive components also ship `play` functions that exercise the meaningful interaction (open the overlay, sort the column, advance the stepper).
+
+    # Run the Storybook dev server with live reload
+    npm run storybook
+
+    # Open in your browser at
+    http://localhost:6006/
+
+    # Build the static site for hosting (output: dist/storybook/novo-elements)
+    npm run build-storybook
+
+Stories are co-located with their component sources at `projects/novo-elements/src/elements/<component>/<component>.stories.ts`. The `📖 Usage Guide` for [Button](./projects/novo-elements/src/elements/button/button.stories.ts) is the canonical convention reference — match that file's structure when adding new stories. Conventions and gotchas accumulated during the rollout are tracked in [STORYBOOK_PLAN.md](./STORYBOOK_PLAN.md).
+
 ## E2E Testing
 
 The project includes end-to-end tests using WebdriverIO (wdio) and Mocha for testing component functionality across the entire application.
