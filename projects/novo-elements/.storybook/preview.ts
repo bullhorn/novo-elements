@@ -4,6 +4,7 @@ import { setCompodocJson } from '@storybook/addon-docs/angular';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideHttpClient } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { _VIEW_REPEATER_STRATEGY, _DisposeViewRepeaterStrategy } from '@angular/cdk/collections';
 import { BrowserGlobalRef, ComponentUtils, DateFormatService, GlobalRef, NOVO_ELEMENTS_LABELS_PROVIDERS, OptionsService } from 'novo-elements/services';
 import { FieldInteractionApi, FormUtils } from 'novo-elements/elements/form';
 import { NovoToastService } from 'novo-elements/elements/toast';
@@ -46,6 +47,12 @@ const preview: Preview = {
         FormUtils,
         OptionsService,
         { provide: GlobalRef, useClass: BrowserGlobalRef },
+        // CDK Table strategy — required at the root injector for `<novo-data-table>`
+        // and any other CdkTable consumer. BrowserModule provides this transitively,
+        // but Storybook's applicationConfig only uses standalone providers, so the
+        // token is missing. Without it, Tier 4 data-table stories throw NG0201 at
+        // the StorybookWrapperComponent and rows render empty.
+        { provide: _VIEW_REPEATER_STRATEGY, useClass: _DisposeViewRepeaterStrategy },
       ],
     }),
     moduleMetadata({

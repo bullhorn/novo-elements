@@ -149,6 +149,8 @@ await expect(await body.findByRole('listbox')).toBeVisible();
 
 Pre-selecting state for selection-based components (multi-select dropdown, indeterminate checkboxes, etc.) reads better at-a-glance than a play that toggles a few items, but for visual-regression you usually want both: pre-select for the static snapshot, and use `play` to open the panel so the selected state is actually visible.
 
+**Only bind template inputs that match keys in `args`.** A story template like `[fooEnabled]="enabled"` references `args.enabled` — if `args` doesn't define `enabled`, the binding resolves to `undefined`. For components that treat undefined as a meaningful negative state, that silently breaks the story. Concrete example: tooltip's `[tooltipActive]="undefined"` flipped the directive's internal active signal to falsy, so `mouseenter` short-circuited before ever calling `show()` and no tooltip ever appeared. Trim render templates to the inputs args sets, and put the full input surface in Playground.
+
 **Composing modules in story imports.** A component's NgModule typically imports its dependencies (`NovoIconModule`, etc.) for its *own* templates but doesn't necessarily re-export them. If a story's template uses a peer component directly (e.g. `<novo-icon>` inside a `<novo-chip>` story), you must explicitly import that peer's module in `moduleMetadata.imports` alongside the primary one. Symptom when missed: the peer element renders as a bare custom element with its inner text leaking through (no Angular component lifecycle, no styling) — no console error, so it's easy to miss until visual review. Recurring offenders worth memorizing:
 
 - `<novo-icon>` lives in `NovoIconModule`, not re-exported by `NovoChipsModule` or `NovoFieldModule`.
