@@ -3,9 +3,11 @@ import {
   FieldInteractionApi,
   GooglePlacesService,
   IMenuOptions, MENU_OPTIONS,
+  NOVO_ADDRESS_CONFIG,
   NovoAsideService,
   NovoModalService,
   NovoToastService,
+  PlacesSettings,
 } from 'novo-elements/elements';
 import {
   BrowserGlobalRef,
@@ -35,7 +37,7 @@ const NOVO_ELEMENTS_PROVIDERS = [
   imports: [],
 })
 export class NovoElementProviders {
-  static forRoot(options?: { menu: IMenuOptions }): ModuleWithProviders<NovoElementProviders> {
+  static forRoot(options?: { menu?: IMenuOptions; address?: PlacesSettings }): ModuleWithProviders<NovoElementProviders> {
     return {
       ngModule: NovoElementProviders,
       providers: [
@@ -44,6 +46,8 @@ export class NovoElementProviders {
           provide: MENU_OPTIONS,
           useValue: options && options.menu,
         },
+        // Only register when supplied, so a bare forRoot() doesn't shadow a root provider with undefined.
+        ...(options?.address ? [{ provide: NOVO_ADDRESS_CONFIG, useValue: options.address }] : []),
       ],
     };
   }

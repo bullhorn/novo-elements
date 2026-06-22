@@ -8,7 +8,7 @@ import { Key } from 'novo-elements/utils';
 import { Observable } from 'rxjs';
 import { GooglePlacesService } from './places.service';
 
-export interface Settings {
+export interface PlacesSettings {
   geoPredictionServerUrl?: string;
   geoLatLangServiceUrl?: string;
   geoLocDetailServerUrl?: string;
@@ -33,6 +33,17 @@ export interface Settings {
   locationIconUrl?: string;
 }
 
+/** Normalized address prediction; raw provider records are mapped into this via normalizePrediction. */
+export interface AddressLookupPrediction {
+  placeId?: string;
+  primaryText?: string;
+  secondaryText?: string;
+  displayAddress?: string;
+  types?: string[];
+  /** Original provider record, retained so recent-search selection re-emits full detail. */
+  raw?: any;
+}
+
 // Value accessor for the component (supports ngModel)
 const PLACES_VALUE_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
@@ -48,9 +59,9 @@ const PLACES_VALUE_ACCESSOR = {
       <novo-list-item *ngFor="let data of matches; let $index = index" (click)="selectedListNode($event, $index)" [ngClass]="{ active: data === activeMatch }">
         <item-header>
           <item-avatar icon="location"></item-avatar>
-          <item-title>{{ data.structured_formatting?.main_text ? data.structured_formatting.main_text : data.description }}</item-title>
+          <item-title>{{ data.primaryText }}</item-title>
         </item-header>
-        <item-content>{{ data.structured_formatting?.secondary_text }}</item-content>
+        <item-content>{{ data.secondaryText }}</item-content>
       </novo-list-item>
     </novo-list>
   `,
@@ -59,11 +70,13 @@ const PLACES_VALUE_ACCESSOR = {
 })
 export class PlacesListComponent extends BasePickerResults implements OnInit, OnChanges, ControlValueAccessor {
   @Input()
-  userSettings: Settings;
+  userSettings: PlacesSettings;
   @Output()
   termChange: EventEmitter<any> = new EventEmitter<any>();
   @Output()
   select: EventEmitter<any> = new EventEmitter<any>();
+  @Output()
+  matchesUpdated: EventEmitter<AddressLookupPrediction[]> = new EventEmitter<AddressLookupPrediction[]>();
 
   public locationInput: string = '';
   public gettingCurrentLocationFlag: boolean = false;
@@ -71,12 +84,12 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
   public recentDropdownOpen: boolean = false;
   public isSettingsError: boolean = false;
   public settingsErrorMsg: string = '';
-  public settings: Settings = {};
+  public settings: PlacesSettings = {};
   private moduleinit: boolean = false;
   private selectedDataIndex: number = -1;
   private recentSearchData: any = [];
   private userSelectedOption: any = '';
-  private defaultSettings: Settings = {
+  private defaultSettings: PlacesSettings = {
     geoPredictionServerUrl: '',
     geoLatLangServiceUrl: '',
     geoLocDetailServerUrl: '',
@@ -183,10 +196,11 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
   }
 
   // function to execute when user selects a match.
-  selectMatch(match: any): any {
+  selectMatch(match: AddressLookupPrediction): any {
     this.dropdownOpen = false;
     if (this.recentDropdownOpen) {
-      this.setRecentLocation(match);
+      // Recent items carry full detail on `raw`, which downstream consumers need.
+      this.setRecentLocation(match.raw ?? match);
     } else {
       this.getPlaceLocationInfo(match);
     }
@@ -276,7 +290,7 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
   }
 
   // function to set user settings if it is available.
-  private setUserSettings(): Settings {
+  private setUserSettings(): PlacesSettings {
     const _tempObj: any = {};
     if (this.userSettings && typeof this.userSettings === 'object') {
       const keys: string[] = Object.keys(this.defaultSettings);
@@ -328,9 +342,12 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
 
   // function to update the predicted list.
   private updateListItem(listData: any): any {
-    this.matches = listData ? listData : [];
+    this.matches = (listData || []).map((item: any) => this.normalizePrediction(item));
+    // Reset highlight so Enter can't act on a stale prediction.
+    this.activeMatch = undefined;
     this.dropdownOpen = true;
     this.cdr.detectChanges();
+    this.matchesUpdated.emit(this.matches);
   }
 
   // function to show the recent search result.
@@ -338,11 +355,7 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
     this.recentDropdownOpen = true;
     this.dropdownOpen = true;
     this._googlePlacesService.getRecentList(this.settings.recentStorageName).then((result: any) => {
-      if (result) {
-        this.matches = result;
-      } else {
-        this.matches = [];
-      }
+      this.matches = (result || []).map((item: any) => this.normalizePrediction(item));
     });
   }
 
@@ -367,15 +380,16 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
   }
 
   // function to retrieve the location info based on google place id.
-  private getPlaceLocationInfo(selectedData: any): any {
+  private getPlaceLocationInfo(selectedData: AddressLookupPrediction): any {
+    const placeId = selectedData.placeId;
     if (this.settings.useGoogleGeoApi) {
-      this._googlePlacesService.getGeoPlaceDetail(selectedData.place_id).then((data: any) => {
+      this._googlePlacesService.getGeoPlaceDetail(placeId).then((data: any) => {
         if (data) {
           this.setRecentLocation(data);
         }
       });
     } else {
-      this._googlePlacesService.getPlaceDetails(this.settings.geoLocDetailServerUrl, selectedData.place_id).then((result: any) => {
+      this._googlePlacesService.getPlaceDetails(this.settings.geoLocDetailServerUrl, placeId).then((result: any) => {
         if (result) {
           result = this.extractServerList(this.settings.serverResponseDetailHierarchy, result);
           this.setRecentLocation(result);
@@ -387,7 +401,7 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
   // function to store the selected user search in the localstorage.
   private setRecentLocation(data: any): any {
     data = JSON.parse(JSON.stringify(data));
-    data.description = data.description ? data.description : data.formatted_address;
+    data.description = data.description ? data.description : (data.formattedAddress || data.formatted_address);
     data.active = false;
     this.selectedDataIndex = -1;
     this.locationInput = data.description;
@@ -410,6 +424,18 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
     });
   }
 
+  // Fold a raw Google/REST/recent record into the internal AddressLookupPrediction shape.
+  normalizePrediction(raw: any): AddressLookupPrediction {
+    return {
+      placeId: raw?.placeId || raw?.place_id,
+      primaryText: raw?.primaryText || raw?.structured_formatting?.main_text || raw?.displayAddress || raw?.description || '',
+      secondaryText: raw?.secondaryText || raw?.structured_formatting?.secondary_text || '',
+      displayAddress: raw?.displayAddress || raw?.description,
+      types: raw?.types,
+      raw,
+    };
+  }
+
   onKeyDown(event: KeyboardEvent) {
     if (this.dropdownOpen) {
       if (event.key === Key.ArrowUp) {
@@ -421,7 +447,10 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
         return;
       }
       if (event.key === Key.Enter) {
-        this.selectMatch(this.activeMatch);
+        // Only select when a prediction is highlighted.
+        if (this.activeMatch) {
+          this.selectMatch(this.activeMatch);
+        }
         return;
       }
     }
