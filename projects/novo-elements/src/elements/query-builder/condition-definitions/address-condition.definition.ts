@@ -15,7 +15,7 @@ import {
 } from '@angular/core';
 import { AbstractControl, UntypedFormGroup } from '@angular/forms';
 import { NovoPickerToggleElement } from 'novo-elements/elements/field';
-import { PlacesListComponent } from 'novo-elements/elements/places';
+import { NOVO_ADDRESS_CONFIG, PlacesListComponent, PlacesSettings } from 'novo-elements/elements/places';
 import { NovoLabelService } from 'novo-elements/services';
 import { Key } from 'novo-elements/utils';
 import { Subscription } from 'rxjs';
@@ -64,7 +64,7 @@ import { NovoSelectElement } from 'novo-elements/elements/select';
           <novo-field #novoField class="address-location">
             <novo-chip-list [(ngModel)]="chipListModel" [ngModelOptions]="{ standalone: true }" (click)="openPlacesList(viewIndex)">
               <novo-chip *ngFor="let item of formGroup.get('value').value" (removed)="remove(item, formGroup, viewIndex)">
-                <novo-text ellipsis [tooltip]="item.formatted_address" tooltipOnOverflow>{{ item.formatted_address }}</novo-text>
+                <novo-text ellipsis [tooltip]="addressLabel(item)" tooltipOnOverflow>{{ addressLabel(item) }}</novo-text>
                 <novo-icon novoChipRemove>close</novo-icon>
               </novo-chip>
               <input
@@ -79,6 +79,7 @@ import { NovoSelectElement } from 'novo-elements/elements/select';
             <novo-picker-toggle [overlayId]="viewIndex" icon="location" novoSuffix>
               <google-places-list
                 [term]="term"
+                [userSettings]="addressConfig"
                 (select)="selectPlace($event, formGroup, viewIndex)"
                 formControlName="value"
                 #placesPicker/>
@@ -121,6 +122,9 @@ export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef im
   private _addressChangesSubscription: Subscription = Subscription.EMPTY;
 
   public element = inject(ElementRef);
+  // App-wide address config; when provided with the server path, the picker uses the address-search-service
+  // instead of the Google client SDK. Null leaves the picker on its Google default.
+  protected addressConfig: PlacesSettings = inject(NOVO_ADDRESS_CONFIG, { optional: true });
 
   constructor(labelService: NovoLabelService) {
     super(labelService);
@@ -154,6 +158,11 @@ export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef im
     return formGroup.value.value || [];
   }
 
+  // Google client-SDK results use formatted_address; address-search-service results use formattedAddress.
+  addressLabel(item: AddressData): string {
+    return item?.formatted_address ?? item?.formattedAddress ?? '';
+  }
+
   getCurrentOverlay(viewIndex: string): NovoPickerToggleElement {
     return this.overlayChildren?.find(item => item.overlayId === viewIndex);
   }
@@ -171,15 +180,19 @@ export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef im
   }
 
   selectPlace(event: any, formGroup: AbstractControl, viewIndex: string): void {
-    const valueToAdd: AddressData = {
-      address_components: event.address_components,
-      formatted_address: event.formatted_address,
-      geometry: event.geometry,
-      name: event.name,
-      postal_codes: event.postal_codes,
-      place_id: event.place_id,
-      types: event.types,
-    };
+    // Google client-SDK results expose address_components; address-search-service results are already
+    // a flat, provider-agnostic shape and are stored as-is.
+    const valueToAdd: AddressData = event?.address_components
+      ? {
+          address_components: event.address_components,
+          formatted_address: event.formatted_address,
+          geometry: event.geometry,
+          name: event.name,
+          postal_codes: event.postal_codes,
+          place_id: event.place_id,
+          types: event.types,
+        }
+      : { ...event };
     const current: AddressData | AddressData[] = this.getValue(formGroup);
     const updated: AddressData[] = Array.isArray(current) ? [...current, valueToAdd] : [valueToAdd];
     formGroup.get('value').setValue(this.updateRadiusInValues(formGroup, updated));

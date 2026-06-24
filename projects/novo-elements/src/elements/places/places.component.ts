@@ -43,6 +43,10 @@ export interface PlacesSettings {
   currentLocIconUrl?: string;
   searchIconUrl?: string;
   locationIconUrl?: string;
+  /** Bullhorn-managed key; when set, the library lazy-loads the Maps JS SDK with it instead of relying on a host script tag. */
+  googleApiKey?: string;
+  /** Extra Maps JS loader query params, merged over the defaults (libraries=places, loading=async). */
+  googleMapsLoaderParams?: Record<string, string>;
 }
 
 /** Normalized address prediction; raw provider records are mapped into this via normalizePrediction. */
@@ -118,6 +122,8 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
     currentLocIconUrl: '',
     searchIconUrl: '',
     locationIconUrl: '',
+    googleApiKey: '',
+    googleMapsLoaderParams: {},
   };
 
   model: any;
@@ -348,7 +354,7 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
   }
 
   // function to get the autocomplete list based on user input.
-  private getListQuery(value: string): any {
+  private async getListQuery(value: string): Promise<void> {
     this.recentDropdownOpen = false;
     if (this.settings.useGoogleGeoApi) {
       const _tempParams: any = {
@@ -360,9 +366,15 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
         _tempParams.geoLocation = this.settings.geoLocation;
         _tempParams.radius = this.settings.geoRadius;
       }
-      this._googlePlacesService.getGeoPrediction(_tempParams).then((result) => {
+      try {
+        await this._googlePlacesService.loadGoogleMaps(this.settings);
+        const result = await this._googlePlacesService.getGeoPrediction(_tempParams);
         this.updateListItem(result);
-      });
+      } catch (err) {
+        // The Maps SDK failed to load; surface an empty list instead of leaving a stale dropdown.
+        console.error('Failed to load Google Maps for address predictions', err);
+        this.updateListItem([]);
+      }
     } else {
       this._googlePlacesService.getPredictions(this.settings.geoPredictionServerUrl, value, this.ensureSessionToken()).then((result) => {
         result = this.extractServerList(this.settings.serverResponseListHierarchy, result);
@@ -436,14 +448,20 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
   }
 
   // function to execute to get location detail based on latitude and longitude.
-  private getCurrentLocationInfo(latlng: any): any {
+  private async getCurrentLocationInfo(latlng: any): Promise<void> {
     if (this.settings.useGoogleGeoApi) {
-      this._googlePlacesService.getGeoLatLngDetail(latlng).then((result: any) => {
+      try {
+        await this._googlePlacesService.loadGoogleMaps(this.settings);
+        const result = await this._googlePlacesService.getGeoLatLngDetail(latlng);
         if (result) {
           this.setRecentLocation(result);
         }
+      } catch (err) {
+        console.error('Failed to load Google Maps for current location', err);
+      } finally {
+        // Always clear the spinner, even if the SDK never loaded.
         this.gettingCurrentLocationFlag = false;
-      });
+      }
     } else {
       this._googlePlacesService.getLatLngDetail(this.settings.geoLatLangServiceUrl, latlng.lat, latlng.lng).then((result: any) => {
         if (result) {
@@ -459,9 +477,15 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
   private async getPlaceLocationInfo(selectedData: AddressLookupPrediction): Promise<void> {
     const placeId = selectedData.placeId;
     if (this.settings.useGoogleGeoApi) {
-      const data = await this._googlePlacesService.getGeoPlaceDetail(placeId);
-      if (data) {
-        this.setRecentLocation(data);
+      try {
+        // Ensure the SDK is loaded before getGeoPlaceDetail touches window.google.
+        await this._googlePlacesService.loadGoogleMaps(this.settings);
+        const data = await this._googlePlacesService.getGeoPlaceDetail(placeId);
+        if (data) {
+          this.setRecentLocation(data);
+        }
+      } catch (err) {
+        console.error('Failed to load Google Maps for place details', err);
       }
     } else {
       try {

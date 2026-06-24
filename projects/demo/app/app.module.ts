@@ -46,7 +46,9 @@ export function provideAppBridgeService(http) {
         ScrollingModule,
         // Vendor
         NovoElementsModule,
-        NovoElementProviders.forRoot({ address: {} }),
+        // Supplies the key via NOVO_ADDRESS_CONFIG so the address components lazy-load the Maps
+        // SDK through GooglePlacesService — the same path real apps use — instead of a global script.
+        NovoElementProviders.forRoot({ address: { googleApiKey: environment.googlePlacesKey } }),
         // APP
         NovoExamplesRoutesModule], providers: [
         // NovoTemplateService,

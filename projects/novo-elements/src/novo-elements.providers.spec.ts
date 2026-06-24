@@ -14,6 +14,14 @@ describe('NovoElementProviders.forRoot', () => {
     expect(provider.useValue).toBe(address);
   });
 
+  it('passes googleApiKey through to NOVO_ADDRESS_CONFIG', () => {
+    const address = { googleApiKey: 'managed-key' };
+    const moduleWithProviders = NovoElementProviders.forRoot({ address });
+
+    const provider = (moduleWithProviders.providers as any[]).find((p) => p.provide === NOVO_ADDRESS_CONFIG);
+    expect(provider.useValue.googleApiKey).toBe('managed-key');
+  });
+
   it('does NOT register NOVO_ADDRESS_CONFIG for a bare forRoot() (avoids shadowing root config)', () => {
     expect(hasAddressProvider(NovoElementProviders.forRoot().providers as any[])).toBe(false);
     expect(hasAddressProvider(NovoElementProviders.forRoot({}).providers as any[])).toBe(false);

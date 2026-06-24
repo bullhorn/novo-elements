@@ -2,15 +2,77 @@ import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { GlobalRef, LocalStorageService } from 'novo-elements/services';
+import type { PlacesSettings } from './places.component';
 
 @Injectable()
 export class GooglePlacesService {
+  // Shared across the address fields that use this singleton so the SDK is injected at most once.
+  private mapsLoad?: Promise<void>;
+  // The key the SDK was (or is being) loaded with; the Maps JS API can only be loaded once per page.
+  private mapsLoadKey?: string;
+
   constructor(
     private _http: HttpClient,
     @Inject(PLATFORM_ID) private platformId: Object,
     private _global: GlobalRef,
     private _localStorageService: LocalStorageService,
   ) {}
+
+  // Ensure the Google Maps JS SDK is available before any window.google usage.
+  // No-ops when the SDK is already present (host script tag) or no key is configured (search-service path).
+  loadGoogleMaps(settings: PlacesSettings): Promise<void> {
+    const _window: any = this._global.nativeGlobal;
+    if (_window?.google?.maps?.places) {
+      return Promise.resolve();
+    }
+    if (!isPlatformBrowser(this.platformId) || !settings?.googleApiKey) {
+      return Promise.resolve();
+    }
+    if (!this.mapsLoad) {
+      this.mapsLoadKey = settings.googleApiKey;
+      this.mapsLoad = this.injectGoogleMapsScript(settings);
+    } else if (this.mapsLoadKey && this.mapsLoadKey !== settings.googleApiKey) {
+      // The Maps JS API can only be loaded once per page; a second, different key is ignored.
+      console.warn(
+        'GooglePlacesService: the Google Maps SDK is already loading with a different key; ignoring the new googleApiKey.',
+      );
+    }
+    return this.mapsLoad;
+  }
+
+  private injectGoogleMapsScript(settings: PlacesSettings): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      const _window: any = this._global.nativeGlobal;
+      // Build params one at a time so undefined override values are dropped instead of serialized as "undefined".
+      const params = new URLSearchParams();
+      params.set('key', settings.googleApiKey);
+      params.set('libraries', 'places');
+      params.set('loading', 'async');
+      for (const [key, value] of Object.entries(settings.googleMapsLoaderParams ?? {})) {
+        if (value !== undefined && value !== null) {
+          params.set(key, value);
+        }
+      }
+      const script = document.createElement('script');
+      script.src = `https://maps.googleapis.com/maps/api/js?${params.toString()}`;
+      script.async = true;
+      script.onload = () => {
+        // With loading=async, onload fires when the bootstrap loader is ready, not when the
+        // places library is. importLibrary resolves only once the library is actually usable.
+        if (_window?.google?.maps?.importLibrary) {
+          _window.google.maps.importLibrary('places').then(() => resolve(), reject);
+        } else {
+          resolve();
+        }
+      };
+      script.onerror = () => {
+        // Clear the cached promise so a later attempt can retry instead of resolving a failed load.
+        this.mapsLoad = undefined;
+        reject(new Error('Failed to load the Google Maps JavaScript API.'));
+      };
+      document.head.appendChild(script);
+    });
+  }
 
   getPredictions(url: string, query: string, sessionToken?: string): Promise<any> {
     return new Promise((resolve) => {
