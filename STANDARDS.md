@@ -66,14 +66,15 @@ Reference document for code review. Applies to all code in `projects/novo-elemen
 ### Types
 
 -   Prefer specific types over `any` — use `unknown` when the type truly isn't known
--   Never introduce new `any` types — existing `any` usage is technical debt, not a precedent to follow
+-   No `any` types passed through business logic — `any` is acceptable at raw API response / parse boundaries, but assign a type before it's passed around
 
 ### Error Handling
 
 -   No try/catch or fallbacks for scenarios that cannot happen — trust Angular and framework guarantees
 -   Only validate at system boundaries: user input, external API responses
 -   No null checks for values guaranteed by the framework or constructor injection
--   No empty catch blocks — always handle or log the error
+-   No empty catch blocks
+-   Don't catch, log, and rethrow — that duplicates the base error handler while squelching stack info; catch only when adding recovery logic
 
 ### Code Organization
 
@@ -142,6 +143,7 @@ All user-visible strings must go through `NovoLabelService` — never hardcode d
 ### Observables
 
 -   Never use `toPromise()` — it is deprecated; use `firstValueFrom()` or `lastValueFrom()` instead; replace existing usages when working in a file that contains them
+-   Avoid `new Promise()` — it is rarely needed; `async` functions auto-wrap return values, and static helpers cover most other cases: `Promise.resolve(value)`, `Promise.reject(error)`, `Promise.all([...])`
 -   Do not use `toObservable(signal)` in tests — Angular's effect scheduler is unreliable under `isolate: false`; read signals directly or test the underlying logic instead
 -   Prefer `takeUntilDestroyed()` or `DestroyRef` over a manual `Subject` + `takeUntil` pattern for subscription cleanup
 
