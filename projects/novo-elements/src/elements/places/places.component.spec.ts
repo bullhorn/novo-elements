@@ -158,7 +158,99 @@ describe('Elements: PlacesListComponent', () => {
       component['_googlePlacesService'] = { getPlaceDetails } as any;
       component.settings = { useGoogleGeoApi: false, geoLocDetailServerUrl: 'https://api/detail' } as any;
       component['getPlaceLocationInfo']({ placeId: 'abc' });
-      expect(getPlaceDetails).toHaveBeenCalledWith('https://api/detail', 'abc');
+      expect(getPlaceDetails).toHaveBeenCalledWith('https://api/detail', 'abc', '');
+    });
+  });
+
+  describe('Google Places billing session token', () => {
+    const UUID_V4 = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+    const REST_SETTINGS = {
+      useGoogleGeoApi: false,
+      geoPredictionServerUrl: 'https://api/predict',
+      geoLocDetailServerUrl: 'https://api/detail',
+      serverResponseListHierarchy: [],
+      serverResponseDetailHierarchy: [],
+    };
+    const flush = () => new Promise((resolve) => setTimeout(resolve));
+
+    it('should mint a UUID v4 token on the first prediction and reuse it across predictions', () => {
+      const tokens: string[] = [];
+      const getPredictions = vi.fn((_url: string, _query: string, token: string) => {
+        tokens.push(token);
+        return Promise.resolve([]);
+      });
+      component['_googlePlacesService'] = { getPredictions } as any;
+      component.settings = { ...REST_SETTINGS } as any;
+
+      component['getListQuery']('123 Main');
+      component['getListQuery']('123 Main St');
+
+      expect(tokens.length).toBe(2);
+      expect(tokens[0]).toMatch(UUID_V4);
+      expect(tokens[1]).toBe(tokens[0]);
+    });
+
+    it('should forward the active token to getPlaceDetails and clear it once details resolve', async () => {
+      let detailToken: string;
+      const getPredictions = vi.fn().mockResolvedValue([]);
+      const getPlaceDetails = vi.fn((_url: string, _placeId: string, token: string) => {
+        detailToken = token;
+        return Promise.resolve(null);
+      });
+      component['_googlePlacesService'] = { getPredictions, getPlaceDetails } as any;
+      component.settings = { ...REST_SETTINGS } as any;
+
+      component['getListQuery']('123 Main');
+      const minted = component['sessionToken'];
+      expect(minted).toMatch(UUID_V4);
+
+      component['getPlaceLocationInfo']({ placeId: 'abc' });
+      await flush();
+
+      expect(detailToken).toBe(minted);
+      expect(component['sessionToken']).toBe('');
+    });
+
+    it('should mint a fresh, distinct token for the next interaction after a selection', async () => {
+      const getPredictions = vi.fn().mockResolvedValue([]);
+      const getPlaceDetails = vi.fn().mockResolvedValue(null);
+      component['_googlePlacesService'] = { getPredictions, getPlaceDetails } as any;
+      component.settings = { ...REST_SETTINGS } as any;
+
+      component['getListQuery']('first');
+      const firstToken = component['sessionToken'];
+      component['getPlaceLocationInfo']({ placeId: 'abc' });
+      await flush();
+
+      component['getListQuery']('second');
+      const secondToken = component['sessionToken'];
+
+      expect(secondToken).toMatch(UUID_V4);
+      expect(secondToken).not.toBe(firstToken);
+    });
+
+    it('should refresh the token after the inactivity timeout', () => {
+      const getPredictions = vi.fn().mockResolvedValue([]);
+      component['_googlePlacesService'] = { getPredictions } as any;
+      component.settings = { ...REST_SETTINGS } as any;
+
+      component['getListQuery']('a');
+      const firstToken = component['sessionToken'];
+      component['sessionTokenStartedAt'] = Date.now() - 4 * 60 * 1000;
+      component['getListQuery']('ab');
+
+      expect(component['sessionToken']).not.toBe(firstToken);
+    });
+
+    it('should clear the token when the input is emptied', () => {
+      component['sessionToken'] = 'spent-token';
+      component['sessionTokenStartedAt'] = Date.now();
+      component.settings = { showRecentSearch: false } as any;
+      component.locationInput = '';
+
+      component.searchinputCallback(null);
+
+      expect(component['sessionToken']).toBe('');
     });
   });
 });

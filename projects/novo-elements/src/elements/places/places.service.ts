@@ -12,10 +12,11 @@ export class GooglePlacesService {
     private _localStorageService: LocalStorageService,
   ) {}
 
-  getPredictions(url: string, query: string): Promise<any> {
+  getPredictions(url: string, query: string, sessionToken?: string): Promise<any> {
     return new Promise((resolve) => {
       const separator = url.includes('?') ? '&' : '?';
-      this._http.get(url + separator + 'query=' + query).subscribe((data: any) => {
+      const sessionParam = sessionToken ? '&sessionToken=' + sessionToken : '';
+      this._http.get(url + separator + 'query=' + query + sessionParam).subscribe((data: any) => {
         if (data) {
           resolve(data);
         } else {
@@ -38,10 +39,11 @@ export class GooglePlacesService {
     });
   }
 
-  getPlaceDetails(url: string, placeId: string): Promise<any> {
+  getPlaceDetails(url: string, placeId: string, sessionToken?: string): Promise<any> {
     return new Promise((resolve) => {
       const separator = url.includes('?') ? '&' : '?';
-      this._http.get(url + separator + 'query=' + placeId).subscribe((data: any) => {
+      const sessionParam = sessionToken ? '&sessionToken=' + sessionToken : '';
+      this._http.get(url + separator + 'query=' + placeId + sessionParam).subscribe((data: any) => {
         if (data) {
           resolve(data);
         } else {
@@ -230,16 +232,13 @@ export class GooglePlacesService {
       geocoder.geocode({ location: placeDetail.geometry.location }, (results, status) => {
         if (status === 'OK' && results.length) {
           resolve(
-            results.reduce(
-              (postalCodes: string[], result: any) => {
-                const postalCodeComponent = result.address_components.find(item => item.types.includes('postal_code'));
-                if (postalCodeComponent && !postalCodes.includes(postalCodeComponent.long_name)) {
-                  postalCodes.push(postalCodeComponent.long_name);
-                }
-                return postalCodes;
-              },
-              [],
-            ),
+            results.reduce((postalCodes: string[], result: any) => {
+              const postalCodeComponent = result.address_components.find((item) => item.types.includes('postal_code'));
+              if (postalCodeComponent && !postalCodes.includes(postalCodeComponent.long_name)) {
+                postalCodes.push(postalCodeComponent.long_name);
+              }
+              return postalCodes;
+            }, []),
           );
         } else {
           resolve(null);

@@ -1,6 +1,18 @@
 // NG2
 import { isPlatformBrowser } from '@angular/common';
-import { ChangeDetectorRef, Component, ElementRef, EventEmitter, forwardRef, Inject, Input, OnChanges, OnInit, Output, PLATFORM_ID } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  forwardRef,
+  Inject,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  PLATFORM_ID,
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BasePickerResults } from 'novo-elements/elements/picker';
 import { GlobalRef } from 'novo-elements/services';
@@ -52,11 +64,15 @@ const PLACES_VALUE_ACCESSOR = {
 };
 
 @Component({
-    selector: 'google-places-list',
-    providers: [PLACES_VALUE_ACCESSOR],
-    template: `
+  selector: 'google-places-list',
+  providers: [PLACES_VALUE_ACCESSOR],
+  template: `
     <novo-list direction="vertical">
-      <novo-list-item *ngFor="let data of matches; let $index = index" (click)="selectedListNode($event, $index)" [ngClass]="{ active: data === activeMatch }">
+      <novo-list-item
+        *ngFor="let data of matches; let $index = index"
+        (click)="selectedListNode($event, $index)"
+        [ngClass]="{ active: data === activeMatch }"
+      >
         <item-header>
           <item-avatar icon="location"></item-avatar>
           <item-title>{{ data.primaryText }}</item-title>
@@ -65,10 +81,12 @@ const PLACES_VALUE_ACCESSOR = {
       </novo-list-item>
     </novo-list>
   `,
-    styleUrls: ['./places.component.scss'],
-    standalone: false,
+  styleUrls: ['./places.component.scss'],
+  standalone: false,
 })
 export class PlacesListComponent extends BasePickerResults implements OnInit, OnChanges, ControlValueAccessor {
+  private static readonly SESSION_TOKEN_TIMEOUT_MS: number = 3 * 60 * 1000;
+
   @Input()
   userSettings: PlacesSettings;
   @Output()
@@ -89,6 +107,8 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
   private selectedDataIndex: number = -1;
   private recentSearchData: any = [];
   private userSelectedOption: any = '';
+  private sessionToken: string = '';
+  private sessionTokenStartedAt: number = 0;
   private defaultSettings: PlacesSettings = {
     geoPredictionServerUrl: '',
     geoLatLangServiceUrl: '',
@@ -166,6 +186,7 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
       this.getListQuery(inputVal);
     } else {
       this.matches = [];
+      this.clearSessionToken();
       if (this.userSelectedOption) {
         this.userQuerySubmit('false');
       }
@@ -237,6 +258,43 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
         }
       });
     }
+  }
+
+  // Fold a raw Google/REST/recent record into the internal AddressLookupPrediction shape.
+  normalizePrediction(raw: any): AddressLookupPrediction {
+    return {
+      placeId: raw?.placeId || raw?.place_id,
+      primaryText: raw?.primaryText || raw?.structured_formatting?.main_text || raw?.displayAddress || raw?.description || '',
+      secondaryText: raw?.secondaryText || raw?.structured_formatting?.secondary_text || '',
+      displayAddress: raw?.displayAddress || raw?.description,
+      types: raw?.types,
+      raw,
+    };
+  }
+
+  onKeyDown(event: KeyboardEvent) {
+    if (this.dropdownOpen) {
+      if (event.key === Key.ArrowUp) {
+        this.prevActiveMatch();
+        return;
+      }
+      if (event.key === Key.ArrowDown) {
+        this.nextActiveMatch();
+        return;
+      }
+      if (event.key === Key.Enter) {
+        // Only select when a prediction is highlighted.
+        if (this.activeMatch) {
+          this.selectMatch(this.activeMatch);
+        }
+        return;
+      }
+    }
+  }
+
+  search(term, mode?): Observable<any> {
+    // Disable the base search term functionality here since it is handled by the places picker separately
+    return new Observable();
   }
 
   // module initialization happens. function called by ngOninit and ngOnChange
@@ -320,11 +378,29 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
         this.updateListItem(result);
       });
     } else {
-      this._googlePlacesService.getPredictions(this.settings.geoPredictionServerUrl, value).then((result) => {
+      this._googlePlacesService.getPredictions(this.settings.geoPredictionServerUrl, value, this.ensureSessionToken()).then((result) => {
         result = this.extractServerList(this.settings.serverResponseListHierarchy, result);
         this.updateListItem(result);
       });
     }
+  }
+
+  // Returns the active billing-session token for prediction calls, minting a fresh UUID v4 when
+  // none exists or the previous one has gone stale (~3 min of inactivity). Each call refreshes the
+  // inactivity window.
+  private ensureSessionToken(): string {
+    const now = Date.now();
+    if (!this.sessionToken || now - this.sessionTokenStartedAt > PlacesListComponent.SESSION_TOKEN_TIMEOUT_MS) {
+      this.sessionToken = crypto.randomUUID();
+    }
+    this.sessionTokenStartedAt = now;
+    return this.sessionToken;
+  }
+
+  // Ends the current billing session so the next interaction starts a fresh one.
+  private clearSessionToken(): void {
+    this.sessionToken = '';
+    this.sessionTokenStartedAt = 0;
   }
 
   // function to extratc custom data which is send by the server.
@@ -389,7 +465,9 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
         }
       });
     } else {
-      this._googlePlacesService.getPlaceDetails(this.settings.geoLocDetailServerUrl, placeId).then((result: any) => {
+      this._googlePlacesService.getPlaceDetails(this.settings.geoLocDetailServerUrl, placeId, this.sessionToken).then((result: any) => {
+        // The details call closes the Google billing session; the token is now spent.
+        this.clearSessionToken();
         if (result) {
           result = this.extractServerList(this.settings.serverResponseDetailHierarchy, result);
           this.setRecentLocation(result);
@@ -401,7 +479,7 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
   // function to store the selected user search in the localstorage.
   private setRecentLocation(data: any): any {
     data = JSON.parse(JSON.stringify(data));
-    data.description = data.description ? data.description : (data.formattedAddress || data.formatted_address);
+    data.description = data.description ? data.description : data.formattedAddress || data.formatted_address;
     data.active = false;
     this.selectedDataIndex = -1;
     this.locationInput = data.description;
@@ -422,42 +500,5 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
     this._googlePlacesService.getRecentList(this.settings.recentStorageName).then((data: any) => {
       this.recentSearchData = data && data.length ? data : [];
     });
-  }
-
-  // Fold a raw Google/REST/recent record into the internal AddressLookupPrediction shape.
-  normalizePrediction(raw: any): AddressLookupPrediction {
-    return {
-      placeId: raw?.placeId || raw?.place_id,
-      primaryText: raw?.primaryText || raw?.structured_formatting?.main_text || raw?.displayAddress || raw?.description || '',
-      secondaryText: raw?.secondaryText || raw?.structured_formatting?.secondary_text || '',
-      displayAddress: raw?.displayAddress || raw?.description,
-      types: raw?.types,
-      raw,
-    };
-  }
-
-  onKeyDown(event: KeyboardEvent) {
-    if (this.dropdownOpen) {
-      if (event.key === Key.ArrowUp) {
-        this.prevActiveMatch();
-        return;
-      }
-      if (event.key === Key.ArrowDown) {
-        this.nextActiveMatch();
-        return;
-      }
-      if (event.key === Key.Enter) {
-        // Only select when a prediction is highlighted.
-        if (this.activeMatch) {
-          this.selectMatch(this.activeMatch);
-        }
-        return;
-      }
-    }
-  }
-
-  search(term, mode?): Observable<any> {
-    // Disable the base search term functionality here since it is handled by the places picker separately
-    return new Observable();
   }
 }
