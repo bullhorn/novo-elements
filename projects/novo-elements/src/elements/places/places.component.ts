@@ -18,6 +18,7 @@ import { BasePickerResults } from 'novo-elements/elements/picker';
 import { GlobalRef } from 'novo-elements/services';
 import { Key } from 'novo-elements/utils';
 import { Observable } from 'rxjs';
+import { v4 as uuidv4 } from 'uuid';
 import { GooglePlacesService } from './places.service';
 
 export interface PlacesSettings {
@@ -391,7 +392,7 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
   private ensureSessionToken(): string {
     const now = Date.now();
     if (!this.sessionToken || now - this.sessionTokenStartedAt > PlacesListComponent.SESSION_TOKEN_TIMEOUT_MS) {
-      this.sessionToken = crypto.randomUUID();
+      this.sessionToken = uuidv4();
     }
     this.sessionTokenStartedAt = now;
     return this.sessionToken;
