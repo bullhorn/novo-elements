@@ -66,21 +66,7 @@ const PLACES_VALUE_ACCESSOR = {
 @Component({
   selector: 'google-places-list',
   providers: [PLACES_VALUE_ACCESSOR],
-  template: `
-    <novo-list direction="vertical">
-      <novo-list-item
-        *ngFor="let data of matches; let $index = index"
-        (click)="selectedListNode($event, $index)"
-        [ngClass]="{ active: data === activeMatch }"
-      >
-        <item-header>
-          <item-avatar icon="location"></item-avatar>
-          <item-title>{{ data.primaryText }}</item-title>
-        </item-header>
-        <item-content>{{ data.secondaryText }}</item-content>
-      </novo-list-item>
-    </novo-list>
-  `,
+  templateUrl: './places.component.html',
   styleUrls: ['./places.component.scss'],
   standalone: false,
 })
@@ -292,7 +278,7 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
     }
   }
 
-  search(term, mode?): Observable<any> {
+  override search(term, mode?): Observable<any> {
     // Disable the base search term functionality here since it is handled by the places picker separately
     return new Observable();
   }
@@ -412,7 +398,6 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
     });
   }
 
-  // Ends the current billing session so the next interaction starts a fresh one.
   private clearSessionToken(): void {
     this.sessionToken = '';
     this.sessionTokenStartedAt = 0;
