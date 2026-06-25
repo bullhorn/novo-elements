@@ -3,6 +3,7 @@ on:
   push:
     tags:
       - '[0-9]+.[0-9]+.[0-9]+'
+      - '[0-9]+.[0-9]+.[0-9]+-*'
   workflow_dispatch:
     inputs:
       dry-run:
@@ -29,30 +30,14 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - name: Update npm
         run: npm install -g npm@10.9.7
-      - name: Verify tag matches package.json version
-        if: github.event_name == 'push'
-        run: |
-          VERSION=$(node -p "require('./package.json').version")
-          TAG="${{ github.ref_name }}"
-          echo "Tag: $TAG"
-          echo "package.json version: $VERSION"
-          if [ "$TAG" != "$VERSION" ]; then
-            echo "::error::Tag '$TAG' does not match package.json version '$VERSION'"
-            exit 1
-          fi
       - name: Install Dependencies
         run: |
           npm ci
       - name: Building Projects
         run: |
           npm run build:ci
-      - name: Sync dist version with root package.json
-        run: |
-          VERSION=$(node -p "require('./package.json').version")
-          echo "Setting dist/novo-elements version to $VERSION"
-          (cd dist/novo-elements && npm version "$VERSION" --no-git-tag-version --allow-same-version)
       - name: Publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          npm publish dist/novo-elements${{ github.event.inputs.dry-run == 'true' && ' --dry-run' || '' }}
+          npm publish ./dist/novo-elements
