@@ -18,7 +18,6 @@ import { BasePickerResults } from 'novo-elements/elements/picker';
 import { GlobalRef } from 'novo-elements/services';
 import { Key } from 'novo-elements/utils';
 import { Observable } from 'rxjs';
-import { v4 as uuidv4 } from 'uuid';
 import { GooglePlacesService } from './places.service';
 
 export interface PlacesSettings {
@@ -392,10 +391,25 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
   private ensureSessionToken(): string {
     const now = Date.now();
     if (!this.sessionToken || now - this.sessionTokenStartedAt > PlacesListComponent.SESSION_TOKEN_TIMEOUT_MS) {
-      this.sessionToken = uuidv4();
+      this.sessionToken = this.generateSessionToken();
     }
     this.sessionTokenStartedAt = now;
     return this.sessionToken;
+  }
+
+  // Mints a v4 UUID for the Google Places billing session. Prefers the built-in crypto.randomUUID(),
+  // which exists only in secure contexts (HTTPS / localhost). Falls back to a locally generated UUID for
+  // insecure-context local development (e.g. localhost development); the token only needs to be a unique
+  // opaque string, so Math.random() is acceptable there.
+  private generateSessionToken(): string {
+    if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+      return crypto.randomUUID();
+    }
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (char) => {
+      const random: number = (Math.random() * 16) | 0;
+      const value: number = char === 'x' ? random : (random & 0x3) | 0x8;
+      return value.toString(16);
+    });
   }
 
   // Ends the current billing session so the next interaction starts a fresh one.

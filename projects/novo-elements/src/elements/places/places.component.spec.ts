@@ -252,5 +252,15 @@ describe('Elements: PlacesListComponent', () => {
 
       expect(component['sessionToken']).toBe('');
     });
+
+    it('should fall back to a locally generated UUID v4 when crypto.randomUUID is unavailable', () => {
+      const original = (globalThis.crypto as any).randomUUID;
+      (globalThis.crypto as any).randomUUID = undefined;
+      try {
+        expect(component['generateSessionToken']()).toMatch(UUID_V4);
+      } finally {
+        (globalThis.crypto as any).randomUUID = original;
+      }
+    });
   });
 });
