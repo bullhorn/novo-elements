@@ -40,6 +40,8 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlVal
   name;
   @Input()
   minimal;
+  @Input() customConfig: any = null;
+  @Input() customFonts: string = '';
   @Input()
   startupFocus: boolean = false;
   @Input()
@@ -176,7 +178,7 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlVal
       disableNativeSpellChecker: false,
       removePlugins: 'liststyle,tabletools,contextmenu,tableselection', // allows browser based spell checking
       extraAllowedContent: '*(*){*};table tbody tr td th[*];', // allows class names (*) and inline styles {*} for all and attributes [*] on tables
-      font_names:
+      font_names: this.customFonts ? this.customFonts :
         'Arial/Arial, Helvetica, sans-serif;' +
         'Calibri/Calibri, Verdana, Geneva, sans-serif;' +
         'Comic Sans MS/Comic Sans MS, cursive;' +
@@ -241,7 +243,11 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlVal
       filebrowserImageUploadUrl: this.fileBrowserImageUploadUrl,
     };
 
-    return Object.assign(baseConfig, this.minimal ? minimalConfig : extendedConfig);
+    const config = this.customConfig
+                    ? this.customConfig
+                    : this.minimal ? minimalConfig : extendedConfig;
+
+    return Object.assign(baseConfig, config);
   }
 
   writeValue(value) {

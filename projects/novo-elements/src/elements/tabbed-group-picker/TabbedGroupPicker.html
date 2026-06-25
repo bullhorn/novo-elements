@@ -9,10 +9,31 @@
     <ng-content></ng-content>
     <div class="tabbed-group-picker-button-label">{{ buttonConfig.label }}</div>
   </novo-button>
-  <div class="tabbed-group-picker-search" data-automation-id="tabbed-group-picker-search" (keydown)="dropdown._handleKeydown($event)">
-    <input #inputElement type="text" [placeholder]="labelService.search" [value]="filterText | async" (input)="onFilter($event)" />
-    <i class="bhi-search" *ngIf="!(filterText | async)"></i>
-    <i class="bhi-times" *ngIf="(filterText | async)" (click)="onClearFilter($event)" (keydown.space)="onClearFilter($event)"></i>
+  <div class="tabbed-group-picker-search"
+    [class.use-chips]="useChips()"
+    data-automation-id="tabbed-group-picker-search"
+    (keydown)="dropdown._handleKeydown($event)">
+    @if (useChips()) {
+      <novo-chip-list>
+        <novo-chip *ngFor="let chip of displayedChips()" [value]="chip" [size]="chipSize()">
+          <novo-icon *ngIf="chip.icon?.entityColor" class="txc-{{ chip.icon.entityColor }}" novoChipAvatar>circle</novo-icon>
+          <novo-icon *ngIf="!chip.icon?.entityColor && chip.icon">{{ chip.icon }}</novo-icon>
+          <novo-text ellipsis tooltipOnOverflow>{{ chip.label || chip.name || chip.title || chip.value }}</novo-text>
+          <novo-icon novoChipRemove (click)="activateItem(chip)">x</novo-icon>
+        </novo-chip>
+        <div *ngIf="selectedChips().length" class="hidden-chips-toggle" (click)="showAllChipsToggle($event)">
+          <novo-label *ngIf="hiddenChips().length && !showAllChips()" color="positive">+ {{ hiddenChips().length }} {{ labelService.more }} </novo-label>
+          <novo-label *ngIf="showAllChips()" color="positive"><novo-icon>sort-asc</novo-icon> {{ labelService.showLess }}</novo-label>
+        </div>
+        <input #inputElement class="chip-list-input" type="text" [value]="filterText | async" (input)="onFilter($event)" />
+        <i class="bhi-search" *ngIf="!(filterText | async) && !showAllChips()" (click)="inputElement.focus()"></i>
+        <i class="bhi-times" *ngIf="(filterText | async)" (click)="onClearFilter($event)" (keydown.space)="onClearFilter($event)"></i>
+      </novo-chip-list>
+    } @else {
+      <input #inputElement type="text" [placeholder]="labelService.search" [value]="filterText | async" (input)="onFilter($event)" />
+      <i class="bhi-search" *ngIf="!(filterText | async)"></i>
+      <i class="bhi-times" *ngIf="(filterText | async)" (click)="onClearFilter($event)" (keydown.space)="onClearFilter($event)"></i>
+    }
   </div>
   <div class="tabbed-group-picker-column-container" (keydown)="dropdown._handleKeydown($event)">
     <div class="tabbed-group-picker-column left">

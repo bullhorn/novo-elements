@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormUtils, NovoAsideRef, NovoAsideService, PickerControl, PickerResults, TextBoxControl } from 'novo-elements';
 
 @Component({
@@ -73,6 +73,7 @@ export class AsideFormDemo implements OnInit {
     selector: 'aside-form-example',
     templateUrl: 'aside-form-example.html',
     styleUrls: ['aside-form-example.css'],
+    encapsulation: ViewEncapsulation.None,
     standalone: false,
 })
 export class AsideFormExample {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { NovoAsideRef, NovoAsideService } from 'novo-elements';
 
 interface CustomParams {
@@ -72,6 +72,7 @@ export class AsideCustomDemo {
     selector: 'aside-usage-example',
     templateUrl: 'aside-usage-example.html',
     styleUrls: ['aside-usage-example.css'],
+    encapsulation: ViewEncapsulation.None,
     standalone: false,
 })
 export class AsideUsageExample {

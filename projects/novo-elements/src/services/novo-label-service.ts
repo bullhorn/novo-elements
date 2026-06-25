@@ -147,6 +147,7 @@ export class NovoLabelService {
   beginsWith = 'Begins With';
   true = 'True';
   false = 'False';
+  like = 'Matches';
   before = 'Before';
   after = 'After';
   within = 'Within';

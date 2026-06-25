@@ -17,6 +17,7 @@ export interface IDataTablePreferences {
   hasUnsavedChanges?: boolean;
   unsavedChanges?: any;
   useBooleanKeywords?: boolean;
+  cardView?: boolean;
 }
 
 export interface AutobuildEntityData {
