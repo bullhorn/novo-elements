@@ -2,7 +2,7 @@ import { click, scrollIntoView } from '../utils/ElementActionUtil';
 import { formControlsUrl, getURLs } from '../utils/EnvironmentUtil';
 import { codeExample, Classes } from '../utils/SelectorUtil';
 import { verifyPresent, verifyClassPresent, verifyTextIncludes } from '../utils/VerifyUtil';
-import { selectSelectors } from '../utils/SelectUtil';
+import { selectSelectors, selectBasicOption, selectLegacyOption, selectMultipleOption } from '../utils/SelectUtil';
 
 describe('Select Demo Page', () => {
     const url = formControlsUrl('select');
@@ -44,8 +44,8 @@ describe('Select Demo Page', () => {
 
         it('should open dropdown and select an option', async () => {
             await click(selectSelectors.basicInput);
-            await verifyPresent(selectSelectors.basicOption(0), 'first option in dropdown');
-            await click(selectSelectors.basicOption(0));
+            await verifyPresent(selectBasicOption(0), 'first option in dropdown');
+            await click(selectBasicOption(0));
             await verifyTextIncludes(selectSelectors.basicValueLabel, 'Alpha', 'basic select value label after selection');
         });
     });
@@ -86,8 +86,8 @@ describe('Select Demo Page', () => {
 
         it('should open dropdown and select an option', async () => {
             await click(selectSelectors.legacyInput);
-            await verifyPresent(selectSelectors.legacyOption(0), 'first option in legacy dropdown');
-            await click(selectSelectors.legacyOption(0));
+            await verifyPresent(selectLegacyOption(0), 'first option in legacy dropdown');
+            await click(selectLegacyOption(0));
             await verifyTextIncludes(selectSelectors.legacyValueLabel, 'Alpha', 'legacy select value label after selection');
         });
     });
@@ -121,8 +121,8 @@ describe('Select Demo Page', () => {
 
         it('should open dropdown and add a selection', async () => {
             await click(selectSelectors.multipleInput);
-            await verifyPresent(selectSelectors.multipleOption(0), 'first option in multiple select dropdown');
-            await click(selectSelectors.multipleOption(0));
+            await verifyPresent(selectMultipleOption(0), 'first option in multiple select dropdown');
+            await click(selectMultipleOption(0));
             await verifyTextIncludes(selectSelectors.multipleValueLabel, 'Alabama', 'multiple select value label after adding Alabama');
         });
     });

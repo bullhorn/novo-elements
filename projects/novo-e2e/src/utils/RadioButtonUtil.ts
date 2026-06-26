@@ -2,22 +2,59 @@ import { automationId } from './SelectorUtil';
 
 export const radioSelectors = {
     basicGroup: automationId('radio-basic-group'),
-    basicRadio: (value: string): string => automationId(`radio-basic-${value}`),
-    basicIcon: (value: string): string => `${automationId(`radio-basic-${value}`)} i`,
-    basicLabel: (value: string): string => `${automationId(`radio-basic-${value}`)} label`,
-
     buttonGroup: automationId('radio-button-group'),
-    buttonRadio: (value: string): string => automationId(`radio-button-${value}`),
-    buttonControl: (value: string): string => `${automationId(`radio-button-${value}`)} novo-button`,
-    buttonLabel: (value: string): string => `${automationId(`radio-button-${value}`)} label`,
-
     iconGroup: automationId('radio-icon-group'),
-    iconRadio: (icon: string): string => automationId(`radio-icon-${icon}`),
-    iconControl: (icon: string): string => `${automationId(`radio-icon-${icon}`)} novo-button`,
-    iconLabel: (icon: string): string => `${automationId(`radio-icon-${icon}`)} label`,
-
     verticalGroup: automationId('radio-vertical-group'),
-    verticalRadio: (value: string): string => automationId(`radio-vertical-${value}`),
-    verticalIcon: (value: string): string => `${automationId(`radio-vertical-${value}`)} i`,
-    verticalLabel: (value: string): string => `${automationId(`radio-vertical-${value}`)} label`,
 };
+
+function radioItem(group: string, value: string): string {
+    return automationId(`radio-${group}-${value}`);
+}
+
+export function basicRadio(value: string): string {
+    return radioItem('basic', value);
+}
+
+export function basicRadioIcon(value: string): string {
+    return `${radioItem('basic', value)} i`;
+}
+
+export function basicRadioLabel(value: string): string {
+    return `${radioItem('basic', value)} label`;
+}
+
+export function buttonRadio(value: string): string {
+    return radioItem('button', value);
+}
+
+export function buttonRadioControl(value: string): string {
+    return `${radioItem('button', value)} novo-button`;
+}
+
+export function buttonRadioLabel(value: string): string {
+    return `${radioItem('button', value)} label`;
+}
+
+export function iconRadio(icon: string): string {
+    return radioItem('icon', icon);
+}
+
+export function iconRadioControl(icon: string): string {
+    return `${radioItem('icon', icon)} novo-button`;
+}
+
+export function iconRadioLabel(icon: string): string {
+    return `${radioItem('icon', icon)} label`;
+}
+
+export function verticalRadio(value: string): string {
+    return radioItem('vertical', value);
+}
+
+export function verticalRadioIcon(value: string): string {
+    return `${radioItem('vertical', value)} i`;
+}
+
+export function verticalRadioLabel(value: string): string {
+    return `${radioItem('vertical', value)} label`;
+}

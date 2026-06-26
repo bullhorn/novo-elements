@@ -2,7 +2,20 @@ import { click, scrollIntoView } from '../utils/ElementActionUtil';
 import { formControlsUrl, getURLs } from '../utils/EnvironmentUtil';
 import { codeExample, Classes } from '../utils/SelectorUtil';
 import { verifyPresent, verifyClassPresent, verifyClassAbsent } from '../utils/VerifyUtil';
-import { radioSelectors } from '../utils/RadioButtonUtil';
+import {
+    radioSelectors,
+    basicRadio,
+    basicRadioIcon,
+    basicRadioLabel,
+    buttonRadio,
+    buttonRadioControl,
+    buttonRadioLabel,
+    iconRadio,
+    iconRadioControl,
+    iconRadioLabel,
+    verticalRadioIcon,
+    verticalRadioLabel,
+} from '../utils/RadioButtonUtil';
 
 describe('Radio Buttons Demo Page', () => {
     const url = formControlsUrl('radio-buttons');
@@ -41,23 +54,23 @@ describe('Radio Buttons Demo Page', () => {
 
         radioInitialStates.forEach(({ value, label, iconClass }) => {
             it(`should display ${label} radio with correct initial icon`, async () => {
-                await verifyClassPresent(radioSelectors.basicIcon(value), iconClass, `${label} radio icon`);
+                await verifyClassPresent(basicRadioIcon(value), iconClass, `${label} radio icon`);
             });
         });
 
         it('should have disabled class on radio-two label', async () => {
-            await verifyClassPresent(radioSelectors.basicLabel('two'), Classes.disabled, 'radio-two label');
+            await verifyClassPresent(basicRadioLabel('two'), Classes.disabled, 'radio-two label');
         });
 
         it('should not have disabled class on enabled radio labels', async () => {
-            await verifyClassAbsent(radioSelectors.basicLabel('one'), Classes.disabled, 'radio-one label');
-            await verifyClassAbsent(radioSelectors.basicLabel('three'), Classes.disabled, 'radio-three label');
+            await verifyClassAbsent(basicRadioLabel('one'), Classes.disabled, 'radio-one label');
+            await verifyClassAbsent(basicRadioLabel('three'), Classes.disabled, 'radio-three label');
         });
 
         it('should select radio-one on click', async () => {
-            await click(radioSelectors.basicRadio('one'));
-            await verifyClassPresent(radioSelectors.basicIcon('one'), Classes.bhiRadioFilled, 'radio-one icon after click');
-            await verifyClassAbsent(radioSelectors.basicIcon('one'), Classes.bhiRadioEmpty, 'radio-one icon after click');
+            await click(basicRadio('one'));
+            await verifyClassPresent(basicRadioIcon('one'), Classes.bhiRadioFilled, 'radio-one icon after click');
+            await verifyClassAbsent(basicRadioIcon('one'), Classes.bhiRadioEmpty, 'radio-one icon after click');
         });
     });
 
@@ -74,21 +87,21 @@ describe('Radio Buttons Demo Page', () => {
         const uncheckedButtons = ['one', 'two', 'three'];
         uncheckedButtons.forEach((value) => {
             it(`should have radio-${value} initially unchecked`, async () => {
-                await verifyClassPresent(radioSelectors.buttonControl(value), Classes.radioButtonUnchecked, `button-${value} initial state`);
+                await verifyClassPresent(buttonRadioControl(value), Classes.radioButtonUnchecked, `button-${value} initial state`);
             });
         });
 
         const disabledButtons = ['disabled', 'also-disabled'];
         disabledButtons.forEach((value) => {
             it(`should have disabled class on radio-button-${value}`, async () => {
-                await verifyClassPresent(radioSelectors.buttonLabel(value), Classes.disabled, `radio-button-${value} label`);
+                await verifyClassPresent(buttonRadioLabel(value), Classes.disabled, `radio-button-${value} label`);
             });
         });
 
         it('should select radio-one on click', async () => {
-            await click(radioSelectors.buttonRadio('one'));
-            await verifyClassPresent(radioSelectors.buttonControl('one'), Classes.radioButtonChecked, 'button-one after click');
-            await verifyClassPresent(radioSelectors.buttonControl('two'), Classes.radioButtonUnchecked, 'button-two after click');
+            await click(buttonRadio('one'));
+            await verifyClassPresent(buttonRadioControl('one'), Classes.radioButtonChecked, 'button-one after click');
+            await verifyClassPresent(buttonRadioControl('two'), Classes.radioButtonUnchecked, 'button-two after click');
         });
     });
 
@@ -105,19 +118,19 @@ describe('Radio Buttons Demo Page', () => {
         it('should display all icon radios', async () => {
             const iconRadios = ['company', 'job', 'candidate', 'opportunity', 'lead'];
             for (const icon of iconRadios) {
-                await verifyPresent(radioSelectors.iconRadio(icon), `${icon} icon radio`);
+                await verifyPresent(iconRadio(icon), `${icon} icon radio`);
             }
         });
 
         it('should have disabled class on all disabled icon radios', async () => {
             const disabledIcons = ['opportunity', 'lead'];
             for (const icon of disabledIcons) {
-                await verifyClassPresent(radioSelectors.iconLabel(icon), Classes.disabled, `${icon} icon radio label`);
+                await verifyClassPresent(iconRadioLabel(icon), Classes.disabled, `${icon} icon radio label`);
             }
         });
 
         it('should have lead icon radio initially checked', async () => {
-            await verifyClassPresent(radioSelectors.iconControl('lead'), Classes.radioButtonChecked, 'lead icon control');
+            await verifyClassPresent(iconRadioControl('lead'), Classes.radioButtonChecked, 'lead icon control');
         });
     });
 
@@ -133,12 +146,12 @@ describe('Radio Buttons Demo Page', () => {
 
         radioInitialStates.forEach(({ value, label, iconClass }) => {
             it(`should display vertical ${label} radio with correct initial icon`, async () => {
-                await verifyClassPresent(radioSelectors.verticalIcon(value), iconClass, `vertical ${label} radio icon`);
+                await verifyClassPresent(verticalRadioIcon(value), iconClass, `vertical ${label} radio icon`);
             });
         });
 
         it('should have disabled class on vertical-two label', async () => {
-            await verifyClassPresent(radioSelectors.verticalLabel('two'), Classes.disabled, 'vertical-two label');
+            await verifyClassPresent(verticalRadioLabel('two'), Classes.disabled, 'vertical-two label');
         });
     });
 });
