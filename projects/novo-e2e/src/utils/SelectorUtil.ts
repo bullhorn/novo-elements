@@ -39,7 +39,11 @@ export enum Classes {
     activeRouterLink = 'router-link-active',
     bhiCheckboxFilled = 'bhi-checkbox-filled',
     bhiCheckboxUnfilled = 'bhi-checkbox-empty',
-    bhiCheckboxIndeterminate = 'bhi-checkbox-indeterminate'
+    bhiCheckboxIndeterminate = 'bhi-checkbox-indeterminate',
+    bhiRadioEmpty = 'bhi-radio-empty',
+    bhiRadioFilled = 'bhi-radio-filled',
+    radioButtonChecked = 'checked',
+    radioButtonUnchecked = 'unchecked',
 }
 
 export const elements = {
