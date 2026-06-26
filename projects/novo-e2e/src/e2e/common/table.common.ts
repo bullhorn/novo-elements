@@ -10,6 +10,10 @@ import {
   verifyColumnSorted,
 } from '../../utils/TableUtil';
 
+export const sharedSelectors = {
+  errorText: '.error-text'
+};
+
 export async function testElements(columns: string[]) {
   for (const column of columns) {
     it(`should have ${column} header`, async () => {

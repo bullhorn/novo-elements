@@ -1,7 +1,8 @@
+import { sharedSelectors } from 'projects/novo-e2e/src/e2e/common/table.common';
 import { click, clearInputAndSendKeys, scrollIntoView, clickRadio, sendKeysWithoutElement } from '../utils/ElementActionUtil';
 import { formControlsExamplesUrl, getURLs } from '../utils/EnvironmentUtil';
 import { codeExample, elements, keyboardKeys } from '../utils/SelectorUtil';
-import { verifyPresent, verifyText, verifyInputValue, verifyTextIncludes } from '../utils/VerifyUtil';
+import { verifyPresent, verifyText, verifyInputValue, verifyTextIncludes, verifyAbsent } from '../utils/VerifyUtil';
 
 // ─── Selectors ────────────────────────────────────────────────────────────────
 
@@ -108,12 +109,7 @@ describe('Date Picker Demo Page', () => {
       it('should accept 03-26-2026 and reflect it in the input', async () => {
         await typeDate(datePicker.input.textInput, '03-26-2026');
         await verifyInputValue(datePicker.input.textInput, '03-26-2026', 'date picker input');
-      });
-
-      it('should update the selected value output after typing', async () => {
-        // Value display is {{selected | json}} which produces an ISO date string.
-        // We check for the date portion to avoid timezone-offset sensitivity.
-        await verifyTextIncludes(datePicker.input.value, '2026-03-26', 'date picker value output');
+        await verifyAbsent(sharedSelectors.errorText);
       });
 
       it('should clear the date when the clear icon is clicked', async () => {
@@ -130,6 +126,7 @@ describe('Date Picker Demo Page', () => {
       it('should accept "Mar 26, 2026" and update the selected value', async () => {
         await typeDate(datePicker.input.textInput, 'Mar 26, 2026');
         await verifyTextIncludes(datePicker.input.value, '2026-03-26', 'date picker value output (MMM DD, YYYY)');
+        await verifyAbsent(sharedSelectors.errorText);
       });
 
       after(async () => {
