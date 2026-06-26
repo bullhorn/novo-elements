@@ -24,6 +24,7 @@ export const COMPONENT_URLS = {
     SWITCH: 'switch',
     POPOVER: 'pop over',
     TOOLBAR: 'toolbar',
+    TOASTER: 'toaster',
 };
 
 export function examplesUrl(component: string): string {
