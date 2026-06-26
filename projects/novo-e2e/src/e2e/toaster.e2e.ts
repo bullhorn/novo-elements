@@ -84,14 +84,12 @@ describe('Toaster Demo Page', () => {
             await verifyClassPresent(toaster.optionsPreview, 'banner');
         });
 
-        it('should switch to success color', async () => {
-            await clickRadio(automationId('toast-color-success'));
-            await verifyClassPresent(toaster.optionsPreview, 'success');
-        });
-
-        it('should switch to danger color', async () => {
-            await clickRadio(automationId('toast-color-danger'));
-            await verifyClassPresent(toaster.optionsPreview, 'danger');
+        const colors = ['success', 'danger'];
+        colors.forEach((color) => {
+            it(`should switch to ${color} color`, async () => {
+                await clickRadio(automationId(`toast-color-${color}`));
+                await verifyClassPresent(toaster.optionsPreview, color);
+            });
         });
 
         it('should hide the title when hide is selected', async () => {

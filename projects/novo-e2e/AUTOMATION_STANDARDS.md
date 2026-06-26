@@ -51,6 +51,45 @@ Util files can also contain component-specific action helpers (e.g. `sortTableCo
 -   Group tests by example section using nested `describe` blocks
 -   Always start with a **Page Elements** describe that verifies the page title and each example section is present
 
+### Reducing repetition with loops
+
+When multiple `it` blocks share the same structure and differ only in their data, collapse them into a `forEach` over a typed array. This keeps the test count intact (each item generates its own named `it`) while eliminating structural duplication.
+
+```typescript
+// ❌ three structurally identical tests
+it('should display candidate icon', async () => {
+    await verifyPresent(basicIcon('candidate'));
+});
+it('should display job icon', async () => {
+    await verifyPresent(basicIcon('job'));
+});
+it('should display company icon', async () => {
+    await verifyPresent(basicIcon('company'));
+});
+
+// ✅ data-driven
+const icons = ['candidate', 'job', 'company'];
+icons.forEach((name) => {
+    it(`should display ${name} icon`, async () => {
+        await verifyPresent(basicIcon(name));
+    });
+});
+```
+
+When verifying that a set of items share a common property (rather than testing each item independently), use a `for...of` loop inside a single `it`:
+
+```typescript
+// ✅ one assertion about a shared property across all items
+it('should display all service trigger buttons', async () => {
+    const triggerIds = ['toast-trigger', 'toast-trigger-bottom', 'toast-trigger-growl-top-right'];
+    for (const id of triggerIds) {
+        await verifyPresent(automationId(id));
+    }
+});
+```
+
+Use `forEach` → `it` when each item deserves its own test result. Use `for...of` inside a single `it` when the items are collectively testing one shared behavior.
+
 ---
 
 ## Selector Strategy

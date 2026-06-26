@@ -38,7 +38,8 @@ export enum Classes {
     validForm = 'valid-form',
     activeRouterLink = 'router-link-active',
     bhiCheckboxFilled = 'bhi-checkbox-filled',
-    bhiCheckboxUnfilled = 'bhi-checkbox-empty'
+    bhiCheckboxUnfilled = 'bhi-checkbox-empty',
+    bhiCheckboxIndeterminate = 'bhi-checkbox-indeterminate'
 }
 
 export const elements = {
