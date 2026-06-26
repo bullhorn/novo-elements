@@ -9,9 +9,10 @@
     position: absolute;
   }
   & > .tile-container {
-    background: $white;
+    background: var(--background-bright);
     display: flex;
-    border: solid thin $slate;
+    border: solid thin var(--color-slate);
+    // TODO: semantic role TBD - could be border-radius or border-radius-small
     border-radius: 3px;
     .tile {
       margin: 2px;
@@ -20,7 +21,7 @@
         margin-right: 3px;
       }
       &.defaultColor.active {
-          background: darken($ocean, 20%);
+          background: darkenLive('--color-ocean', 20);
       }
       &.disabled {
         cursor: not-allowed;
@@ -34,7 +35,7 @@
       }
     }
     &.disabled {
-      border-color: lighten($grey, 20%);
+      border-color: brightenLive('--color-grey', 20);
       opacity: 0.4;
       pointer-events: auto;
       cursor: not-allowed;

@@ -9,7 +9,7 @@ novo-pagination {
   }
   h5.rows {
     padding: 0;
-    font-size: 1rem;
+    font-size: var(--font-size-xs);
     opacity: 0.75;
     letter-spacing: 0.1px;
   }
@@ -43,11 +43,12 @@ novo-pagination {
       padding: 0 10px;
       line-height: 2.4rem;
       font-size: var(--font-size-text);
+      // TODO: semantic role TBD - could be border-radius or border-radius-small
       border-radius: 2px;
       text-align: center;
       list-style-type: none;
       cursor: pointer;
-      color: $company;
+      color: var(--color-company);
       &:last-child {
         padding-right: 0;
       }
@@ -57,8 +58,8 @@ novo-pagination {
       }
     }
     .page.active {
-      color: $company;
-      background-color: $off-white;
+      color: var(--color-company);
+      background-color: var(--background-main);
       opacity: 1;
     }
   }

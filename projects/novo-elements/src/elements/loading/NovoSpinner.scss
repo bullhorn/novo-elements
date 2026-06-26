@@ -62,7 +62,7 @@ $large-spinner-size: 2.1em;
   &.white,
   &[inverse] {
     .dot:before {
-      background-color: $white;
+      background-color: var(--background-body);
     }
   }
 

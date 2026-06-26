@@ -39,7 +39,7 @@
 
   &.ng-invalid.ng-dirty.ng-touched {
     .novo-field-input {
-      border-bottom: 1px solid $negative !important;
+      border-bottom: 1px solid var(--color-negative) !important;
     }
   }
 

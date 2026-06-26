@@ -6,7 +6,7 @@ $novo-stepper-label-min-width: 50px !default;
 $novo-stepper-side-gap: 24px !default;
 $novo-vertical-stepper-content-margin: 36px !default;
 $novo-stepper-line-gap: 8px !default;
-$novo-step-optional-font-size: 12px;
+$novo-step-optional-font-size: var(--font-size-sm);
 $novo-step-header-icon-size: 1em !default;
 
 :host {
@@ -36,19 +36,20 @@ $novo-step-header-icon-size: 1em !default;
       display: flex;
       align-items: center;
       justify-content: center;
+      // TODO: semantic role TBD - could be border-radius or border-radius-small
       border-radius: 4px;
     }
   }
 
   .novo-step-icon {
     .novo-step-number {
-      background: $positive;
+      background: var(--color-positive);
       color: $white;
     }
   }
   .novo-step-icon-not-touched {
     .novo-step-number {
-      background: $submission;
+      background: var(--color-submission);
       color: $white;
     }
   }
@@ -119,7 +120,7 @@ $novo-step-header-icon-size: 1em !default;
           display: block;
           width: calc(50% - 8px);
           margin-right: 8px;
-          border-bottom: 1px solid $light;
+          border-bottom: 1px solid var(--color-border);
         }
         &:after {
           content: "";
@@ -127,19 +128,19 @@ $novo-step-header-icon-size: 1em !default;
           width: calc(50% - 8px);
           margin-left: calc(50% + 8px);
           margin-top: -1px;
-          border-top: 1px solid $light;
+          border-top: 1px solid var(--color-border);
         }
         &.edit {
           &:before {
-            border-bottom: 1px solid $positive;
+            border-bottom: 1px solid var(--color-positive);
           }
         }
         &.done {
           &:before {
-            border-bottom: 1px solid $positive;
+            border-bottom: 1px solid var(--color-positive);
           }
           &:after {
-            border-top: 1px solid $positive;
+            border-top: 1px solid var(--color-positive);
           }
         }
       }

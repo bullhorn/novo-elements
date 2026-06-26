@@ -5,6 +5,7 @@ $range-slider-shadow: 0 1px 1px #000, 0 0 1px #0d0d0d;
   height: 9.5px;
   transition: 0.2s;
   background: var(--background-main);
+  // TODO: semantic role TBD - could be border-radius or border-radius-small
   border-radius: 3px;
 }
 @mixin range-thumb() {
@@ -76,12 +77,14 @@ input[type="range"]::-ms-track {
 input[type="range"]::-ms-fill-lower {
   background: var(--background-main);
   border: 0.2px solid #010101;
+  // TODO: semantic role TBD - could be border-radius or border-radius-small
   border-radius: 3px;
   box-shadow: 1px 1px 1px #000, 0 0 1px #0d0d0d;
 }
 input[type="range"]::-ms-fill-upper {
   background: var(--background-main);
   border: 0.2px solid #010101;
+  // TODO: semantic role TBD - could be border-radius or border-radius-small
   border-radius: 3px;
   box-shadow: 1px 1px 1px #000, 0 0 1px #0d0d0d;
 }

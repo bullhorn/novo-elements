@@ -1,7 +1,7 @@
 @import "../../styles/variables.scss";
 @import "../../styles/reset";
 
-$table-bg-accent: var(--background-bright, $off-white);
+$table-bg-accent: var(--background-bright, $color-off-white);
 $novo-row-horizontal-padding: 20px;
 $table-header-font-weight: 400;
 $breakpoint: 1000px;
@@ -31,10 +31,10 @@ cdk-table {
       .novo-data-table-dropdown-cell,
       .novo-data-table-expand-cell,
       .novo-data-table-checkbox-cell {
-        background-color: rgba($ocean, 0.15);
+        background-color: rgb(from var(--color-positive) r g b / 0.15);
       }
       + .novo-data-table-detail-row {
-        background-color: rgba($ocean, 0.15);
+        background-color: rgb(from var(--color-positive) r g b / 0.15);
       }
     }
     + .novo-data-table-detail-row {
@@ -55,10 +55,10 @@ cdk-table {
       .novo-data-table-dropdown-cell,
       .novo-data-table-expand-cell,
       .novo-data-table-checkbox-cell {
-        background-color: rgba($ocean, 0.15);
+        background-color: rgb(from var(--color-positive) r g b / 0.15);
       }
       + .novo-data-table-detail-row {
-        background-color: rgba($ocean, 0.15);
+        background-color: rgb(from var(--color-positive) r g b / 0.15);
       }
     }
     + .novo-data-table-detail-row {
@@ -111,14 +111,14 @@ cdk-table {
   &.resizable {
     padding-right: 0;
     &:hover {
-      background-color: var(--background-muted, $neutral);
+      background-color: var(--background-muted, --color-neutral);
     }
     .data-table-header-resizable {
       height: 100%;
 
       span {
         cursor: ew-resize;
-        background-color: var(--border, $neutral);
+        background-color: var(--border, --color-neutral);
         width: 1px;
         margin: 0 4px;
         display: block;
@@ -169,7 +169,7 @@ cdk-table {
     color: var(--text-muted);
     background: transparent;
     pointer-events: all;
-    margin-left: 0.5rem;
+    margin-left: var(--spacing-sm);
     line-height: 1em;
     outline: none;
     &:hover {
@@ -181,18 +181,18 @@ cdk-table {
   }
 
   button.active {
-    color: $white;
-    background: $positive;
+    color: var(--color-contrast-positive);
+    background: var(--color-positive);
     &:hover,
     &:active,
     &:focus,
     &:visited {
-      background: $positive !important;
+      background: var(--color-positive) !important;
     }
   }
   &.clickable {
     cursor: pointer;
-    color: $company;
+    color: var(--color-company);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -238,6 +238,7 @@ cdk-table {
     cursor: pointer;
     font-size: 1.2em;
     padding: 0.5em;
+    // TODO: semantic role TBD - could be border-radius or border-radius-small
     border-radius: 3px;
     &.disabled {
       pointer-events: none;
@@ -333,7 +334,7 @@ cdk-table {
       }
       &.bhi-box-yes,
       &.bhi-checkbox-filled {
-        color: $positive;
+        color: var(--color-positive);
       }
     }
   }
@@ -358,7 +359,7 @@ novo-data-table {
     display: flex;
     align-items: center;
     flex-shrink: 0;
-    border-bottom: 1px solid var(--border, $off-white);
+    border-bottom: 1px solid var(--border, $color-off-white);
     &.pagination-footer {
       justify-content: space-between;
     }
@@ -458,6 +459,7 @@ novo-data-table {
     display: flex;
     align-items: center;
     justify-content: center;
+    // TODO: semantic role TBD - rec font-secondary
     color: $grey;
     z-index: 5;
   }
@@ -465,7 +467,7 @@ novo-data-table {
     display: flex;
     flex: 1;
     .novo-data-table-custom-filter {
-      border-right: 1px solid var(--border, $off-white);
+      border-right: 1px solid var(--border, $color-off-white);
       novo-date-picker {
         .calendar {
           box-shadow: none;
@@ -515,7 +517,7 @@ novo-data-table {
     align-items: center;
     > div,
     div.novo-data-table-footer-cell {
-      border-top: 1px solid var(--border, $off-white);
+      border-top: 1px solid var(--border, $color-off-white);
       flex: 1;
       min-width: 200px;
       display: flex;
@@ -553,7 +555,7 @@ novo-data-table {
     overflow-x: hidden;
   }
   .footer {
-    border-top: 1px solid var(--border, $off-white);
+    border-top: 1px solid var(--border, $color-off-white);
     padding: 5px 10px;
     display: flex;
     justify-content: flex-end;
@@ -581,10 +583,10 @@ novo-data-table {
     height: 100%;
     min-height: 200px;
     width: 100%;
-    background: #fff;
+    background: var(--background-bright);
     padding: 0 !important;
     .back-link {
-      color: $positive;
+      color: var(--color-positive);
       line-height: 3em;
       font-size: 0.9em;
       padding-left: 5px;
@@ -603,16 +605,17 @@ novo-data-table {
     }
   }
   span.error-text {
-    color: $negative;
+    color: var(--color-negative);
     position: relative;
     left: 10px;
     top: -17px;
     font-size: x-small;
   }
   .filter-null-results {
-    background-color: $white;
+    background-color: var(--background-body);
     text-align: center;
-    color: darken($light, 15%);
+    // TODO: semantic role TBD - rec color-disabled
+    color: darkenLive('--color-light', 15);
     background: transparent;
     font-weight: 500;
   }

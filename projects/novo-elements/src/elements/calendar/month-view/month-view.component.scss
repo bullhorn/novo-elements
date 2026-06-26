@@ -30,6 +30,7 @@
       text-overflow: ellipsis;
       margin: 5px;
       font-weight: normal;
+      // TODO: semantic role TBD - could be border-radius or border-radius-small
       border-radius: 3px;
       &.selected {
         background-color: var(--selection);
@@ -45,7 +46,7 @@
       height: 3.2rem;
       width: 3.2rem;
       line-height: 1;
-      font-size: 1.2rem;
+      font-size: var(--font-size-sm);
       padding: 1px;
       border: none;
       background-color: transparent;
@@ -151,7 +152,7 @@
           height: 100%;
           max-width: 3.2rem;
           margin: 0 auto;
-          box-shadow: inset 0 0 0 2px $light;
+          box-shadow: inset 0 0 0 2px var(--color-border);
         }
         &.inRange,
         &.selected {
@@ -163,8 +164,8 @@
 
       &.inPreview .day {
         border-radius: 0;
-        border-top: 1px dashed $positive;
-        border-bottom: 1px dashed $positive;
+        border-top: 1px dashed var(--color-positive);
+        border-bottom: 1px dashed var(--color-positive);
       }
 
       &.previewStart .day {
@@ -172,14 +173,14 @@
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
         box-shadow: none !important;
-        border-left: 1px dashed $positive;
+        border-left: 1px dashed var(--color-positive);
       }
       &.previewEnd .day {
         border-radius: 50%;
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
         box-shadow: none !important;
-        border-right: 1px dashed $positive;
+        border-right: 1px dashed var(--color-positive);
       }
     }
   }

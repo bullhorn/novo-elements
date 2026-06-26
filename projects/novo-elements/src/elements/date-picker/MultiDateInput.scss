@@ -14,6 +14,7 @@
       margin: 0px;
     }
     &.selected {
+      // TODO: semantic role TBD - rec background-main
       background: $light;
       border-radius: 50%;
     }
@@ -22,6 +23,7 @@
   ul.summary {
     display: inline;
     list-style: none;
+    // TODO: semantic role TBD - rec font-color-secondary
     color: darken(#d2d2d2, 30%);
     padding: 0 10px 0;
 

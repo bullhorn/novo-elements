@@ -9,6 +9,7 @@
   ul.summary {
     display: inline;
     list-style: none;
+    // TODO: semantic role TBD - rec font-secondary
     color: darken(#d2d2d2, 30%);
     padding: 0 10px 0;
 
@@ -41,13 +42,14 @@
           i {
             &.bhi-checkbox-empty,
             &.bhi-checkbox-indeterminate {
-              color: $positive;
+              color: var(--color-positive);
             }
           }
         }
       }
       &.checked {
         label {
+          // TODO(theme): #d2d2d2 has no design token yet; register it, then migrate to darkenLive('--color-...', 60)
           color: darken(#d2d2d2, 60%);
         }
       }
@@ -61,7 +63,7 @@
 
       &.bhi-checkbox-filled,
       &.bhi-checkbox-indeterminate {
-        color: $positive;
+        color: var(--color-positive);
       }
     }
   }

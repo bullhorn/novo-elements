@@ -11,10 +11,10 @@
     }
 
     .cal-hour:nth-child(even) {
-      background-color: $off-white;
+      background-color: var(--background-main);
     }
     .cal-hour:nth-child(odd) {
-      background-color: $white;
+      background-color: var(--background-body);
     }
 
     .cal-hour-segment {
@@ -35,6 +35,7 @@
       padding-top: 5px;
       width: 70px;
       text-align: center;
+      // TODO: semantic role TBD - rec disabled
       color: $grey;
     }
 
@@ -46,6 +47,7 @@
 
     .cal-hour-segment:hover,
     .cal-drag-over .cal-hour-segment {
+      // TODO: semantic role TBD - rec background-bright
       background-color: #ededed;
     }
   }

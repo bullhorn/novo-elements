@@ -24,6 +24,7 @@
       }
 
       .color-square {
+        // TODO: semantic role TBD - could be border-radius or border-radius-small
         border-radius: 4px;
         height: 150px;
         justify-content: center;
@@ -39,7 +40,7 @@
         color: rgba(255, 255, 255, 0.6);
         left: 50%;
         bottom: 40px;
-        font-size: 10px;
+        font-size: var(--font-size-xs);
         text-transform: uppercase;
         transform: translateX(-50%);
         width: 100%;

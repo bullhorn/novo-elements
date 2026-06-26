@@ -7,7 +7,7 @@
 
   &.linear {
     @include theme-backgrounds("color");
-    background-color: $positive;
+    background-color: var(--color-positive);
 
     &:first-child {
       border-radius: 0.2em 0 0 0.2em;
@@ -51,7 +51,7 @@
     @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
       &[color="#{$name}"] {
         svg circle {
-          stroke: $color;
+          stroke: getCssVarname($name);
         }
       }
     }
@@ -59,7 +59,7 @@
 
     svg {
       circle {
-        stroke: $positive;
+        stroke: var(--color-positive);
         transform-origin: 50% 50%;
         transform: rotate(-90deg);
         transition: 0.35s stroke-dashoffset;

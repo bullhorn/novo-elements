@@ -87,6 +87,7 @@ address {
 
 mark {
   background-color: var(--highlight);
+  // TODO: semantic role TBD - could be border-radius or border-radius-small
   border-radius: 2px;
   padding: 0 2px 0 2px;
   color: #000;
@@ -114,8 +115,8 @@ h6.novo-section-header {
   display: flex;
   width: 100%;
   padding: 1rem 0.5rem 1rem 1.5rem;
-  margin-left: -1.5rem;
-  margin-right: -1.5rem;
+  margin-left: calc(-1 * var(--spacing-xl));
+  margin-right: calc(-1 * var(--spacing-xl));
   > i {
     display: flex;
     margin-right: 10px;
