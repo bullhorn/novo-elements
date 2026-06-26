@@ -171,5 +171,8 @@
       "ignore": "projects/novo-examples/src/examples.*.ts",
       "quiet": false
     }
+  },
+  "optionalDependencies": {
+    "patch-package": "^8.0.1"
   }
 }

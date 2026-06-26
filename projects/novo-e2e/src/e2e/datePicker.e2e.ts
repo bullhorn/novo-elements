@@ -92,12 +92,17 @@ describe('Date Picker Demo Page', () => {
   // user types freely with dashes) so keyboard input is straightforward.
 
   describe('Date Picker Input', () => {
+    const MmmDdYyyyRegex = /\w+ \w+ \d{1,2}, \d{4}/;
     before(async () => {
       await scrollIntoView(datePicker.input.container);
     });
 
     it('should display the date input field', async () => {
       await verifyPresent(datePicker.input.textInput);
+    });
+
+    it('should already have a date value entered (Today)', async () =>{
+      await verifyText(datePicker.input.textInput, MmmDdYyyyRegex);
     });
 
     describe('Typing a date with MM-DD-YYYY format', () => {

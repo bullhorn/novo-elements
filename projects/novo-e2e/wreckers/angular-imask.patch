@@ -1,0 +1,22 @@
+diff --git a/node_modules/angular-imask/fesm2022/angular-imask.mjs b/node_modules/angular-imask/fesm2022/angular-imask.mjs
+index 80e4f78..f4f42a3 100644
+--- a/node_modules/angular-imask/fesm2022/angular-imask.mjs
++++ b/node_modules/angular-imask/fesm2022/angular-imask.mjs
+@@ -107,7 +107,7 @@ class IMaskDirective {
+         this._writing = false;
+         return this._writingValue;
+     }
+-    writeValue(value) {
++    scribeValue(value) {
+         value = (value == null && this.unmask !== 'typed' ? '' : value);
+         if (this.maskRef) {
+             this.beginWrite(value);
+@@ -136,7 +136,7 @@ class IMaskDirective {
+             .on('accept', this._onAccept.bind(this))
+             .on('complete', this._onComplete.bind(this));
+         if (this._initialValue != null)
+-            this.writeValue(this._initialValue);
++            this.scribeValue(this._initialValue);
+         delete this._initialValue;
+     }
+     setDisabledState(isDisabled) {
