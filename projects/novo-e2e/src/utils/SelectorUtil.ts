@@ -44,6 +44,7 @@ export enum Classes {
     bhiRadioFilled = 'bhi-radio-filled',
     radioButtonChecked = 'checked',
     radioButtonUnchecked = 'unchecked',
+    novoSelectDisabled = 'novo-select-disabled',
 }
 
 export const elements = {
