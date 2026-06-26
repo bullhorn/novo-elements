@@ -47,6 +47,8 @@ Util files can also contain component-specific action helpers (e.g. `sortTableCo
 
 -   Top-level `before` navigates to the page; top-level `after` navigates home
 -   `browser.refresh()` at the start of each nested `before` resets state between describe blocks
+-   Each `it` must be able to run in isolation — never rely on state left by a previous `it`. State setup belongs in `before`/`beforeEach`, not in prior tests.
+-   Every `it` must contain at least one verification call (`verifyPresent`, `verifyText`, etc.). An `it` that only performs actions without asserting anything is not a test.
 -   `scrollIntoView` before interacting with elements below the fold
 -   Group tests by example section using nested `describe` blocks
 -   Always start with a **Page Elements** describe that verifies the page title and each example section is present
@@ -99,6 +101,7 @@ Prefer in this order:
 1. **`automationId('...')`** — for elements with a `data-automation-id` attribute. This is the primary strategy.
 2. **`codeExample('example-name')`** — to scope to a specific demo section.
 3. **CSS class or element type selectors scoped to a parent** — when internal elements lack `data-automation-id` (e.g. `novo-toast.fixedBottom h5`). Wrap these in a util helper function; do not write the concatenated string inline in the test.
+4. **Never use XPath** — it is slow and brittle. If no `data-automation-id` exists and no CSS selector is short enough to be maintainable, add a `data-automation-id` to the template instead.
 
 ### Checking for data-automation-id gaps
 
@@ -129,6 +132,28 @@ await click(`${codeExample('section-b')} ${automationId('submit-trigger')}`);
 | Element text contains a substring | `verifyTextIncludes(selector, 'substring', 'friendly name')` |
 | Input value matches | `verifyInputValue(selector, 'value')` |
 
+Always pass a descriptive friendly name to verify functions — it's what appears in the failure output. `verifyPresent(selector, 'submit button')` beats a raw selector in the error log.
+
+### Parallelizing independent assertions
+
+When verifying that multiple independent elements are present (none depends on the others), wrap them in `Promise.all`. This runs checks concurrently and makes the **Page Elements** describe block noticeably faster.
+
+```typescript
+// ❌ sequential — each waits for the previous
+await verifyPresent(myComponent.container, 'container');
+await verifyPresent(myComponent.trigger, 'trigger');
+await verifyPresent(myComponent.display, 'display');
+
+// ✅ concurrent — all three fire at once
+await Promise.all([
+    verifyPresent(myComponent.container, 'container'),
+    verifyPresent(myComponent.trigger, 'trigger'),
+    verifyPresent(myComponent.display, 'display'),
+]);
+```
+
+Only use `Promise.all` when the checks are truly independent. If one check's result informs whether to run another, keep them sequential.
+
 ---
 
 ## Code Style
@@ -140,6 +165,8 @@ Follow the same naming rules as the top-level `STANDARDS.md`:
 -   No single-letter variables — `section` not `s`, `trigger` not `t`
 -   No abbreviated names — `container` not `cont`, `selector` not `sel`
 -   Booleans read as assertions: `isVisible`, `hasClass`, `canDismiss`
+
+`describe` block names must be unique within the file. Nested describes that share a name (e.g., two inner blocks both named "Options") produce ambiguous test reports.
 
 `describe` blocks name the feature or section under test. `it` blocks complete the sentence "it should ...":
 
@@ -154,6 +181,10 @@ describe('Toast Options', () => {
     it('should switch to growl appearance', async () => { ... });
 });
 ```
+
+### No hard-coded waits
+
+Never use `browser.sleep()` or equivalent timeout-based delays to wait for elements. All wait behavior is built into the verify and action utils. If a test is flaky without a sleep, the underlying problem is that the component isn't signaling readiness — fix the selector or use a more targeted wait utility.
 
 ### Comments
 
