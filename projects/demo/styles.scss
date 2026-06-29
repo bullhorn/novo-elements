@@ -2,6 +2,8 @@
 // Plugins (Third-Party-Libraries)
 // --------------------------------------------------
 @import "novo-elements";
+// Modern theme token vars (scoped to [data-theme="modern"]) — from local novo-design-tokens.
+@import "novo-design-tokens/css/variables-modern";
 // --------------------------------------------------
 // Global
 // --------------------------------------------------

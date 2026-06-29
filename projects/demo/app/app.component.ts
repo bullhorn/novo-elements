@@ -1,7 +1,7 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { AfterViewInit, Component, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router, Scroll } from '@angular/router';
-import { NovoLayoutContent, NovoModalService, NovoSidenavComponent, NovoToastService } from 'novo-elements';
+import { NovoLayoutContent, NovoModalService, NovoSidenavComponent, NovoTheme, NovoToastService } from 'novo-elements';
 import { delay, filter, startWith } from 'rxjs/operators';
 import { AnchorViewportScroller } from './anchor-scroller';
 @Component({
@@ -11,6 +11,7 @@ import { AnchorViewportScroller } from './anchor-scroller';
 })
 export class AppComponent implements AfterViewInit {
   menuOpen: boolean = false;
+  modernTheme: boolean = false;
   sectionRoutes: Array<any>;
   designRoutes: Array<any>;
   componentRoutes: Array<any>;
@@ -32,6 +33,7 @@ export class AppComponent implements AfterViewInit {
     toaster: NovoToastService,
     modalService: NovoModalService,
     private observer: BreakpointObserver,
+    private theme: NovoTheme,
   ) {
     toaster.parentViewContainer = viewContainerRef;
 
@@ -105,5 +107,12 @@ export class AppComponent implements AfterViewInit {
 
   toggleDarkMode() {
     document.documentElement.classList.toggle('theme-dark');
+  }
+
+  toggleModernTheme() {
+    this.modernTheme = !this.modernTheme;
+    // Drives the real NovoTheme path: use() -> applyThemeToDom() sets
+    // data-theme="modern" for modern* themes (and clears it for classic).
+    this.theme.use({ themeName: this.modernTheme ? 'modern-light' : 'classic' });
   }
 }
