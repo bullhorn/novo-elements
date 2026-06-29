@@ -5,17 +5,20 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  padding: 0 var(--spacing-md);
+  // Component-level vars: fallbacks preserve the classic look; the modern theme
+  // overrides these under [data-theme="modern"] (see styles/themes/modern.scss).
+  padding: var(--novo-button-padding-y, 0) var(--novo-button-padding-x, var(--spacing-md));
   font-size: var(--font-size-button);
-  height: 3rem;
-  border: none;
-  color: var(--text-main, $dark);
-  background: transparent;
-  // TODO: semantic role TBD - could be border-radius or border-radius-small
-  border-radius: 3px;
+  font-weight: var(--novo-button-font-weight, inherit);
+  letter-spacing: var(--novo-button-letter-spacing, normal);
+  height: var(--novo-button-height, 3rem);
+  border: var(--novo-button-border-width, 0) solid var(--novo-button-border-color, transparent);
+  color: var(--novo-button-color, var(--text-main, $dark));
+  background: var(--novo-button-bg, transparent);
+  border-radius: var(--novo-button-radius, 3px);
   text-transform: uppercase;
   transition: all 200ms ease-in-out;
-  gap: var(--spacing-md);
+  gap: var(--novo-button-gap, var(--spacing-md));
   cursor: pointer;
   user-select: none;
   text-overflow: clip;
@@ -65,6 +68,11 @@
 
   &:focus {
     outline: none;
+  }
+
+  // Modern theme supplies a focus ring via box-shadow; classic = none (unchanged).
+  &:focus-visible {
+    box-shadow: var(--novo-button-focus-ring, none);
   }
 
   &[disabled],
