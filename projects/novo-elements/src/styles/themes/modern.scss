@@ -38,8 +38,10 @@
   --border-2:    var(--color-border-subtle, #f0f5f9);
   --border-hard: var(--color-border-emphasized, #282828);
 
-  // --- Interactive — PENDING DESIGN SIGN-OFF (modern links/focus are charcoal, not ocean) ---
-  // See novo-design-tokens/src/tokens/modern/NAMING_ALIGNMENT.md §7.
+  // --- Interactive ---
+  // Decision (provisional — designer's Figma is WIP): links are CHARCOAL, not branded,
+  // per the source-of-truth export. Newer Figma screenshots show branded links, but the
+  // export is authoritative for now. See novo-design-tokens NAMING_ALIGNMENT.md §7.
   --links:     var(--color-content-link, #282828);
   --focus:     var(--color-border-strong, #314158);
   --selection: var(--color-border-strong, #314158);
