@@ -23,25 +23,26 @@ describe('Loading Demo Page', () => {
 
     describe('Page Elements', () => {
         it('should display page title', async () => {
-            await verifyPresent(elements.title);
+            await verifyPresent(elements.title, 'page title');
             await verifyText(elements.title, 'Loading', 'Loading example page title');
         });
 
         it('should display loading-line example section', async () => {
             await scrollIntoView(loading.lineExample);
-            await verifyPresent(loading.lineExample);
-            await verifyPresent(loading.lineComponent);
+            await verifyPresent(loading.lineExample, 'loading line example section');
+            await verifyPresent(loading.lineComponent, 'loading line component');
         });
 
         it('should display loading-circle example section', async () => {
             await scrollIntoView(loading.circleExample);
-            await verifyPresent(loading.circleExample);
-            await verifyPresent(loading.spinnerComponent);
+            await verifyPresent(loading.circleExample, 'loading circle example section');
+            await verifyPresent(loading.spinnerComponent, 'loading spinner component');
         });
     });
 
     describe('Line Loader', () => {
-        beforeEach(async () => {
+        before(async () => {
+            await browser.refresh();
             await scrollIntoView(loading.lineExample);
         });
 
@@ -65,7 +66,8 @@ describe('Loading Demo Page', () => {
     });
 
     describe('Spinner', () => {
-        beforeEach(async () => {
+        before(async () => {
+            await browser.refresh();
             await scrollIntoView(loading.circleExample);
         });
 

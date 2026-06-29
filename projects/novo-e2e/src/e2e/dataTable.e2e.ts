@@ -9,13 +9,11 @@ import { automationId, elements } from '../utils/SelectorUtil';
 import { testElements, testFiltering, testSorting } from './common/table.common';
 import { click } from '../utils/ElementActionUtil';
 import { sleep } from '../utils/SleepUtil';
+import { dataTableSelectors } from '../utils/TableUtil';
 
 describe('Data Table Demo Tests', () => {
     const url = componentsUrl(COMPONENT_URLS.DATA_TABLE);
     const dataTablePage = 'data-table-page';
-    const detailRow = '.novo-data-table-detail-row';
-    const emptyMessage = '.novo-data-table-empty-message';
-    const configureColumnsModal = 'novo-modal [title="Configure Columns"]';
     const headerPagination = `header ${elements.pagination}`;
     const footerPagination = `footer ${elements.pagination}`;
 
@@ -27,9 +25,11 @@ describe('Data Table Demo Tests', () => {
         await browser.navigateTo(getURLs().HOME);
     });
 
-    it('should display page title and examples', async () => {
-        await verifyText(`${dataTablePage} h1`, 'Data Table (source)', 'Data Table example page title');
-        await verifyPresent(dataTablePage);
+    describe('Page Title and Layout', () => {
+        it('should display page title and examples', async () => {
+            await verifyText(`${dataTablePage} h1`, 'Data Table (source)', 'Data Table example page title');
+            await verifyPresent(dataTablePage, 'data table page');
+        });
     });
 
     describe('Array of Rows section', () => {
@@ -69,7 +69,7 @@ describe('Data Table Demo Tests', () => {
             await click(automationId('Dataset #3'));
             await verifyPresent(`${automationId('Dataset #3')}${elements.buttonThemes.primary}`);
             await verifyPresent(`${automationId('Dataset #1')}${elements.buttonThemes.dialogue}`);
-            await verifyText(emptyMessage, 'Yo! No Records!');
+            await verifyText(dataTableSelectors.emptyMessage, 'Yo! No Records!');
             await click(automationId('Dataset #1'));
         });
         it('should change pagination style', async () => {
@@ -107,36 +107,37 @@ describe('Data Table Demo Tests', () => {
         });
         it('should open a Configure Columns modal', async () => {
             await click(elements.primaryButton);
-            await verifyPresent(configureColumnsModal);
-            await verifyText(`${configureColumnsModal} novo-title`, 'Configure Columns');
+            await verifyPresent(dataTableSelectors.configureColumnsModal, 'configure columns modal');
+            await verifyText(`${dataTableSelectors.configureColumnsModal} novo-title`, 'Configure Columns');
             await click(`button${elements.buttonThemes.standard}`);
-            await verifyAbsent(configureColumnsModal);
+            await verifyAbsent(dataTableSelectors.configureColumnsModal, 'configure columns modal');
         });
         it('should show and hide row details', async () => {
             await click(elements.primaryButton, 1);
-            await verifyPresent(detailRow);
+            await verifyPresent(dataTableSelectors.detailRow, 'row detail row');
             await click(elements.primaryButton, 2);
             await sleep(500);
-            await verifyAbsent(detailRow);
+            await verifyAbsent(dataTableSelectors.detailRow, 'row detail row');
         });
     });
-    describe('Test elements', async () => {
-        await testElements(['id', 'date', 'status', 'percent']);
+
+    describe('Test elements', () => {
+        testElements(['id', 'date', 'status', 'percent']);
     });
 
-    describe('Test filtering', async () => {
+    describe('Test filtering', () => {
         before(async () => {
             await click(automationId('50'));
             await sleep(500);
         });
-        await testFiltering(['id', 'bigdecimal']);
+        testFiltering(['id', 'bigdecimal']);
     });
 
-    describe('Test sorting', async () => {
+    describe('Test sorting', () => {
         before(async () => {
             await click(automationId('25'));
             await sleep(500);
         });
-        await testSorting(['id', 'date', 'status', 'percent']);
+        testSorting(['id', 'date', 'status', 'percent']);
     });
 });

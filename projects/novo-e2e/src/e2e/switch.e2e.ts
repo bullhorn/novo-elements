@@ -17,6 +17,10 @@ describe('Switch Demo Page', () => {
 
 
     describe('Switch Interactions', () => {
+        before(async () => {
+            await browser.refresh();
+        });
+
         it('should toggle default switch and update label', async () => {
             await verifyPresent(switchSelectors.defaultSwitch);
             const initialLabel = await getElementText(switchSelectors.label);

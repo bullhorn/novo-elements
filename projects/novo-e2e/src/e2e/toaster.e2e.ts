@@ -1,3 +1,4 @@
+import { waitForElementToBeAbsent } from '../utils/WaitUtil';
 import { browser } from '@wdio/globals';
 import { click, clickRadio, scrollIntoView } from '../utils/ElementActionUtil';
 import { COMPONENT_URLS, examplesUrl, getURLs } from '../utils/EnvironmentUtil';
@@ -154,13 +155,7 @@ describe('Toaster Demo Page', () => {
             await verifyPresent('novo-toast.fixedTop');
             await verifyPresent(toastCloseButton('novo-toast.fixedTop'));
             await click(toastCloseButton('novo-toast.fixedTop'));
-            await browser.waitUntil(
-                async () => {
-                    const toasts = await $$('novo-toast.fixedTop');
-                    return toasts.length === 0;
-                },
-                { timeout: 5000, timeoutMsg: 'Toast did not dismiss after clicking close button' },
-            );
+            await waitForElementToBeAbsent('novo-toast.fixedTop');
         });
     });
 

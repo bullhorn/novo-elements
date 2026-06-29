@@ -1,7 +1,8 @@
 import { browser } from '@wdio/globals';
 import { COMPONENT_URLS, examplesUrl, getURLs } from '../utils/EnvironmentUtil';
 import { verifyElementCountEquals, verifyPresent, verifyText } from '../utils/VerifyUtil';
-import { automationId, codeExample, elements } from '../utils/SelectorUtil';
+import { elements } from '../utils/SelectorUtil';
+import { avatarSelectors } from '../utils/AvatarUtil';
 
 describe('Avatar Demo Page', () => {
     const url = examplesUrl(COMPONENT_URLS.AVATAR);
@@ -14,42 +15,43 @@ describe('Avatar Demo Page', () => {
         await browser.navigateTo(getURLs().HOME);
     });
 
-    it('should display page title and examples', async () => {
-        await verifyPresent(elements.title);
-        await verifyText(elements.title, 'Avatar', 'Avatar example page title');
-        await verifyPresent('avatar-examples-page');
+    describe('Page Title and Layout', () => {
+        it('should display page title and examples', async () => {
+            await verifyPresent(elements.title, 'page title');
+            await verifyText(elements.title, 'Avatar', 'Avatar example page title');
+            await verifyPresent(avatarSelectors.page, 'avatar examples page');
+        });
     });
 
     describe('Avatar Section', () => {
-        it('should display Avatar section', async () => {
-            const avatarTitle = 'avatar-examples-page h3';
-            await verifyText(avatarTitle, 'Avatar', 'Avatar section title');
+        it('should display Avatar section heading', async () => {
+            await verifyText(avatarSelectors.sectionHeading, 'Avatar', 'Avatar section title');
         });
 
         it('should have Avatar usage example', async () => {
-            await verifyPresent(codeExample('avatar-usage'));
+            await verifyPresent(avatarSelectors.usageExample, 'avatar usage example');
         });
 
         it('should display novo-avatar elements', async () => {
-            await verifyElementCountEquals(`avatar-usage-example ${automationId('avatar')}`, 3);
+            await verifyElementCountEquals(avatarSelectors.avatarsInUsage, 3, 'avatars in usage example');
         });
     });
 
     describe('Avatar Stack Section', () => {
-        it('should display Avatar Stack section', async () => {
-            await verifyText('h3', 'Avatar Stack', 'Avatar Stack section title', 1);
+        it('should display Avatar Stack section heading', async () => {
+            await verifyText(avatarSelectors.sectionHeading, 'Avatar Stack', 'Avatar Stack section title', 1);
         });
 
         it('should have Avatar Stack usage example', async () => {
-            await verifyPresent(codeExample('avatar-stack-usage'));
+            await verifyPresent(avatarSelectors.stackExample, 'avatar stack usage example');
         });
 
         it('should display novo-avatar-stack element', async () => {
-            await verifyPresent(automationId('avatar-stack'));
+            await verifyPresent(avatarSelectors.stack, 'avatar-stack element');
         });
 
         it('should have multiple avatars in the stack', async () => {
-            await verifyElementCountEquals(automationId('avatar'), 6);
+            await verifyElementCountEquals(avatarSelectors.avatarsAll, 6, 'avatars in stack');
         });
     });
 });

@@ -1,7 +1,7 @@
 import { click } from '../utils/ElementActionUtil';
 import { COMPONENT_URLS, examplesUrl, getURLs } from '../utils/EnvironmentUtil';
 import { elements } from '../utils/SelectorUtil';
-import { verifyPresent, verifyText, verifyDisabled, verifyEnabled } from '../utils/VerifyUtil';
+import { verifyPresent, verifyText, verifyDisabled, verifyEnabled, verifyAbsent } from '../utils/VerifyUtil';
 import { menu, closeMenu } from '../utils/MenuUtil';
 import { acceptAlertIfPresent } from '../utils/AutomationHelpers';
 
@@ -18,23 +18,29 @@ describe('Menu Demo Page', () => {
 
     describe('Page Elements', () => {
         it('should display page title', async () => {
-            await verifyPresent(elements.title);
+            await verifyPresent(elements.title, 'page title');
             await verifyText(elements.title, 'Menu', 'Menu example page title');
         });
     });
 
     describe('Basic Menu', () => {
+        before(async () => {
+            await browser.refresh();
+        });
+
         it('should display basic menu example section', async () => {
-            await verifyPresent(menu.basicMenuExample);
+            await verifyPresent(menu.basicMenuExample, 'basic menu example section');
         });
 
         it('should open menu and display all menu items', async () => {
             await click(menu.basicMenuButton);
-            await verifyPresent(menu.basicMenu);
-            await verifyPresent(menu.basicMenuPreview);
-            await verifyPresent(menu.basicMenuEdit);
-            await verifyPresent(menu.basicMenuDisabled);
-            await verifyPresent(menu.basicMenuDelete);
+            await Promise.all([
+                verifyPresent(menu.basicMenu, 'basic menu'),
+                verifyPresent(menu.basicMenuPreview, 'preview item'),
+                verifyPresent(menu.basicMenuEdit, 'edit item'),
+                verifyPresent(menu.basicMenuDisabled, 'disabled item'),
+                verifyPresent(menu.basicMenuDelete, 'delete item'),
+            ]);
             await closeMenu();
         });
 
@@ -52,6 +58,7 @@ describe('Menu Demo Page', () => {
             await click(menu.basicMenuPreview);
             await acceptAlertIfPresent();
             await closeMenu();
+            await verifyPresent(menu.basicMenuButton, 'basic menu button still accessible after preview action');
         });
 
         it('should allow clicking delete menu item action', async () => {
@@ -59,17 +66,24 @@ describe('Menu Demo Page', () => {
             await click(menu.basicMenuDelete);
             await acceptAlertIfPresent();
             await closeMenu();
+            await verifyPresent(menu.basicMenuButton, 'basic menu button still accessible after delete action');
         });
     });
 
     describe('Icon Menu', () => {
+        before(async () => {
+            await browser.refresh();
+        });
+
         it('should display icon menu button and open menu with all items', async () => {
-            await verifyPresent(menu.iconMenuButton);
+            await verifyPresent(menu.iconMenuButton, 'icon menu button');
             await click(menu.iconMenuButton);
-            await verifyPresent(menu.iconMenu);
-            await verifyPresent(menu.iconMenuPreview);
-            await verifyPresent(menu.iconMenuEdit);
-            await verifyPresent(menu.iconMenuDelete);
+            await Promise.all([
+                verifyPresent(menu.iconMenu, 'icon menu'),
+                verifyPresent(menu.iconMenuPreview, 'icon preview item'),
+                verifyPresent(menu.iconMenuEdit, 'icon edit item'),
+                verifyPresent(menu.iconMenuDelete, 'icon delete item'),
+            ]);
             await closeMenu();
         });
 
@@ -78,6 +92,7 @@ describe('Menu Demo Page', () => {
             await click(menu.iconMenuPreview);
             await acceptAlertIfPresent();
             await closeMenu();
+            await verifyPresent(menu.iconMenuButton, 'icon menu button still accessible after preview action');
         });
 
         it('should allow clicking icon menu delete action', async () => {
@@ -85,26 +100,33 @@ describe('Menu Demo Page', () => {
             await click(menu.iconMenuDelete);
             await acceptAlertIfPresent();
             await closeMenu();
+            await verifyPresent(menu.iconMenuButton, 'icon menu button still accessible after delete action');
         });
     });
 
     describe('Nested Menu', () => {
+        before(async () => {
+            await browser.refresh();
+        });
+
         it('should display nested menu example section', async () => {
-            await verifyPresent(menu.nestedMenuExample);
+            await verifyPresent(menu.nestedMenuExample, 'nested menu example section');
         });
 
         it('should open nested menu and display all items', async () => {
             await click(menu.nestedMenuButton);
-            await verifyPresent(menu.nestedMenu);
-            await verifyPresent(menu.nestedMenuPreview);
-            await verifyPresent(menu.nestedMenuEdit);
-            await verifyPresent(menu.nestedMenuChoose);
+            await Promise.all([
+                verifyPresent(menu.nestedMenu, 'nested menu'),
+                verifyPresent(menu.nestedMenuPreview, 'nested preview item'),
+                verifyPresent(menu.nestedMenuEdit, 'nested edit item'),
+                verifyPresent(menu.nestedMenuChoose, 'nested choose item'),
+            ]);
             await closeMenu();
         });
 
         it('should display submenu trigger item', async () => {
             await click(menu.nestedMenuButton);
-            await verifyPresent(menu.nestedMenuChoose);
+            await verifyPresent(menu.nestedMenuChoose, 'nested choose submenu trigger');
             await closeMenu();
         });
 
@@ -113,26 +135,35 @@ describe('Menu Demo Page', () => {
             await click(menu.nestedMenuPreview);
             await acceptAlertIfPresent();
             await closeMenu();
+            await verifyPresent(menu.nestedMenuButton, 'nested menu button still accessible after preview action');
         });
     });
 
     describe('Context Menu', () => {
+        before(async () => {
+            await browser.refresh();
+        });
+
         it('should display context menu example section', async () => {
-            await verifyPresent(menu.contextMenuExample);
+            await verifyPresent(menu.contextMenuExample, 'context menu example section');
         });
 
         it('should display context menu buttons', async () => {
-            await verifyPresent(menu.contextMenuButton('apple'));
-            await verifyPresent(menu.contextMenuButton('orange'));
+            await Promise.all([
+                verifyPresent(menu.contextMenuButton('apple'), 'apple context menu button'),
+                verifyPresent(menu.contextMenuButton('orange'), 'orange context menu button'),
+            ]);
         });
 
         it('should open context menu for apples and display all items', async () => {
             await click(menu.contextMenuButton('apple'));
-            await verifyPresent(menu.contextMenu);
-            await verifyPresent(menu.contextMenuPreview);
-            await verifyPresent(menu.contextMenuEdit);
-            await verifyPresent(menu.contextMenuDelete);
-            await verifyPresent(menu.contextMenuDisabled);
+            await Promise.all([
+                verifyPresent(menu.contextMenu, 'context menu'),
+                verifyPresent(menu.contextMenuPreview, 'context preview item'),
+                verifyPresent(menu.contextMenuEdit, 'context edit item'),
+                verifyPresent(menu.contextMenuDelete, 'context delete item'),
+                verifyPresent(menu.contextMenuDisabled, 'context disabled item'),
+            ]);
             await closeMenu();
         });
 
@@ -141,14 +172,17 @@ describe('Menu Demo Page', () => {
             await click(menu.contextMenuPreview);
             await acceptAlertIfPresent();
             await closeMenu();
+            await verifyPresent(menu.contextMenuButton('apple'), 'apple context button still accessible after preview action');
         });
 
         it('should open context menu for oranges and display all items', async () => {
             await click(menu.contextMenuButton('orange'));
-            await verifyPresent(menu.contextMenu);
-            await verifyPresent(menu.contextMenuPreview);
-            await verifyPresent(menu.contextMenuEdit);
-            await verifyPresent(menu.contextMenuDelete);
+            await Promise.all([
+                verifyPresent(menu.contextMenu, 'context menu'),
+                verifyPresent(menu.contextMenuPreview, 'context preview item'),
+                verifyPresent(menu.contextMenuEdit, 'context edit item'),
+                verifyPresent(menu.contextMenuDelete, 'context delete item'),
+            ]);
             await closeMenu();
         });
 
@@ -157,6 +191,7 @@ describe('Menu Demo Page', () => {
             await click(menu.contextMenuPreview);
             await acceptAlertIfPresent();
             await closeMenu();
+            await verifyPresent(menu.contextMenuButton('orange'), 'orange context button still accessible after preview action');
         });
     });
 });

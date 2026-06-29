@@ -51,7 +51,7 @@ Util files can also contain component-specific action helpers (e.g. `sortTableCo
 -   Every `it` must contain at least one verification call (`verifyPresent`, `verifyText`, etc.). An `it` that only performs actions without asserting anything is not a test.
 -   `scrollIntoView` before interacting with elements below the fold
 -   Group tests by example section using nested `describe` blocks
--   Always start with a **Page Elements** describe that verifies the page title and each example section is present
+-   **Top-level `it` blocks are not allowed.** Every `it` must live inside a `describe`.
 
 ### Reducing repetition with loops
 
@@ -182,9 +182,9 @@ describe('Toast Options', () => {
 });
 ```
 
-### No hard-coded waits
+### Prefer dynamic waits over hard sleeps
 
-Never use `browser.sleep()` or equivalent timeout-based delays to wait for elements. All wait behavior is built into the verify and action utils. If a test is flaky without a sleep, the underlying problem is that the component isn't signaling readiness — fix the selector or use a more targeted wait utility.
+Use verify and wait utilities (`waitForElementToBePresent`, `waitForElementToBeAbsent`, etc.) when the component provides a DOM signal to wait on. A `sleep()` is acceptable when no such signal exists and a small delay is needed for stability — but always look for a targeted wait util first.
 
 ### Comments
 

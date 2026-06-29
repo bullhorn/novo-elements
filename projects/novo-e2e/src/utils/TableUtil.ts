@@ -11,6 +11,12 @@ import { sleep } from './SleepUtil';
 import { verifyPresent } from './VerifyUtil';
 import { waitForElementAbsenceOrXSeconds, waitForElementOrXMilliseconds } from './WaitUtil';
 
+export const dataTableSelectors = {
+    detailRow: '.novo-data-table-detail-row',
+    emptyMessage: '.novo-data-table-empty-message',
+    configureColumnsModal: 'novo-modal [title="Configure Columns"]',
+};
+
 const maxVisibleRows = 50;
 const cellSelector = 'novo-data-table-cell.cdk-column-';
 
