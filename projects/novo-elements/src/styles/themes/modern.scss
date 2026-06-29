@@ -1,0 +1,74 @@
+// Modern theme — maps the modern design tokens (Figma "subatomic") onto the
+// semantic CSS-variable contract that novo-elements components consume.
+//
+// Requires `novo-design-tokens/css/variables-modern(.min).css` to be loaded by the
+// app (it defines the `--color-*` / `--typography-*` / `--spacing-*` modern vars,
+// scoped to `[data-theme="modern"]`). NovoTheme sets `data-theme="modern"` on the
+// document root when a `modern*` theme is active (see theme-options.ts).
+//
+// Built on the f/cssvar-theming runtime foundation: values resolve at runtime, and
+// `--bg-fade-multiplier` drives the live elevate()/recede() color math (in tokens'
+// scss/mixins.scss). Light direction = 1; a future modern-dark flips it to -1.
+//
+// Fallbacks (var(--token, #hex)) keep this resilient if the modern token CSS hasn't
+// loaded yet; the #hex values mirror the resolved Figma tokens.
+
+@mixin modern-variables {
+  // Live color-math direction (light): elevate() brightens, recede() darkens.
+  --bg-fade-multiplier: 1;
+
+  // Typeface — modern uses Inter (classic uses Montserrat).
+  --font-family-base: var(--typography-font-family-base, 'Inter', Helvetica, Arial, sans-serif);
+
+  // --- Surfaces ---
+  --background-body:   var(--color-gray-white, #ffffff);
+  --background-main:   var(--color-background-default, #f8fafc);
+  --background-bright: var(--color-gray-white, #ffffff);
+  --background-dark:   var(--color-background-subtle-hover, #e2e2e2);
+  --background-muted:  var(--color-background-subtle, #f1f5fc);
+
+  // --- Text / content ---
+  --text-main:      var(--color-content-headline, #282828);
+  --text-secondary: var(--color-content-body, #314158);
+  --text-muted:     var(--color-content-subtle, #8ca1b9);
+  --text-disabled:  var(--color-content-disabled, #707070);
+
+  // --- Borders ---
+  --border:      var(--color-border-default, #f0f5f9);
+  --border-2:    var(--color-border-subtle, #f0f5f9);
+  --border-hard: var(--color-border-emphasized, #282828);
+
+  // --- Interactive — PENDING DESIGN SIGN-OFF (modern links/focus are charcoal, not ocean) ---
+  // See novo-design-tokens/src/tokens/modern/NAMING_ALIGNMENT.md §7.
+  --links:     var(--color-content-link, #282828);
+  --focus:     var(--color-border-strong, #314158);
+  --selection: var(--color-border-strong, #314158);
+
+  // --- Typography scale (map semantic sizes onto modern composite roles) ---
+  --font-size-caption: var(--typography-meta-default-font-size, 1.4rem);
+  --font-size-label:   var(--typography-label-lg-font-size, 1.4rem);
+  --font-size-text:    var(--typography-body-default-font-size, 1.4rem);
+  --font-size-button:  var(--typography-button-font-size, 1.2rem);
+  --font-size-title:   var(--typography-title-font-size, 2.4rem);
+  --font-size-tab:     var(--typography-tabs-default-font-size, 1.4rem);
+
+  // --- Spacing rhythm (8/16/24/32 → rem at ÷10) ---
+  --spacing-xs:  var(--spacing-4, 0.4rem);
+  --spacing-sm:  var(--spacing-8, 0.8rem);
+  --spacing-md:  var(--spacing-16, 1.6rem);
+  --spacing-lg:  var(--spacing-24, 2.4rem);
+  --spacing-xl:  var(--spacing-32, 3.2rem);
+  --spacing-2xl: var(--spacing-48, 4.8rem);
+  --spacing-3xl: var(--spacing-64, 6.4rem);
+
+  // NOTE: not yet overridden (inherit classic / TODO follow-up):
+  //   --code, --variable, --highlight, --scrollbar-thumb(-hover),
+  //   --button-hover, --form-placeholder, --form-text.
+  // Status primitives (--color-positive [125 files], --color-negative, entity colors)
+  // are part of the getColor() var contract and are deferred to Track 2 + design sign-off.
+}
+
+:root[data-theme='modern'],
+:root.theme-modern {
+  @include modern-variables();
+}
