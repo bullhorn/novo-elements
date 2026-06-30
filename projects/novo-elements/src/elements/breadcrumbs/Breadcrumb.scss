@@ -8,3 +8,8 @@
     }
   }
 }
+
+// Modern theme: subtle breadcrumb text.
+:host-context([data-theme='modern']) {
+  color: var(--color-content-subtle, #8ca1b9);
+}

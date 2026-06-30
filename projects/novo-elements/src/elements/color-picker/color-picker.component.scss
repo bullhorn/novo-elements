@@ -31,3 +31,9 @@
     padding: 0.4rem 0.8rem;
   }
 }
+
+// Modern theme: rounded, bordered color-picker panel.
+:host-context([data-theme='modern']) {
+  border-radius: var(--border-radius-sm, 0.8rem);
+  border: 1px solid var(--color-border-default, #f0f5f9);
+}

@@ -345,3 +345,9 @@ novo-simple-table-pagination {
     font-weight: 500;
   }
 }
+
+// Modern theme: subtle, medium-weight column headers (matches data-table).
+[data-theme='modern'] .novo-simple-header-cell {
+  font-weight: 600;
+  color: var(--color-content-subtle, #8ca1b9);
+}

@@ -85,3 +85,9 @@ $novo-select-search-toggle-all-checkbox-x: 16px;
     padding-right: $novo-select-search-toggle-all-checkbox-x;
   }
 }
+
+// Modern theme: rounded, bordered select-search panel.
+::ng-deep [data-theme='modern'] .novo-select-search-panel {
+  border-radius: var(--border-radius-sm, 0.8rem);
+  border: 1px solid var(--color-border-default, #f0f5f9);
+}

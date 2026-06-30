@@ -98,3 +98,23 @@ $novo-stepper-line-gap: 8px !default;
     }
   }
 }
+
+// Modern theme: neutral progress circles (mockup shows neutral outline circles,
+// not filled status badges). Completed/active = charcoal fill; future = outlined.
+// No accent/status colors (those ride on the deferred decision).
+:host-context([data-theme='modern']) {
+  .novo-step-icon .novo-step-number {
+    background: var(--color-content-default, #282828);
+    color: #fff;
+    border: 1px solid var(--color-content-default, #282828);
+    border-radius: 50%;
+    box-shadow: none;
+  }
+  .novo-step-icon-not-touched .novo-step-number {
+    background: transparent;
+    color: var(--color-content-subtle, #8ca1b9);
+    border: 1px solid var(--color-border-default, #d0d9e3);
+    border-radius: 50%;
+    box-shadow: none;
+  }
+}

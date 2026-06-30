@@ -46,3 +46,9 @@
     }
   }
 }
+
+// Modern theme: rounder segmented control + neutral border (active-tile accent deferred).
+:host-context([data-theme='modern']) > .tile-container {
+  border-radius: var(--border-radius-sm, 0.8rem);
+  border-color: var(--color-border-default, #f0f5f9);
+}

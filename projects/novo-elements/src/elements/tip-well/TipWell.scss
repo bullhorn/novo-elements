@@ -33,3 +33,8 @@
     }
   }
 }
+
+// Modern theme: rounder tip-well surface.
+:host-context([data-theme='modern']) > div {
+  border-radius: var(--border-radius-sm, 0.8rem);
+}

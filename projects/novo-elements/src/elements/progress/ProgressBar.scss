@@ -105,3 +105,13 @@
   60% { transform: translateX(0%) }
   100% { transform: translateX(0%) }
 }
+
+// Modern theme: pill progress bar ends (fill color rides on the deferred accent).
+:host-context([data-theme='modern']) {
+  &.linear:first-child {
+    border-radius: 999px 0 0 999px;
+  }
+  &.linear:last-child {
+    border-radius: 0 999px 999px 0;
+  }
+}
