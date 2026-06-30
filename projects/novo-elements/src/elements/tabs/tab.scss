@@ -157,6 +157,25 @@
   }
 }
 
+// Modern theme: charcoal tabs, near-black active text + rounded neutral indicator
+// (Tier-3 tabs spec; the dark underline in the Figma, not an entity color).
+:host-context([data-theme='modern']) {
+  .novo-tab-link {
+    color: var(--color-content-link, #282828);
+  }
+  &.active,
+  &.router-link-active {
+    color: var(--color-content-link-hover, #221f1f);
+    .novo-tab-link {
+      color: var(--color-content-link-hover, #221f1f);
+    }
+    .indicator {
+      background: var(--color-content-link-hover, #221f1f);
+      border-radius: 999px;
+    }
+  }
+}
+
 
 :host-context(novo-nav[theme="color"]),
 :host-context(novo-nav[theme="neutral"]) {
