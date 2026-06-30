@@ -197,3 +197,14 @@
     }
   }
 }
+
+// Modern theme: rounded, bordered select panel (surface only — selected/hover
+// item accent rides on the deferred brand/secondary token). The panel is
+// portalled into a global overlay (outside this host), so neither :host-context
+// (no host ancestor) nor an encapsulated selector (attr lands on the [data-theme]
+// element too) reaches it. ::ng-deep emits a global rule, gated by the unique
+// panel class + the [data-theme] ancestor to keep it scoped.
+::ng-deep [data-theme='modern'] .novo-select-list {
+  border-radius: var(--border-radius-sm, 0.8rem);
+  border: 1px solid var(--color-border-default, #f0f5f9);
+}
