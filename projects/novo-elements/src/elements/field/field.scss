@@ -108,3 +108,18 @@
     }
   }
 }
+
+// Modern theme: lighter label (content/subtle, weight 600) + modern input text
+// (14px/500), per Tier-3 inputs spec. Focus/selected/box states are deferred —
+// they need the color/brand/secondary tokens (not in the current export).
+:host-context([data-theme='modern']) {
+  .novo-field-label {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--color-content-subtle, #8ca1b9);
+  }
+  .novo-field-input ::ng-deep .novo-input-element {
+    font-size: 1.4rem;
+    font-weight: 500;
+  }
+}
