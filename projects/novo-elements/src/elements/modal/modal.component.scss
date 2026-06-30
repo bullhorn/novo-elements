@@ -45,3 +45,16 @@
     }
   }
 }
+
+// Modern theme: larger 16px radius (border.radius.md) for the rounded modern
+// surface language; header top corners follow. :host-context is valid here even
+// though the modal is portalled — we style the host element itself (carries
+// _nghost) and html (with data-theme) is its ancestor.
+:host-context([data-theme='modern']) {
+  border-radius: var(--novo-modal-radius, 1.6rem);
+
+  > ::ng-deep header {
+    border-top-left-radius: var(--novo-modal-radius, 1.6rem);
+    border-top-right-radius: var(--novo-modal-radius, 1.6rem);
+  }
+}

@@ -107,3 +107,10 @@
     }
   }
 }
+
+// Modern theme: larger 16px radius (border.radius.md) for the rounded modern
+// surface language. :host-context is valid here even though the notification is
+// portalled — we style the host element itself and html carries data-theme.
+:host-context([data-theme='modern']) {
+  border-radius: var(--novo-modal-radius, 1.6rem);
+}
