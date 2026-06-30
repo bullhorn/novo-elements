@@ -120,13 +120,17 @@
   }
 }
 
-// Modern theme: rounder card (16px = border.radius.md) + 1px border, per Tier-3
-// cards spec. Frosted header/body backgrounds deferred (need color/transparency tokens).
+// Modern theme: rounder card (16px = border.radius.md) + 1px border + frosted
+// translucent surface (Tier-3 cards: background = transparency/white-80). The
+// backdrop blur gives the frosted-glass effect (no blur token yet — modest value).
 :host-context([data-theme='modern']) {
   border-radius: var(--novo-card-radius, 1.6rem);
   border: 1px solid var(--color-border-default, #f0f5f9);
+  background-color: var(--color-transparency-white-80, rgba(255, 255, 255, 0.8));
+  backdrop-filter: blur(12px);
 
   div.card-loading-container {
     border-radius: var(--novo-card-radius, 1.6rem);
+    background-color: var(--color-transparency-white-80, rgba(255, 255, 255, 0.8));
   }
 }
