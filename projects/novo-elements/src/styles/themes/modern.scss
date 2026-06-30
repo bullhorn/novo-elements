@@ -92,8 +92,14 @@
   // NOTE: not yet overridden (inherit classic / TODO follow-up):
   //   --code, --variable, --highlight, --scrollbar-thumb(-hover),
   //   --button-hover, --form-placeholder, --form-text.
-  // Status primitives (--color-positive [125 files], --color-negative, entity colors)
-  // are part of the getColor() var contract and are deferred to Track 2 + design sign-off.
+
+  // PROVISIONAL modern accent (best-guess, pending design sign-off). Overriding
+  // --color-positive cascades through the getColor() var contract to primary/
+  // secondary buttons, checkbox/radio checked, slider, progress, select header,
+  // focus/selection, links, etc. Amplify-adjacent brand blue; replace with the
+  // real brand/primary token when design delivers it. --color-negative / entity
+  // / status colors stay classic for now.
+  --color-positive: #0095da;
 }
 
 :root[data-theme='modern'],
