@@ -211,6 +211,20 @@ describe('Elements: PlacesListComponent', () => {
       expect(component['sessionToken']).toBe('');
     });
 
+    it('should clear the token even when the details request rejects', async () => {
+      const getPredictions = vi.fn().mockResolvedValue([]);
+      const getPlaceDetails = vi.fn().mockRejectedValue(new Error('details failed'));
+      component['_googlePlacesService'] = { getPredictions, getPlaceDetails } as any;
+      component.settings = { ...REST_SETTINGS } as any;
+
+      component['getListQuery']('123 Main');
+      expect(component['sessionToken']).toMatch(UUID_V4);
+
+      await expect(component['getPlaceLocationInfo']({ placeId: 'abc' })).rejects.toThrow('details failed');
+
+      expect(component['sessionToken']).toBe('');
+    });
+
     it('should mint a fresh, distinct token for the next interaction after a selection', async () => {
       const getPredictions = vi.fn().mockResolvedValue([]);
       const getPlaceDetails = vi.fn().mockResolvedValue(null);

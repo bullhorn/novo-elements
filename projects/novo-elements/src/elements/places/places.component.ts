@@ -17,7 +17,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BasePickerResults } from 'novo-elements/elements/picker';
 import { GlobalRef } from 'novo-elements/services';
 import { Key } from 'novo-elements/utils';
-import { Observable } from 'rxjs';
+import { NEVER, Observable } from 'rxjs';
 import { GooglePlacesService } from './places.service';
 
 export interface PlacesSettings {
@@ -280,7 +280,7 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
 
   override search(term, mode?): Observable<any> {
     // Disable the base search term functionality here since it is handled by the places picker separately
-    return new Observable();
+    return NEVER;
   }
 
   // module initialization happens. function called by ngOninit and ngOnChange
@@ -456,23 +456,25 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
   }
 
   // function to retrieve the location info based on google place id.
-  private getPlaceLocationInfo(selectedData: AddressLookupPrediction): any {
+  private async getPlaceLocationInfo(selectedData: AddressLookupPrediction): Promise<void> {
     const placeId = selectedData.placeId;
     if (this.settings.useGoogleGeoApi) {
-      this._googlePlacesService.getGeoPlaceDetail(placeId).then((data: any) => {
-        if (data) {
-          this.setRecentLocation(data);
-        }
-      });
+      const data = await this._googlePlacesService.getGeoPlaceDetail(placeId);
+      if (data) {
+        this.setRecentLocation(data);
+      }
     } else {
-      this._googlePlacesService.getPlaceDetails(this.settings.geoLocDetailServerUrl, placeId, this.sessionToken).then((result: any) => {
-        // The details call closes the Google billing session; the token is now spent.
-        this.clearSessionToken();
+      try {
+        let result = await this._googlePlacesService.getPlaceDetails(this.settings.geoLocDetailServerUrl, placeId, this.sessionToken);
         if (result) {
           result = this.extractServerList(this.settings.serverResponseDetailHierarchy, result);
           this.setRecentLocation(result);
         }
-      });
+      } finally {
+        // The details call ends the Google billing session; clear the token even if the request
+        // failed so the next interaction starts a fresh session.
+        this.clearSessionToken();
+      }
     }
   }
 
