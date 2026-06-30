@@ -303,3 +303,8 @@
     }
   }
 }
+
+// Modern theme: rounded toast surface.
+:host-context([data-theme='modern']) {
+  border-radius: var(--border-radius-sm, 0.8rem);
+}

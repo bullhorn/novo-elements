@@ -66,3 +66,9 @@
     }
   }
 }
+
+// Modern theme: rounded, bordered expansion panel (component is ViewEncapsulation.None).
+[data-theme='modern'] .novo-expansion-panel {
+  border-radius: var(--border-radius-sm, 0.8rem);
+  border: 1px solid var(--color-border-default, #f0f5f9);
+}

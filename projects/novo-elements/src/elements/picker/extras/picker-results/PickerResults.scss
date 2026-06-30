@@ -296,3 +296,14 @@ distribution-list-picker-results {
     color: black;
   }
 }
+
+// Modern theme: rounded picker results + neutral border (was hardcoded blue).
+[data-theme='modern'] picker-results,
+[data-theme='modern'] entity-picker-results {
+  border-radius: var(--border-radius-sm, 0.8rem);
+  overflow: hidden;
+  .novo-list {
+    border-color: var(--color-border-default, #f0f5f9);
+    border-radius: var(--border-radius-sm, 0.8rem);
+  }
+}
