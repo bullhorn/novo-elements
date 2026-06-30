@@ -17,8 +17,10 @@
   // Live color-math direction (light): elevate() brightens, recede() darkens.
   --bg-fade-multiplier: 1;
 
-  // Typeface — modern uses Inter (classic uses Montserrat).
+  // Typeface — modern uses Inter (classic uses Montserrat). Override BOTH --font-family-base
+  // (html) and --font-family-body (body, used by most content) so all text picks up Inter.
   --font-family-base: var(--typography-font-family-base, 'Inter', Helvetica, Arial, sans-serif);
+  --font-family-body: var(--typography-font-family-base, 'Inter', Helvetica, Arial, sans-serif);
 
   // --- Surfaces ---
   --background-body:   var(--color-gray-white, #ffffff);
