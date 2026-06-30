@@ -1,0 +1,19 @@
+:host {
+  display: flex;
+  flex-flow: column;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.ab-child-status {
+  font-family: monospace;
+  display: flex;
+  flex-flow: column;
+  gap: 0.25rem;
+}
+
+.ab-child-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}

@@ -46,3 +46,9 @@ export function formControlsUrl(control: string): string {
     const baseUrl = (global as any).E2E_BASE_URL || 'https://bullhorn.github.io/novo-elements/docs';
     return `${baseUrl}/#/form-controls/${control}`;
 }
+
+/** URL for hidden test-harness pages (section: 'testing', not shown in nav). */
+export function testingUrl(page: string): string {
+    const baseUrl = (global as any).E2E_BASE_URL || 'https://bullhorn.github.io/novo-elements/docs';
+    return `${baseUrl}/#/testing/${page}`;
+}

@@ -1,0 +1,49 @@
+<section class="ab-controls">
+  <h4>Parent Controls</h4>
+  <button (click)="fireEventToChildren()" data-automation-id="ab-parent-fire-event">
+    Fire custom event to children
+  </button>
+</section>
+
+<section class="ab-log">
+  <h4>Received from child</h4>
+  <div class="ab-log-row" data-automation-id="ab-received-register">
+    <span class="ab-log-label">register:</span>
+    <span class="ab-log-value">{{ received.register ?? '—' }}</span>
+  </div>
+  <div class="ab-log-row" data-automation-id="ab-received-open">
+    <span class="ab-log-label">open:</span>
+    <span class="ab-log-value">{{ received.open ?? '—' }}</span>
+  </div>
+  <div class="ab-log-row" data-automation-id="ab-received-update">
+    <span class="ab-log-label">update:</span>
+    <span class="ab-log-value">{{ received.update ?? '—' }}</span>
+  </div>
+  <div class="ab-log-row" data-automation-id="ab-received-close">
+    <span class="ab-log-label">close:</span>
+    <span class="ab-log-value">{{ received.close ?? '—' }}</span>
+  </div>
+  <div class="ab-log-row" data-automation-id="ab-received-refresh">
+    <span class="ab-log-label">refresh:</span>
+    <span class="ab-log-value">{{ received.refresh ?? '—' }}</span>
+  </div>
+  <div class="ab-log-row" data-automation-id="ab-received-pin">
+    <span class="ab-log-label">pin:</span>
+    <span class="ab-log-value">{{ received.pin ?? '—' }}</span>
+  </div>
+  <div class="ab-log-row" data-automation-id="ab-received-custom">
+    <span class="ab-log-label">customEvent:</span>
+    <span class="ab-log-value">{{ received.customEvent ?? '—' }}</span>
+  </div>
+</section>
+
+<section class="ab-frame-container">
+  <h4>Child Frame</h4>
+  <iframe
+    [src]="childUrl"
+    width="100%"
+    height="500"
+    frameborder="0"
+    data-automation-id="ab-child-frame">
+  </iframe>
+</section>

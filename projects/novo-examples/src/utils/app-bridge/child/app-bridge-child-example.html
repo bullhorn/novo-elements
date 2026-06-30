@@ -1,0 +1,14 @@
+<section class="ab-child-status">
+  <div data-automation-id="ab-child-status">{{ status }}</div>
+  <div data-automation-id="ab-child-parent-event">parentEvent: {{ parentEvent }}</div>
+</section>
+
+<section class="ab-child-actions">
+  <button (click)="register()" data-automation-id="ab-child-register">Register</button>
+  <button (click)="open()"     data-automation-id="ab-child-open">Open</button>
+  <button (click)="update()"   data-automation-id="ab-child-update">Update</button>
+  <button (click)="close()"    data-automation-id="ab-child-close">Close</button>
+  <button (click)="refresh()"  data-automation-id="ab-child-refresh">Refresh</button>
+  <button (click)="pin()"      data-automation-id="ab-child-pin">Pin</button>
+  <button (click)="fireEvent()" data-automation-id="ab-child-fire-event">Fire custom event</button>
+</section>

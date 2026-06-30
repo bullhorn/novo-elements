@@ -1,0 +1,31 @@
+:host {
+  display: flex;
+  flex-flow: column;
+  gap: 1.5rem;
+}
+
+.ab-controls button {
+  margin-right: 0.5rem;
+}
+
+.ab-log {
+  display: flex;
+  flex-flow: column;
+  gap: 0.25rem;
+}
+
+.ab-log-row {
+  display: flex;
+  gap: 0.5rem;
+  font-family: monospace;
+}
+
+.ab-log-label {
+  font-weight: bold;
+  min-width: 8rem;
+}
+
+.ab-frame-container iframe {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}

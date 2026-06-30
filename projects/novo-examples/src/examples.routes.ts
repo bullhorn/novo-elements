@@ -181,6 +181,30 @@ export class CodeEditorPage {
 
 
 @Component({
+  selector: 'app-bridge-parent-page',
+  template: `<p><app-bridge-parent-example></app-bridge-parent-example></p>
+`,
+  host: { class: 'markdown-page' },
+  standalone: false,
+})
+export class AppBridgeParentPage {
+  public params: any = {};
+}
+
+
+@Component({
+  selector: 'app-bridge-child-page',
+  template: `<p><app-bridge-child-example></app-bridge-child-example></p>
+`,
+  host: { class: 'markdown-page' },
+  standalone: false,
+})
+export class AppBridgeChildPage {
+  public params: any = {};
+}
+
+
+@Component({
   selector: 'v9-page',
   template: `<h1>📢  December 2023 (version 9)</h1>
 <h1>Continuing CommonJS library removal</h1>
@@ -6830,6 +6854,8 @@ const routes: Routes = [
   { path: 'utils/field-interactions', component: FieldInteractionsPage, data: { order: '3', title: 'Field Interactions', section: 'utils' } },
   { path: 'utils/drag and drop', component: DragDropPage, data: { order: '1', title: 'Drag and Drop', section: 'utils' } },
   { path: 'utils/code editor', component: CodeEditorPage, data: { order: '1', title: 'Code Editor', section: 'utils' } },
+  { path: 'testing/app-bridge', component: AppBridgeParentPage, data: { order: '1', title: 'AppBridge Parent', section: 'testing' } },
+  { path: 'testing/app-bridge-child', component: AppBridgeChildPage, data: { order: '1', title: 'AppBridge Child', section: 'testing' } },
   { path: 'updates/v9-announce', component: v9Page, data: { order: '5', title: 'v9', section: 'updates' } },
   { path: 'updates/v8-announce', component: v8Page, data: { order: '6', title: 'v8', section: 'updates' } },
   { path: 'updates/v7-announce', component: v7Page, data: { order: '7', title: 'v7', section: 'updates' } },
@@ -7129,7 +7155,7 @@ const routes: Routes = [
 ];
 
 export const PAGE_LIST = [
-  SecurityPage,QuickNotePage,PipesPage,FieldInteractionsPage,DragDropPage,CodeEditorPage,v9Page,v8Page,v7Page,v6Page,v13Page,v12Page,v11Page,v10Page,TemplatesPage,PatternsPage,PatternsTestPage,PatternsNativeFormsPage,LayoutsPage,TabsExamplesPage,TabsDevelopPage,TabsDesignPage,StepperPage,SidenavPage,ListPage,HeaderPage,ExpansionPage,CardExamplesPage,CardDevelopPage,CardDesignPage,CardDescriptionPage,HomePage,FormControlsPage,ValuePage,TimePickerExamplesPage,TimePickerDevelopPage,TimePickerDesignPage,TilesPage,SelectPage,RadioButtonsPage,PickerPage,MultiPickerPage,FormGroupsPage,FormPage,DynamicFormPage,DateTimePickerExamplesPage,DateTimePickerDevelopPage,DateTimePickerDesignPage,DatePickerExamplesPage,DatePickerDevelopPage,DatePickerDesignPage,ColorPickerPage,CkEditorPage,ChipsExamplesPage,ChipsDevelopPage,ChipsDesignPage,CheckboxPage,DesignPage,TypographyPage,SpacingPage,IconographyPage,CompositionPage,ColorsPage,ComponentsPage,TooltipExamplesPage,TooltipDevelopPage,TooltipDesignPage,ToolbarExamplesPage,ToolbarDevelopPage,ToolbarDesignPage,ToasterExamplesPage,ToasterDevelopPage,ToasterDesignPage,TipWellExamplesPage,TipWellDevelopPage,TipWellDesignPage,TabbedGroupPickerPage,SwitchPage,SlidesPage,SearchPage,QueryBuilderExamplesPage,QueryBuilderDevelopPage,QueryBuilderDesignPage,ProgressUsagePage,ProgressExamplesPage,ProgressDevelopPage,ProgressDesignPage,PopoverExamplesPage,PopoverDevelopPage,PopoverDesignPage,NonIdealStateExamplesPage,NonIdealStateDevelopPage,NonIdealStateDesignPage,ModalExamplesPage,ModalDevelopPage,ModalDesignPage,MenuExamplesPage,MenuDevelopPage,MenuDesignPage,LoadingExamplesPage,LoadingDevelopPage,LoadingDesignPage,IconExamplesPage,IconDevelopPage,IconDesignPage,FieldExamplesPage,FieldDevelopPage,FieldDesignPage,DropdownExamplesPage,DropdownDevelopPage,DropdownDesignPage,DataTablePage,CalendarExamplesPage,CalendarDevelopPage,CalendarDesignPage,ButtonExamplesPage,ButtonDevelopPage,ButtonDesignPage,BreadcrumbExamplesPage,BreadcrumbDevelopPage,BreadcrumbDesignPage,AvatarExamplesPage,AvatarDevelopPage,AvatarDesignPage,AutocompleteExamplesPage,AutocompleteDevelopPage,AutocompleteDesignPage,AsideExamplesPage,AsideDevelopPage,AsideDesignPage,AgendaExamplesPage,AgendaDevelopPage,AgendaDesignPage
+  SecurityPage,QuickNotePage,PipesPage,FieldInteractionsPage,DragDropPage,CodeEditorPage,AppBridgeParentPage,AppBridgeChildPage,v9Page,v8Page,v7Page,v6Page,v13Page,v12Page,v11Page,v10Page,TemplatesPage,PatternsPage,PatternsTestPage,PatternsNativeFormsPage,LayoutsPage,TabsExamplesPage,TabsDevelopPage,TabsDesignPage,StepperPage,SidenavPage,ListPage,HeaderPage,ExpansionPage,CardExamplesPage,CardDevelopPage,CardDesignPage,CardDescriptionPage,HomePage,FormControlsPage,ValuePage,TimePickerExamplesPage,TimePickerDevelopPage,TimePickerDesignPage,TilesPage,SelectPage,RadioButtonsPage,PickerPage,MultiPickerPage,FormGroupsPage,FormPage,DynamicFormPage,DateTimePickerExamplesPage,DateTimePickerDevelopPage,DateTimePickerDesignPage,DatePickerExamplesPage,DatePickerDevelopPage,DatePickerDesignPage,ColorPickerPage,CkEditorPage,ChipsExamplesPage,ChipsDevelopPage,ChipsDesignPage,CheckboxPage,DesignPage,TypographyPage,SpacingPage,IconographyPage,CompositionPage,ColorsPage,ComponentsPage,TooltipExamplesPage,TooltipDevelopPage,TooltipDesignPage,ToolbarExamplesPage,ToolbarDevelopPage,ToolbarDesignPage,ToasterExamplesPage,ToasterDevelopPage,ToasterDesignPage,TipWellExamplesPage,TipWellDevelopPage,TipWellDesignPage,TabbedGroupPickerPage,SwitchPage,SlidesPage,SearchPage,QueryBuilderExamplesPage,QueryBuilderDevelopPage,QueryBuilderDesignPage,ProgressUsagePage,ProgressExamplesPage,ProgressDevelopPage,ProgressDesignPage,PopoverExamplesPage,PopoverDevelopPage,PopoverDesignPage,NonIdealStateExamplesPage,NonIdealStateDevelopPage,NonIdealStateDesignPage,ModalExamplesPage,ModalDevelopPage,ModalDesignPage,MenuExamplesPage,MenuDevelopPage,MenuDesignPage,LoadingExamplesPage,LoadingDevelopPage,LoadingDesignPage,IconExamplesPage,IconDevelopPage,IconDesignPage,FieldExamplesPage,FieldDevelopPage,FieldDesignPage,DropdownExamplesPage,DropdownDevelopPage,DropdownDesignPage,DataTablePage,CalendarExamplesPage,CalendarDevelopPage,CalendarDesignPage,ButtonExamplesPage,ButtonDevelopPage,ButtonDesignPage,BreadcrumbExamplesPage,BreadcrumbDevelopPage,BreadcrumbDesignPage,AvatarExamplesPage,AvatarDevelopPage,AvatarDesignPage,AutocompleteExamplesPage,AutocompleteDevelopPage,AutocompleteDesignPage,AsideExamplesPage,AsideDevelopPage,AsideDesignPage,AgendaExamplesPage,AgendaDevelopPage,AgendaDesignPage
 ];
 
 @NgModule({
