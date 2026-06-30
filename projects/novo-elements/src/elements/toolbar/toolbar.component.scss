@@ -60,3 +60,12 @@
     width: 100%;
   }
 }
+
+// Modern theme: swap the thick entity-colored accent underline for a subtle neutral
+// border (per Tier-3 header spec; entity color stays on the icon/avatar).
+:host-context([data-theme='modern']) {
+  .novo-toolbar .novo-toolbar-row[class*='novo-accent-'],
+  .novo-toolbar.novo-toolbar-single-row[class*='novo-accent-'] {
+    border-bottom: 1px solid var(--color-border-default, #f0f5f9);
+  }
+}
