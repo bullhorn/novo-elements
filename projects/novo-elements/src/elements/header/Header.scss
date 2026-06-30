@@ -151,3 +151,11 @@
     flex-flow: row nowrap;
   }
 }
+
+// Modern theme: soften the entity-accent underline to a neutral 1px border
+// (matches the toolbar/header treatment; entity color stays on the icon).
+:host-context([data-theme='modern']) {
+  &[class*='novo-accent-'] > section:first-of-type {
+    border-bottom: 1px solid var(--color-border-default, #f0f5f9);
+  }
+}
