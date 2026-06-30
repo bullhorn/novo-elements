@@ -13,10 +13,8 @@ export class AccentColorDirective implements OnDestroy {
 
   @HostBinding('class')
   get hb_textColor() {
-    // Support legacy classic theme... for now
-    if (this.theme.themeName === 'classic') {
-      return `novo-theme-${this.accent}`;
-    }
+    // The legacy 'classic' theme is retired — every theme now uses the
+    // modern/neutral accent treatment (classic = today's baseline look).
     return `novo-accent-${this.accent}`;
   }
 
