@@ -2102,20 +2102,6 @@ export class ValuePage {
 
 
 @Component({
-  selector: 'timezone-page',
-  template: `<h1>Checkbox <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/form/controls/timezone/TimezoneControl">(source)</a></h1>
-<h5>Basic</h5>
-<p><code-example example="timezone"></code-example></p>
-`,
-  host: { class: 'markdown-page' },
-  standalone: false,
-})
-export class TimezonePage {
-  public params: any = {};
-}
-
-
-@Component({
   selector: 'time-picker-examples-page',
   template: `<h2>Standalone Time Picker</h2>
 <p>Time pickers come in 12 hour or 24 hour style.</p>
@@ -2629,8 +2615,6 @@ export class DateTimePickerDesignPage {
 <p><code-example example="week-start"></code-example></p>
 <h5>Date Picker Limits</h5>
 <p><code-example example="date-picker-limits"></code-example></p>
-<h2>Different Locale</h2>
-<p>TBD</p>
 `,
   host: { class: 'markdown-page' },
   standalone: false,
@@ -6859,8 +6843,8 @@ const routes: Routes = [
   { path: 'layouts', component: LayoutsPage, data: { order: '6', title: 'Layouts', section: 'src' } },
   { path: 'home', component: HomePage, data: { order: '1', title: 'Introduction', section: 'src' } },
   { path: 'form-controls', component: FormControlsPage, data: { order: '12', title: 'Form Controls', section: 'src' } },
-  { path: 'design', component: DesignPage, data: { order: '26', title: 'Design', section: 'src' } },
-  { path: 'components', component: ComponentsPage, data: { order: '32', title: 'Components', section: 'src' } },
+  { path: 'design', component: DesignPage, data: { order: '25', title: 'Design', section: 'src' } },
+  { path: 'components', component: ComponentsPage, data: { order: '31', title: 'Components', section: 'src' } },
   {
     path: 'patterns/patterns',
     component: TabsLayout,
@@ -6893,18 +6877,17 @@ const routes: Routes = [
       { path: '', redirectTo: '/layouts/card/design', pathMatch: 'full' },
     ]},
   { path: 'form-controls/value', component: ValuePage, data: { order: '13', title: 'Value', section: 'form-controls' } },
-  { path: 'form-controls/timezone', component: TimezonePage, data: { order: '14', title: 'Timezone', section: 'form-controls' } },
-  { path: 'form-controls/tiles', component: TilesPage, data: { order: '15', title: 'Tiles', section: 'form-controls' } },
-  { path: 'form-controls/select', component: SelectPage, data: { order: '16', title: 'Select', section: 'form-controls' } },
-  { path: 'form-controls/radio-buttons', component: RadioButtonsPage, data: { order: '17', title: 'Radio Buttons', section: 'form-controls' } },
-  { path: 'form-controls/picker', component: PickerPage, data: { order: '18', title: 'Picker', section: 'form-controls' } },
-  { path: 'form-controls/multi-picker', component: MultiPickerPage, data: { order: '19', title: 'Multi Picker', section: 'form-controls' } },
-  { path: 'form-controls/form-groups', component: FormGroupsPage, data: { order: '20', title: 'Form Groups', section: 'form-controls' } },
-  { path: 'form-controls/form', component: FormPage, data: { order: '21', title: 'Form', section: 'form-controls' } },
-  { path: 'form-controls/dynamic-form', component: DynamicFormPage, data: { order: '22', title: 'Dynamic Form', section: 'form-controls' } },
-  { path: 'form-controls/color-picker', component: ColorPickerPage, data: { order: '23', title: 'Color Picker', section: 'form-controls' } },
-  { path: 'form-controls/ck-editor', component: CkEditorPage, data: { order: '24', title: 'Ck Editor', section: 'form-controls' } },
-  { path: 'form-controls/checkbox', component: CheckboxPage, data: { order: '25', title: 'Checkbox', section: 'form-controls' } },
+  { path: 'form-controls/tiles', component: TilesPage, data: { order: '14', title: 'Tiles', section: 'form-controls' } },
+  { path: 'form-controls/select', component: SelectPage, data: { order: '15', title: 'Select', section: 'form-controls' } },
+  { path: 'form-controls/radio-buttons', component: RadioButtonsPage, data: { order: '16', title: 'Radio Buttons', section: 'form-controls' } },
+  { path: 'form-controls/picker', component: PickerPage, data: { order: '17', title: 'Picker', section: 'form-controls' } },
+  { path: 'form-controls/multi-picker', component: MultiPickerPage, data: { order: '18', title: 'Multi Picker', section: 'form-controls' } },
+  { path: 'form-controls/form-groups', component: FormGroupsPage, data: { order: '19', title: 'Form Groups', section: 'form-controls' } },
+  { path: 'form-controls/form', component: FormPage, data: { order: '20', title: 'Form', section: 'form-controls' } },
+  { path: 'form-controls/dynamic-form', component: DynamicFormPage, data: { order: '21', title: 'Dynamic Form', section: 'form-controls' } },
+  { path: 'form-controls/color-picker', component: ColorPickerPage, data: { order: '22', title: 'Color Picker', section: 'form-controls' } },
+  { path: 'form-controls/ck-editor', component: CkEditorPage, data: { order: '23', title: 'Ck Editor', section: 'form-controls' } },
+  { path: 'form-controls/checkbox', component: CheckboxPage, data: { order: '24', title: 'Checkbox', section: 'form-controls' } },
   {
     path: 'form-controls/time picker',
     component: TabsLayout,
@@ -6941,11 +6924,11 @@ const routes: Routes = [
       { path: 'examples', component: ChipsExamplesPage },
       { path: '', redirectTo: '/form-controls/chips/design', pathMatch: 'full' },
     ]},
-  { path: 'design/typography', component: TypographyPage, data: { order: '27', title: 'Typography', section: 'design' } },
-  { path: 'design/spacing', component: SpacingPage, data: { order: '28', title: 'Spacing', section: 'design' } },
-  { path: 'design/iconography', component: IconographyPage, data: { order: '29', title: 'Iconography', section: 'design' } },
-  { path: 'design/composition', component: CompositionPage, data: { order: '30', title: 'Composition', section: 'design' } },
-  { path: 'design/colors', component: ColorsPage, data: { order: '31', title: 'Colors', section: 'design' } },
+  { path: 'design/typography', component: TypographyPage, data: { order: '26', title: 'Typography', section: 'design' } },
+  { path: 'design/spacing', component: SpacingPage, data: { order: '27', title: 'Spacing', section: 'design' } },
+  { path: 'design/iconography', component: IconographyPage, data: { order: '28', title: 'Iconography', section: 'design' } },
+  { path: 'design/composition', component: CompositionPage, data: { order: '29', title: 'Composition', section: 'design' } },
+  { path: 'design/colors', component: ColorsPage, data: { order: '30', title: 'Colors', section: 'design' } },
   {
     path: 'components/tooltip',
     component: TabsLayout,
@@ -6982,10 +6965,10 @@ const routes: Routes = [
       { path: 'examples', component: TipWellExamplesPage },
       { path: '', redirectTo: '/components/tip well/design', pathMatch: 'full' },
     ]},
-  { path: 'components/tabbed-group-picker', component: TabbedGroupPickerPage, data: { order: '33', title: 'Tabbed Group Picker', section: 'components' } },
-  { path: 'components/switch', component: SwitchPage, data: { order: '34', title: 'Switch', section: 'components' } },
-  { path: 'components/slides', component: SlidesPage, data: { order: '35', title: 'Slides', section: 'components' } },
-  { path: 'components/search', component: SearchPage, data: { order: '36', title: 'Search', section: 'components' } },
+  { path: 'components/tabbed-group-picker', component: TabbedGroupPickerPage, data: { order: '32', title: 'Tabbed Group Picker', section: 'components' } },
+  { path: 'components/switch', component: SwitchPage, data: { order: '33', title: 'Switch', section: 'components' } },
+  { path: 'components/slides', component: SlidesPage, data: { order: '34', title: 'Slides', section: 'components' } },
+  { path: 'components/search', component: SearchPage, data: { order: '35', title: 'Search', section: 'components' } },
   {
     path: 'components/query builder',
     component: TabsLayout,
@@ -7077,7 +7060,7 @@ const routes: Routes = [
       { path: 'examples', component: DropdownExamplesPage },
       { path: '', redirectTo: '/components/dropdown/design', pathMatch: 'full' },
     ]},
-  { path: 'components/data-table', component: DataTablePage, data: { order: '37', title: 'Data Table', section: 'components' } },
+  { path: 'components/data-table', component: DataTablePage, data: { order: '36', title: 'Data Table', section: 'components' } },
   {
     path: 'components/calendar',
     component: TabsLayout,
@@ -7146,7 +7129,7 @@ const routes: Routes = [
 ];
 
 export const PAGE_LIST = [
-  SecurityPage,QuickNotePage,PipesPage,FieldInteractionsPage,DragDropPage,CodeEditorPage,v9Page,v8Page,v7Page,v6Page,v13Page,v12Page,v11Page,v10Page,TemplatesPage,PatternsPage,PatternsTestPage,PatternsNativeFormsPage,LayoutsPage,TabsExamplesPage,TabsDevelopPage,TabsDesignPage,StepperPage,SidenavPage,ListPage,HeaderPage,ExpansionPage,CardExamplesPage,CardDevelopPage,CardDesignPage,CardDescriptionPage,HomePage,FormControlsPage,ValuePage,TimezonePage,TimePickerExamplesPage,TimePickerDevelopPage,TimePickerDesignPage,TilesPage,SelectPage,RadioButtonsPage,PickerPage,MultiPickerPage,FormGroupsPage,FormPage,DynamicFormPage,DateTimePickerExamplesPage,DateTimePickerDevelopPage,DateTimePickerDesignPage,DatePickerExamplesPage,DatePickerDevelopPage,DatePickerDesignPage,ColorPickerPage,CkEditorPage,ChipsExamplesPage,ChipsDevelopPage,ChipsDesignPage,CheckboxPage,DesignPage,TypographyPage,SpacingPage,IconographyPage,CompositionPage,ColorsPage,ComponentsPage,TooltipExamplesPage,TooltipDevelopPage,TooltipDesignPage,ToolbarExamplesPage,ToolbarDevelopPage,ToolbarDesignPage,ToasterExamplesPage,ToasterDevelopPage,ToasterDesignPage,TipWellExamplesPage,TipWellDevelopPage,TipWellDesignPage,TabbedGroupPickerPage,SwitchPage,SlidesPage,SearchPage,QueryBuilderExamplesPage,QueryBuilderDevelopPage,QueryBuilderDesignPage,ProgressUsagePage,ProgressExamplesPage,ProgressDevelopPage,ProgressDesignPage,PopoverExamplesPage,PopoverDevelopPage,PopoverDesignPage,NonIdealStateExamplesPage,NonIdealStateDevelopPage,NonIdealStateDesignPage,ModalExamplesPage,ModalDevelopPage,ModalDesignPage,MenuExamplesPage,MenuDevelopPage,MenuDesignPage,LoadingExamplesPage,LoadingDevelopPage,LoadingDesignPage,IconExamplesPage,IconDevelopPage,IconDesignPage,FieldExamplesPage,FieldDevelopPage,FieldDesignPage,DropdownExamplesPage,DropdownDevelopPage,DropdownDesignPage,DataTablePage,CalendarExamplesPage,CalendarDevelopPage,CalendarDesignPage,ButtonExamplesPage,ButtonDevelopPage,ButtonDesignPage,BreadcrumbExamplesPage,BreadcrumbDevelopPage,BreadcrumbDesignPage,AvatarExamplesPage,AvatarDevelopPage,AvatarDesignPage,AutocompleteExamplesPage,AutocompleteDevelopPage,AutocompleteDesignPage,AsideExamplesPage,AsideDevelopPage,AsideDesignPage,AgendaExamplesPage,AgendaDevelopPage,AgendaDesignPage
+  SecurityPage,QuickNotePage,PipesPage,FieldInteractionsPage,DragDropPage,CodeEditorPage,v9Page,v8Page,v7Page,v6Page,v13Page,v12Page,v11Page,v10Page,TemplatesPage,PatternsPage,PatternsTestPage,PatternsNativeFormsPage,LayoutsPage,TabsExamplesPage,TabsDevelopPage,TabsDesignPage,StepperPage,SidenavPage,ListPage,HeaderPage,ExpansionPage,CardExamplesPage,CardDevelopPage,CardDesignPage,CardDescriptionPage,HomePage,FormControlsPage,ValuePage,TimePickerExamplesPage,TimePickerDevelopPage,TimePickerDesignPage,TilesPage,SelectPage,RadioButtonsPage,PickerPage,MultiPickerPage,FormGroupsPage,FormPage,DynamicFormPage,DateTimePickerExamplesPage,DateTimePickerDevelopPage,DateTimePickerDesignPage,DatePickerExamplesPage,DatePickerDevelopPage,DatePickerDesignPage,ColorPickerPage,CkEditorPage,ChipsExamplesPage,ChipsDevelopPage,ChipsDesignPage,CheckboxPage,DesignPage,TypographyPage,SpacingPage,IconographyPage,CompositionPage,ColorsPage,ComponentsPage,TooltipExamplesPage,TooltipDevelopPage,TooltipDesignPage,ToolbarExamplesPage,ToolbarDevelopPage,ToolbarDesignPage,ToasterExamplesPage,ToasterDevelopPage,ToasterDesignPage,TipWellExamplesPage,TipWellDevelopPage,TipWellDesignPage,TabbedGroupPickerPage,SwitchPage,SlidesPage,SearchPage,QueryBuilderExamplesPage,QueryBuilderDevelopPage,QueryBuilderDesignPage,ProgressUsagePage,ProgressExamplesPage,ProgressDevelopPage,ProgressDesignPage,PopoverExamplesPage,PopoverDevelopPage,PopoverDesignPage,NonIdealStateExamplesPage,NonIdealStateDevelopPage,NonIdealStateDesignPage,ModalExamplesPage,ModalDevelopPage,ModalDesignPage,MenuExamplesPage,MenuDevelopPage,MenuDesignPage,LoadingExamplesPage,LoadingDevelopPage,LoadingDesignPage,IconExamplesPage,IconDevelopPage,IconDesignPage,FieldExamplesPage,FieldDevelopPage,FieldDesignPage,DropdownExamplesPage,DropdownDevelopPage,DropdownDesignPage,DataTablePage,CalendarExamplesPage,CalendarDevelopPage,CalendarDesignPage,ButtonExamplesPage,ButtonDevelopPage,ButtonDesignPage,BreadcrumbExamplesPage,BreadcrumbDevelopPage,BreadcrumbDesignPage,AvatarExamplesPage,AvatarDevelopPage,AvatarDesignPage,AutocompleteExamplesPage,AutocompleteDevelopPage,AutocompleteDesignPage,AsideExamplesPage,AsideDevelopPage,AsideDesignPage,AgendaExamplesPage,AgendaDevelopPage,AgendaDesignPage
 ];
 
 @NgModule({
