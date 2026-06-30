@@ -7,7 +7,7 @@
 $black: $color-black;
 $white: $color-white;
 $grey: $color-grey;
-// $off-white: $color-off-white;
+$off-white: $color-off-white;
 $light: $color-light;
 $navy: $color-navy;
 $pulse: $color-pulse;
@@ -52,17 +52,20 @@ $invoiceStatement: $color-invoice-statement;
 $billableCharge: $color-billable-charge;
 $payableCharge: $color-payable-charge;
 // Color Applications
+// Legacy aliases — DEPRECATED, kept for backward compatibility. The app and libs
+// (cm-ui, bte, modals, data-tables, …) still consume these directly; do not remove
+// until those usages are migrated to tokens / CSS variables.
 $dark: $color-dark;
-/*$navigation: $color-navigation;
-var(--color-positive): $ocean;
+$navigation: $color-navigation;
+$positive: $ocean;
 $success: $grass;
-var(--color-negative): $grapefruit;
+$negative: $grapefruit;
 $warning: $sunflower;
 $background: $off-white;
 $background-dark: #e2e2e2;
 $neutral: $color-neutral;
 $empty: $color-empty;
-$disabled: $color-stone;*/
+$disabled: $color-stone;
 
 // Spacing
 // --------------------------------------------------
