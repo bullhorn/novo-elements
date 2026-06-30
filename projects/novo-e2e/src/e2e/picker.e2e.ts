@@ -121,7 +121,7 @@ describe('Picker Demo Page', () => {
         });
 
         it('should update the value display after selecting Brian Kimball', async () => {
-            await verifyTextIncludes(formattedPicker.value, '1', 'formatted picker value after selecting Brian Kimball');
+            await verifyTextIncludes(formattedPicker.value, 'Selected Value: 1', 'formatted picker value after selecting Brian Kimball');
         });
     });
 

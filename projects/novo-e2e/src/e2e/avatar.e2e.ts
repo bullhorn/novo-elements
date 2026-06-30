@@ -51,7 +51,7 @@ describe('Avatar Demo Page', () => {
         });
 
         it('should have multiple avatars in the stack', async () => {
-            await verifyElementCountEquals(avatarSelectors.avatarsAll, 6, 'avatars in stack');
+            await verifyElementCountEquals(avatarSelectors.avatarsPageTotal, 6, 'total avatars on page');
         });
     });
 });

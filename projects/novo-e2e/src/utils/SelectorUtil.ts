@@ -67,6 +67,7 @@ export const elements = {
     headerButtons: '.custom-header-buttons',
     loadingOverlay: '.novo-data-table-loading-mask',
     dropdownOptions: '.novo-option',
+    dropdownContainer: '.dropdown-container',
     actions: '.novo-data-table-actions',
     input: automationId('keywords-chip-input'),
     radio: 'novo-radio',

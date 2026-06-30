@@ -1,4 +1,6 @@
+import { elements } from './SelectorUtil';
+
 export const dropdownSelectors = {
-    container: '.dropdown-container',
+    container: elements.dropdownContainer,
     optGroupLabel: '.novo-optgroup-label',
 };

@@ -25,8 +25,10 @@ export function scopedDate(scope: string, dayNumber: number | string): string {
     return `${scope} .calendar-date${automationId(dayNumber)}`;
 }
 
+export const overlayCalendar = `${datePicker.overlay} ${elements.calendar}`;
+
 export function overlayDate(dayNumber: number | string): string {
-    return scopedDate(`${datePicker.overlay} ${elements.calendar}`, dayNumber);
+    return scopedDate(overlayCalendar, dayNumber);
 }
 
 export function scopedWeekdayHeaders(scope: string): string {

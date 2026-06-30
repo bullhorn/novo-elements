@@ -43,6 +43,11 @@ describe('Calendar Demo Page', () => {
     });
 
     describe('Calendar Navigation', () => {
+        before(async () => {
+            await browser.refresh();
+            await scrollIntoView(elements.calendar);
+        });
+
         it('should navigate to next month using calendar-next button', async () => {
             await scrollIntoView(elements.calendar);
             const prevMonthHeader = await $(calendar.monthText).getText();
@@ -78,14 +83,19 @@ describe('Calendar Demo Page', () => {
     });
 
     describe('Single Selection Mode', () => {
-        it('should select a single date and display it in the output', async () => {
+        beforeEach(async () => {
+            await browser.refresh();
             await scrollIntoView(elements.calendar);
+        });
+
+        it('should select a single date and display it in the output', async () => {
             await click(calendarDate(15));
             await verifyClassPresent(calendarDate(15), 'selected', 'calendar date 15');
             await verifyCalendarDateSelected(15);
         });
 
         it('should replace selection with a new date', async () => {
+            await click(calendarDate(15));
             await click(calendarDate(20));
             await verifyClassPresent(calendarDate(20), 'selected', 'calendar date 20');
             await verifyClassAbsent(calendarDate(15), 'selected', 'calendar date 15');

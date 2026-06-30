@@ -1,5 +1,4 @@
 import { waitForElementToBeAbsent } from '../utils/WaitUtil';
-import { browser } from '@wdio/globals';
 import { click, clickRadio, scrollIntoView } from '../utils/ElementActionUtil';
 import { COMPONENT_URLS, examplesUrl, getURLs } from '../utils/EnvironmentUtil';
 import { automationId, codeExample, elements } from '../utils/SelectorUtil';
@@ -45,12 +44,9 @@ describe('Toaster Demo Page', () => {
             await verifyClassPresent(toaster.display, 'danger');
         });
 
-        it('should cycle to default theme after one click', async () => {
+        it('should cycle through themes on button click', async () => {
             await click(toaster.changeButton);
             await verifyClassPresent(toaster.display, 'default');
-        });
-
-        it('should cycle to success theme after a second click', async () => {
             await click(toaster.changeButton);
             await verifyClassPresent(toaster.display, 'success');
         });
@@ -125,15 +121,18 @@ describe('Toaster Demo Page', () => {
             'toast-trigger-top-accent',
         ];
 
-        it('should display all service trigger buttons', async () => {
+        beforeEach(async () => {
+            await browser.refresh();
             await scrollIntoView(automationId('toast-trigger'));
+        });
+
+        it('should display all service trigger buttons', async () => {
             for (const id of triggerIds) {
                 await verifyPresent(automationId(id));
             }
         });
 
         it('should show a fixed-bottom toast and display its title', async () => {
-            await browser.refresh();
             await scrollIntoView(automationId('toast-trigger-bottom'));
             await click(automationId('toast-trigger-bottom'));
             await verifyPresent('novo-toast.fixedBottom');
@@ -141,7 +140,6 @@ describe('Toaster Demo Page', () => {
         });
 
         it('should show a growl-top-right toast and display its message', async () => {
-            await browser.refresh();
             await scrollIntoView(automationId('toast-trigger-growl-top-right'));
             await click(automationId('toast-trigger-growl-top-right'));
             await verifyPresent('novo-toast.growlTopRight');
@@ -149,7 +147,6 @@ describe('Toaster Demo Page', () => {
         });
 
         it('should show a closeable toast and dismiss it via the close button', async () => {
-            await browser.refresh();
             await scrollIntoView(automationId('toast-trigger-top-accent'));
             await click(automationId('toast-trigger-top-accent'));
             await verifyPresent('novo-toast.fixedTop');

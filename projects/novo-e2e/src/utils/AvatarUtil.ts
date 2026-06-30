@@ -9,5 +9,5 @@ export const avatarSelectors = {
     stackExample: codeExample('avatar-stack-usage'),
     avatarsInUsage: `avatar-usage-example ${automationId('avatar')}`,
     stack: automationId('avatar-stack'),
-    avatarsAll: automationId('avatar'),
+    avatarsPageTotal: automationId('avatar'),
 };

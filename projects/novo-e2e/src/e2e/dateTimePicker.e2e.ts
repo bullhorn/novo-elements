@@ -2,14 +2,12 @@ import { click, scrollIntoView } from '../utils/ElementActionUtil';
 import { formControlsExamplesUrl, getURLs } from '../utils/EnvironmentUtil';
 import { codeExample, elements } from '../utils/SelectorUtil';
 import { verifyPresent, verifyText } from '../utils/VerifyUtil';
-import { expectedDate, verifyDisplayedDate, datePickerInputField, openInputPicker, scopedDate, overlayDate, datePicker } from '../utils/DatePickerUtil';
+import { expectedDate, verifyDisplayedDate, datePickerInputField, openInputPicker, overlayCalendar, scopedDate, overlayDate } from '../utils/DatePickerUtil';
 import {
     dateTimePicker,
     selectTime,
     verifyDisplayedDateTime,
 } from '../utils/DateTimePickerUtil';
-
-const overlayCalendar = `${datePicker.overlay} ${elements.calendar}`;
 
 describe('Date Time Picker Demo Page', () => {
     const url = formControlsExamplesUrl('date time picker');

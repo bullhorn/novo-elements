@@ -5,6 +5,7 @@ import { verifyPresent, verifyText, verifyDisabled, verifyAbsent, verifyClassPre
 import { getAllElements } from '../utils/GetElementUtil';
 import {
     datePicker,
+    overlayCalendar,
     scopedDate,
     overlayDate,
     scopedWeekdayHeaders,
@@ -23,8 +24,6 @@ import {
     getDisplayedDateText,
     sundayWeekRange,
 } from '../utils/DatePickerUtil';
-
-const overlayCalendar = `${datePicker.overlay} ${elements.calendar}`;
 
 describe('Date Picker Demo Page', () => {
     const url = formControlsExamplesUrl('date picker');

@@ -2,7 +2,7 @@ import { asyncForEach } from '../utils/AutomationHelpers';
 import { click, scrollIntoView } from '../utils/ElementActionUtil';
 import { COMPONENT_URLS, examplesUrl, getURLs } from '../utils/EnvironmentUtil';
 import { getAllElements } from '../utils/GetElementUtil';
-import { automationId, codeExample, elements } from '../utils/SelectorUtil';
+import { codeExample, elements } from '../utils/SelectorUtil';
 import { verifyDisabled, verifyEnabled, verifyPresent, verifyText } from '../utils/VerifyUtil';
 import { buttonSelectors } from '../utils/ButtonUtil';
 
@@ -73,16 +73,12 @@ describe('Button Demo Page', () => {
             await browser.refresh();
         });
 
-        it('should disable the button', async () => {
-            await scrollIntoView('button-dynamic-example');
-            await verifyPresent(automationId('disable-button-checkbox'), 'disable button checkbox');
-            await click(`${automationId('disable-button-checkbox')} i`);
-            await verifyDisabled(automationId('dynamic-button-example'));
-        });
-
-        it('should re-enable the button', async () => {
-            await click(`${automationId('disable-button-checkbox')} i`);
-            await verifyEnabled(automationId('dynamic-button-example'));
+        it('should toggle the button disabled state', async () => {
+            await scrollIntoView(buttonSelectors.dynamicSection);
+            await click(buttonSelectors.dynamicCheckbox);
+            await verifyDisabled(buttonSelectors.dynamicExample);
+            await click(buttonSelectors.dynamicCheckbox);
+            await verifyEnabled(buttonSelectors.dynamicExample);
         });
     });
 
@@ -92,10 +88,10 @@ describe('Button Demo Page', () => {
         });
 
         it('should make the button enter a loading state', async () => {
-            await scrollIntoView('button-loading-example');
-            await verifyPresent(automationId('button-loading-example'), 'button loading example');
-            await click(automationId('button-loading-example'));
-            await verifyPresent(`${automationId('button-loading-example')}[loading="true"]`, 'button in loading state');
+            await scrollIntoView(buttonSelectors.loadingSection);
+            await verifyPresent(buttonSelectors.loadingButton, 'button loading example');
+            await click(buttonSelectors.loadingButton);
+            await verifyPresent(buttonSelectors.loadingButtonActive, 'button in loading state');
         });
     });
 });
