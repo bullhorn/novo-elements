@@ -224,3 +224,10 @@
     display: block;
   }
 }
+
+// Modern theme: rounder calendar surface (8px) for the modern surface language.
+// Selected-day / today / range accents ride on the deferred status/brand color
+// (--color-positive), so only the panel radius changes here.
+:host-context([data-theme='modern']) .date-picker-container {
+  border-radius: var(--novo-calendar-radius, 0.8rem);
+}
