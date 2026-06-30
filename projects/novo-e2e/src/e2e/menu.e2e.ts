@@ -1,7 +1,7 @@
 import { click } from '../utils/ElementActionUtil';
 import { COMPONENT_URLS, examplesUrl, getURLs } from '../utils/EnvironmentUtil';
 import { elements } from '../utils/SelectorUtil';
-import { verifyPresent, verifyText, verifyDisabled, verifyEnabled, verifyAbsent } from '../utils/VerifyUtil';
+import { verifyPresent, verifyText, verifyDisabled, verifyEnabled } from '../utils/VerifyUtil';
 import { menu, closeMenu } from '../utils/MenuUtil';
 import { acceptAlertIfPresent } from '../utils/AutomationHelpers';
 
