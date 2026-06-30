@@ -143,3 +143,13 @@ $switch-thumb-size: 20px !default;
     }
   }
 }
+
+// Modern theme: outlined toggle — white track + 1px neutral border in the off
+// state (Tier-3 toggle: background = white, border = border.default). The on/accent
+// state keeps its color (rides on the status/brand color decision, deferred).
+:host-context([data-theme='modern']) {
+  .novo-switch-bar {
+    background-color: var(--toggle-color-background, #ffffff);
+    border: 1px solid var(--toggle-color-border, var(--color-border-default, #f0f5f9));
+  }
+}
