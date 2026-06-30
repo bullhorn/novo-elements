@@ -64,8 +64,7 @@
   --spacing-3xl: var(--spacing-64, 6.4rem);
 
   // --- Component tokens (curated; Track 2 migration) ---
-  // Button — default/secondary treatment. Themed variants ([theme="primary"], etc.)
-  // set their own background and are unaffected. Per the Tier-3 button spec.
+  // Button — plain/base treatment, consumed via --novo-button-* (per Tier-3 button spec).
   --novo-button-height:         var(--spacing-48, 4.8rem);
   --novo-button-padding-y:      var(--spacing-8, 0.8rem);
   --novo-button-padding-x:      var(--spacing-16, 1.6rem);
@@ -79,6 +78,12 @@
   --novo-button-letter-spacing: var(--typography-letter-spacing-half, 0.05rem);
   // --novo-button-focus-ring + hover/disabled states: TODO — pending Tier-3 focus
   // tokens (brand/secondary, button bg-focus) and per-variant hover handling.
+
+  // Themed neutral variant (button[theme="standard"]) consumes these semantic vars.
+  --button-background:          var(--color-grayscale-white, #ffffff);
+  --button-text:                var(--color-content-link, #282828);
+  // NOTE: primary/secondary variants ([theme="primary"|"secondary"]) use --color-positive
+  // (the deferred status/brand accent) — they stay accent-colored until that decision lands.
 
   // NOTE: not yet overridden (inherit classic / TODO follow-up):
   //   --code, --variable, --highlight, --scrollbar-thumb(-hover),
