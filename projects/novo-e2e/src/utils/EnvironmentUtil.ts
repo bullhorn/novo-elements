@@ -9,6 +9,7 @@ export function getURLs() {
 export const URLS = getURLs();
 
 export const COMPONENT_URLS = {
+    AUTOCOMPLETE: 'autocomplete',
     AVATAR: 'avatar',
     BREADCRUMB: 'breadcrumbs',
     BUTTON: 'button',
