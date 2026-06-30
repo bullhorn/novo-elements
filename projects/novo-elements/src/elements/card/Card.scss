@@ -119,3 +119,14 @@
     margin: var(--spacing-md) 0;
   }
 }
+
+// Modern theme: rounder card (16px = border.radius.md) + 1px border, per Tier-3
+// cards spec. Frosted header/body backgrounds deferred (need color/transparency tokens).
+:host-context([data-theme='modern']) {
+  border-radius: var(--novo-card-radius, 1.6rem);
+  border: 1px solid var(--color-border-default, #f0f5f9);
+
+  div.card-loading-container {
+    border-radius: var(--novo-card-radius, 1.6rem);
+  }
+}
