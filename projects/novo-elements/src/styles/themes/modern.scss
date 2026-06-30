@@ -69,7 +69,9 @@
   --novo-button-padding-y:      var(--spacing-8, 0.8rem);
   --novo-button-padding-x:      var(--spacing-16, 1.6rem);
   --novo-button-gap:            var(--spacing-8, 0.8rem);
-  --novo-button-radius:         var(--border-radius-round, 999px);
+  // Pill — literal, NOT var(--border-radius-round): that name is the classic default
+  // radius used by cards/panels (modern "round" = 999/pill would balloon them).
+  --novo-button-radius:         999px;
   --novo-button-border-width:   var(--border-width-border-default, 1px);
   --novo-button-border-color:   var(--color-border-default, #f0f5f9);
   --novo-button-bg:             var(--color-grayscale-white, #ffffff);
