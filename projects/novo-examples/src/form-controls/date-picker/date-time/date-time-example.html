@@ -1,7 +1,7 @@
 <div class="date-picker-demo-side-by-side" data-automation-id="date-time-container">
   <section>
-    <p data-automation-id="date-time-value-12hr">
-      <label>Date-Time</label> {{(dateTime | date:'medium') || 'N/A'}}
+    <p>
+      <label>Date-Time</label> <span data-automation-id="date-time-value">{{ (dateTime | json) || 'N/A' }}</span>
     </p>
     <novo-date-time-picker [(ngModel)]="dateTime" data-automation-id="date-time-picker-12hr"></novo-date-time-picker>
   </section>

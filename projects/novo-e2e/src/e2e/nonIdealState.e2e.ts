@@ -1,97 +1,105 @@
-import { browser } from '@wdio/globals';
 import { COMPONENT_URLS, examplesUrl, getURLs } from '../utils/EnvironmentUtil';
-import { verifyNotActive, verifyPresent, verifyText } from '../utils/VerifyUtil';
+import { verifyNotActive, verifyPresent, verifyText, verifyElementCountEquals } from '../utils/VerifyUtil';
 import { click, scrollIntoView } from '../utils/ElementActionUtil';
 import { getAllElements } from '../utils/GetElementUtil';
 import { elements } from '../utils/SelectorUtil';
+import { nonIdealStateSelectors } from '../utils/NonIdealStateUtil';
 
 describe('Non Ideal State Demo Page', () => {
     const url = examplesUrl(COMPONENT_URLS.NON_IDEAL_STATE);
-    const searchSelector = 'code-example[example="non-ideal-state-search-usage"]';
-    const loadingSelector = 'code-example[example="non-ideal-state-loading-usage"]';
-    let buttons;
 
     before(async () => {
         await browser.navigateTo(url);
-        buttons = await getAllElements(elements.primaryButton);
     });
 
     after(async () => {
         await browser.navigateTo(getURLs().HOME);
     });
 
-    it('should display page title', async () => {
-        await verifyPresent(elements.title);
-        await verifyText(elements.title, 'Non Ideal State', 'Non Ideal State example page title');
-        await verifyPresent('non-ideal-state-examples-page');
+    describe('Page Title and Layout', () => {
+        it('should display page title', async () => {
+            await verifyPresent(elements.title, 'page title');
+            await verifyText(elements.title, 'Non Ideal State', 'Non Ideal State example page title');
+            await verifyPresent(nonIdealStateSelectors.page, 'non-ideal-state examples page');
+        });
     });
 
     describe('Basic Button Usage', () => {
+        before(async () => {
+            await browser.refresh();
+        });
+
         it('should display basic usage section', async () => {
-            await verifyText('non-ideal-state-examples-page h2', 'Basic Usage', 'Basic Usage section title');
+            await verifyText(nonIdealStateSelectors.basicUsageSectionHeading, 'Basic Usage', 'Basic Usage section title');
         });
 
         it('should have non-ideal-state-usage section', async () => {
-            await verifyPresent('code-example[example="non-ideal-state-usage"]');
+            await verifyPresent(nonIdealStateSelectors.basicUsageExample, 'basic usage example');
         });
 
         it('should have 3 upload buttons', async () => {
-            expect(buttons.length).toEqual(3);
-        })
+            await verifyElementCountEquals(elements.primaryButton, 3, 'upload buttons');
+        });
 
         it('should display "This folder is empty" title', async () => {
-            await verifyText('novo-title.novo-non-ideal-state-title', 'This folder is empty', 'Non ideal state title');
+            await verifyText(nonIdealStateSelectors.basicUsageTitle, 'This folder is empty', 'Non ideal state title');
         });
 
         it('should display upload description text', async () => {
-            const exampleSelector = '[title="This folder is empty"]';
-            await verifyText(`${exampleSelector} novo-text`, 'Upload a new file to populate the folder.', 'Upload description');
+            await verifyText(nonIdealStateSelectors.folderEmptyText, 'Upload a new file to populate the folder.', 'Upload description');
         });
 
         it('should display tip-well "Ok, Got it" button and hide section when clicked', async () => {
-            const tipwell = 'novo-tip-well';
-            await verifyText(`${tipwell} ${elements.novoButton}`, 'Ok, Got it', 'Tip well button');
-            await click(`${tipwell} ${elements.novoButton}`);
-            await verifyNotActive(tipwell);
+            await verifyText(nonIdealStateSelectors.tipWellButton, 'Ok, Got it', 'Tip well button');
+            await click(nonIdealStateSelectors.tipWellButton);
+            await verifyNotActive(nonIdealStateSelectors.tipWell, 'tip well');
         });
     });
 
     describe('Search Usage Example', () => {
+        before(async () => {
+            await browser.refresh();
+        });
+
         it('should display search usage example', async () => {
-            await scrollIntoView(searchSelector);
-            await verifyPresent(searchSelector);
+            await scrollIntoView(nonIdealStateSelectors.searchExample);
+            await verifyPresent(nonIdealStateSelectors.searchExample, 'search usage example');
         });
 
         it('should display "No results found" title', async () => {
-            await verifyText(`${searchSelector} ${elements.title}`, 'No results found.', 'Search no results title');
+            await verifyText(nonIdealStateSelectors.searchTitle, 'No results found.', 'Search no results title');
         });
 
         it('should display search description text', async () => {
-            await verifyText(`${searchSelector} ${elements.text}`, 'Your search didn\'t match any files.\\nTry searching for something else.');
+            await verifyText(nonIdealStateSelectors.searchText, 'Your search didn\'t match any files.\\nTry searching for something else.');
         });
 
         it('should display search input field', async () => {
-            const searchInputs = await getAllElements(`${searchSelector} ${elements.search} input[type="text"]`);
+            const searchInputs = await getAllElements(nonIdealStateSelectors.searchInput);
             expect(searchInputs.length).toBeGreaterThan(0);
         });
     });
 
     describe('Loading Usage Example', () => {
+        before(async () => {
+            await browser.refresh();
+        });
+
         it('should display loading usage example', async () => {
-            await scrollIntoView(loadingSelector);
-            await verifyPresent(loadingSelector);
+            await scrollIntoView(nonIdealStateSelectors.loadingExample);
+            await verifyPresent(nonIdealStateSelectors.loadingExample, 'loading usage example');
         });
 
         it('should display loading spinner', async () => {
-            await verifyPresent(`${loadingSelector} ${elements.loading}`);
+            await verifyPresent(nonIdealStateSelectors.loadingSpinner, 'loading spinner');
         });
 
         it('should display loading message', async () => {
-            await verifyText(`${loadingSelector} ${elements.text}`, 'We are currently experiencing technical difficulties and your wait time is taking a bit longer than expected. Thank you for your patience.');
+            await verifyText(nonIdealStateSelectors.loadingText, 'We are currently experiencing technical difficulties and your wait time is taking a bit longer than expected. Thank you for your patience.');
         });
 
         it('should display Refresh button', async () => {
-            await verifyText(`${loadingSelector} ${elements.novoButton}`, 'Refresh', 'Refresh button');
+            await verifyText(nonIdealStateSelectors.loadingButton, 'Refresh', 'Refresh button');
         });
     });
 });

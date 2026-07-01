@@ -4,6 +4,11 @@ export const chipsSelectors = {
     // Basic Chips
     basicInput: automationId('chips-basic-input'),
     basicValue: automationId('chips-basic-value'),
+    basicFirstChip: `${automationId('chips-basic-input')} novo-chip`,
+    basicSecondChip: `${automationId('chips-basic-input')} novo-chip:nth-of-type(2)`,
+    basicThirdChip: `${automationId('chips-basic-input')} novo-chip:nth-of-type(3)`,
+    basicChipRemove: (nth: number) => `${automationId('chips-basic-input')} novo-chip:nth-of-type(${nth}) .novo-chip-remove`,
+    pickerResultItem: (nth: number) => `[data-automation-id="picker-result-list-item"]:nth-of-type(${nth})`,
 
     // Chip Usage
     chipUsageSizeGroup: automationId('chip-usage-size-group'),
