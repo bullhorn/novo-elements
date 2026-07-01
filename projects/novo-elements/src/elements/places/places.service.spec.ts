@@ -148,6 +148,31 @@ describe('GooglePlacesService', () => {
       createSpy.mockRestore();
       appendSpy.mockRestore();
     });
+
+    it('clears the cached loader when importLibrary rejects so a retry is possible', async () => {
+      const script: any = {};
+      const createSpy = vi.spyOn(document, 'createElement').mockReturnValue(script);
+      const appendSpy = vi.spyOn(document.head, 'appendChild').mockImplementation((node: any) => node);
+      const importLibrary = vi.fn()
+        .mockRejectedValueOnce(new Error('library load failed'))
+        .mockResolvedValueOnce({});
+      nativeGlobal.google = { maps: { importLibrary } };
+      service = build();
+      const settings = { googleApiKey: 'abc' } as PlacesSettings;
+
+      const attempt = service.loadGoogleMaps(settings);
+      script.onload();
+      await expect(attempt).rejects.toThrow('library load failed');
+
+      const retry = service.loadGoogleMaps(settings);
+      expect(retry).not.toBe(attempt);
+      expect(appendSpy).toHaveBeenCalledTimes(2);
+
+      script.onload();
+      await retry;
+      createSpy.mockRestore();
+      appendSpy.mockRestore();
+    });
   });
 
   describe('Method: getPredictions()', () => {

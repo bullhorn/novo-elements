@@ -60,7 +60,10 @@ export class GooglePlacesService {
         // With loading=async, onload fires when the bootstrap loader is ready, not when the
         // places library is. importLibrary resolves only once the library is actually usable.
         if (_window?.google?.maps?.importLibrary) {
-          _window.google.maps.importLibrary('places').then(() => resolve(), reject);
+          _window.google.maps.importLibrary('places').then(
+            () => resolve(),
+            (err) => { this.mapsLoad = undefined; this.mapsLoadKey = undefined; reject(err); },
+          );
         } else {
           resolve();
         }
@@ -215,13 +218,11 @@ export class GooglePlacesService {
         const _window: any = this._global.nativeGlobal;
         const placesService: any = new _window.google.maps.places.PlacesService(document.createElement('div'));
         placesService.getDetails({ placeId }, (result: any) => {
-          if (result === null || result.length === 0) {
+          if (result === null) {
+            resolve(false);
+          } else if (result.length === 0) {
             this.getGeoPaceDetailByReferance(result.referance).then((referanceData: any) => {
-              if (!referanceData) {
-                resolve(false);
-              } else {
-                resolve(referanceData);
-              }
+              resolve(referanceData || false);
             });
           } else {
             resolve(result);

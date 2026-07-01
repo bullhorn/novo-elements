@@ -379,6 +379,9 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
       this._googlePlacesService.getPredictions(this.settings.geoPredictionServerUrl, value, this.ensureSessionToken()).then((result) => {
         result = this.extractServerList(this.settings.serverResponseListHierarchy, result);
         this.updateListItem(result);
+      }).catch((err) => {
+        console.error('Failed to load address predictions from server', err);
+        this.updateListItem([]);
       });
     }
   }
@@ -469,6 +472,9 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
           this.setRecentLocation(result);
         }
         this.gettingCurrentLocationFlag = false;
+      }).catch((err) => {
+        console.error('Failed to get current location detail from server', err);
+        this.gettingCurrentLocationFlag = false;
       });
     }
   }
@@ -494,6 +500,8 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
           result = this.extractServerList(this.settings.serverResponseDetailHierarchy, result);
           this.setRecentLocation(result);
         }
+      } catch (err) {
+        console.error('Failed to load place details from server', err);
       } finally {
         // The details call ends the Google billing session; clear the token even if the request
         // failed so the next interaction starts a fresh session.

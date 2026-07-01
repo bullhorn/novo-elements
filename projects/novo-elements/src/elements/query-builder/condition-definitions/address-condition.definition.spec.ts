@@ -98,6 +98,24 @@ describe('NovoDefaultAddressConditionDef', () => {
       expect(formGroup.get('value').value).toEqual([flatEvent]);
     });
 
+    it('does not store UI-state fields (active, description) added by setRecentLocation into the form value', () => {
+      const formGroup = new FormGroup({ value: new FormControl(null) });
+      const flatEventWithUiState = {
+        city: 'Boston',
+        formattedAddress: 'Boston, MA, USA',
+        referenceId: 'ref-1',
+        active: false,
+        description: 'Boston, MA, USA',
+      };
+      NovoDefaultAddressConditionDef.prototype.selectPlace.call(buildContext(formGroup), flatEventWithUiState, formGroup, 'v1');
+      const stored = formGroup.get('value').value[0];
+      expect(stored.active).toBeUndefined();
+      expect(stored.description).toBeUndefined();
+      expect(stored.city).toBe('Boston');
+      expect(stored.formattedAddress).toBe('Boston, MA, USA');
+      expect(stored.referenceId).toBe('ref-1');
+    });
+
     it('should append to existing values', () => {
       const formGroup = new FormGroup({ value: new FormControl([{ referenceId: 'existing' }]) });
       NovoDefaultAddressConditionDef.prototype.selectPlace.call(buildContext(formGroup), { referenceId: 'new' }, formGroup, 'v1');

@@ -192,7 +192,23 @@ export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef im
           place_id: event.place_id,
           types: event.types,
         }
-      : { ...event };
+      : {
+          address1: event.address1,
+          address2: event.address2,
+          city: event.city,
+          state: event.state,
+          zip: event.zip,
+          countryName: event.countryName,
+          countryCode: event.countryCode,
+          formattedAddress: event.formattedAddress,
+          location: event.location,
+          viewport: event.viewport,
+          referenceId: event.referenceId,
+          postalCodes: event.postalCodes,
+          postal_codes: event.postal_codes,
+          types: event.types,
+          radius: event.radius,
+        };
     const current: AddressData | AddressData[] = this.getValue(formGroup);
     const updated: AddressData[] = Array.isArray(current) ? [...current, valueToAdd] : [valueToAdd];
     formGroup.get('value').setValue(this.updateRadiusInValues(formGroup, updated));
