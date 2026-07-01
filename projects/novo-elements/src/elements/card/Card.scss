@@ -133,4 +133,17 @@
     border-radius: var(--novo-card-radius, 1.6rem);
     background-color: var(--color-transparency-white-80, rgba(255, 255, 255, 0.8));
   }
+
+  // Roomier card header + stronger, larger title to match the mockup.
+  header {
+    padding: var(--spacing-md, 1.6rem);
+    .title {
+      h1,
+      h2,
+      h3 {
+        font-size: 1.8rem;
+        font-weight: 600;
+      }
+    }
+  }
 }
