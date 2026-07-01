@@ -10,6 +10,7 @@ import {
   Input,
   OnChanges,
   OnInit,
+  Optional,
   Output,
   PLATFORM_ID,
 } from '@angular/core';
@@ -19,6 +20,7 @@ import { GlobalRef } from 'novo-elements/services';
 import { Key } from 'novo-elements/utils';
 import { NEVER, Observable } from 'rxjs';
 import { GooglePlacesService } from './places.service';
+import { NOVO_ADDRESS_CONFIG } from './places.tokens';
 
 export interface PlacesSettings {
   geoPredictionServerUrl?: string;
@@ -136,6 +138,8 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
     private _global: GlobalRef,
     private _googlePlacesService: GooglePlacesService,
     private cdr: ChangeDetectorRef,
+    // Fallback config from the app-wide token; used when [userSettings] does not provide a field.
+    @Optional() @Inject(NOVO_ADDRESS_CONFIG) private addressConfig: PlacesSettings = null,
   ) {
     super(_elmRef, cdr);
     this.config = {};
@@ -340,17 +344,20 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
   }
 
   // function to set user settings if it is available.
+  // Priority: [userSettings] input > NOVO_ADDRESS_CONFIG token > defaultSettings.
   private setUserSettings(): PlacesSettings {
     const _tempObj: any = {};
-    if (this.userSettings && typeof this.userSettings === 'object') {
-      const keys: string[] = Object.keys(this.defaultSettings);
-      for (const value of keys) {
-        _tempObj[value] = this.userSettings[value] !== undefined ? this.userSettings[value] : this.defaultSettings[value];
+    const keys: string[] = Object.keys(this.defaultSettings);
+    for (const value of keys) {
+      if (this.userSettings?.[value] !== undefined) {
+        _tempObj[value] = this.userSettings[value];
+      } else if (this.addressConfig?.[value] !== undefined) {
+        _tempObj[value] = this.addressConfig[value];
+      } else {
+        _tempObj[value] = this.defaultSettings[value];
       }
-      return _tempObj;
-    } else {
-      return this.defaultSettings;
     }
+    return _tempObj;
   }
 
   // function to get the autocomplete list based on user input.
