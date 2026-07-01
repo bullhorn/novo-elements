@@ -1,6 +1,7 @@
 export const environment = {
   production: true,
-  // Google Places key for the demo. Passed to NovoElementProviders.forRoot via NOVO_ADDRESS_CONFIG
-  // so the address components lazy-load the Maps SDK. Real apps supply their own Bullhorn-managed key.
-  googlePlacesKey: 'AIzaSyA7AU3UZXB5frMpSa0koWN096kb6MMtmN8',
+  // To enable Google Places address autocomplete, set your own Google Maps API key here.
+  // See https://developers.google.com/maps/documentation/javascript/get-api-key
+  // Never commit a real key — supply it via an environment variable at build time.
+  googlePlacesKey: '',
 };
