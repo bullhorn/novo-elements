@@ -5,7 +5,7 @@ import {
     verifyPresent,
     verifyText,
 } from '../utils/VerifyUtil';
-import { automationId, elements } from '../utils/SelectorUtil';
+import { automationId, elements, themedButton } from '../utils/SelectorUtil';
 import { testElements, testFiltering, testSorting } from './common/table.common';
 import { click } from '../utils/ElementActionUtil';
 import { sleep } from '../utils/SleepUtil';
@@ -13,9 +13,6 @@ import { dataTableSelectors } from '../utils/TableUtil';
 
 describe('Data Table Demo Tests', () => {
     const url = componentsUrl(COMPONENT_URLS.DATA_TABLE);
-    const dataTablePage = 'data-table-page';
-    const headerPagination = `header ${elements.pagination}`;
-    const footerPagination = `footer ${elements.pagination}`;
 
     before(async () => {
         await browser.navigateTo(url);
@@ -27,8 +24,8 @@ describe('Data Table Demo Tests', () => {
 
     describe('Page Title and Layout', () => {
         it('should display page title and examples', async () => {
-            await verifyText(`${dataTablePage} h1`, 'Data Table (source)', 'Data Table example page title');
-            await verifyPresent(dataTablePage, 'data table page');
+            await verifyText(dataTableSelectors.pageTitle, 'Data Table (source)', 'Data Table example page title');
+            await verifyPresent(dataTableSelectors.page, 'data table page');
         });
     });
 
@@ -58,58 +55,58 @@ describe('Data Table Demo Tests', () => {
             await verifyText(elements.primaryButton, 'Hide Row Details (first table)', 'Hide Row Details (first table) button', 2);
         });
         it('should display 3 options in the Actions dropdown', async () => {
-            await click(`${elements.actions} button`, 1);
+            await click(dataTableSelectors.actionsButton, 1);
             await verifyText(elements.dropdownOptions, 'Action 1', 'First Action');
             await verifyText(elements.dropdownOptions, 'Action 2', 'Second Action', 1);
             await verifyText(elements.dropdownOptions, 'Action 3', 'Third Action', 2);
         });
         it('should show no records when Dataset #3 is selected', async () => {
-            await verifyPresent(`${automationId('Dataset #1')}${elements.buttonThemes.primary}`);
-            await verifyPresent(`${automationId('Dataset #3')}${elements.buttonThemes.dialogue}`);
+            await verifyPresent(themedButton('Dataset #1', elements.buttonThemes.primary));
+            await verifyPresent(themedButton('Dataset #3', elements.buttonThemes.dialogue));
             await click(automationId('Dataset #3'));
-            await verifyPresent(`${automationId('Dataset #3')}${elements.buttonThemes.primary}`);
-            await verifyPresent(`${automationId('Dataset #1')}${elements.buttonThemes.dialogue}`);
+            await verifyPresent(themedButton('Dataset #3', elements.buttonThemes.primary));
+            await verifyPresent(themedButton('Dataset #1', elements.buttonThemes.dialogue));
             await verifyText(dataTableSelectors.emptyMessage, 'Yo! No Records!');
             await click(automationId('Dataset #1'));
         });
         it('should change pagination style', async () => {
-            await verifyPresent(`${automationId('Standard')}${elements.buttonThemes.primary}`);
-            await verifyPresent(`${automationId('Basic')}${elements.buttonThemes.dialogue}`);
+            await verifyPresent(themedButton('Standard', elements.buttonThemes.primary));
+            await verifyPresent(themedButton('Basic', elements.buttonThemes.dialogue));
             await verifyElementCountEquals(automationId(elements.paginationDropdown), 2);
-            await verifyElementCountEquals(automationId('novo-data-table-pagination-tiles'), 1);
+            await verifyElementCountEquals(dataTableSelectors.paginationTiles, 1);
             await click(automationId('Basic'));
-            await verifyPresent(`${automationId('Basic')}${elements.buttonThemes.primary}`);
-            await verifyPresent(`${automationId('Standard')}${elements.buttonThemes.dialogue}`);
+            await verifyPresent(themedButton('Basic', elements.buttonThemes.primary));
+            await verifyPresent(themedButton('Standard', elements.buttonThemes.dialogue));
             await verifyElementCountEquals(automationId(elements.paginationDropdown), 1);
-            await verifyElementCountEquals(automationId('novo-data-table-pagination-tiles'), 2);
+            await verifyElementCountEquals(dataTableSelectors.paginationTiles, 2);
         });
         it('should change pagination placement', async () => {
-            await verifyPresent(`${automationId('Top')}${elements.buttonThemes.primary}`);
-            await verifyPresent(`${automationId('Bottom')}${elements.buttonThemes.dialogue}`);
-            await verifyPresent(headerPagination);
-            await verifyElementCountEquals(headerPagination, 3);
-            await verifyElementCountEquals(footerPagination, 0);
+            await verifyPresent(themedButton('Top', elements.buttonThemes.primary));
+            await verifyPresent(themedButton('Bottom', elements.buttonThemes.dialogue));
+            await verifyPresent(dataTableSelectors.headerPagination);
+            await verifyElementCountEquals(dataTableSelectors.headerPagination, 3);
+            await verifyElementCountEquals(dataTableSelectors.footerPagination, 0);
             await click(automationId('Bottom'));
-            await verifyPresent(`${automationId('Bottom')}${elements.buttonThemes.primary}`);
-            await verifyPresent(`${automationId('Top')}${elements.buttonThemes.dialogue}`);
-            await verifyPresent(footerPagination);
-            await verifyElementCountEquals(headerPagination, 2);
-            await verifyElementCountEquals(footerPagination, 1);
+            await verifyPresent(themedButton('Bottom', elements.buttonThemes.primary));
+            await verifyPresent(themedButton('Top', elements.buttonThemes.dialogue));
+            await verifyPresent(dataTableSelectors.footerPagination);
+            await verifyElementCountEquals(dataTableSelectors.headerPagination, 2);
+            await verifyElementCountEquals(dataTableSelectors.footerPagination, 1);
         });
         it('should toggle global search', async () => {
-            await verifyPresent(`${automationId('Hide')}${elements.buttonThemes.primary}`);
-            await verifyPresent(`${automationId('Show')}${elements.buttonThemes.dialogue}`);
-            await verifyAbsent('header novo-search');
+            await verifyPresent(themedButton('Hide', elements.buttonThemes.primary));
+            await verifyPresent(themedButton('Show', elements.buttonThemes.dialogue));
+            await verifyAbsent(dataTableSelectors.headerSearch);
             await click(automationId('Show'));
-            await verifyPresent(`${automationId('Show')}${elements.buttonThemes.primary}`);
-            await verifyPresent(`${automationId('Hide')}${elements.buttonThemes.dialogue}`);
-            await verifyPresent('header novo-search');
+            await verifyPresent(themedButton('Show', elements.buttonThemes.primary));
+            await verifyPresent(themedButton('Hide', elements.buttonThemes.dialogue));
+            await verifyPresent(dataTableSelectors.headerSearch);
         });
         it('should open a Configure Columns modal', async () => {
             await click(elements.primaryButton);
             await verifyPresent(dataTableSelectors.configureColumnsModal, 'configure columns modal');
-            await verifyText(`${dataTableSelectors.configureColumnsModal} novo-title`, 'Configure Columns');
-            await click(`button${elements.buttonThemes.standard}`);
+            await verifyText(dataTableSelectors.configureColumnsModalTitle, 'Configure Columns');
+            await click(dataTableSelectors.configureColumnsModalClose);
             await verifyAbsent(dataTableSelectors.configureColumnsModal, 'configure columns modal');
         });
         it('should show and hide row details', async () => {

@@ -3,7 +3,7 @@ import { click, clickRadio, scrollIntoView } from '../utils/ElementActionUtil';
 import { COMPONENT_URLS, examplesUrl, getURLs } from '../utils/EnvironmentUtil';
 import { automationId, codeExample, elements } from '../utils/SelectorUtil';
 import { verifyAbsent, verifyClassAbsent, verifyClassPresent, verifyPresent, verifyText } from '../utils/VerifyUtil';
-import { toaster, toastTitle, toastMessage, toastActionButton, toastCloseButton } from '../utils/ToasterUtil';
+import { toaster, positionedToast, actionsSectionTrigger, toastTitle, toastMessage, toastActionButton, toastCloseButton } from '../utils/ToasterUtil';
 
 describe('Toaster Demo Page', () => {
     const url = examplesUrl(COMPONENT_URLS.TOASTER);
@@ -135,24 +135,24 @@ describe('Toaster Demo Page', () => {
         it('should show a fixed-bottom toast and display its title', async () => {
             await scrollIntoView(automationId('toast-trigger-bottom'));
             await click(automationId('toast-trigger-bottom'));
-            await verifyPresent('novo-toast.fixedBottom');
-            await verifyText(toastTitle('novo-toast.fixedBottom'), 'Bottom', 'fixed-bottom toast title');
+            await verifyPresent(positionedToast.fixedBottom);
+            await verifyText(toastTitle(positionedToast.fixedBottom), 'Bottom', 'fixed-bottom toast title');
         });
 
         it('should show a growl-top-right toast and display its message', async () => {
             await scrollIntoView(automationId('toast-trigger-growl-top-right'));
             await click(automationId('toast-trigger-growl-top-right'));
-            await verifyPresent('novo-toast.growlTopRight');
-            await verifyText(toastMessage('novo-toast.growlTopRight'), 'This positioning is growlTopRight', 'growl-top-right toast message');
+            await verifyPresent(positionedToast.growlTopRight);
+            await verifyText(toastMessage(positionedToast.growlTopRight), 'This positioning is growlTopRight', 'growl-top-right toast message');
         });
 
         it('should show a closeable toast and dismiss it via the close button', async () => {
             await scrollIntoView(automationId('toast-trigger-top-accent'));
             await click(automationId('toast-trigger-top-accent'));
-            await verifyPresent('novo-toast.fixedTop');
-            await verifyPresent(toastCloseButton('novo-toast.fixedTop'));
-            await click(toastCloseButton('novo-toast.fixedTop'));
-            await waitForElementToBeAbsent('novo-toast.fixedTop');
+            await verifyPresent(positionedToast.fixedTop);
+            await verifyPresent(toastCloseButton(positionedToast.fixedTop));
+            await click(toastCloseButton(positionedToast.fixedTop));
+            await waitForElementToBeAbsent(positionedToast.fixedTop);
         });
     });
 
@@ -178,10 +178,10 @@ describe('Toaster Demo Page', () => {
 
         it('should show a growl toast with an action button', async () => {
             // Both toast-service and toast-actions share trigger automation IDs — scope to this section.
-            await click(`${codeExample('toast-actions')} ${automationId('toast-trigger-growl-top-right')}`);
-            await verifyPresent('novo-toast.growlTopRight');
-            await verifyPresent(toastActionButton('novo-toast.growlTopRight'));
-            await verifyText(toastActionButton('novo-toast.growlTopRight'), 'Click Me', 'toast action button label');
+            await click(actionsSectionTrigger('toast-trigger-growl-top-right'));
+            await verifyPresent(positionedToast.growlTopRight);
+            await verifyPresent(toastActionButton(positionedToast.growlTopRight));
+            await verifyText(toastActionButton(positionedToast.growlTopRight), 'Click Me', 'toast action button label');
         });
     });
 });

@@ -198,6 +198,16 @@ export function codeExample(exampleName: string): string {
     return `code-example[example="${exampleName}"]`;
 }
 
+/**
+ * Returns the selector for a themed novo-button identified by its automation id (usually its visible label).
+ * Used to assert toggle-button state, e.g. a selected button carries the primary theme and an unselected one the dialogue theme.
+ * @param label the data-automation-id of the button
+ * @param theme one of elements.buttonThemes
+ */
+export function themedButton(label: string | number, theme: string): string {
+    return `${automationId(label)}${theme}`;
+}
+
 export function codeExampleExpandButton(exampleName: string): string {
     return `${codeExample(exampleName)} novo-button[icon="bhi-book"]`;
 }

@@ -42,7 +42,7 @@ describe('Non Ideal State Demo Page', () => {
         });
 
         it('should display "This folder is empty" title', async () => {
-            await verifyText('novo-title.novo-non-ideal-state-title', 'This folder is empty', 'Non ideal state title');
+            await verifyText(nonIdealStateSelectors.basicUsageTitle, 'This folder is empty', 'Non ideal state title');
         });
 
         it('should display upload description text', async () => {
@@ -50,8 +50,8 @@ describe('Non Ideal State Demo Page', () => {
         });
 
         it('should display tip-well "Ok, Got it" button and hide section when clicked', async () => {
-            await verifyText(`${nonIdealStateSelectors.tipWell} ${elements.novoButton}`, 'Ok, Got it', 'Tip well button');
-            await click(`${nonIdealStateSelectors.tipWell} ${elements.novoButton}`);
+            await verifyText(nonIdealStateSelectors.tipWellButton, 'Ok, Got it', 'Tip well button');
+            await click(nonIdealStateSelectors.tipWellButton);
             await verifyNotActive(nonIdealStateSelectors.tipWell, 'tip well');
         });
     });
@@ -67,15 +67,15 @@ describe('Non Ideal State Demo Page', () => {
         });
 
         it('should display "No results found" title', async () => {
-            await verifyText(`${nonIdealStateSelectors.searchExample} ${elements.title}`, 'No results found.', 'Search no results title');
+            await verifyText(nonIdealStateSelectors.searchTitle, 'No results found.', 'Search no results title');
         });
 
         it('should display search description text', async () => {
-            await verifyText(`${nonIdealStateSelectors.searchExample} ${elements.text}`, 'Your search didn\'t match any files.\\nTry searching for something else.');
+            await verifyText(nonIdealStateSelectors.searchText, 'Your search didn\'t match any files.\\nTry searching for something else.');
         });
 
         it('should display search input field', async () => {
-            const searchInputs = await getAllElements(`${nonIdealStateSelectors.searchExample} ${elements.search} input[type="text"]`);
+            const searchInputs = await getAllElements(nonIdealStateSelectors.searchInput);
             expect(searchInputs.length).toBeGreaterThan(0);
         });
     });
@@ -91,15 +91,15 @@ describe('Non Ideal State Demo Page', () => {
         });
 
         it('should display loading spinner', async () => {
-            await verifyPresent(`${nonIdealStateSelectors.loadingExample} ${elements.loading}`, 'loading spinner');
+            await verifyPresent(nonIdealStateSelectors.loadingSpinner, 'loading spinner');
         });
 
         it('should display loading message', async () => {
-            await verifyText(`${nonIdealStateSelectors.loadingExample} ${elements.text}`, 'We are currently experiencing technical difficulties and your wait time is taking a bit longer than expected. Thank you for your patience.');
+            await verifyText(nonIdealStateSelectors.loadingText, 'We are currently experiencing technical difficulties and your wait time is taking a bit longer than expected. Thank you for your patience.');
         });
 
         it('should display Refresh button', async () => {
-            await verifyText(`${nonIdealStateSelectors.loadingExample} ${elements.novoButton}`, 'Refresh', 'Refresh button');
+            await verifyText(nonIdealStateSelectors.loadingButton, 'Refresh', 'Refresh button');
         });
     });
 });

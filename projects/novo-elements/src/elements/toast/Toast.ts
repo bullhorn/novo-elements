@@ -20,8 +20,8 @@ import { Deferred, DeferredPromise } from 'novo-elements/utils';
       <i [ngClass]="iconClass"></i>
     </div>
     <div class="toast-content">
-      <h5 *ngIf="title" data-automation-id="toast-title">{{ title }}</h5>
-      <p *ngIf="_message" data-automation-id="toast-message" [class.message-only]="!title" [innerHtml]="_message"></p>
+      <h5 *ngIf="title">{{ title }}</h5>
+      <p *ngIf="_message" [class.message-only]="!title" [innerHtml]="_message"></p>
       <div *ngIf="link" class="link-generated">
         <input type="text" [value]="link" onfocus="this.select();" />
       </div>
@@ -29,10 +29,10 @@ import { Deferred, DeferredPromise } from 'novo-elements/utils';
         <ng-content></ng-content>
       </div>
       <div *ngIf="action" class="action">
-        <button theme="dialogue" color="white" data-automation-id="toast-action-button" (click)="actionHandler($event)">{{ action }}</button>
+        <button theme="dialogue" color="white" (click)="actionHandler($event)">{{ action }}</button>
       </div>
     </div>
-    <div class="close-icon" data-automation-id="toast-close-button" *ngIf="isCloseable" (click)="close($event)">
+    <div class="close-icon" *ngIf="isCloseable" (click)="close($event)">
       <i class="bhi-times"></i>
     </div>
   `,

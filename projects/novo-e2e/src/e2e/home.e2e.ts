@@ -1,6 +1,7 @@
 import { browser } from '@wdio/globals';
 import { verifyPresent, verifyText } from '../utils/VerifyUtil';
 import { getURLs } from '../utils/EnvironmentUtil';
+import { homeSelectors } from '../utils/HomeUtil';
 
 describe('Novo Elements Demo Home Page', () => {
     before(async () => {
@@ -18,8 +19,8 @@ describe('Novo Elements Demo Home Page', () => {
         });
 
         it('should have the main header with specific text', async () => {
-            await verifyPresent('h1', 'main header');
-            await verifyText('h1', 'Novo Elements, Bullhorn\'s design system', 'main header title');
+            await verifyPresent(homeSelectors.mainHeader, 'main header');
+            await verifyText(homeSelectors.mainHeader, 'Novo Elements, Bullhorn\'s design system', 'main header title');
         });
     });
 });

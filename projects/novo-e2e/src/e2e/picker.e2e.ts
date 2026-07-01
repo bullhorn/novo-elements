@@ -117,11 +117,11 @@ describe('Picker Demo Page', () => {
             await browser.refresh();
             await scrollIntoView(formattedPicker.component);
             await click(pickerInput(formattedPicker.component));
-            await clickPickerItemByLabel('Brian Kimball');
+            await click(pickerResultItems);
         });
 
-        it('should update the value display after selecting Brian Kimball', async () => {
-            await verifyTextIncludes(formattedPicker.value, 'Selected Value: 1', 'formatted picker value after selecting Brian Kimball');
+        it('should update the value display after selecting the first result', async () => {
+            await verifyTextIncludes(formattedPicker.value, 'Selected Value: 1', 'formatted picker value after selecting the first result');
         });
     });
 
