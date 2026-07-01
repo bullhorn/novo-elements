@@ -69,8 +69,9 @@ export class GooglePlacesService {
         }
       };
       script.onerror = () => {
-        // Clear the cached promise so a later attempt can retry instead of resolving a failed load.
+        // Clear both cached fields so a later attempt can retry with any key.
         this.mapsLoad = undefined;
+        this.mapsLoadKey = undefined;
         reject(new Error('Failed to load the Google Maps JavaScript API.'));
       };
       document.head.appendChild(script);
