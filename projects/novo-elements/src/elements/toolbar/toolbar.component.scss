@@ -7,7 +7,7 @@
     box-sizing: border-box;
     background-color: var(--background-bright);
     color: var(--text-main);
-    padding: 0 $spacing-md;
+    padding: 0 var(--spacing-md);
     width: 100%;
     // Flexbox Vertical Alignment
     flex-direction: row;
@@ -27,8 +27,8 @@
     @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
       &.novo-color-#{$name},
       &.novo-theme-#{$name} {
-        color: $contrast;
-        background: $color;
+        color: getContrastColor($name);
+        background: getCssVarname($name);
         & > novo-text,
         & > novo-label,
         & > novo-icon,
@@ -43,12 +43,12 @@
           }
         }
         .novo-divider.novo-divider-vertical {
-          border-right-color: $tint;
+          border-right-color: getTintColor($name);
         }
       }
 
       &.novo-accent-#{$name} {
-        border-bottom: 2px solid $color;
+        border-bottom: 2px solid getCssVarname($name);
       }
     }
   }
@@ -58,5 +58,14 @@
     box-sizing: border-box;
     flex-direction: column;
     width: 100%;
+  }
+}
+
+// Modern theme: swap the thick entity-colored accent underline for a subtle neutral
+// border (per Tier-3 header spec; entity color stays on the icon/avatar).
+:host-context([data-theme='modern']) {
+  .novo-toolbar .novo-toolbar-row[class*='novo-accent-'],
+  .novo-toolbar.novo-toolbar-single-row[class*='novo-accent-'] {
+    border-bottom: 1px solid var(--color-border-default, #f0f5f9);
   }
 }

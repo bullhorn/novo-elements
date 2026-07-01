@@ -36,7 +36,7 @@ novo-dynamic-form {
           height: auto;
           opacity: 1;
           input.ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) {
-            border-bottom: 1px solid $negative !important;
+            border-bottom: 1px solid var(--color-negative) !important;
             &.valid-number {
               border-bottom: none !important;
             }
@@ -47,7 +47,7 @@ novo-dynamic-form {
           novo-picker.ng-touched.ng-invalid:not(.ng-pristine) input,
           textarea.ng-touched.ng-invalid:not(.ng-pristine):not(.ng-valid),
           chips.ng-touched.ng-invalid:not(.ng-pristine) {
-            border-bottom: 1px solid $negative !important;
+            border-bottom: 1px solid var(--color-negative) !important;
           }
           &.checklist,
           &.file,
@@ -65,14 +65,14 @@ novo-dynamic-form {
             .ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) {
               border-bottom: none !important;
               > input {
-                border-bottom: 1px solid $negative !important;
+                border-bottom: 1px solid var(--color-negative) !important;
               }
             }
           }
           novo-date-time-picker-input.ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container) {
             border-bottom: none !important;
             input {
-              border-bottom: 1px solid $negative !important;
+              border-bottom: 1px solid var(--color-negative) !important;
             }
           }
           &.hidden {
@@ -90,7 +90,8 @@ novo-dynamic-form {
             }
             input:not(.picker-input):not(.tiles-input) {
               &::placeholder {
-                color: lighten($dark, 30%) !important;
+                // TODO: semantic role TBD - rec text-disabled or text-muted
+                color: brightenLive('--color-dark', 30) !important;
               }
               border-bottom-style: dashed !important;
             }
@@ -105,7 +106,7 @@ novo-dynamic-form {
               border-bottom-style: dashed !important;
               i.bhi-collapse {
                 top: auto;
-                color: lighten($dark, 30%) !important;
+                color: brightenLive('--color-dark', 30) !important;
               }
             }
             label {
@@ -114,7 +115,7 @@ novo-dynamic-form {
               }
             }
             chips {
-              border-bottom: 1px dashed lighten($dark, 30%) !important;
+              border-bottom: 1px dashed brightenLive('--color-dark', 30) !important;
               input {
                 border: none !important;
               }
@@ -175,14 +176,14 @@ novo-dynamic-form {
               margin-bottom: 0;
             }
             .character-count {
-              font-size: 12px;
+              font-size: var(--font-size-sm);
               color: $grey;
               &.error {
-                color: $negative;
+                color: var(--color-negative);
               }
             }
             .record-count {
-              font-size: 12px;
+              font-size: var(--font-size-sm);
               color: $grey;
               margin-right: 9em;
               &.zero-count {
@@ -195,7 +196,7 @@ novo-dynamic-form {
             .messages {
               flex: 1;
               span.error-text {
-                color: $negative;
+                color: var(--color-negative);
                 padding-bottom: 5px;
                 padding-right: 5px;
                 flex: 1;
@@ -208,12 +209,12 @@ novo-dynamic-form {
                 flex: 1;
               }
               .warning-text {
-                color: $warning;
+                color: var(--color-warning);
               }
             }
           }
           .error-message {
-            color: $negative;
+            color: var(--color-negative);
             font-size: var(--font-size-caption);
             padding: 5px 0;
             flex-basis: 100%;
@@ -228,10 +229,10 @@ novo-dynamic-form {
               visibility: hidden;
             }
             .character-count {
-              font-size: 12px;
+              font-size: var(--font-size-sm);
               color: $grey;
               &.error {
-                color: $negative;
+                color: var(--color-negative);
               }
             }
             span.error-text {
@@ -275,7 +276,7 @@ novo-dynamic-form {
                   max-width: 15px;
                   max-height: 15px;
                   .spinner {
-                    fill: $positive;
+                    fill: var(--color-positive);
                   }
                 }
               }
@@ -322,7 +323,7 @@ novo-dynamic-form {
                     input {
                       background: transparent !important;
                       border: none;
-                      border-bottom: 1px solid lighten($dark, 45%);
+                      border-bottom: 1px solid brightenLive('--color-dark', 45);
                       border-radius: 0;
                       outline: none;
                       height: 2rem;
@@ -334,29 +335,29 @@ novo-dynamic-form {
                       transition: all 300ms;
                       color: var(--text-main);
                       &:hover {
-                        border-bottom: 1px solid lighten($dark, 15%);
+                        border-bottom: 1px solid brightenLive('--color-dark', 15);
                       }
                       &:focus {
-                        border-bottom: 1px solid $positive;
+                        border-bottom: 1px solid var(--color-positive);
                       }
                       &:invalid {
                         border-bottom: 1px solid #da4453;
                       }
                       &.maxlength-error {
-                        border-bottom: 1px solid $negative !important;
+                        border-bottom: 1px solid var(--color-negative) !important;
                       }
                     }
                     &.highlighted {
                       input,
                       novo-select {
-                        background-color: lighten($ocean, 35%) !important;
+                        background-color: brightenLive('--color-ocean', 35) !important;
                       }
                     }
                     textarea {
                       height: 2rem;
                       background: transparent !important;
                       border: none;
-                      border-bottom: 1px solid lighten($dark, 45%);
+                      border-bottom: 1px solid brightenLive('--color-dark', 45);
                       border-radius: 0;
                       outline: none;
                       width: 100%;
@@ -370,17 +371,17 @@ novo-dynamic-form {
                       color: var(--text-main);
                       overflow-y: hidden;
                       &:hover {
-                        border-bottom: 1px solid lighten($dark, 15%);
+                        border-bottom: 1px solid brightenLive('--color-dark', 15);
                       }
                       &:focus {
-                        border-bottom: 1px solid $positive;
+                        border-bottom: 1px solid var(--color-positive);
                         overflow-y: auto !important;
                       }
                       &:invalid {
                         border-bottom: 1px solid #da4453;
                       }
                       &.maxlength-error {
-                        border-bottom: 1px solid $negative;
+                        border-bottom: 1px solid var(--color-negative);
                       }
                     }
                     textarea[autosize] {
@@ -408,7 +409,7 @@ novo-dynamic-form {
                       }
                       label.input-label {
                         padding-left: 5px;
-                        color: $dark;
+                        color: var(--font-color-base);
                       }
                     }
                     > div.novo-control-input-container {
@@ -421,7 +422,7 @@ novo-dynamic-form {
                         position: absolute;
                         right: 0;
                         top: 0;
-                        font-size: 1.2rem;
+                        font-size: var(--font-size-sm);
                       }
                       > i.bhi-times {
                         cursor: pointer;
@@ -439,7 +440,7 @@ novo-dynamic-form {
                         left: 0;
                         display: flex;
                         flex-direction: column;
-                        background: #fff;
+                        background: var(--background-bright);
                         z-index: z(above);
                         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
                         border-bottom-right-radius: 3px;
@@ -450,7 +451,7 @@ novo-dynamic-form {
                           border-top-right-radius: 0;
                           border-bottom-right-radius: 0;
                           box-shadow: none;
-                          border-right: 1px solid rgba($light, 0.5);
+                          border-right: 1px solid rgb(from var(--color-border) r g b / 0.5);
                           > .calendar {
                             box-shadow: none;
                           }
@@ -489,12 +490,12 @@ novo-dynamic-form {
                     font-size: 13px;
                     margin-right: 10px;
                     &.bhi-circle {
-                      color: $grapefruit;
+                      color: var(--color-error);
                       text-align: center;
                       font-size: 7px;
                     }
                     &.bhi-check {
-                      color: $grass;
+                      color: var(--color-success);
                     }
                     &.address {
                       display: none;
@@ -515,6 +516,7 @@ novo-dynamic-form {
       }
     }
   }
+  // TODO: Better support for dark theming may mean simply changing CSS vars, rather than overrides of this fashion.
   &[dark] {
     .novo-form-container {
       form {
@@ -539,20 +541,20 @@ novo-dynamic-form {
             time-input {
               input,
               textarea {
-                color: $light;
-                border-bottom: 1px solid rgba(lighten($dark, 12%), 0.25);
+                color: var(--font-color-secondary);
+                border-bottom: 1px solid color-mix(in srgb, brightenLive('--color-dark', 12) 25%, transparent);
                 background: transparent !important;
                 &:focus {
-                  border-bottom: 1px solid $ocean;
+                  border-bottom: 1px solid var(--color-positive);
                 }
               }
             }
             novo-select {
               > div[type="button"] {
-                color: $light;
-                border-bottom: 1px solid rgba(lighten($dark, 12%), 0.25);
+                color: var(--font-color-secondary);
+                border-bottom: 1px solid color-mix(in srgb, brightenLive('--color-dark', 12) 25%, transparent);
                 &:focus {
-                  border-bottom: 1px solid $ocean;
+                  border-bottom: 1px solid var(--color-positive);
                 }
               }
             }
@@ -597,7 +599,7 @@ novo-dynamic-form {
             &.disabled {
               input:not(.picker-input):not(.tiles-input) {
                 &::placeholder {
-                  color: lighten($dark, 30%) !important;
+                  color: brightenLive('--color-dark', 30) !important;
                 }
                 border-bottom-style: dashed !important;
               }
@@ -611,7 +613,7 @@ novo-dynamic-form {
                 border-bottom-style: dashed !important;
                 i.bhi-collapse {
                   top: auto;
-                  color: lighten($dark, 30%) !important;
+                  color: brightenLive('--color-dark', 30) !important;
                 }
               }
               label {
@@ -620,7 +622,7 @@ novo-dynamic-form {
                 }
               }
               chips {
-                border-bottom: 1px dashed lighten($dark, 30%) !important;
+                border-bottom: 1px dashed brightenLive('--color-dark', 30) !important;
                 input {
                   border: none !important;
                 }

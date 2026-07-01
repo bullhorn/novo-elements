@@ -39,7 +39,7 @@
           width: 100px;
           min-width: 100px;
           max-width: 100px;
-          margin-right: 1rem;
+          margin-right: var(--spacing-md);
           novo-select {
             min-width: 70px;
           }
@@ -70,24 +70,5 @@
         padding: 0 !important;
       }
     }
-  }
-
-  .and-or-filter-button {
-    box-sizing: border-box;
-    background: #fff;
-    border: 1px solid #ddd;
-    color: #5691f5;
-    display: inline-block;
-    position: relative;
-    cursor: pointer;
-    margin: 0.4rem auto;
-    align-items: center;
-    text-align: center;
-    user-select: none;
-    outline: none;
-    white-space: nowrap;
-    text-transform: uppercase;
-    overflow: hidden;
-    transition: box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   }
 }

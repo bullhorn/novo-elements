@@ -39,7 +39,30 @@ export class NovoTheme {
    */
   private changeTheme(theme: NovoThemeOptions): void {
     this._currentTheme = theme;
+    this.applyThemeToDom(theme.themeName);
     this.onThemeChange.emit({ themeName: theme.themeName, options: theme });
+  }
+
+  /**
+   * Reflects the active theme onto the document root so token CSS can target it.
+   *
+   * The per-component `themeName` logic (e.g. header accents) keeps working off the
+   * service value; this adds the *global* hook the modern token set needs:
+   * `variables-modern.css` is scoped to `[data-theme="modern"]`, so any theme whose
+   * name starts with `modern` switches the whole token contract at runtime.
+   * `classic`/`light` clear the attribute and fall back to the default `:root` vars.
+   * Dark mode remains an orthogonal `theme-dark` class, so it can layer on either base.
+   */
+  private applyThemeToDom(themeName: string): void {
+    if (typeof document === 'undefined' || !document.documentElement) {
+      return;
+    }
+    const root = document.documentElement;
+    if (themeName?.startsWith('modern')) {
+      root.dataset.theme = 'modern';
+    } else {
+      root.removeAttribute('data-theme');
+    }
   }
 }
 

@@ -8,7 +8,7 @@
   z-index: 99;
   background: $white;
   &.active {
-    border: 1px solid $positive;
+    border: 1px solid var(--color-positive);
   }
   novo-list {
     list-style: none;
@@ -39,7 +39,7 @@
       &.active,
       &:focus,
       &:hover {
-        background-color: lighten($positive, 35%);
+        background-color: brightenLive('--color-positive', 35);
       }
       &.disabled {
         opacity: 0.5;
@@ -62,6 +62,6 @@
   .picker-loading,
   .picker-null {
     text-align: center;
-    color: darken($light, 15%);
+    color: darkenLive('--color-light', 15);
   }
 }

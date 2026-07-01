@@ -29,11 +29,11 @@ $chip-height: (
   "xl": 3.6rem,
 );
 $chip-spacing: (
-  "xs": $spacing-xs,
-  "sm": $spacing-sm,
-  "md": $spacing-md,
-  "lg": $spacing-lg,
-  "xl": $spacing-xl,
+  "xs": var(--spacing-xs),
+  "sm": var(--spacing-sm),
+  "md": var(--spacing-md),
+  "lg": var(--spacing-lg),
+  "xl": var(--spacing-xl),
 );
 
 .novo-chip {
@@ -50,9 +50,9 @@ $chip-spacing: (
   display: inline-flex;
   align-items: center;
   cursor: default;
-  gap: 1rem;
-  border-radius: 0.4rem;
-  padding: $spacing-none $spacing-md;
+  gap: var(--spacing-md);
+  border-radius: var(--size-border-radius-round);
+  padding: var(--spacing-none) var(--spacing-md);
   min-height: 2.4rem;
   height: 1px;
   max-width: 100%;
@@ -76,7 +76,7 @@ $chip-spacing: (
 
     &:focus {
       outline: none;
-      border: 1px solid var(--selection);
+      border: var(--border-width-thin) solid var(--selection);
 
       &::after {
         opacity: 0.16;
@@ -84,7 +84,7 @@ $chip-spacing: (
     }
 
     &:hover {
-      border: 1px solid var(--selection);
+      border: var(--border-width-thin) solid var(--selection);
     }
   }
 
@@ -139,11 +139,13 @@ $chip-spacing: (
   }
 
   .novo-chip-remove {
-    color: $light;
+    // TODO: semantic role TBD - rec font-color-base
+    color: var(--color-light);
   }
   &:not(.novo-chip-disabled) {
     .novo-chip-remove:hover {
-      color: darken($light, 30%);
+      // TODO: semantic role TBD - rec disabled or a shade
+      color: darkenLive('--color-light', 30);
     }
   }
 
@@ -153,8 +155,8 @@ $chip-spacing: (
     $height: map-get($chip-height, $size);
     &.novo-size-#{$size} {
       font-size: map-get($chip-fontsize, $size);
-      border-radius: 0.4rem;
-      padding: $spacing-none $spacing;
+      border-radius: var(--border-radius-round);
+      padding: var(--spacing-none) $spacing;
       min-height: $height;
       gap: $spacing;
 
@@ -173,15 +175,15 @@ $chip-spacing: (
   @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
     &.novo-color-#{$name} {
       color: getContrastColor($name);
-      background: $color;
+      background: getCssVarname($name);
       & > * {
         color: inherit;
       }
     }
 
     &.novo-accent-#{$name} {
-      border: 1px solid $color;
-      color: $color;
+      border: 1px solid getCssVarname($name);
+      color: getCssVarname($name);
     }
   }
 }

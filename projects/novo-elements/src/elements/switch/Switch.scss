@@ -53,6 +53,7 @@ $switch-thumb-size: 20px !default;
     width: $switch-width - 2px;
     top: calc($switch-height / 2) - calc($switch-bar-height / 2);
     height: $switch-bar-height;
+    // TODO: semantic role TBD - could be border-radius or border-radius-small
     border-radius: 8px;
     position: absolute;
   }
@@ -79,7 +80,7 @@ $switch-thumb-size: 20px !default;
     height: $switch-thumb-size;
     width: $switch-thumb-size;
     border-radius: 50%;
-    box-shadow: $shadow-1; // todo
+    box-shadow: var(--shadow-1); // todo
     color: getContrastColor("light");
 
     .novo-icon {
@@ -112,7 +113,7 @@ $switch-thumb-size: 20px !default;
   // Loop through analytics colors and make a switch color class for each
   @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
     &.#{$name} {
-      @include novo-switch-style($color, lighten($color, 18%));
+      @include novo-switch-style($color, brightenLive('--color-#{$name}', 18));
       &[aria-checked="true"] {
         .novo-switch-thumb {
           color: getContrastColor($name);
@@ -122,22 +123,33 @@ $switch-thumb-size: 20px !default;
   }
 
   &.dark {
-    @include novo-switch-style($dark, darken($dark, 5%));
+    @include novo-switch-style($dark, darkenLive('--color-dark', 5));
   }
   &.light {
-    @include novo-switch-style(darken($light, 3%), $light);
+    @include novo-switch-style(darkenLive('--color-light', 3), $light);
   }
 
   .novo-switch-thumb {
+    // TODO: semantic role TBD - rec background-bright
     background-color: $light;
   }
   .novo-switch-bar {
-    background-color: lighten($light, 10%);
+    background-color: brightenLive('--color-light', 10);
   }
 
   &:focus {
     .novo-switch-label:not(:empty) {
-      border: 1px dotted $light;
+      border: 1px dotted var(--color-border);
     }
+  }
+}
+
+// Modern theme: outlined toggle — white track + 1px neutral border in the off
+// state (Tier-3 toggle: background = white, border = border.default). The on/accent
+// state keeps its color (rides on the status/brand color decision, deferred).
+:host-context([data-theme='modern']) {
+  .novo-switch-bar {
+    background-color: var(--toggle-color-background, #ffffff);
+    border: 1px solid var(--toggle-color-border, var(--color-border-default, #f0f5f9));
   }
 }

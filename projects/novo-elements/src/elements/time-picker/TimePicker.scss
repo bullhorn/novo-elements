@@ -4,6 +4,7 @@
   display: block;
   width: min-content;
   overflow: hidden;
+  // TODO: semantic role TBD - could be border-radius or border-radius-small
   border-radius: 4px;
   background-color: var(--background-bright);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15), 0 2px 7px rgba(0, 0, 0, 0.1);
@@ -47,6 +48,7 @@
     justify-content: center;
   }
   .digital--clock {
+    // TODO: semantic role TBD. Background?
     color: #fff;
     font-size: 1.8em;
     font-weight: 500;
@@ -165,7 +167,7 @@
       display: block;
       right: 3.2rem;
       top: 50%;
-      margin-top: -1.5rem;
+      margin-top: calc(-1 * var(--spacing-xl));
       border-radius: 50%;
       position: absolute;
       border: 3px solid var(--selection);
@@ -277,7 +279,7 @@
     margin-left: 1px;
     display: block;
     position: absolute;
-    background-color: $background;
+    background-color: var(--background-main);
   }
   .analog--hour,
   .analog--minute {
@@ -299,7 +301,7 @@
     }
   }
   .analog--minute {
-    font-size: 1rem;
+    font-size: var(--font-size-xs);
     margin-left: -20px;
     margin-top: -16px;
   }
@@ -383,4 +385,10 @@
       box-shadow: 0 1px 3px #00000026, 0 2px 7px #0000001a;
     }
   }
+}
+
+// Modern theme: rounded, bordered time-picker panel.
+:host-context([data-theme='modern']) {
+  border-radius: var(--border-radius-sm, 0.8rem);
+  border: 1px solid var(--color-border-default, #f0f5f9);
 }

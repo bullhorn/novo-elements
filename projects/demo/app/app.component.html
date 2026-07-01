@@ -52,8 +52,9 @@
       <a href="https://github.com/bullhorn/novo-elements"
         target="_blank"
         class="fork-me">Fork Me On Github</a>
-      <novo-flex>
+      <novo-flex align="center" gap="md">
         <novo-switch [icons]="['day', 'night']" (onChange)="toggleDarkMode()"></novo-switch>
+        <novo-switch [icons]="['previous', 'next']" (onChange)="toggleModernTheme()" data-automation-id="theme-modern-switch"></novo-switch>
       </novo-flex>
     </novo-stack>
     <nav>

@@ -8,10 +8,10 @@
   align-content: center;
   align-items: center;
   position: relative;
-  background: $navy;
-  color: $white;
-  padding: $spacing-md;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  background: var(--color-toast);
+  color: var(--text-bg-contrast);
+  padding: var(--spacing-md);
+  box-shadow: var(--shadow-1);
 
   &.show {
     display: grid !important;
@@ -31,6 +31,7 @@
     width: 32px;
     height: 32px;
     background: rgba(0, 0, 0, 0.15);
+    // TODO: semantic role TBD - could be border-radius or border-radius-small
     border-radius: 3px;
   }
 
@@ -48,7 +49,7 @@
   .close-icon i {
     display: flex;
     position: relative;
-    font-size: 1.2rem;
+    font-size: var(--font-size-sm);
     line-height: 1.2;
   }
 
@@ -60,7 +61,7 @@
         input {
           background: transparent !important;
           border: none;
-          border-bottom: 1px solid lighten($dark, 45%);
+          border-bottom: 1px solid brightenLive('--color-dark', 45);
           border-radius: 0;
           outline: none;
           height: 2rem;
@@ -73,10 +74,10 @@
           color: $white;
           text-overflow: ellipsis;
           &:focus {
-            background-color: $positive;
+            background-color: var(--color-positive);
           }
           &:hover {
-            border-bottom: 1px solid lighten($dark, 15%);
+            border-bottom: 1px solid brightenLive('--color-dark', 15);
           }
         }
       }
@@ -104,19 +105,19 @@
   }
 
   &.text {
-    background: $dark;
+    background: var(--color-dark);
   }
   &.neutral {
-    background: $neutral;
+    background: var(--color-neutral);
   }
   &.background {
-    background: $off-white;
+    background: var(--background-main);
     .toast-content > h5 {
-      color: $dark !important;
+      color: var(--text-main) !important;
     }
     i,
     p {
-      color: $dark;
+      color: var(--text-main);
     }
   }
 
@@ -173,6 +174,7 @@
   }
 
   &[class*="growl"] {
+    // TODO: semantic role TBD - could be border-radius or border-radius-small
     border-radius: 3px;
     max-width: 350px;
   }
@@ -255,12 +257,12 @@
   @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
     &.#{$name} {
       color: getContrastColor($name);
-      background: $color;
+      background: getCssVarname($name);
     }
     &.novo-accent-#{$name} {
-      border: 1px solid $color;
+      border: 1px solid getCssVarname($name);
       background: getPaleColor($name);
-      color: $dark;
+      color: var(--font-color-base);
     }
   }
 }
@@ -300,4 +302,9 @@
       }
     }
   }
+}
+
+// Modern theme: rounded toast surface.
+:host-context([data-theme='modern']) {
+  border-radius: var(--border-radius-sm, 0.8rem);
 }

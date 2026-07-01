@@ -18,6 +18,8 @@
 :host-context(novo-nav[theme="color"]) {
   color: rgba(255, 255, 255, 0.75);
   &.active {
+    // TODO: This is difficult theming-wise. These themes only darken the parent region a little bit, but we don't know what base background we're working with
+    // in order to contrast it. "inherit" is a possible value - issuing font color decisions to the element applying the background
     color: #fff;
     background: rgba(0, 0, 0, 0.2);
   }

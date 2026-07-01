@@ -11,13 +11,13 @@
 
       .cal-event {
         height: inherit;
-        font-size: 12px;
+        font-size: var(--font-size-sm);
         margin-left: 2px;
         margin-right: 2px;
         min-height: 30px;
         display: flex;
         flex-flow: row nowrap;
-        background-color: $off-white;
+        background-color: var(--background-main);
 
         .cal-event-ribbon {
           width: 4px;
@@ -34,7 +34,7 @@
           line-height: 26px;
         }
         .cal-event-description {
-          font-size: 10px;
+          font-size: var(--font-size-xs);
           line-height: 13px;
         }
       }

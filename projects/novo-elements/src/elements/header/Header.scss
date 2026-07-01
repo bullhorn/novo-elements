@@ -29,8 +29,8 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 0 $spacing-lg;
-    gap: $spacing-sm;
+    padding: 0 var(--spacing-lg);
+    gap: var(--spacing-sm);
     box-sizing: border-box;
     // line-height: 4rem;
 
@@ -40,7 +40,7 @@
     div.header-title {
       display: flex;
       align-items: center;
-      gap: $spacing-sm;
+      gap: var(--spacing-sm);
       // making room for ellipsis
       padding-inline-end: 2em;
       // prevent pushing other flex content
@@ -51,7 +51,7 @@
       }
 
       ::ng-deep novo-icon {
-        margin-right: 1rem;
+        margin-right: var(--spacing-md);
       }
     }
     .header-titles {
@@ -83,7 +83,7 @@
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      gap: $spacing-sm;
+      gap: var(--spacing-sm);
     }
 
     ::ng-deep .novo-action {
@@ -96,23 +96,23 @@
       .header-titles,
       .header-title {
         ::ng-deep .novo-icon {
-          color: $color;
+          color: getCssVarname($name);
         }
       }
       & > section:first-of-type {
-        border-bottom: 2px solid $color;
+        border-bottom: 2px solid getCssVarname($name);
       }
     }
     &.novo-theme-#{$name} {
       & > section:first-of-type {
-        background: $color;
-        color: $contrast;
+        background: getCssVarname($name);
+        color: getContrastColor($name);
         border-bottom: none;
       }
       ::ng-deep .novo-title {
         color: inherit;
         overflow: hidden;
-        padding-right: 0.5rem;
+        padding-right: var(--spacing-sm);
       }
       ::ng-deep .novo-action {
         button,
@@ -149,5 +149,13 @@
   .header-actions {
     display: flex;
     flex-flow: row nowrap;
+  }
+}
+
+// Modern theme: soften the entity-accent underline to a neutral 1px border
+// (matches the toolbar/header treatment; entity color stays on the icon).
+:host-context([data-theme='modern']) {
+  &[class*='novo-accent-'] > section:first-of-type {
+    border-bottom: 1px solid var(--color-border-default, #f0f5f9);
   }
 }

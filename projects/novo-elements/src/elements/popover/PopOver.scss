@@ -21,7 +21,7 @@
       }
     }
     &.right {
-      margin-left: 1rem;
+      margin-left: var(--spacing-md);
       &.virtual-area {
         left: -1.1rem;
       }
@@ -162,4 +162,10 @@
       white-space: pre-line;
     }
   }
+}
+
+// Modern theme: rounded, bordered popover surface.
+:host-context([data-theme='modern']) .popover {
+  border-radius: var(--border-radius-sm, 0.8rem);
+  border: 1px solid var(--color-border-default, #f0f5f9);
 }

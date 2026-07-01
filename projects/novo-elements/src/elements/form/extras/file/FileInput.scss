@@ -1,7 +1,7 @@
 @import "../../../../styles/variables.scss";
 
 @mixin file-item-style() {
-  background-color: $white;
+  background-color: var(--background-body);
   box-shadow: 0 1px 4px rgba(#000, 0.15), 0 2px 10px rgba(#000, 0.09);
   padding: 4px 12px;
   display: flex;
@@ -51,7 +51,7 @@ novo-file-input {
       button:focus,
       button.active {
         background: none;
-        color: $positive;
+        color: var(--color-positive);
       }
       &.disabled {
         box-shadow: none;
@@ -79,7 +79,7 @@ novo-file-input {
     &:hover,
     &.active {
       label.boxed {
-        border: 2px dashed $positive;
+        border: 2px dashed var(--color-positive);
       }
     }
     &.disabled {
@@ -99,7 +99,7 @@ novo-file-input {
       pointer-events: none;
       /*This for FF*/
       strong {
-        color: $positive;
+        color: var(--color-positive);
       }
       small {
         margin-top: 7px;

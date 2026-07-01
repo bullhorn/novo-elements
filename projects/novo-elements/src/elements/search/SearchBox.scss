@@ -7,16 +7,15 @@
   grid-template-rows: 1fr;
   align-items: center;
   height: 3.2rem;
-  background: $white;
-  font-size: 1.4rem;
-  border: 1px solid $light;
+  background: var(--background-bright);
+  border: 1px solid var(--color-border);
   border-radius: 0.2rem;
   max-width: 400px;
   min-width: 100px;
   transition: all 250ms ease-in-out;
 
   &[size="small"] {
-    font-size: 1rem;
+    font-size: var(--font-size-xs);
     height: 2.4rem;
     grid-template-columns: 2.4rem 1fr;
   }
@@ -64,7 +63,7 @@
     @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
       &[color="#{$name}"] {
         > novo-icon {
-          color: $color !important;
+          color: getCssVarname($name) !important;
         }
       }
     }
@@ -75,15 +74,21 @@ header {
   novo-search.always-open:not(.focused) {
     button {
       background: rgba($white, 0.25) !important;
-      color: rgba($positive, 0.25) !important;
+      color: rgb(from var(--color-positive) r g b / 0.25) !important;
     }
     input {
       background-color: rgba($white, 0.25) !important;
       border-color: rgba($white, 0.25) !important;
-      color: rgba($positive, 0.25) !important;
+      color: rgb(from var(--color-positive) r g b / 0.25) !important;
       &::placeholder {
-        color: $empty !important;
+        color: var(--color-empty) !important;
       }
     }
   }
+}
+
+// Modern theme: rounder search box + neutral border.
+:host-context([data-theme='modern']) {
+  border-radius: var(--border-radius-sm, 0.8rem);
+  border-color: var(--color-border-default, #f0f5f9);
 }

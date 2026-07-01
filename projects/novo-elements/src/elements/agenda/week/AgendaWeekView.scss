@@ -13,7 +13,7 @@
       flex: 1;
       text-align: center;
       padding: 5px;
-      background-color: $off-white;
+      background-color: var(--background-main);
     }
 
     .cal-day-headers .cal-header:not(:last-child) {
@@ -42,11 +42,11 @@
 
         .cal-event {
           height: inherit;
-          font-size: 12px;
+          font-size: var(--font-size-sm);
           min-height: 30px;
           display: flex;
           flex-flow: column;
-          background-color: $off-white;
+          background-color: var(--background-main);
 
           .cal-event-ribbon {
             min-height: 4px;
@@ -59,7 +59,7 @@
             text-overflow: ellipsis;
           }
           .cal-event-description {
-            font-size: 10px;
+            font-size: var(--font-size-xs);
             line-height: 13px;
             padding: 0px 0px 0px 10px;
             overflow: hidden;

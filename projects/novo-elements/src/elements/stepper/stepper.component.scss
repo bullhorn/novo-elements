@@ -19,14 +19,14 @@ $novo-stepper-line-gap: 8px !default;
     align-items: center;
     justify-content: center;
     margin-bottom: 1em;
-    background: $background;
+    background: var(--background-main);
     .novo-stepper-horizontal-line {
-      border-bottom: $novo-stepper-line-width solid $light;
+      border-bottom: $novo-stepper-line-width solid var(--color-border);
       flex: auto;
       min-width: 0px;
       height: $novo-horizontal-stepper-header-height;
       &.complete {
-        border-bottom: $novo-stepper-line-width solid $positive;
+        border-bottom: $novo-stepper-line-width solid var(--color-positive);
       }
     }
   }
@@ -66,7 +66,7 @@ $novo-stepper-line-gap: 8px !default;
       z-index: z(below);
       border-left-width: $novo-stepper-line-width;
       border-left-style: solid;
-      border-left-color: $light;
+      border-left-color: var(--color-border);
 
       [dir="rtl"] & {
         left: auto;
@@ -75,15 +75,15 @@ $novo-stepper-line-gap: 8px !default;
     }
     &.edit {
       &:before {
-        border-left-color: 1px solid $positive;
+        border-left-color: 1px solid var(--color-positive);
       }
     }
     &.done {
       &:before {
-        border-left-color: 1px solid $positive;
+        border-left-color: 1px solid var(--color-positive);
       }
       &:after {
-        border-left-color: 1px solid $positive;
+        border-left-color: 1px solid var(--color-positive);
       }
     }
   }
@@ -96,5 +96,25 @@ $novo-stepper-line-gap: 8px !default;
     .novo-vertical-content-container {
       border: none;
     }
+  }
+}
+
+// Modern theme: neutral progress circles (mockup shows neutral outline circles,
+// not filled status badges). Completed/active = charcoal fill; future = outlined.
+// No accent/status colors (those ride on the deferred decision).
+:host-context([data-theme='modern']) {
+  .novo-step-icon .novo-step-number {
+    background: var(--color-content-default, #282828);
+    color: #fff;
+    border: 1px solid var(--color-content-default, #282828);
+    border-radius: 50%;
+    box-shadow: none;
+  }
+  .novo-step-icon-not-touched .novo-step-number {
+    background: transparent;
+    color: var(--color-content-subtle, #8ca1b9);
+    border: 1px solid var(--color-border-default, #d0d9e3);
+    border-radius: 50%;
+    box-shadow: none;
   }
 }

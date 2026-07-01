@@ -20,7 +20,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output
     styles: [
         `
       .swatch {
-        border-radius: 0.4rem;
+        border-radius: var(--border-radius-round);
       }
     `,
     ],

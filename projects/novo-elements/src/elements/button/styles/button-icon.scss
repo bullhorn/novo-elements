@@ -4,11 +4,11 @@
   // Icon Themed Button
   &[theme="icon"] {
     @include theme-text-colors("color");
-    padding: $spacing-sm;
+    padding: var(--spacing-sm);
     font-size: 1.4rem;
     height: 2.4rem;
     &[inverse] {
-      color: #fff;
+      color: var(--color-contrast-text);
     }
     i {
       display: contents;
@@ -25,8 +25,8 @@
       display: contents;
     }
     &[size="small"] {
-      padding: $spacing-sm;
-      font-size: 1.2rem;
+      padding: var(--spacing-sm);
+      font-size: var(--font-size-sm);
       height: 2rem;
     }
     &[size="medium"] {
@@ -35,7 +35,7 @@
     &[size="large"] {
       font-size: 2rem;
       height: 2.8rem;
-      padding: $spacing-md;
+      padding: var(--spacing-md);
     }
   }
 }

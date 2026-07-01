@@ -1,7 +1,6 @@
 @import "../../styles/variables.scss";
 @import "../../styles/reset";
 
-$table-bg-accent: #f4f4f4;
 $novo-row-horizontal-padding: 20px;
 $breakpoint: 1000px;
 
@@ -19,14 +18,14 @@ novo-simple-table {
   .novo-simple-button-cell,
   .novo-simple-dropdown-cell,
   .novo-simple-checkbox-cell {
-      background-color: $table-bg-accent;
+      background-color: var(--background-muted);
     }
     &.active {
       .novo-simple-cell,
       .novo-simple-button-cell,
       .novo-simple-dropdown-cell,
       .novo-simple-checkbox-cell {
-        background-color: rgba($ocean, 0.15);
+        background-color: rgb(from var(--color-positive) r g b / 0.15);
       }
     }
   }
@@ -35,14 +34,14 @@ novo-simple-table {
   .novo-simple-button-cell,
   .novo-simple-dropdown-cell,
   .novo-simple-checkbox-cell {
-      background-color: $white;
+      background-color: var(--background-body);
     }
     &.active {
       .novo-simple-cell,
       .novo-simple-button-cell,
       .novo-simple-dropdown-cell,
       .novo-simple-checkbox-cell {
-        background-color: rgba($ocean, 0.15);
+        background-color: rgb(from var(--color-positive) r g b / 0.15);
       }
     }
   }
@@ -56,7 +55,7 @@ novo-simple-table {
   .novo-simple-header-cell,
   novo-simple-empty-header-cell,
   .novo-simple-checkbox-header-cell {
-    border-bottom: 1px solid $off-white;
+    border-bottom: 1px solid var(--border-2);
   }
 }
 
@@ -76,7 +75,7 @@ novo-simple-table {
     display: inline-block;
   }
   button.active {
-    color: $positive;
+    color: var(--color-positive);
   }
   &.clickable {
     cursor: pointer;
@@ -92,7 +91,7 @@ novo-simple-table {
 }
 
 .novo-simple-header-cell {
-  border-left: 1px solid $off-white;
+  border-left: 1px solid var(--border-2);
   white-space: nowrap;
   display: flex;
   align-items: center;
@@ -172,7 +171,7 @@ novo-activity-table {
     display: flex;
     align-items: center;
     flex-shrink: 0;
-    border-bottom: 1px solid $off-white;
+    border-bottom: 1px solid var(--border-2);
     > [novo-activity-table-custom-header] {
       flex: 1;
     }
@@ -249,7 +248,7 @@ novo-activity-table {
     display: flex;
     flex: 1;
     .novo-activity-table-custom-filter {
-      border-right: 1px solid $off-white;
+      border-right: 1px solid var(--border-2);
       novo-date-picker {
         .calendar {
           box-shadow: none;
@@ -345,4 +344,10 @@ novo-simple-table-pagination {
     background: transparent;
     font-weight: 500;
   }
+}
+
+// Modern theme: subtle, medium-weight column headers (matches data-table).
+[data-theme='modern'] .novo-simple-header-cell {
+  font-weight: 600;
+  color: var(--color-content-subtle, #8ca1b9);
 }

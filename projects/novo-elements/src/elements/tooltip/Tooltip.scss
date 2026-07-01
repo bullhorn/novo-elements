@@ -29,7 +29,7 @@ $tooltip-success-color: var(--color-shade-success, #458746);
     color: var(--color-white, #fff);
     border-radius: var(--tooltip-border-radius, 4px);
     padding: 8px 10px;
-    font-size: 12px;
+    font-size: var(--font-size-sm);
     line-height: 12px;
     white-space: nowrap;
     box-shadow: var(--shadow-2);
@@ -159,4 +159,11 @@ $tooltip-success-color: var(--color-shade-success, #458746);
       }
     }
   }
+}
+
+// Modern theme: rounder tooltip bubble (8px) for the modern surface language.
+// The tooltip portals as a unit, so its div stays inside the host and
+// :host-context reaches it.
+:host-context([data-theme='modern']) div {
+  border-radius: var(--novo-tooltip-radius, 0.8rem);
 }

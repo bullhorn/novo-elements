@@ -19,11 +19,11 @@
       padding-inline-start: 0px !important;
       box-shadow: $shadow-multi;
       :hover {
-        background: rgba($ocean, 0.1);
-        color: $dark;
+        background: rgb(from var(--color-positive) r g b / 0.1);
+        color: var(--font-color-base);
       }
       :active {
-        background: rgba($ocean, 0.4);
+        background: rgb(from var(--color-positive) r g b / 0.4);
       }
       .menu-item-container {
         display: flex;
@@ -31,7 +31,7 @@
         position: relative;
         .sub-menu-caret {
           position: absolute;
-          right: $spacing-sm;
+          right: var(--spacing-sm);
         }
       }
 
@@ -39,7 +39,7 @@
         @include novo-body-text();
         cursor: pointer;
         margin: 0;
-        padding: $spacing-md $spacing-md $spacing-md $spacing-lg;
+        padding: var(--spacing-md) var(--spacing-md) var(--spacing-md) var(--spacing-lg);
         box-sizing: border-box;
         display: flex;
         align-items: center;
@@ -49,14 +49,20 @@
       .divider {
         order: none;
         height: 1px;
-        background: $silver;
+        background: var(--background-dark);
       }
       a {
         &.disabled {
-          color: $disabled;
+          color: var(--color-disabled);
           cursor: not-allowed;
         }
       }
     }
   }
+}
+
+// Modern theme: rounded, bordered menu panel.
+::ng-deep [data-theme='modern'] .menu-container .menu {
+  border-radius: var(--border-radius-sm, 0.8rem);
+  border: 1px solid var(--color-border-default, #f0f5f9);
 }

@@ -4,6 +4,7 @@
   text-align: center;
   display: block;
   background-color: var(--background-bright);
+  // TODO: semantic role TBD - could be border-radius or border-radius-small
   border-radius: 4px;
   box-shadow: 0 1px 7px rgba(0, 0, 0, 0.09), 0 1px 3px rgba(0, 0, 0, 0.2);
   z-index: z(modal);
@@ -13,55 +14,55 @@
 
   & > .novo-button.modal-close {
     position: absolute;
-    right: $spacing-xl;
-    top: $spacing-xl;
+    right: var(--spacing-xl);
+    top: var(--spacing-xl);
   }
 
   ::ng-deep .novo-notification-body {
     display: flex;
     flex-direction: column;
-    padding: 0 $spacing-xl;
-    margin: $spacing-lg 0 55px;
+    padding: 0 var(--spacing-xl);
+    margin: var(--spacing-lg) 0 55px;
 
     & > img {
       width: 100%;
     }
 
     h1 {
-      font-size: $font-size-2xl;
+      font-size: var(--font-size-2xl);
       margin: 10px auto 0;
     }
     h2 {
-      font-size: $font-size-xl;
+      font-size: var(--font-size-xl);
       color: var(--text-muted);
       margin: 0 auto;
       padding: 0;
     }
     h3 {
-      font-size: $font-size-lg;
+      font-size: var(--font-size-lg);
       margin: 0 auto;
     }
     h4 {
-      font-size: $font-size-lg;
+      font-size: var(--font-size-lg);
       color: var(--text-muted);
       margin: 0 auto;
       padding: 0;
     }
     h5 {
-      font-size: $font-size-md;
+      font-size: var(--font-size-md);
       margin: 0 auto;
     }
     h6 {
-      font-size: $font-size-md;
+      font-size: var(--font-size-md);
       margin: 0 auto;
     }
 
     i.indicator {
       color: var(--text-muted);
       border: 1px solid var(--text-muted);
-      font-size: $font-size-2xl;
+      font-size: var(--font-size-2xl);
       border-radius: 50%;
-      padding: $spacing-md;
+      padding: var(--spacing-md);
       margin: 2rem auto;
       align-self: center;
     }
@@ -70,8 +71,8 @@
   &[type="success"] {
     .novo-notification-body {
       i.indicator {
-        color: $success;
-        border-color: $success;
+        color: var(--color-success);
+        border-color: var(--color-success);
       }
     }
   }
@@ -79,8 +80,8 @@
   &[type="warning"] {
     .novo-notification-body {
       i.indicator {
-        color: $warning;
-        border-color: $warning;
+        color: var(--color-warning);
+        border-color: var(--color-warning);
       }
     }
   }
@@ -88,8 +89,8 @@
   &[type="error"] {
     .novo-notification-body {
       i.indicator {
-        color: $negative;
-        border-color: $negative;
+        color: var(--color-negative);
+        border-color: var(--color-negative);
       }
     }
   }
@@ -98,11 +99,18 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    padding: $spacing-md;
-    gap: $spacing-md;
+    padding: var(--spacing-md);
+    gap: var(--spacing-md);
 
     button {
       min-width: 10rem;
     }
   }
+}
+
+// Modern theme: larger 16px radius (border.radius.md) for the rounded modern
+// surface language. :host-context is valid here even though the notification is
+// portalled — we style the host element itself and html carries data-theme.
+:host-context([data-theme='modern']) {
+  border-radius: var(--novo-modal-radius, 1.6rem);
 }

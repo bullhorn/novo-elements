@@ -52,6 +52,9 @@ $invoiceStatement: $color-invoice-statement;
 $billableCharge: $color-billable-charge;
 $payableCharge: $color-payable-charge;
 // Color Applications
+// Legacy aliases — DEPRECATED, kept for backward compatibility. The app and libs
+// (cm-ui, bte, modals, data-tables, …) still consume these directly; do not remove
+// until those usages are migrated to tokens / CSS variables.
 $dark: $color-dark;
 $navigation: $color-navigation;
 $positive: $ocean;
@@ -68,12 +71,12 @@ $disabled: $color-stone;
 // --------------------------------------------------
 $spacing-rules: (
   "none": $spacing-none,
-  "px": $spacing-px,
-  "xs": $spacing-xs,
-  "sm": $spacing-sm,
-  "md": $spacing-md,
-  "lg": $spacing-lg,
-  "xl": $spacing-xl,
+  "px": var(--spacing-px),
+  "xs": var(--spacing-xs),
+  "sm": var(--spacing-sm),
+  "md": var(--spacing-md),
+  "lg": var(--spacing-lg),
+  "xl": var(--spacing-xl),
 );
 
 // Sizes
