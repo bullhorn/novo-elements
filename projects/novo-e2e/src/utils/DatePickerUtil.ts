@@ -4,6 +4,8 @@ import { waitForElementToBePresent } from './WaitUtil';
 
 export const SHORT_MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
+export const MmDdYyyyRegex = /^\d{2}\/\d{2}\/\d{4}$/;
+
 export const datePicker = {
     standalone: automationId('date-picker-picker'),
     standaloneValue: automationId('date-picker-value'),

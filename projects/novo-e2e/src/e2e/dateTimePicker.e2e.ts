@@ -1,8 +1,8 @@
 import { click, scrollIntoView } from '../utils/ElementActionUtil';
 import { formControlsExamplesUrl, getURLs } from '../utils/EnvironmentUtil';
 import { codeExample, elements } from '../utils/SelectorUtil';
-import { verifyPresent, verifyText } from '../utils/VerifyUtil';
-import { expectedDate, verifyDisplayedDate, datePickerInputField, openInputPicker, overlayCalendar, scopedDate, overlayDate } from '../utils/DatePickerUtil';
+import { verifyPresent, verifyText, verifyInputValue } from '../utils/VerifyUtil';
+import { expectedDate, verifyDisplayedDate, datePickerInputField, openInputPicker, overlayCalendar, scopedDate, overlayDate, MmDdYyyyRegex } from '../utils/DatePickerUtil';
 import {
     dateTimePicker,
     selectTime,
@@ -80,6 +80,10 @@ describe('Date Time Picker Demo Page', () => {
             const expected = await expectedDate(overlayCalendar, 15);
             await click(overlayDate(15));
             await verifyDisplayedDate(dateTimePicker.value1, expected, 'date-time-input-1 value after selection');
+        });
+
+        it('should display the selected date in MM/DD/YYYY format', async () => {
+            await verifyInputValue(datePickerInputField(dateTimePicker.input1), MmDdYyyyRegex, 'date-time-input-1 date field format');
         });
 
         it('should update value when a date is selected in the inline picker', async () => {

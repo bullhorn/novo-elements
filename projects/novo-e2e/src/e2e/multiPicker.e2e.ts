@@ -91,10 +91,11 @@ describe('Multi-Picker Demo Page', () => {
         before(async () => {
             await browser.refresh();
             await scrollIntoView(basicMultiPicker.component);
-            await click(clearAllButtonIn(basicMultiPicker.component));
         });
 
         it('should remove all chips when clear all is clicked', async () => {
+            await verifyPresent(chipsIn(basicMultiPicker.component), 'chips before clearing all');
+            await click(clearAllButtonIn(basicMultiPicker.component));
             await verifyAbsent(chipsIn(basicMultiPicker.component), 'chips after clearing all');
         });
     });
