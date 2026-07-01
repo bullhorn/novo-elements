@@ -46,7 +46,9 @@ export function provideAppBridgeService(http) {
         ScrollingModule,
         // Vendor
         NovoElementsModule,
-        NovoElementProviders.forRoot({ address: {} }),
+        // To enable Google Places autocomplete, set googlePlacesKey in environment.ts.
+        // See NovoElementProviders.forRoot JSDoc for the full options shape.
+        NovoElementProviders.forRoot({ address: { googleApiKey: environment.googlePlacesKey } }),
         // APP
         NovoExamplesRoutesModule], providers: [
         // NovoTemplateService,

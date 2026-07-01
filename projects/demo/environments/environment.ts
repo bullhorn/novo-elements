@@ -4,6 +4,10 @@
 
 export const environment = {
   production: false,
+  // To enable Google Places address autocomplete in the demo, set your own Google Maps API key here.
+  // See https://developers.google.com/maps/documentation/javascript/get-api-key
+  // Never commit a real key — add it locally or supply it via an environment variable at build time.
+  googlePlacesKey: '',
 };
 
 /*
