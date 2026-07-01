@@ -62,7 +62,7 @@ describe('GooglePlacesService', () => {
       expect(appendSpy).toHaveBeenCalledTimes(1);
       expect(script.src).toContain('key=abc');
       expect(script.src).toContain('libraries=places');
-      expect(script.src).toContain('loading=async');
+      expect(script.src).not.toContain('loading=async');
       expect(script.src).toContain('language=en-US');
 
       script.onload();
@@ -70,29 +70,6 @@ describe('GooglePlacesService', () => {
 
       createSpy.mockRestore();
       appendSpy.mockRestore();
-    });
-
-    it('awaits importLibrary("places") before resolving when loading=async exposes it', async () => {
-      const script: any = {};
-      const createSpy = vi.spyOn(document, 'createElement').mockReturnValue(script);
-      vi.spyOn(document.head, 'appendChild').mockImplementation((node: any) => node);
-      const order: string[] = [];
-      const importLibrary = vi.fn().mockImplementation(() => {
-        order.push('import');
-        return Promise.resolve({});
-      });
-      nativeGlobal.google = { maps: { importLibrary } };
-      service = build();
-
-      const loaded = service.loadGoogleMaps({ googleApiKey: 'abc' } as PlacesSettings);
-      loaded.then(() => order.push('resolve'));
-
-      script.onload();
-      await loaded;
-
-      expect(importLibrary).toHaveBeenCalledWith('places');
-      expect(order).toEqual(['import', 'resolve']);
-      createSpy.mockRestore();
     });
 
     it('drops undefined loader params instead of serializing them as "undefined"', () => {
@@ -149,30 +126,6 @@ describe('GooglePlacesService', () => {
       appendSpy.mockRestore();
     });
 
-    it('clears the cached loader when importLibrary rejects so a retry is possible', async () => {
-      const script: any = {};
-      const createSpy = vi.spyOn(document, 'createElement').mockReturnValue(script);
-      const appendSpy = vi.spyOn(document.head, 'appendChild').mockImplementation((node: any) => node);
-      const importLibrary = vi.fn()
-        .mockRejectedValueOnce(new Error('library load failed'))
-        .mockResolvedValueOnce({});
-      nativeGlobal.google = { maps: { importLibrary } };
-      service = build();
-      const settings = { googleApiKey: 'abc' } as PlacesSettings;
-
-      const attempt = service.loadGoogleMaps(settings);
-      script.onload();
-      await expect(attempt).rejects.toThrow('library load failed');
-
-      const retry = service.loadGoogleMaps(settings);
-      expect(retry).not.toBe(attempt);
-      expect(appendSpy).toHaveBeenCalledTimes(2);
-
-      script.onload();
-      await retry;
-      createSpy.mockRestore();
-      appendSpy.mockRestore();
-    });
   });
 
   describe('Method: getPredictions()', () => {

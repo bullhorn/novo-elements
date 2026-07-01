@@ -44,10 +44,11 @@ export class GooglePlacesService {
     return new Promise<void>((resolve, reject) => {
       const _window: any = this._global.nativeGlobal;
       // Build params one at a time so undefined override values are dropped instead of serialized as "undefined".
+      // The component uses the legacy Places API (AutocompleteService, PlacesService) which requires the
+      // synchronous library load — google.maps.places is fully populated when onload fires.
       const params = new URLSearchParams();
       params.set('key', settings.googleApiKey);
       params.set('libraries', 'places');
-      params.set('loading', 'async');
       for (const [key, value] of Object.entries(settings.googleMapsLoaderParams ?? {})) {
         if (value !== undefined && value !== null) {
           params.set(key, value);
@@ -56,18 +57,7 @@ export class GooglePlacesService {
       const script = document.createElement('script');
       script.src = `https://maps.googleapis.com/maps/api/js?${params.toString()}`;
       script.async = true;
-      script.onload = () => {
-        // With loading=async, onload fires when the bootstrap loader is ready, not when the
-        // places library is. importLibrary resolves only once the library is actually usable.
-        if (_window?.google?.maps?.importLibrary) {
-          _window.google.maps.importLibrary('places').then(
-            () => resolve(),
-            (err) => { this.mapsLoad = undefined; this.mapsLoadKey = undefined; reject(err); },
-          );
-        } else {
-          resolve();
-        }
-      };
+      script.onload = () => resolve();
       script.onerror = () => {
         // Clear both cached fields so a later attempt can retry with any key.
         this.mapsLoad = undefined;
