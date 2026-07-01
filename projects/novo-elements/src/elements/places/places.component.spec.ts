@@ -156,6 +156,7 @@ describe('Elements: PlacesListComponent', () => {
         return Promise.resolve([]);
       });
       component['_googlePlacesService'] = { loadGoogleMaps, getGeoPrediction } as any;
+      component['_global'] = { nativeGlobal: { google: { maps: { places: {} } } } } as any;
       component.settings = { useGoogleGeoApi: true, geoCountryRestriction: [], geoTypes: [], geoLocation: [] } as any;
 
       component['getListQuery']('100 Sum');
@@ -196,6 +197,34 @@ describe('Elements: PlacesListComponent', () => {
       expect(getGeoPrediction).not.toHaveBeenCalled();
       expect(component['updateListItem']).toHaveBeenCalledWith([]);
       errSpy.mockRestore();
+    });
+
+    it('shows an empty list without crashing when no googleApiKey is configured (SDK not loaded)', async () => {
+      const loadGoogleMaps = vi.fn().mockResolvedValue(undefined);
+      const getGeoPrediction = vi.fn();
+      component['_googlePlacesService'] = { loadGoogleMaps, getGeoPrediction } as any;
+      component['_global'] = { nativeGlobal: {} } as any; // google.maps not present
+      component.settings = { useGoogleGeoApi: true, geoCountryRestriction: [], geoTypes: [], geoLocation: [] } as any;
+      component['updateListItem'] = vi.fn();
+
+      await component['getListQuery']('100 Sum');
+
+      expect(getGeoPrediction).not.toHaveBeenCalled();
+      expect(component['updateListItem']).toHaveBeenCalledWith([]);
+    });
+
+    it('warns once on init when useGoogleGeoApi is true but no googleApiKey is configured', () => {
+      const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+      component['_googlePlacesService'] = {
+        getRecentList: vi.fn().mockResolvedValue([]),
+      } as any;
+      // userSettings with no key; defaultSettings has useGoogleGeoApi: true
+      component.userSettings = { useGoogleGeoApi: true, googleApiKey: '' } as any;
+
+      component['moduleInit']();
+
+      expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('No googleApiKey configured'));
+      warnSpy.mockRestore();
     });
 
     it('shows an empty list and logs an error when the server prediction request fails', async () => {

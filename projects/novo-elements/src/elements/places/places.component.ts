@@ -312,6 +312,12 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
     if (this.settings.showRecentSearch) {
       this.getRecentLocations();
     }
+    if (this.settings.useGoogleGeoApi && !this.settings.googleApiKey) {
+      console.warn(
+        'google-places-list: No googleApiKey configured — Google Places autocomplete is disabled. ' +
+        'Pass address.googleApiKey to NovoElementProviders.forRoot() to enable it.',
+      );
+    }
     if (!this.settings.useGoogleGeoApi) {
       if (!this.settings.geoPredictionServerUrl) {
         this.isSettingsError = true;
@@ -375,10 +381,13 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
       }
       try {
         await this._googlePlacesService.loadGoogleMaps(this.settings);
+        if (!(this._global.nativeGlobal as any)?.google?.maps?.places) {
+          this.updateListItem([]);
+          return;
+        }
         const result = await this._googlePlacesService.getGeoPrediction(_tempParams);
         this.updateListItem(result);
       } catch (err) {
-        // The Maps SDK failed to load; surface an empty list instead of leaving a stale dropdown.
         console.error('Failed to load Google Maps for address predictions', err);
         this.updateListItem([]);
       }
