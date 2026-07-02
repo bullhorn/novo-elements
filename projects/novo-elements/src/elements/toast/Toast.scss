@@ -305,6 +305,6 @@
 }
 
 // Modern theme: rounded toast surface.
-:host-context([data-theme='modern']) {
+:host-context([data-theme='bh2026']) {
   border-radius: var(--border-radius-sm, 0.8rem);
 }

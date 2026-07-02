@@ -88,7 +88,7 @@ header {
 }
 
 // Modern theme: rounder search box + neutral border.
-:host-context([data-theme='modern']) {
+:host-context([data-theme='bh2026']) {
   border-radius: var(--border-radius-sm, 0.8rem);
   border-color: var(--color-border-default, #f0f5f9);
 }

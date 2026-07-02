@@ -1,6 +1,34 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
+/**
+ * Novo theme generations (see novo-design-tokens THEME_GENERATIONS_PLAN.md).
+ * themeName is `bh<year>-<mode>`; the `data-theme` hook is the *generation* (light/dark
+ * remains the orthogonal `.theme-dark` class). The base generation (bh2022) renders as
+ * `:root` (no `data-theme`); override generations (bh2026) set `data-theme=<generation>`.
+ */
+export type ThemeName = 'bh2022-light' | 'bh2022-dark' | 'bh2026-light';
+export const DEFAULT_THEME: ThemeName = 'bh2022-light';
+
+/** Generations that render as a `[data-theme]` token override (bh2022 = the :root base). */
+const OVERRIDE_GENERATIONS = new Set<string>(['bh2026']);
+
+/** Map any stored/legacy themeName onto a canonical current name. */
+export function normalizeThemeName(stored?: string): ThemeName {
+  switch (stored) {
+    case 'bh2026-light':
+    case 'modern':
+      return 'bh2026-light';
+    case 'bh2022-dark':
+    case 'modern-dark':
+    case 'dark':
+      return 'bh2022-dark';
+    // 'bh2022-light' | 'classic' | 'light' | 'modern-light' | undefined
+    default:
+      return 'bh2022-light';
+  }
+}
+
 export class NovoThemeOptions {
   themeName: string;
 }
@@ -13,12 +41,12 @@ export interface ThemeChangeEvent {
   providedIn: 'root',
 })
 export class NovoTheme {
-  private _defaultTheme: NovoThemeOptions = { themeName: 'modern-light' };
+  private _defaultTheme: NovoThemeOptions = { themeName: DEFAULT_THEME };
   private _currentTheme: NovoThemeOptions;
 
   onThemeChange: EventEmitter<ThemeChangeEvent> = new EventEmitter<ThemeChangeEvent>();
 
-  /** Name of the theme being used. defaults to `modern-light` */
+  /** Name of the theme being used. defaults to `bh2022-light`. */
   get themeName() {
     return this._currentTheme?.themeName || this._defaultTheme.themeName;
   }
@@ -44,33 +72,22 @@ export class NovoTheme {
   }
 
   /**
-   * Reflects the active theme onto the document root so token CSS can target it.
-   *
-   * The per-component `themeName` logic (e.g. header accents) keeps working off the
-   * service value; this adds the *global* hook the modern token set needs:
-   * `variables-modern.css` is scoped to `[data-theme="modern"]`, so any theme whose
-   * name starts with `modern` switches the whole token contract at runtime.
-   * `classic`/`light` clear the attribute and fall back to the default `:root` vars.
-   * Dark mode remains an orthogonal `theme-dark` class, so it can layer on either base.
+   * Reflects the active theme's *generation* onto the document root so the token CSS can
+   * target it. Override generations (bh2026) set `data-theme=<generation>` — the
+   * `variables-bh2026.css` set is scoped to `[data-theme="bh2026"]`. The base generation
+   * (bh2022) clears the attribute and uses the default `:root` vars. Light/dark remains an
+   * orthogonal `theme-dark` class, layered on either base.
    */
   private applyThemeToDom(themeName: string): void {
     if (typeof document === 'undefined' || !document.documentElement) {
       return;
     }
     const root = document.documentElement;
-    if (themeName?.startsWith('modern')) {
-      root.dataset.theme = 'modern';
+    const generation = normalizeThemeName(themeName).split('-')[0];
+    if (OVERRIDE_GENERATIONS.has(generation)) {
+      root.dataset.theme = generation;
     } else {
       root.removeAttribute('data-theme');
     }
   }
 }
-
-/* FUTURE THOUGHTS */
-/**
- getComputedStyle(document.documentElement)
-    .getPropertyValue('--my-variable-name'); // #999999
-
- document.documentElement.style
-    .setProperty('--my-variable-name', 'pink');
-*/

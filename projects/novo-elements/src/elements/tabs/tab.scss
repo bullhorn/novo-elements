@@ -159,7 +159,7 @@
 
 // Modern theme: charcoal tabs, near-black active text + rounded neutral indicator
 // (Tier-3 tabs spec; the dark underline in the Figma, not an entity color).
-:host-context([data-theme='modern']) {
+:host-context([data-theme='bh2026']) {
   .novo-tab-link {
     color: var(--color-content-link, #282828);
     // Modern tabs are Title Case (mockup), not uppercase.

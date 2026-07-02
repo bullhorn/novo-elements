@@ -627,7 +627,7 @@ novo-data-table {
 // accents ride on the deferred status color (--color-positive).
 // NOTE: this component is ViewEncapsulation.None, so styles are global and
 // :host-context is NOT transformed — use a plain [data-theme] ancestor selector.
-[data-theme='modern'] {
+[data-theme='bh2026'] {
   .novo-data-table-header-cell,
   .novo-data-table-header-cell > label {
     font-weight: 600;

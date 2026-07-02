@@ -11,7 +11,7 @@ import { AnchorViewportScroller } from './anchor-scroller';
 })
 export class AppComponent implements AfterViewInit {
   menuOpen: boolean = false;
-  modernTheme: boolean = false;
+  bh2026Theme: boolean = false;
   sectionRoutes: Array<any>;
   designRoutes: Array<any>;
   componentRoutes: Array<any>;
@@ -109,10 +109,10 @@ export class AppComponent implements AfterViewInit {
     document.documentElement.classList.toggle('theme-dark');
   }
 
-  toggleModernTheme() {
-    this.modernTheme = !this.modernTheme;
+  toggleBh2026Theme() {
+    this.bh2026Theme = !this.bh2026Theme;
     // Drives the real NovoTheme path: use() -> applyThemeToDom() sets
-    // data-theme="modern" for modern* themes (and clears it for classic).
-    this.theme.use({ themeName: this.modernTheme ? 'modern-light' : 'classic' });
+    // data-theme="bh2026" for the bh2026 generation (cleared for the bh2022 base).
+    this.theme.use({ themeName: this.bh2026Theme ? 'bh2026-light' : 'bh2022-light' });
   }
 }

@@ -102,7 +102,7 @@ $novo-stepper-line-gap: 8px !default;
 // Modern theme: neutral progress circles (mockup shows neutral outline circles,
 // not filled status badges). Completed/active = charcoal fill; future = outlined.
 // No accent/status colors (those ride on the deferred decision).
-:host-context([data-theme='modern']) {
+:host-context([data-theme='bh2026']) {
   .novo-step-icon .novo-step-number {
     background: var(--color-content-default, #282828);
     color: #fff;

@@ -107,7 +107,7 @@
 }
 
 // Modern theme: pill progress bar ends (fill color rides on the deferred accent).
-:host-context([data-theme='modern']) {
+:host-context([data-theme='bh2026']) {
   &.linear:first-child {
     border-radius: 999px 0 0 999px;
   }

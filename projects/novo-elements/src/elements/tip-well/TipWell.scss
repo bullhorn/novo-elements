@@ -34,6 +34,6 @@
 }
 
 // Modern theme: rounder tip-well surface.
-:host-context([data-theme='modern']) > div {
+:host-context([data-theme='bh2026']) > div {
   border-radius: var(--border-radius-sm, 0.8rem);
 }

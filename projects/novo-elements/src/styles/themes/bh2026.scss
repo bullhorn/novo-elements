@@ -1,19 +1,19 @@
 // Modern theme — maps the modern design tokens (Figma "subatomic") onto the
 // semantic CSS-variable contract that novo-elements components consume.
 //
-// Requires `novo-design-tokens/css/variables-modern(.min).css` to be loaded by the
+// Requires `novo-design-tokens/css/variables-bh2026(.min).css` to be loaded by the
 // app (it defines the `--color-*` / `--typography-*` / `--spacing-*` modern vars,
-// scoped to `[data-theme="modern"]`). NovoTheme sets `data-theme="modern"` on the
+// scoped to `[data-theme="bh2026"]`). NovoTheme sets `data-theme="bh2026"` on the
 // document root when a `modern*` theme is active (see theme-options.ts).
 //
 // Built on the f/cssvar-theming runtime foundation: values resolve at runtime, and
 // `--bg-fade-multiplier` drives the live elevate()/recede() color math (in tokens'
-// scss/mixins.scss). Light direction = 1; a future modern-dark flips it to -1.
+// scss/mixins.scss). Light direction = 1; a future bh2026-dark flips it to -1.
 //
 // Fallbacks (var(--token, #hex)) keep this resilient if the modern token CSS hasn't
 // loaded yet; the #hex values mirror the resolved Figma tokens.
 
-@mixin modern-variables {
+@mixin bh2026-variables {
   // Live color-math direction (light): elevate() brightens, recede() darkens.
   --bg-fade-multiplier: 1;
 
@@ -102,7 +102,7 @@
   --color-positive: #0095da;
 }
 
-:root[data-theme='modern'],
-:root.theme-modern {
-  @include modern-variables();
+:root[data-theme='bh2026'],
+:root.theme-bh2026 {
+  @include bh2026-variables();
 }

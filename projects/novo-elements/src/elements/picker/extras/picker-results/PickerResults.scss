@@ -298,8 +298,8 @@ distribution-list-picker-results {
 }
 
 // Modern theme: rounded picker results + neutral border (was hardcoded blue).
-[data-theme='modern'] picker-results,
-[data-theme='modern'] entity-picker-results {
+[data-theme='bh2026'] picker-results,
+[data-theme='bh2026'] entity-picker-results {
   border-radius: var(--border-radius-sm, 0.8rem);
   overflow: hidden;
   .novo-list {

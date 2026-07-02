@@ -50,7 +50,7 @@
 // surface language; header top corners follow. :host-context is valid here even
 // though the modal is portalled — we style the host element itself (carries
 // _nghost) and html (with data-theme) is its ancestor.
-:host-context([data-theme='modern']) {
+:host-context([data-theme='bh2026']) {
   border-radius: var(--novo-modal-radius, 1.6rem);
 
   > ::ng-deep header {

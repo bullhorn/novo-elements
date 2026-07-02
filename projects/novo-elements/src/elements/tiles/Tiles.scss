@@ -48,7 +48,7 @@
 }
 
 // Modern theme: rounder segmented control + neutral border (active-tile accent deferred).
-:host-context([data-theme='modern']) > .tile-container {
+:host-context([data-theme='bh2026']) > .tile-container {
   border-radius: var(--border-radius-sm, 0.8rem);
   border-color: var(--color-border-default, #f0f5f9);
 }
