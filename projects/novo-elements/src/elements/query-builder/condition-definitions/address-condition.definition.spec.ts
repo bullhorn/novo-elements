@@ -33,23 +33,6 @@ describe('NovoDefaultAddressConditionDef', () => {
       expect(actual).toBeTruthy();
     });
   });
-  describe('Function: addressLabel', () => {
-    const addressLabel = NovoDefaultAddressConditionDef.prototype.addressLabel;
-
-    it('uses formatted_address for the Google client-SDK shape', () => {
-      expect(addressLabel({ formatted_address: 'Boston, MA, USA' } as any)).toBe('Boston, MA, USA');
-    });
-
-    it('falls back to formattedAddress for the address-search-service shape', () => {
-      expect(addressLabel({ formattedAddress: 'Boston, MA, USA' } as any)).toBe('Boston, MA, USA');
-    });
-
-    it('returns empty string when neither field is present', () => {
-      expect(addressLabel({} as any)).toBe('');
-      expect(addressLabel(undefined as any)).toBe('');
-    });
-  });
-
   describe('Function: selectPlace', () => {
     const buildContext = (formGroup: FormGroup) => ({
       getValue: NovoDefaultAddressConditionDef.prototype.getValue,

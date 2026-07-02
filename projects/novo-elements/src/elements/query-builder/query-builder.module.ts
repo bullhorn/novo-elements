@@ -26,6 +26,7 @@ import { NovoSwitchModule } from 'novo-elements/elements/switch';
 import { NovoTabbedGroupPickerModule } from 'novo-elements/elements/tabbed-group-picker';
 import { NovoTabModule } from 'novo-elements/elements/tabs';
 import { ConditionBuilderComponent, ConditionInputOutlet, ConditionOperatorOutlet } from './condition-builder/condition-builder.component';
+import { AddressLabelPipe } from './condition-definitions/address-label.pipe';
 import { NovoDefaultAddressConditionDef } from './condition-definitions/address-condition.definition';
 import { NovoDefaultBooleanConditionDef } from './condition-definitions/boolean-condition.definition';
 import { NovoDefaultDateConditionDef } from './condition-definitions/date-condition.definition';
@@ -75,6 +76,7 @@ import { NovoTooltipModule } from 'novo-elements/elements/tooltip';
     NovoTooltipModule,
   ],
   declarations: [
+    AddressLabelPipe,
     CriteriaBuilderComponent,
     ConditionBuilderComponent,
     ConditionInputOutlet,

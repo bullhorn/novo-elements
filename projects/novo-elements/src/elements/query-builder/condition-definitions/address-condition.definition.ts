@@ -64,7 +64,7 @@ import { NovoSelectElement } from 'novo-elements/elements/select';
           <novo-field #novoField class="address-location">
             <novo-chip-list [(ngModel)]="chipListModel" [ngModelOptions]="{ standalone: true }" (click)="openPlacesList(viewIndex)">
               <novo-chip *ngFor="let item of formGroup.get('value').value" (removed)="remove(item, formGroup, viewIndex)">
-                <novo-text ellipsis [tooltip]="addressLabel(item)" tooltipOnOverflow>{{ addressLabel(item) }}</novo-text>
+                <novo-text ellipsis [tooltip]="item | addressLabel" tooltipOnOverflow>{{ item | addressLabel }}</novo-text>
                 <novo-icon novoChipRemove>close</novo-icon>
               </novo-chip>
               <input
@@ -124,7 +124,7 @@ export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef im
   public element = inject(ElementRef);
   // App-wide address config; when provided with the server path, the picker uses the address-search-service
   // instead of the Google client SDK. Null leaves the picker on its Google default.
-  protected addressConfig: PlacesSettings = inject(NOVO_ADDRESS_CONFIG, { optional: true });
+  protected readonly addressConfig: PlacesSettings = inject(NOVO_ADDRESS_CONFIG, { optional: true });
 
   constructor(labelService: NovoLabelService) {
     super(labelService);
@@ -156,11 +156,6 @@ export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef im
 
   getValue(formGroup: AbstractControl): AddressData[] {
     return formGroup.value.value || [];
-  }
-
-  // Google client-SDK results use formatted_address; address-search-service results use formattedAddress.
-  addressLabel(item: AddressData): string {
-    return item?.formatted_address ?? item?.formattedAddress ?? '';
   }
 
   getCurrentOverlay(viewIndex: string): NovoPickerToggleElement {
