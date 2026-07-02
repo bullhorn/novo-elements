@@ -37,6 +37,17 @@ We have very precise rules over how our git commit messages can be formatted.  T
 readable messages** that are easy to follow when looking through the **project history**.  But also,
 we use the git commit messages to **generate the Angular change log**.
 
+> **Your commit type decides whether a release is published.** This repo uses
+> [semantic-release](https://github.com/semantic-release/semantic-release), which reads the `<type>`
+> of each commit to decide the next version (see also [RELEASE_PROCESS.md](./RELEASE_PROCESS.md)):
+>
+> * `feat`, `refactor` &rarr; **minor** release
+> * `fix`, `perf`, `chore`, `revert` &rarr; **patch** release
+> * `breaking` or any commit with a `BREAKING CHANGE:` footer &rarr; **major** release
+> * `docs`, `style`, `test`, `build`, `ci` &rarr; **no release** (change ships with the next release)
+>
+> If your change needs to be published, make sure it uses one of the release-triggering types above.
+
 ### Commit Message Format
 Each commit message consists of a **header**, a **body** and a **footer**.  The header has a special
 format that includes a **type**, a **scope** and a **subject**:
@@ -94,3 +105,34 @@ reference GitHub issues that this commit **Closes**.
 **Breaking Changes** should start with the word `BREAKING CHANGE:` with a space or two newlines. The rest of the commit message is then used for this.
 
 A detailed explanation can be found in this [document](https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit?pref=2&pli=1#).
+
+### Examples
+
+A simple bug fix — header only is enough:
+
+```
+fix(Address): use sessions for search service to reduce cost
+```
+
+A feature with a body explaining the motivation:
+
+```
+feat(DataTable): support multi-column sorting
+
+Allow holding shift while clicking column headers to sort by more than one
+column. Sort order is preserved when data is refreshed.
+
+Closes #1523
+```
+
+A breaking change — note the `BREAKING CHANGE:` footer, which forces a major release:
+
+```
+refactor(Picker): simplify value binding options
+
+Consolidate the picker value inputs into a single strategy so consumers no
+longer need to wire up separate config objects.
+
+BREAKING CHANGE: `NovoPickerConfig.source` has been removed. Provide a
+`PickerResults` implementation via the `results` input instead.
+```

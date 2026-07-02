@@ -91,6 +91,27 @@ There are many ways to **[contribute](https://github.com/bullhorn/novo-elements/
 
 > TL;DR: Fork this repository, make any required change and then submit a PR :)
 
+### Commit messages (required)
+
+This repo uses **[semantic-release](https://github.com/semantic-release/semantic-release)**, so your
+commit messages are not optional formatting — the commit **type** decides whether a release/build is
+published and how the version bumps. Every commit **must** follow the Conventional Commits / Angular
+format:
+
+```
+<type>(<scope>): <subject>
+```
+
+- **Triggers a release** — `feat` (minor), `refactor` (minor), `fix` / `perf` / `chore` / `revert`
+  (patch), and `breaking` or a `BREAKING CHANGE:` footer (major).
+- **Does not trigger a release** — `docs`, `style`, `test`, `build`, `ci`.
+
+Example: `fix(DataTable): prevent duplicate row selection on shift-click`
+
+Read the full rules, subject/body/footer conventions, and worked examples in the
+**[Commit Message Guidelines](https://github.com/bullhorn/novo-elements/blob/master/CONTRIBUTING.md#commit)**
+before opening a PR.
+
 # License
 
 Copyright (c) forever [Bullhorn](http://www.bullhorn.com).
