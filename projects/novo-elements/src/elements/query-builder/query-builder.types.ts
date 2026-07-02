@@ -85,14 +85,39 @@ export interface FieldConfig<T extends BaseFieldDef> {
 }
 
 export interface AddressData {
-  address_components: AddressComponent[];
-  formatted_address: string;
-  geometry: AddressGeometry;
+  // Google Places (client SDK) shape — present when the places picker uses the Google API directly.
+  address_components?: AddressComponent[];
+  formatted_address?: string;
+  geometry?: AddressGeometry;
   name?: string;
-  place_id: string;
+  place_id?: string;
+  // address-search-service (flat) shape — present when an app configures the server path via NOVO_ADDRESS_CONFIG.
+  address1?: string;
+  address2?: string;
+  city?: string;
+  state?: string;
+  zip?: string;
+  countryName?: string;
+  countryCode?: string;
+  formattedAddress?: string;
+  location?: AddressGeoPoint;
+  viewport?: AddressDetailViewport;
+  referenceId?: string;
+  postalCodes?: string[];
+  // common
   radius?: AddressRadius;
   postal_codes?: string[];
   types?: string[];
+}
+
+export interface AddressGeoPoint {
+  latitude: number;
+  longitude: number;
+}
+
+export interface AddressDetailViewport {
+  northeast: AddressGeoPoint;
+  southwest: AddressGeoPoint;
 }
 
 export interface AddressRadius {
