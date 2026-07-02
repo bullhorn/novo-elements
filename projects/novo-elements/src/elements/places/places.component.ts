@@ -10,6 +10,7 @@ import {
   Input,
   OnChanges,
   OnInit,
+  Optional,
   Output,
   PLATFORM_ID,
 } from '@angular/core';
@@ -19,6 +20,7 @@ import { GlobalRef } from 'novo-elements/services';
 import { Key } from 'novo-elements/utils';
 import { NEVER, Observable } from 'rxjs';
 import { GooglePlacesService } from './places.service';
+import { NOVO_ADDRESS_CONFIG } from './places.tokens';
 
 export interface PlacesSettings {
   geoPredictionServerUrl?: string;
@@ -43,6 +45,10 @@ export interface PlacesSettings {
   currentLocIconUrl?: string;
   searchIconUrl?: string;
   locationIconUrl?: string;
+  /** Bullhorn-managed key; when set, the library lazy-loads the Maps JS SDK with it instead of relying on a host script tag. */
+  googleApiKey?: string;
+  /** Extra Maps JS loader query params, merged over the defaults (libraries=places, loading=async). */
+  googleMapsLoaderParams?: Record<string, string>;
 }
 
 /** Normalized address prediction; raw provider records are mapped into this via normalizePrediction. */
@@ -118,6 +124,8 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
     currentLocIconUrl: '',
     searchIconUrl: '',
     locationIconUrl: '',
+    googleApiKey: '',
+    googleMapsLoaderParams: {},
   };
 
   model: any;
@@ -130,6 +138,8 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
     private _global: GlobalRef,
     private _googlePlacesService: GooglePlacesService,
     private cdr: ChangeDetectorRef,
+    // Fallback config from the app-wide token; used when [userSettings] does not provide a field.
+    @Optional() @Inject(NOVO_ADDRESS_CONFIG) private addressConfig: PlacesSettings = null,
   ) {
     super(_elmRef, cdr);
     this.config = {};
@@ -302,6 +312,12 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
     if (this.settings.showRecentSearch) {
       this.getRecentLocations();
     }
+    if (this.settings.useGoogleGeoApi && !this.settings.googleApiKey) {
+      console.warn(
+        'google-places-list: No googleApiKey configured — Google Places autocomplete is disabled. ' +
+        'Pass address.googleApiKey to NovoElementProviders.forRoot() to enable it.',
+      );
+    }
     if (!this.settings.useGoogleGeoApi) {
       if (!this.settings.geoPredictionServerUrl) {
         this.isSettingsError = true;
@@ -334,21 +350,24 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
   }
 
   // function to set user settings if it is available.
+  // Priority: [userSettings] input > NOVO_ADDRESS_CONFIG token > defaultSettings.
   private setUserSettings(): PlacesSettings {
     const _tempObj: any = {};
-    if (this.userSettings && typeof this.userSettings === 'object') {
-      const keys: string[] = Object.keys(this.defaultSettings);
-      for (const value of keys) {
-        _tempObj[value] = this.userSettings[value] !== undefined ? this.userSettings[value] : this.defaultSettings[value];
+    const keys: string[] = Object.keys(this.defaultSettings);
+    for (const value of keys) {
+      if (this.userSettings?.[value] !== undefined) {
+        _tempObj[value] = this.userSettings[value];
+      } else if (this.addressConfig?.[value] !== undefined) {
+        _tempObj[value] = this.addressConfig[value];
+      } else {
+        _tempObj[value] = this.defaultSettings[value];
       }
-      return _tempObj;
-    } else {
-      return this.defaultSettings;
     }
+    return _tempObj;
   }
 
   // function to get the autocomplete list based on user input.
-  private getListQuery(value: string): any {
+  private async getListQuery(value: string): Promise<void> {
     this.recentDropdownOpen = false;
     if (this.settings.useGoogleGeoApi) {
       const _tempParams: any = {
@@ -360,13 +379,25 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
         _tempParams.geoLocation = this.settings.geoLocation;
         _tempParams.radius = this.settings.geoRadius;
       }
-      this._googlePlacesService.getGeoPrediction(_tempParams).then((result) => {
+      try {
+        await this._googlePlacesService.loadGoogleMaps(this.settings);
+        if (!(this._global.nativeGlobal as any)?.google?.maps?.places) {
+          this.updateListItem([]);
+          return;
+        }
+        const result = await this._googlePlacesService.getGeoPrediction(_tempParams);
         this.updateListItem(result);
-      });
+      } catch (err) {
+        console.error('Failed to load Google Maps for address predictions', err);
+        this.updateListItem([]);
+      }
     } else {
       this._googlePlacesService.getPredictions(this.settings.geoPredictionServerUrl, value, this.ensureSessionToken()).then((result) => {
         result = this.extractServerList(this.settings.serverResponseListHierarchy, result);
         this.updateListItem(result);
+      }).catch((err) => {
+        console.error('Failed to load address predictions from server', err);
+        this.updateListItem([]);
       });
     }
   }
@@ -436,20 +467,29 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
   }
 
   // function to execute to get location detail based on latitude and longitude.
-  private getCurrentLocationInfo(latlng: any): any {
+  private async getCurrentLocationInfo(latlng: any): Promise<void> {
     if (this.settings.useGoogleGeoApi) {
-      this._googlePlacesService.getGeoLatLngDetail(latlng).then((result: any) => {
+      try {
+        await this._googlePlacesService.loadGoogleMaps(this.settings);
+        const result = await this._googlePlacesService.getGeoLatLngDetail(latlng);
         if (result) {
           this.setRecentLocation(result);
         }
+      } catch (err) {
+        console.error('Failed to load Google Maps for current location', err);
+      } finally {
+        // Always clear the spinner, even if the SDK never loaded.
         this.gettingCurrentLocationFlag = false;
-      });
+      }
     } else {
       this._googlePlacesService.getLatLngDetail(this.settings.geoLatLangServiceUrl, latlng.lat, latlng.lng).then((result: any) => {
         if (result) {
           result = this.extractServerList(this.settings.serverResponseatLangHierarchy, result);
           this.setRecentLocation(result);
         }
+        this.gettingCurrentLocationFlag = false;
+      }).catch((err) => {
+        console.error('Failed to get current location detail from server', err);
         this.gettingCurrentLocationFlag = false;
       });
     }
@@ -459,9 +499,15 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
   private async getPlaceLocationInfo(selectedData: AddressLookupPrediction): Promise<void> {
     const placeId = selectedData.placeId;
     if (this.settings.useGoogleGeoApi) {
-      const data = await this._googlePlacesService.getGeoPlaceDetail(placeId);
-      if (data) {
-        this.setRecentLocation(data);
+      try {
+        // Ensure the SDK is loaded before getGeoPlaceDetail touches window.google.
+        await this._googlePlacesService.loadGoogleMaps(this.settings);
+        const data = await this._googlePlacesService.getGeoPlaceDetail(placeId);
+        if (data) {
+          this.setRecentLocation(data);
+        }
+      } catch (err) {
+        console.error('Failed to load Google Maps for place details', err);
       }
     } else {
       try {
@@ -470,6 +516,8 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
           result = this.extractServerList(this.settings.serverResponseDetailHierarchy, result);
           this.setRecentLocation(result);
         }
+      } catch (err) {
+        console.error('Failed to load place details from server', err);
       } finally {
         // The details call ends the Google billing session; clear the token even if the request
         // failed so the next interaction starts a fresh session.

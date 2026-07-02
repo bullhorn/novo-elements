@@ -33,6 +33,79 @@ describe('NovoDefaultAddressConditionDef', () => {
       expect(actual).toBeTruthy();
     });
   });
+  describe('Function: selectPlace', () => {
+    const buildContext = (formGroup: FormGroup) => ({
+      getValue: NovoDefaultAddressConditionDef.prototype.getValue,
+      updateRadiusInValues: (_fg: any, values: any[]) => values,
+      inputChildren: { forEach: () => {} },
+      getCurrentInput: () => undefined,
+      closePlacesList: () => {},
+    });
+
+    it('should store the Google client-SDK fields when the result has address_components', () => {
+      const formGroup = new FormGroup({ value: new FormControl(null) });
+      const googleEvent = {
+        address_components: [{ long_name: 'Boston', short_name: 'Boston', types: ['locality'] }],
+        formatted_address: 'Boston, MA, USA',
+        geometry: { location: { lat: 1, lng: 2 } },
+        name: 'Boston',
+        place_id: 'g1',
+        types: ['locality'],
+        extraneous: 'dropped',
+      };
+      NovoDefaultAddressConditionDef.prototype.selectPlace.call(buildContext(formGroup), googleEvent, formGroup, 'v1');
+      expect(formGroup.get('value').value).toEqual([
+        {
+          address_components: googleEvent.address_components,
+          formatted_address: 'Boston, MA, USA',
+          geometry: googleEvent.geometry,
+          name: 'Boston',
+          postal_codes: undefined,
+          place_id: 'g1',
+          types: ['locality'],
+        },
+      ]);
+    });
+
+    it('should store the flat address-search-service shape as-is when there are no address_components', () => {
+      const formGroup = new FormGroup({ value: new FormControl(null) });
+      const flatEvent = {
+        city: 'Boston',
+        state: 'Massachusetts',
+        countryName: 'United States',
+        formattedAddress: 'Boston, MA, USA',
+        referenceId: 'ref-1',
+        viewport: { northeast: { latitude: 1, longitude: 2 }, southwest: { latitude: 3, longitude: 4 } },
+      };
+      NovoDefaultAddressConditionDef.prototype.selectPlace.call(buildContext(formGroup), flatEvent, formGroup, 'v1');
+      expect(formGroup.get('value').value).toEqual([flatEvent]);
+    });
+
+    it('does not store UI-state fields (active, description) added by setRecentLocation into the form value', () => {
+      const formGroup = new FormGroup({ value: new FormControl(null) });
+      const flatEventWithUiState = {
+        city: 'Boston',
+        formattedAddress: 'Boston, MA, USA',
+        referenceId: 'ref-1',
+        active: false,
+        description: 'Boston, MA, USA',
+      };
+      NovoDefaultAddressConditionDef.prototype.selectPlace.call(buildContext(formGroup), flatEventWithUiState, formGroup, 'v1');
+      const stored = formGroup.get('value').value[0];
+      expect(stored.active).toBeUndefined();
+      expect(stored.description).toBeUndefined();
+      expect(stored.city).toBe('Boston');
+      expect(stored.formattedAddress).toBe('Boston, MA, USA');
+      expect(stored.referenceId).toBe('ref-1');
+    });
+
+    it('should append to existing values', () => {
+      const formGroup = new FormGroup({ value: new FormControl([{ referenceId: 'existing' }]) });
+      NovoDefaultAddressConditionDef.prototype.selectPlace.call(buildContext(formGroup), { referenceId: 'new' }, formGroup, 'v1');
+      expect(formGroup.get('value').value).toEqual([{ referenceId: 'existing' }, { referenceId: 'new' }]);
+    });
+  });
+
   describe('Function: updateRadiusInValues', () => {
     it('should return values updated with the radius based on form values if radius operator is selected', () => {
       const expected = [
