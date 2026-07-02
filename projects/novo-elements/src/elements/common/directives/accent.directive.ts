@@ -13,8 +13,12 @@ export class AccentColorDirective implements OnDestroy {
 
   @HostBinding('class')
   get hb_textColor() {
-    // The legacy 'classic' theme is retired — every theme now uses the
-    // modern/neutral accent treatment (classic = today's baseline look).
+    // 'classic' (main, entity-colored) keeps the legacy treatment; every other theme
+    // (main modern-light, and the bh2022/bh2026 generations) uses the neutral accent.
+    // This makes flag-off byte-identical to main while the refresh (bh2026-light) stays neutral.
+    if (this.theme.themeName === 'classic') {
+      return `novo-theme-${this.accent}`;
+    }
     return `novo-accent-${this.accent}`;
   }
 
