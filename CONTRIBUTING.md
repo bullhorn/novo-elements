@@ -43,7 +43,6 @@ we use the git commit messages to **generate the Angular change log**.
 >
 > * `feat`, `refactor` &rarr; **minor** release
 > * `fix`, `perf`, `chore`, `revert` &rarr; **patch** release
-> * `breaking` or any commit with a `BREAKING CHANGE:` footer &rarr; **major** release
 > * `docs`, `style`, `test`, `build`, `ci` &rarr; **no release** (change ships with the next release)
 >
 > If your change needs to be published, make sure it uses one of the release-triggering types above.
@@ -123,16 +122,4 @@ Allow holding shift while clicking column headers to sort by more than one
 column. Sort order is preserved when data is refreshed.
 
 Closes #1523
-```
-
-A breaking change — note the `BREAKING CHANGE:` footer, which forces a major release:
-
-```
-refactor(Picker): simplify value binding options
-
-Consolidate the picker value inputs into a single strategy so consumers no
-longer need to wire up separate config objects.
-
-BREAKING CHANGE: `NovoPickerConfig.source` has been removed. Provide a
-`PickerResults` implementation via the `results` input instead.
 ```

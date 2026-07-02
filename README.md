@@ -103,7 +103,7 @@ format:
 ```
 
 - **Triggers a release** — `feat` (minor), `refactor` (minor), `fix` / `perf` / `chore` / `revert`
-  (patch), and `breaking` or a `BREAKING CHANGE:` footer (major).
+  (patch).
 - **Does not trigger a release** — `docs`, `style`, `test`, `build`, `ci`.
 
 Example: `fix(DataTable): prevent duplicate row selection on shift-click`
