@@ -19,6 +19,7 @@ export interface NovoDataTableRef<T = any> {
   allSelected: EventEmitter<any>;
   canSelectAll: boolean;
   allMatchingSelected: boolean;
+  rowIdentifier: string;
   state: DataTableState<T>;
   dataSource: DataTableSource<T>;
 }

@@ -60,6 +60,16 @@ export class NovoDataTableCheckboxHeaderCell<T> extends CdkHeaderCell implements
     this.selectionSubscription = this.dataTable.state.selectionSource.subscribe(() => {
       this.checked = this.dataTable.allCurrentRowsSelected() || (this.dataTable?.canSelectAll && this.dataTable?.allMatchingSelected);
       if (this.dataTable?.canSelectAll) {
+        if (this.dataTable.allMatchingSelected) {
+          const allCurrentPageSelected = (this.dataTable.dataSource.data || []).every((row) =>
+            this.dataTable.state.selectedRows.has(`${row[this.dataTable.rowIdentifier]}`),
+          );
+          if (!allCurrentPageSelected) {
+            this.dataTable.selectRows(true);
+            this.ref.markForCheck();
+            return;
+          }
+        }
         this.selectAllChanged();
       }
       this.ref.markForCheck();
