@@ -82,19 +82,6 @@ export class GooglePlacesService {
     });
   }
 
-  getLatLngDetail(url: string, lat: number, lng: number): Promise<any> {
-    return new Promise((resolve) => {
-      const separator = url.includes('?') ? '&' : '?';
-      this._http.get(url + separator + 'lat=' + lat + '&lng=' + lng).subscribe((data: any) => {
-        if (data) {
-          resolve(data);
-        } else {
-          resolve(false);
-        }
-      });
-    });
-  }
-
   getPlaceDetails(url: string, placeId: string, sessionToken?: string): Promise<any> {
     return new Promise((resolve) => {
       const separator = url.includes('?') ? '&' : '?';
@@ -106,48 +93,6 @@ export class GooglePlacesService {
           resolve(false);
         }
       });
-    });
-  }
-
-  getGeoCurrentLocation(): Promise<any> {
-    return new Promise((resolve) => {
-      if (isPlatformBrowser(this.platformId)) {
-        const _window: any = this._global.nativeGlobal;
-        if (_window.navigator.geolocation) {
-          _window.navigator.geolocation.getCurrentPosition((pos) => {
-            const latlng: any = { lat: parseFloat(pos.coords.latitude + ''), lng: parseFloat(pos.coords.longitude + '') };
-            resolve(latlng);
-          });
-        } else {
-          resolve(false);
-        }
-      } else {
-        resolve(false);
-      }
-    });
-  }
-
-  getGeoLatLngDetail(latlng: any): Promise<any> {
-    return new Promise((resolve) => {
-      if (isPlatformBrowser(this.platformId)) {
-        const _window: any = this._global.nativeGlobal;
-        const geocoder: any = new _window.google.maps.Geocoder();
-        geocoder.geocode({ location: latlng }, (results, status) => {
-          if (status === 'OK') {
-            this.getGeoPlaceDetail(results[0].place_id).then((result) => {
-              if (result) {
-                resolve(result);
-              } else {
-                resolve(false);
-              }
-            });
-          } else {
-            resolve(false);
-          }
-        });
-      } else {
-        resolve(false);
-      }
     });
   }
 

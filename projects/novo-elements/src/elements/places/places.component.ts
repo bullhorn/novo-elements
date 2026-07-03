@@ -1,5 +1,4 @@
 // NG2
-import { isPlatformBrowser } from '@angular/common';
 import {
   ChangeDetectorRef,
   Component,
@@ -12,7 +11,6 @@ import {
   OnInit,
   Optional,
   Output,
-  PLATFORM_ID,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BasePickerResults } from 'novo-elements/elements/picker';
@@ -89,7 +87,6 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
   matchesUpdated: EventEmitter<AddressLookupPrediction[]> = new EventEmitter<AddressLookupPrediction[]>();
 
   public locationInput: string = '';
-  public gettingCurrentLocationFlag: boolean = false;
   public dropdownOpen: boolean = false;
   public recentDropdownOpen: boolean = false;
   public isSettingsError: boolean = false;
@@ -133,7 +130,6 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
   onModelTouched: Function = () => {};
 
   constructor(
-    @Inject(PLATFORM_ID) private platformId: Object,
     private _elmRef: ElementRef,
     private _global: GlobalRef,
     private _googlePlacesService: GooglePlacesService,
@@ -238,21 +234,6 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
       this.select.emit(this.userSelectedOption);
     } else {
       // this.select.emit(false);
-    }
-  }
-
-  // function to get user current location from the device.
-  currentLocationSelected(): any {
-    if (isPlatformBrowser(this.platformId)) {
-      this.gettingCurrentLocationFlag = true;
-      this.dropdownOpen = false;
-      this._googlePlacesService.getGeoCurrentLocation().then((result: any) => {
-        if (!result) {
-          this.gettingCurrentLocationFlag = false;
-        } else {
-          this.getCurrentLocationInfo(result);
-        }
-      });
     }
   }
 
@@ -464,35 +445,6 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
     this._googlePlacesService.getRecentList(this.settings.recentStorageName).then((result: any) => {
       this.matches = (result || []).map((item: any) => this.normalizePrediction(item));
     });
-  }
-
-  // function to execute to get location detail based on latitude and longitude.
-  private async getCurrentLocationInfo(latlng: any): Promise<void> {
-    if (this.settings.useGoogleGeoApi) {
-      try {
-        await this._googlePlacesService.loadGoogleMaps(this.settings);
-        const result = await this._googlePlacesService.getGeoLatLngDetail(latlng);
-        if (result) {
-          this.setRecentLocation(result);
-        }
-      } catch (err) {
-        console.error('Failed to load Google Maps for current location', err);
-      } finally {
-        // Always clear the spinner, even if the SDK never loaded.
-        this.gettingCurrentLocationFlag = false;
-      }
-    } else {
-      this._googlePlacesService.getLatLngDetail(this.settings.geoLatLangServiceUrl, latlng.lat, latlng.lng).then((result: any) => {
-        if (result) {
-          result = this.extractServerList(this.settings.serverResponseatLangHierarchy, result);
-          this.setRecentLocation(result);
-        }
-        this.gettingCurrentLocationFlag = false;
-      }).catch((err) => {
-        console.error('Failed to get current location detail from server', err);
-        this.gettingCurrentLocationFlag = false;
-      });
-    }
   }
 
   // function to retrieve the location info based on google place id.

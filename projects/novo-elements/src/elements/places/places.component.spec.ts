@@ -8,7 +8,7 @@ describe('Elements: PlacesListComponent', () => {
   beforeEach(() => {
     const elmRef: any = { nativeElement: document.createElement('div') };
     const cdr: any = { detectChanges: () => {} };
-    component = new PlacesListComponent('browser', elmRef, {} as any, {} as any, cdr);
+    component = new PlacesListComponent(elmRef, {} as any, {} as any, cdr);
   });
 
   describe('Output: matchesUpdated', () => {
@@ -243,68 +243,6 @@ describe('Elements: PlacesListComponent', () => {
       await Promise.resolve();
 
       expect(component['updateListItem']).toHaveBeenCalledWith([]);
-      errSpy.mockRestore();
-    });
-  });
-
-  describe('Method: getCurrentLocationInfo()', () => {
-    it('loads the SDK, stores the detail, and clears the spinner on the Google path', async () => {
-      const loadGoogleMaps = vi.fn().mockResolvedValue(undefined);
-      const getGeoLatLngDetail = vi.fn().mockResolvedValue({ formattedAddress: 'x' });
-      component['_googlePlacesService'] = { loadGoogleMaps, getGeoLatLngDetail } as any;
-      component.settings = { useGoogleGeoApi: true } as any;
-      component['setRecentLocation'] = vi.fn();
-      component['gettingCurrentLocationFlag'] = true;
-
-      await component['getCurrentLocationInfo']({ lat: 1, lng: 2 });
-
-      expect(loadGoogleMaps).toHaveBeenCalledWith(component.settings);
-      expect(getGeoLatLngDetail).toHaveBeenCalledWith({ lat: 1, lng: 2 });
-      expect(component['setRecentLocation']).toHaveBeenCalledWith({ formattedAddress: 'x' });
-      expect(component['gettingCurrentLocationFlag']).toBe(false);
-    });
-
-    it('clears the spinner when the Maps SDK fails to load', async () => {
-      const loadGoogleMaps = vi.fn().mockRejectedValue(new Error('boom'));
-      const getGeoLatLngDetail = vi.fn();
-      component['_googlePlacesService'] = { loadGoogleMaps, getGeoLatLngDetail } as any;
-      component.settings = { useGoogleGeoApi: true } as any;
-      component['gettingCurrentLocationFlag'] = true;
-      const errSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
-
-      await component['getCurrentLocationInfo']({ lat: 1, lng: 2 });
-
-      expect(getGeoLatLngDetail).not.toHaveBeenCalled();
-      expect(component['gettingCurrentLocationFlag']).toBe(false);
-      errSpy.mockRestore();
-    });
-
-    it('uses the REST endpoint and clears the spinner on the search-service path', async () => {
-      const getLatLngDetail = vi.fn().mockResolvedValue(null);
-      component['_googlePlacesService'] = { getLatLngDetail } as any;
-      component.settings = { useGoogleGeoApi: false, geoLatLangServiceUrl: 'https://api/ll', serverResponseatLangHierarchy: [] } as any;
-      component['gettingCurrentLocationFlag'] = true;
-
-      component['getCurrentLocationInfo']({ lat: 1, lng: 2 });
-      await Promise.resolve();
-      await Promise.resolve();
-
-      expect(getLatLngDetail).toHaveBeenCalledWith('https://api/ll', 1, 2);
-      expect(component['gettingCurrentLocationFlag']).toBe(false);
-    });
-
-    it('clears the spinner when the server path request rejects', async () => {
-      const getLatLngDetail = vi.fn().mockRejectedValue(new Error('500'));
-      component['_googlePlacesService'] = { getLatLngDetail } as any;
-      component.settings = { useGoogleGeoApi: false, geoLatLangServiceUrl: 'https://api/ll' } as any;
-      component['gettingCurrentLocationFlag'] = true;
-      const errSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
-
-      component['getCurrentLocationInfo']({ lat: 1, lng: 2 });
-      await Promise.resolve();
-      await Promise.resolve();
-
-      expect(component['gettingCurrentLocationFlag']).toBe(false);
       errSpy.mockRestore();
     });
   });
