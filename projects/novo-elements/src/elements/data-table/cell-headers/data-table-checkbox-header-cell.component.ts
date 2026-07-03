@@ -65,6 +65,7 @@ export class NovoDataTableCheckboxHeaderCell<T> extends CdkHeaderCell implements
             this.dataTable.state.selectedRows.has(`${row[this.dataTable.rowIdentifier]}`),
           );
           if (!allCurrentPageSelected) {
+            this.dataTable.state.selectedRows.clear();
             this.dataTable.selectRows(true);
             this.ref.markForCheck();
             return;
