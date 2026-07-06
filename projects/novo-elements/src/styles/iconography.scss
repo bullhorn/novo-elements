@@ -18,7 +18,7 @@ i {
         vertical-align: baseline;
         line-height: 1.8;
       }
-      // Theming TODO: Use contrast colors?
+      // TODO(design): Use contrast colors?
       @each $entity, $color in $entity-colors {
         &.#{$entity} {
           color: $white;

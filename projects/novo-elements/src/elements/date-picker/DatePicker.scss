@@ -3,9 +3,7 @@
 :host {
   display: block;
   .date-picker-container {
-    // TODO: semantic role TBD
-    // TODO: semantic role TBD - could be border-radius or border-radius-small
-    border-radius: 4px;
+    border-radius: var(--border-radius-default, 4px);
     width: min-content;
     text-align: center;
     background: var(--background-main);
@@ -66,7 +64,7 @@
       &.week-select-mode {
         & > span {
           cursor: default;
-          // TODO: Do we need this color var? Should be text-main
+          // TODO(design): Do we need this color var? Should be text-main
           color: $font-color-base;
           pointer-events: none;
           opacity: 1 !important;
@@ -134,8 +132,8 @@
         color: var(--color-positive);
         font-weight: 600;
         .month {
-          // TODO: semantic role TBD - could be border-radius or border-radius-small
-          border-radius: 2px;
+          // TODO(token): --border-radius-small not yet in novo-design-tokens (fallback 2px)
+          border-radius: var(--border-radius-small, 2px);
           padding: 3px 8px;
           &:hover {
             background: var(--color-positive);
@@ -144,8 +142,8 @@
           }
         }
         .year {
-          // TODO: semantic role TBD - could be border-radius or border-radius-small
-          border-radius: 2px;
+          // TODO(token): --border-radius-small not yet in novo-design-tokens (fallback 2px)
+          border-radius: var(--border-radius-small, 2px);
           padding: 3px 8px;
           &:hover {
             background: var(--color-positive);

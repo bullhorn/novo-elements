@@ -38,7 +38,7 @@ $icon-border-radius: 0.3em;
     &[theme="#{$name}"] {
       i {
         color: $white;
-        // Theming TODO: Should be contrast?
+        // TODO(design): Should be contrast?
         //color: getContrastColor($name);
         background: getCssVarname($name);
         border-radius: $icon-border-radius;

@@ -15,7 +15,7 @@
   --text-bg-contrast: #{$color-white};
   --links: #{$color-ocean};
   --focus: #{$color-ocean};
-  // TODO: semantic role work - we may want to move this to novo-design-tokens so we can get a few other shades of it.
+  // TODO(token): semantic role work - we may want to move this to novo-design-tokens so we can get a few other shades of it.
   --border: #{$color-light}; //#dbdbdb;
   --border-2: #{$color-off-white}; //#f7f7f7
   --border-hard: #{$color-dark}; //#3d464d

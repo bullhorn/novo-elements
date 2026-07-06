@@ -15,8 +15,8 @@
       min-width: 400px;
       display: block;
       z-index: z("max");
-      // TODO: semantic role TBD - could be border-radius or border-radius-small
-      border-radius: 2px;
+      // TODO(token): --border-radius-small not yet in novo-design-tokens (fallback 2px)
+      border-radius: var(--border-radius-small, 2px);
       top: 100%;
       margin-top: 5px;
     }
@@ -43,7 +43,7 @@
         font-size: 1em;
         background: transparent !important;
         border: none;
-        // TODO: semantic role TBD - rec border, more in the same file
+        // TODO(design): semantic role TBD - rec border, more in the same file
         border-bottom: 1px solid brightenLive('--color-dark', 45);
         border-radius: 0;
         outline: none;
@@ -101,7 +101,7 @@
     novo-nav {
       max-height: 140px;
       overflow: auto;
-      // TODO: semantic role TBD - rec border
+      // TODO(design): semantic role TBD - rec border
       border-bottom: 1px solid #ccc;
       > novo-tab {
         height: 30px;

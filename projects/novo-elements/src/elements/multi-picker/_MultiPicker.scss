@@ -9,7 +9,7 @@
   ul.summary {
     display: inline;
     list-style: none;
-    // TODO: semantic role TBD - rec font-secondary
+    // TODO(token): semantic role TBD - rec font-secondary
     color: darken(#d2d2d2, 30%);
     padding: 0 10px 0;
 
@@ -49,7 +49,7 @@
       }
       &.checked {
         label {
-          // TODO(theme): #d2d2d2 has no design token yet; register it, then migrate to darkenLive('--color-...', 60)
+          // TODO(token): #d2d2d2 has no design token yet; register it, then migrate to darkenLive('--color-...', 60)
           color: darken(#d2d2d2, 60%);
         }
       }

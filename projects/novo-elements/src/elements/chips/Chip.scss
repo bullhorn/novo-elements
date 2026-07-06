@@ -139,12 +139,12 @@ $chip-spacing: (
   }
 
   .novo-chip-remove {
-    // TODO: semantic role TBD - rec font-color-base
+    // TODO(design): semantic role TBD - rec font-color-base
     color: var(--color-light);
   }
   &:not(.novo-chip-disabled) {
     .novo-chip-remove:hover {
-      // TODO: semantic role TBD - rec disabled or a shade
+      // TODO(token): semantic role TBD - rec disabled or a shade
       color: darkenLive('--color-light', 30);
     }
   }

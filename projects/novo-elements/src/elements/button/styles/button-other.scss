@@ -50,7 +50,7 @@
       outline: none;
     }
     &:hover {
-      // TODO: semantic role TBD - rec border
+      // TODO(design): semantic role TBD - rec border
       border-bottom: 1px solid brightenLive('--color-dark', 15);
       i {
         opacity: 0.75;

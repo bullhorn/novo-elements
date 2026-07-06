@@ -10,8 +10,8 @@
 
   &[type="button-bar"] {
     display: inline-flex;
-    // TODO: semantic role TBD - could be border-radius or border-radius-small
-    border-radius: 3px;
+    // TODO(token): --border-radius-small not yet in novo-design-tokens (fallback 3px)
+    border-radius: var(--border-radius-small, 3px);
     border: 2px solid #fff;
   }
 

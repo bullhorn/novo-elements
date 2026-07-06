@@ -53,8 +53,8 @@ $switch-thumb-size: 20px !default;
     width: $switch-width - 2px;
     top: calc($switch-height / 2) - calc($switch-bar-height / 2);
     height: $switch-bar-height;
-    // TODO: semantic role TBD - could be border-radius or border-radius-small
-    border-radius: 8px;
+    // TODO(token): --border-radius-lg not yet in novo-design-tokens (fallback 8px)
+    border-radius: var(--border-radius-lg, 8px);
     position: absolute;
   }
   .novo-switch-thumb-container {
@@ -130,7 +130,7 @@ $switch-thumb-size: 20px !default;
   }
 
   .novo-switch-thumb {
-    // TODO: semantic role TBD - rec background-bright
+    // TODO(design): semantic role TBD - rec background-bright
     background-color: $light;
   }
   .novo-switch-bar {

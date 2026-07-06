@@ -58,8 +58,8 @@ tbody tr:nth-child(even) button:hover {
 }
 
 ::-webkit-scrollbar-thumb {
-  // TODO: semantic role TBD - could be border-radius or border-radius-small
-  border-radius: 6px;
+  // TODO(token): --border-radius-lg not yet in novo-design-tokens (fallback 6px)
+  border-radius: var(--border-radius-lg, 6px);
   border: 2px solid var(--background-main);
 }
 
@@ -83,8 +83,8 @@ details {
   background-color: var(--background-bright);
   padding: 10px 10px 0;
   margin: 1em 0;
-  // TODO: semantic role TBD - could be border-radius or border-radius-small
-  border-radius: 6px;
+  // TODO(token): --border-radius-lg not yet in novo-design-tokens (fallback 6px)
+  border-radius: var(--border-radius-lg, 6px);
   overflow: hidden;
 }
 
@@ -126,8 +126,8 @@ dialog {
   background-color: var(--background-bright);
   color: var(--text-main);
   border: none;
-  // TODO: semantic role TBD - could be border-radius or border-radius-small
-  border-radius: 6px;
+  // TODO(token): --border-radius-lg not yet in novo-design-tokens (fallback 6px)
+  border-radius: var(--border-radius-lg, 6px);
   border-color: var(--border);
   padding: 10px 30px;
 }

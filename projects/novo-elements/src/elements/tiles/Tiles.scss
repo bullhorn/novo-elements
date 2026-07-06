@@ -12,8 +12,8 @@
     background: var(--background-bright);
     display: flex;
     border: solid thin var(--color-slate);
-    // TODO: semantic role TBD - could be border-radius or border-radius-small
-    border-radius: 3px;
+    // TODO(token): --border-radius-small not yet in novo-design-tokens (fallback 3px)
+    border-radius: var(--border-radius-small, 3px);
     .tile {
       margin: 2px;
       gap: .5rem;

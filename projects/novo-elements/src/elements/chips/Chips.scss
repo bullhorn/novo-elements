@@ -21,7 +21,7 @@
     margin-bottom: 20px;
   }
   &:hover {
-    // TODO: semantic role TBD - rec border, same elsewhere in this file
+    // TODO(design): semantic role TBD - rec border, same elsewhere in this file
     border-bottom: 1px solid brightenLive('--color-dark', 15);
   }
   &.selected,

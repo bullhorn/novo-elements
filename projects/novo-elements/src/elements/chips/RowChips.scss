@@ -24,7 +24,7 @@
       align-items: center;
       background: transparent !important;
       border: none;
-      // TODO: semantic role TBD - rec border-solid?
+      // TODO(design): semantic role TBD - rec border-solid?
       border-bottom: 1px dashed brightenLive('--color-dark', 30);
       border-radius: 0;
       outline: none;
@@ -71,7 +71,7 @@
   }
   .novo-row-chips-empty-message {
     font-style: italic;
-    // TODO: semantic role TBD - rec font-secondary
+    // TODO(token): semantic role TBD - rec font-secondary
     color: $grey;
   }
   i {
