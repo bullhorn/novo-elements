@@ -4,6 +4,7 @@
   // Primary theme
   &[theme="primary"] {
     @include theme-backgrounds("color");
+
     background: $positive;
     color: #fff;
     text-align: left;
@@ -13,6 +14,7 @@
       box-shadow: $shadow-2, $shadow-1;
       filter: brightness(1.15);
     }
+
     &:active {
       filter: brightness(0.85);
       box-shadow: $shadow-1;
@@ -21,17 +23,21 @@
     &[color="white"] {
       background: $white;
       color: $ocean;
+
       &:hover,
       &:focus {
         background: $background;
       }
+
       &:active {
         background: darken($background, 5%);
       }
+
       i {
-        background: rgba(0, 0, 0, 0.05);
+        background: rgb(0 0 0 / 5%);
       }
     }
+
     &[size="large"] {
       i {
         margin-left: 3px;

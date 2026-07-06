@@ -4,6 +4,7 @@
   position: relative;
   display: block;
   width: 100%;
+
   &.condition-host {
     padding: var(--spacing-md);
     margin-bottom: 1rem;
@@ -22,16 +23,19 @@
       }
     }
   }
+
   .condition-input {
     &::ng-deep {
       // Full Width
       novo-field.novo-field-layout-vertical {
         grid-template-columns: minmax(fit-content, 1fr);
         width: -webkit-fill-available;
+
         .novo-input-element {
           width: 100%;
         }
       }
+
       novo-field {
         width: fit-content;
 
@@ -40,32 +44,40 @@
           min-width: 100px;
           max-width: 100px;
           margin-right: 1rem;
+
           novo-select {
             min-width: 70px;
           }
         }
       }
+
       novo-field.address-location {
         .novo-field-suffix {
           align-self: flex-end;
         }
       }
+
       .novo-field-infix {
         white-space: nowrap;
         overflow: hidden;
       }
+
       novo-chip-list {
         flex-grow: 1;
+
         novo-chip {
           max-width: min(33rem, 100% - 9px);
         }
       }
+
       novo-chips {
         border-bottom: none !important;
+
         input {
           padding-left: 0 !important;
         }
       }
+
       novo-radio-group {
         padding: 0 !important;
       }

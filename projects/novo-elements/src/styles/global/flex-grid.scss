@@ -63,7 +63,9 @@ $fg-breakpoints: ((xs), (sm, 768px), (md, 992px), (lg, 1200px)) !default;
   @if $orientation == vertical {
     #{ $type }-top: $value;
     #{ $type }-bottom: $value;
-  } @else {
+  }
+
+ @else {
     #{ $type }-left: $value;
     #{ $type }-right: $value;
   }
@@ -75,8 +77,8 @@ $fg-breakpoints: ((xs), (sm, 768px), (md, 992px), (lg, 1200px)) !default;
 .#{ $fg-class-row } {
   box-sizing: border-box;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-flow: row wrap;
+
   @include spacing((-$fg-gutter), margin, horizontal);
 }
 
@@ -86,11 +88,13 @@ $fg-breakpoints: ((xs), (sm, 768px), (md, 992px), (lg, 1200px)) !default;
   flex-direction: column;
   flex-grow: 0;
   flex-shrink: 0;
+
   @include spacing(($fg-gutter), padding, horizontal);
 }
 
 %#{ $fg-class-col }-flex {
   @extend %#{ $fg-class-col };
+
   flex-grow: 1;
   flex-basis: 0;
   max-width: 100%;
@@ -107,6 +111,7 @@ $fg-breakpoints: ((xs), (sm, 768px), (md, 992px), (lg, 1200px)) !default;
   .#{ $fg-class-col }-#{$namespace} {
     @extend %#{ $fg-class-col }-flex;
   }
+
   @for $i from 1 through $fg-columns {
     .#{ $fg-class-col }-#{$namespace}-#{$i} {
       @extend %#{ $fg-class-col };
@@ -122,6 +127,7 @@ $fg-breakpoints: ((xs), (sm, 768px), (md, 992px), (lg, 1200px)) !default;
       max-width: get-col-percent($i);
     }
   }
+
   @for $i from 1 through $fg-columns {
     // Don't include the .off class for the last column
     @if ($i != $fg-columns) {
@@ -139,16 +145,21 @@ $fg-breakpoints: ((xs), (sm, 768px), (md, 992px), (lg, 1200px)) !default;
  */
 @each $val in $fg-breakpoints {
   $namespace: nth($val, 1);
+
   @include grid-base($namespace);
 }
 
 @each $val in $fg-breakpoints {
   @if length($val) == 1 {
     $namespace: nth($val, 1);
+
     @include grid-sizes($namespace);
-  } @else {
+  }
+
+ @else {
     $namespace: nth($val, 1);
     $size: nth($val, 2);
+
     @media only screen and (min-width: #{$size}) {
       @include grid-sizes($namespace);
     }

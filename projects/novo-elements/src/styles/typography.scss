@@ -88,7 +88,7 @@ address {
 mark {
   background-color: var(--highlight);
   border-radius: 2px;
-  padding: 0 2px 0 2px;
+  padding: 0 2px;
   color: #000;
 }
 
@@ -116,9 +116,11 @@ h6.novo-section-header {
   padding: 1rem 0.5rem 1rem 1.5rem;
   margin-left: -1.5rem;
   margin-right: -1.5rem;
+
   > i {
     display: flex;
     margin-right: 10px;
+
     &.bhi-section {
       // Special case for icons that are not vertically centered
       margin-top: -0.2rem;
@@ -136,6 +138,7 @@ h6,
 p,
 span {
   @include base-text-rules();
+
   vertical-align: baseline;
 }
 

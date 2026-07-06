@@ -45,11 +45,13 @@
       }
     }
   }
+
   &:hover {
     &::ng-deep {
       novo-avatar {
-        margin-left: 0px;
+        margin-left: 0;
         margin-right: 1px;
+
         &:nth-child(n + 6) {
           display: unset;
           opacity: 1;

@@ -4,9 +4,11 @@
   padding: var(--spacing-md);
   cursor: pointer;
   transition: all 120ms ease-in-out;
+
   &.disabled {
     opacity: 0.5;
     cursor: not-allowed;
+
     &:hover {
       opacity: 0.5;
     }
@@ -16,17 +18,21 @@
 // inside color
 :host-context(novo-nav[theme="neutral"]),
 :host-context(novo-nav[theme="color"]) {
-  color: rgba(255, 255, 255, 0.75);
+  color: rgb(255 255 255 / 75%);
+
   &.active {
     color: #fff;
-    background: rgba(0, 0, 0, 0.2);
+    background: rgb(0 0 0 / 20%);
   }
+
   &:hover {
-    background: rgba(0, 0, 0, 0.1);
+    background: rgb(0 0 0 / 10%);
   }
+
   &.disabled {
     opacity: 0.5;
     cursor: not-allowed;
+
     &:hover {
       opacity: 0.5;
     }
@@ -36,17 +42,21 @@
 :host-context(novo-nav[theme="white"]) {
   color: var(--color-text);
   opacity: 0.75;
+
   &.active {
     color: var(--color-selection);
-    background: rgba(0, 0, 0, 0.05);
+    background: rgb(0 0 0 / 5%);
     opacity: 1;
   }
+
   &:hover {
     opacity: 1;
   }
+
   &.disabled {
     opacity: 0.5;
     cursor: not-allowed;
+
     &:hover {
       opacity: 0.5;
     }

@@ -2,6 +2,7 @@
 
 :host {
   display: block;
+
   &:not(.condensed) {
     padding: $spacing-md $spacing-md;
   }

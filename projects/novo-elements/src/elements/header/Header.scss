@@ -18,9 +18,11 @@
   &.header-size-small > section {
     height: 3.2rem;
   }
+
   &.header-size-default > section {
     height: 5rem;
   }
+
   &.header-size-large > section {
     height: 6.4rem;
   }
@@ -37,6 +39,7 @@
     .header-icon {
       font-size: var(--font-size-2xl);
     }
+
     div.header-title {
       display: flex;
       align-items: center;
@@ -46,6 +49,7 @@
       // prevent pushing other flex content
       min-width: 0;
       flex-shrink: 1;
+
       .novo-title {
         overflow: hidden;
       }
@@ -54,17 +58,21 @@
         margin-right: 1rem;
       }
     }
+
     .header-titles {
       display: flex;
       flex-direction: column;
       max-width: 100%;
+
       .novo-title {
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
       }
+
       h1 {
         @include novo-title-text();
+
         margin: 0;
         padding: 0;
         display: inline-block;
@@ -74,10 +82,12 @@
         padding-right: 20px;
       }
     }
+
     > ::ng-deep section {
       flex: 2 2 250px;
       min-width: 100px;
     }
+
     ::ng-deep utils,
     ::ng-deep novo-utils {
       display: flex;
@@ -99,6 +109,7 @@
           color: $color;
         }
       }
+
       & > section:first-of-type {
         border-bottom: 2px solid $color;
       }
@@ -109,11 +120,13 @@
         color: $contrast;
         border-bottom: none;
       }
+
       ::ng-deep .novo-title {
         color: inherit;
         overflow: hidden;
         padding-right: 0.5rem;
       }
+
       ::ng-deep .novo-action {
         button,
         .novo-button {
@@ -126,20 +139,25 @@
   & > main {
     padding: 4px 16px 4px 32px;
   }
+
   & > ::ng-deep novo-nav {
     padding-left: 16px;
+
     &.block {
       padding-left: 0;
     }
   }
+
   &.condensed {
     .header-title,
     .header-titles {
       line-height: 1.375;
     }
+
     > section {
       height: 3.6rem;
     }
+
     ::ng-deep .novo-icon {
       margin-right: 0.5rem !important;
       font-size: 1.8rem;

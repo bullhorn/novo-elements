@@ -2,9 +2,7 @@
 
 :host {
   display: grid;
-  grid-template-areas: "icon input";
-  grid-template-columns: 3.2rem 1fr;
-  grid-template-rows: 1fr;
+  grid-template: "icon input" 1fr / 3.2rem 1fr;
   align-items: center;
   height: 3.2rem;
   background: $white;
@@ -77,10 +75,12 @@ header {
       background: rgba($white, 0.25) !important;
       color: rgba($positive, 0.25) !important;
     }
+
     input {
       background-color: rgba($white, 0.25) !important;
       border-color: rgba($white, 0.25) !important;
       color: rgba($positive, 0.25) !important;
+
       &::placeholder {
         color: $empty !important;
       }

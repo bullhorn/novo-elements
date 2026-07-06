@@ -16,14 +16,17 @@ $novo-select-search-toggle-all-checkbox-x: 16px;
 .novo-select-search-hidden {
   visibility: hidden;
 }
+
 .novo-select-search-inner {
   width: 100%;
   background-color: var(--background-bright);
+
   /* Prevent iOS scroll issue */
   -webkit-transform: translate3d(0, 0, 0);
 
   &.novo-select-search-inner-multiple {
     width: 100%;
+
     &.novo-select-search-inner-toggle-all {
       display: flex;
       align-items: center;
@@ -48,14 +51,16 @@ $novo-select-search-toggle-all-checkbox-x: 16px;
 /** override styling when inside a novo-option */
 :host.novo-select-search-inside-novo-option {
   .novo-select-search-input {
-    padding-top: 0px;
-    padding-bottom: 0px;
+    padding-top: 0;
+    padding-bottom: 0;
     height: $novo-option-height;
     line-height: $novo-option-height;
   }
+
   .novo-select-search-clear {
     top: 6px;
   }
+
   .novo-select-search-icon-prefix {
     left: $clear-button-width - $novo-select-search-clear-x;
     top: 7px;
@@ -68,9 +73,10 @@ $novo-select-search-toggle-all-checkbox-x: 16px;
   border: none;
 
   .novo-icon {
-    margin-right: 0px;
-    margin-left: 0px;
+    margin-right: 0;
+    margin-left: 0;
   }
+
   .novo-option-pseudo-checkbox {
     display: none;
   }
@@ -81,7 +87,7 @@ $novo-select-search-toggle-all-checkbox-x: 16px;
   padding-bottom: 2px;
 
   :host-context([dir="rtl"]) & {
-    padding-left: 0px;
+    padding-left: 0;
     padding-right: $novo-select-search-toggle-all-checkbox-x;
   }
 }

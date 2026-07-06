@@ -12,8 +12,9 @@
         align-items: start;
         margin-top: 0.9rem;
       }
+
       &.novo-field-no-label {
-        grid-template-columns: 0px minmax(300px, 600px);
+        grid-template-columns: 0 minmax(300px, 600px);
         gap: 0;
       }
 
@@ -23,11 +24,13 @@
             background: rgba($positive, 0.15);
           }
         }
+
         &.novo-focused {
           .novo-field-label {
             color: $positive !important;
           }
         }
+
         &.novo-field-invalid {
           .novo-field-label {
             color: $negative !important;

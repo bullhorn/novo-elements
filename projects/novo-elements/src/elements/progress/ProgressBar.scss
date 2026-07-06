@@ -7,11 +7,13 @@
 
   &.linear {
     @include theme-backgrounds("color");
+
     background-color: $positive;
 
     &:first-child {
       border-radius: 0.2em 0 0 0.2em;
     }
+
     &:last-child {
       border-radius: 0 0.2em 0.2em 0;
     }
@@ -19,11 +21,11 @@
     &.striped {
       background-image: linear-gradient(
         45deg,
-        rgba(255, 255, 255, 0.15) 25%,
+        rgb(255 255 255 / 15%) 25%,
         transparent 25%,
         transparent 50%,
-        rgba(255, 255, 255, 0.15) 50%,
-        rgba(255, 255, 255, 0.15) 75%,
+        rgb(255 255 255 / 15%) 50%,
+        rgb(255 255 255 / 15%) 75%,
         transparent 75%,
         transparent
       );
@@ -55,6 +57,7 @@
         }
       }
     }
+
     position: absolute;
 
     svg {
@@ -80,14 +83,17 @@
   from {
     background-position: 0 0;
   }
+
   to {
     background-position: 40px 0;
   }
 }
+
 @keyframes progress-bar-stripes {
   from {
     background-position: 0 0;
   }
+
   to {
     background-position: 40px 0;
   }
@@ -99,6 +105,7 @@
   60% { transform: translateX(0%) }
   100% { transform: translateX(0%) }
 }
+
 @keyframes progress-bar-flash {
   0% { transform: translateX(calc(-50% - 100px)) }
   30% { transform: translateX(calc(-50% - 100px)) }

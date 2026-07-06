@@ -29,15 +29,17 @@
       border-bottom: 1px solid var(--selection);
     }
   }
+
   > i.bhi-clock,
   > i.bhi-search,
   > i.bhi-times,
   > i.bhi-calendar {
     position: absolute;
     right: 0;
-    top: 0px;
+    top: 0;
     font-size: 1.2rem;
   }
+
   > i.bhi-times {
     cursor: pointer;
   }

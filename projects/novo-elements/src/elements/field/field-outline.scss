@@ -20,9 +20,11 @@
     &:not(.novo-focused):hover {
       border: 1px solid $dark !important;
     }
+
     &.novo-focused {
       border: 1px solid $positive !important;
     }
+
     &.novo-field-invalid {
       border: 1px solid $negative !important;
     }

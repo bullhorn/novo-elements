@@ -43,7 +43,9 @@ $chip-spacing: (
   // Chips could be set on buttons so we need to reset the user agent styles.
   -webkit-appearance: none;
   -moz-appearance: none;
+
   @include novo-body-text();
+
   background: var(--background-main);
   border: 1px solid transparent;
   transition: all 200ms ease-in-out;
@@ -61,10 +63,7 @@ $chip-spacing: (
     color: var(--selection);
     // Overlay used to darken the chip on hover and focus.
     &::after {
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      inset: 0;
       position: absolute;
       border-radius: inherit;
       opacity: 0;
@@ -92,6 +91,7 @@ $chip-spacing: (
     color: var(--text-main);
     opacity: 0.7;
     pointer-events: none;
+
     &::after {
       opacity: 0;
     }
@@ -102,7 +102,7 @@ $chip-spacing: (
     }
   }
 
-  .novo-chip-avatar::not(novo-icon) {
+  .novo-chip-avatar:not(novo-icon) {
     width: $novo-chip-avatar-size;
     height: $novo-chip-avatar-size;
   }
@@ -141,6 +141,7 @@ $chip-spacing: (
   .novo-chip-remove {
     color: $light;
   }
+
   &:not(.novo-chip-disabled) {
     .novo-chip-remove:hover {
       color: darken($light, 30%);
@@ -161,9 +162,11 @@ $chip-spacing: (
       &.novo-chip-with-avatar {
         padding-left: calc($spacing / 2);
       }
+
       &.novo-chip-with-trailing-icon {
         padding-right: calc($spacing / 2);
       }
+
       .novo-text {
         font-size: inherit;
       }
@@ -174,6 +177,7 @@ $chip-spacing: (
     &.novo-color-#{$name} {
       color: getContrastColor($name);
       background: $color;
+
       & > * {
         color: inherit;
       }

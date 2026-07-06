@@ -3,5 +3,6 @@
 
 :host {
   display: inline-block;
+
   @include novo-label-text();
 }

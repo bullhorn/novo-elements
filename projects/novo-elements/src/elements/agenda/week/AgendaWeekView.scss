@@ -52,16 +52,18 @@
             min-height: 4px;
             width: 100%;
           }
+
           .cal-event-title {
-            padding: 0px 0px 0px 10px;
+            padding: 0 0 0 10px;
             line-height: 26px;
             overflow: hidden;
             text-overflow: ellipsis;
           }
+
           .cal-event-description {
             font-size: 10px;
             line-height: 13px;
-            padding: 0px 0px 0px 10px;
+            padding: 0 0 0 10px;
             overflow: hidden;
             text-overflow: ellipsis;
           }

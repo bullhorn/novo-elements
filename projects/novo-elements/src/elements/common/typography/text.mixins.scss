@@ -12,12 +12,15 @@
   &.text-capitalize {
     text-transform: capitalize;
   }
+
   &.text-uppercase {
     text-transform: uppercase;
   }
+
   &.text-nowrap {
     white-space: nowrap;
   }
+
   &.text-ellipsis {
     white-space: nowrap;
     overflow: hidden;
@@ -36,33 +39,43 @@
   &.text-size-default {
     font-size: inherit;
   }
+
   &.text-size-body {
     font-size: $font-size-body;
   }
+
   &.text-size-xs {
     font-size: $font-size-xs;
   }
+
   &.text-size-sm {
     font-size: $font-size-sm;
   }
+
   &.text-size-md {
     font-size: $font-size-md;
   }
+
   &.text-size-lg {
     font-size: $font-size-lg;
   }
+
   &.text-size-xl {
     font-size: $font-size-xl;
   }
+
   &.text-size-2xl {
     font-size: $font-size-2xl;
   }
+
   &.text-size-3xl {
     font-size: $font-size-3xl;
   }
+
   &.text-size-smaller {
     font-size: 0.8em;
   }
+
   &.text-size-larger {
     font-size: 1.2em;
   }
@@ -73,33 +86,43 @@
   &.text-weight-hairline {
     font-weight: 100;
   }
+
   &.text-weight-thin {
     font-weight: 200;
   }
+
   &.text-weight-light {
     font-weight: 300;
   }
+
   &.text-weight-normal {
     font-weight: 400;
   }
+
   &.text-weight-medium {
     font-weight: 500;
   }
+
   &.text-weight-semibold {
     font-weight: 600;
   }
+
   &.text-weight-bold {
     font-weight: 700;
   }
+
   &.text-weight-extrabold {
     font-weight: 800;
   }
+
   &.text-weight-heavy {
     font-weight: 900;
   }
+
   &.text-weight-lighter {
     font-weight: lighter;
   }
+
   &.text-weight-bolder {
     font-weight: bolder;
   }
@@ -109,9 +132,11 @@
   &.text-length-small {
     max-width: 40ch;
   }
+
   &.text-length-medium {
     max-width: 55ch;
   }
+
   &.text-length-large {
     max-width: 70ch;
   }
@@ -140,6 +165,7 @@
   font-weight: normal;
   color: inherit;
   font-size: var(--font-size-text);
+
   @include base-text-rules();
 }
 
@@ -150,6 +176,7 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   font-size: var(--font-size-title);
+
   @include base-text-rules();
 }
 
@@ -161,6 +188,7 @@
   line-height: 1.375;
   color: var(--text-muted);
   font-size: var(--font-size-label);
+
   @include base-text-rules();
 }
 
@@ -169,5 +197,6 @@
   font-weight: 400;
   line-height: 1.375;
   color: var(--text-muted);
+
   @include base-text-rules();
 }

@@ -3,5 +3,6 @@
 
 :host {
   display: block;
+
   @include novo-title-text();
 }

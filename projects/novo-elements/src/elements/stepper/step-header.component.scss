@@ -32,7 +32,7 @@ $novo-step-header-icon-size: 1em !default;
       font-size: $novo-step-header-icon-size;
       min-width: 1.6em;
       height: 1.6em;
-      box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+      box-shadow: 2px 2px 0 rgb(0 0 0 / 20%);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -46,6 +46,7 @@ $novo-step-header-icon-size: 1em !default;
       color: $white;
     }
   }
+
   .novo-step-icon-not-touched {
     .novo-step-number {
       background: $submission;
@@ -61,7 +62,7 @@ $novo-step-header-icon-size: 1em !default;
     min-width: $novo-stepper-label-min-width;
     vertical-align: middle;
     text-align: center;
-    padding: 4px 0px;
+    padding: 4px 0;
   }
 
   .novo-step-text-label {
@@ -85,6 +86,7 @@ $novo-step-header-icon-size: 1em !default;
         margin-left: $novo-vertical-stepper-content-margin - $novo-stepper-side-gap;
       }
     }
+
     novo-step-status {
       position: absolute;
       left: 35px;
@@ -109,19 +111,21 @@ $novo-step-header-icon-size: 1em !default;
       align-items: center;
       position: absolute;
       height: 1px;
-      bottom: 0px;
+      bottom: 0;
 
       .novo-stepper-status-line {
         width: 100%;
         position: absolute;
-        &:before {
+
+        &::before {
           content: "";
           display: block;
           width: calc(50% - 8px);
           margin-right: 8px;
           border-bottom: 1px solid $light;
         }
-        &:after {
+
+        &::after {
           content: "";
           display: block;
           width: calc(50% - 8px);
@@ -129,34 +133,37 @@ $novo-step-header-icon-size: 1em !default;
           margin-top: -1px;
           border-top: 1px solid $light;
         }
+
         &.edit {
-          &:before {
+          &::before {
             border-bottom: 1px solid $positive;
           }
         }
+
         &.done {
-          &:before {
+          &::before {
             border-bottom: 1px solid $positive;
           }
-          &:after {
+
+          &::after {
             border-top: 1px solid $positive;
           }
         }
       }
+
       .novo-stepper-status-icon {
         position: relative;
-        &:before {
+
+        &::before {
           content: "";
           display: block;
           background: $white;
           border-radius: 50%;
           position: absolute;
           z-index: 0;
-          top: 1px;
-          left: 1px;
-          bottom: 1px;
-          right: 1px;
+          inset: 1px;
         }
+
         & > * {
           position: relative;
           z-index: z(default);

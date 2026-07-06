@@ -44,6 +44,7 @@
     padding: 0 $spacing-md;
     height: 2.4rem;
     gap: $spacing-sm;
+
     .button-contents,
     i {
       height: 1rem;
@@ -56,6 +57,7 @@
     padding: 0 $spacing-lg;
     height: 3.6rem;
     gap: $spacing-lg;
+
     .button-contents,
     i {
       height: 1.6rem;
@@ -83,18 +85,21 @@
     opacity: 0.5;
     cursor: not-allowed;
     pointer-events: none;
+
     i.loading {
       display: flex;
       align-items: center;
       justify-content: center;
       animation: rotate 1200ms linear infinite;
+
       svg {
         width: 100%;
         height: 100%;
         max-width: 15px;
         max-height: 15px;
+
         .spinner {
-          fill: currentColor;
+          fill: currentcolor;
         }
       }
     }
@@ -105,6 +110,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

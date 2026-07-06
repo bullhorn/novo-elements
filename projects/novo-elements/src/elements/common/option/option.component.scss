@@ -5,6 +5,7 @@ $novo-menu-side-padding: 0.5rem;
 
 .novo-option {
   @include novo-body-text();
+
   position: relative;
   cursor: pointer;
   outline: none;
@@ -36,6 +37,7 @@ $novo-menu-side-padding: 0.5rem;
   &[aria-disabled="true"] {
     cursor: not-allowed;
     color: $disabled;
+
     &:hover {
       background: rgba($negative, 10%);
     }
@@ -57,10 +59,12 @@ $novo-menu-side-padding: 0.5rem;
     &.novo-fill-#{$name}:not(.novo-option-inert) {
       color: getContrastColor($name);
       background: $color;
+
       &:hover,
       &:focus {
         background: getTintColor($name);
       }
+
       &:active {
         background: getShadeColor($name);
       }
@@ -81,6 +85,7 @@ $novo-menu-side-padding: 0.5rem;
 
 .novo-option-pseudo-checkbox {
   $margin: calc($novo-menu-side-padding / 2);
+
   margin-right: $margin;
 
   [dir="rtl"] & {

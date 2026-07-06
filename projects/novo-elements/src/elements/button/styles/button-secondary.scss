@@ -15,31 +15,38 @@
 
     i.loading {
       margin-left: 0.8rem;
+
       svg {
         .spinner {
           fill: $positive;
         }
       }
     }
+
     &:hover,
     &:focus {
       box-shadow: $shadow-2, $shadow-1;
       background: $white;
     }
+
     &:active {
       box-shadow: $shadow-1;
     }
+
     &[inverse] {
-      background: rgba(0, 0, 0, 0.25);
+      background: rgb(0 0 0 / 25%);
       color: #fff;
       border: 1px solid #fff;
+
       &:hover,
       &:focus {
-        background: rgba(0, 0, 0, 0.35);
+        background: rgb(0 0 0 / 35%);
       }
+
       &:active {
-        background: rgba(0, 0, 0, 0.45);
+        background: rgb(0 0 0 / 45%);
       }
+
       i.loading {
         svg {
           .spinner {

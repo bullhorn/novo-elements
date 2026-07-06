@@ -35,7 +35,7 @@ label {
   display: inline-block;
 }
 
-input:not([type="checkbox"]):not([type="radio"]),
+input:not([type="checkbox"], [type="radio"]),
 input[type="range"],
 select,
 button,

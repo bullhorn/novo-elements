@@ -6,23 +6,29 @@
   overflow: hidden;
   border-radius: 4px;
   background-color: var(--background-bright);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15), 0 2px 7px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 15%), 0 2px 7px rgb(0 0 0 / 10%);
   z-index: z(overlay);
+
   .digital {
     background-color: var(--selection);
     display: flex;
     justify-content: center;
+
     &.inline {
       background: $white;
       border-bottom: 1px solid #f0f0f0;
+
       &.military {
         border-bottom: none;
       }
+
       .digital--inner {
         flex: 1;
+
         .control-block {
           display: flex;
           flex: 1;
+
           .digital--period {
             color: var(--selection);
             cursor: pointer;
@@ -30,6 +36,7 @@
             opacity: 0.6;
             padding: 1rem;
             flex: 1;
+
             &.active {
               opacity: 1;
               background-color: var(--selection);
@@ -40,20 +47,24 @@
       }
     }
   }
+
   .digital--inner {
     display: flex;
     text-align: center;
     align-items: center;
     justify-content: center;
   }
+
   .digital--clock {
     color: #fff;
     font-size: 1.8em;
     font-weight: 500;
   }
+
   .control-block {
     display: inline-block;
   }
+
   .digital--period {
     display: block;
     color: #fff;
@@ -62,6 +73,7 @@
     opacity: 0.6;
     text-transform: uppercase;
     font-weight: 400;
+
     &.active {
       opacity: 1;
       font-weight: 600;
@@ -76,8 +88,7 @@
     flex-flow: row nowrap;
 
     novo-list {
-      overflow-y: auto;
-      overflow-x: hidden;
+      overflow: hidden auto;
       height: 100%;
       flex: 1;
       scroll-snap-type: y mandatory;
@@ -98,12 +109,14 @@
       ::ng-deep .list-item {
         line-height: 19px;
       }
+
       &:focus,
       &:hover {
         background: var(--selection);
         color: var(--text-selection);
         filter: brightness(1.25);
       }
+
       &.active {
         background: var(--selection);
         color: var(--text-selection);
@@ -120,23 +133,20 @@
     position: relative;
     margin: 10% auto;
   }
+
   .analog--inner {
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
     width: 100%;
     position: absolute;
     transition: transform 125ms linear;
   }
+
   .analog--face {
-    top: 5px;
-    right: 5px;
-    left: 5px;
-    bottom: 5px;
+    inset: 5px;
     position: absolute;
     border-radius: 50%;
   }
+
   .analog--hand--hours {
     width: 240px;
     height: 240px;
@@ -147,7 +157,8 @@
     transform: rotate(0deg);
     transition: transform 100ms linear;
     z-index: 1;
-    &:before {
+
+    &::before {
       content: " ";
       width: 2px;
       top: 0;
@@ -159,6 +170,7 @@
       position: absolute;
       transform: rotate(90deg);
     }
+
     .analog--ball {
       height: 3rem;
       width: 3rem;
@@ -171,43 +183,56 @@
       border: 3px solid var(--selection);
       background: var(--selection);
     }
+
     &.hour-12 {
       transform: rotate(-90deg);
     }
+
     &.hour-1 {
       transform: rotate(-60deg);
     }
+
     &.hour-2 {
       transform: rotate(-30deg);
     }
+
     &.hour-3 {
       transform: rotate(0);
     }
+
     &.hour-4 {
       transform: rotate(30deg);
     }
+
     &.hour-5 {
       transform: rotate(60deg);
     }
+
     &.hour-6 {
       transform: rotate(90deg);
     }
+
     &.hour-7 {
       transform: rotate(120deg);
     }
+
     &.hour-8 {
       transform: rotate(150deg);
     }
+
     &.hour-9 {
       transform: rotate(180deg);
     }
+
     &.hour-10 {
       transform: rotate(210deg);
     }
+
     &.hour-11 {
       transform: rotate(240deg);
     }
   }
+
   .analog--hand--minutes {
     width: 200px;
     height: 200px;
@@ -219,7 +244,8 @@
     transform: rotate(0deg);
     transition: transform 100ms linear;
     z-index: 1;
-    &:before {
+
+    &::before {
       left: 23%;
       margin: 33%;
       content: " ";
@@ -231,6 +257,7 @@
       position: absolute;
       transform: rotate(90deg);
     }
+
     .analog--ball {
       display: block;
       top: 50%;
@@ -243,21 +270,25 @@
       border: 2px solid var(--selection);
       background: var(--selection);
       transition: all 160ms ease-in-out;
+
       &.between {
         height: 1px;
         border-radius: 2em;
         margin-top: 0;
       }
     }
+
     &.min-00 {
       transform: rotate(-90deg);
     }
+
     @for $i from 1 through 9 {
       $deg: ($i * (calc(30 / 5)) - 90);
       &.min-0#{$i} {
         transform: rotate(#{$deg}deg);
       }
     }
+
     @for $i from 10 through 59 {
       $deg: ($i * (calc(30 / 5)) - 90);
       &.min-#{$i} {
@@ -265,6 +296,7 @@
       }
     }
   }
+
   .analog--center {
     height: 12rem;
     width: 12rem;
@@ -279,10 +311,11 @@
     position: absolute;
     background-color: $background;
   }
+
   .analog--hour,
   .analog--minute {
     font-size: 1.6rem;
-    color: #666666;
+    color: #666;
     left: 50%;
     top: 50%;
     z-index: 3;
@@ -294,15 +327,18 @@
     margin-left: -20px;
     margin-top: -20px;
     position: absolute;
+
     &.active {
       color: #fff;
     }
   }
+
   .analog--minute {
     font-size: 1rem;
     margin-left: -20px;
     margin-top: -16px;
   }
+
   .analog--hours,
   .analog--minutes {
     width: 250px;
@@ -310,10 +346,12 @@
     float: left;
     position: relative;
   }
+
   .analog--minutes {
     position: absolute;
   }
   $d: 4.5em;
+
   @for $i from 1 through 12 {
     $deg: ($i * 30 - 90);
     .analog--hour:nth-child(#{$i}) {
@@ -323,14 +361,17 @@
       transform: rotate(#{$deg}deg) translate($d) rotate(#{$deg * -1}deg);
     }
   }
+
   &.military {
     $md: 8rem;
+
     @for $i from 1 through 24 {
       $hour: $i - 1;
       $deg: ($i * 15 - 105);
       .analog--hour:nth-child(#{$i}) {
         transform: rotate(#{$deg}deg) translate($md) rotate(#{$deg * -1}deg);
       }
+
       .analog--hand--hours {
         top: -10px;
         left: -10px;
@@ -339,20 +380,21 @@
         }
       }
     }
+
     .analog--face {
-      top: 15px;
-      right: 15px;
-      left: 15px;
-      bottom: 15px;
+      inset: 15px;
     }
+
     .analog--hour {
       font-size: 0.9rem;
       margin-left: -2rem;
       margin-top: -1.2rem;
     }
+
     .analog--hand--minutes {
       margin: 10px;
     }
+
     .analog--hand--hours {
       .analog--ball {
         height: 2.8rem;
@@ -372,6 +414,7 @@
         width: auto;
       }
     }
+
     .save-cancel-buttons {
       background: var(--background-main);
       display: flex;

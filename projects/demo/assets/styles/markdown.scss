@@ -3,13 +3,13 @@
     box-sizing: border-box;
   }
 
-  &:after,
-  &:before {
+  &::after,
+  &::before {
     display: table;
     content: "";
   }
 
-  &:after {
+  &::after {
     clear: both;
   }
 
@@ -27,7 +27,7 @@
 
   .octicon {
     display: inline-block;
-    fill: currentColor;
+    fill: currentcolor;
     vertical-align: text-bottom;
   }
 
@@ -71,12 +71,12 @@
     visibility: visible;
   }
 
-  h1:hover .anchor .octicon-link:before,
-  h2:hover .anchor .octicon-link:before,
-  h3:hover .anchor .octicon-link:before,
-  h4:hover .anchor .octicon-link:before,
-  h5:hover .anchor .octicon-link:before,
-  h6:hover .anchor .octicon-link:before {
+  h1:hover .anchor .octicon-link::before,
+  h2:hover .anchor .octicon-link::before,
+  h3:hover .anchor .octicon-link::before,
+  h4:hover .anchor .octicon-link::before,
+  h5:hover .anchor .octicon-link::before,
+  h6:hover .anchor .octicon-link::before {
     width: 16px;
     height: 16px;
     content: " ";
@@ -163,13 +163,13 @@
     border-bottom: 1px solid #dfe2e5;
   }
 
-  hr:after,
-  hr:before {
+  hr::after,
+  hr::before {
     display: table;
     content: "";
   }
 
-  hr:after {
+  hr::after {
     clear: both;
   }
 
@@ -185,7 +185,7 @@
   kbd {
     display: inline-block;
     padding: 3px 5px;
-    font: 11px SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+    font: 11px SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
     line-height: 10px;
     color: #444d56;
     vertical-align: middle;
@@ -247,7 +247,7 @@
   kbd {
     display: inline-block;
     padding: 3px 5px;
-    font: 11px SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+    font: 11px SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
     line-height: 10px;
     color: #444d56;
     vertical-align: middle;
@@ -311,7 +311,7 @@
   }
 
   li {
-    word-wrap: break-all;
+    overflow-wrap: break-all;
     line-height: 1.375;
   }
 
@@ -366,7 +366,7 @@
   }
 
   pre {
-    word-wrap: normal;
+    overflow-wrap: normal;
   }
 
   pre > code {
@@ -405,7 +405,7 @@
     margin: 0;
     overflow: visible;
     line-height: inherit;
-    word-wrap: normal;
+    overflow-wrap: normal;
     background-color: initial;
     border: 0;
   }
@@ -424,7 +424,7 @@
   }
 
   .contains-do-list {
-    padding-left: 0rem;
+    padding-left: 0;
 
     .bullhorn-do-item {
       list-style-type: none;
@@ -432,15 +432,17 @@
       align-items: flex-start;
 
       p {
-        margin-top: 0rem;
-        margin-bottom: 0rem;
+        margin-top: 0;
+        margin-bottom: 0;
         line-height: 1.5;
       }
+
       & > p:first-child {
         display: flex;
         align-items: center;
         justify-content: flex-start;
       }
+
       & > p + p,
       & > .p + .p {
         margin-left: 2.7rem;

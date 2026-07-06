@@ -1,23 +1,23 @@
 @import "../../styles/variables";
 @import "../../styles/global/functions";
-
-@import "./_expansion-theme";
+@import "./expansion-theme";
 
 @include novo-expansion-panel-theme();
 
 .novo-expansion-panel {
   // @include novo-elevation-transition;
   @include novo-elevation(2);
+
   box-sizing: content-box;
   display: block;
-  margin: 0;
   transition: margin 225ms ease-in-out;
-  margin: 0px 16px;
+  margin: 0 16px;
 
   &.novo-expanded {
     &:first-child {
       margin-top: 0;
     }
+
     &:last-child {
       margin-bottom: 0;
     }
@@ -40,6 +40,7 @@
 
 .novo-expansion-panel-spacing {
   margin: 16px 4px;
+
   .novo-accordion &:first-child {
     margin-top: 0;
   }

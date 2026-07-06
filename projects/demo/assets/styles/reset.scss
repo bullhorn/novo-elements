@@ -2,9 +2,11 @@
 html {
   height: 100%;
   width: 100%;
+
   body {
     height: 100%;
     width: 100%;
+
     demo-app {
       height: 100%;
       width: 100%;
@@ -13,7 +15,7 @@ html {
 }
 
 *,
-*:after,
-*:before {
+*::after,
+*::before {
   box-sizing: border-box;
 }

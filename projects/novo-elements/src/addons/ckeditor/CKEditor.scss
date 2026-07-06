@@ -43,6 +43,7 @@
   ::ng-deep .cke_button {
     filter: invert(1);
   }
+
   ::ng-deep .cke_combo {
     a.cke_combo_button {
       &:hover,
@@ -52,9 +53,11 @@
         background: var(--background-main);
         border: 1px solid var(--border);
       }
+
       .cke_combo_text {
         color: white;
       }
+
       .cke_combo_arrow {
         border-top-color: white;
       }

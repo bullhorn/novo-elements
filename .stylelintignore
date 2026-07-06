@@ -1,0 +1,4 @@
+# Third-party / vendored styles — not our code to lint.
+projects/novo-elements/src/styles/global/include-media.scss
+projects/demo/assets/styles/markdown.scss
+projects/demo/assets/styles/highlight.scss

@@ -10,6 +10,7 @@
       text-align: center;
       font-weight: bolder;
       border-bottom: 2px solid #e1e1e1;
+
       .agenda-header-top {
         display: flex;
         flex-flow: row nowrap;
@@ -19,13 +20,16 @@
         .agenda-month {
           font-size: 180%;
         }
+
         .agenda-year {
           color: #999;
         }
       }
+
       .agenda-weekdays {
         display: flex;
         flex-flow: row nowrap;
+
         .agenda-weekday {
           padding: 5px 0;
           overflow: hidden;
@@ -39,6 +43,7 @@
 
     .agenda-cell-row {
       display: flex;
+
       &:hover {
         background-color: #fafafa;
       }
@@ -60,6 +65,7 @@
       align-items: center;
       justify-content: flex-end;
     }
+
     .agenda-cell:hover {
       .agenda-actions {
         display: flex;
@@ -151,7 +157,7 @@
       padding: 15px;
       color: white;
       background-color: #555;
-      box-shadow: inset 0 0 15px 0 rgba(0, 0, 0, 0.5);
+      box-shadow: inset 0 0 15px 0 rgb(0 0 0 / 50%);
     }
 
     .agenda-open-day-events .agenda-event {

@@ -15,10 +15,7 @@
 
   div.card-loading-container {
     position: absolute;
-    top: 43px;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 43px 0 0;
     border-radius: 0.4em;
     background-color: var(--background-bright, $color-white);
     display: flex;
@@ -27,22 +24,26 @@
     align-items: center;
     z-index: z("default");
   }
+
   header {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
     justify-content: space-between;
     padding: 0.5em;
+
     .title {
       display: flex;
       align-items: center;
       min-width: 0;
       flex: 1;
+
       ::ng-deep i.bhi-move {
         color: $light;
         margin-right: 0.3em;
         cursor: pointer;
       }
+
       h1,
       h2,
       h3 {
@@ -55,14 +56,17 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+
         i {
           font-size: 1.2em;
+
           &.bhi-info {
             color: $light;
           }
         }
       }
     }
+
     .actions {
       color: lighten($dark, 15%);
       white-space: nowrap;
@@ -75,6 +79,7 @@
     text-align: center;
     line-height: 25px;
     color: lighten($grey, 10%);
+
     i {
       display: block;
       font-size: 24px;
@@ -90,18 +95,21 @@
 
   &.novo-card-inline {
     display: inline-flex;
-    justify-self: start;
-    align-self: start;
+    place-self: start start;
   }
+
   &.novo-card-inset-none {
     padding: 0;
   }
+
   &.novo-card-inset-small {
     padding: $spacing-sm;
   }
+
   &.novo-card-inset-medium {
     padding: $spacing-md;
   }
+
   &.novo-card-inset-large {
     padding: $spacing-lg;
   }

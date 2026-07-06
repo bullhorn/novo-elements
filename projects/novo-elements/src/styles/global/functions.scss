@@ -4,6 +4,7 @@
 // For example see "loading" element. (BhLoading.scss)
 @mixin enumerate($map, $target, $prop, $val) {
   $keys: map-keys($map);
+
   @each $item in $keys {
     $idx: index($keys, $item);
     //@debug $idx;
@@ -25,6 +26,7 @@
 // Animation Delay Function - multiplies $base-speed by key index;
 @mixin delay($map, $base-speed) {
   $keys: map-keys($map);
+
   @each $item in $keys {
     $idx: index($keys, $item);
 
@@ -47,6 +49,7 @@
   $animation-play-state
 ) {
   $keys: map-keys($map);
+
   @each $item in $keys {
     $idx: index($keys, $item);
 
@@ -59,14 +62,7 @@
         $animation-iterate-count
         $animation-fill-mode
         $animation-play-state;
-      animation-name: $animation-name;
-      animation-duration: $animation-duration;
-      animation-timing-function: $animation-timing-function;
-      animation-delay: $delay-base-speed * $idx;
-      animation-direction: $animation-direction;
-      animation-iteration-count: $animation-iterate-count;
-      animation-fill-mode: $animation-fill-mode;
-      animation-play-state: $animation-play-state;
+      animation: $animation-name $animation-duration $animation-timing-function $delay-base-speed * $idx $animation-iterate-count $animation-direction $animation-fill-mode $animation-play-state;
     }
   }
 }
@@ -75,6 +71,7 @@
   @if type-of($zValue) != number or not unitless($zValue) {
     @error '$zValue must be a unitless number';
   }
+
   @if $zValue < 0 or $zValue > 24 {
     @error '$zValue must be between 0 and 24';
   }

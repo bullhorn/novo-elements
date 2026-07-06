@@ -4,14 +4,17 @@
   display: flex;
   flex-flow: row wrap;
   gap: 1rem;
+
   &.hasLabel {
     [class*="-group"] {
       margin-right: 15px;
     }
   }
+
   .novo-checkbox-group {
     cursor: pointer;
     position: relative;
+
     &:hover {
       &:not(.disabled) {
         label {
@@ -24,26 +27,32 @@
         }
       }
     }
+
     &.checked {
       label {
         color: var(--text-main);
+
         i {
           animation: iconEnter 160ms ease-in-out;
         }
       }
     }
+
     &.disabled {
       pointer-events: auto;
+
       label {
         cursor: not-allowed;
         opacity: 0.4;
       }
     }
+
     input[type="checkbox"] {
       appearance: none !important;
       height: 0 !important;
       border: none !important;
       position: absolute;
+
       &:focus + label {
         i {
           &.bhi-checkbox-empty,
@@ -53,6 +62,7 @@
         }
       }
     }
+
     label {
       color: darken(#d2d2d2, 30%);
       margin-left: 0;
@@ -60,14 +70,17 @@
       transition: all 200ms ease-in-out;
       display: flex;
       align-items: baseline;
+
       i {
         margin-right: 5px;
         transition: all 200ms ease-in-out;
+
         &.bhi-checkbox-empty,
         &.bhi-radio-empty,
         &.bhi-circle-o {
           color: #d2d2d2;
         }
+
         &.bhi-check {
           background: #d2d2d2;
           color: #fff;
@@ -77,11 +90,13 @@
           height: 20px;
           border-radius: 50%;
         }
+
         &.bhi-checkbox-filled,
         &.bhi-radio-filled {
           color: $color-positive;
         }
       }
+
       span {
         display: inline-block;
       }

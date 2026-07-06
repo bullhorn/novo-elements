@@ -7,6 +7,7 @@
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
+
   i.bhi-move {
     color: $grey;
     padding-right: 0.75em;
@@ -15,15 +16,18 @@
     cursor: -webkit-grab;
     cursor: grab;
   }
+
   label {
     flex: 1;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+
     span {
       margin: 0 8px;
     }
   }
+
   button {
     font-size: 1.4rem;
     width: 42px;
@@ -36,39 +40,49 @@
 novo-file-input {
   display: flex;
   flex-flow: row wrap;
+
   .files-below {
     padding-top: 10px;
   }
+
   .file-output-group {
     width: 100%;
     margin-top: 15px;
+
     .file-item {
       @include file-item-style;
+
       margin-bottom: 15px;
       position: relative;
       width: 100%;
+
       button:hover,
       button:focus,
       button.active {
         background: none;
         color: $positive;
       }
+
       &.disabled {
         box-shadow: none;
         border: 2px dashed $grey;
       }
     }
+
     &.cdk-drop-list-dragging {
       cursor: grabbing;
+
       .file-item {
         transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
       }
     }
   }
+
   .file-input-group {
     cursor: pointer;
     width: 100%;
     position: relative;
+
     input[type="file"] {
       opacity: 0;
       position: absolute;
@@ -76,16 +90,19 @@ novo-file-input {
       height: 100% !important;
       cursor: pointer;
     }
+
     &:hover,
     &.active {
       label.boxed {
         border: 2px dashed $positive;
       }
     }
+
     &.disabled {
       opacity: 0.3;
       pointer-events: none;
     }
+
     label {
       color: $grey;
       margin-left: 0;
@@ -97,25 +114,31 @@ novo-file-input {
       padding: 15px;
       cursor: pointer;
       pointer-events: none;
-      /*This for FF*/
+
+      /* This for FF */
       strong {
         color: $positive;
       }
+
       small {
         margin-top: 7px;
       }
+
       i.bhi-dropzone {
         float: left;
         margin: -17px 0.25em 0 0;
       }
+
       &.boxed {
         border: 2px dashed $grey;
       }
+
       i {
         font-size: 3em;
       }
     }
   }
+
   novo-loading {
     padding: 10px;
     transform: scale(0.8, 0.8);
@@ -135,6 +158,7 @@ novo-file-input {
 
 .cdk-drag-preview.file-item {
   cursor: grab;
+
   @include file-item-style;
 }
 

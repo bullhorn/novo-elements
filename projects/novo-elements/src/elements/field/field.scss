@@ -6,7 +6,7 @@
   position: relative;
 
   &.novo-field-layout-horizontal {
-    grid-gap: 0rem 1rem;
+    gap: 0 1rem;
     grid-template-columns: 150px minmax(min-content, max-content);
     grid-template-areas:
       "label input"
@@ -14,8 +14,10 @@
   }
 
   &.novo-field-layout-vertical {
+    // Longhand kept intentionally — clearer than the grid-template shorthand for named areas.
     grid-template-columns: minmax(min-content, 100%);
     grid-template-rows: repeat(3, minmax(min-content, max-content));
+    // stylelint-disable-next-line declaration-block-no-redundant-longhand-properties
     grid-template-areas:
       "label"
       "input"
@@ -54,11 +56,12 @@
     &::ng-deep {
       .novo-input-element {
         @include novo-body-text();
+
         border: none;
         background-image: none;
         background-color: transparent;
         box-shadow: none;
-        padding: 0.4rem 0.2rem 0rem;
+        padding: 0.4rem 0.2rem 0;
         border-bottom: none !important;
 
         &:focus {
@@ -80,6 +83,7 @@
       display: flex;
       align-items: center;
       align-self: flex-end;
+
       select,
       &::ng-deep .novo-input-element {
         width: 100%;

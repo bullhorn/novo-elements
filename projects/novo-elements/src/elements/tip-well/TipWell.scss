@@ -6,6 +6,7 @@
     display: inline-block;
     margin-bottom: $spacing-md;
   }
+
   > div {
     display: inline-block;
     border-radius: 0.25rem;
@@ -13,17 +14,21 @@
     color: var(--text-main, $dark);
     padding: $spacing-lg;
     text-align: right;
+
     > div {
       display: flex;
+
       > i {
         flex-shrink: 0;
         text-align: center;
         margin-top: 0.3rem;
         margin-right: $spacing-md;
-        color: #aaaaaa;
+        color: #aaa;
       }
+
       > p {
         @include novo-body-text();
+
         width: 100%;
         padding: 0;
         text-align: left;

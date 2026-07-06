@@ -16,7 +16,8 @@
 
   &[theme="neutral"], // temporarily added back for backwards compatibility
   &[theme="color"] {
-    background: rgba(0, 0, 0, 0.2);
+    background: rgb(0 0 0 / 20%);
+
     &[type="button-bar"] {
       border: 2px solid #fff;
     }
@@ -24,9 +25,11 @@
 
   &[theme="white"] {
     background-color: $white;
+
     &[direction="vertical"] {
       background: transparent;
     }
+
     &[type="button-bar"] {
       border: 2px solid $light;
     }

@@ -20,19 +20,23 @@ $novo-stepper-line-gap: 8px !default;
     justify-content: center;
     margin-bottom: 1em;
     background: $background;
+
     .novo-stepper-horizontal-line {
       border-bottom: $novo-stepper-line-width solid $light;
       flex: auto;
-      min-width: 0px;
+      min-width: 0;
       height: $novo-horizontal-stepper-header-height;
+
       &.complete {
         border-bottom: $novo-stepper-line-width solid $positive;
       }
     }
   }
+
   .novo-horizontal-content-container {
     overflow: hidden;
-    padding: 0 $novo-stepper-side-gap $novo-stepper-side-gap $novo-stepper-side-gap;
+    padding: 0 $novo-stepper-side-gap $novo-stepper-side-gap;
+
     .novo-horizontal-stepper-content {
       overflow: hidden;
 
@@ -51,45 +55,47 @@ $novo-stepper-line-gap: 8px !default;
       margin-left: 0;
       margin-right: $novo-vertical-stepper-content-margin;
     }
+
     .novo-vertical-stepper-content {
       overflow: hidden;
     }
   }
 
   .novo-stepper-vertical-line {
-    &:before {
+    &::before {
       content: "";
       position: absolute;
       top: $novo-stepper-line-gap - $novo-stepper-side-gap;
       bottom: $novo-stepper-line-gap - $novo-stepper-side-gap;
       left: 0;
       z-index: z(below);
-      border-left-width: $novo-stepper-line-width;
-      border-left-style: solid;
-      border-left-color: $light;
+      border-left: $novo-stepper-line-width solid $light;
 
       [dir="rtl"] & {
         left: auto;
         right: 0;
       }
     }
+
     &.edit {
-      &:before {
+      &::before {
         border-left-color: 1px solid $positive;
       }
     }
+
     &.done {
-      &:before {
+      &::before {
         border-left-color: 1px solid $positive;
       }
-      &:after {
+
+      &::after {
         border-left-color: 1px solid $positive;
       }
     }
   }
 
   .novo-vertical-content {
-    padding: 0 $novo-stepper-side-gap $novo-stepper-side-gap $novo-stepper-side-gap;
+    padding: 0 $novo-stepper-side-gap $novo-stepper-side-gap;
   }
 
   .novo-step:last-child {

@@ -12,10 +12,10 @@ body {
   font-family: var(--font-family-body);
   font-size: var(--font-size-body, 1.2rem);
   line-height: 1.2;
-  word-wrap: break-word;
+  overflow-wrap: break-word;
   color: var(--text-main);
   background: var(--background-body);
-  text-rendering: optimizeLegibility;
+  text-rendering: optimizelegibility;
 }
 
 button,

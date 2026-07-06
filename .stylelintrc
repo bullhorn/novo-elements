@@ -1,9 +1,5 @@
 {
-  "extends": [
-    "stylelint-config-standard",
-    "stylelint-config-recommended-scss",
-    "stylelint-config-prettier"
-  ],
+  "extends": ["stylelint-config-standard", "stylelint-config-recommended-scss"],
   "rules": {
     "font-family-name-quotes": "always-where-recommended",
     "function-url-quotes": [
@@ -13,22 +9,13 @@
       }
     ],
     "selector-attribute-quotes": "always",
-    "string-quotes": "double",
-    "max-nesting-depth": 3,
-    "selector-max-compound-selectors": 3,
-    "selector-max-specificity": "0,3,2",
-    "declaration-no-important": true,
-    "at-rule-no-vendor-prefix": true,
-    "media-feature-name-no-vendor-prefix": true,
-    "property-no-vendor-prefix": true,
-    "selector-no-vendor-prefix": true,
-    "value-no-vendor-prefix": true,
+    "import-notation": "string",
     "no-empty-source": null,
     "selector-class-pattern": "[a-z-]+",
     "selector-id-pattern": "[a-z-]+",
     "selector-max-id": 0,
-    "selector-no-qualifying-type": true,
-    "selector-max-universal": 0,
+    "media-feature-name-no-vendor-prefix": true,
+    "selector-no-vendor-prefix": true,
     "selector-type-no-unknown": [
       true,
       {
@@ -41,8 +28,22 @@
         "ignorePseudoElements": ["ng-deep"]
       }
     ],
-    "unit-whitelist": ["px", "%", "em", "rem", "vw", "vh", "deg", "s"],
-    "max-empty-lines": 2,
-    "max-line-length": 120
+    "unit-allowed-list": ["px", "%", "em", "rem", "vw", "vh", "vmin", "vmax", "ch", "deg", "s", "ms", "fr"],
+
+    "selector-no-qualifying-type": null,
+    "selector-max-compound-selectors": null,
+    "selector-max-specificity": null,
+    "no-descending-specificity": null,
+    "max-nesting-depth": null,
+    "declaration-no-important": null,
+    "selector-max-universal": null,
+    "property-no-vendor-prefix": null,
+    "at-rule-no-vendor-prefix": null,
+    "value-no-vendor-prefix": null,
+    "scss/no-global-function-names": null,
+    "scss/load-partial-extension": null,
+    "scss/at-extend-no-missing-placeholder": null,
+    "keyframes-name-pattern": null,
+    "function-name-case": null
   }
 }

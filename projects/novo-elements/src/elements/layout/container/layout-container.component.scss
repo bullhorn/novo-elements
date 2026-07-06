@@ -32,7 +32,6 @@ $novo-drawer-over-drawer-z-index: 4;
 
   // Hide the drawers when they're closed.
   overflow: hidden;
-
   height: 100%;
 
   // TODO(hansl): Update this with a more robust solution.
@@ -62,10 +61,7 @@ $novo-drawer-over-drawer-z-index: 4;
   display: block;
   position: absolute;
   background: #000;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  inset: 0;
 
   // Because of the new stacking context, the z-index stack is new and we can use our own
   // numbers.
@@ -118,6 +114,7 @@ $novo-drawer-over-drawer-z-index: 4;
   min-width: 5rem;
   width: max-content;
   background: var(--background-bright);
+
   .novo-rail-contents {
     display: inline-flex;
     flex-direction: column;
@@ -129,6 +126,7 @@ $novo-drawer-over-drawer-z-index: 4;
   display: grid;
   grid-template-columns: 1fr;
   height: 100%;
+
   &.and-has-rail {
     grid-template-columns: auto 1fr;
   }

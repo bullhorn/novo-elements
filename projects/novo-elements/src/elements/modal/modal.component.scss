@@ -4,7 +4,7 @@
   display: block;
   background-color: var(--background-bright);
   border-radius: 4px;
-  box-shadow: 0 1px 7px rgba(0, 0, 0, 0.09), 0 1px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 7px rgb(0 0 0 / 9%), 0 1px 3px rgb(0 0 0 / 20%);
   z-index: z(modal);
   position: relative;
   min-width: 330px;
@@ -39,6 +39,7 @@
     justify-content: flex-end;
     padding: $spacing-md;
     gap: $spacing-md;
+
     ::ng-deep button {
       min-width: 10rem;
     }

@@ -11,10 +11,12 @@
     pointer-events: none;
     opacity: 1;
   }
+
   .date-range-input-container {
     position: relative;
     height: min-content;
   }
+
   .date-range-input-divider {
     font-weight: 800;
     margin: 0 0.5em;
@@ -37,16 +39,19 @@
     box-sizing: content-box;
     transition: all 300ms;
     color: var(--text-main);
+
     &:focus {
       border-bottom: 1px solid $ocean;
     }
   }
+
   novo-icon {
     position: absolute;
     right: 0;
     top: 0;
     font-size: 1em;
   }
+
   novo-icon[size="small"] {
     top: calc(50% - 0.75em);
     font-size: 0.5em;

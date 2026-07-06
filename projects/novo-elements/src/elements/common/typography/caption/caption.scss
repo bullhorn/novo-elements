@@ -3,5 +3,6 @@
 
 :host {
   display: inline;
+
   @include novo-caption-text();
 }

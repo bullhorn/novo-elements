@@ -20,19 +20,24 @@
   &.with-value {
     margin-bottom: 20px;
   }
+
   &:hover {
     border-bottom: 1px solid lighten($dark, 15%);
   }
+
   &.selected,
   &.selected:hover {
     border-bottom: 1px solid $positive;
+
     & + i {
       color: $positive;
     }
   }
+
   &.disabled {
     border-bottom-style: dashed !important;
   }
+
   .novo-chip-container {
     flex: 1;
     display: flex;
@@ -40,24 +45,29 @@
     gap: 0.4rem;
     align-items: center;
   }
+
   .chip-input-container {
     flex: 1 15rem;
     padding-left: 1rem;
+
     input {
       padding-top: 0;
       border: none;
       background: transparent !important;
       width: 100%;
+
       &:focus {
         outline: none;
       }
     }
   }
+
   .chip-label {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+
   label.clear-all {
     flex: 1 100%;
     position: absolute;
@@ -68,12 +78,14 @@
     cursor: pointer;
     display: flex;
     align-items: center;
+
     i {
       font-size: 0.7rem;
       padding-bottom: 2px;
       margin-left: 5px;
     }
   }
+
   i.bhi-search {
     position: absolute;
     bottom: 8px;
@@ -87,6 +99,7 @@
     right: 0;
     bottom: 7px;
   }
+
   &.with-value {
     margin-bottom: 0;
   }
@@ -94,16 +107,20 @@
   novo-picker {
     position: inherit;
     padding-bottom: 0;
+
     > ::ng-deep input {
       border: none;
       border-bottom: none !important;
+
       &:disabled {
         border-bottom: none !important;
       }
     }
+
     > ::ng-deep i {
       display: none;
     }
+
     div.picker-results-container {
       left: 0;
     }
@@ -112,23 +129,30 @@
   picker-results {
     position: absolute;
     color: black;
+
     novo-list {
       max-height: 49vh;
       overflow: auto;
+
       novo-list-item {
         flex: 0 0;
         transition: background-color 250ms;
+
         & > div {
           width: 100%;
         }
+
         &.active {
           background-color: lighten($positive, 35%);
         }
+
         &:hover {
           background-color: lighten($positive, 35%);
         }
+
         item-content {
           flex-flow: row wrap;
+
           & > * {
             flex: 0 0 33%;
             white-space: nowrap;
@@ -136,30 +160,33 @@
         }
       }
     }
+
     .error-results,
     .no-recents,
     .null-results {
       text-align: center;
       padding: 1em 0 4em;
+
       > i {
         font-size: 3em;
         margin: 0.5em;
-        color: rgba(0, 0, 0, 0.3);
+        color: rgb(0 0 0 / 30%);
       }
+
       > h4,
       > p {
         margin: 0;
         max-width: none;
         padding: 0;
       }
+
       > h4 {
         font-weight: 500;
       }
-      > p {
-      }
     }
+
     section {
-      box-shadow: 0.1em 0.1em 1em rgba(0, 0, 0, 0.25);
+      box-shadow: 0.1em 0.1em 1em rgb(0 0 0 / 25%);
       z-index: 9;
       position: absolute;
       width: 100%;
@@ -167,6 +194,7 @@
       color: black;
     }
   }
+
   .preview-container {
     entity-picker-result {
       background: $white;
@@ -180,17 +208,22 @@
       z-index: z("max");
       border: 1px solid #4a89dc;
       transition: all 200ms ease-in-out;
+
       .novo-list-item {
         flex: 0 0;
+
         & > div {
           width: 100%;
         }
+
         .novo-item-content {
           flex-flow: row wrap;
+
           & > * {
             flex: 0 0 33%;
             white-space: nowrap;
           }
+
           > p {
             min-width: 15em;
             font-size: 0.9em;

@@ -7,10 +7,12 @@
   margin-left: -1.5rem;
   margin-right: -1.5rem;
   font-size: 1.8rem;
+
   ::ng-deep i,
   ::ng-deep novo-icon {
     margin: 1px 10px 1px 6px;
   }
+
   &.hidden {
     display: none;
   }

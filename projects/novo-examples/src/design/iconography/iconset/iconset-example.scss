@@ -12,7 +12,7 @@
       display: inline-block;
       text-align: center;
       position: relative;
-      padding: 3rem 0px;
+      padding: 3rem 0;
       border: 1px solid #eee;
       cursor: pointer;
 
@@ -31,9 +31,10 @@
         display: flex;
         position: relative;
       }
+
       &:hover {
         .icon-text {
-          &:after {
+          &::after {
             content: "Click to copy";
             position: absolute;
             color: #333;

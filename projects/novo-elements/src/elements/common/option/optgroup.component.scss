@@ -3,6 +3,7 @@
 
 .novo-optgroup-label {
   @include novo-label-text();
+
   color: $grey;
   cursor: default;
   flex: 1;

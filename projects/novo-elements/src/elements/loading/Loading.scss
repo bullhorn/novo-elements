@@ -22,6 +22,7 @@
     border-radius: 50%;
     height: 1em;
     width: 1em;
+
     @include enumerate($dot-colors, "background-color", "map-val", "");
     @include animationMapDelay($dot-colors, jump, 1600ms, ease-in-out, 70ms, forward, infinite, "", "");
   }
@@ -44,11 +45,11 @@
 
 @keyframes jump {
   0% {
-    transform: translateY(0px);
+    transform: translateY(0);
   }
 
   30% {
-    transform: translateY(0px);
+    transform: translateY(0);
     opacity: 1;
   }
 
@@ -63,7 +64,7 @@
   }
 
   100% {
-    transform: translateY(0px);
+    transform: translateY(0);
     opacity: 1;
   }
 }

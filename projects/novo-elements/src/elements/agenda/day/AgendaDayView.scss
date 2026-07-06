@@ -23,6 +23,7 @@
           width: 4px;
           min-height: 100%;
         }
+
         .cal-event-group {
           overflow: hidden;
           flex: 1;
@@ -30,9 +31,11 @@
           display: flex;
           flex-flow: column;
         }
+
         .cal-event-title {
           line-height: 26px;
         }
+
         .cal-event-description {
           font-size: 10px;
           line-height: 13px;

@@ -3,6 +3,7 @@
 
 .novo-text {
   display: inline;
+
   @include novo-body-text();
 
   &.text-block {

@@ -29,12 +29,14 @@
       &.novo-theme-#{$name} {
         color: $contrast;
         background: $color;
+
         & > novo-text,
         & > novo-label,
         & > novo-icon,
         & novo-title {
           color: inherit;
         }
+
         novo-action,
         .links {
           button,
@@ -42,6 +44,7 @@
             color: inherit;
           }
         }
+
         .novo-divider.novo-divider-vertical {
           border-right-color: $tint;
         }

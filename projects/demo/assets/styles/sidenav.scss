@@ -99,7 +99,6 @@
   .menu-list {
     position: relative;
     margin: 20px 0 0;
-    padding: 0;
     list-style: none;
     padding: 20px 20px 60px;
   }
@@ -126,7 +125,7 @@
     font-weight: 400;
     cursor: pointer;
     user-select: none;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: rgb(0 0 0 / 0%);
     padding-left: 15px;
   }
 

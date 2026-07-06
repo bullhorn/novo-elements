@@ -3,7 +3,6 @@
 // --------------------------------------------------
 @import 'novo-design-tokens/scss';
 @import 'novo-design-tokens/css/variables.min';
-
 @import "./styles/variables";
 @import "./styles/reset";
 @import "./styles/base";
@@ -20,40 +19,48 @@
 
 // CDK
 @import "./styles/cdk";
+@import "./elements/picker/extras/picker-results/PickerResults";
+
 @include cdk-overlay();
 
 // --------------------------------------------------
 // Directives
 // --------------------------------------------------
-@import "./elements/picker/extras/picker-results/PickerResults";
 
 .bgc-main,
 .novo-background-main {
   background-color: var(--background-main, $color-bright);
 }
+
 .bgc-alt,
 .bgc-bright,
 .novo-background-bright {
   background-color: var(--background-bright, $color-white);
 }
+
 .bgc-dark,
 .novo-background-dark {
   background-color: var(--background-dark, $color-white);
 }
+
 .bgc-muted,
 .novo-background-muted {
   background-color: var(--background-muted, $color-white);
 }
+
 .bgc-body,
 .novo-background-body {
   background-color: var(--background-body, $color-silver);
 }
+
 .txc-main {
   color: var(--text-main, $color-charcoal);
 }
+
 .txc-muted {
   color: var(--text-muted, $color-neutral);
 }
+
 .txc-disabled {
   color: var(--text-disabled, $color-slate);
 }
@@ -65,7 +72,7 @@
 @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
   $excluded: (bright, muted);
 
-  @if index($excluded, $name) == null {
+  @if not index($excluded, $name) {
     .novo-background-#{$name} {
       background: $color;
       color: $contrast;
@@ -125,7 +132,7 @@
 
 .modal-overlay-backdrop,
 .aside-overlay-backdrop {
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgb(0 0 0 / 80%);
 }
 
 .aside-overlay-panel {
@@ -138,10 +145,12 @@
     opacity: 0;
     transform: scale(0.8);
   }
+
   90% {
     opacity: 1;
     transform: scale(1.1);
   }
+
   100% {
     opacity: 1;
     transform: scale(1);
@@ -195,7 +204,7 @@
   }
 
   75% {
-    transform: translateX(0px);
+    transform: translateX(0);
   }
 
   100% {

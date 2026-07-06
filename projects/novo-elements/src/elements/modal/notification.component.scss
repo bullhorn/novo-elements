@@ -5,7 +5,7 @@
   display: block;
   background-color: var(--background-bright);
   border-radius: 4px;
-  box-shadow: 0 1px 7px rgba(0, 0, 0, 0.09), 0 1px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 7px rgb(0 0 0 / 9%), 0 1px 3px rgb(0 0 0 / 20%);
   z-index: z(modal);
   position: relative;
   min-width: 330px;
@@ -31,26 +31,31 @@
       font-size: $font-size-2xl;
       margin: 10px auto 0;
     }
+
     h2 {
       font-size: $font-size-xl;
       color: var(--text-muted);
       margin: 0 auto;
       padding: 0;
     }
+
     h3 {
       font-size: $font-size-lg;
       margin: 0 auto;
     }
+
     h4 {
       font-size: $font-size-lg;
       color: var(--text-muted);
       margin: 0 auto;
       padding: 0;
     }
+
     h5 {
       font-size: $font-size-md;
       margin: 0 auto;
     }
+
     h6 {
       font-size: $font-size-md;
       margin: 0 auto;

@@ -7,6 +7,7 @@ i {
   font-size: $base-icon-size;
   display: inline-table;
   flex: 0 0 auto;
+
   &[theme] {
     &[theme="contained"] {
       font-size: 0.8rem;
@@ -14,26 +15,31 @@ i {
       height: $icon-height;
       width: $icon-width;
       text-align: center;
-      &:before {
+
+      &::before {
         vertical-align: baseline;
         line-height: 1.8;
       }
+
       @each $entity, $color in $entity-colors {
         &.#{$entity} {
           color: $white;
           background: $color;
         }
       }
+
       @each $key, $color in $analytics-colors {
         &.#{$key} {
           color: $white;
           background: $color;
         }
       }
+
       &.large {
         font-size: 1.2rem;
       }
     }
+
     &[theme="entity"] {
       @each $entity, $color in $entity-colors {
         &.#{$entity} {
@@ -63,14 +69,17 @@ span,
     font-size: 1.1em;
     margin: 0 0.5em 0 0;
     padding: 0;
-    &:before {
+
+    &::before {
       vertical-align: middle !important;
     }
+
     &[theme] {
       &[theme="contained"] {
         font-size: 0.8rem;
         vertical-align: 0.1rem;
-        &:before {
+
+        &::before {
           vertical-align: baseline;
           line-height: $icon-width;
           display: block;

@@ -10,18 +10,18 @@
     display: inline;
     list-style: none;
     color: darken(#d2d2d2, 30%);
-    padding: 0 10px 0;
+    padding: 0 10px;
 
     li {
       display: inline;
       padding: 0 3px;
     }
 
-    li:after {
+    li::after {
       content: ", ";
     }
 
-    li:last-child:after {
+    li:last-child::after {
       content: " ";
     }
   }
@@ -34,9 +34,11 @@
         border-top: 1px solid #e8e8e8;
         padding-bottom: 0;
       }
+
       label {
         color: #9e9e9e;
         text-transform: capitalize;
+
         &:hover {
           i {
             &.bhi-checkbox-empty,
@@ -46,12 +48,14 @@
           }
         }
       }
+
       &.checked {
         label {
           color: darken(#d2d2d2, 60%);
         }
       }
     }
+
     i {
       margin-right: 5px;
 

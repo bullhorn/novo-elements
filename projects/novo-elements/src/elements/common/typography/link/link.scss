@@ -3,6 +3,7 @@
 
 :host {
   display: inline;
+
   @include novo-body-text();
 
   &::ng-deep {
@@ -10,6 +11,7 @@
       font-size: 1em;
     }
   }
+
   novo-icon {
     font-size: 1em;
   }

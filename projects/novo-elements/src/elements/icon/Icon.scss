@@ -15,6 +15,7 @@ $icon-border-radius: 0.3em;
   font-size: 1.2em;
   line-height: inherit;
   vertical-align: middle;
+
   i {
     display: flex;
     justify-content: center;
@@ -25,15 +26,18 @@ $icon-border-radius: 0.3em;
     height: 1em;
     color: inherit;
     outline: none;
-    &:before {
+
+    &::before {
       color: inherit;
     }
+
     * {
       display: none !important;
     }
   }
 
   @include base-text-rules();
+
   @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
     &[theme="#{$name}"] {
       i {
@@ -43,6 +47,7 @@ $icon-border-radius: 0.3em;
         width: 1.6em;
         height: 1.6em;
       }
+
       &[shape='circle'] {
         i {
           border-radius: 50%;
@@ -54,17 +59,20 @@ $icon-border-radius: 0.3em;
   &.novo-icon-raised {
     i {
       // background-color: rgba(0, 0, 0, .25);
-      box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+      box-shadow: 2px 2px 0 rgb(0 0 0 / 20%);
     }
   }
+
   &[shape='circle'] {
     i {
       border-radius: 50%;
     }
   }
+
   &.icon-size-smaller {
     font-size: 1.0em;
   }
+
   &.icon-size-larger {
     font-size: 1.4em;
   }

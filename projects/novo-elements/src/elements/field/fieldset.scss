@@ -2,10 +2,10 @@
 
 :host {
   display: grid;
-  grid-gap: 2.8rem 2rem;
+  gap: 2.8rem 2rem;
 
   &.novo-fieldset-appearance-list {
-    grid-gap: 0rem;
+    gap: 0;
   }
 
   &.full-width {
@@ -18,8 +18,10 @@
           width: 100%;
         }
       }
+
       novo-field.novo-field-layout-horizontal {
         grid-template-columns: 150px minmax(150px, 1fr);
+
         .novo-input-element {
           width: 100%;
         }
