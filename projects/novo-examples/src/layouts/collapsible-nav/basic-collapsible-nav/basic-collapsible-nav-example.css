@@ -1,0 +1,14 @@
+.collapsible-nav-example {
+  height: 640px;
+  display: flex;
+  border: 1px solid var(--border);
+}
+
+.collapsible-nav-example .novo-text {
+  flex: 1;
+}
+
+.novo-collapsible-nav-collapsed .novo-text,
+.novo-collapsible-nav-collapsed .novo-action {
+  display: none;
+}

@@ -1,0 +1,25 @@
+<div class="collapsible-nav-example" data-automation-id="collapsible-nav-example">
+  <novo-collapsible-nav [(collapsed)]="collapsed" data-automation-id="collapsible-nav">
+    <div novo-collapsible-nav-header>
+      <novo-option (click)="collapsed = !collapsed" data-automation-id="collapsible-nav-toggle">
+        <novo-icon>{{ collapsed ? 'arrow-right' : 'arrow-left' }}</novo-icon>
+        <novo-text>Collapse</novo-text>
+      </novo-option>
+    </div>
+    <div novo-collapsible-nav-body>
+      @for (win of openWindows; track win.label) {
+        <novo-option [accent]="win.accent" data-automation-id="collapsible-nav-tab">
+          <novo-icon>{{ win.accent }}</novo-icon>
+          <novo-text>{{ win.label }}</novo-text>
+          <novo-action icon="x"></novo-action>
+        </novo-option>
+      }
+    </div>
+    <div novo-collapsible-nav-footer>
+      <novo-option data-automation-id="collapsible-nav-parse">
+        <novo-icon>resume</novo-icon>
+        <novo-text>Parse Resume</novo-text>
+      </novo-option>
+    </div>
+  </novo-collapsible-nav>
+</div>
