@@ -1,17 +1,5 @@
 // Modern theme — maps the modern design tokens (Figma "subatomic") onto the
 // semantic CSS-variable contract that novo-elements components consume.
-//
-// Requires `novo-design-tokens/css/variables-bh2026(.min).css` to be loaded by the
-// app (it defines the `--color-*` / `--typography-*` / `--spacing-*` modern vars,
-// scoped to `[data-theme="bh2026"]`). NovoTheme sets `data-theme="bh2026"` on the
-// document root when a `modern*` theme is active (see theme-options.ts).
-//
-// Built on the f/cssvar-theming runtime foundation: values resolve at runtime, and
-// `--bg-fade-multiplier` drives the live elevate()/recede() color math (in tokens'
-// scss/mixins.scss). Light direction = 1; a future bh2026-dark flips it to -1.
-//
-// Fallbacks (var(--token, #hex)) keep this resilient if the modern token CSS hasn't
-// loaded yet; the #hex values mirror the resolved Figma tokens.
 
 @mixin bh2026-variables {
   // Live color-math direction (light): elevate() brightens, recede() darkens.
@@ -41,9 +29,6 @@
   --border-hard: var(--color-border-emphasized, #282828);
 
   // --- Interactive ---
-  // Decision (provisional — designer's Figma is WIP): links are CHARCOAL, not branded,
-  // per the source-of-truth export. Newer Figma screenshots show branded links, but the
-  // export is authoritative for now. See novo-design-tokens NAMING_ALIGNMENT.md §7.
   --links:     var(--color-content-link, #282828);
   --focus:     var(--color-border-strong, #314158);
   --selection: var(--color-border-strong, #314158);
@@ -105,4 +90,31 @@
 :root[data-theme='bh2026'],
 :root.theme-bh2026 {
   @include bh2026-variables();
+}
+
+// bh2026 dark
+:root[data-theme='bh2026'].theme-dark {
+  @include dark-variables();
+
+  // bh2026-specific: flip the live elevate()/recede() color-math direction for dark
+  // (light sets +1 in bh2026-variables). Affects bh2026-migrated components only.
+  --bg-fade-multiplier: -1;
+
+  // bh2026-only component vars aren't part of the shared classic palette — point them at
+  // the shared dark button/border vars so they track bh2022's dark palette too.
+  --novo-button-bg:           var(--button-background);
+  --novo-button-color:        var(--button-text);
+  --novo-button-border-color: var(--border);
+
+  // bh2026 components color text via the modern `--color-content-*` tokens (charcoal in
+  // light), not the classic `--text-*` vars — so `dark-variables` alone leaves them dark
+  // (e.g. tab labels stay black-on-dark). Remap the content ramp onto the shared dark text
+  // palette so tabs/stepper/field/table/breadcrumbs/data-table all flip to light.
+  --color-content-headline:   var(--text-main);
+  --color-content-body:       var(--text-main);
+  --color-content-default:    var(--text-main);
+  --color-content-link:       var(--text-main);
+  --color-content-link-hover: var(--text-main);
+  --color-content-subtle:     var(--text-muted);
+  --color-content-disabled:   var(--text-disabled);
 }

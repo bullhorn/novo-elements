@@ -2,12 +2,9 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 /**
- * Novo theme generations (see novo-design-tokens THEME_GENERATIONS_PLAN.md).
- * themeName is `bh<year>-<mode>`; the `data-theme` hook is the *generation* (light/dark
- * remains the orthogonal `.theme-dark` class). The base generation (bh2022) renders as
- * `:root` (no `data-theme`); override generations (bh2026) set `data-theme=<generation>`.
+ * Novo theme generations named `bh<year>-<mode>`
  */
-export type ThemeName = 'bh2022-light' | 'bh2022-dark' | 'bh2026-light';
+export type ThemeName = 'bh2022-light' | 'bh2022-dark' | 'bh2026-light' | 'bh2026-dark';
 export const DEFAULT_THEME: ThemeName = 'bh2022-light';
 
 /** Generations that render as a `[data-theme]` token override (bh2022 = the :root base). */
@@ -19,6 +16,8 @@ export function normalizeThemeName(stored?: string): ThemeName {
     case 'bh2026-light':
     case 'modern':
       return 'bh2026-light';
+    case 'bh2026-dark':
+      return 'bh2026-dark';
     case 'bh2022-dark':
     case 'modern-dark':
     case 'dark':
