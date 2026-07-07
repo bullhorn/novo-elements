@@ -1,9 +1,13 @@
 // NG2
-import { Component, DoCheck, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
+import { Component, DoCheck, ElementRef, EventEmitter, forwardRef, Inject, Input, OnDestroy, OnInit, Optional, Output, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Subject, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 // APP
+import { NovoOverlayTemplateComponent } from 'novo-elements/elements/common';
+import { NOVO_ADDRESS_CONFIG, PlacesListComponent, PlacesSettings } from 'novo-elements/elements/places';
 import { NovoLabelService } from 'novo-elements/services';
-import { COUNTRIES, findByCountryId, getStates, Helpers } from 'novo-elements/utils';
+import { COUNTRIES, findByCountryId, getStates, Helpers, Key } from 'novo-elements/utils';
 
 // Value accessor for the component (supports ngModel)
 const ADDRESS_VALUE_ACCESSOR = {
@@ -11,6 +15,23 @@ const ADDRESS_VALUE_ACCESSOR = {
   useExisting: forwardRef(() => NovoAddressElement),
   multi: true,
 };
+
+export interface AddressLookupResult {
+  address1?: string;
+  address2?: string;
+  city?: string;
+  state?: string;
+  zip?: string;
+  countryName?: string;
+  countryCode?: string;
+  formattedAddress?: string;
+  location?: { latitude: number; longitude: number };
+  viewport?: {
+    northeast: { latitude: number; longitude: number };
+    southwest: { latitude: number; longitude: number };
+  };
+  placeId?: string;
+}
 
 export interface NovoAddressSubfieldConfig {
   label: string;
@@ -34,9 +55,9 @@ export interface NovoAddressConfig {
 }
 
 @Component({
-    selector: 'novo-address',
-    providers: [ADDRESS_VALUE_ACCESSOR],
-    template: `
+  selector: 'novo-address',
+  providers: [ADDRESS_VALUE_ACCESSOR],
+  template: `
     <span
       *ngIf="!config?.address1?.hidden"
       class="street-address"
@@ -51,6 +72,7 @@ export interface NovoAddressConfig {
       >
       </i>
       <input
+        #address1El
         [class.maxlength-error]="invalidMaxlength.address1"
         type="text"
         id="address1"
@@ -62,10 +84,20 @@ export interface NovoAddressConfig {
         (ngModelChange)="updateControl()"
         (focus)="isFocused($event, 'address1')"
         (blur)="isBlurred($event, 'address1')"
-        (input)="onInput($event, 'address1')"
+        (input)="onAddress1Input($event)"
+        (keydown)="onAddress1Keydown($event)"
         [disabled]="disabled.address1"
       />
     </span>
+    <novo-overlay-template *ngIf="addressConfig" [parent]="address1ElRef" position="above-below">
+      <google-places-list
+        [term]="debouncedSearch"
+        [userSettings]="addressConfig"
+        (select)="onPlaceSelected($event)"
+        (matchesUpdated)="onMatchesUpdated($event)"
+      >
+      </google-places-list>
+    </novo-overlay-template>
     <span
       *ngIf="!config?.address2?.hidden"
       class="apt suite"
@@ -184,32 +216,24 @@ export interface NovoAddressConfig {
       ></novo-picker>
     </span>
   `,
-    styleUrls: ['./Address.scss'],
-    standalone: false,
+  styleUrls: ['./Address.scss'],
+  standalone: false,
 })
-export class NovoAddressElement implements ControlValueAccessor, OnInit, DoCheck {
+export class NovoAddressElement implements ControlValueAccessor, OnInit, DoCheck, OnDestroy {
   @Input()
   config: NovoAddressConfig;
-  private _readOnly = false;
-  @Input()
-  set readOnly(readOnly: boolean) {
-    this._readOnly = readOnly;
-    this.fieldList.forEach((field: string) => {
-      this.disabled[field] = this._readOnly;
-    });
-    if (this.model) {
-      this.updateStates();
-    }
-  }
-  get readOnly(): boolean {
-    return this._readOnly;
-  }
-  private previousRequiredState: Record<string, boolean> = {};
+  @ViewChild('address1El', { read: ElementRef })
+  address1ElRef: ElementRef;
+  @ViewChild(NovoOverlayTemplateComponent)
+  overlay: NovoOverlayTemplateComponent;
+  @ViewChild(PlacesListComponent)
+  placesList: PlacesListComponent;
+  debouncedSearch: string = '';
+  private searchTerms$ = new Subject<string>();
+  private searchSubscription: Subscription;
   states: Array<any> = [];
   fieldList: Array<string> = ['address1', 'address2', 'city', 'state', 'zip', 'countryID'];
   model: any;
-  onModelChange: Function = () => {};
-  onModelTouched: Function = () => {};
   focused: any = {};
   invalid: any = {};
   disabled: any = {};
@@ -226,8 +250,33 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit, DoCheck
   blur: EventEmitter<any> = new EventEmitter();
   @Output()
   validityChange: EventEmitter<any> = new EventEmitter();
+  private previousRequiredState: Record<string, boolean> = {};
 
-  constructor(public labels: NovoLabelService) {}
+  constructor(
+    public labels: NovoLabelService,
+    @Optional() @Inject(NOVO_ADDRESS_CONFIG) public addressConfig: PlacesSettings,
+  ) {}
+
+  private _readOnly = false;
+
+  get readOnly(): boolean {
+    return this._readOnly;
+  }
+
+  @Input()
+  set readOnly(readOnly: boolean) {
+    this._readOnly = readOnly;
+    this.fieldList.forEach((field: string) => {
+      this.disabled[field] = this._readOnly;
+    });
+    if (this.model) {
+      this.updateStates();
+    }
+  }
+
+  onModelChange: Function = () => {};
+
+  onModelTouched: Function = () => {};
 
   ngOnInit() {
     if (!this.config) {
@@ -242,6 +291,18 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit, DoCheck
     }
     if (Helpers.isBlank(this.model.countryID)) {
       this.updateStates();
+    }
+    this.searchSubscription = this.searchTerms$.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+    ).subscribe(term => {
+      this.debouncedSearch = term;
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.searchSubscription) {
+      this.searchSubscription.unsubscribe();
     }
   }
 
@@ -420,6 +481,110 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit, DoCheck
     this.model.state = state;
     this.updateControl();
     this.onInput(null, 'state');
+  }
+
+  onAddress1Input(event: Event): void {
+    this.onInput(event, 'address1');
+    // Read the live DOM value; model.address1 can lag a keystroke.
+    const term = (event?.target as HTMLInputElement)?.value ?? '';
+    if (!term) {
+      this.debouncedSearch = '';
+      this.overlay?.closePanel();
+      return;
+    }
+    // Open on type so the projected picker is attached to fetch/show results.
+    this.overlay?.openPanel();
+    this.searchTerms$.next(term);
+  }
+
+  onMatchesUpdated(matches: any[]): void {
+    // Close when a query returns no results, otherwise keep the panel open.
+    if (matches?.length) {
+      this.overlay?.openPanel();
+    } else {
+      this.overlay?.closePanel();
+    }
+  }
+
+  onAddress1Keydown(event: KeyboardEvent): void {
+    if (!this.overlay?.panelOpen) {
+      return;
+    }
+    if (event.key === Key.Escape) {
+      this.overlay.closePanel();
+      return;
+    }
+    if (event.key === Key.ArrowUp || event.key === Key.ArrowDown || event.key === Key.Enter) {
+      if (event.key === Key.Enter) {
+        // Prevent submitting the surrounding form when selecting a prediction.
+        event.preventDefault();
+      }
+      this.placesList?.onKeyDown(event);
+    }
+  }
+
+  onPlaceSelected(placeDetail: AddressLookupResult & { address_components?: any[]; formatted_address?: string }): void {
+    if (!placeDetail) {
+      return;
+    }
+
+    // Normalize the raw Google detail into flat fields; REST results arrive pre-parsed.
+    const result: AddressLookupResult = placeDetail.address_components ? this.parseGooglePlaceDetail(placeDetail) : placeDetail;
+
+    // Set fields the result defines (including '' to clear); undefined leaves the model value.
+    if (result.address1 !== undefined) {
+      this.model.address1 = result.address1;
+    }
+    if (result.address2 !== undefined) {
+      this.model.address2 = result.address2;
+    }
+    if (result.city !== undefined) {
+      this.model.city = result.city;
+    }
+    if (result.state !== undefined) {
+      this.model.state = result.state;
+    }
+    if (result.zip !== undefined) {
+      this.model.zip = result.zip;
+    }
+
+    if (result.countryCode) {
+      const country = COUNTRIES.find((c) => c.code === result.countryCode);
+      if (country) {
+        this.model.countryID = country.id;
+        this.model.countryName = country.name;
+      }
+    }
+
+    this.updateStates();
+    this.updateControl();
+    this.fieldList.forEach((field) => this.onInput(null, field));
+    this.debouncedSearch = '';
+    this.overlay?.closePanel();
+  }
+
+  // Map a raw Google detail to flat fields; omitted components resolve to '' so partial selections clear finer fields.
+  private parseGooglePlaceDetail(place: { address_components?: any[]; formatted_address?: string; place_id?: string }): AddressLookupResult {
+    const components: Array<{ long_name: string; short_name: string; types: string[] }> = place.address_components || [];
+    const find = (type: string, useShort = false): string => {
+      const match = components.find((component) => component.types.includes(type));
+      if (!match) {
+        return '';
+      }
+      return useShort ? match.short_name : match.long_name;
+    };
+    const street = [find('street_number'), find('route')].filter(Boolean).join(' ');
+    return {
+      address1: street,
+      address2: find('subpremise'),
+      city: find('locality') || find('postal_town') || find('sublocality') || find('sublocality_level_1'),
+      state: find('administrative_area_level_1'),
+      zip: find('postal_code'),
+      countryName: find('country'),
+      countryCode: find('country', true),
+      formattedAddress: place.formatted_address,
+      placeId: place.place_id,
+    };
   }
 
   setStateLabel(model: any) {

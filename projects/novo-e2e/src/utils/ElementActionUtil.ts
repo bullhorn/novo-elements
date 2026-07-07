@@ -87,6 +87,7 @@ export async function moveMouseToElement(element: string | WebdriverIO.Element, 
 
 export async function scrollIntoView(element: string | WebdriverIO.Element, alignToTop: boolean = true, index: number = 0): Promise<void> {
     const resolvedElement = await resolveElement(element, index);
+    await waitForElementToBePresent(resolvedElement);
     await resolvedElement.scrollIntoView(alignToTop);
 }
 

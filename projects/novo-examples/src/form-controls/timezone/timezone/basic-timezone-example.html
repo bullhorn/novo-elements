@@ -1,9 +1,0 @@
-<div *ngFor="let item of items; let i = index" data-automation-id="timezone-items">
-  <novo-checkbox
-    [label]="item.name"
-    [(ngModel)]="item.isChecked"
-    [disabled]="item.disabled"
-    [indeterminate]="item.indeterminate"
-    (onSelect)="onChange($event, item)"
-    [attr.data-automation-id]="'timezone-item-' + i"></novo-checkbox>
-</div>

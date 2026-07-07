@@ -1,5 +1,4 @@
 import { COMPONENT_URLS, examplesUrl, getURLs } from '../utils/EnvironmentUtil';
-import { browser } from '@wdio/globals';
 import { automationId, elements, novoAdvancedSearchOperator } from '../utils/SelectorUtil';
 import { sleep } from '../utils/SleepUtil';
 import {
@@ -14,14 +13,10 @@ import {
 import { getElementWithTextValue } from '../utils/GetElementUtil';
 import { click, moveMouseToElement } from '../utils/ElementActionUtil';
 import { setFiltersFromAdvancedSearch } from '../utils/TableUtil';
+import { queryBuilderSelectors } from '../utils/QueryBuilderUtil';
 
 describe('Query Builder Demo Page', () => {
   const url = examplesUrl(COMPONENT_URLS.QUERY_BUILDER);
-  const sectionLabel = 'section .novo-label';
-  const sectionLabelSpan = 'section novo-label span';
-  const pageHeader1 = 'query-builder-examples-page h1';
-  const pageHeader2 = 'query-builder-examples-page h2';
-  const pageText = 'query-builder-examples-page p';
   const andOperator = automationId('and');
   const orOperator = automationId('or');
   const notOperator = automationId('not');
@@ -42,8 +37,8 @@ describe('Query Builder Demo Page', () => {
 
     it('criteria builder elements', async () => {
       await Promise.all([
-        await verifyText(pageHeader2, 'Just a basic Criteria Builder'),
-        await verifyText(pageText, 'A common use case is to just collect a list of criteria to build as a query. A Criteria can contain multiple conditions which will need to be joined by a conjunctions (and/or).'),
+        await verifyText(queryBuilderSelectors.pageHeader2, 'Just a basic Criteria Builder'),
+        await verifyText(queryBuilderSelectors.pageText, 'A common use case is to just collect a list of criteria to build as a query. A Criteria can contain multiple conditions which will need to be joined by a conjunctions (and/or).'),
         await verifyPresent('novo-condition-group'),
         await verifyText(elements.primaryButton, 'Add a group'),
         await verifyText(elements.secondaryButton, 'Reset'),
@@ -52,13 +47,12 @@ describe('Query Builder Demo Page', () => {
       ]);
     });
     it('Join Operators', async () => {
-      const joinOperator = '.novo-label.text-color-ash';
       const radioLabel = `${elements.radio} .novo-radio-button-label i`;
       const radioSelected = 'bhi-radio-filled';
       const operatorDropdown = automationId(elements.advancedSearch.button.andNotDropdown);
       await click(elements.radio);
       await verifyClassPresent(radioLabel, radioSelected);
-      await verifyAllElementsTextIncludes(joinOperator, 'And');
+      await verifyAllElementsTextIncludes(queryBuilderSelectors.joinOperatorLabel, 'And');
       await click(elements.radio, 1);
       await verifyClassPresent(radioLabel, radioSelected, 'And, Or', 1);
       await click(operatorDropdown);
@@ -72,8 +66,8 @@ describe('Query Builder Demo Page', () => {
       await verifyText(notOperator, 'not');
     });
     it('should enable/disable additional scope', async () => {
-      await verifyText(sectionLabel, 'Add Additional Scope', 'Add Additional Scope Section', 1);
-      await moveMouseToElement(sectionLabelSpan, 0);
+      await verifyText(queryBuilderSelectors.sectionLabel, 'Add Additional Scope', 'Add Additional Scope Section', 1);
+      await moveMouseToElement(queryBuilderSelectors.sectionLabelSpan, 0);
       await sleep(500);
       await verifyPresent('[tooltip="Adding an additional entity scope to the searchable fields will change the behavior when adding a new condition"]');
       await click(`${automationId('True')}`, 0);
@@ -86,18 +80,18 @@ describe('Query Builder Demo Page', () => {
       await verifyPresent(elements.primaryButton, 'Add a group button should be enabled when additional scope is disabled');
     });
     it('should show/hide first operator', async () => {
-      await verifyText(sectionLabel, 'Hide First Operator', 'Hide First Operator Section', 2);
-      await moveMouseToElement(sectionLabelSpan, 2);
+      await verifyText(queryBuilderSelectors.sectionLabel, 'Hide First Operator', 'Hide First Operator Section', 2);
+      await moveMouseToElement(queryBuilderSelectors.sectionLabelSpan, 2);
       await sleep(500);
       await verifyPresent('[tooltip="Disabling will display the AND/OR/NOT operator in the first row. Enabling (default) will hide it"]');
       await click(`button ${automationId('True')}`, 1);
       await verifyElementCountEquals(automationId(elements.advancedSearch.button.andNotDropdown), 4);
       await click(`button ${automationId('False')}`, 1);
       await verifyElementCountEquals(automationId(elements.advancedSearch.button.andNotDropdown), 5);
-    })
+    });
     it('should toggle Can Be Empty', async () => {
-      await verifyText(sectionLabel, 'Can Be Empty', 'Can Be Empty Section', 3);
-      await moveMouseToElement(sectionLabelSpan, 4);
+      await verifyText(queryBuilderSelectors.sectionLabel, 'Can Be Empty', 'Can Be Empty Section', 3);
+      await moveMouseToElement(queryBuilderSelectors.sectionLabelSpan, 4);
       await sleep(500);
       await verifyPresent('[tooltip="Enabling will allow you to delete a row if it is the only row in the criteria builder. Disabling (default) will keep the final row, and will instead clear it out"]');
       await click(`${automationId('True')}`, 2);
@@ -109,8 +103,8 @@ describe('Query Builder Demo Page', () => {
     });
     it('should enable/disable Address Radius', async () => {
       let radiusUnits;
-      await verifyText(sectionLabel, 'Address Radius', 'Address Radius  Section', 4);
-      await moveMouseToElement(sectionLabelSpan, 6);
+      await verifyText(queryBuilderSelectors.sectionLabel, 'Address Radius', 'Address Radius  Section', 4);
+      await moveMouseToElement(queryBuilderSelectors.sectionLabelSpan, 6);
       await sleep(500);
       await verifyPresent('[tooltip="Enabling will add a radius option to the full address criteria operator dropdown"]');
       await click(`${automationId('Yes')}`);
@@ -126,18 +120,18 @@ describe('Query Builder Demo Page', () => {
     });
   });
 
-  describe('Single Field Criteria Builder', async () => {
+  describe('Single Field Criteria Builder', () => {
     it('single field criteria builder elements', async () => {
-      await verifyText(pageHeader1, 'Single Field Criteria Builder');
-      await verifyText(pageText, 'While the Criteria Builder can support multiple fields at once, its UI can also be configured to express a condition on a single field specified in via configuration input. This mode is more suitable for compact scenarios.', 'Single field criteria builder description', 2);
-      await verifyPresent('single-field-criteria-example');
+      await verifyText(queryBuilderSelectors.pageHeader1, 'Single Field Criteria Builder');
+      await verifyText(queryBuilderSelectors.pageText, 'While the Criteria Builder can support multiple fields at once, its UI can also be configured to express a condition on a single field specified in via configuration input. This mode is more suitable for compact scenarios.', 'Single field criteria builder description', 2);
+      await verifyPresent(queryBuilderSelectors.singleFieldExample, 'single field criteria example');
     });
   });
 
-  describe('Full Query Builder', async () => {
-    it('single field criteria builder elements', async () => {
-      await verifyText(pageHeader2, 'Full Query Builder', 'Full Query Builder header',  1);
-      await verifyText(pageText, 'The difference between the Query and Criteria Builder is that it allow for the user to define multiple criteria and join them as either inclusion or exclusion criteria. ie. Find where fruit.seeds >= 1 and not fruit.name=\'Avacodo\'', 'Single field criteria builder description', 4);
+  describe('Full Query Builder', () => {
+    it('full query builder elements', async () => {
+      await verifyText(queryBuilderSelectors.pageHeader2, 'Full Query Builder', 'Full Query Builder header', 1);
+      await verifyText(queryBuilderSelectors.pageText, 'The difference between the Query and Criteria Builder is that it allow for the user to define multiple criteria and join them as either inclusion or exclusion criteria. ie. Find where fruit.seeds >= 1 and not fruit.name=\'Avacodo\'', 'Full Query Builder description', 4);
     });
   });
 

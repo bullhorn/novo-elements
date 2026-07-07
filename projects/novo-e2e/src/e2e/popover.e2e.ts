@@ -16,6 +16,10 @@ describe('PopOver Placement Demo Page', () => {
     });
 
     describe('Placement', () => {
+        before(async () => {
+            await browser.refresh();
+        });
+
         const popoverName = 'pop-over-placement';
 
         placementData.forEach((placement) => {
@@ -33,6 +37,10 @@ describe('PopOver Placement Demo Page', () => {
     });
 
     describe('Horizontal Alignment', () => {
+        before(async () => {
+            await browser.refresh();
+        });
+
         const popoverName = 'pop-over-horizontal';
 
         horizontalAlignmentData.forEach((alignment) => {
@@ -43,6 +51,10 @@ describe('PopOver Placement Demo Page', () => {
     });
 
     describe('Vertical Alignment', () => {
+        before(async () => {
+            await browser.refresh();
+        });
+
         const popoverName = 'pop-over-vertical';
 
         verticalAlignmentData.forEach((alignment) => {
@@ -53,6 +65,10 @@ describe('PopOver Placement Demo Page', () => {
     });
 
     describe('Behavior', () => {
+        before(async () => {
+            await browser.refresh();
+        });
+
         const popoverName = 'pop-over-behaviors';
 
         it('should display and hide on hover', async () => {
@@ -96,6 +112,10 @@ describe('PopOver Placement Demo Page', () => {
     });
 
     describe('Dynamic HTML', () => {
+        before(async () => {
+            await browser.refresh();
+        });
+
         const popoverName = 'pop-over-dynamic';
 
         it('should display dynamic HTML content on click', async () => {
@@ -105,5 +125,4 @@ describe('PopOver Placement Demo Page', () => {
             await verifyPresent(popoverContent(popoverName));
         });
     });
-
 });

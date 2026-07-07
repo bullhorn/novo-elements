@@ -8,8 +8,8 @@
 <br/>
 <br/>
 <div class="date-picker-demo-side-by-side" data-automation-id="week-start-picker-container">
-    <p data-automation-id="week-start-value">
-        <label>Value</label> {{(weekStartDate | date) || 'N/A'}}
+    <p>
+        <label>Value</label> <span data-automation-id="week-start-value">{{(weekStartDate | date) || 'N/A'}}</span>
     </p>
     <novo-date-picker [(ngModel)]="weekStartDate" [weekStart]="weekStart" data-automation-id="week-start-picker"></novo-date-picker>
 </div>

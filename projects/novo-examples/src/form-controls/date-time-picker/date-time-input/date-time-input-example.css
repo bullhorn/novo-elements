@@ -1,1 +1,30 @@
-/** No CSS for this example */
+.date-time-input-demo {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.date-time-input-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+}
+
+.date-time-input-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.date-time-input-value {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-top: 2px;
+}
+
+.date-time-inline-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}

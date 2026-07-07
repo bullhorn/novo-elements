@@ -2,9 +2,15 @@ import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { GlobalRef, LocalStorageService } from 'novo-elements/services';
+import type { PlacesSettings } from './places.component';
 
 @Injectable()
 export class GooglePlacesService {
+  // Shared across the address fields that use this singleton so the SDK is injected at most once.
+  private mapsLoad?: Promise<void>;
+  // The key the SDK was (or is being) loaded with; the Maps JS API can only be loaded once per page.
+  private mapsLoadKey?: string;
+
   constructor(
     private _http: HttpClient,
     @Inject(PLATFORM_ID) private platformId: Object,
@@ -12,9 +18,61 @@ export class GooglePlacesService {
     private _localStorageService: LocalStorageService,
   ) {}
 
-  getPredictions(url: string, query: string): Promise<any> {
+  // Ensure the Google Maps JS SDK is available before any window.google usage.
+  // No-ops when the SDK is already present (host script tag) or no key is configured (search-service path).
+  loadGoogleMaps(settings: PlacesSettings): Promise<void> {
+    const _window: any = this._global.nativeGlobal;
+    if (_window?.google?.maps?.places) {
+      return Promise.resolve();
+    }
+    if (!isPlatformBrowser(this.platformId) || !settings?.googleApiKey) {
+      return Promise.resolve();
+    }
+    if (!this.mapsLoad) {
+      this.mapsLoadKey = settings.googleApiKey;
+      this.mapsLoad = this.injectGoogleMapsScript(settings);
+    } else if (this.mapsLoadKey && this.mapsLoadKey !== settings.googleApiKey) {
+      // The Maps JS API can only be loaded once per page; a second, different key is ignored.
+      console.warn(
+        'GooglePlacesService: the Google Maps SDK is already loading with a different key; ignoring the new googleApiKey.',
+      );
+    }
+    return this.mapsLoad;
+  }
+
+  private injectGoogleMapsScript(settings: PlacesSettings): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      const _window: any = this._global.nativeGlobal;
+      // Build params one at a time so undefined override values are dropped instead of serialized as "undefined".
+      // The component uses the legacy Places API (AutocompleteService, PlacesService) which requires the
+      // synchronous library load — google.maps.places is fully populated when onload fires.
+      const params = new URLSearchParams();
+      params.set('key', settings.googleApiKey);
+      params.set('libraries', 'places');
+      for (const [key, value] of Object.entries(settings.googleMapsLoaderParams ?? {})) {
+        if (value !== undefined && value !== null) {
+          params.set(key, value);
+        }
+      }
+      const script = document.createElement('script');
+      script.src = `https://maps.googleapis.com/maps/api/js?${params.toString()}`;
+      script.async = true;
+      script.onload = () => resolve();
+      script.onerror = () => {
+        // Clear both cached fields so a later attempt can retry with any key.
+        this.mapsLoad = undefined;
+        this.mapsLoadKey = undefined;
+        reject(new Error('Failed to load the Google Maps JavaScript API.'));
+      };
+      document.head.appendChild(script);
+    });
+  }
+
+  getPredictions(url: string, query: string, sessionToken?: string): Promise<any> {
     return new Promise((resolve) => {
-      this._http.get(url + '?query=' + query).subscribe((data: any) => {
+      const separator = url.includes('?') ? '&' : '?';
+      const sessionParam = sessionToken ? '&sessionToken=' + sessionToken : '';
+      this._http.get(url + separator + 'query=' + query + sessionParam).subscribe((data: any) => {
         if (data) {
           resolve(data);
         } else {
@@ -26,7 +84,8 @@ export class GooglePlacesService {
 
   getLatLngDetail(url: string, lat: number, lng: number): Promise<any> {
     return new Promise((resolve) => {
-      this._http.get(url + '?lat=' + lat + '&lng=' + lng).subscribe((data: any) => {
+      const separator = url.includes('?') ? '&' : '?';
+      this._http.get(url + separator + 'lat=' + lat + '&lng=' + lng).subscribe((data: any) => {
         if (data) {
           resolve(data);
         } else {
@@ -36,9 +95,11 @@ export class GooglePlacesService {
     });
   }
 
-  getPlaceDetails(url: string, placeId: string): Promise<any> {
+  getPlaceDetails(url: string, placeId: string, sessionToken?: string): Promise<any> {
     return new Promise((resolve) => {
-      this._http.get(url + '?query=' + placeId).subscribe((data: any) => {
+      const separator = url.includes('?') ? '&' : '?';
+      const sessionParam = sessionToken ? '&sessionToken=' + sessionToken : '';
+      this._http.get(url + separator + 'query=' + placeId + sessionParam).subscribe((data: any) => {
         if (data) {
           resolve(data);
         } else {
@@ -148,13 +209,11 @@ export class GooglePlacesService {
         const _window: any = this._global.nativeGlobal;
         const placesService: any = new _window.google.maps.places.PlacesService(document.createElement('div'));
         placesService.getDetails({ placeId }, (result: any) => {
-          if (result === null || result.length === 0) {
+          if (result === null) {
+            resolve(false);
+          } else if (result.length === 0) {
             this.getGeoPaceDetailByReferance(result.referance).then((referanceData: any) => {
-              if (!referanceData) {
-                resolve(false);
-              } else {
-                resolve(referanceData);
-              }
+              resolve(referanceData || false);
             });
           } else {
             resolve(result);
@@ -227,16 +286,13 @@ export class GooglePlacesService {
       geocoder.geocode({ location: placeDetail.geometry.location }, (results, status) => {
         if (status === 'OK' && results.length) {
           resolve(
-            results.reduce(
-              (postalCodes: string[], result: any) => {
-                const postalCodeComponent = result.address_components.find(item => item.types.includes('postal_code'));
-                if (postalCodeComponent && !postalCodes.includes(postalCodeComponent.long_name)) {
-                  postalCodes.push(postalCodeComponent.long_name);
-                }
-                return postalCodes;
-              },
-              [],
-            ),
+            results.reduce((postalCodes: string[], result: any) => {
+              const postalCodeComponent = result.address_components.find((item) => item.types.includes('postal_code'));
+              if (postalCodeComponent && !postalCodes.includes(postalCodeComponent.long_name)) {
+                postalCodes.push(postalCodeComponent.long_name);
+              }
+              return postalCodes;
+            }, []),
           );
         } else {
           resolve(null);
