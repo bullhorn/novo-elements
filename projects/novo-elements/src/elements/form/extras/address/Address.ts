@@ -89,7 +89,7 @@ export interface NovoAddressConfig {
         [disabled]="disabled.address1"
       />
     </span>
-    <novo-overlay-template *ngIf="addressConfig" [parent]="address1ElRef" position="above-below">
+    <novo-overlay-template *ngIf="addressConfig?.addressBlockEnabled" [parent]="address1ElRef" position="above-below">
       <google-places-list
         [term]="debouncedSearch"
         [userSettings]="addressConfig"

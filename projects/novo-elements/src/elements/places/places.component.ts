@@ -47,6 +47,8 @@ export interface PlacesSettings {
   googleApiKey?: string;
   /** Extra Maps JS loader query params, merged over the defaults (libraries=places, loading=async). */
   googleMapsLoaderParams?: Record<string, string>;
+  /** When false/undefined, the address-block inline autocomplete overlay is suppressed even when this config is present. */
+  addressBlockEnabled?: boolean;
 }
 
 /** Normalized address prediction; raw provider records are mapped into this via normalizePrediction. */
