@@ -5,7 +5,7 @@
   ::ng-deep i {
     @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
       &.#{$name} {
-        color: $color;
+        color: getCssVarname($name);
       }
     }
   }

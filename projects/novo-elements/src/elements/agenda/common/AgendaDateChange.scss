@@ -4,16 +4,18 @@
   display: inline-block;
 
   .cal-date-change {
+    // TODO: semantic role TBD - could be border-radius-small
+    // TODO: semantic role TBD - could be border-radius or border-radius-small
     border-radius: 3px;
     border: 1px solid #e1e1e1;
-    background-color: $white;
+    background-color: var(--background-body);
     position: relative;
     padding: 10px 15px;
     text-align: center;
 
     > span {
       padding: 5px;
-      color: $black;
+      color: var(--form-text);
     }
 
     > i {

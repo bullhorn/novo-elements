@@ -4,14 +4,14 @@
 :host {
   &.active {
     display: inline-block;
-    margin-bottom: $spacing-md;
+    margin-bottom: var(--spacing-md);
   }
   > div {
     display: inline-block;
     border-radius: 0.25rem;
-    background-color: var(--background-main, $off-white);
+    background-color: var(--background-main, $color-off-white);
     color: var(--text-main, $dark);
-    padding: $spacing-lg;
+    padding: var(--spacing-lg);
     text-align: right;
     > div {
       display: flex;
@@ -19,7 +19,8 @@
         flex-shrink: 0;
         text-align: center;
         margin-top: 0.3rem;
-        margin-right: $spacing-md;
+        margin-right: var(--spacing-md);
+        // TODO: semantic role TBD
         color: #aaaaaa;
       }
       > p {

@@ -4,6 +4,7 @@ samp {
   background: var(--background-main);
   color: var(--code);
   border: 1px solid var(--border);
+  // TODO: semantic role TBD - could be border-radius or border-radius-small
   border-radius: 4px;
   padding: 0 0.5ch;
   margin: 0 0.5ch;
@@ -34,6 +35,7 @@ kbd {
   font-family: var(--font-family-mono);
   background: var(--background-main);
   border: 1px solid var(--border);
+  // TODO: semantic role TBD - could be border-radius or border-radius-small
   border-radius: 2px;
   color: var(--text-main);
   padding: 2px 4px 2px 4px;

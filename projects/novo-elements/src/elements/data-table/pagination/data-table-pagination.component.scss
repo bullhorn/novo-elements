@@ -67,7 +67,7 @@ $breakpoint: 1000px;
     }
     h5.rows {
       padding: 0;
-      font-size: 12px;
+      font-size: var(--font-size-sm);
       opacity: 0.75;
       letter-spacing: 0.1px;
     }
@@ -105,24 +105,26 @@ $breakpoint: 1000px;
         width: 2.4rem;
         height: 2.4rem;
         font-size: var(--font-size-text);
+        // TODO: semantic role TBD - could be border-radius or border-radius-small
         border-radius: 2px;
         list-style-type: none;
         cursor: pointer;
-        color: $company;
+        color: var(--color-company);
         &.disabled {
           opacity: 0.3;
           pointer-events: none;
         }
       }
       .page.active {
-        color: $company;
+        color: var(--color-company);
         background-color: rgba($black, 0.1);
         opacity: 1;
       }
     }
     .novo-data-table-of-total-amount {
-      color: $slate;
-      font-size: 12px;
+      // TODO: semantic role TBD - rec color-disabled
+      color: var(--color-slate);
+      font-size: var(--font-size-sm);
     }
   }
 }

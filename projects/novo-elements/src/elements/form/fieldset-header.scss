@@ -2,10 +2,11 @@
   background: var(--background-muted);
   box-sizing: content-box;
   padding: 1rem 1rem 1rem 0.5rem;
-  margin-bottom: 2rem;
+  margin-bottom: var(--spacing-2xl);
   display: flex;
-  margin-left: -1.5rem;
-  margin-right: -1.5rem;
+  margin-left: calc(-1 * var(--spacing-xl));
+  margin-right: calc(-1 * var(--spacing-xl));
+  // TODO: semantic role TBD - could be font-size-lg for closest cousin
   font-size: 1.8rem;
   ::ng-deep i,
   ::ng-deep novo-icon {

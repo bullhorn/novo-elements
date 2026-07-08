@@ -3,30 +3,32 @@
 :host {
   // Primary theme
   &[theme="primary"] {
-    @include theme-backgrounds("color");
-    background: $positive;
-    color: #fff;
+    @include theme-backgrounds-live();
+    background: var(--color-positive);
+    color: var(--color-contrast-positive);
     text-align: left;
 
     &:hover,
     &:focus {
-      box-shadow: $shadow-2, $shadow-1;
+
       filter: brightness(1.15);
+      box-shadow: var(--shadow-2), var(--shadow-1);
     }
     &:active {
       filter: brightness(0.85);
-      box-shadow: $shadow-1;
+      box-shadow: var(--shadow-1);
     }
 
     &[color="white"] {
-      background: $white;
-      color: $ocean;
+      background: var(--background-main);
+      color: var(--color-positive);
       &:hover,
       &:focus {
-        background: $background;
+        background: var(--background-main);
       }
       &:active {
-        background: darken($background, 5%);
+        background: darkenLive('--theme-background-main', 5);
+        //background: var(--background-muted);
       }
       i {
         background: rgba(0, 0, 0, 0.05);

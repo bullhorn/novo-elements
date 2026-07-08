@@ -18,10 +18,10 @@ entity-picker-results {
         width: 100%;
       }
       &.active {
-        background-color: lighten($positive, 35%);
+        background-color: brightenLive('--color-positive', 35);
       }
       &:hover {
-        background-color: lighten($positive, 39%);
+        background-color: brightenLive('--color-positive', 39);
       }
       .novo-item-content {
         flex-flow: row wrap;
@@ -49,14 +49,14 @@ entity-picker-results {
   .picker-loader,
   .picker-null-recent-results,
   .picker-null-results {
-    background-color: $white;
+    background-color: var(--background-body);
     text-align: center;
-    color: darken($light, 15%);
+    color: darkenLive('--color-light', 15);
     box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-    border: 1px solid $positive;
+    border: 1px solid var(--color-positive);
     transform: translateY(0%);
     transition: all 0.15s cubic-bezier(0.35, 0, 0.25, 1);
-    padding: $spacing-sm;
+    padding: var(--spacing-sm);
   }
 
   p.picker-error,
@@ -69,12 +69,12 @@ entity-picker-results {
 
   picker-loader,
   .picker-loader {
-    background-color: $white;
+    background-color: var(--background-body);
     display: flex;
     align-items: center;
     flex-direction: column;
     box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-    border: 1px solid $positive;
+    border: 1px solid var(--color-positive);
     transform: translateY(0%);
     transition: all 0.15s cubic-bezier(0.35, 0, 0.25, 1);
   }
@@ -92,21 +92,21 @@ picker-results,
 .picker-results,
 quick-note-results,
 .quick-note-results {
-  background-color: $white;
+  background-color: var(--background-body);
   cursor: default;
   line-height: 26px;
   width: 100%;
   display: block;
   novo-list,
   ul {
-    background-color: $white;
+    background-color: var(--background-body);
     max-height: 200px;
     overflow: auto;
     list-style: none;
     padding: 0;
     margin: 0;
     box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-    border: 1px solid $positive;
+    border: 1px solid var(--color-positive);
     transform: translateY(0%);
     transition: all 0.15s cubic-bezier(0.35, 0, 0.25, 1);
     display: block;
@@ -122,16 +122,16 @@ quick-note-results,
       h6 {
         padding-top: 0;
         font-weight: 400;
-        color: lighten($dark, 35%);
+        color: brightenLive('--color-dark', 35);
         strong {
           font-weight: 400;
-          color: $dark;
+          color: var(--font-color-base);
         }
       }
       &.active,
       &:focus,
       &:hover {
-        background-color: lighten($positive, 35%);
+        background-color: brightenLive('--color-positive', 35);
       }
       &.disabled {
         opacity: 0.5;
@@ -170,7 +170,7 @@ entity-picker-results {
     max-height: 49vh;
     overflow: auto;
     .novo-item-content {
-      margin-top: $spacing-sm;
+      margin-top: var(--spacing-sm);
       margin-left: 1.8rem;
       row-gap: 1rem;
       .novo-text {
@@ -197,7 +197,7 @@ distribution-list-picker-results {
   background: $white;
   padding: 1px;
   &.active {
-    border: 1px solid $positive;
+    border: 1px solid var(--color-positive);
   }
   .novo-list {
     min-height: 100%;
@@ -208,7 +208,7 @@ distribution-list-picker-results {
     .novo-list-item {
       display: block;
       transition: background-color 250ms;
-      border-bottom: 1px solid $background-dark;
+      border-bottom: 1px solid var(--background-dark);
       cursor: pointer;
       &.disabled {
         opacity: 0.5;
@@ -231,10 +231,10 @@ distribution-list-picker-results {
         margin-left: 15px;
       }
       &.active {
-        background-color: lighten($positive, 35%);
+        background-color: brightenLive('--color-positive', 35);
       }
       &:hover {
-        background-color: lighten($positive, 35%);
+        background-color: brightenLive('--color-positive', 35);
       }
       item-content {
         flex-flow: row nowrap;
@@ -292,7 +292,7 @@ distribution-list-picker-results {
     z-index: 9;
     position: absolute;
     width: 100%;
-    background-color: white;
+    background-color: var(--background-bright);
     color: black;
   }
 }

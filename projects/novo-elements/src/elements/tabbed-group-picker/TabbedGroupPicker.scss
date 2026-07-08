@@ -29,7 +29,7 @@
       box-shadow: none;
       box-sizing: content-box;
       transition: all 300ms;
-      color: $dark;
+      color: var(--font-color-base);
       &::placeholder {
         color: var(--form-placeholder);
       }
@@ -40,7 +40,7 @@
       bottom: 1em;
       right: 0.5em;
       color: $grey;
-      font-size: 1.2rem;
+      font-size: var(--font-size-sm);
       margin-right: 1em;
     }
     i.bhi-times {
@@ -67,7 +67,7 @@
       align-items: center;
 
       &.left {
-        border-right: 1px solid $light;
+        border-right: 1px solid var(--color-border);
         justify-content: space-between;
 
         .clear-all-button {
@@ -94,7 +94,7 @@
               &:hover {
                 .novo-tab-link {
                   font-weight: 400;
-                  color: $positive;
+                  color: var(--color-positive);
                 }
               }
             }
@@ -119,14 +119,14 @@
 
           .quick-select-label {
             padding: 0.7em 1.9em 0 1.9em;
-            background: lighten($light, 10%);
+            background: brightenLive('--color-light', 10);
             text-transform: uppercase;
             font-size: 0.8em;
           }
 
           .quick-select-list {
             .quick-select-item {
-              background: lighten($light, 10%);
+              background: brightenLive('--color-light', 10);
               padding: 0.5em 0.8em;
               border-bottom: none;
             }
@@ -143,7 +143,7 @@
 
           novo-option {
             &:hover.novo-option-inert {
-              background: var(--background-main, rgba($ocean, 0.1));
+              background: var(--background-main, rgb(from var(--color-ocean) r g b / 0.1));
             }
           }
         }
@@ -163,7 +163,7 @@
           }
           .empty-item-main-message {
             font-weight: 500;
-            color: $dark;
+            color: var(--font-color-base);
           }
           .empty-item-sub-message {
             font-size: 0.9em;

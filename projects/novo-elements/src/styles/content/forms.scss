@@ -85,6 +85,7 @@ input[type="button"] {
   padding: 0.5em 1em;
   outline: none;
   border: none;
+  // TODO: semantic role TBD - could be border-radius or border-radius-small
   border-radius: 4px;
 }
 
@@ -112,6 +113,7 @@ button:disabled {
 
 fieldset {
   border: 1px var(--focus) solid;
+  // TODO: semantic role TBD - could be border-radius or border-radius-small
   border-radius: 6px;
   margin: 0;
   margin-bottom: 12px;

@@ -6,7 +6,7 @@
     @include theme-backgrounds("color", false);
     border-radius: 50% !important;
     padding: 0;
-    font-size: 1.2rem;
+    font-size: var(--font-size-sm);
     width: 3.2rem;
     height: 3.2rem;
     display: inline-flex;
