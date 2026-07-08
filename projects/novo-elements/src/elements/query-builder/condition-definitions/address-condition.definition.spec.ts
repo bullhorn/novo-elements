@@ -74,7 +74,9 @@ describe('NovoDefaultAddressConditionDef', () => {
         state: 'Massachusetts',
         countryName: 'United States',
         formattedAddress: 'Boston, MA, USA',
-        referenceId: 'ref-1',
+        placeId: 'ref-1',
+        name: 'Boston',
+        types: ['locality', 'political'],
         viewport: { northeast: { latitude: 1, longitude: 2 }, southwest: { latitude: 3, longitude: 4 } },
       };
       NovoDefaultAddressConditionDef.prototype.selectPlace.call(buildContext(formGroup), flatEvent, formGroup, 'v1');
@@ -86,7 +88,7 @@ describe('NovoDefaultAddressConditionDef', () => {
       const flatEventWithUiState = {
         city: 'Boston',
         formattedAddress: 'Boston, MA, USA',
-        referenceId: 'ref-1',
+        placeId: 'ref-1',
         active: false,
         description: 'Boston, MA, USA',
       };
@@ -96,13 +98,13 @@ describe('NovoDefaultAddressConditionDef', () => {
       expect(stored.description).toBeUndefined();
       expect(stored.city).toBe('Boston');
       expect(stored.formattedAddress).toBe('Boston, MA, USA');
-      expect(stored.referenceId).toBe('ref-1');
+      expect(stored.placeId).toBe('ref-1');
     });
 
     it('should append to existing values', () => {
-      const formGroup = new FormGroup({ value: new FormControl([{ referenceId: 'existing' }]) });
-      NovoDefaultAddressConditionDef.prototype.selectPlace.call(buildContext(formGroup), { referenceId: 'new' }, formGroup, 'v1');
-      expect(formGroup.get('value').value).toEqual([{ referenceId: 'existing' }, { referenceId: 'new' }]);
+      const formGroup = new FormGroup({ value: new FormControl([{ placeId: 'existing' }]) });
+      NovoDefaultAddressConditionDef.prototype.selectPlace.call(buildContext(formGroup), { placeId: 'new' }, formGroup, 'v1');
+      expect(formGroup.get('value').value).toEqual([{ placeId: 'existing' }, { placeId: 'new' }]);
     });
   });
 

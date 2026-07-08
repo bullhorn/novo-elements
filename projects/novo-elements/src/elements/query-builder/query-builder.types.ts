@@ -103,7 +103,7 @@ export interface AddressData {
   formattedAddress?: string;
   location?: AddressGeoPoint;
   viewport?: AddressDetailViewport;
-  referenceId?: string;
+  placeId?: string;
   postalCodes?: string[];
   // common
   radius?: AddressRadius;
