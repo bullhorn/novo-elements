@@ -71,7 +71,9 @@ export class NovoTheme {
   }
 
   private applyThemeToDom(themeName: string): void {
-    if (typeof document === 'undefined' || !document.documentElement) return;
+    if (typeof document === 'undefined' || !document.documentElement) {
+      return;
+    }
     const root = document.documentElement;
     const normalized = normalizeThemeName(themeName);
     const generation = normalized.split('-')[0];
