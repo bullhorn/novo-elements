@@ -4,14 +4,14 @@ import { Router, Scroll } from '@angular/router';
 import { NovoLayoutContent, NovoModalService, NovoSidenavComponent, NovoTheme, NovoToastService } from 'novo-elements';
 import { delay, filter, startWith } from 'rxjs/operators';
 import { AnchorViewportScroller } from './anchor-scroller';
+
 @Component({
-    selector: 'novo-demo-app',
-    templateUrl: './app.component.html',
-    standalone: false,
+  selector: 'novo-demo-app',
+  templateUrl: './app.component.html',
+  standalone: false,
 })
 export class AppComponent implements AfterViewInit {
   menuOpen: boolean = false;
-  bh2026Theme: boolean = false;
   sectionRoutes: Array<any>;
   designRoutes: Array<any>;
   componentRoutes: Array<any>;
@@ -106,13 +106,14 @@ export class AppComponent implements AfterViewInit {
   }
 
   toggleDarkMode() {
-    document.documentElement.classList.toggle('theme-dark');
+    this.theme.themeName = this.theme.themeName.endsWith('-dark')
+      ? this.theme.themeName.replace('-dark', '-light')
+      : this.theme.themeName.replace('-light', '-dark');
   }
 
   toggleBh2026Theme() {
-    this.bh2026Theme = !this.bh2026Theme;
-    // Drives the real NovoTheme path: use() -> applyThemeToDom() sets
-    // data-theme="bh2026" for the bh2026 generation (cleared for the bh2022 base).
-    this.theme.use({ themeName: this.bh2026Theme ? 'bh2026-light' : 'bh2022-light' });
+    this.theme.themeName = this.theme.themeName.startsWith('bh2026')
+      ? this.theme.themeName.replace('bh2026', 'bh2022')
+      : this.theme.themeName.replace('bh2022', 'bh2026');
   }
 }

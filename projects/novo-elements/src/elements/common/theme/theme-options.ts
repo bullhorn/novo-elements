@@ -70,19 +70,12 @@ export class NovoTheme {
     this.onThemeChange.emit({ themeName: theme.themeName, options: theme });
   }
 
-  /**
-   * Reflects the active theme's *generation* onto the document root so the token CSS can
-   * target it. Override generations (bh2026) set `data-theme=<generation>` — the
-   * `variables-bh2026.css` set is scoped to `[data-theme="bh2026"]`. The base generation
-   * (bh2022) clears the attribute and uses the default `:root` vars. Light/dark remains an
-   * orthogonal `theme-dark` class, layered on either base.
-   */
   private applyThemeToDom(themeName: string): void {
-    if (typeof document === 'undefined' || !document.documentElement) {
-      return;
-    }
+    if (typeof document === 'undefined' || !document.documentElement) return;
     const root = document.documentElement;
-    const generation = normalizeThemeName(themeName).split('-')[0];
+    const normalized = normalizeThemeName(themeName);
+    const generation = normalized.split('-')[0];
+    root.classList.toggle('theme-dark', normalized.endsWith('-dark'));
     if (OVERRIDE_GENERATIONS.has(generation)) {
       root.dataset.theme = generation;
     } else {
