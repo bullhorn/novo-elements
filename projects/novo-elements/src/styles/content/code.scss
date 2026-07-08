@@ -34,8 +34,7 @@ kbd {
   font-family: var(--font-family-mono);
   background: var(--background-main);
   border: 1px solid var(--border);
-  // TODO(token): --border-radius-small not yet in novo-design-tokens (fallback 2px)
-  border-radius: var(--border-radius-small, 2px);
+  border-radius: var(--border-radius-xsm, 2px);
   color: var(--text-main);
   padding: 2px 4px 2px 4px;
 }

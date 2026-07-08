@@ -4,8 +4,7 @@
   display: inline-block;
 
   .cal-date-change {
-    // TODO(token): --border-radius-small not yet in novo-design-tokens (fallback 3px)
-    border-radius: var(--border-radius-small, 3px);
+    border-radius: var(--border-radius-sm, 3px);
     border: 1px solid #e1e1e1;
     background-color: var(--background-body);
     position: relative;

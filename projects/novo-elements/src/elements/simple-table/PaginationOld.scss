@@ -43,8 +43,7 @@ novo-pagination {
       padding: 0 10px;
       line-height: 2.4rem;
       font-size: var(--font-size-text);
-      // TODO(token): --border-radius-small not yet in novo-design-tokens (fallback 2px)
-      border-radius: var(--border-radius-small, 2px);
+      border-radius: var(--border-radius-xsm, 2px);
       text-align: center;
       list-style-type: none;
       cursor: pointer;

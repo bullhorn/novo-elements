@@ -105,8 +105,7 @@ $breakpoint: 1000px;
         width: 2.4rem;
         height: 2.4rem;
         font-size: var(--font-size-text);
-        // TODO(token): --border-radius-small not yet in novo-design-tokens (fallback 2px)
-        border-radius: var(--border-radius-small, 2px);
+        border-radius: var(--border-radius-xsm, 2px);
         list-style-type: none;
         cursor: pointer;
         color: var(--color-company);

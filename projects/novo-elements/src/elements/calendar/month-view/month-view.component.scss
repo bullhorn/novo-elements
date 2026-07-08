@@ -30,8 +30,7 @@
       text-overflow: ellipsis;
       margin: 5px;
       font-weight: normal;
-      // TODO(token): --border-radius-small not yet in novo-design-tokens (fallback 3px)
-      border-radius: var(--border-radius-small, 3px);
+      border-radius: var(--border-radius-sm, 3px);
       &.selected {
         background-color: var(--selection);
         color: #fff;

@@ -31,8 +31,7 @@
     width: 32px;
     height: 32px;
     background: rgba(0, 0, 0, 0.15);
-    // TODO(token): --border-radius-small not yet in novo-design-tokens (fallback 3px)
-    border-radius: var(--border-radius-small, 3px);
+    border-radius: var(--border-radius-sm, 3px);
   }
 
   .close-icon {
@@ -174,8 +173,7 @@
   }
 
   &[class*="growl"] {
-    // TODO(token): --border-radius-small not yet in novo-design-tokens (fallback 3px)
-    border-radius: var(--border-radius-small, 3px);
+    border-radius: var(--border-radius-sm, 3px);
     max-width: 350px;
   }
 

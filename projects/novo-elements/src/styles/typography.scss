@@ -87,8 +87,7 @@ address {
 
 mark {
   background-color: var(--highlight);
-  // TODO(token): --border-radius-small not yet in novo-design-tokens (fallback 2px)
-  border-radius: var(--border-radius-small, 2px);
+  border-radius: var(--border-radius-xsm, 2px);
   padding: 0 2px 0 2px;
   color: #000;
 }

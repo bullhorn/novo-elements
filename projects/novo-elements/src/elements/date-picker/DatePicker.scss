@@ -132,8 +132,7 @@
         color: var(--color-positive);
         font-weight: 600;
         .month {
-          // TODO(token): --border-radius-small not yet in novo-design-tokens (fallback 2px)
-          border-radius: var(--border-radius-small, 2px);
+          border-radius: var(--border-radius-xsm, 2px);
           padding: 3px 8px;
           &:hover {
             background: var(--color-positive);
@@ -142,8 +141,7 @@
           }
         }
         .year {
-          // TODO(token): --border-radius-small not yet in novo-design-tokens (fallback 2px)
-          border-radius: var(--border-radius-small, 2px);
+          border-radius: var(--border-radius-xsm, 2px);
           padding: 3px 8px;
           &:hover {
             background: var(--color-positive);
