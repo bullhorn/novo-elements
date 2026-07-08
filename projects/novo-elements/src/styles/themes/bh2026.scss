@@ -1,6 +1,4 @@
-// Modern theme — maps the modern design tokens (Figma "subatomic") onto the
-// semantic CSS-variable contract that novo-elements components consume.
-
+// Maps design tokens (Figma "subatomic") onto the semantic CSS-variable contract for novo-elements components.
 @mixin bh2026-variables {
   // Live color-math direction (light): elevate() brightens, recede() darkens.
   --bg-fade-multiplier: 1;

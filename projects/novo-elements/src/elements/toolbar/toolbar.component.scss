@@ -61,8 +61,7 @@
   }
 }
 
-// Modern theme: swap the thick entity-colored accent underline for a subtle neutral
-// border (per Tier-3 header spec; entity color stays on the icon/avatar).
+// bh2026: swap the thick entity-colored accent underline for a subtle neutral border
 :host-context([data-theme='bh2026']) {
   .novo-toolbar .novo-toolbar-row[class*='novo-accent-'],
   .novo-toolbar.novo-toolbar-single-row[class*='novo-accent-'] {

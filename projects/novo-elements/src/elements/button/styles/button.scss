@@ -5,8 +5,6 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  // Component-level vars: fallbacks preserve the classic look; the modern theme
-  // overrides these under [data-theme="bh2026"] (see styles/themes/modern.scss).
   padding: var(--novo-button-padding-y, 0) var(--novo-button-padding-x, var(--spacing-md));
   font-size: var(--font-size-button);
   font-weight: var(--novo-button-font-weight, inherit);
@@ -70,7 +68,6 @@
     outline: none;
   }
 
-  // Modern theme supplies a focus ring via box-shadow; classic = none (unchanged).
   &:focus-visible {
     box-shadow: var(--novo-button-focus-ring, none);
   }

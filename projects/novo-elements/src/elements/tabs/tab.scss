@@ -157,8 +157,8 @@
   }
 }
 
-// Modern theme: charcoal tabs, near-black active text + rounded neutral indicator
-// (Tier-3 tabs spec; the dark underline in the Figma, not an entity color).
+// bh2026: charcoal tabs, near-black active text + rounded neutral indicator
+// TODO: (Tier-3 tabs spec; the dark underline in the Figma, not an entity color).
 :host-context([data-theme='bh2026']) {
   .novo-tab-link {
     color: var(--color-content-link, #282828);

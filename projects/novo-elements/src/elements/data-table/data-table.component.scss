@@ -620,12 +620,7 @@ novo-data-table {
   }
 }
 
-// Modern theme: stronger, subtler column headers (medium weight + subtle content
-// color), matching the modern field-label treatment. Borders/backgrounds/font
-// already shift via the modern semantic-var foundation; row selection/sort
-// accents ride on the deferred status color (--color-positive).
-// NOTE: this component is ViewEncapsulation.None, so styles are global and
-// :host-context is NOT transformed — use a plain [data-theme] ancestor selector.
+// bh2026: stronger, subtler column headers (medium weight + subtle content color), matching modern field-label treatment.
 [data-theme='bh2026'] {
   .novo-data-table-header-cell,
   .novo-data-table-header-cell > label {
