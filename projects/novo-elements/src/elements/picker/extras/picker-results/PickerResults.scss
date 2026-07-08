@@ -8,8 +8,11 @@ entity-picker-results {
   max-width: 100%;
   z-index: 10;
   top: 100%;
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
   .novo-list {
-    border: 1px solid #4a89dc;
+    border: 1px solid var(--color-border-default, #4a89dc);
+    border-radius: var(--border-radius-sm);
     .novo-list-item {
       cursor: pointer;
       flex: 0 0;
@@ -297,13 +300,3 @@ distribution-list-picker-results {
   }
 }
 
-// Modern theme: rounded picker results + neutral border (was hardcoded blue).
-[data-theme='bh2026'] picker-results,
-[data-theme='bh2026'] entity-picker-results {
-  border-radius: var(--border-radius-sm, 0.8rem);
-  overflow: hidden;
-  .novo-list {
-    border-color: var(--color-border-default, #f0f5f9);
-    border-radius: var(--border-radius-sm, 0.8rem);
-  }
-}

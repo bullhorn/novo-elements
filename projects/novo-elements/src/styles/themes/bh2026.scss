@@ -7,8 +7,8 @@
 
   // Typeface — modern uses Inter (classic uses Montserrat). Override BOTH --font-family-base
   // (html) and --font-family-body (body, used by most content) so all text picks up Inter.
-  --font-family-base: var(--typography-font-family-base, 'Inter', Helvetica, Arial, sans-serif);
-  --font-family-body: var(--typography-font-family-base, 'Inter', Helvetica, Arial, sans-serif);
+  --font-family-base: var(--typography-font-family-base, Inter), Helvetica, Arial, sans-serif;
+  --font-family-body: var(--typography-font-family-base, Inter), Helvetica, Arial, sans-serif;
 
   // --- Surfaces ---
   --background-body:   var(--color-gray-white, #ffffff);
@@ -50,7 +50,16 @@
   --spacing-2xl: var(--spacing-48, 4.8rem);
   --spacing-3xl: var(--spacing-64, 6.4rem);
 
+  // --border-radius-round in bh2026.css tokens = 999px (pill), but components that use it
+  // (ControlGroup, field-outline, chips) expect a modest rounding. Override to the
+  // standard form-element radius; pill shapes use explicit 999px literals.
+  --border-radius-round: var(--border-radius-sm);
+
   // --- Component tokens (curated; Track 2 migration) ---
+  // Surface border — applied via var(--novo-surface-border, none) in component base rules.
+  // Undefined in bh2022 so classic panels have no border; bh2026 gets the light surface border.
+  --novo-surface-border: 1px solid var(--color-border-default, #f0f5f9);
+
   // Button — plain/base treatment, consumed via --novo-button-* (per Tier-3 button spec).
   --novo-button-height:         var(--spacing-48, 4.8rem);
   --novo-button-padding-y:      var(--spacing-8, 0.8rem);

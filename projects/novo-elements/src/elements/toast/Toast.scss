@@ -12,6 +12,7 @@
   color: var(--text-bg-contrast);
   padding: var(--spacing-md);
   box-shadow: var(--shadow-1);
+  border-radius: var(--border-radius-sm);
 
   &.show {
     display: grid !important;
@@ -31,7 +32,7 @@
     width: 32px;
     height: 32px;
     background: rgba(0, 0, 0, 0.15);
-    border-radius: var(--border-radius-sm, 3px);
+    border-radius: var(--border-radius-sm);
   }
 
   .close-icon {
@@ -300,9 +301,4 @@
       }
     }
   }
-}
-
-// Modern theme: rounded toast surface.
-:host-context([data-theme='bh2026']) {
-  border-radius: var(--border-radius-sm, 0.8rem);
 }

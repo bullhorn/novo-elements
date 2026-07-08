@@ -8,7 +8,7 @@
   }
   > div {
     display: inline-block;
-    border-radius: 0.25rem;
+    border-radius: var(--border-radius-sm);
     background-color: var(--background-main, $color-off-white);
     color: var(--text-main, $dark);
     padding: var(--spacing-lg);
@@ -31,9 +31,4 @@
       }
     }
   }
-}
-
-// Modern theme: rounder tip-well surface.
-:host-context([data-theme='bh2026']) > div {
-  border-radius: var(--border-radius-sm, 0.8rem);
 }

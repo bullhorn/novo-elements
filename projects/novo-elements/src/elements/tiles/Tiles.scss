@@ -12,7 +12,7 @@
     background: var(--background-bright);
     display: flex;
     border: solid thin var(--color-slate);
-    border-radius: var(--border-radius-sm, 3px);
+    border-radius: var(--border-radius-sm);
     .tile {
       margin: 2px;
       gap: .5rem;
@@ -46,8 +46,7 @@
   }
 }
 
-// Modern theme: rounder segmented control + neutral border (active-tile accent deferred).
+// Modern theme: neutral border (slate → default; radius handled by token in base rule).
 :host-context([data-theme='bh2026']) > .tile-container {
-  border-radius: var(--border-radius-sm, 0.8rem);
   border-color: var(--color-border-default, #f0f5f9);
 }

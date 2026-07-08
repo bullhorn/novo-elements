@@ -53,7 +53,6 @@ $switch-thumb-size: 20px !default;
     width: $switch-width - 2px;
     top: calc($switch-height / 2) - calc($switch-bar-height / 2);
     height: $switch-bar-height;
-    // TODO(token): --border-radius-lg not yet in novo-design-tokens (fallback 8px)
     border-radius: var(--border-radius-lg, 8px);
     position: absolute;
   }

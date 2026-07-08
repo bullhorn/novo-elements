@@ -13,6 +13,8 @@
     color: var(--text-main, $dark);
     background-clip: padding-box;
     box-shadow: $shadow-popover;
+    border-radius: var(--border-radius-sm);
+    border: var(--novo-surface-border, none);
 
     &.top {
       margin-top: -1rem;
@@ -162,10 +164,4 @@
       white-space: pre-line;
     }
   }
-}
-
-// Modern theme: rounded, bordered popover surface.
-:host-context([data-theme='bh2026']) .popover {
-  border-radius: var(--border-radius-sm, 0.8rem);
-  border: 1px solid var(--color-border-default, #f0f5f9);
 }
