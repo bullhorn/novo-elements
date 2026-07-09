@@ -59,7 +59,7 @@
   // Undefined in bh2022 so classic panels have no border; bh2026 gets the light surface border.
   --novo-surface-border: 1px solid var(--color-border-default, #f0f5f9);
 
-  // Button — plain/base treatment, consumed via --novo-button-* (per Tier-3 button spec).
+  // Button — plain/base treatment
   --novo-button-height:         var(--spacing-48, 4.8rem);
   --novo-button-padding-y:      var(--spacing-8, 0.8rem);
   --novo-button-padding-x:      var(--spacing-16, 1.6rem);
@@ -73,8 +73,6 @@
   --novo-button-color:          var(--color-content-link, #282828);
   --novo-button-font-weight:    var(--typography-button-font-weight, 500);
   --novo-button-letter-spacing: var(--typography-letter-spacing-half, 0.05rem);
-  // --novo-button-focus-ring + hover/disabled states: TODO — pending Tier-3 focus
-  // tokens (brand/secondary, button bg-focus) and per-variant hover handling.
 
   // Themed neutral variant (button[theme="standard"]) consumes these semantic vars.
   --button-background:          var(--color-grayscale-white, #ffffff);
@@ -82,16 +80,7 @@
   // NOTE: primary/secondary variants ([theme="primary"|"secondary"]) use --color-positive
   // (the deferred status/brand accent) — they stay accent-colored until that decision lands.
 
-  // NOTE: not yet overridden (inherit classic / TODO follow-up):
-  //   --code, --variable, --highlight, --scrollbar-thumb(-hover),
-  //   --button-hover, --form-placeholder, --form-text.
-
-  // PROVISIONAL modern accent (best-guess, pending design sign-off). Overriding
-  // --color-positive cascades through the getColor() var contract to primary/
-  // secondary buttons, checkbox/radio checked, slider, progress, select header,
-  // focus/selection, links, etc. Amplify-adjacent brand blue; replace with the
-  // real brand/primary token when design delivers it. --color-negative / entity
-  // / status colors stay classic for now.
+  // PROVISIONAL modern accent
   --color-positive: #0095da;
 }
 

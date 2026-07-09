@@ -108,7 +108,6 @@
 }
 
 // bh2026: larger 16px radius (border.radius.md) for the rounded modern surface language.
-// TODO: novo-modal-radius is not defined here
 :host-context([data-theme='bh2026']) {
-  border-radius: var(--novo-modal-radius, 1.6rem);
+  border-radius: var(--border-radius-md, 1.6rem);
 }

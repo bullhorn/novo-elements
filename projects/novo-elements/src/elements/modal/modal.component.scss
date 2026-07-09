@@ -47,10 +47,10 @@
 
 // bh2026: larger 16px radius (border.radius.md) for the rounded modern surface language; header top corners follow.
 :host-context([data-theme='bh2026']) {
-  border-radius: var(--novo-modal-radius, 1.6rem);
+  border-radius: var(--border-radius-md, 1.6rem);
 
   > ::ng-deep header {
-    border-top-left-radius: var(--novo-modal-radius, 1.6rem);
-    border-top-right-radius: var(--novo-modal-radius, 1.6rem);
+    border-top-left-radius: var(--border-radius-md, 1.6rem);
+    border-top-right-radius: var(--border-radius-md, 1.6rem);
   }
 }

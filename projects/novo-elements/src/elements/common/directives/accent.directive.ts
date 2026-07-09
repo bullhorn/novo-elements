@@ -13,7 +13,7 @@ export class AccentColorDirective implements OnDestroy {
 
   @HostBinding('class')
   get hb_textColor() {
-    // Classic look is a fully colored record header. bh2022 theme is an entity color border.
+    // Classic look is a fully colored record header. bh2022 theme is an entity colored bottom border.
     if (this.theme.themeName === 'classic') {
       return `novo-theme-${this.accent}`;
     } else if (this.theme.themeName.includes('bh2022')) {
