@@ -24,17 +24,19 @@
       min-height: inherit;
     }
 
-    @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
+    @include theme-colors() using($name, $color, $contrast, $tint, $shade, $pale) {
       &.novo-color-#{$name},
       &.novo-theme-#{$name} {
         color: getContrastColor($name);
         background: getCssVarname($name);
+
         & > novo-text,
         & > novo-label,
         & > novo-icon,
         & novo-title {
           color: inherit;
         }
+
         novo-action,
         .links {
           button,
@@ -42,6 +44,7 @@
             color: inherit;
           }
         }
+
         .novo-divider.novo-divider-vertical {
           border-right-color: getTintColor($name);
         }
@@ -58,13 +61,5 @@
     box-sizing: border-box;
     flex-direction: column;
     width: 100%;
-  }
-}
-
-// bh2026: swap the thick entity-colored accent underline for a subtle neutral border
-:host-context([data-theme='bh2026']) {
-  .novo-toolbar .novo-toolbar-row[class*='novo-accent-'],
-  .novo-toolbar.novo-toolbar-single-row[class*='novo-accent-'] {
-    border-bottom: 1px solid var(--color-border-default, #f0f5f9);
   }
 }

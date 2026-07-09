@@ -39,14 +39,15 @@
   --font-size-title:   var(--typography-title-font-size, 2.4rem);
   --font-size-tab:     var(--typography-tabs-default-font-size, 1.4rem);
 
-  // --- Spacing rhythm (8/16/24/32 → rem at ÷10) ---
-  --spacing-xs:  var(--spacing-4, 0.4rem);
-  --spacing-sm:  var(--spacing-8, 0.8rem);
-  --spacing-md:  var(--spacing-16, 1.6rem);
-  --spacing-lg:  var(--spacing-24, 2.4rem);
-  --spacing-xl:  var(--spacing-32, 3.2rem);
-  --spacing-2xl: var(--spacing-48, 4.8rem);
-  --spacing-3xl: var(--spacing-64, 6.4rem);
+  // bh2026 tokens are authored at a 16px rem base (web standard), unlike bh2022's 10px,
+  // but the conversion to 16px base would be a massive rewrite, so spacing gets corrected here.
+  --spacing-xs:  0.25rem;
+  --spacing-sm:  0.5rem;
+  --spacing-md:  1rem;
+  --spacing-lg:  1.5rem;
+  --spacing-xl:  2rem;
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
 
   // --border-radius-round in bh2026.css tokens = 999px (pill), but components that use it
   // (ControlGroup, field-outline, chips) expect a modest rounding. Override to the
