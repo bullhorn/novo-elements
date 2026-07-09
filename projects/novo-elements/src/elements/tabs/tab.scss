@@ -165,6 +165,7 @@
     color: var(--color-content-link, #282828);
     // Tabs are Title Case, not uppercase.
     text-transform: none;
+    font-weight: 400;
   }
 
   &.active,
@@ -172,12 +173,19 @@
     color: var(--color-content-link-hover, #221f1f);
     .novo-tab-link {
       color: var(--color-content-link-hover, #221f1f);
+      font-weight: 500;
     }
     .indicator {
       background: var(--color-content-link-hover, #221f1f);
       border-radius: 999px;
       // Quarter round from the top, flat on bottom
       border-radius: 3px 3px 0 0 / 100% 100% 0 0;
+    }
+  }
+
+  &:hover {
+    .novo-tab-link {
+      font-weight: 500;
     }
   }
 }
