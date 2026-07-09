@@ -13,13 +13,13 @@ export class AccentColorDirective implements OnDestroy {
 
   @HostBinding('class')
   get hb_textColor() {
-    // 'classic' (main, entity-colored) keeps the legacy treatment; every other theme
-    // (main modern-light, and the bh2022/bh2026 generations) uses the neutral accent.
-    // This makes flag-off byte-identical to main while the refresh (bh2026-light) stays neutral.
+    // Classic look is a fully colored record header. bh2022 theme is an entity color border.
     if (this.theme.themeName === 'classic') {
       return `novo-theme-${this.accent}`;
+    } else if (this.theme.themeName.includes('bh2022')) {
+      return `novo-accent-${this.accent}`;
     }
-    return `novo-accent-${this.accent}`;
+    return '';
   }
 
   constructor(private theme: NovoTheme, protected cdr: ChangeDetectorRef) {
