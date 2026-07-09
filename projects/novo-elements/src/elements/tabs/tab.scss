@@ -173,6 +173,8 @@
     .indicator {
       background: var(--color-content-link-hover, #221f1f);
       border-radius: 999px;
+      // Quarter round from the top, flat on bottom
+      border-radius: 3px 3px 0 0 / 100% 100% 0 0;
     }
   }
 }
