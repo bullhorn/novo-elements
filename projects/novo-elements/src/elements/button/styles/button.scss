@@ -14,7 +14,7 @@
   color: var(--novo-button-color, var(--text-main, $dark));
   background: var(--novo-button-bg, transparent);
   border-radius: var(--novo-button-radius, 3px);
-  text-transform: uppercase;
+  text-transform: var(--novo-button-text-transform, uppercase);
   transition: all 200ms ease-in-out;
   gap: var(--novo-button-gap, var(--spacing-md));
   cursor: pointer;
@@ -31,7 +31,7 @@
     line-height: 1;
     font-size: inherit;
     color: inherit;
-    text-transform: uppercase;
+    text-transform: var(--novo-button-text-transform, uppercase);
   }
 
   i {
