@@ -126,7 +126,6 @@
       font-size: var(--font-size-xs);
       &:focus,
       &:hover {
-        // TODO(token): semantic role TBD - rec font-color-secondary or shade
         color: darkenLive('--color-light', 55);
       }
       i {
@@ -154,7 +153,6 @@
       font-size: 0.8rem;
       color: #acacac;
       &:hover {
-        // TODO(token): semantic role TBD - rec font-color-secondary or dark shade
         color: darken(#acacac, 15%);
       }
     }

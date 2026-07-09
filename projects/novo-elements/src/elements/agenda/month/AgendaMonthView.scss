@@ -46,7 +46,6 @@
 
     .agenda-cell-row .agenda-cell:hover,
     .agenda-cell.agenda-has-events.agenda-open {
-      // TODO(design): semantic role TBD - rec theme-background-dark
       background-color: #ededed;
     }
 
@@ -133,7 +132,6 @@
     }
 
     .agenda-day-cell.agenda-weekend .agenda-day-number {
-      // TODO(design): semantic role TBD - Should likely be darkened off negative, but may need contrast attention
       color: darkred;
     }
 
@@ -142,19 +140,16 @@
     }
 
     .agenda-day-cell.agenda-today .agenda-day-number {
-      // TODO(design): semantic role TBD - Should likely be text-main
       color: var(--font-color-base);
     }
 
     .agenda-day-cell.agenda-drag-over {
-      // TODO(design): semantic role TBD - Should likely be theme-background-muted
       background-color: darken(#ededed, 5%) !important;
     }
 
     .agenda-open-day-events {
       padding: 15px;
       color: white;
-      // TODO(design): semantic role TBD - close to steel or neutral
       background-color: #555;
       box-shadow: inset 0 0 15px 0 rgba(0, 0, 0, 0.5);
     }

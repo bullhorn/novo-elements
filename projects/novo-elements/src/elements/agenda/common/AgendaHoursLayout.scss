@@ -35,7 +35,6 @@
       padding-top: 5px;
       width: 70px;
       text-align: center;
-      // TODO(token): semantic role TBD - rec disabled
       color: $grey;
     }
 
@@ -47,7 +46,6 @@
 
     .cal-hour-segment:hover,
     .cal-drag-over .cal-hour-segment {
-      // TODO(design): semantic role TBD - rec background-bright
       background-color: #ededed;
     }
   }

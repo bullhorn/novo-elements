@@ -39,7 +39,6 @@
       min-width: 0;
       flex: 1;
       ::ng-deep i.bhi-move {
-        // TODO(design): semantic role TBD
         color: var(--font-color-secondary);
         margin-right: 0.3em;
         cursor: pointer;
@@ -65,7 +64,6 @@
       }
     }
     .actions {
-      // TODO(design): semantic role TBD - rec text-main
       color: brightenLive('--color-dark', 15);
       white-space: nowrap;
     }
@@ -76,7 +74,6 @@
     max-width: inherit;
     text-align: center;
     line-height: 25px;
-    // TODO(token): semantic role TBD - rec new "text-secondary"
     color: brightenLive('--color-grey', 10);
     i {
       display: block;

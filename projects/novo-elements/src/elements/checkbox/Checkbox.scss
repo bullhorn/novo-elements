@@ -29,7 +29,6 @@
     }
     &.checked {
       label {
-        // TODO(token): #d2d2d2 has no design token yet; register it, then migrate to darkenLive('--color-...', 60)
         color: darken(#d2d2d2, 60%);
         i {
           animation: iconEnter 160ms ease-in-out;
@@ -58,7 +57,6 @@
       }
     }
     label {
-      // TODO(token): #d2d2d2 has no design token yet; register it, then migrate to darkenLive('--color-...', 30)
       color: darken(#d2d2d2, 30%);
       margin-left: 0;
       cursor: pointer;

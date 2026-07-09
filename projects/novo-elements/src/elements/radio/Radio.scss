@@ -101,7 +101,6 @@
 
     @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
       &.checked[color="#{$name}"] {
-        // TODO(design): Use contrast color?
         color: $white;
         background: getCssVarname($name);
       }

@@ -90,7 +90,6 @@ novo-dynamic-form {
             }
             input:not(.picker-input):not(.tiles-input) {
               &::placeholder {
-                // TODO(token): semantic role TBD - rec text-disabled or text-muted
                 color: brightenLive('--color-dark', 30) !important;
               }
               border-bottom-style: dashed !important;
@@ -516,7 +515,6 @@ novo-dynamic-form {
       }
     }
   }
-  // TODO(design): Better support for dark theming may mean simply changing CSS vars, rather than overrides of this fashion.
   &[dark] {
     .novo-form-container {
       form {

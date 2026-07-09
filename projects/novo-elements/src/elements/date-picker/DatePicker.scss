@@ -64,7 +64,6 @@
       &.week-select-mode {
         & > span {
           cursor: default;
-          // TODO(design): Do we need this color var? Should be text-main
           color: $font-color-base;
           pointer-events: none;
           opacity: 1 !important;

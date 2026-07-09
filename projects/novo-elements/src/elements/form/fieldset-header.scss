@@ -6,7 +6,6 @@
   display: flex;
   margin-left: calc(-1 * var(--spacing-xl));
   margin-right: calc(-1 * var(--spacing-xl));
-  // TODO(design): semantic role TBD - could be font-size-lg for closest cousin
   font-size: 1.8rem;
   ::ng-deep i,
   ::ng-deep novo-icon {

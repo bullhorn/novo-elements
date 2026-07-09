@@ -42,7 +42,6 @@
         font-size: 1em;
         background: transparent !important;
         border: none;
-        // TODO(design): semantic role TBD - rec border, more in the same file
         border-bottom: 1px solid brightenLive('--color-dark', 45);
         border-radius: 0;
         outline: none;
@@ -100,7 +99,6 @@
     novo-nav {
       max-height: 140px;
       overflow: auto;
-      // TODO(design): semantic role TBD - rec border
       border-bottom: 1px solid #ccc;
       > novo-tab {
         height: 30px;

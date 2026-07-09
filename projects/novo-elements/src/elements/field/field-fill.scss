@@ -45,9 +45,7 @@
       }
       &.novo-field-disabled {
         .novo-field-input {
-          // TODO(token): semantic role TBD - rec color-shade-disabled
           color: $grey !important;
-          // TODO(token): semantic role TBD - rec define a new border color
           border-bottom: 1px dashed $grey !important;
         }
         &:not(.novo-focused):hover {

@@ -458,7 +458,6 @@ novo-data-table {
     display: flex;
     align-items: center;
     justify-content: center;
-    // TODO(token): semantic role TBD - rec font-secondary
     color: $grey;
     z-index: 5;
   }
@@ -613,7 +612,6 @@ novo-data-table {
   .filter-null-results {
     background-color: var(--background-body);
     text-align: center;
-    // TODO(token): semantic role TBD - rec color-disabled
     color: darkenLive('--color-light', 15);
     background: transparent;
     font-weight: 500;
