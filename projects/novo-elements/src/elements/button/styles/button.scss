@@ -10,7 +10,7 @@
   font-weight: var(--novo-button-font-weight, inherit);
   letter-spacing: var(--novo-button-letter-spacing, normal);
   height: var(--novo-button-height, 3rem);
-  border: var(--novo-button-border-width, 0) solid var(--novo-button-border-color, transparent);
+  border: none;
   color: var(--novo-button-color, var(--text-main, $dark));
   background: var(--novo-button-bg, transparent);
   border-radius: var(--novo-button-radius, 3px);
