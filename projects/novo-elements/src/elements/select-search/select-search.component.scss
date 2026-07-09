@@ -64,7 +64,7 @@ $novo-select-search-toggle-all-checkbox-x: 16px;
 
 ::ng-deep .novo-option.contains-novo-select-search {
   /* let move novo-select-search at the top of the dropdown. As option is disabled, there will be no-ripple hence safe. */
-  padding: 0 !important; // Option group padding was being applied as well. 
+  padding: 0 !important; // Option group padding was being applied as well.
   border: none;
 
   .novo-icon {
@@ -84,12 +84,4 @@ $novo-select-search-toggle-all-checkbox-x: 16px;
     padding-left: 0px;
     padding-right: $novo-select-search-toggle-all-checkbox-x;
   }
-}
-
-// Portalled overlay — ::ng-deep is required (panel rendered outside :host).
-// Token cascade handles theming: --border-radius-sm and --novo-surface-border
-// resolve to classic values under bh2022 and modern values under bh2026.
-::ng-deep .novo-select-search-panel {
-  border-radius: var(--border-radius-sm);
-  border: var(--novo-surface-border, none);
 }

@@ -161,7 +161,7 @@
 :host-context([data-theme='bh2026']) {
   .novo-tab-link {
     color: var(--color-content-link, #282828);
-    // Modern tabs are Title Case (mockup), not uppercase.
+    // Tabs are Title Case, not uppercase.
     text-transform: none;
   }
   &.active,

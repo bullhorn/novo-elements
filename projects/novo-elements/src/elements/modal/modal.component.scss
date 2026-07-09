@@ -45,7 +45,7 @@
   }
 }
 
-// bh2026: larger 16px radius (border.radius.md) for the rounded modern surface language; header top corners follow.
+// bh2026: rounded modal and header top corners.
 :host-context([data-theme='bh2026']) {
   border-radius: var(--border-radius-md, 1.6rem);
 

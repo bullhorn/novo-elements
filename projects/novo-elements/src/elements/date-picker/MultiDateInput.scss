@@ -14,8 +14,6 @@
       margin: 0px;
     }
     &.selected {
-      // Migrated hardcoded -> semantic: novo-multi-date-input is unused in novo (verified),
-      // so consolidating to the recommended role has no real-consumer impact.
       background: var(--background-main, $light);
       border-radius: 50%;
     }

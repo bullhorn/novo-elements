@@ -107,7 +107,7 @@
   }
 }
 
-// bh2026: larger 16px radius (border.radius.md) for the rounded modern surface language.
+// bh2026: rounded notifications
 :host-context([data-theme='bh2026']) {
   border-radius: var(--border-radius-md, 1.6rem);
 }

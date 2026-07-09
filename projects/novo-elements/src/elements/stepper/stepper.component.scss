@@ -99,7 +99,7 @@ $novo-stepper-line-gap: 8px !default;
   }
 }
 
-// bh2026: neutral progress circles (mockup shows neutral outline circles, not filled status badges)
+// bh2026: neutral progress circles
 :host-context([data-theme='bh2026']) {
   .novo-step-icon .novo-step-number {
     background: var(--color-content-default, #282828);

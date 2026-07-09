@@ -75,11 +75,3 @@
     }
   }
 }
-
-// Portalled overlay — ::ng-deep is required (panel rendered outside :host).
-// Token cascade handles theming: --border-radius-sm and --novo-surface-border
-// resolve to classic values under bh2022 and modern values under bh2026.
-::ng-deep .dropdown-container {
-  border-radius: var(--border-radius-sm);
-  border: var(--novo-surface-border, none);
-}
