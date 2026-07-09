@@ -52,9 +52,6 @@ $invoiceStatement: $color-invoice-statement;
 $billableCharge: $color-billable-charge;
 $payableCharge: $color-payable-charge;
 // Color Applications
-// Legacy aliases — DEPRECATED, kept for backward compatibility. The app and libs
-// (cm-ui, bte, modals, data-tables, …) still consume these directly; do not remove
-// until those usages are migrated to tokens / CSS variables.
 $dark: $color-dark;
 $navigation: $color-navigation;
 $positive: $ocean;
