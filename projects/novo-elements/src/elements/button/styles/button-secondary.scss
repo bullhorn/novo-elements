@@ -10,7 +10,7 @@
     align-items: center;
     background: var(--color-white);
     color: var(--button-secondary-text, var(--button-primary-background, var(--color-positive)));
-    border: 1px solid var(--button-primary-background, var(--color-positive));
+    border: 1px solid var(--button-primary-border, var(--color-positive));
     padding: 0 calc(#{var(--spacing-md)} - 1px);
 
     i.loading {

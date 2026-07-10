@@ -89,8 +89,8 @@
 
   // bh2026-only component vars aren't part of the shared classic palette — point them at
   // the shared dark button/border vars so they track bh2022's dark palette too.
-  --button-background:           var(--button-background);
-  --button-color:        var(--button-text);
+  --button-background: var(--button-background);
+  --button-color:      var(--button-text);
 
   // bh2026 components color text via the modern `--color-content-*` tokens (charcoal in
   // light), not the classic `--text-*` vars — so `dark-variables` alone leaves them dark
