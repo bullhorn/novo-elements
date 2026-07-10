@@ -14,7 +14,6 @@
   transition: margin 225ms ease-in-out;
   margin: 0px 16px;
   border-radius: var(--border-radius-sm);
-  border: var(--surface-border, none);
 
   &.novo-expanded {
     &:first-child {
