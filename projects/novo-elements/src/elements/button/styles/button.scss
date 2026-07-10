@@ -5,18 +5,18 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  padding: var(--novo-button-padding-y, 0) var(--novo-button-padding-x, var(--spacing-md));
+  padding: var(--button-padding-y, 0) var(--button-padding-x, var(--spacing-md));
   font-size: var(--font-size-button);
-  font-weight: var(--novo-button-font-weight, inherit);
-  letter-spacing: var(--novo-button-letter-spacing, normal);
-  height: var(--novo-button-height, 3rem);
+  font-weight: var(--button-font-weight, inherit);
+  letter-spacing: var(--button-letter-spacing, normal);
+  height: var(--button-height, 3rem);
   border: none;
-  color: var(--novo-button-color, var(--text-main, $dark));
-  background: var(--novo-button-bg, transparent);
-  border-radius: var(--novo-button-radius, 3px);
-  text-transform: var(--novo-button-text-transform, uppercase);
+  color: var(--button-color, var(--text-main, $dark));
+  background: transparent;
+  border-radius: var(--button-radius, 3px);
+  text-transform: var(--button-text-transform, uppercase);
   transition: all 200ms ease-in-out;
-  gap: var(--novo-button-gap, var(--spacing-md));
+  gap: var(--button-gap, var(--spacing-md));
   cursor: pointer;
   user-select: none;
   text-overflow: clip;
@@ -31,7 +31,7 @@
     line-height: 1;
     font-size: inherit;
     color: inherit;
-    text-transform: var(--novo-button-text-transform, uppercase);
+    text-transform: var(--button-text-transform, uppercase);
   }
 
   i {
@@ -69,7 +69,7 @@
   }
 
   &:focus-visible {
-    box-shadow: var(--novo-button-focus-ring, none);
+    box-shadow: var(--button-focus-ring, none);
   }
 
   &[disabled],

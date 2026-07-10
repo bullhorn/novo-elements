@@ -10,7 +10,7 @@
   transform: translateY(0%);
   transition: all 0.15s cubic-bezier(0.35, 0, 0.25, 1);
   border-radius: var(--border-radius-sm);
-  border: var(--novo-surface-border, none);
+  border: var(--surface-border, none);
   width: 18rem;
 
   .novo-color-preview {

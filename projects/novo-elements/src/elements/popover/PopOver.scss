@@ -14,7 +14,7 @@
     background-clip: padding-box;
     box-shadow: $shadow-popover;
     border-radius: var(--border-radius-sm);
-    border: var(--novo-surface-border, none);
+    border: var(--surface-border, none);
 
     &.top {
       margin-top: -1rem;

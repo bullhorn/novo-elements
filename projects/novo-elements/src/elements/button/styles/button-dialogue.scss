@@ -5,7 +5,7 @@
   &[theme="dialogue"] {
     @include theme-text-colors("color");
     background: transparent;
-    color: var(--novo-button-color, var(--novo-button-bg-primary, var(--color-positive)));
+    color: var(--button-color, var(--button-primary-background, var(--color-positive)));
     i {
       line-height: 1.2;
     }

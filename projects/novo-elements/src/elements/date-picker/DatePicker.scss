@@ -222,5 +222,5 @@
 
 // bh2026: rounder calendar
 :host-context([data-theme='bh2026']) .date-picker-container {
-  border-radius: var(--novo-calendar-radius, 0.8rem);
+  border-radius: var(--calendar-radius, 0.8rem);
 }

@@ -163,5 +163,5 @@ $tooltip-success-color: var(--color-shade-success, #458746);
 
 // bh2026: rounder tooltip
 :host-context([data-theme='bh2026']) div {
-  border-radius: var(--novo-tooltip-radius, 0.8rem);
+  border-radius: var(--tooltip-radius, 0.8rem);
 }

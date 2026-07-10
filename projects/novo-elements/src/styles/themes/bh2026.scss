@@ -8,6 +8,16 @@
   --font-family-base: var(--typography-font-family-base, Inter), Helvetica, Arial, sans-serif;
   --font-family-body: var(--typography-font-family-base, Inter), Helvetica, Arial, sans-serif;
 
+  // bh2026 tokens are authored at a 16px rem base (web standard), unlike bh2022's 10px,
+  // but the conversion to 16px base would be a massive rewrite, so spacing gets corrected here.
+  --spacing-xs:  0.25rem;
+  --spacing-sm:  0.5rem;
+  --spacing-md:  1rem;
+  --spacing-lg:  1.5rem;
+  --spacing-xl:  2rem;
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
+
   // --- Surfaces ---
   --background-body:   var(--color-gray-white, #ffffff);
   --background-main:   var(--color-background-default, #f8fafc);
@@ -22,9 +32,11 @@
   --text-disabled:  var(--color-content-disabled, #707070);
 
   // --- Borders ---
-  --border:      var(--color-border-default, #f0f5f9);
-  --border-2:    var(--color-border-subtle, #f0f5f9);
-  --border-hard: var(--color-border-emphasized, #282828);
+  --border:              var(--color-border-default, #f0f5f9);
+  --border-2:            var(--color-border-subtle, #f0f5f9);
+  --border-hard:         var(--color-border-emphasized, #282828);
+  --border-radius-round: var(--border-radius-sm);
+  --surface-border: 1px solid var(--color-border-default, #f0f5f9);
 
   // --- Interactive ---
   --links:     var(--color-content-link, #282828);
@@ -39,46 +51,24 @@
   --font-size-title:   var(--typography-title-font-size, 2.4rem);
   --font-size-tab:     var(--typography-tabs-default-font-size, 1.4rem);
 
-  // bh2026 tokens are authored at a 16px rem base (web standard), unlike bh2022's 10px,
-  // but the conversion to 16px base would be a massive rewrite, so spacing gets corrected here.
-  --spacing-xs:  0.25rem;
-  --spacing-sm:  0.5rem;
-  --spacing-md:  1rem;
-  --spacing-lg:  1.5rem;
-  --spacing-xl:  2rem;
-  --spacing-2xl: 3rem;
-  --spacing-3xl: 4rem;
+  // --- Button ---
+  --button-background:     var(--color-grayscale-white, #ffffff);
+  --button-color:          var(--color-content-link, #282828);
+  --button-font-weight:    var(--typography-font-weight-400, 400);
+  --button-gap:            var(--spacing-8, 0.8rem);
+  --button-height:         3.5rem;
+  --button-letter-spacing: var(--typography-letter-spacing-half, 0.05rem);
+  --button-padding-x:      var(--spacing-16, 1.6rem);
+  --button-padding-y:      var(--spacing-8, 0.8rem);
+  --button-radius:         999px;
+  --button-text-transform: none;
+  --button-text:           var(--color-content-link, #282828);
 
-  // --border-radius-round in bh2026.css tokens = 999px (pill), but components that use it
-  // (ControlGroup, field-outline, chips) expect a modest rounding. Override to the
-  // standard form-element radius; pill shapes use explicit 999px literals.
-  --border-radius-round: var(--border-radius-sm);
-
-  // Surface border — applied via var(--novo-surface-border, none) in component base rules.
-  // Undefined in bh2022 so classic panels have no border; bh2026 gets the light surface border.
-  --novo-surface-border: 1px solid var(--color-border-default, #f0f5f9);
-
-  // Themed neutral variant (button[theme="standard"]) consumes these semantic vars.
-  --button-background:          var(--color-grayscale-white, #ffffff);
-  --button-text:                var(--color-content-link, #282828);
-
-  // Button - Pill styling
-  --novo-button-height:         3.5rem;
-  --novo-button-font-weight:    var(--typography-font-weight-400, 400);
-  --novo-button-letter-spacing: var(--typography-letter-spacing-half, 0.05rem);
-  --novo-button-padding-y:      var(--spacing-8, 0.8rem);
-  --novo-button-padding-x:      var(--spacing-16, 1.6rem);
-  --novo-button-gap:            var(--spacing-8, 0.8rem);
-  --novo-button-text-transform: none;
-  --novo-button-radius:         999px;
-  --novo-button-bg:             var(--color-grayscale-white, #ffffff);
-  --novo-button-bg-primary:     var(--novo-button-bg);
-  --novo-button-color:          var(--color-content-link, #282828);
-
-  // Button variant overrides
-  --novo-button-border-primary: var(--border);
-  --novo-button-color-primary:  var(--novo-button-color);
-  --novo-button-secondary-text:      var(--button-text);
+  // Button variants
+  --button-primary-background: var(--button-background);
+  --button-primary-border:     var(--border);
+  --button-primary-color:      var(--button-color);
+  --button-secondary-text:     var(--button-text);
 
   // Best guess currently at the refresh accent color
   --color-positive: #0095da;
@@ -99,8 +89,8 @@
 
   // bh2026-only component vars aren't part of the shared classic palette — point them at
   // the shared dark button/border vars so they track bh2022's dark palette too.
-  --novo-button-bg:           var(--button-background);
-  --novo-button-color:        var(--button-text);
+  --button-background:           var(--button-background);
+  --button-color:        var(--button-text);
 
   // bh2026 components color text via the modern `--color-content-*` tokens (charcoal in
   // light), not the classic `--text-*` vars — so `dark-variables` alone leaves them dark

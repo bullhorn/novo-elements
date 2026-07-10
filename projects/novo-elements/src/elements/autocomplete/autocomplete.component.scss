@@ -3,7 +3,7 @@
 
 :host {
   border-radius: var(--border-radius-sm);
-  border: var(--novo-surface-border, none);
+  border: var(--surface-border, none);
 }
 
 .novo-autocomplete-options {
