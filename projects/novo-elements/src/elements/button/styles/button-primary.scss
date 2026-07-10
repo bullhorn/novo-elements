@@ -4,8 +4,9 @@
   // Primary theme
   &[theme="primary"] {
     @include theme-backgrounds-live();
-    background: var(--color-positive);
-    color: var(--color-contrast-positive);
+    background: var(--novo-button-bg-primary, var(--color-positive));
+    color: var(--novo-button-color-primary, var(--color-contrast-positive));
+    border: 1px solid var(--novo-button-border-primary, var(--button-background, var(--color-positive)));
     text-align: left;
 
     &:hover,

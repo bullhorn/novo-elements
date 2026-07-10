@@ -54,32 +54,33 @@
   // standard form-element radius; pill shapes use explicit 999px literals.
   --border-radius-round: var(--border-radius-sm);
 
-  // --- Component tokens (curated; Track 2 migration) ---
   // Surface border — applied via var(--novo-surface-border, none) in component base rules.
   // Undefined in bh2022 so classic panels have no border; bh2026 gets the light surface border.
   --novo-surface-border: 1px solid var(--color-border-default, #f0f5f9);
 
-  // Button — plain/base treatment
-  --novo-button-height:         var(--spacing-48, 4.8rem);
+  // Themed neutral variant (button[theme="standard"]) consumes these semantic vars.
+  --button-background:          var(--color-grayscale-white, #ffffff);
+  --button-text:                var(--color-content-link, #282828);
+
+  // Button - Pill styling
+  --novo-button-height:         3.5rem;
+  --novo-button-font-weight:    var(--typography-font-weight-400, 400);
+  --novo-button-letter-spacing: var(--typography-letter-spacing-half, 0.05rem);
   --novo-button-padding-y:      var(--spacing-8, 0.8rem);
   --novo-button-padding-x:      var(--spacing-16, 1.6rem);
   --novo-button-gap:            var(--spacing-8, 0.8rem);
   --novo-button-text-transform: none;
-  // Pill styling
   --novo-button-radius:         999px;
-  --novo-button-border-color:   var(--color-border-default, #f0f5f9);
   --novo-button-bg:             var(--color-grayscale-white, #ffffff);
+  --novo-button-bg-primary:     var(--novo-button-bg);
   --novo-button-color:          var(--color-content-link, #282828);
-  --novo-button-font-weight:    var(--typography-button-font-weight, 500);
-  --novo-button-letter-spacing: var(--typography-letter-spacing-half, 0.05rem);
 
-  // Themed neutral variant (button[theme="standard"]) consumes these semantic vars.
-  --button-background:          var(--color-grayscale-white, #ffffff);
-  --button-text:                var(--color-content-link, #282828);
-  // NOTE: primary/secondary variants ([theme="primary"|"secondary"]) use --color-positive
-  // (the deferred status/brand accent) — they stay accent-colored until that decision lands.
+  // Button variant overrides
+  --novo-button-border-primary: var(--border);
+  --novo-button-color-primary:  var(--novo-button-color);
+  --novo-button-secondary-text:      var(--button-text);
 
-  // PROVISIONAL modern accent
+  // Best guess currently at the refresh accent color
   --color-positive: #0095da;
 }
 
@@ -100,7 +101,6 @@
   // the shared dark button/border vars so they track bh2022's dark palette too.
   --novo-button-bg:           var(--button-background);
   --novo-button-color:        var(--button-text);
-  --novo-button-border-color: var(--border);
 
   // bh2026 components color text via the modern `--color-content-*` tokens (charcoal in
   // light), not the classic `--text-*` vars — so `dark-variables` alone leaves them dark
