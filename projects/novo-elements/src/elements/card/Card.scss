@@ -129,6 +129,7 @@
 
   header {
     padding: var(--spacing-md, 1.6rem);
+    margin-left: var(--spacing-md);
 
     .title {
       ::ng-deep i.bhi-move {
@@ -139,7 +140,7 @@
       h2,
       h3 {
         font-size: 1.8rem;
-        font-weight: 600;
+        font-weight: 500;
       }
     }
 
