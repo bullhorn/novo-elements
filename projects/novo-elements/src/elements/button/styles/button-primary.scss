@@ -6,7 +6,7 @@
     @include theme-backgrounds-live();
     background: var(--button-primary-background, var(--color-positive));
     color: var(--button-primary-color, var(--color-contrast-positive));
-    border: 1px solid var(--button-primary-border, var(--color-positive));
+    border: var(--button-primary-border, none);
     text-align: left;
 
     &:hover,

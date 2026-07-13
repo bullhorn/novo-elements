@@ -65,9 +65,10 @@
 
   // Button variants
   --button-primary-background: var(--button-background);
-  --button-primary-border:     var(--border);
   --button-primary-color:      var(--button-color);
+  --button-primary-border:     1px solid var(--border);
   --button-secondary-text:     var(--button-text);
+  --button-secondary-border:   1px solid var(--border);
 
   // Best guess currently at the refresh accent color
   --color-positive: #0095da;
