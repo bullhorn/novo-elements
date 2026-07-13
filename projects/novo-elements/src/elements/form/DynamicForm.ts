@@ -25,6 +25,7 @@ import { NovoFormGroup } from './NovoFormGroup';
       <novo-icon>{{ icon?.replace('bhi-', '') }}</novo-icon
       >{{ title }}
     </novo-title>
+    <ng-content />
   `,
     styleUrls: ['./fieldset-header.scss'],
     host: {

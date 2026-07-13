@@ -35,6 +35,7 @@ export enum Operator {
   isEmpty = 'isEmpty',
   isNull = 'isNull',
   lessThan = 'lessThan',
+  like = 'like',
   outsideRadius = 'outsideRadius',
   radius = 'radius',
   within = 'within',
