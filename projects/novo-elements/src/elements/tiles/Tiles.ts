@@ -32,7 +32,7 @@ const TILES_VALUE_ACCESSOR = {
         *ngFor="let option of _options; let i = index"
         [ngClass]="{ defaultColor: !option.color, active: option.checked, disabled: option.disabled }"
         [theme]="option.checked ? 'primary' : 'dialogue'"
-        [color]="option.checked ? option.color || 'darken($ocean, 20%)' : 'text'"
+        [color]="option.checked ? option.color || 'darken($ocean, 20%)' : 'dark'"
         [icon]="option.icon"
         [side]="option.iconSide || 'left'"
         (click)="select($event, option)"
