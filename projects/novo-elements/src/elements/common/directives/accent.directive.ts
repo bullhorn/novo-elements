@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Directive, HostBinding, Input, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { NovoTheme, ThemeChangeEvent } from '../theme/theme-options';
+import { NovoTheme, ThemeChangeEvent, normalizeThemeName } from '../theme/theme-options';
 
 @Directive({
     selector: '[accent]',
@@ -16,7 +16,9 @@ export class AccentColorDirective implements OnDestroy {
     // Classic look is a fully colored record header. bh2022 theme is an entity colored bottom border.
     if (this.theme.themeName === 'classic') {
       return `novo-theme-${this.accent}`;
-    } else if (this.theme.themeName.includes('bh2022')) {
+    }
+    const normalized = normalizeThemeName(this.theme.themeName);
+    if (normalized.includes('bh2022')) {
       return `novo-accent-${this.accent}`;
     }
     return '';
