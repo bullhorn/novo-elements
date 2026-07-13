@@ -9,15 +9,15 @@
     text-align: left;
     align-items: center;
     background: var(--color-white);
-    color: var(--button-secondary-text, var(--button-primary-background, var(--color-positive)));
-    border: var(--button-secondary-border, none);
+    color: var(--button-secondary-text, var(--color-positive));
+    border: var(--button-secondary-border, 1px solid $positive);
     padding: 0 calc(#{var(--spacing-md)} - 1px);
 
     i.loading {
       margin-left: 0.8rem;
       svg {
         .spinner {
-          fill: var(--button-primary-background, var(--color-positive));
+          fill: var(--color-positive);
         }
       }
     }
