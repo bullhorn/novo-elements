@@ -38,7 +38,7 @@ $icon-border-radius: 0.3em;
     &[theme="#{$name}"] {
       i {
         color: $white;
-        background: $color;
+        background: getCssVarname($name);
         border-radius: $icon-border-radius;
         width: 1.6em;
         height: 1.6em;

@@ -1,0 +1,106 @@
+// Maps design tokens (Figma "subatomic") onto the semantic CSS-variable contract for novo-elements components.
+@mixin bh2026-variables {
+  // Live color-math direction (light): elevate() brightens, recede() darkens.
+  --bg-fade-multiplier: 1;
+
+  // Typeface — modern uses Inter (classic uses Montserrat). Override BOTH --font-family-base
+  // (html) and --font-family-body (body, used by most content) so all text picks up Inter.
+  --font-family-base: var(--typography-font-family-base, Inter), Helvetica, Arial, sans-serif;
+  --font-family-body: var(--typography-font-family-base, Inter), Helvetica, Arial, sans-serif;
+
+  // bh2026 tokens are authored at a 16px rem base (web standard), unlike bh2022's 10px,
+  // but the conversion to 16px base would be a massive rewrite, so spacing gets corrected here.
+  --spacing-xs:  0.25rem;
+  --spacing-sm:  0.5rem;
+  --spacing-md:  1rem;
+  --spacing-lg:  1.5rem;
+  --spacing-xl:  2rem;
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
+
+  // --- Surfaces ---
+  --background-body:   var(--color-gray-white, #ffffff);
+  --background-main:   var(--color-background-default, #f8fafc);
+  --background-bright: var(--color-gray-white, #ffffff);
+  --background-dark:   var(--color-background-subtle-hover, #e2e2e2);
+  --background-muted:  var(--color-background-subtle, #f1f5fc);
+
+  // --- Text / content ---
+  --text-main:      var(--color-content-headline, #282828);
+  --text-secondary: var(--color-content-body, #314158);
+  --text-muted:     var(--color-content-subtle, #8ca1b9);
+  --text-disabled:  var(--color-content-disabled, #707070);
+
+  // --- Borders ---
+  --border:              var(--color-border-default, #f0f5f9);
+  --border-2:            var(--color-border-subtle, #f0f5f9);
+  --border-hard:         var(--color-border-emphasized, #282828);
+  --border-radius-round: var(--border-radius-sm);
+
+  // --- Interactive ---
+  --links:     var(--color-content-link, #282828);
+  --focus:     var(--color-border-strong, #314158);
+  --selection: var(--color-border-strong, #314158);
+
+  // --- Typography scale (map semantic sizes onto modern composite roles) ---
+  --font-size-caption: var(--typography-meta-default-font-size, 1.4rem);
+  --font-size-label:   var(--typography-label-lg-font-size, 1.4rem);
+  --font-size-text:    var(--typography-body-default-font-size, 1.4rem);
+  --font-size-button:  var(--typography-button-font-size, 1.2rem);
+  --font-size-title:   var(--typography-title-font-size, 2.4rem);
+  --font-size-tab:     var(--typography-tabs-default-font-size, 1.4rem);
+
+  // --- Button ---
+  --button-background:     var(--color-grayscale-white, #ffffff);
+  --button-color:          var(--color-content-link, #282828);
+  --button-font-weight:    var(--typography-font-weight-400, 400);
+  --button-gap:            var(--spacing-8, 0.8rem);
+  --button-height:         3.5rem;
+  --button-letter-spacing: var(--typography-letter-spacing-half, 0.05rem);
+  --button-padding-x:      var(--spacing-16, 1.6rem);
+  --button-padding-y:      var(--spacing-8, 0.8rem);
+  --button-radius:         999px;
+  --button-text-transform: none;
+  --button-text:           var(--color-content-link, #282828);
+
+  // Button variants
+  --button-primary-background: var(--button-background);
+  --button-primary-color:      var(--button-color);
+  --button-primary-border:     1px solid var(--border);
+  --button-secondary-text:     var(--button-text);
+  --button-secondary-border:   1px solid var(--border);
+
+  // Best guess currently at the refresh accent color
+  --color-positive: #0095da;
+}
+
+:root[data-theme='bh2026'],
+:root.theme-bh2026 {
+  @include bh2026-variables();
+}
+
+// bh2026 dark
+:root[data-theme='bh2026'].theme-dark {
+  @include dark-variables();
+
+  // bh2026-specific: flip the live elevate()/recede() color-math direction for dark
+  // (light sets +1 in bh2026-variables). Affects bh2026-migrated components only.
+  --bg-fade-multiplier: -1;
+
+  // bh2026-only component vars aren't part of the shared classic palette — point them at
+  // the shared dark button/border vars so they track bh2022's dark palette too.
+  --button-background: var(--button-background);
+  --button-color:      var(--button-text);
+
+  // bh2026 components color text via the modern `--color-content-*` tokens (charcoal in
+  // light), not the classic `--text-*` vars — so `dark-variables` alone leaves them dark
+  // (e.g. tab labels stay black-on-dark). Remap the content ramp onto the shared dark text
+  // palette so tabs/stepper/field/table/breadcrumbs/data-table all flip to light.
+  --color-content-headline:   var(--text-main);
+  --color-content-body:       var(--text-main);
+  --color-content-default:    var(--text-main);
+  --color-content-link:       var(--text-main);
+  --color-content-link-hover: var(--text-main);
+  --color-content-subtle:     var(--text-muted);
+  --color-content-disabled:   var(--text-disabled);
+}

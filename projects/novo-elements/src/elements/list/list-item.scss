@@ -3,14 +3,14 @@
 @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
   $contrast: getContrastColor($name);
   :host-context([theme="#{$name}"]) {
-    background: $color;
-    color: $contrast;
+    background: getCssVarname($name);
+    color: getContrastColor($name);
     border: unset;
     border-bottom: 1px solid rgba(#fff, 0.1);
     outline: none;
     item-title h6,
     i {
-      color: $contrast;
+      color: getContrastColor($name);
     }
     item-content {
       > * {
@@ -19,7 +19,7 @@
     }
     &:hover,
     &:active {
-      background: lighten($color, 20%);
+      background: brightenLive('--color-#{$name}', 20);
     }
   }
 }
@@ -31,10 +31,10 @@
   flex-direction: row;
   outline: none;
   &:hover {
-    background: rgba($positive, 0.2);
+    background: rgb(from var(--color-positive) r g b / 0.2);
   }
   &.active {
-    background: rgba($positive, 0.3);
+    background: rgb(from var(--color-positive) r g b / 0.3);
   }
   &:last-child {
     border-bottom: none;

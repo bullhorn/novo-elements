@@ -1,13 +1,14 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { AfterViewInit, Component, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router, Scroll } from '@angular/router';
-import { NovoLayoutContent, NovoModalService, NovoSidenavComponent, NovoToastService } from 'novo-elements';
+import { NovoLayoutContent, NovoModalService, NovoSidenavComponent, NovoTheme, NovoToastService } from 'novo-elements';
 import { delay, filter, startWith } from 'rxjs/operators';
 import { AnchorViewportScroller } from './anchor-scroller';
+
 @Component({
-    selector: 'novo-demo-app',
-    templateUrl: './app.component.html',
-    standalone: false,
+  selector: 'novo-demo-app',
+  templateUrl: './app.component.html',
+  standalone: false,
 })
 export class AppComponent implements AfterViewInit {
   menuOpen: boolean = false;
@@ -32,6 +33,7 @@ export class AppComponent implements AfterViewInit {
     toaster: NovoToastService,
     modalService: NovoModalService,
     private observer: BreakpointObserver,
+    private theme: NovoTheme,
   ) {
     toaster.parentViewContainer = viewContainerRef;
 
@@ -104,6 +106,14 @@ export class AppComponent implements AfterViewInit {
   }
 
   toggleDarkMode() {
-    document.documentElement.classList.toggle('theme-dark');
+    this.theme.themeName = this.theme.themeName.endsWith('-dark')
+      ? this.theme.themeName.replace('-dark', '-light')
+      : this.theme.themeName.replace('-light', '-dark');
+  }
+
+  toggleBh2026Theme() {
+    this.theme.themeName = this.theme.themeName.startsWith('bh2026')
+      ? this.theme.themeName.replace('bh2026', 'bh2022')
+      : this.theme.themeName.replace('bh2022', 'bh2026');
   }
 }

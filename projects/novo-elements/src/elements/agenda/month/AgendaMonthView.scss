@@ -2,14 +2,14 @@
 
 :host {
   ::ng-deep .agenda-month-view {
-    background-color: $white;
+    background-color: var(--background-body);
 
     .agenda-header {
       display: flex;
       flex-flow: column;
       text-align: center;
       font-weight: bolder;
-      border-bottom: 2px solid #e1e1e1;
+      border-bottom: 2px solid var(--border);
       .agenda-header-top {
         display: flex;
         flex-flow: row nowrap;
@@ -50,7 +50,7 @@
     }
 
     .agenda-days {
-      border: 1px solid #e1e1e1;
+      border: 1px solid var(--border, #e1e1e1);
       border-bottom: 0;
     }
 
@@ -92,7 +92,7 @@
       display: inline-block;
       min-width: 10px;
       padding: 3px 7px;
-      font-size: 12px;
+      font-size: var(--font-size-sm);
       font-weight: 700;
       line-height: 1;
       color: white;
@@ -112,14 +112,14 @@
     .agenda-event {
       width: 22px;
       height: 22px;
-      border-radius: 4px;
+      border-radius: var(--border-radius-default, 4px);
       display: inline-block;
       margin: 2px;
       vertical-align: middle;
       text-align: center;
       line-height: 22px;
-      font-size: 12px;
-      color: $white;
+      font-size: var(--font-size-sm);
+      color: var(--text-bg-contrast);
     }
 
     .agenda-day-cell.agenda-in-month.agenda-has-events {
@@ -140,7 +140,7 @@
     }
 
     .agenda-day-cell.agenda-today .agenda-day-number {
-      color: $dark;
+      color: var(--font-color-base);
     }
 
     .agenda-day-cell.agenda-drag-over {

@@ -5,7 +5,7 @@
   flex-flow: column;
   background-color: var(--background-bright, $color-white);
   box-shadow: $shadow-card;
-  border-radius: 0.4em;
+  border-radius: var(--border-radius-round);
   position: relative;
   overflow-x: hidden;
 
@@ -19,7 +19,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    border-radius: 0.4em;
+    border-radius: var(--border-radius-round);
     background-color: var(--background-bright, $color-white);
     display: flex;
     flex-direction: column;
@@ -39,14 +39,14 @@
       min-width: 0;
       flex: 1;
       ::ng-deep i.bhi-move {
-        color: $light;
+        color: var(--font-color-secondary);
         margin-right: 0.3em;
         cursor: pointer;
       }
       h1,
       h2,
       h3 {
-        font-size: $font-size-lg;
+        font-size: var(--font-size-lg);
         font-weight: 500;
         line-height: 1.5;
         color: var(--text-main, #3d464d);
@@ -64,7 +64,7 @@
       }
     }
     .actions {
-      color: lighten($dark, 15%);
+      color: brightenLive('--color-dark', 15);
       white-space: nowrap;
     }
   }
@@ -74,12 +74,12 @@
     max-width: inherit;
     text-align: center;
     line-height: 25px;
-    color: lighten($grey, 10%);
+    color: brightenLive('--color-grey', 10);
     i {
       display: block;
       font-size: 24px;
       margin: 0 0 0.5em;
-      color: lighten($grey, 20%);
+      color: brightenLive('--color-grey', 20);
     }
   }
 
@@ -97,22 +97,57 @@
     padding: 0;
   }
   &.novo-card-inset-small {
-    padding: $spacing-sm;
+    padding: var(--spacing-sm);
   }
   &.novo-card-inset-medium {
-    padding: $spacing-md;
+    padding: var(--spacing-md);
   }
   &.novo-card-inset-large {
-    padding: $spacing-lg;
+    padding: var(--spacing-lg);
   }
 
   ::ng-deep .novo-card-header + .novo-card-content.condensed,
   ::ng-deep .novo-card-header + :not(.novo-card-content) {
-    margin-top: $spacing-sm;
+    margin-top: var(--spacing-sm);
   }
 
   ::ng-deep [novo-card-image] {
     width: calc(100%);
-    margin: $spacing-md 0;
+    margin: var(--spacing-md) 0;
+  }
+}
+
+// bh2026: roomier, rounder card, larger title
+:host-context([data-theme='bh2026']) {
+  border-radius: var(--border-radius-md, 1.6rem);
+  border: 1px solid var(--color-border-default, #f0f5f9);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+
+  div.card-loading-container {
+    border-radius: var(--border-radius-md, 1.6rem);
+  }
+
+  header {
+    padding: var(--spacing-md, 1.6rem);
+    margin-left: var(--spacing-md);
+
+    .title {
+      ::ng-deep i.bhi-move {
+        display: none;
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-size: 1.8rem;
+        font-weight: 500;
+      }
+    }
+
+    novo-button {
+      color: rgba(var(--text-secondary), 0.7);
+      margin-left: var(--spacing-sm);
+      margin-right: var(--spacing-sm);
+    }
   }
 }

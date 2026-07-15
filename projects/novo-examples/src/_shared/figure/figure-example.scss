@@ -1,11 +1,8 @@
-$success: #8cc152;
-$negative: #da4453;
-$positive: #4a89dc;
 
 .figure-example {
   display: flex;
   flex-direction: column;
-  font-size: 1.2rem;
+  font-size: var(--font-size-sm);
   gap: 1rem;
 
   .figure-content {
@@ -33,25 +30,25 @@ $positive: #4a89dc;
 
   &.figure-theme-negative {
     .figure-caption {
-      border-top: 3px solid $negative;
+      border-top: 3px solid var(--color-negative);
       novo-icon {
-        color: $negative;
+        color: var(--color-negative);
       }
     }
   }
   &.figure-theme-success {
     .figure-caption {
-      border-top: 3px solid $success;
+      border-top: 3px solid var(--color-success);
       novo-icon {
-        color: $success;
+        color: var(--color-success);
       }
     }
   }
   &.figure-theme-positive {
     .figure-caption {
-      border-top: 3px solid $positive;
+      border-top: 3px solid var(--color-positive);
       novo-icon {
-        color: $positive;
+        color: var(--color-positive);
       }
     }
   }
