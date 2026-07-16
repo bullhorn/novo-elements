@@ -1,4 +1,15 @@
-import { ChangeDetectionStrategy, Component, HostBinding, input, model, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  HostBinding,
+  HostListener,
+  ViewEncapsulation,
+  computed,
+  effect,
+  input,
+  model,
+  signal,
+} from '@angular/core';
 import { novoCollapsibleNavAnimations } from './collapsible-nav.animations';
 
 /**
@@ -28,17 +39,41 @@ export class NovoCollapsibleNavComponent {
   /** Width of the panel when collapsed to the icon rail. */
   collapsedWidth = input<string>('4rem');
 
+  /** When true, hovering a collapsed panel temporarily expands it as an overlay without affecting layout. */
+  overlayOnHover = input<boolean>(false);
+
+  private readonly isHovered = signal(false);
+  private readonly effectiveCollapsed = computed(() => this.collapsed() && !(this.overlayOnHover() && this.isHovered()));
+
+  constructor() {
+    effect(() => {
+      if (this.collapsed()) {
+        this.isHovered.set(false);
+      }
+    });
+  }
+
+  @HostListener('mouseenter')
+  onMouseEnter(): void {
+    this.isHovered.set(true);
+  }
+
+  @HostListener('mouseleave')
+  onMouseLeave(): void {
+    this.isHovered.set(false);
+  }
+
   @HostBinding('@expandCollapse')
   get expandCollapseState(): { value: string; params: { expandedWidth: string; collapsedWidth: string } } {
     return {
-      value: this.collapsed() ? 'collapsed' : 'expanded',
+      value: this.effectiveCollapsed() ? 'collapsed' : 'expanded',
       params: { expandedWidth: this.expandedWidth(), collapsedWidth: this.collapsedWidth() },
     };
   }
 
   @HostBinding('class.novo-collapsible-nav-collapsed')
   get isCollapsed(): boolean {
-    return this.collapsed();
+    return this.effectiveCollapsed();
   }
 
   toggle(): void {

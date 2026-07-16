@@ -64,4 +64,44 @@ describe('Elements: NovoCollapsibleNavComponent', () => {
       params: { expandedWidth: '20rem', collapsedWidth: '5rem' },
     });
   });
+
+  describe('overlayOnHover', () => {
+    beforeEach(() => {
+      fixture.componentRef.setInput('overlayOnHover', true);
+      component.collapse();
+      fixture.detectChanges();
+    });
+
+    it('mouseenter while collapsed should expand the animation state and remove collapsed class', () => {
+      component.onMouseEnter();
+      fixture.detectChanges();
+      expect(component.expandCollapseState.value).toBe('expanded');
+      expect(component.isCollapsed).toBe(false);
+    });
+
+    it('mouseleave should collapse the animation state and restore collapsed class', () => {
+      component.onMouseEnter();
+      component.onMouseLeave();
+      fixture.detectChanges();
+      expect(component.expandCollapseState.value).toBe('collapsed');
+      expect(component.isCollapsed).toBe(true);
+    });
+
+    it('mouseenter should have no effect when overlayOnHover is false', () => {
+      fixture.componentRef.setInput('overlayOnHover', false);
+      component.onMouseEnter();
+      fixture.detectChanges();
+      expect(component.expandCollapseState.value).toBe('collapsed');
+      expect(component.isCollapsed).toBe(true);
+    });
+
+    it('setting collapsed to true while hovered should collapse immediately', () => {
+      component.onMouseEnter();
+      fixture.detectChanges();
+      expect(component.expandCollapseState.value).toBe('expanded');
+      component.collapse();
+      fixture.detectChanges();
+      expect(component.expandCollapseState.value).toBe('collapsed');
+    });
+  });
 });

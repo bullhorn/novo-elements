@@ -14,11 +14,11 @@ export class BasicCollapsibleNavExample {
   openWindows = [
     {
       accent: 'candidate',
-      label: '101 | Ferdinand del Toro',
+      label: 'Bob del Toro',
     },
     {
       accent: 'job',
-      label: '101 | Ferdinand del Toro',
+      label: 'UX Designer',
     },
     {
       accent: 'company',

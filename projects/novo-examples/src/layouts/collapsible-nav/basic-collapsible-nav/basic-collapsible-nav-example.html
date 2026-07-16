@@ -1,9 +1,8 @@
 <div class="collapsible-nav-example" data-automation-id="collapsible-nav-example">
-  <novo-collapsible-nav [(collapsed)]="collapsed" data-automation-id="collapsible-nav">
+  <novo-collapsible-nav [(collapsed)]="collapsed" [overlayOnHover]="true" data-automation-id="collapsible-nav">
     <div novo-collapsible-nav-header>
       <novo-option (click)="collapsed = !collapsed" data-automation-id="collapsible-nav-toggle">
         <novo-icon>{{ collapsed ? 'arrow-right' : 'arrow-left' }}</novo-icon>
-        <novo-text>Collapse</novo-text>
       </novo-option>
     </div>
     <div novo-collapsible-nav-body>

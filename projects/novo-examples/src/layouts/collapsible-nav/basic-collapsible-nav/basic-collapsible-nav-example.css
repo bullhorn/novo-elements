@@ -2,6 +2,7 @@
   height: 640px;
   display: flex;
   border: 1px solid var(--border);
+  background: var(--background-main);
 }
 
 .collapsible-nav-example .novo-text {
@@ -11,4 +12,16 @@
 .novo-collapsible-nav-collapsed .novo-text,
 .novo-collapsible-nav-collapsed .novo-action {
   display: none;
+}
+
+.novo-collapsible-nav-collapsed .novo-option {
+  padding-inline: 0;
+}
+
+.novo-collapsible-nav-collapsed novo-icon {
+  margin: auto;
+}
+
+.novo-collapsible-nav:not(.novo-collapsible-nav-collapsed) .novo-collapsible-nav-header novo-icon {
+  margin-left: auto;
 }
