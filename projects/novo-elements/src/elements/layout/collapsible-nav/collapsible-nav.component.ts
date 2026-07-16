@@ -86,5 +86,6 @@ export class NovoCollapsibleNavComponent {
 
   collapse(): void {
     this.collapsed.set(true);
+    this.isHovered.set(false);
   }
 }
