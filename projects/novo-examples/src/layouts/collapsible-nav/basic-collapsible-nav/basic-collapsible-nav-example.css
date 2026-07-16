@@ -7,6 +7,8 @@
 
 .collapsible-nav-example .novo-text {
   flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .novo-collapsible-nav-collapsed .novo-text,
@@ -22,6 +24,6 @@
   margin: auto;
 }
 
-.novo-collapsible-nav:not(.novo-collapsible-nav-collapsed) .novo-collapsible-nav-header novo-icon {
-  margin-left: auto;
+.novo-collapsible-nav:not(.novo-collapsible-nav-collapsed) .novo-collapsible-nav-header .novo-option-text {
+  justify-content: flex-end;
 }
