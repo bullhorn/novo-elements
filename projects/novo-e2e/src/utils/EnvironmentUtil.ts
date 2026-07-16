@@ -47,3 +47,12 @@ export function formControlsUrl(control: string): string {
     const baseUrl = (global as any).E2E_BASE_URL || 'https://bullhorn.github.io/novo-elements/docs';
     return `${baseUrl}/#/form-controls/${control}`;
 }
+
+export const LAYOUT_URLS = {
+    COLLAPSIBLE_NAV: 'collapsible-nav',
+};
+
+export function layoutsUrl(component: string): string {
+    const baseUrl = (global as any).E2E_BASE_URL || 'https://bullhorn.github.io/novo-elements/docs';
+    return `${baseUrl}/#/layouts/${component}`;
+}
