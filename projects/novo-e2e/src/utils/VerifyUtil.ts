@@ -228,6 +228,15 @@ export async function verifyDisabled(selector: string, friendlyElementName: stri
     });
 }
 
+export async function verifyNotDisplayed(selector: string, friendlyElementName: string = null, index: number = 0, totalWaitTime: number = 3000): Promise<void> {
+    const elementName = friendlyElementName || 'element';
+    await expect(await getElement(selector, index)).not.toBeDisplayed({
+        message: `Expected ${elementName} to not be displayed, but it was visible for selector: ${selector}`,
+        interval: 1000,
+        wait: totalWaitTime,
+    });
+}
+
 export async function verifyEnabled(el: string, friendlyElementName: string = null, index: number = 0): Promise<void> {
     const elementName = friendlyElementName || 'element';
     await retry(async () => {

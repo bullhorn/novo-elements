@@ -2,13 +2,14 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 // APP
+import { NovoCollapsibleNavComponent } from './collapsible-nav/collapsible-nav.component';
 import { NovoLayoutContainer } from './container/layout-container.component';
 import { NovoLayoutContent } from './content/layout-content.component';
 import { NovoRailComponent } from './rail/rail.component';
 import { NovoSidenavComponent } from './sidenav/sidenav.component';
 @NgModule({
   imports: [CommonModule],
-  declarations: [NovoLayoutContainer, NovoLayoutContent, NovoSidenavComponent, NovoRailComponent],
-  exports: [NovoLayoutContainer, NovoLayoutContent, NovoSidenavComponent, NovoRailComponent],
+  declarations: [NovoLayoutContainer, NovoLayoutContent, NovoSidenavComponent, NovoRailComponent, NovoCollapsibleNavComponent],
+  exports: [NovoLayoutContainer, NovoLayoutContent, NovoSidenavComponent, NovoRailComponent, NovoCollapsibleNavComponent],
 })
 export class NovoLayoutModule {}

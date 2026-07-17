@@ -1,3 +1,4 @@
+export * from './collapsible-nav/collapsible-nav.component';
 export * from './container/layout-container.component';
 export * from './content/layout-content.component';
 export * from './layout.constants';
