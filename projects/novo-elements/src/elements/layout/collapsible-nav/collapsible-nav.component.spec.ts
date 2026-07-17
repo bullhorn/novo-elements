@@ -6,8 +6,8 @@ describe('Elements: NovoCollapsibleNavComponent', () => {
   let fixture: ComponentFixture<NovoCollapsibleNavComponent>;
   let component: NovoCollapsibleNavComponent;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       declarations: [NovoCollapsibleNavComponent],
       imports: [NoopAnimationsModule],
     }).compileComponents();
@@ -31,8 +31,8 @@ describe('Elements: NovoCollapsibleNavComponent', () => {
   });
 
   it('toggle() should flip the collapsed state and emit collapsedChange', () => {
-    let emitted: boolean;
-    component.collapsed.subscribe((value) => {
+    let emitted: boolean | undefined;
+    const subscription = component.collapsed.subscribe((value) => {
       emitted = value;
     });
     component.toggle();
@@ -41,6 +41,7 @@ describe('Elements: NovoCollapsibleNavComponent', () => {
     component.toggle();
     expect(component.collapsed()).toBe(false);
     expect(emitted).toBe(false);
+    subscription.unsubscribe();
   });
 
   it('collapse() should set collapsed to true; expand() should set it to false', () => {
@@ -102,6 +103,24 @@ describe('Elements: NovoCollapsibleNavComponent', () => {
       component.collapse();
       fixture.detectChanges();
       expect(component.expandCollapseState.value).toBe('collapsed');
+    });
+
+    it('setting collapsed input to true while hovered should reset hover via effect', () => {
+      component.expand();
+      fixture.detectChanges();
+      component.onMouseEnter();
+      fixture.detectChanges();
+      expect(component.isCollapsed).toBe(false);
+      fixture.componentRef.setInput('collapsed', true);
+      fixture.detectChanges();
+      expect(component.isCollapsed).toBe(true);
+    });
+
+    it('mouseleave without prior mouseenter should be a no-op', () => {
+      component.onMouseLeave();
+      fixture.detectChanges();
+      expect(component.expandCollapseState.value).toBe('collapsed');
+      expect(component.isCollapsed).toBe(true);
     });
   });
 });

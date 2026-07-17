@@ -1,8 +1,8 @@
 import { click, moveMouseToElement, moveMouse, scrollIntoView } from '../utils/ElementActionUtil';
 import { LAYOUT_URLS, getURLs, layoutsUrl } from '../utils/EnvironmentUtil';
 import { sleep } from '../utils/SleepUtil';
-import { verifyClassAbsent, verifyClassPresent, verifyElementCountEquals, verifyPresent } from '../utils/VerifyUtil';
-import { COLLAPSED_CLASS, collapsibleNav } from '../utils/CollapsibleNavUtil';
+import { verifyClassAbsent, verifyClassPresent, verifyElementCountEquals, verifyNotDisplayed, verifyPresent } from '../utils/VerifyUtil';
+import { COLLAPSED_CLASS, collapsibleNav, navTabCloseButton, navTabLabel } from '../utils/CollapsibleNavUtil';
 
 describe('Collapsible Nav Demo Page', () => {
     const url = layoutsUrl(LAYOUT_URLS.COLLAPSIBLE_NAV);
@@ -17,9 +17,11 @@ describe('Collapsible Nav Demo Page', () => {
 
     describe('Page Elements', () => {
         it('should display the nav, toggle, tabs, and footer option', async () => {
-            await verifyPresent(collapsibleNav.nav, 'collapsible nav');
-            await verifyPresent(collapsibleNav.toggle, 'toggle button');
-            await verifyElementCountEquals(collapsibleNav.tab, 3, 'nav tabs');
+            await Promise.all([
+                verifyPresent(collapsibleNav.nav, 'collapsible nav'),
+                verifyPresent(collapsibleNav.toggle, 'toggle button'),
+                verifyElementCountEquals(collapsibleNav.tab, 3, 'nav tabs'),
+            ]);
         });
     });
 
@@ -53,13 +55,11 @@ describe('Collapsible Nav Demo Page', () => {
         });
 
         it('should hide tab labels when collapsed', async () => {
-            const textEl = await $(`${collapsibleNav.nav} novo-text`);
-            expect(await textEl.isDisplayed()).toBe(false);
+            await verifyNotDisplayed(navTabLabel(), 'tab label');
         });
 
         it('should hide tab close buttons when collapsed', async () => {
-            const actionEl = await $(`${collapsibleNav.nav} novo-action`);
-            expect(await actionEl.isDisplayed()).toBe(false);
+            await verifyNotDisplayed(navTabCloseButton(), 'tab close button');
         });
     });
 
