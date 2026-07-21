@@ -6,7 +6,7 @@ $novo-divider-inset-margin: 80px;
 .novo-divider {
   display: block;
   margin: 0;
-  border-top-width: $novo-divider-width;
+  border-top-width: var(--border-width-thin);
   border-top-style: solid;
   border-top-color: var(--border);
 
@@ -16,8 +16,8 @@ $novo-divider-inset-margin: 80px;
     border-right-width: $novo-divider-width;
     border-right-style: solid;
     border-right-color: var(--border);
-    margin-left: $spacing-md;
-    margin-right: $spacing-md;
+    margin-left: var(--spacing-md);
+    margin-right: var(--spacing-md);
   }
 
   &.novo-divider-inset {

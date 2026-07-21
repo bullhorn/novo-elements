@@ -8,7 +8,7 @@ describe('Elements: PlacesListComponent', () => {
   beforeEach(() => {
     const elmRef: any = { nativeElement: document.createElement('div') };
     const cdr: any = { detectChanges: () => {} };
-    component = new PlacesListComponent('browser', elmRef, {} as any, {} as any, cdr);
+    component = new PlacesListComponent(elmRef, {} as any, {} as any, cdr);
   });
 
   describe('Output: matchesUpdated', () => {
@@ -144,12 +144,119 @@ describe('Elements: PlacesListComponent', () => {
     });
   });
 
+  describe('Method: getListQuery()', () => {
+    it('loads the Maps SDK before requesting Google predictions', async () => {
+      const order: string[] = [];
+      const loadGoogleMaps = vi.fn().mockImplementation(() => {
+        order.push('load');
+        return Promise.resolve();
+      });
+      const getGeoPrediction = vi.fn().mockImplementation(() => {
+        order.push('predict');
+        return Promise.resolve([]);
+      });
+      component['_googlePlacesService'] = { loadGoogleMaps, getGeoPrediction } as any;
+      component['_global'] = { nativeGlobal: { google: { maps: { places: {} } } } } as any;
+      component.settings = { useGoogleGeoApi: true, geoCountryRestriction: [], geoTypes: [], geoLocation: [] } as any;
+
+      component['getListQuery']('100 Sum');
+      await Promise.resolve();
+      await Promise.resolve();
+
+      expect(loadGoogleMaps).toHaveBeenCalledWith(component.settings);
+      expect(getGeoPrediction).toHaveBeenCalled();
+      expect(order).toEqual(['load', 'predict']);
+    });
+
+    it('does NOT load the Maps SDK on the search-service path', () => {
+      const loadGoogleMaps = vi.fn();
+      const getPredictions = vi.fn().mockResolvedValue([]);
+      component['_googlePlacesService'] = { loadGoogleMaps, getPredictions } as any;
+      component.settings = {
+        useGoogleGeoApi: false,
+        geoPredictionServerUrl: 'https://api/pred',
+        serverResponseListHierarchy: [],
+      } as any;
+
+      component['getListQuery']('100 Sum');
+
+      expect(loadGoogleMaps).not.toHaveBeenCalled();
+      expect(getPredictions).toHaveBeenCalledWith('https://api/pred', '100 Sum', expect.any(String));
+    });
+
+    it('shows an empty list when the Maps SDK fails to load', async () => {
+      const loadGoogleMaps = vi.fn().mockRejectedValue(new Error('boom'));
+      const getGeoPrediction = vi.fn();
+      component['_googlePlacesService'] = { loadGoogleMaps, getGeoPrediction } as any;
+      component.settings = { useGoogleGeoApi: true, geoCountryRestriction: [], geoTypes: [], geoLocation: [] } as any;
+      component['updateListItem'] = vi.fn();
+      const errSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+
+      await component['getListQuery']('100 Sum');
+
+      expect(getGeoPrediction).not.toHaveBeenCalled();
+      expect(component['updateListItem']).toHaveBeenCalledWith([]);
+      errSpy.mockRestore();
+    });
+
+    it('shows an empty list without crashing when no googleApiKey is configured (SDK not loaded)', async () => {
+      const loadGoogleMaps = vi.fn().mockResolvedValue(undefined);
+      const getGeoPrediction = vi.fn();
+      component['_googlePlacesService'] = { loadGoogleMaps, getGeoPrediction } as any;
+      component['_global'] = { nativeGlobal: {} } as any; // google.maps not present
+      component.settings = { useGoogleGeoApi: true, geoCountryRestriction: [], geoTypes: [], geoLocation: [] } as any;
+      component['updateListItem'] = vi.fn();
+
+      await component['getListQuery']('100 Sum');
+
+      expect(getGeoPrediction).not.toHaveBeenCalled();
+      expect(component['updateListItem']).toHaveBeenCalledWith([]);
+    });
+
+    it('warns once on init when useGoogleGeoApi is true but no googleApiKey is configured', () => {
+      const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+      component['_googlePlacesService'] = {
+        getRecentList: vi.fn().mockResolvedValue([]),
+      } as any;
+      // userSettings with no key; defaultSettings has useGoogleGeoApi: true
+      component.userSettings = { useGoogleGeoApi: true, googleApiKey: '' } as any;
+
+      component['moduleInit']();
+
+      expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('No googleApiKey configured'));
+      warnSpy.mockRestore();
+    });
+
+    it('shows an empty list and logs an error when the server prediction request fails', async () => {
+      const getPredictions = vi.fn().mockRejectedValue(new Error('500'));
+      component['_googlePlacesService'] = { getPredictions } as any;
+      component.settings = {
+        useGoogleGeoApi: false,
+        geoPredictionServerUrl: 'https://api/pred',
+        serverResponseListHierarchy: [],
+      } as any;
+      component['updateListItem'] = vi.fn();
+      const errSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+
+      component['getListQuery']('100 Sum');
+      await Promise.resolve();
+      await Promise.resolve();
+
+      expect(component['updateListItem']).toHaveBeenCalledWith([]);
+      errSpy.mockRestore();
+    });
+  });
+
   describe('Method: getPlaceLocationInfo()', () => {
-    it('should resolve Google details using the normalized placeId', () => {
+    it('should load the Maps SDK before resolving Google details using the normalized placeId', async () => {
+      const loadGoogleMaps = vi.fn().mockResolvedValue(undefined);
       const getGeoPlaceDetail = vi.fn().mockResolvedValue(null);
-      component['_googlePlacesService'] = { getGeoPlaceDetail } as any;
+      component['_googlePlacesService'] = { loadGoogleMaps, getGeoPlaceDetail } as any;
       component.settings = { useGoogleGeoApi: true } as any;
       component['getPlaceLocationInfo']({ placeId: 'abc' });
+      await Promise.resolve();
+      await Promise.resolve();
+      expect(loadGoogleMaps).toHaveBeenCalledWith(component.settings);
       expect(getGeoPlaceDetail).toHaveBeenCalledWith('abc');
     });
 
@@ -158,7 +265,151 @@ describe('Elements: PlacesListComponent', () => {
       component['_googlePlacesService'] = { getPlaceDetails } as any;
       component.settings = { useGoogleGeoApi: false, geoLocDetailServerUrl: 'https://api/detail' } as any;
       component['getPlaceLocationInfo']({ placeId: 'abc' });
-      expect(getPlaceDetails).toHaveBeenCalledWith('https://api/detail', 'abc');
+      expect(getPlaceDetails).toHaveBeenCalledWith('https://api/detail', 'abc', '');
+    });
+  });
+
+  describe('Google Places billing session token', () => {
+    const UUID_V4 = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+    const REST_SETTINGS = {
+      useGoogleGeoApi: false,
+      geoPredictionServerUrl: 'https://api/predict',
+      geoLocDetailServerUrl: 'https://api/detail',
+      serverResponseListHierarchy: [],
+      serverResponseDetailHierarchy: [],
+    };
+    const flush = () => new Promise((resolve) => setTimeout(resolve));
+
+    it('should mint a UUID v4 token on the first prediction and reuse it across predictions', () => {
+      const tokens: string[] = [];
+      const getPredictions = vi.fn((_url: string, _query: string, token: string) => {
+        tokens.push(token);
+        return Promise.resolve([]);
+      });
+      component['_googlePlacesService'] = { getPredictions } as any;
+      component.settings = { ...REST_SETTINGS } as any;
+
+      component['getListQuery']('123 Main');
+      component['getListQuery']('123 Main St');
+
+      expect(tokens.length).toBe(2);
+      expect(tokens[0]).toMatch(UUID_V4);
+      expect(tokens[1]).toBe(tokens[0]);
+    });
+
+    it('should forward the active token to getPlaceDetails and clear it once details resolve', async () => {
+      let detailToken: string;
+      const getPredictions = vi.fn().mockResolvedValue([]);
+      const getPlaceDetails = vi.fn((_url: string, _placeId: string, token: string) => {
+        detailToken = token;
+        return Promise.resolve(null);
+      });
+      component['_googlePlacesService'] = { getPredictions, getPlaceDetails } as any;
+      component.settings = { ...REST_SETTINGS } as any;
+
+      component['getListQuery']('123 Main');
+      const minted = component['sessionToken'];
+      expect(minted).toMatch(UUID_V4);
+
+      component['getPlaceLocationInfo']({ placeId: 'abc' });
+      await flush();
+
+      expect(detailToken).toBe(minted);
+      expect(component['sessionToken']).toBe('');
+    });
+
+    it('should clear the token even when the details request rejects', async () => {
+      const getPredictions = vi.fn().mockResolvedValue([]);
+      const getPlaceDetails = vi.fn().mockRejectedValue(new Error('details failed'));
+      component['_googlePlacesService'] = { getPredictions, getPlaceDetails } as any;
+      component.settings = { ...REST_SETTINGS } as any;
+
+      component['getListQuery']('123 Main');
+      expect(component['sessionToken']).toMatch(UUID_V4);
+
+      const errSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+      await component['getPlaceLocationInfo']({ placeId: 'abc' });
+      errSpy.mockRestore();
+
+      expect(component['sessionToken']).toBe('');
+    });
+
+    it('should mint a fresh, distinct token for the next interaction after a selection', async () => {
+      const getPredictions = vi.fn().mockResolvedValue([]);
+      const getPlaceDetails = vi.fn().mockResolvedValue(null);
+      component['_googlePlacesService'] = { getPredictions, getPlaceDetails } as any;
+      component.settings = { ...REST_SETTINGS } as any;
+
+      component['getListQuery']('first');
+      const firstToken = component['sessionToken'];
+      component['getPlaceLocationInfo']({ placeId: 'abc' });
+      await flush();
+
+      component['getListQuery']('second');
+      const secondToken = component['sessionToken'];
+
+      expect(secondToken).toMatch(UUID_V4);
+      expect(secondToken).not.toBe(firstToken);
+    });
+
+    it('should refresh the token after the inactivity timeout', () => {
+      const getPredictions = vi.fn().mockResolvedValue([]);
+      component['_googlePlacesService'] = { getPredictions } as any;
+      component.settings = { ...REST_SETTINGS } as any;
+
+      component['getListQuery']('a');
+      const firstToken = component['sessionToken'];
+      component['sessionTokenStartedAt'] = Date.now() - 4 * 60 * 1000;
+      component['getListQuery']('ab');
+
+      expect(component['sessionToken']).not.toBe(firstToken);
+    });
+
+    it('should clear the token when the input is emptied', () => {
+      component['sessionToken'] = 'spent-token';
+      component['sessionTokenStartedAt'] = Date.now();
+      component.settings = { showRecentSearch: false } as any;
+      component.locationInput = '';
+
+      component.searchinputCallback(null);
+
+      expect(component['sessionToken']).toBe('');
+    });
+
+    it('should fall back to a locally generated UUID v4 when crypto.randomUUID is unavailable', () => {
+      const original = (globalThis.crypto as any).randomUUID;
+      (globalThis.crypto as any).randomUUID = undefined;
+      try {
+        expect(component['generateSessionToken']()).toMatch(UUID_V4);
+      } finally {
+        (globalThis.crypto as any).randomUUID = original;
+      }
+    });
+
+    it('swallows a Maps SDK load failure without calling getGeoPlaceDetail', async () => {
+      const loadGoogleMaps = vi.fn().mockRejectedValue(new Error('boom'));
+      const getGeoPlaceDetail = vi.fn();
+      component['_googlePlacesService'] = { loadGoogleMaps, getGeoPlaceDetail } as any;
+      component.settings = { useGoogleGeoApi: true } as any;
+      const errSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+
+      await component['getPlaceLocationInfo']({ placeId: 'abc' });
+
+      expect(getGeoPlaceDetail).not.toHaveBeenCalled();
+      errSpy.mockRestore();
+    });
+
+    it('logs an error and still clears the session token when server path details request fails', async () => {
+      const getPlaceDetails = vi.fn().mockRejectedValue(new Error('500'));
+      component['_googlePlacesService'] = { getPlaceDetails } as any;
+      component.settings = { useGoogleGeoApi: false, geoLocDetailServerUrl: 'https://api/detail' } as any;
+      component['sessionToken'] = 'tok-123';
+      const errSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+
+      await component['getPlaceLocationInfo']({ placeId: 'abc' });
+
+      expect(component['sessionToken']).toBe('');
+      errSpy.mockRestore();
     });
   });
 });

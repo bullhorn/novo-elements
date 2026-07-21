@@ -9,6 +9,7 @@ export function getURLs() {
 export const URLS = getURLs();
 
 export const COMPONENT_URLS = {
+    AUTOCOMPLETE: 'autocomplete',
     AVATAR: 'avatar',
     BREADCRUMB: 'breadcrumbs',
     BUTTON: 'button',
@@ -24,6 +25,7 @@ export const COMPONENT_URLS = {
     SWITCH: 'switch',
     POPOVER: 'pop over',
     TOOLBAR: 'toolbar',
+    TOASTER: 'toaster',
 };
 
 export function examplesUrl(component: string): string {
@@ -39,4 +41,18 @@ export function componentsUrl(component: string): string {
 export function formControlsExamplesUrl(control: string): string {
     const baseUrl = (global as any).E2E_BASE_URL || 'https://bullhorn.github.io/novo-elements/docs';
     return `${baseUrl}/#/form-controls/${control}/examples`;
+}
+
+export function formControlsUrl(control: string): string {
+    const baseUrl = (global as any).E2E_BASE_URL || 'https://bullhorn.github.io/novo-elements/docs';
+    return `${baseUrl}/#/form-controls/${control}`;
+}
+
+export const LAYOUT_URLS = {
+    COLLAPSIBLE_NAV: 'collapsible-nav',
+};
+
+export function layoutsUrl(component: string): string {
+    const baseUrl = (global as any).E2E_BASE_URL || 'https://bullhorn.github.io/novo-elements/docs';
+    return `${baseUrl}/#/layouts/${component}`;
 }

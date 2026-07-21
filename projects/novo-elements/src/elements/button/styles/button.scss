@@ -5,16 +5,18 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  padding: 0 $spacing-md;
+  padding: var(--button-padding-y, 0) var(--button-padding-x, var(--spacing-md));
   font-size: var(--font-size-button);
-  height: 3rem;
+  font-weight: var(--button-font-weight, inherit);
+  letter-spacing: var(--button-letter-spacing, normal);
+  height: var(--button-height, 3rem);
   border: none;
-  color: var(--text-main, $dark);
+  color: var(--button-color, var(--text-main, $dark));
   background: transparent;
-  border-radius: 3px;
-  text-transform: uppercase;
+  border-radius: var(--button-radius, 3px);
+  text-transform: var(--button-text-transform, uppercase);
   transition: all 200ms ease-in-out;
-  gap: $spacing-md;
+  gap: var(--button-gap, var(--spacing-md));
   cursor: pointer;
   user-select: none;
   text-overflow: clip;
@@ -29,7 +31,7 @@
     line-height: 1;
     font-size: inherit;
     color: inherit;
-    text-transform: uppercase;
+    text-transform: var(--button-text-transform, uppercase);
   }
 
   i {
@@ -40,10 +42,10 @@
 
   &[size="small"],
   &[size="sm"] {
-    font-size: 1rem;
-    padding: 0 $spacing-md;
+    font-size: var(--font-size-xs);
+    padding: 0 var(--spacing-md);
     height: 2.4rem;
-    gap: $spacing-sm;
+    gap: var(--spacing-sm);
     .button-contents,
     i {
       height: 1rem;
@@ -53,9 +55,9 @@
   &[size="large"],
   &[size="lg"] {
     font-size: 1.6rem;
-    padding: 0 $spacing-lg;
+    padding: 0 var(--spacing-lg);
     height: 3.6rem;
-    gap: $spacing-lg;
+    gap: var(--spacing-lg);
     .button-contents,
     i {
       height: 1.6rem;
@@ -64,6 +66,10 @@
 
   &:focus {
     outline: none;
+  }
+
+  &:focus-visible {
+    box-shadow: var(--button-focus-ring, none);
   }
 
   &[disabled],

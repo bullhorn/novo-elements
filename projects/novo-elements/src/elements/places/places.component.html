@@ -1,0 +1,11 @@
+<novo-list direction="vertical">
+  @for (data of matches; track $index) {
+    <novo-list-item (click)="selectedListNode($event, $index)" [ngClass]="{ active: data === activeMatch }">
+      <item-header>
+        <item-avatar icon="location"></item-avatar>
+        <item-title>{{ data.primaryText }}</item-title>
+      </item-header>
+      <item-content>{{ data.secondaryText }}</item-content>
+    </novo-list-item>
+  }
+</novo-list>

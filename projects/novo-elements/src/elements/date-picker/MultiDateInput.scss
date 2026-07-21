@@ -14,7 +14,7 @@
       margin: 0px;
     }
     &.selected {
-      background: $light;
+      background: var(--background-main, $light);
       border-radius: 50%;
     }
   }

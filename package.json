@@ -1,6 +1,6 @@
 {
   "name": "novo-elements",
-  "version": "13.1.0",
+  "version": "13.2.0",
   "description": "Bullhorn's Novo-Elements repository, including core projects and tools",
   "license": "MIT",
   "private": true,
@@ -67,7 +67,7 @@
     "codemirror": "6.0.2",
     "date-fns": "4.1.0",
     "imask": "^7.6.1",
-    "novo-design-tokens": "^0.1.4",
+    "novo-design-tokens": "^1.0.0",
     "post-robot": "9.0.36",
     "rxjs": "~7.8.2",
     "timezone-support": "^3.1.0",

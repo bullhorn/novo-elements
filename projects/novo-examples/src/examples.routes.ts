@@ -1759,6 +1759,22 @@ export class ExpansionPage {
 
 
 @Component({
+  selector: 'collapsible-nav-page',
+  template: `<h1>Collapsible Nav <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/layout">(source)</a></h1>
+<p>A slide-out navigation panel that expands to a full-width panel or collapses to a narrow icon rail. Consumers project their own header, body, and footer content into the named slots (<code>novo-collapsible-nav-header</code>, <code>novo-collapsible-nav-body</code>, <code>novo-collapsible-nav-footer</code>). The <code>collapsed</code> state is two-way bindable.</p>
+<h5>Examples</h5>
+<h2>Basic Collapsible Nav</h2>
+<p><code-example example="basic-collapsible-nav"></code-example></p>
+`,
+  host: { class: 'markdown-page' },
+  standalone: false,
+})
+export class CollapsibleNavPage {
+  public params: any = {};
+}
+
+
+@Component({
   selector: 'card-examples-page',
   template: `<h2>Basic Card (using attributes)</h2>
 <p><code-example example="basic-card"></code-example></p>
@@ -2097,20 +2113,6 @@ export class FormControlsPage {
   standalone: false,
 })
 export class ValuePage {
-  public params: any = {};
-}
-
-
-@Component({
-  selector: 'timezone-page',
-  template: `<h1>Checkbox <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/form/controls/timezone/TimezoneControl">(source)</a></h1>
-<h5>Basic</h5>
-<p><code-example example="timezone"></code-example></p>
-`,
-  host: { class: 'markdown-page' },
-  standalone: false,
-})
-export class TimezonePage {
   public params: any = {};
 }
 
@@ -2629,8 +2631,6 @@ export class DateTimePickerDesignPage {
 <p><code-example example="week-start"></code-example></p>
 <h5>Date Picker Limits</h5>
 <p><code-example example="date-picker-limits"></code-example></p>
-<h2>Different Locale</h2>
-<p>TBD</p>
 `,
   host: { class: 'markdown-page' },
   standalone: false,
@@ -4020,6 +4020,9 @@ export class TipWellDesignPage {
 <p><code-example example="tabbed-group-picker-no-selection"></code-example></p>
 <h2>Footer</h2>
 <p><code-example example="tabbed-group-picker-footer"></code-example></p>
+<h2>Chips</h2>
+<p>Use a Chip List display inside of the Tabbed Group Picker to show selected options.</p>
+<p><code-example example="tabbed-group-picker-chips"></code-example></p>
 `,
   host: { class: 'markdown-page' },
   standalone: false,
@@ -6554,6 +6557,9 @@ export class AutocompleteDesignPage {
 <h2>Add</h2>
 <p>Add modals have a colored title bar based on the record type being created. Additionally, due to a greater than average amount of content, they have fixed footers.</p>
 <p><code-example example="aside-form"></code-example></p>
+<h2>Widget</h2>
+<p>A new experimental aside configuration making it behave as a pop-out widget. This component is both resizable and draggable around the screen.</p>
+<p><code-example example="aside-widget"></code-example></p>
 `,
   host: { class: 'markdown-page' },
   standalone: false,
@@ -6858,7 +6864,7 @@ const routes: Routes = [
   { path: 'patterns', component: PatternsPage, data: { order: '5', title: 'Patterns', section: 'src' } },
   { path: 'layouts', component: LayoutsPage, data: { order: '6', title: 'Layouts', section: 'src' } },
   { path: 'home', component: HomePage, data: { order: '1', title: 'Introduction', section: 'src' } },
-  { path: 'form-controls', component: FormControlsPage, data: { order: '12', title: 'Form Controls', section: 'src' } },
+  { path: 'form-controls', component: FormControlsPage, data: { order: '13', title: 'Form Controls', section: 'src' } },
   { path: 'design', component: DesignPage, data: { order: '26', title: 'Design', section: 'src' } },
   { path: 'components', component: ComponentsPage, data: { order: '32', title: 'Components', section: 'src' } },
   {
@@ -6883,6 +6889,7 @@ const routes: Routes = [
   { path: 'layouts/list', component: ListPage, data: { order: '9', title: 'List', section: 'layouts' } },
   { path: 'layouts/header', component: HeaderPage, data: { order: '10', title: 'Header', section: 'layouts' } },
   { path: 'layouts/expansion', component: ExpansionPage, data: { order: '11', title: 'Expansion', section: 'layouts' } },
+  { path: 'layouts/collapsible-nav', component: CollapsibleNavPage, data: { order: '12', title: 'Collapsible Nav', section: 'layouts' } },
   {
     path: 'layouts/card',
     component: TabsLayout,
@@ -6892,8 +6899,7 @@ const routes: Routes = [
       { path: 'examples', component: CardExamplesPage },
       { path: '', redirectTo: '/layouts/card/design', pathMatch: 'full' },
     ]},
-  { path: 'form-controls/value', component: ValuePage, data: { order: '13', title: 'Value', section: 'form-controls' } },
-  { path: 'form-controls/timezone', component: TimezonePage, data: { order: '14', title: 'Timezone', section: 'form-controls' } },
+  { path: 'form-controls/value', component: ValuePage, data: { order: '14', title: 'Value', section: 'form-controls' } },
   { path: 'form-controls/tiles', component: TilesPage, data: { order: '15', title: 'Tiles', section: 'form-controls' } },
   { path: 'form-controls/select', component: SelectPage, data: { order: '16', title: 'Select', section: 'form-controls' } },
   { path: 'form-controls/radio-buttons', component: RadioButtonsPage, data: { order: '17', title: 'Radio Buttons', section: 'form-controls' } },
@@ -7146,7 +7152,7 @@ const routes: Routes = [
 ];
 
 export const PAGE_LIST = [
-  SecurityPage,QuickNotePage,PipesPage,FieldInteractionsPage,DragDropPage,CodeEditorPage,v9Page,v8Page,v7Page,v6Page,v13Page,v12Page,v11Page,v10Page,TemplatesPage,PatternsPage,PatternsTestPage,PatternsNativeFormsPage,LayoutsPage,TabsExamplesPage,TabsDevelopPage,TabsDesignPage,StepperPage,SidenavPage,ListPage,HeaderPage,ExpansionPage,CardExamplesPage,CardDevelopPage,CardDesignPage,CardDescriptionPage,HomePage,FormControlsPage,ValuePage,TimezonePage,TimePickerExamplesPage,TimePickerDevelopPage,TimePickerDesignPage,TilesPage,SelectPage,RadioButtonsPage,PickerPage,MultiPickerPage,FormGroupsPage,FormPage,DynamicFormPage,DateTimePickerExamplesPage,DateTimePickerDevelopPage,DateTimePickerDesignPage,DatePickerExamplesPage,DatePickerDevelopPage,DatePickerDesignPage,ColorPickerPage,CkEditorPage,ChipsExamplesPage,ChipsDevelopPage,ChipsDesignPage,CheckboxPage,DesignPage,TypographyPage,SpacingPage,IconographyPage,CompositionPage,ColorsPage,ComponentsPage,TooltipExamplesPage,TooltipDevelopPage,TooltipDesignPage,ToolbarExamplesPage,ToolbarDevelopPage,ToolbarDesignPage,ToasterExamplesPage,ToasterDevelopPage,ToasterDesignPage,TipWellExamplesPage,TipWellDevelopPage,TipWellDesignPage,TabbedGroupPickerPage,SwitchPage,SlidesPage,SearchPage,QueryBuilderExamplesPage,QueryBuilderDevelopPage,QueryBuilderDesignPage,ProgressUsagePage,ProgressExamplesPage,ProgressDevelopPage,ProgressDesignPage,PopoverExamplesPage,PopoverDevelopPage,PopoverDesignPage,NonIdealStateExamplesPage,NonIdealStateDevelopPage,NonIdealStateDesignPage,ModalExamplesPage,ModalDevelopPage,ModalDesignPage,MenuExamplesPage,MenuDevelopPage,MenuDesignPage,LoadingExamplesPage,LoadingDevelopPage,LoadingDesignPage,IconExamplesPage,IconDevelopPage,IconDesignPage,FieldExamplesPage,FieldDevelopPage,FieldDesignPage,DropdownExamplesPage,DropdownDevelopPage,DropdownDesignPage,DataTablePage,CalendarExamplesPage,CalendarDevelopPage,CalendarDesignPage,ButtonExamplesPage,ButtonDevelopPage,ButtonDesignPage,BreadcrumbExamplesPage,BreadcrumbDevelopPage,BreadcrumbDesignPage,AvatarExamplesPage,AvatarDevelopPage,AvatarDesignPage,AutocompleteExamplesPage,AutocompleteDevelopPage,AutocompleteDesignPage,AsideExamplesPage,AsideDevelopPage,AsideDesignPage,AgendaExamplesPage,AgendaDevelopPage,AgendaDesignPage
+  SecurityPage,QuickNotePage,PipesPage,FieldInteractionsPage,DragDropPage,CodeEditorPage,v9Page,v8Page,v7Page,v6Page,v13Page,v12Page,v11Page,v10Page,TemplatesPage,PatternsPage,PatternsTestPage,PatternsNativeFormsPage,LayoutsPage,TabsExamplesPage,TabsDevelopPage,TabsDesignPage,StepperPage,SidenavPage,ListPage,HeaderPage,ExpansionPage,CollapsibleNavPage,CardExamplesPage,CardDevelopPage,CardDesignPage,CardDescriptionPage,HomePage,FormControlsPage,ValuePage,TimePickerExamplesPage,TimePickerDevelopPage,TimePickerDesignPage,TilesPage,SelectPage,RadioButtonsPage,PickerPage,MultiPickerPage,FormGroupsPage,FormPage,DynamicFormPage,DateTimePickerExamplesPage,DateTimePickerDevelopPage,DateTimePickerDesignPage,DatePickerExamplesPage,DatePickerDevelopPage,DatePickerDesignPage,ColorPickerPage,CkEditorPage,ChipsExamplesPage,ChipsDevelopPage,ChipsDesignPage,CheckboxPage,DesignPage,TypographyPage,SpacingPage,IconographyPage,CompositionPage,ColorsPage,ComponentsPage,TooltipExamplesPage,TooltipDevelopPage,TooltipDesignPage,ToolbarExamplesPage,ToolbarDevelopPage,ToolbarDesignPage,ToasterExamplesPage,ToasterDevelopPage,ToasterDesignPage,TipWellExamplesPage,TipWellDevelopPage,TipWellDesignPage,TabbedGroupPickerPage,SwitchPage,SlidesPage,SearchPage,QueryBuilderExamplesPage,QueryBuilderDevelopPage,QueryBuilderDesignPage,ProgressUsagePage,ProgressExamplesPage,ProgressDevelopPage,ProgressDesignPage,PopoverExamplesPage,PopoverDevelopPage,PopoverDesignPage,NonIdealStateExamplesPage,NonIdealStateDevelopPage,NonIdealStateDesignPage,ModalExamplesPage,ModalDevelopPage,ModalDesignPage,MenuExamplesPage,MenuDevelopPage,MenuDesignPage,LoadingExamplesPage,LoadingDevelopPage,LoadingDesignPage,IconExamplesPage,IconDevelopPage,IconDesignPage,FieldExamplesPage,FieldDevelopPage,FieldDesignPage,DropdownExamplesPage,DropdownDevelopPage,DropdownDesignPage,DataTablePage,CalendarExamplesPage,CalendarDevelopPage,CalendarDesignPage,ButtonExamplesPage,ButtonDevelopPage,ButtonDesignPage,BreadcrumbExamplesPage,BreadcrumbDevelopPage,BreadcrumbDesignPage,AvatarExamplesPage,AvatarDevelopPage,AvatarDesignPage,AutocompleteExamplesPage,AutocompleteDevelopPage,AutocompleteDesignPage,AsideExamplesPage,AsideDevelopPage,AsideDesignPage,AgendaExamplesPage,AgendaDevelopPage,AgendaDesignPage
 ];
 
 @NgModule({

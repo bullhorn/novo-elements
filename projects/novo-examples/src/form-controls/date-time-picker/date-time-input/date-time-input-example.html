@@ -1,11 +1,32 @@
-<div class="date-picker-demo-side-by-side" data-automation-id="date-time-input-container">
-    <p data-automation-id="date-time-input-values">
-        <label>Date-Time</label> {{(dateTimeInput | date:'medium') || 'N/A'}}
-        <label>Date-Time 2</label> {{(dateTimeInput2 | date:'medium') || 'N/A'}}
-    </p>
-    <div data-automation-id="date-time-input-inputs">
-        <novo-date-time-picker-input [(ngModel)]="dateTimeInput" data-automation-id="date-time-input-1"></novo-date-time-picker-input>
-        <novo-date-time-picker-input [(ngModel)]="dateTimeInput2" [military]="true" data-automation-id="date-time-input-2"></novo-date-time-picker-input>
+<div class="date-time-input-demo" data-automation-id="date-time-input-container">
+    <div class="date-time-input-row">
+        <div class="date-time-input-field">
+            <label>12-Hour</label>
+            <novo-date-time-picker-input [(ngModel)]="dateTimeInput" data-automation-id="date-time-input-1"></novo-date-time-picker-input>
+        </div>
+        <div class="date-time-input-value">
+            <label>Value</label>
+            <span data-automation-id="date-time-input-value-1">{{ (dateTimeInput | json) || 'N/A' }}</span>
+        </div>
     </div>
-    <novo-date-time-picker [(ngModel)]="dateTimeInput3" data-automation-id="date-time-input-picker"></novo-date-time-picker>
+
+    <div class="date-time-input-row">
+        <div class="date-time-input-field">
+            <label>24-Hour (Military)</label>
+            <novo-date-time-picker-input [(ngModel)]="dateTimeInput2" [military]="true" data-automation-id="date-time-input-2"></novo-date-time-picker-input>
+        </div>
+        <div class="date-time-input-value">
+            <label>Value</label>
+            <span data-automation-id="date-time-input-value-2">{{ (dateTimeInput2 | json) || 'N/A' }}</span>
+        </div>
+    </div>
+
+    <div class="date-time-inline-section">
+        <label>Inline Picker</label>
+        <novo-date-time-picker [(ngModel)]="dateTimeInput3" data-automation-id="date-time-input-picker3"></novo-date-time-picker>
+        <div class="date-time-input-value">
+            <label>Value</label>
+            <span data-automation-id="date-time-input-value-3">{{ (dateTimeInput3 | json) || 'N/A' }}</span>
+        </div>
+    </div>
 </div>

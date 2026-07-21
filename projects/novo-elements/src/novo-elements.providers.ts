@@ -37,6 +37,20 @@ const NOVO_ELEMENTS_PROVIDERS = [
   imports: [],
 })
 export class NovoElementProviders {
+  /**
+   * Registers Novo Elements root services.
+   *
+   * @param options.address - Optional address-lookup config. Set `googleApiKey` to your
+   *   Google Maps Platform API key (https://developers.google.com/maps/documentation/javascript/get-api-key)
+   *   to enable client-side Places autocomplete. Omit or leave blank to use the
+   *   Bullhorn address-search-service path instead.
+   *
+   * @example
+   * // In AppModule imports:
+   * NovoElementProviders.forRoot({
+   *   address: { googleApiKey: environment.googleMapsApiKey },
+   * })
+   */
   static forRoot(options?: { menu?: IMenuOptions; address?: PlacesSettings }): ModuleWithProviders<NovoElementProviders> {
     return {
       ngModule: NovoElementProviders,

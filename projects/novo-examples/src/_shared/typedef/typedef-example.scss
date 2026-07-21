@@ -2,8 +2,8 @@
   display: flex;
   flex-direction: column;
   border: 1px solid lightgray;
-  margin-bottom: 2rem;
-  font-size: 1.2rem;
+  margin-bottom: var(--spacing-2xl);
+  font-size: var(--font-size-sm);
 }
 
 .as-split-gutter {

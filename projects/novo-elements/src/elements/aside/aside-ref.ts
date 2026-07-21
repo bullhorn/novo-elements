@@ -1,15 +1,19 @@
 import { OverlayRef } from '@angular/cdk/overlay';
+import { EventEmitter, signal } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 import { AsideComponent } from './aside.component';
 
 export class NovoAsideRef<T = any, R = any> {
-  constructor(public component: any, public params: T, private overlayRef: OverlayRef) {}
+  constructor(public component: any, public params: T, public overlayRef: OverlayRef) {}
 
   private _beforeClose = new Subject<R>();
   private _afterClosed = new Subject<R>();
   isClosed: boolean = false;
   componentInstance: AsideComponent;
+  draggable = signal(false);
+  disableDrag = signal(true);
+  onDragStart = new EventEmitter<void>();
 
   // Gets a promise that is resolved when the dialog is closed.
   get onClosed(): Promise<R> {

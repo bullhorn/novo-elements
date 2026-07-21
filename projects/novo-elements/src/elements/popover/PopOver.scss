@@ -13,6 +13,7 @@
     color: var(--text-main, $dark);
     background-clip: padding-box;
     box-shadow: $shadow-popover;
+    border-radius: var(--border-radius-sm);
 
     &.top {
       margin-top: -1rem;
@@ -21,7 +22,7 @@
       }
     }
     &.right {
-      margin-left: 1rem;
+      margin-left: var(--spacing-md);
       &.virtual-area {
         left: -1.1rem;
       }

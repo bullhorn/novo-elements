@@ -1,0 +1,15 @@
+import { animate, AnimationTriggerMetadata, state, style, transition, trigger } from '@angular/animations';
+
+/**
+ * Animation that grows/shrinks the panel width between its expanded and collapsed (icon-rail) sizes.
+ * Width is animated rather than transform because the panel shrinks in place rather than sliding away.
+ */
+export const novoCollapsibleNavAnimations: {
+  readonly expandCollapse: AnimationTriggerMetadata;
+} = {
+  expandCollapse: trigger('expandCollapse', [
+    state('expanded', style({ width: '{{ expandedWidth }}' }), { params: { expandedWidth: '18rem' } }),
+    state('collapsed', style({ width: '{{ collapsedWidth }}' }), { params: { collapsedWidth: '4rem' } }),
+    transition('expanded <=> collapsed', animate('300ms cubic-bezier(0.25, 0.8, 0.25, 1)')),
+  ]),
+};

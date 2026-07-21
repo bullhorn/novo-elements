@@ -112,6 +112,9 @@
         [dataAutomationId]="row[rowIdentifier]"
       ></novo-data-table-row>
     </cdk-table>
+    <div class="novo-data-table-alternate-view" *ngIf="templates['alternateView']">
+      <ng-container *ngTemplateOutlet="templates['alternateView'];"></ng-container>
+    </div>
     <div class="novo-data-table-footer" *ngIf="templates['footer']">
       <ng-container *ngTemplateOutlet="templates['footer']; context: { $implicit: columns, data: dataSource.data }"></ng-container>
     </div>

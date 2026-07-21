@@ -1,0 +1,16 @@
+/** CSS for this example */
+aside-widget-example {
+  display: block;
+  background: rgba(0, 0, 0, 0.55);
+  padding: 35px 0;
+  position: relative;
+  text-align: center;
+}
+
+.aside-overlay-panel {
+    width: 100%;
+}
+
+novo-aside .example-spacer {
+  flex: 1 1 100%;
+}

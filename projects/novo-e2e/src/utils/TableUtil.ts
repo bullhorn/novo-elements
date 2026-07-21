@@ -11,6 +11,23 @@ import { sleep } from './SleepUtil';
 import { verifyPresent } from './VerifyUtil';
 import { waitForElementAbsenceOrXSeconds, waitForElementOrXMilliseconds } from './WaitUtil';
 
+const configureColumnsModal = 'novo-modal [title="Configure Columns"]';
+
+export const dataTableSelectors = {
+    page: 'data-table-page',
+    pageTitle: 'data-table-page h1',
+    detailRow: '.novo-data-table-detail-row',
+    emptyMessage: '.novo-data-table-empty-message',
+    configureColumnsModal,
+    configureColumnsModalTitle: `${configureColumnsModal} ${elements.title}`,
+    configureColumnsModalClose: `button${elements.buttonThemes.standard}`,
+    actionsButton: `${elements.actions} button`,
+    paginationTiles: automationId('novo-data-table-pagination-tiles'),
+    headerPagination: `header ${elements.pagination}`,
+    footerPagination: `footer ${elements.pagination}`,
+    headerSearch: `header ${elements.search}`,
+};
+
 const maxVisibleRows = 50;
 const cellSelector = 'novo-data-table-cell.cdk-column-';
 

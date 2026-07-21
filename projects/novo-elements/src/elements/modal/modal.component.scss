@@ -3,7 +3,7 @@
 :host {
   display: block;
   background-color: var(--background-bright);
-  border-radius: 4px;
+  border-radius: var(--border-radius-default, 4px);
   box-shadow: 0 1px 7px rgba(0, 0, 0, 0.09), 0 1px 3px rgba(0, 0, 0, 0.2);
   z-index: z(modal);
   position: relative;
@@ -12,8 +12,8 @@
 
   > .novo-button.modal-close {
     position: absolute;
-    right: $spacing-xl;
-    top: $spacing-xl;
+    right: var(--spacing-xl);
+    top: var(--spacing-xl);
   }
 
   > ::ng-deep header {
@@ -28,7 +28,7 @@
   }
 
   > ::ng-deep section {
-    padding: $spacing-md $spacing-xl;
+    padding: var(--spacing-md) var(--spacing-xl);
     max-height: 500px;
     overflow: auto;
   }
@@ -37,10 +37,20 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    padding: $spacing-md;
-    gap: $spacing-md;
+    padding: var(--spacing-md);
+    gap: var(--spacing-md);
     ::ng-deep button {
       min-width: 10rem;
     }
+  }
+}
+
+// bh2026: rounded modal and header top corners.
+:host-context([data-theme='bh2026']) {
+  border-radius: var(--border-radius-md, 1.6rem);
+
+  > ::ng-deep header {
+    border-top-left-radius: var(--border-radius-md, 1.6rem);
+    border-top-right-radius: var(--border-radius-md, 1.6rem);
   }
 }

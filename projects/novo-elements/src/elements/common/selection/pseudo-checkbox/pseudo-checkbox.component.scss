@@ -23,12 +23,12 @@ $_novo-pseudo-checkmark-size: $novo-checkbox-size - (2 * $_novo-pseudo-checkbox-
 
   &.novo-pseudo-checkbox-checked,
   &.novo-pseudo-checkbox-indeterminate {
-    color: $ocean;
+    color: var(--color-positive);
     animation: iconEnter 160ms ease-in-out;
   }
 
   i {
-    font-size: 1.4rem;
+    font-size: var(--font-size-novo-default);
     line-height: 1rem;
   }
 }

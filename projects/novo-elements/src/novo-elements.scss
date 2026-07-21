@@ -3,6 +3,7 @@
 // --------------------------------------------------
 @import 'novo-design-tokens/scss';
 @import 'novo-design-tokens/css/variables.min';
+@import 'novo-design-tokens/css/bh2026.min';
 
 @import "./styles/variables";
 @import "./styles/reset";
@@ -67,25 +68,25 @@
 
   @if index($excluded, $name) == null {
     .novo-background-#{$name} {
-      background: $color;
-      color: $contrast;
+      background: getCssVarname($name);
+      color: getContrastColor($name);
     }
     .novo-text-#{$name} {
-      color: $color;
+      color: getCssVarname($name);
     }
 
     .bgc-#{$name} {
-      background: $color;
+      background: getCssVarname($name);
       color: $contrast;
     }
 
     .bgc-#{$name}-striped {
       & > *:nth-child(odd) {
-        background: $color;
+        background: getCssVarname($name);
       }
     }
     .txc-#{$name} {
-      color: $color;
+      color: getCssVarname($name);
     }
   }
 }
@@ -130,7 +131,6 @@
 
 .aside-overlay-panel {
   position: relative;
-  // z-index: 1001;
 }
 
 @keyframes iconEnter {

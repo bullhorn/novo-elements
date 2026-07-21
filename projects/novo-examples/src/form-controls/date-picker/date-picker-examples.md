@@ -24,7 +24,3 @@ order: 4
 ##### Date Picker Limits
 
 <code-example example="date-picker-limits"></code-example>
-
-## Different Locale
-
-TBD
