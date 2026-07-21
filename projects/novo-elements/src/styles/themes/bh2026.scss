@@ -1,4 +1,4 @@
-// Maps design tokens (Figma "subatomic") onto the semantic CSS-variable contract for novo-elements components.
+// Maps design tokens onto the semantic CSS-variable contract for novo-elements components.
 @mixin bh2026-variables {
   // Live color-math direction (light): elevate() brightens, recede() darkens.
   --bg-fade-multiplier: 1;
@@ -35,6 +35,8 @@
   --border:              var(--color-border-default, #f0f5f9);
   --border-2:            var(--color-border-subtle, #f0f5f9);
   --border-hard:         var(--color-border-emphasized, #282828);
+  --border-radius-sm:    0.8rem;
+  --border-radius-md:    1.6rem;
   --border-radius-round: var(--border-radius-sm);
 
   // --- Interactive ---
@@ -51,24 +53,26 @@
   --font-size-tab:     var(--typography-tabs-default-font-size, 1.4rem);
 
   // --- Button ---
-  --button-background:     var(--color-grayscale-white, #ffffff);
-  --button-color:          var(--color-content-link, #282828);
+  --button-background:     #e2e2e2;
+  --button-color:          var(--color-content-subtle, #5d7798);
+  --button-focus-ring:     0 0 0 2px #4a89dc;
   --button-font-weight:    var(--typography-font-weight-400, 400);
   --button-gap:            var(--spacing-8, 0.8rem);
   --button-height:         3.5rem;
-  --button-letter-spacing: var(--typography-letter-spacing-half, 0.05rem);
+  --button-icon-margin:    0;
+  --button-letter-spacing: var(--typography-button-letter-spacing, 0);
   --button-padding-x:      var(--spacing-16, 1.6rem);
   --button-padding-y:      var(--spacing-8, 0.8rem);
   --button-radius:         999px;
   --button-text-transform: none;
-  --button-text:           var(--color-content-link, #282828);
+  --button-text:           var(--color-content-subtle, #5d7798);
 
   // Button variants
-  --button-primary-background: var(--button-background);
-  --button-primary-color:      var(--button-color);
-  --button-primary-border:     1px solid var(--border);
-  --button-secondary-text:     var(--button-text);
-  --button-secondary-border:   1px solid var(--border);
+  --button-primary-background: #1450a0;
+  --button-primary-color:      #ffffff;
+  --button-primary-border:     none;
+  --button-secondary-text:     var(--color-content-subtle, #5d7798);
+  --button-secondary-border:   1px solid var(--color-border-subtle, #8ca1b9);
 
   // Best guess currently at the refresh accent color
   --color-positive: #0095da;
@@ -77,6 +81,30 @@
 :root[data-theme='bh2026'],
 :root.theme-bh2026 {
   @include bh2026-variables();
+}
+
+// bh2026: primary icon defaults to left. row-reverse moves the default right-side icon
+// visually before the text. Explicit side="left" reverts to row (icon already first in DOM).
+:root[data-theme='bh2026'] [theme="primary"],
+:root.theme-bh2026 [theme="primary"] {
+  flex-direction: row-reverse;
+
+  &[side="left"] {
+    flex-direction: row;
+  }
+}
+
+// Dropdown trigger buttons keep the collapse icon on the right.
+// This override wins over the base rule (0,3,1 > 0,3,0).
+:root[data-theme='bh2026'] novo-dropdown [theme="primary"],
+:root.theme-bh2026 novo-dropdown [theme="primary"] {
+  flex-direction: row;
+}
+
+// bh2026: dialogue does not share pill format on hover
+:root[data-theme='bh2026'] [theme="dialogue"],
+:root.theme-bh2026 [theme="dialogue"] {
+  border-radius: var(--border-radius-sm, 0.8rem);
 }
 
 // bh2026 dark

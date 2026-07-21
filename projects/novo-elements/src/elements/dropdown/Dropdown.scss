@@ -16,13 +16,15 @@
       font-size: 0.8em !important;
       width: 1em !important;
       height: 1em !important;
-      margin: 0 0.5em;
+      margin: 0 var(--button-icon-margin, 0.5em);
     }
   }
 }
 
 .dropdown-container {
   background-color: var(--background-bright, $color-bright);
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
   list-style: none;
   margin: 0;
   padding: 0;

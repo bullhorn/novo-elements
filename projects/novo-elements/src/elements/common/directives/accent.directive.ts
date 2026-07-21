@@ -18,7 +18,7 @@ export class AccentColorDirective implements OnDestroy {
       return `novo-theme-${this.accent}`;
     }
     const normalized = normalizeThemeName(this.theme.themeName);
-    if (normalized.includes('bh2022')) {
+    if (normalized.includes('bh2022') || normalized.includes('bh2026')) {
       return `novo-accent-${this.accent}`;
     }
     return '';
