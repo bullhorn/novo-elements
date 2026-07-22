@@ -11,7 +11,6 @@
     background: var(--color-white);
     color: var(--button-secondary-text, var(--color-positive));
     border: var(--button-secondary-border, 1px solid $positive);
-    padding: 0 calc(#{var(--spacing-md)} - 1px);
 
     i.loading {
       margin-left: 0.8rem;

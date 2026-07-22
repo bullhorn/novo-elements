@@ -46,7 +46,21 @@
   }
 }
 
-// bh2026: neutral border
+// bh2026: pill container, muted bg, navy selected state
 :host-context([data-theme='bh2026']) > .tile-container {
-  border-color: var(--color-border-default, #f0f5f9);
+  border-color: var(--color-border-subtle);
+  border-radius: 999px;
+
+  .tile {
+    border-radius: 999px;
+  }
+
+  .tile.defaultColor.active {
+    background: var(--button-primary-background);
+  }
+
+  .tile:not(.active) {
+    color: var(--text-muted);
+    i { color: var(--text-muted); }
+  }
 }

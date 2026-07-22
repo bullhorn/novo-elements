@@ -62,4 +62,19 @@
     flex-direction: column;
     width: 100%;
   }
+
+  // bh2026: frosted translucent toolbar, no entity accent border
+  :root[data-theme='bh2026'] & {
+    background: var(--color-transparency-white-90);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 1px 2px var(--color-transparency-black-10);
+
+    .novo-toolbar-row {
+      background: transparent;
+
+      &[class*='novo-accent-'] {
+        border-bottom: none;
+      }
+    }
+  }
 }
