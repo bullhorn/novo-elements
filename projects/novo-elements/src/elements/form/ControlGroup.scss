@@ -53,13 +53,13 @@ novo-control-group {
   // bh2026: description text and column-header labels match decoration weight/size of hint and field-message
   [data-theme='bh2026'] & {
     .novo-section-header label.novo-control-group-description {
-      font-size: var(--typography-font-size-12);
-      font-weight: var(--typography-input-value-default-font-weight);
-      color: var(--color-content-subtle);
+      font-size: var(--typography-input-value-sm-font-size);
+      font-weight: var(--typography-input-value-sm-font-weight);
+      color: var(--color-text-subtle);
     }
     .novo-control-group-labels .novo-control-group-control-label > span {
-      font-size: var(--typography-font-size-12);
-      font-weight: var(--typography-input-value-default-font-weight);
+      font-size: var(--typography-input-value-sm-font-size);
+      font-weight: var(--typography-input-value-sm-font-weight);
     }
   }
 

@@ -128,7 +128,7 @@
   }
 
   header {
-    padding: var(--spacing-16) var(--spacing-24) var(--spacing-16) 0;
+    padding: var(--spacing-padding-md) var(--spacing-padding-lg) var(--spacing-padding-md) 0;
     border-bottom: 1px solid var(--color-border-default);
 
     .title {
@@ -145,17 +145,17 @@
     }
 
     &:hover .title ::ng-deep i.bhi-move {
-      color: var(--color-content-subtle);
+      color: var(--color-text-subtle);
     }
 
     .actions {
       display: flex;
       align-items: center;
-      gap: var(--spacing-8);
+      gap: var(--spacing-gap-sm);
     }
 
     novo-button {
-      color: var(--color-content-subtle);
+      color: var(--color-text-subtle);
     }
   }
 }

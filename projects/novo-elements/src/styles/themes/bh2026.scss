@@ -82,12 +82,12 @@
   --button-color:          var(--color-text-subtle);
   --button-focus-ring:     0 2px 2px 0 var(--color-transparency-charcoal-04), 0 0 0 2px var(--color-utility-blue-400);
   --button-font-weight:    var(--typography-font-weight-400);
-  --button-gap:            var(--spacing-8);
+  --button-gap:            var(--spacing-gap-sm);
   --button-height:         3.5rem;
   --button-icon-margin:    0;
   --button-letter-spacing: var(--typography-button-letter-spacing);
-  --button-padding-x:      var(--spacing-16);
-  --button-padding-y:      var(--spacing-8);
+  --button-padding-x:      var(--spacing-padding-md);
+  --button-padding-y:      var(--spacing-padding-sm);
   --button-radius:         999px;
   --button-text-transform: none;
   --button-text:           var(--color-text-subtle);

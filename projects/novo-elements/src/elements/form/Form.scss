@@ -827,19 +827,19 @@ control-prompt-modal {
     &.novo-control-filled,
     &.novo-control-focused,
     &.novo-control-always-active {
-      font-weight: var(--typography-input-value-default-font-weight) !important;
+      font-weight: var(--typography-input-label-sm-font-weight) !important;
       font-size: var(--typography-input-label-sm-font-size) !important;
       letter-spacing: var(--typography-input-label-sm-letter-spacing);
       text-transform: var(--typography-input-label-sm-text-transform);
-      color: var(--color-dark) !important;
+      color: var(--color-text-body) !important;
     }
   }
   .novo-form-control-label {
-    font-weight: var(--typography-input-value-default-font-weight) !important;
+    font-weight: var(--typography-input-label-sm-font-weight) !important;
     font-size: var(--typography-input-label-sm-font-size) !important;
     letter-spacing: var(--typography-input-label-sm-letter-spacing);
     text-transform: var(--typography-input-label-sm-text-transform);
-    color: var(--color-dark) !important;
+    color: var(--color-text-body) !important;
   }
   .novo-control-outer-container input:not([type='checkbox']):not([type='radio']) {
     font-size: var(--typography-input-value-default-font-size) !important;
@@ -847,21 +847,21 @@ control-prompt-modal {
   }
   .field-message,
   novo-tip-well.active {
-    font-size: var(--typography-font-size-12);
-    font-weight: var(--typography-input-value-default-font-weight);
-    color: var(--color-content-subtle);
+    font-size: var(--typography-input-value-sm-font-size);
+    font-weight: var(--typography-input-value-sm-font-weight);
+    color: var(--color-text-subtle);
 
     // $grey is a compile-time SCSS variable — explicit selectors required to override
     .character-count,
     .record-count {
-      font-size: var(--typography-font-size-12);
-      color: var(--color-content-subtle);
+      font-size: var(--typography-input-value-sm-font-size);
+      color: var(--color-text-subtle);
     }
   }
   .error-message {
     .character-count {
-      font-size: var(--typography-font-size-12);
-      color: var(--color-content-subtle);
+      font-size: var(--typography-input-value-sm-font-size);
+      color: var(--color-text-subtle);
     }
   }
 }

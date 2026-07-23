@@ -51,8 +51,8 @@
   background: var(--color-gray-0);
   border: 1px solid var(--color-border-default);
   border-radius: 999px;
-  padding: var(--spacing-4);
-  gap: var(--spacing-8);
+  padding: var(--spacing-padding-xsm);
+  gap: var(--spacing-gap-sm);
 
   .tile {
     border-radius: 999px;
