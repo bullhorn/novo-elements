@@ -54,12 +54,10 @@
   &[theme="secondary"] {
     &:hover,
     &:focus {
-      background: var(--button-secondary-hover-background);
       border: var(--button-secondary-border-hover);
       box-shadow: var(--button-shadow-hover);
     }
     &:active {
-      background: var(--button-secondary-hover-background);
       border: var(--button-secondary-border-hover);
       box-shadow: var(--button-shadow-active);
     }
