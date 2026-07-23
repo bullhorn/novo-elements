@@ -154,6 +154,19 @@
 
 // bh2026: frosted translucent header + entity squircle icon
 :host-context([data-theme='bh2026']) {
+  & > section {
+    gap: var(--spacing-gap-lg);
+  }
+
+  .header-actions {
+    gap: var(--spacing-gap-sm);
+  }
+
+  ::ng-deep utils,
+  ::ng-deep novo-utils {
+    gap: var(--spacing-gap-sm);
+  }
+
   &[class*='novo-accent-'] {
     background: var(--color-transparency-white-90);
     backdrop-filter: blur(12px);
@@ -167,7 +180,7 @@
     }
 
     utils {
-      color: var(--color-transparency-black-60);
+      color: var(--color-text-subtle);
     }
   }
 
