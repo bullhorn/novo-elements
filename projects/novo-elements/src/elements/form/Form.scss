@@ -822,8 +822,7 @@ control-prompt-modal {
 
 // bh2026: uppercase label + tighter value typography per Figma "Value - Finalized" spec
 // ViewEncapsulation.None: use plain selectors (not :host-context which is Shadow DOM only)
-:root[data-theme='bh2026'],
-:root.theme-bh2026 {
+:root[data-theme='bh2026'] {
   label.novo-control-label {
     &.novo-control-filled,
     &.novo-control-focused,

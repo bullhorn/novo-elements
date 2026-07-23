@@ -19,30 +19,55 @@
   --spacing-3xl: 4rem;
 
   // --- Surfaces ---
-  --background-body:   var(--color-gray-white);
+  --background-body:   var(--color-gray-0);
   --background-main:   var(--color-background-default);
-  --background-bright: var(--color-gray-white);
+  --background-bright: var(--color-gray-0);
   --background-dark:   var(--color-background-subtle-hover);
   --background-muted:  var(--color-background-subtle);
 
   // --- Text / content ---
-  --text-main:      var(--color-content-headline);
-  --text-secondary: var(--color-content-body);
-  --text-muted:     var(--color-content-subtle);
-  --text-disabled:  var(--color-content-disabled);
+  --text-main:      var(--color-text-headline);
+  --text-secondary: var(--color-text-body);
+  --text-muted:     var(--color-text-subtle);
+  --text-disabled:  var(--color-text-disabled);
+
+  // Transition aliases — color.content.* was renamed to color.text.* in the subatomic
+  // token update. Keeps migrated components working without per-component changes.
+  --color-content-headline:   var(--color-text-headline);
+  --color-content-body:       var(--color-text-body);
+  --color-content-default:    var(--color-text-body);
+  --color-content-link:       var(--color-text-link);
+  --color-content-link-hover: var(--color-text-link-hover);
+  --color-content-subtle:     var(--color-text-subtle);
+  --color-content-disabled:   var(--color-text-disabled);
+
+  // Transition aliases — flat palette tokens removed in subatomic 1.1.0 export.
+  // Non-bh2026-migrated components (Form, Toast, Stepper, Tiles, etc.) reference these via
+  // the global `:root` (bh2022) values; these overrides ensure bh2026 surfaces stay consistent.
+  --color-border:     var(--color-border-default);
+  --color-dark:       var(--color-text-body);
+  --color-negative:   var(--color-border-utility-negative);
+  --color-positive:   var(--color-border-utility-positive);
+  --color-slate:      var(--color-gray-600);
+  --color-success:    var(--color-border-utility-success);
+  --color-warning:    var(--color-border-utility-warning);
 
   // --- Borders ---
   --border:              var(--color-border-default);
   --border-2:            var(--color-border-subtle);
-  --border-hard:         var(--color-border-emphasized);
+  --border-hard:         var(--color-border-control);
   --border-radius-sm:    0.8rem;
   --border-radius-md:    1.6rem;
   --border-radius-round: var(--border-radius-sm);
 
+  // Transition aliases — color.border.emphasized/strong renamed in subatomic update.
+  --color-border-emphasized: var(--color-border-control);
+  --color-border-strong:     var(--color-border-utility-positive);
+
   // --- Interactive ---
-  --links:     var(--color-content-link);
-  --focus:     var(--color-border-strong);
-  --selection: var(--color-border-strong);
+  --links:     var(--color-text-link);
+  --focus:     var(--color-border-utility-positive);
+  --selection: var(--color-border-utility-positive);
 
   // --- Typography scale (map semantic sizes onto modern composite roles) ---
   --font-size-caption: var(--typography-meta-default-font-size);
@@ -53,9 +78,9 @@
   --font-size-tab:     var(--typography-tabs-default-font-size);
 
   // --- Button ---
-  --button-background:     var(--color-silver);
-  --button-color:          var(--button-color-secondary-content-default, #677079);
-  --button-focus-ring:     0 0 0 2px #4a89dc;
+  --button-background:     var(--color-background-subtle);
+  --button-color:          var(--color-text-subtle);
+  --button-focus-ring:     0 2px 2px 0 var(--color-transparency-charcoal-04), 0 0 0 2px var(--color-utility-blue-400);
   --button-font-weight:    var(--typography-font-weight-400);
   --button-gap:            var(--spacing-8);
   --button-height:         3.5rem;
@@ -65,28 +90,37 @@
   --button-padding-y:      var(--spacing-8);
   --button-radius:         999px;
   --button-text-transform: none;
-  --button-text:           var(--button-color-secondary-content-default, #677079);
+  --button-text:           var(--color-text-subtle);
+
+  // Button hover/active state colors (shared across base, standard, dialogue, tiles)
+  --button-hover-background: var(--color-background-subtle-hover);
+
+  // Button elevation shadows
+  --button-shadow:        0 2px 2px 0 var(--color-transparency-charcoal-04);
+  --button-shadow-hover:  4px 8px 12px 0 var(--color-transparency-charcoal-08), 0 2px 4px 0 var(--color-transparency-charcoal-04);
+  --button-shadow-active: 4px 8px 12px 0 var(--color-transparency-charcoal-08), 0 2px 4px 0 var(--color-transparency-charcoal-04), inset 0 4px 8px 0 var(--color-transparency-charcoal-08);
 
   // Button variants
-  --button-primary-background: #1450a0;
-  --button-primary-color:      var(--color-gray-white);
-  --button-primary-border:     none;
-  --button-secondary-text:     var(--button-text);
-  --button-secondary-border:   1px solid var(--color-border-subtle);
-
-  // Best guess currently at the refresh accent color
-  --color-positive: #0095da;
+  --button-primary-background:       var(--color-utility-blue-600);
+  --button-primary-background-hover: var(--color-utility-blue-700);
+  --button-primary-color:            var(--color-gray-0);
+  --button-primary-border:           none;
+  --button-primary-filter-hover:     none;
+  --button-primary-filter-active:    none;
+  --button-secondary-text:           var(--button-text);
+  --button-secondary-border:         1px solid var(--color-border-subtle);
+  --button-secondary-hover-background: var(--color-background-subtle-hover);
+  --button-secondary-border-hover:   1px solid var(--color-gray-300);
+  --button-dialogue-hover-background: var(--color-background-subtle-hover);
 }
 
-:root[data-theme='bh2026'],
-:root.theme-bh2026 {
+:root[data-theme='bh2026'] {
   @include bh2026-variables();
 }
 
 // bh2026: primary icon defaults to left. row-reverse moves the default right-side icon
 // visually before the text. Explicit side="left" reverts to row (icon already first in DOM).
-:root[data-theme='bh2026'] [theme="primary"],
-:root.theme-bh2026 [theme="primary"] {
+:root[data-theme='bh2026'] [theme="primary"] {
   flex-direction: row-reverse;
 
   &[side="left"] {
@@ -96,15 +130,20 @@
 
 // Dropdown trigger buttons keep the collapse icon on the right.
 // This override wins over the base rule (0,3,1 > 0,3,0).
-:root[data-theme='bh2026'] novo-dropdown [theme="primary"],
-:root.theme-bh2026 novo-dropdown [theme="primary"] {
+:root[data-theme='bh2026'] novo-dropdown [theme="primary"] {
   flex-direction: row;
 }
 
 // bh2026: dialogue does not share pill format on hover
-:root[data-theme='bh2026'] [theme="dialogue"],
-:root.theme-bh2026 [theme="dialogue"] {
+:root[data-theme='bh2026'] [theme="dialogue"] {
   border-radius: var(--border-radius-sm);
+}
+
+// bh2026: primary disabled uses a lighter blue at full opacity instead of the default 0.5 opacity dimming
+:root[data-theme='bh2026'] [theme="primary"][disabled],
+:root[data-theme='bh2026'] [theme="primary"].novo-button-disabled {
+  background: var(--color-utility-blue-400);
+  opacity: 1;
 }
 
 // bh2026 dark
@@ -120,15 +159,14 @@
   --button-background: var(--button-background);
   --button-color:      var(--button-text);
 
-  // bh2026 components color text via the modern `--color-content-*` tokens (charcoal in
-  // light), not the classic `--text-*` vars — so `dark-variables` alone leaves them dark
-  // (e.g. tab labels stay black-on-dark). Remap the content ramp onto the shared dark text
-  // palette so tabs/stepper/field/table/breadcrumbs/data-table all flip to light.
-  --color-content-headline:   var(--text-main);
-  --color-content-body:       var(--text-main);
-  --color-content-default:    var(--text-main);
-  --color-content-link:       var(--text-main);
-  --color-content-link-hover: var(--text-main);
-  --color-content-subtle:     var(--text-muted);
-  --color-content-disabled:   var(--text-disabled);
+  // bh2026 components color text via the modern --color-text-* tokens (dark in light mode),
+  // not the classic --text-* vars — so dark-variables alone leaves them dark
+  // (e.g. tab labels stay black-on-dark). Remap onto the shared dark text palette
+  // so tabs/stepper/field/table/breadcrumbs/data-table all flip to light.
+  --color-text-headline:   var(--text-main);
+  --color-text-body:       var(--text-main);
+  --color-text-link:       var(--text-main);
+  --color-text-link-hover: var(--text-main);
+  --color-text-subtle:     var(--text-muted);
+  --color-text-disabled:   var(--text-disabled);
 }

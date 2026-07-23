@@ -28,3 +28,15 @@
     }
   }
 }
+
+:host-context([data-theme='bh2026']) {
+  &[theme="dialogue"] {
+    box-shadow: none;
+    &:hover,
+    &:focus,
+    &:active {
+      background: var(--button-dialogue-hover-background);
+      box-shadow: none;
+    }
+  }
+}

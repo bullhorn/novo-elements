@@ -11,7 +11,6 @@
 
     &:hover,
     &:focus {
-
       filter: brightness(1.15);
       box-shadow: var(--shadow-2), var(--shadow-1);
     }
@@ -38,6 +37,22 @@
       i {
         margin-left: 3px;
       }
+    }
+  }
+}
+
+:host-context([data-theme='bh2026']) {
+  &[theme="primary"] {
+    &:hover,
+    &:focus {
+      filter: none;
+      background: var(--button-primary-background-hover);
+      box-shadow: var(--button-shadow-hover);
+    }
+    &:active {
+      filter: none;
+      background: var(--button-primary-background-hover);
+      box-shadow: var(--button-shadow-active);
     }
   }
 }

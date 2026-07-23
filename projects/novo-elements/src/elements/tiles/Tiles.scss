@@ -57,6 +57,8 @@
 
   .tile.defaultColor.active {
     background: var(--button-primary-background);
+    color: var(--button-primary-color);
+    i { color: var(--button-primary-color); }
   }
 
   .tile:not(.active) {
