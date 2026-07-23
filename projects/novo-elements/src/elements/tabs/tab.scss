@@ -157,7 +157,7 @@
   }
 }
 
-// bh2026: charcoal tabs, near-black active text + rounded neutral indicator
+// bh2026: charcoal tabs, navy active text, rounded indicator
 :host-context([data-theme='bh2026']) {
   margin-right: var(--spacing-gap-lg);
 
@@ -165,31 +165,28 @@
     color: var(--color-content-link, #282828);
     // Tabs are Title Case, not uppercase.
     text-transform: none;
-    font-weight: 400;
+    font-weight: var(--typography-font-weight-400, 400);
   }
 
   &.active,
   &.router-link-active {
-    color: var(--color-content-link-hover, #221f1f);
+    color: #1450a0;
     .novo-tab-link {
-      color: var(--color-content-link-hover, #221f1f);
-      font-weight: 500;
+      color: #1450a0;
+      font-weight: var(--typography-font-weight-600, 600);
     }
     .indicator {
-      background: var(--color-content-link-hover, #221f1f);
-      border-radius: 999px;
-      // Quarter round from the top, flat on bottom
-      border-radius: 3px 3px 0 0 / 100% 100% 0 0;
+      background: #1450a0;
+      border-radius: 999px 999px 0 0;
     }
   }
 
   &:hover {
     .novo-tab-link {
-      font-weight: 500;
+      color: #1450a0;
     }
   }
 }
-
 
 :host-context(novo-nav[theme="color"]),
 :host-context(novo-nav[theme="neutral"]) {

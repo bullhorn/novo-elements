@@ -4,7 +4,7 @@
   text-align: center;
   display: block;
   background-color: var(--background-bright);
-  border-radius: var(--border-radius-default, 4px);
+  border-radius: var(--border-radius-md, 4px);
   box-shadow: 0 1px 7px rgba(0, 0, 0, 0.09), 0 1px 3px rgba(0, 0, 0, 0.2);
   z-index: z(modal);
   position: relative;
@@ -105,9 +105,4 @@
       min-width: 10rem;
     }
   }
-}
-
-// bh2026: rounded notifications
-:host-context([data-theme='bh2026']) {
-  border-radius: var(--border-radius-md, 1.6rem);
 }

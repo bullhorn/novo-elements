@@ -117,7 +117,7 @@
   }
 }
 
-// bh2026: roomier, rounder card, larger title
+// bh2026: rounder card, grippy on hover
 :host-context([data-theme='bh2026']) {
   border-radius: var(--border-radius-md, 1.6rem);
   border: 1px solid var(--color-border-default, #f0f5f9);
@@ -128,26 +128,34 @@
   }
 
   header {
-    padding: var(--spacing-md, 1.6rem);
-    margin-left: var(--spacing-md);
+    padding: var(--spacing-16, 1.6rem) var(--spacing-24, 2.4rem) var(--spacing-16, 1.6rem) 0;
+    border-bottom: 1px solid var(--color-border-default, #f0f5f9);
 
     .title {
-      ::ng-deep i.bhi-move {
-        display: none;
-      }
-
       h1,
       h2,
       h3 {
-        font-size: 1.8rem;
-        font-weight: 500;
+        font-size: var(--typography-card-header-font-size, 1.8rem);
+        font-weight: var(--typography-card-header-font-weight, 500);
+      }
+
+      ::ng-deep i.bhi-move {
+        color: transparent;
       }
     }
 
+    &:hover .title ::ng-deep i.bhi-move {
+      color: var(--color-content-subtle, #5d7798);
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-8, 0.8rem);
+    }
+
     novo-button {
-      color: rgba(var(--text-secondary), 0.7);
-      margin-left: var(--spacing-sm);
-      margin-right: var(--spacing-sm);
+      color: var(--color-content-subtle, #5d7798);
     }
   }
 }
