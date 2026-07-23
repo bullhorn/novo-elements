@@ -162,28 +162,28 @@
   margin-right: var(--spacing-gap-lg);
 
   .novo-tab-link {
-    color: var(--color-content-link, #282828);
+    color: var(--color-content-link);
     // Tabs are Title Case, not uppercase.
     text-transform: none;
-    font-weight: var(--typography-font-weight-400, 400);
+    font-weight: var(--typography-tabs-default-font-weight);
   }
 
   &.active,
   &.router-link-active {
-    color: #1450a0;
+    color: var(--button-primary-background);
     .novo-tab-link {
-      color: #1450a0;
-      font-weight: var(--typography-font-weight-600, 600);
+      color: var(--button-primary-background);
+      font-weight: var(--typography-tabs-active-font-weight);
     }
     .indicator {
-      background: #1450a0;
+      background: var(--button-primary-background);
       border-radius: 999px 999px 0 0;
     }
   }
 
   &:hover {
     .novo-tab-link {
-      color: #1450a0;
+      color: var(--button-primary-background);
     }
   }
 }

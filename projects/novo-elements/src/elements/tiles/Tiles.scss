@@ -48,7 +48,7 @@
 
 // bh2026: pill container, muted bg, navy selected state
 :host-context([data-theme='bh2026']) > .tile-container {
-  border-color: #8ca1b9;
+  border-color: var(--color-border-subtle);
   border-radius: 999px;
 
   .tile {
@@ -56,11 +56,11 @@
   }
 
   .tile.defaultColor.active {
-    background: var(--button-primary-background, #1f57a1);
+    background: var(--button-primary-background);
   }
 
   .tile:not(.active) {
-    color: var(--text-muted, #8ca1b9);
-    i { color: var(--text-muted, #8ca1b9); }
+    color: var(--text-muted);
+    i { color: var(--text-muted); }
   }
 }

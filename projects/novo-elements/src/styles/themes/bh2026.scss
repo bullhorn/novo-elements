@@ -5,8 +5,8 @@
 
   // Typeface — modern uses Inter (classic uses Montserrat). Override BOTH --font-family-base
   // (html) and --font-family-body (body, used by most content) so all text picks up Inter.
-  --font-family-base: var(--typography-font-family-base, Inter), Helvetica, Arial, sans-serif;
-  --font-family-body: var(--typography-font-family-base, Inter), Helvetica, Arial, sans-serif;
+  --font-family-base: var(--typography-font-family-base), Helvetica, Arial, sans-serif;
+  --font-family-body: var(--typography-font-family-base), Helvetica, Arial, sans-serif;
 
   // bh2026 tokens are authored at a 16px rem base (web standard), unlike bh2022's 10px,
   // but the conversion to 16px base would be a massive rewrite, so spacing gets corrected here.
@@ -19,60 +19,60 @@
   --spacing-3xl: 4rem;
 
   // --- Surfaces ---
-  --background-body:   var(--color-gray-white, #ffffff);
-  --background-main:   var(--color-background-default, #f8fafc);
-  --background-bright: var(--color-gray-white, #ffffff);
-  --background-dark:   var(--color-background-subtle-hover, #e2e2e2);
-  --background-muted:  var(--color-background-subtle, #f1f5fc);
+  --background-body:   var(--color-gray-white);
+  --background-main:   var(--color-background-default);
+  --background-bright: var(--color-gray-white);
+  --background-dark:   var(--color-background-subtle-hover);
+  --background-muted:  var(--color-background-subtle);
 
   // --- Text / content ---
-  --text-main:      var(--color-content-headline, #282828);
-  --text-secondary: var(--color-content-body, #314158);
-  --text-muted:     var(--color-content-subtle, #8ca1b9);
-  --text-disabled:  var(--color-content-disabled, #707070);
+  --text-main:      var(--color-content-headline);
+  --text-secondary: var(--color-content-body);
+  --text-muted:     var(--color-content-subtle);
+  --text-disabled:  var(--color-content-disabled);
 
   // --- Borders ---
-  --border:              var(--color-border-default, #f0f5f9);
-  --border-2:            var(--color-border-subtle, #f0f5f9);
-  --border-hard:         var(--color-border-emphasized, #282828);
+  --border:              var(--color-border-default);
+  --border-2:            var(--color-border-subtle);
+  --border-hard:         var(--color-border-emphasized);
   --border-radius-sm:    0.8rem;
   --border-radius-md:    1.6rem;
   --border-radius-round: var(--border-radius-sm);
 
   // --- Interactive ---
-  --links:     var(--color-content-link, #282828);
-  --focus:     var(--color-border-strong, #314158);
-  --selection: var(--color-border-strong, #314158);
+  --links:     var(--color-content-link);
+  --focus:     var(--color-border-strong);
+  --selection: var(--color-border-strong);
 
   // --- Typography scale (map semantic sizes onto modern composite roles) ---
-  --font-size-caption: var(--typography-meta-default-font-size, 1.4rem);
-  --font-size-label:   var(--typography-label-lg-font-size, 1.4rem);
-  --font-size-text:    var(--typography-body-default-font-size, 1.4rem);
-  --font-size-button:  var(--typography-button-font-size, 1.2rem);
-  --font-size-title:   var(--typography-title-font-size, 2.4rem);
-  --font-size-tab:     var(--typography-tabs-default-font-size, 1.4rem);
+  --font-size-caption: var(--typography-meta-default-font-size);
+  --font-size-label:   var(--typography-label-lg-font-size);
+  --font-size-text:    var(--typography-body-default-font-size);
+  --font-size-button:  var(--typography-button-font-size);
+  --font-size-title:   var(--typography-title-font-size);
+  --font-size-tab:     var(--typography-tabs-default-font-size);
 
   // --- Button ---
-  --button-background:     #e2e2e2;
-  --button-color:          var(--color-content-subtle, #5d7798);
+  --button-background:     var(--color-silver);
+  --button-color:          var(--button-color-secondary-content-default, #677079);
   --button-focus-ring:     0 0 0 2px #4a89dc;
-  --button-font-weight:    var(--typography-font-weight-400, 400);
-  --button-gap:            var(--spacing-8, 0.8rem);
+  --button-font-weight:    var(--typography-font-weight-400);
+  --button-gap:            var(--spacing-8);
   --button-height:         3.5rem;
   --button-icon-margin:    0;
-  --button-letter-spacing: var(--typography-button-letter-spacing, 0);
-  --button-padding-x:      var(--spacing-16, 1.6rem);
-  --button-padding-y:      var(--spacing-8, 0.8rem);
+  --button-letter-spacing: var(--typography-button-letter-spacing);
+  --button-padding-x:      var(--spacing-16);
+  --button-padding-y:      var(--spacing-8);
   --button-radius:         999px;
   --button-text-transform: none;
-  --button-text:           var(--color-content-subtle, #5d7798);
+  --button-text:           var(--button-color-secondary-content-default, #677079);
 
   // Button variants
   --button-primary-background: #1450a0;
-  --button-primary-color:      #ffffff;
+  --button-primary-color:      var(--color-gray-white);
   --button-primary-border:     none;
-  --button-secondary-text:     var(--color-content-subtle, #5d7798);
-  --button-secondary-border:   1px solid var(--color-border-subtle, #8ca1b9);
+  --button-secondary-text:     var(--button-text);
+  --button-secondary-border:   1px solid var(--color-border-subtle);
 
   // Best guess currently at the refresh accent color
   --color-positive: #0095da;
@@ -104,7 +104,7 @@
 // bh2026: dialogue does not share pill format on hover
 :root[data-theme='bh2026'] [theme="dialogue"],
 :root.theme-bh2026 [theme="dialogue"] {
-  border-radius: var(--border-radius-sm, 0.8rem);
+  border-radius: var(--border-radius-sm);
 }
 
 // bh2026 dark
