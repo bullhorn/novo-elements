@@ -157,12 +157,12 @@
   }
 }
 
-// bh2026: charcoal tabs, navy active text, rounded indicator
+// bh2026: subtle default text, body text when active/hover, blue indicator only
 :host-context([data-theme='bh2026']) {
   margin-right: var(--spacing-gap-lg);
 
   .novo-tab-link {
-    color: var(--color-content-link);
+    color: var(--color-text-subtle);
     // Tabs are Title Case, not uppercase.
     text-transform: none;
     font-weight: var(--typography-tabs-default-font-weight);
@@ -170,20 +170,19 @@
 
   &.active,
   &.router-link-active {
-    color: var(--button-primary-background);
     .novo-tab-link {
-      color: var(--button-primary-background);
+      color: var(--color-text-body);
       font-weight: var(--typography-tabs-active-font-weight);
     }
     .indicator {
-      background: var(--button-primary-background);
+      background: var(--color-border-utility-positive);
       border-radius: 999px 999px 0 0;
     }
   }
 
   &:hover {
     .novo-tab-link {
-      color: var(--button-primary-background);
+      color: var(--color-text-body);
     }
   }
 }
