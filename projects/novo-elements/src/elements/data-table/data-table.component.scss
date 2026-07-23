@@ -618,11 +618,93 @@ novo-data-table {
   }
 }
 
-// bh2026: stronger, subtler column headers
+// bh2026: banded rows, horizontal borders, modern spacing
 [data-theme='bh2026'] {
+  // Scope icon-button height to default inside data table so buttons don't inflate row height.
+  // bh2026 globally sets --button-height: 3.5rem; 24px matches the base icon button size.
+  novo-data-table {
+    --button-height: 2.4rem;
+  }
+
   .novo-data-table-header-cell,
   .novo-data-table-header-cell > label {
-    font-weight: 600;
+    font-weight: var(--typography-font-weight-600);
+    font-size: var(--font-size-caption);
     color: var(--color-text-subtle);
+  }
+
+  .novo-data-table-row,
+  .novo-data-table-header-row {
+    border-bottom: var(--border-width-border-default) solid var(--color-border-subtle);
+  }
+
+  .novo-data-table-cell,
+  .novo-data-table-header-cell {
+    padding: var(--spacing-padding-sm) var(--spacing-padding-md);
+    color: var(--color-text-body);
+  }
+
+  // Restore zero vertical padding on action/control cells — the general rule above overrides
+  // the base .button-cell / .dropdown-cell padding: 0 5px, putting 8px above/below the button.
+  .novo-data-table-cell {
+    &.button-cell,
+    &.dropdown-cell,
+    &.expand-cell,
+    &.checkbox-cell {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  }
+
+  .novo-data-table-cell.clickable {
+    color: var(--color-text-link);
+  }
+
+  cdk-table {
+    > .novo-data-table-row:nth-of-type(odd) {
+      .novo-data-table-cell,
+      .novo-data-table-button-cell,
+      .novo-data-table-dropdown-cell,
+      .novo-data-table-expand-cell,
+      .novo-data-table-checkbox-cell {
+        background-color: var(--color-background-muted);
+      }
+      + .novo-data-table-detail-row {
+        background-color: var(--color-background-muted);
+      }
+    }
+    > .novo-data-table-row:nth-of-type(even) {
+      .novo-data-table-cell,
+      .novo-data-table-button-cell,
+      .novo-data-table-dropdown-cell,
+      .novo-data-table-expand-cell,
+      .novo-data-table-checkbox-cell {
+        background-color: var(--background-body);
+      }
+      + .novo-data-table-detail-row {
+        background-color: var(--background-body);
+      }
+    }
+    > .novo-data-table-row:hover {
+      .novo-data-table-cell,
+      .novo-data-table-button-cell,
+      .novo-data-table-dropdown-cell,
+      .novo-data-table-expand-cell,
+      .novo-data-table-checkbox-cell {
+        background-color: var(--color-background-subtle);
+      }
+    }
+    > .novo-data-table-row.active {
+      .novo-data-table-cell,
+      .novo-data-table-button-cell,
+      .novo-data-table-dropdown-cell,
+      .novo-data-table-expand-cell,
+      .novo-data-table-checkbox-cell {
+        background-color: var(--color-utility-blue-100);
+      }
+      + .novo-data-table-detail-row {
+        background-color: var(--color-utility-blue-100);
+      }
+    }
   }
 }
