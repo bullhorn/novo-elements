@@ -23,3 +23,5 @@
 <novo-search data-automation-id="search-candidate" icon="candidate" color="candidate" alwaysOpen="true" [(ngModel)]="entity">
   <entity-picker-results [matches]="searchData" (select)="onSelectEntity($event)"></entity-picker-results>
 </novo-search>
+
+<novo-search data-automation-id="search-submit-button" [submitButton]="true" placeholder="Search..."></novo-search>

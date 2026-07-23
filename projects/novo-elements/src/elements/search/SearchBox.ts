@@ -47,6 +47,10 @@ const SEARCH_VALUE_ACCESSOR = {
       #input
       data-automation-id="novo-search-input"
     />
+    <!-- SEARCH SUBMIT BUTTON -->
+    @if (submitButton) {
+      <novo-button theme="primary" icon="search" side="left" (click)="onSubmitClick($event)">{{ submitLabel }}</novo-button>
+    }
     <!-- SEARCH OVERLAY -->
     <novo-overlay-template
       [parent]="element"
@@ -74,6 +78,11 @@ export class NovoSearchBoxElement implements ControlValueAccessor, OnInit {
   @Input()
   @HostBinding('class.always-open')
   public alwaysOpen: boolean = false;
+  @Input()
+  @HostBinding('class.has-search-button')
+  public submitButton: boolean = false;
+  @Input()
+  public submitLabel: string = 'Search';
   @Input()
   public theme: string;
   @Input()
@@ -178,6 +187,13 @@ export class NovoSearchBoxElement implements ControlValueAccessor, OnInit {
     return this.panelOpen || this.alwaysOpen;
   }
   /** END: Convenient Panel Methods. */
+
+  onSubmitClick(event: MouseEvent): void {
+    this.applySearch.emit(event as unknown as KeyboardEvent);
+    if (this.panelOpen) {
+      this.closePanel();
+    }
+  }
 
   _handleKeydown(event: KeyboardEvent): void {
     if ((event.key === Key.Escape || event.key === Key.Enter || event.key === Key.Tab) && this.panelOpen) {

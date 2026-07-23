@@ -70,6 +70,33 @@
   }
 }
 
+:host(.has-search-button) {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8, 0.8rem);
+  height: auto;
+  padding: var(--spacing-4, 0.4rem) 0 var(--spacing-4, 0.4rem) var(--spacing-16, 1.6rem);
+  border-radius: 999px;
+  max-width: none;
+  box-shadow: 0 0.2rem 0.2rem var(--color-transparency-charcoal-04, transparent);
+
+  novo-icon:first-child {
+    flex-shrink: 0;
+    font-size: 1.6rem;
+    color: var(--color-text-subtle, var(--text-muted));
+  }
+
+  > input {
+    flex: 1 1 0;
+    min-width: 0;
+    height: auto;
+
+    &::placeholder {
+      color: var(--color-text-subtle, var(--text-muted));
+    }
+  }
+}
+
 header {
   novo-search.always-open:not(.focused) {
     button {
