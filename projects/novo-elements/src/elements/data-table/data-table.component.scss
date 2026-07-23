@@ -620,12 +620,6 @@ novo-data-table {
 
 // bh2026: banded rows, horizontal borders, modern spacing
 [data-theme='bh2026'] {
-  // Scope icon-button height to default inside data table so buttons don't inflate row height.
-  // bh2026 globally sets --button-height: 3.5rem; 24px matches the base icon button size.
-  novo-data-table {
-    --button-height: 2.4rem;
-  }
-
   .novo-data-table-header-cell,
   .novo-data-table-header-cell > label {
     font-weight: var(--typography-font-weight-600);
