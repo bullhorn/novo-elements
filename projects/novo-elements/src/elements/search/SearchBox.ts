@@ -49,7 +49,7 @@ const SEARCH_VALUE_ACCESSOR = {
     />
     <!-- SEARCH SUBMIT BUTTON -->
     @if (submitButton) {
-      <novo-button theme="primary" icon="search" side="left" (click)="onSubmitClick($event)">{{ submitLabel }}</novo-button>
+      <novo-button theme="primary" icon="search" side="left" [attr.data-automation-id]="submitButtonAutomationId || null" (click)="onSubmitClick($event)">{{ submitLabel }}</novo-button>
     }
     <!-- SEARCH OVERLAY -->
     <novo-overlay-template
@@ -83,6 +83,8 @@ export class NovoSearchBoxElement implements ControlValueAccessor, OnInit {
   public submitButton: boolean = false;
   @Input()
   public submitLabel: string = 'Search';
+  @Input()
+  public submitButtonAutomationId: string;
   @Input()
   public theme: string;
   @Input()
