@@ -59,6 +59,7 @@
   --border-radius-sm:    0.8rem;
   --border-radius-md:    1.6rem;
   --border-radius-round: var(--border-radius-sm);
+  --border-radius-pill:  999px;
 
   // Transition aliases — color.border.emphasized/strong renamed in subatomic update.
   --color-border-emphasized: var(--color-border-control);

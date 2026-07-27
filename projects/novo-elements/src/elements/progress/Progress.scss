@@ -39,7 +39,7 @@
 
 :host-context([data-theme='bh2026']) {
   &.linear {
-    border-radius: 999px;
+    border-radius: var(--border-radius-pill);
     background-color: var(--color-background-subtle-hover);
     border-color: var(--color-border-default);
   }
