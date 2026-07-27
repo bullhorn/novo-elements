@@ -101,6 +101,9 @@
   --button-shadow-hover:  4px 8px 12px 0 var(--color-transparency-charcoal-08), 0 2px 4px 0 var(--color-transparency-charcoal-04);
   --button-shadow-active: 4px 8px 12px 0 var(--color-transparency-charcoal-08), 0 2px 4px 0 var(--color-transparency-charcoal-04), inset 0 4px 8px 0 var(--color-transparency-charcoal-08);
 
+  // Dropdown / overlay elevation shadow
+  --shadow-dropdown: 0px 24px 88px -16px var(--color-transparency-charcoal-20);
+
   // Button variants
   --button-primary-background:       var(--color-utility-blue-600);
   --button-primary-background-hover: var(--color-utility-blue-700);
