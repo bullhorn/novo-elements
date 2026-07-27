@@ -196,7 +196,7 @@
         }
 
         .indicator {
-          background: var(--color-border-utility-positive);
+          background: var(--novo-tabbed-picker-accent, var(--color-border-utility-positive));
           border-radius: 0 var(--border-radius-pill) var(--border-radius-pill) 0;
         }
 
