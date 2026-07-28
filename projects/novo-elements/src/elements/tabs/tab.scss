@@ -175,7 +175,7 @@
       font-weight: var(--typography-tabs-active-font-weight);
     }
     .indicator {
-      background: var(--color-border-utility-positive);
+      background: var(--tab-indicator-color, var(--color-border-utility-positive));
       border-radius: 999px 999px 0 0;
     }
   }
