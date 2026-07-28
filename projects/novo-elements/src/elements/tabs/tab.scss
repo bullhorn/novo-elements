@@ -28,6 +28,8 @@
     gap: var(--spacing-xs);
     cursor: pointer;
     text-transform: uppercase;
+    -webkit-user-select: none;
+    user-select: none;
     &:focus {
       outline: none;
     }
