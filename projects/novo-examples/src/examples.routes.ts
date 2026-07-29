@@ -1761,7 +1761,7 @@ export class ExpansionPage {
 @Component({
   selector: 'collapsible-nav-page',
   template: `<h1>Collapsible Nav <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/layout">(source)</a></h1>
-<p>A slide-out navigation panel that expands to a full-width panel or collapses to a narrow icon rail. Consumers project their own header, body, and footer content into the named slots (<code>novo-collapsible-nav-header</code>, <code>novo-collapsible-nav-body</code>, <code>novo-collapsible-nav-footer</code>). The <code>collapsed</code> state is two-way bindable.</p>
+<p>A navigation panel that animates between an expanded sidebar and a collapsed icon rail. Project content into the <code>novo-collapsible-nav-header</code>, <code>novo-collapsible-nav-body</code>, and <code>novo-collapsible-nav-footer</code> slots. The <code>collapsed</code> state is two-way bindable.</p>
 <h5>Examples</h5>
 <h2>Basic Collapsible Nav</h2>
 <p><code-example example="basic-collapsible-nav"></code-example></p>

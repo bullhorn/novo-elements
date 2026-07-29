@@ -3,4 +3,5 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  --page-entity-color: var(--color-candidate);
 }

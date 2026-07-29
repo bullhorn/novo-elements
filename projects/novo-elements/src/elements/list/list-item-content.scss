@@ -15,7 +15,7 @@
 :host {
   display: flex;
   margin-left: 0.2em;
-  &.novo-item-content > ::ng-deep * {
+  :root:not([data-theme='bh2026']) &.novo-item-content > ::ng-deep * {
     color: rgba(#434343, 0.85);
   }
   &.novo-item-content ::ng-deep i {
