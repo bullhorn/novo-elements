@@ -168,7 +168,7 @@
   }
 
   &[class*='novo-accent-'] {
-    background: var(--color-transparency-white-90);
+    background: var(--header-background, var(--color-transparency-white-90));
     backdrop-filter: blur(12px);
     box-shadow: 0 1px 2px var(--color-transparency-black-10);
     padding-top: var(--spacing-md);
