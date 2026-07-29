@@ -144,6 +144,11 @@
   border-radius: var(--border-radius-sm);
 }
 
+// bh2026: list items use a neutral subtle background on hover instead of the default positive tint
+:root[data-theme='bh2026'] novo-list-item {
+  --list-item-hover-background: var(--color-background-subtle);
+}
+
 // bh2026: primary disabled uses a lighter blue at full opacity instead of the default 0.5 opacity dimming
 :root[data-theme='bh2026'] [theme="primary"][disabled],
 :root[data-theme='bh2026'] [theme="primary"].novo-button-disabled {

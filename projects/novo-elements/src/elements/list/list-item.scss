@@ -31,7 +31,7 @@
   flex-direction: row;
   outline: none;
   &:hover {
-    background: rgb(from var(--color-positive) r g b / 0.2);
+    background: var(--list-item-hover-background, rgb(from var(--color-positive) r g b / 0.2));
   }
   &.active {
     background: rgb(from var(--color-positive) r g b / 0.3);
