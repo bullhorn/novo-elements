@@ -79,10 +79,16 @@ export class NovoSearchBoxElement implements ControlValueAccessor, OnInit {
   @HostBinding('class.always-open')
   public alwaysOpen: boolean = false;
   @Input()
-  @HostBinding('class.has-search-button')
   public submitButton: boolean = false;
   @Input()
+  public bordered: boolean = false;
+  @Input()
   public submitLabel: string = 'Search';
+
+  @HostBinding('class.has-border')
+  get hasSearchButton(): boolean {
+    return this.submitButton || this.bordered;
+  }
   @Input()
   public submitButtonAutomationId: string;
   @Input()
@@ -139,10 +145,6 @@ export class NovoSearchBoxElement implements ControlValueAccessor, OnInit {
     }
   }
 
-  /**
-   * @name showFasterFind
-   * @description This function shows the picker and adds the active class (for animation)
-   */
   showSearch(event?: any, forceClose: boolean = false) {
     if (!this.panelOpen) {
       // Reset search
