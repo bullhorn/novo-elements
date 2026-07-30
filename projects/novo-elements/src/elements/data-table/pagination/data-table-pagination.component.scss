@@ -107,7 +107,7 @@ $breakpoint: 1000px;
         font-size: var(--font-size-text);
         border-radius: var(--border-radius-xsm, 2px);
         list-style-type: none;
-        margin: 0;
+        margin-top: 3px;
         cursor: pointer;
         color: var(--color-company);
         &.disabled {
@@ -158,9 +158,12 @@ $breakpoint: 1000px;
       margin-right: var(--spacing-gap-sm);
 
       ::ng-deep .novo-select-trigger {
-        border-bottom-color: var(--button-color-select-color-border-default, var(--border-hard));
         height: var(--spacing-padding-xlg);
         width: 5rem;
+
+        i.bhi-collapse::before {
+          content: "\f226"; // bhi-sort-desc - all code points are fixed in bullhorn-icons
+        }
 
         span.text-ellipsis {
           color: var(--button-color-select-color-content-value, var(--text-secondary));
