@@ -132,7 +132,7 @@ $breakpoint: 1000px;
   &.standard {
     align-items: center;
     border-top: 1px solid var(--pagination-color-border-default, var(--border));
-    padding: var(--pagination-spacing-padding-vertical, var(--spacing-padding-sm)) var(--pagination-spacing-padding-horizontal, var(--spacing-padding-md));
+    padding: var(--spacing-padding-sm) var(--spacing-padding-sm) 0 var(--spacing-padding-md);
 
     > * {
       margin: 0;
