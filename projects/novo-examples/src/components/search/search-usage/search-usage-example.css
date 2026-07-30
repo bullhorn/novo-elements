@@ -4,3 +4,7 @@
   flex-flow: column;
   gap: 2rem;
 }
+
+novo-search[data-automation-id="search-bordered-with-button"] {
+  padding: var(--spacing-4, 0.4rem) 0 var(--spacing-4, 0.4rem) var(--spacing-16, 1.6rem);
+}

@@ -26,4 +26,10 @@
 
 <novo-search data-automation-id="search-bordered" [bordered]="true" placeholder="Search..."></novo-search>
 
-<novo-search data-automation-id="search-submit-button" [submitButton]="true" placeholder="Search..."></novo-search>
+<novo-search data-automation-id="search-bordered-with-icon" [bordered]="true" placeholder="Search...">
+  <novo-icon novo-search-trailing-action>settings</novo-icon>
+</novo-search>
+
+<novo-search data-automation-id="search-bordered-with-button" [bordered]="true" placeholder="Search...">
+  <novo-button novo-search-trailing-action theme="primary" icon="search" side="left">Search</novo-button>
+</novo-search>

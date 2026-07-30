@@ -47,10 +47,8 @@ const SEARCH_VALUE_ACCESSOR = {
       #input
       data-automation-id="novo-search-input"
     />
-    <!-- SEARCH SUBMIT BUTTON -->
-    @if (submitButton) {
-      <novo-button theme="primary" icon="search" side="left" [attr.data-automation-id]="submitButtonAutomationId || null" (click)="onSubmitClick($event)">{{ submitLabel }}</novo-button>
-    }
+    <!-- TRAILING ACTION SLOT -->
+    <ng-content select="[novo-search-trailing-action]"></ng-content>
     <!-- SEARCH OVERLAY -->
     <novo-overlay-template
       [parent]="element"
@@ -79,18 +77,12 @@ export class NovoSearchBoxElement implements ControlValueAccessor, OnInit {
   @HostBinding('class.always-open')
   public alwaysOpen: boolean = false;
   @Input()
-  public submitButton: boolean = false;
-  @Input()
   public bordered: boolean = false;
-  @Input()
-  public submitLabel: string = 'Search';
 
   @HostBinding('class.has-border')
-  get hasSearchButton(): boolean {
-    return this.submitButton || this.bordered;
+  get hasBorder(): boolean {
+    return this.bordered;
   }
-  @Input()
-  public submitButtonAutomationId: string;
   @Input()
   public theme: string;
   @Input()
@@ -191,13 +183,6 @@ export class NovoSearchBoxElement implements ControlValueAccessor, OnInit {
     return this.panelOpen || this.alwaysOpen;
   }
   /** END: Convenient Panel Methods. */
-
-  onSubmitClick(event: MouseEvent): void {
-    this.applySearch.emit(event as unknown as KeyboardEvent);
-    if (this.panelOpen) {
-      this.closePanel();
-    }
-  }
 
   _handleKeydown(event: KeyboardEvent): void {
     if ((event.key === Key.Escape || event.key === Key.Enter || event.key === Key.Tab) && this.panelOpen) {
