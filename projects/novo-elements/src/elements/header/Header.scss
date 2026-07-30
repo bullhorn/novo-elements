@@ -154,10 +154,23 @@
 
 // bh2026: frosted translucent header + entity squircle icon
 :host-context([data-theme='bh2026']) {
+  & > section {
+    gap: var(--spacing-gap-lg);
+  }
+
+  .header-actions {
+    gap: var(--spacing-gap-sm);
+  }
+
+  ::ng-deep utils,
+  ::ng-deep novo-utils {
+    gap: var(--spacing-gap-sm);
+  }
+
   &[class*='novo-accent-'] {
-    background: var(--color-transparency-white-90, rgba(255, 255, 255, 0.9));
+    background: var(--color-transparency-white-90);
     backdrop-filter: blur(12px);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 2px var(--color-transparency-black-10);
     padding-top: var(--spacing-md);
     padding-left: var(--spacing-lg);
     padding-right: var(--spacing-lg);
@@ -167,7 +180,7 @@
     }
 
     utils {
-      color: var(--color-transparency-black-60);
+      color: var(--color-text-subtle);
     }
   }
 

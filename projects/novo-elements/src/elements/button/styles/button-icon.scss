@@ -39,3 +39,23 @@
     }
   }
 }
+
+:host-context([data-theme='bh2026']) {
+  &[theme="icon"] {
+    height: var(--button-height);
+    width: var(--button-height);
+    border-radius: var(--border-radius-sm);
+    color: var(--color-text-subtle);
+    box-shadow: none;
+
+    &:focus,
+    &:hover {
+      background: var(--color-background-subtle);
+      box-shadow: none;
+    }
+    &:active {
+      background: var(--color-background-subtle-hover);
+      box-shadow: none;
+    }
+  }
+}

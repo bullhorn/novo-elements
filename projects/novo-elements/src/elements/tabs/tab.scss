@@ -28,6 +28,8 @@
     gap: var(--spacing-xs);
     cursor: pointer;
     text-transform: uppercase;
+    -webkit-user-select: none;
+    user-select: none;
     &:focus {
       outline: none;
     }
@@ -157,33 +159,32 @@
   }
 }
 
-// bh2026: charcoal tabs, navy active text, rounded indicator
+// bh2026: subtle default text, body text when active/hover, blue indicator only
 :host-context([data-theme='bh2026']) {
   margin-right: var(--spacing-gap-lg);
 
   .novo-tab-link {
-    color: var(--color-content-link, #282828);
+    color: var(--color-text-subtle);
     // Tabs are Title Case, not uppercase.
     text-transform: none;
-    font-weight: var(--typography-font-weight-400, 400);
+    font-weight: var(--typography-tabs-default-font-weight);
   }
 
   &.active,
   &.router-link-active {
-    color: #1450a0;
     .novo-tab-link {
-      color: #1450a0;
-      font-weight: var(--typography-font-weight-600, 600);
+      color: var(--color-text-body);
+      font-weight: var(--typography-tabs-active-font-weight);
     }
     .indicator {
-      background: #1450a0;
+      background: var(--tab-indicator-color, var(--color-border-utility-positive));
       border-radius: 999px 999px 0 0;
     }
   }
 
   &:hover {
     .novo-tab-link {
-      color: #1450a0;
+      color: var(--color-text-body);
     }
   }
 }

@@ -16,3 +16,9 @@
     justify-content: flex-end;
   }
 }
+
+:host-context([data-theme='bh2026']) {
+  font-size: var(--typography-input-value-sm-font-size);
+  font-weight: var(--typography-input-value-sm-font-weight);
+  color: var(--color-text-subtle);
+}

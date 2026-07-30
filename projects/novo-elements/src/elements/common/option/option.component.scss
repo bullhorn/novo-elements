@@ -83,3 +83,14 @@
 .novo-option-pseudo-checkbox {
   margin-inline-end: calc(var(--menu-side-padding) / 2);
 }
+
+// bh2026: white dropdown bg needs explicit hover — --background-main resolves to white
+[data-theme='bh2026'] .novo-option {
+  &:hover:not(.novo-option-inert) {
+    background: var(--color-background-subtle);
+  }
+  &:active:not(.novo-option-inert),
+  &.novo-active:not(.novo-option-inert) {
+    background: var(--color-background-subtle-hover);
+  }
+}

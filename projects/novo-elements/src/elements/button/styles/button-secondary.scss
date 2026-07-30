@@ -49,3 +49,17 @@
     }
   }
 }
+
+:host-context([data-theme='bh2026']) {
+  &[theme="secondary"] {
+    &:hover,
+    &:focus {
+      border: var(--button-secondary-border-hover);
+      box-shadow: var(--button-shadow-hover);
+    }
+    &:active {
+      border: var(--button-secondary-border-hover);
+      box-shadow: var(--button-shadow-active);
+    }
+  }
+}

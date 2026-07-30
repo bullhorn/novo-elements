@@ -115,3 +115,14 @@
     transform: rotate(360deg);
   }
 }
+
+:host-context([data-theme='bh2026']) {
+  box-shadow: var(--button-shadow);
+
+  &:hover {
+    box-shadow: var(--button-shadow-hover);
+  }
+  &:active {
+    box-shadow: var(--button-shadow-active);
+  }
+}
