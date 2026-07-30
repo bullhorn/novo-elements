@@ -153,8 +153,8 @@ $breakpoint: 1000px;
 
     novo-select {
       color: var(--text-muted);
-      max-width: unset;
-      min-width: unset;
+      max-width: 60px;
+      min-width: 60px;
       margin-right: var(--spacing-gap-sm);
 
       ::ng-deep .novo-select-trigger {
