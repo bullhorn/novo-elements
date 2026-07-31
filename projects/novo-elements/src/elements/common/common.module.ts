@@ -17,6 +17,7 @@ import { NovoLabel } from './typography/label/label.component';
 import { NovoLink } from './typography/link/link.component';
 import { NovoText } from './typography/text/text.component';
 import { NovoTitle } from './typography/title/title.component';
+import { If2026ThemePipe } from './theme/if2026.pipe';
 
 @NgModule({
   imports: [CommonModule, NovoOptionModule],
@@ -39,6 +40,7 @@ import { NovoTitle } from './typography/title/title.component';
     ThemeColorDirective,
     SwitchCasesDirective,
     VisibleDirective,
+    If2026ThemePipe,
   ],
   declarations: [
     NovoTemplate,
@@ -59,6 +61,7 @@ import { NovoTitle } from './typography/title/title.component';
     ThemeColorDirective,
     SwitchCasesDirective,
     VisibleDirective,
+    If2026ThemePipe,
   ],
 })
 export class NovoCommonModule {}

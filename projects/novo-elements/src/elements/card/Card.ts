@@ -75,13 +75,14 @@ export class CardFooterElement {}
           *ngIf="move || config.move"
           tooltip="{{ labels.move }}"
           tooltipPosition="bottom-right"
+          class="card-move-handle"
           [attr.data-automation-id]="cardAutomationId + '-move'"
           >move</novo-icon
         >
         <!--Card Title-->
         <h3 [attr.data-automation-id]="cardAutomationId + '-title'">
-          <span [tooltip]="iconTooltip" tooltipPosition="right"><i *ngIf="icon" [ngClass]="iconClass"></i></span>
-          {{ title || config.title }}
+          <span [tooltip]="iconTooltip" tooltipPosition="right"><i *ngIf="iconClass" class="card-flag-icon" [ngClass]="iconClass"></i></span><!--
+          --><span class="novo-card-header-text">{{ title || config.title }}</span>
         </h3>
       </div>
       <!--Card Actions-->
@@ -89,7 +90,7 @@ export class CardFooterElement {}
         <ng-content select="novo-card-actions"></ng-content>
         <novo-button
           theme="icon"
-          icon="refresh"
+          [icon]="'refresh-o' | ifBh2026Theme : 'refresh'"
           (click)="toggleRefresh()"
           *ngIf="refresh || config.refresh"
           [attr.data-automation-id]="cardAutomationId + '-refresh'"
@@ -99,7 +100,7 @@ export class CardFooterElement {}
 
         <novo-button
           theme="icon"
-          icon="close-o"
+          [icon]="'x' | ifBh2026Theme : 'close-o'"
           (click)="toggleClose()"
           *ngIf="close || config.close"
           [attr.data-automation-id]="cardAutomationId + '-close'"
@@ -140,6 +141,9 @@ export class CardElement implements OnChanges, OnInit {
   messageIcon: string;
   @Input()
   icon: string;
+  // A feature for the 2026 styles that lets a card icon match either the icon default color (auto) or the --page-entity-color css variable
+  @Input()
+  iconColorClass: 'icon-color-auto' | 'icon-color-parent' | undefined;
   @Input()
   iconTooltip: string;
   @Input()
@@ -158,9 +162,10 @@ export class CardElement implements OnChanges, OnInit {
 
   @Input()
   inset: string = 'none';
+
   @HostBinding('class')
-  get hbInset() {
-    return `novo-card-inset-${this.inset}`;
+  get cardClass() {
+    return `${this.iconColorClass || ''} novo-card-inset-${this.inset}`;
   }
 
   @Output()

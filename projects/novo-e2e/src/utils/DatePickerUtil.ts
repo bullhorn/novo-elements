@@ -24,7 +24,7 @@ export const datePicker = {
 };
 
 export function scopedDate(scope: string, dayNumber: number | string): string {
-    return `${scope} .calendar-date${automationId(dayNumber)}`;
+    return `${scope} .calendar-date${automationId(dayNumber)}:not(.notinmonth)`;
 }
 
 export const overlayCalendar = `${datePicker.overlay} ${elements.calendar}`;

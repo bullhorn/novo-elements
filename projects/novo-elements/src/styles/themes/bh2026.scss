@@ -117,6 +117,9 @@
   --button-secondary-hover-background: var(--color-background-subtle-hover);
   --button-secondary-border-hover:   1px solid var(--color-gray-300);
   --button-dialogue-hover-background: var(--color-background-subtle-hover);
+
+  --color-content-icon: var(--color-gray-500, #89909A);
+  --color-text-body: var(--color-gray-800, #3d464d);
 }
 
 :root[data-theme='bh2026'] {
@@ -174,4 +177,8 @@
   --color-text-link-hover: var(--text-main);
   --color-text-subtle:     var(--text-muted);
   --color-text-disabled:   var(--text-disabled);
+}
+
+:root:not([data-theme='bh2026']) .showInBh2026Only {
+  display: none !important;
 }

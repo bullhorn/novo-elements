@@ -1,5 +1,6 @@
 <novo-card [title]="'All Attributes'"
-  icon="activity"
+  [icon]="icon"
+  [iconColorClass]="iconColorClass"
   [loading]="loading"
   [message]="message"
   [messageIcon]="messageIcon"
@@ -10,8 +11,24 @@
   (onClose)="onClose()"
   [padding]="padding"
   data-automation-id="card-all-attributes">
-  This is the ALL attribute card content!
+  This is the ALL attribute card content! (Loading appeared for 2s on page load)
 </novo-card>
+<novo-row align="start" gap="xl" margin="xl">
+  <section>
+    <novo-field>
+      <novo-label>Icon</novo-label>
+      <input novoInput [(ngModel)]="icon"/>
+    </novo-field>
+    <novo-field>
+      <novo-label>Icon Color Class (2026 styles only)</novo-label>
+      <novo-radio-group appearance="vertical" value="single" [(ngModel)]="iconColorClass">
+        <novo-radio name="mode" checked>None (null)</novo-radio>
+        <novo-radio name="mode" value="icon-color-auto">Auto</novo-radio>
+        <novo-radio name="mode" value="icon-color-parent">Parent</novo-radio>
+      </novo-radio-group>
+    </novo-field>
+  </section>
+</novo-row>
 
 
 <novo-row gap="lg" data-automation-id="card-inline-group">
