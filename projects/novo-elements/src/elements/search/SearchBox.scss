@@ -92,6 +92,13 @@
     color: var(--color-text-subtle, var(--text-muted));
   }
 
+  ::ng-deep [novo-search-leading-content] {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+  }
+
   > input {
     flex: 1 1 0;
     min-width: 0;
@@ -100,6 +107,12 @@
     &::placeholder {
       color: var(--color-text-subtle, var(--text-muted));
     }
+  }
+}
+
+:host(.has-border.has-leading-content) {
+  > input {
+    display: none;
   }
 }
 

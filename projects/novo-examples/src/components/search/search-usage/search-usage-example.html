@@ -37,3 +37,12 @@
 <novo-search data-automation-id="search-bordered-with-close" [bordered]="true" placeholder="Search...">
   <novo-action novo-search-trailing-action icon="x" tooltip="Close" tooltipPosition="bottom" size="medium"></novo-action>
 </novo-search>
+
+<novo-search data-automation-id="search-bordered-with-chip" [bordered]="true" placeholder="Search...">
+  <div novo-search-leading-content>
+    <novo-chip-list>
+      <novo-chip size="sm">My Saved Search<novo-icon novoChipRemove>x</novo-icon></novo-chip>
+    </novo-chip-list>
+  </div>
+  <novo-button novo-search-trailing-action theme="dialogue" icon="edit" side="left">Edit Search</novo-button>
+</novo-search>
