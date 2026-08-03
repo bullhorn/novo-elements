@@ -43,6 +43,7 @@ const SEARCH_VALUE_ACCESSOR = {
 @Component({
     selector: 'novo-search',
     providers: [SEARCH_VALUE_ACCESSOR],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
     <!-- SEARCH ICON -->
     <novo-icon (click)="showSearch($event)" [tooltip]="hint" tooltipPosition="bottom">{{ icon }}</novo-icon>
