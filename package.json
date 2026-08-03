@@ -59,7 +59,7 @@
     "@angular/forms": "^20.3.18",
     "@angular/platform-browser": "^20.3.18",
     "@angular/platform-browser-dynamic": "^20.3.18",
-    "@angular/platform-server": "^20.3.18",
+    "@angular/platform-server": "^22.1.0",
     "@angular/router": "^20.3.18",
     "@codemirror/commands": "^6.10.2",
     "@codemirror/state": "^6.5.4",
@@ -78,7 +78,7 @@
   "devDependencies": {
     "@angular-devkit/core": "^20.3.22",
     "@angular-devkit/schematics": "^20.3.22",
-    "@angular/build": "^20.3.22",
+    "@angular/build": "^22.1.2",
     "@angular/cli": "^20.3.22",
     "@angular/compiler-cli": "^20.3.18",
     "@angular/language-service": "^20.3.18",
