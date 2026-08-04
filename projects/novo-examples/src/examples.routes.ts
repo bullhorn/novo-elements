@@ -7134,7 +7134,7 @@ const routes: Routes = [
       { path: 'examples', component: BreadcrumbExamplesPage },
       { path: '', redirectTo: '/components/breadcrumbs/design', pathMatch: 'full' },
     ]},
-  { path: 'components/badge', component: BadgeExamplesPage, data: { order: '4', title: 'Examples', section: 'components' } },
+  { path: 'components/badge', component: BadgeExamplesPage, data: { order: '4', title: 'Badge', section: 'components' } },
   {
     path: 'components/avatar',
     component: TabsLayout,

@@ -1,1 +1,4 @@
-/** No CSS for this example */
+/* The trigger shows only the stage name; counts stay in the dropdown list. */
+.novo-select-trigger novo-badge {
+  display: none;
+}

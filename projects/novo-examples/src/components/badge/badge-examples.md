@@ -1,7 +1,7 @@
 ---
 section: Components
 page: Badge
-title: Examples
+title: Badge
 order: 4
 ---
 
