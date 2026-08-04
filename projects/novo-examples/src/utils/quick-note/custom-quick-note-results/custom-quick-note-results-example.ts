@@ -77,10 +77,10 @@ export class CustomQuickNoteResultsExample {
       tags: '$title',
     },
     renderer: {
-      names: (symbol, item) => {
+      names: (symbol: string, item: any) => {
         return `<a href="http://www.bullhorn.com" class="names">${symbol}${item.label}</a>`;
       },
-      tags: (symbol, item) => {
+      tags: (symbol: string, item: any) => {
         return `<a href="http://www.bullhorn.com" class="tags">${symbol}${item.label}</a>`;
       },
     },
