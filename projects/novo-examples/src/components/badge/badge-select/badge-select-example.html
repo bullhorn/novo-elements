@@ -9,6 +9,7 @@
     <novo-option
       *ngFor="let stage of stages; let i = index"
       [value]="stage"
+      [customViewValue]="stage.label"
       [attr.data-automation-id]="'badge-select-option-' + i"
     >
       <novo-flex justify="space-between" align="center" gap="md" style="width: 100%">
