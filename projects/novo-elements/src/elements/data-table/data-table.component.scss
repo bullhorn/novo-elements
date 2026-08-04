@@ -23,7 +23,7 @@ cdk-table {
     .novo-data-table-dropdown-cell,
     .novo-data-table-expand-cell,
     .novo-data-table-checkbox-cell {
-      background-color: var(--background-muted, $sand);
+      background-color: var(--data-table-stripe, #fdeef3);
     }
     &.active {
       .novo-data-table-cell,
@@ -38,7 +38,7 @@ cdk-table {
       }
     }
     + .novo-data-table-detail-row {
-      background-color: var(--background-muted, $sand);
+      background-color: var(--data-table-stripe, #fdeef3);
     }
   }
   > .novo-data-table-row:nth-of-type(even) {
@@ -661,10 +661,10 @@ novo-data-table {
       .novo-data-table-dropdown-cell,
       .novo-data-table-expand-cell,
       .novo-data-table-checkbox-cell {
-        background-color: var(--color-background-muted);
+        background-color: var(--data-table-stripe, #fdeef3);
       }
       + .novo-data-table-detail-row {
-        background-color: var(--color-background-muted);
+        background-color: var(--data-table-stripe, #fdeef3);
       }
     }
     > .novo-data-table-row:nth-of-type(even) {
