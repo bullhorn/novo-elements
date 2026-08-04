@@ -4,7 +4,9 @@
   ],
   "exclude": [
     "projects/**/*.spec.ts",
-    "projects/schematics/**/*"
+    "projects/schematics/**/*",
+    "projects/novo-e2e/**/*",
+    "projects/demo/**/*"
   ],
   "compileOnSave": false,
   "compilerOptions": {

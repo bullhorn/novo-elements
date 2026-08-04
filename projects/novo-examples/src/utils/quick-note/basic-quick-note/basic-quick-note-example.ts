@@ -25,13 +25,13 @@ export class BasicQuickNoteExample {
       boos: ['Test'],
     },
     renderer: {
-      tags: (symbol, item) => {
+      tags: (symbol: string, item: any) => {
         return `<a href="https://www.google.com/search?q=bullhorn&oq=bullhorn">${symbol}${item.label}</a>`;
       },
-      references: (symbol, item) => {
+      references: (symbol: string, item: any) => {
         return `<a href="https://www.google.com/search?q=bullhorn&oq=bullhorn">${symbol}${item.label}</a>`;
       },
-      boos: (symbol, item) => {
+      boos: (symbol: string, item: any) => {
         return `<strong>${symbol}${item.label}</strong>`;
       },
     },
