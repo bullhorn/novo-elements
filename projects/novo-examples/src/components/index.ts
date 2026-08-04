@@ -2,6 +2,7 @@ export * from './agenda';
 export * from './aside';
 export * from './autocomplete';
 export * from './avatar';
+export * from './badge';
 export * from './breadcrumb';
 export * from './buttons';
 export * from './calendar';
