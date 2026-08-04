@@ -1,15 +1,29 @@
 {
-  "include": ["projects/**/*"],
-  "exclude": ["projects/**/*.spec.ts", "projects/schematics/**/*"],
+  "include": [
+    "projects/**/*"
+  ],
+  "exclude": [
+    "projects/**/*.spec.ts",
+    "projects/schematics/**/*"
+  ],
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
     "outDir": "./dist",
     "target": "ES2022",
     "module": "esnext",
-    "lib": ["es2020", "dom", "esnext.WeakRef"],
-    "typeRoots": ["node_modules/@types", "node_modules"],
-    "types": ["vitest/globals", "node"],
+    "lib": [
+      "es2020",
+      "dom",
+      "esnext.WeakRef"
+    ],
+    "typeRoots": [
+      "node_modules/@types",
+      "node_modules"
+    ],
+    "types": [
+      "vitest/globals",
+      "node"
+    ],
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "bundler",
@@ -21,11 +35,21 @@
     "skipLibCheck": true,
     "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo",
     "paths": {
-      "novo-elements": ["./projects/novo-elements/src/index"],
-      "novo-examples": ["./projects/novo-examples/src/index"],
-      "novo-elements/*": ["./projects/novo-elements/src/*"],
-      "novo-examples/*": ["./projects/novo-examples/src/*"],
-      "novo-testing": ["./testing/tick"]
+      "novo-elements": [
+        "./projects/novo-elements/src/index"
+      ],
+      "novo-examples": [
+        "./projects/novo-examples/src/index"
+      ],
+      "novo-elements/*": [
+        "./projects/novo-elements/src/*"
+      ],
+      "novo-examples/*": [
+        "./projects/novo-examples/src/*"
+      ],
+      "novo-testing": [
+        "./testing/tick"
+      ]
     },
     "useDefineForClassFields": false
   },
