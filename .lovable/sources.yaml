@@ -1,0 +1,240 @@
+tokens:
+    - file: projects/demo/assets/lib/hljs/styles/agate.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/androidstudio.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/arduino-light.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/arta.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/ascetic.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/atelier-cave-dark.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/atelier-cave-light.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/atelier-dune-dark.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/atelier-dune-light.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/atelier-estuary-dark.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/atelier-estuary-light.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/atelier-forest-dark.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/atelier-forest-light.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/atelier-heath-dark.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/atelier-heath-light.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/atelier-lakeside-dark.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/atelier-lakeside-light.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/atelier-plateau-dark.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/atelier-plateau-light.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/atelier-savanna-dark.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/atelier-savanna-light.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/atelier-seaside-dark.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/atelier-seaside-light.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/atelier-sulphurpool-dark.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/atelier-sulphurpool-light.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/atom-one-dark.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/atom-one-light.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/brown-paper.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/codepen-embed.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/color-brewer.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/darcula.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/dark.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/darkula.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/default.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/docco.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/dracula.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/far.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/foundation.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/github-gist.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/github.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/googlecode.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/grayscale.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/gruvbox-dark.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/gruvbox-light.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/hopscotch.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/hybrid.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/idea.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/ir-black.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/kimbie.dark.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/kimbie.light.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/magula.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/mono-blue.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/monokai-sublime.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/monokai.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/obsidian.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/ocean.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/paraiso-dark.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/paraiso-light.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/pojoaque.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/purebasic.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/qtcreator_dark.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/qtcreator_light.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/railscasts.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/rainbow.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/routeros.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/school-book.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/solarized-dark.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/solarized-light.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/sunburst.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/tomorrow-night-blue.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/tomorrow-night-bright.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/tomorrow-night-eighties.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/tomorrow-night.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/tomorrow.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/vs.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/vs2015.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/xcode.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/xt256.css
+      operation: css-variables
+    - file: projects/demo/assets/lib/hljs/styles/zenburn.css
+      operation: css-variables
+    - file: projects/demo/assets/styles/general.scss
+      operation: css-variables
+    - file: projects/demo/assets/styles/highlight.scss
+      operation: css-variables
+    - file: projects/demo/assets/styles/main.scss
+      operation: css-variables
+    - file: projects/demo/assets/styles/markdown.scss
+      operation: css-variables
+    - file: projects/demo/assets/styles/media.scss
+      operation: css-variables
+    - file: projects/demo/assets/styles/reset.scss
+      operation: css-variables
+    - file: projects/demo/assets/styles/sidenav.scss
+      operation: css-variables
+    - file: projects/novo-elements/src/elements/button/styles/button-dialogue.scss
+      operation: css-variables
+    - file: projects/novo-elements/src/elements/button/styles/button-fab.scss
+      operation: css-variables
+    - file: projects/novo-elements/src/elements/button/styles/button-icon.scss
+      operation: css-variables
+    - file: projects/novo-elements/src/elements/button/styles/button-other.scss
+      operation: css-variables
+    - file: projects/novo-elements/src/elements/button/styles/button-primary.scss
+      operation: css-variables
+    - file: projects/novo-elements/src/elements/button/styles/button-secondary.scss
+      operation: css-variables
+    - file: projects/novo-elements/src/elements/button/styles/button-standard.scss
+      operation: css-variables
+    - file: projects/novo-elements/src/elements/button/styles/button.scss
+      operation: css-variables
+    - file: projects/novo-elements/src/elements/common/theme/if2026.pipe.ts
+      operation: js-object-path
+    - file: projects/novo-elements/src/elements/common/theme/theme-options.ts
+      operation: js-object-path
+    - file: projects/novo-elements/src/elements/common/theme/theme.directive.ts
+      operation: js-object-path
+    - file: projects/novo-elements/src/elements/radio/tokens.ts
+      operation: js-object-path
+    - file: projects/novo-elements/src/styles/base.scss
+      operation: css-variables
+    - file: projects/novo-elements/src/styles/cdk.scss
+      operation: css-variables
+    - file: projects/novo-elements/src/styles/content/code.scss
+      operation: css-variables
+    - file: projects/novo-elements/src/styles/content/forms.scss
+      operation: css-variables
+    - file: projects/novo-elements/src/styles/content/links.scss
+      operation: css-variables
+    - file: projects/novo-elements/src/styles/content/misc.scss
+      operation: css-variables
+    - file: projects/novo-elements/src/styles/content/print.scss
+      operation: css-variables
+    - file: projects/novo-elements/src/styles/content/range.scss
+      operation: css-variables
+    - file: projects/novo-elements/src/styles/content/root.scss
+      operation: css-variables
+    - file: projects/novo-elements/src/styles/global/flex-grid.scss
+      operation: css-variables
+    - file: projects/novo-elements/src/styles/global/functions.scss
+      operation: css-variables
+    - file: projects/novo-elements/src/styles/global/include-media.scss
+      operation: css-variables
+    - file: projects/novo-elements/src/styles/global/layout.scss
+      operation: css-variables
+    - file: projects/novo-elements/src/styles/iconography.scss
+      operation: css-variables
+    - file: projects/novo-elements/src/styles/reset.scss
+      operation: css-variables
+    - file: projects/novo-elements/src/styles/themes/bh2026.scss
+      operation: css-variables
+    - file: projects/novo-elements/src/styles/themes/dark.scss
+      operation: css-variables
+    - file: projects/novo-elements/src/styles/themes/light-test.scss
+      operation: css-variables
+    - file: projects/novo-elements/src/styles/themes/light.scss
+      operation: css-variables
+    - file: projects/novo-elements/src/styles/typography.scss
+      operation: css-variables
+    - file: projects/novo-elements/src/styles/variables.scss
+      operation: css-variables
+components: []
