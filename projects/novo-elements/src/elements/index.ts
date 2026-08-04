@@ -2,6 +2,7 @@ export * from 'novo-elements/elements/agenda';
 export * from 'novo-elements/elements/aside';
 export * from 'novo-elements/elements/autocomplete';
 export * from 'novo-elements/elements/avatar';
+export * from 'novo-elements/elements/badge';
 export * from 'novo-elements/elements/breadcrumbs';
 export * from 'novo-elements/elements/button';
 export * from 'novo-elements/elements/calendar';

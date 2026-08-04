@@ -1,0 +1,20 @@
+<novo-field data-automation-id="badge-field-rate">
+  <novo-label>
+    <novo-flex justify="space-between" align="center" gap="sm">
+      <span>Pay Rate</span>
+      <novo-badge color="positive" shape="rounded" data-automation-id="badge-field-beta">Beta</novo-badge>
+    </novo-flex>
+  </novo-label>
+  <input novoInput placeholder="Ex. 65.00" [(ngModel)]="rate" data-automation-id="badge-field-rate-input" />
+  <novo-hint>New rate engine is in beta for this field.</novo-hint>
+</novo-field>
+
+<novo-field data-automation-id="badge-field-notes">
+  <novo-label>
+    <novo-flex justify="space-between" align="center" gap="sm">
+      <span>Candidate Notes</span>
+      <novo-badge color="neutral" data-automation-id="badge-field-count">{{ unreadNotes }} new</novo-badge>
+    </novo-flex>
+  </novo-label>
+  <textarea novoInput placeholder="Ex. Strong React background..." data-automation-id="badge-field-notes-input"></textarea>
+</novo-field>

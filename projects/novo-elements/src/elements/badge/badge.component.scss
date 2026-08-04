@@ -1,0 +1,55 @@
+@import "../../styles/variables.scss";
+
+$novo-badge-colors: (
+  "neutral": var(--color-neutral, #{$neutral}),
+  "positive": var(--color-ocean, #{$positive}),
+  "info": var(--color-ocean, #{$positive}),
+  "success": var(--color-grass, #{$success}),
+  "warning": var(--color-sunflower, #{$warning}),
+  "negative": var(--color-grapefruit, #{$negative}),
+  "candidate": $candidate,
+  "company": $company,
+  "job": $job,
+  "placement": $placement,
+);
+
+.novo-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  box-sizing: border-box;
+  min-width: 1.25rem;
+  padding: 0 var(--spacing-sm);
+  height: 1.25rem;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-caption);
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  vertical-align: middle;
+  color: var(--text-inverted, #{$white});
+  border-radius: var(--border-radius-pill, 999px);
+
+  &.novo-badge-shape-rounded {
+    border-radius: var(--border-radius-sm, 3px);
+  }
+
+  @each $name, $color in $novo-badge-colors {
+    &.novo-badge-color-#{$name} {
+      background-color: #{$color};
+    }
+  }
+
+  &.novo-badge-dot {
+    min-width: 0;
+    width: 0.5rem;
+    height: 0.5rem;
+    padding: 0;
+    border-radius: 999px;
+
+    .novo-badge-indicator {
+      display: none;
+    }
+  }
+}

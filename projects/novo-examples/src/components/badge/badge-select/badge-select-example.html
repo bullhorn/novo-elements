@@ -1,0 +1,22 @@
+<novo-field data-automation-id="badge-select-field">
+  <novo-label>
+    <novo-flex justify="space-between" align="center" gap="sm">
+      <span>Pipeline Stage</span>
+      <novo-badge dot [color]="selectedStage.color" [label]="selectedStage.label" data-automation-id="badge-select-dot"></novo-badge>
+    </novo-flex>
+  </novo-label>
+  <novo-select [(ngModel)]="selectedStage" data-automation-id="badge-select-options">
+    <novo-option
+      *ngFor="let stage of stages; let i = index"
+      [value]="stage"
+      [customViewValue]="stage.label"
+      [attr.data-automation-id]="'badge-select-option-' + i"
+    >
+      <novo-flex justify="space-between" align="center" gap="md" style="width: 100%">
+        <novo-text>{{ stage.label }}</novo-text>
+        <novo-badge [color]="stage.color" [attr.data-automation-id]="'badge-select-count-' + i">{{ stage.count }}</novo-badge>
+      </novo-flex>
+    </novo-option>
+  </novo-select>
+  <novo-hint>{{ selectedStage.count }} candidates in {{ selectedStage.label }}.</novo-hint>
+</novo-field>
