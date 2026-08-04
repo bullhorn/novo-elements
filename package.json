@@ -81,7 +81,7 @@
     "@angular-devkit/core": "^20.3.22",
     "@angular-devkit/schematics": "^20.3.22",
     "@angular/build": "^20.3.22",
-    "@angular/cli": "^20.3.22",
+    "@angular/cli": "^21.0.4",
     "@angular/compiler-cli": "^20.3.18",
     "@angular/language-service": "^20.3.18",
     "@bullhorn/bullhorn-icons": "^2.42.2",
