@@ -21,11 +21,11 @@
     "skipLibCheck": true,
     "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo",
     "paths": {
-      "novo-elements": ["projects/novo-elements/src/index"],
-      "novo-examples": ["projects/novo-examples/src/index"],
-      "novo-elements/*": ["projects/novo-elements/src/*"],
-      "novo-examples/*": ["projects/novo-examples/src/*"],
-      "novo-testing": ["testing/tick"]
+      "novo-elements": ["./projects/novo-elements/src/index"],
+      "novo-examples": ["./projects/novo-examples/src/index"],
+      "novo-elements/*": ["./projects/novo-elements/src/*"],
+      "novo-examples/*": ["./projects/novo-examples/src/*"],
+      "novo-testing": ["./testing/tick"]
     },
     "useDefineForClassFields": false
   },
