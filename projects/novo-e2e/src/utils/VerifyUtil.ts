@@ -41,13 +41,13 @@ export async function verifyNotActive(el: string, friendlyElementName: string = 
     await verifyClassAbsent(el, Classes.active, friendlyElementName, index);
 }
 
-export async function verifyClassPresent(selector: string, expectedClass: string, friendlyElementName: string = null, index: number = 0, totalWaitTime: number = 8000): Promise<void> {
+export async function verifyClassPresent(selector: string, expectedClass: string, friendlyElementName: string = null, index: number = 0, maxRetries: number = 8): Promise<void> {
     const elementName = friendlyElementName || 'element';
-    await expect(await getElement(selector, index)).toHaveElementClass(expectedClass, {
-        message: `${elementName} is missing the expected class: ${expectedClass}.`,
-        interval: 1000,
-        wait: totalWaitTime,
-    });
+    await retry(async () => {
+        if (!(await hasClass(selector, expectedClass, index))) {
+            throw new Error(`${elementName} is missing the expected class: ${expectedClass}.`);
+        }
+    }, null, maxRetries);
 }
 
 export async function verifyClassAbsent(el: string, unexpectedClass: string, friendlyElementName: string = null, index: number = 0): Promise<void> {
