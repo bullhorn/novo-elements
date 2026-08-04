@@ -88,3 +88,72 @@
     }
   }
 }
+
+// bh2026: CSS-based checkbox rendering — replaces icon font glyphs
+:host-context([data-theme='bh2026']) {
+  .novo-checkbox-group {
+    label i.bhi-checkbox-empty,
+    label i.bhi-checkbox-filled {
+      font-size: 0;
+      display: inline-flex;
+      align-self: center;
+      width: 16px;
+      height: 16px;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    label i.bhi-checkbox-empty {
+      &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border: 1px solid var(--color-border-control);
+        border-radius: 2px;
+        background: white;
+      }
+    }
+
+    label i.bhi-checkbox-filled {
+      &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: var(--color-background-utility-positive);
+        border: 1px solid var(--color-utility-blue-600);
+        border-radius: 2px;
+      }
+      &::after {
+        content: '';
+        position: absolute;
+        left: 3px;
+        top: 4px;
+        width: 9px;
+        height: 5px;
+        border-left: 2px solid var(--color-utility-blue-600);
+        border-bottom: 2px solid var(--color-utility-blue-600);
+        transform: rotate(-45deg);
+      }
+    }
+
+    &.disabled {
+      label {
+        opacity: 1;
+      }
+      label i.bhi-checkbox-empty {
+        &::before {
+          background: var(--color-background-utility-positive);
+          border-color: var(--color-border-input-disabled);
+        }
+      }
+      label i.bhi-checkbox-filled {
+        &::before {
+          border-color: var(--color-border-input-disabled);
+        }
+        &::after {
+          border-color: var(--color-border-input-disabled);
+        }
+      }
+    }
+  }
+}
