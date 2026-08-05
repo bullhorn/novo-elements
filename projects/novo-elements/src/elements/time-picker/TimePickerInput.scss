@@ -15,7 +15,9 @@
     border-bottom: 1px solid var(--border);
     background: transparent !important;
     border-radius: 0;
-    outline: none;
+    &:not(:focus-visible) {
+      outline: none;
+    }
     height: 2rem;
     width: 100%;
     margin: 0;

@@ -21,7 +21,9 @@ $switch-thumb-size: 20px !default;
   align-items: center;
   white-space: nowrap;
   cursor: pointer;
-  outline: none;
+  &:not(:focus-visible) {
+    outline: none;
+  }
   user-select: none;
   @include ease("all", "swift-ease-in-out");
   * {
@@ -75,7 +77,9 @@ $switch-thumb-size: 20px !default;
     margin: 0;
     left: 0;
     top: 0;
+    &:not(:focus-visible) {
     outline: none;
+  }
     height: $switch-thumb-size;
     width: $switch-thumb-size;
     border-radius: 50%;

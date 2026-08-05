@@ -39,7 +39,9 @@
     height: 16px;
     margin-right: -5px;
     text-align: center;
-    outline: none;
+    &:not(:focus-visible) {
+      outline: none;
+    }
 
     &:hover {
       svg g polygon {

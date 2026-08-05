@@ -8,6 +8,7 @@ import {
   EventEmitter,
   forwardRef,
   HostBinding,
+  HostListener,
   Input,
   NgZone,
   OnInit,
@@ -17,7 +18,7 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // APP
 import { NovoLabelService } from 'novo-elements/services';
-import { Key } from 'novo-elements/utils';
+import { BooleanInput, Key } from 'novo-elements/utils';
 import { NovoOverlayTemplateComponent } from 'novo-elements/elements/common';
 
 // Value accessor for the component (supports ngModel)
@@ -55,6 +56,7 @@ const SEARCH_VALUE_ACCESSOR = {
     <novo-overlay-template
       [parent]="element"
       [closeOnSelect]="closeOnSelect"
+      [trapKeyboardFocus]="trapKeyboardFocus"
       [position]="position"
       [hasBackdrop]="hasBackdrop"
       (select)="onSelect()"
@@ -105,6 +107,9 @@ export class NovoSearchBoxElement implements ControlValueAccessor, OnInit {
   public allowPropagation: boolean = false;
   @Input()
   public overrideElement: ElementRef;
+  @BooleanInput()
+  @Input()
+  public trapKeyboardFocus = false;
   @Output()
   public searchChanged: EventEmitter<string> = new EventEmitter<string>();
   @Output()
@@ -120,7 +125,7 @@ export class NovoSearchBoxElement implements ControlValueAccessor, OnInit {
 
   /** Element for the panel containing the autocomplete options. */
   @ViewChild(NovoOverlayTemplateComponent)
-  overlay: any;
+  overlay: NovoOverlayTemplateComponent;
   @ViewChild('input', { static: true })
   input: any;
 
@@ -146,7 +151,8 @@ export class NovoSearchBoxElement implements ControlValueAccessor, OnInit {
   showSearch(event?: any, forceClose: boolean = false) {
     if (!this.panelOpen) {
       // Reset search
-      // Set focus on search
+      // Set focus on search and open panel
+      this.openPanel();
       setTimeout(() => {
         const element = this.input.nativeElement;
         if (element) {
@@ -160,8 +166,14 @@ export class NovoSearchBoxElement implements ControlValueAccessor, OnInit {
   onFocus() {
     this._zone.run(() => {
       this.focused = true;
-      this.openPanel();
     });
+  }
+  @HostListener('click')
+  onClick() {
+    if (!this.panelOpen) {
+      this.focused = true;
+      this.openPanel();
+    }
   }
   onBlur() {
     if (!this.keepOpen || !this.panelOpen) {
@@ -198,6 +210,15 @@ export class NovoSearchBoxElement implements ControlValueAccessor, OnInit {
   }
 
   _handleKeydown(event: KeyboardEvent): void {
+    // Open panel on down arrow key
+    if (event.key === 'ArrowDown' && !this.panelOpen) {
+      this._zone.run(() => {
+        this.openPanel();
+      });
+      event.preventDefault();
+      return;
+    }
+
     if ((event.key === Key.Escape || event.key === Key.Enter || event.key === Key.Tab) && this.panelOpen) {
       if (event.keyCode === ENTER) {
         this.applySearch.emit(event);
@@ -212,6 +233,13 @@ export class NovoSearchBoxElement implements ControlValueAccessor, OnInit {
     if (document.activeElement === event.target) {
       this.value = (event.target as HTMLInputElement).value;
       this._onChange((event.target as HTMLInputElement).value);
+
+      // Open panel when user starts typing
+      if (!this.panelOpen && this.value) {
+        this._zone.run(() => {
+          this.openPanel();
+        });
+      }
 
       if (this.debounceSearchChange) {
         clearTimeout(this.debounceSearchChange);

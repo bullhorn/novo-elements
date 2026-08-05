@@ -17,7 +17,9 @@
   }
 
   &:focus {
-    outline: none;
+    &:not(:focus-visible) {
+      outline: none;
+    }
   }
 
   .novo-select-trigger {

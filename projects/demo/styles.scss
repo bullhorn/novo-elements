@@ -16,3 +16,7 @@
 body {
   font-size: 1.4rem;
 }
+
+*:focus-visible:not(input):not(novo-select) {
+    outline: 2px solid orange;
+}

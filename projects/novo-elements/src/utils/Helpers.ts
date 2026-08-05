@@ -550,3 +550,29 @@ export function binarySearch<T>(item: T, array: T[], compare: (a: T, b: T) => 1 
     }
   }
 }
+
+export interface NextFocusOpts {
+  allowExit: boolean;
+}
+
+const NEXT_FOCUS_OPTS_DEFAULT = {
+  allowExit: false,
+};
+
+const FOCUSABLE_ELEMENTS = ['BUTTON', 'INPUT', 'A', 'SELECT', 'TEXTAREA'];
+
+export function focusWalker(startingPosition: HTMLElement, opts?: Partial<NextFocusOpts>) {
+  opts = { ...NEXT_FOCUS_OPTS_DEFAULT, ...opts };
+  return startingPosition.ownerDocument.createTreeWalker(startingPosition, NodeFilter.SHOW_ELEMENT, {
+    acceptNode(node: HTMLElement) {
+      if ((!opts.allowExit && !startingPosition.contains(node)) || !node.checkVisibility()) {
+        return NodeFilter.FILTER_REJECT;
+      }
+      if (node.tabIndex === 0 || FOCUSABLE_ELEMENTS.includes(node.tagName)) {
+        return NodeFilter.FILTER_ACCEPT;
+      } else {
+        return NodeFilter.FILTER_SKIP;
+      }
+    },
+  });
+}

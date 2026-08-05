@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { ActivateDirective } from './directives/activate.directive';
 import { AccentColorDirective } from './directives/accent.directive';
 import { BackgroundColorDirective } from './directives/bg.directive';
 import { BorderDirective } from './directives/border.directive';
@@ -20,7 +21,7 @@ import { NovoTitle } from './typography/title/title.component';
 import { If2026ThemePipe } from './theme/if2026.pipe';
 
 @NgModule({
-  imports: [CommonModule, NovoOptionModule],
+  imports: [CommonModule, NovoOptionModule, ActivateDirective],
   exports: [
     NovoTemplate,
     NovoText,
@@ -28,6 +29,7 @@ import { If2026ThemePipe } from './theme/if2026.pipe';
     NovoCaption,
     NovoLabel,
     NovoLink,
+    ActivateDirective,
     MarginDirective,
     PaddingDirective,
     BackgroundColorDirective,

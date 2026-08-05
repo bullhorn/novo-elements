@@ -31,7 +31,9 @@
     -webkit-user-select: none;
     user-select: none;
     &:focus {
-      outline: none;
+      &:not(:focus-visible) {
+        outline: none;
+      }
     }
   }
   .indicator {
@@ -60,7 +62,9 @@
     }
   }
   &:focus {
-    outline: none;
+    &:not(:focus-visible) {
+      outline: none;
+    }
   }
 }
 
