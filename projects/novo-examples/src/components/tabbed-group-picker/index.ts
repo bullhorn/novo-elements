@@ -4,4 +4,5 @@ export * from './tabbed-group-picker-big-groups-example';
 export * from './tabbed-group-picker-chips';
 export * from './tabbed-group-picker-footer-example';
 export * from './tabbed-group-picker-groups-example';
+export * from './tabbed-group-picker-icon-chips';
 export * from './tabbed-group-picker-quick-select-example';
