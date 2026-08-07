@@ -182,9 +182,10 @@
     }
   }
 
-  &:hover {
+  &:hover:not(.active):not(.router-link-active):not(.disabled) {
     .novo-tab-link {
       color: var(--color-text-body);
+      font-weight: var(--typography-tabs-default-font-weight) !important;
     }
   }
 }

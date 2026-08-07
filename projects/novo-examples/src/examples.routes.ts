@@ -1329,24 +1329,32 @@ export class LayoutsPage {
 
 @Component({
   selector: 'tabs-examples-page',
-  template: `<h2>Themes</h2>
-<h3>Color</h3>
-<p>Colored background tab navigation gets the theme <code>theme=&quot;color&quot;</code></p>
-<p><code-example example="tabs-color"></code-example></p>
+  template: `<h2>Standard Tabs</h2>
 <h3>White</h3>
 <p>White background tab navigation gets the theme <code>theme=&quot;white&quot;</code></p>
 <p><code-example example="tabs-basic"></code-example></p>
-<h2>Styles</h2>
+<h3>Color (in Toolbar)</h3>
+<p>Tabs inside a colored toolbar — no explicit <code>theme</code> attribute needed when the toolbar provides the background.</p>
+<p><code-example example="tabs-color"></code-example></p>
+<h3>Color / Neutral (standalone)</h3>
+<p>Use <code>theme=&quot;color&quot;</code> or <code>theme=&quot;neutral&quot;</code> when tabs sit directly on a colored background.</p>
+<p><code-example example="tabs-neutral"></code-example></p>
+<h2>Variants</h2>
+<h3>Condensed</h3>
 <p>Condensed tabs to help utilize more space with <code>condensed=&quot;true&quot;</code></p>
 <p><code-example example="tabs-condensed"></code-example></p>
-<h2>Types</h2>
 <h3>Vertical</h3>
 <p>Vertical tabs get a direction attribute <code>direction=&quot;vertical&quot;</code></p>
 <p><code-example example="tabs-vertical"></code-example></p>
-<h3>Button Tab Bars</h3>
-<p>Tabbed Button Bars get a similar style treatment to the <code>&quot;header&quot;</code> theme button.</p>
-<h2>As Application Routing Mechanism</h2>
-<p>Follows the same color/white theme as above, but doesn't use the &quot;novo-tabs&quot; tag and you have to add the classes and html accordingly. The header will now control and route your application and put the content in the &quot;router-outlet&quot; and look/feel like our tabs component.</p>
+<h3>Button Bar</h3>
+<p>Use <code>type=&quot;button-bar&quot;</code> for a segmented-control style. Combine with <code>theme=&quot;white&quot;</code> or <code>theme=&quot;color&quot;</code>.</p>
+<p><code-example example="tabs-button-bar"></code-example></p>
+<h2>Router Navigation</h2>
+<h3>Record / Toolbar Style</h3>
+<p>Use <code>novo-tab-link</code> with <code>router</code> on <code>novo-nav</code> for router-driven tabs — no explicit theme, sits inside a <code>novo-toolbar-row</code>.</p>
+<p><code-example example="tabs-nav-link"></code-example></p>
+<h3>Basic Router Example</h3>
+<p>Follows the same color/white theme as above, but doesn't use the <code>novo-tabs</code> tag. The header controls routing and puts content in the <code>router-outlet</code>.</p>
 <p><code-example example="tabs-router"></code-example></p>
 `,
   host: { class: 'markdown-page' },
