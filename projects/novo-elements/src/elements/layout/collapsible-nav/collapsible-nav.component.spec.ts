@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NovoCollapsibleNavComponent } from './collapsible-nav.component';
+import { tick } from 'novo-testing';
 
 describe('Elements: NovoCollapsibleNavComponent', () => {
   let fixture: ComponentFixture<NovoCollapsibleNavComponent>;
@@ -13,6 +14,8 @@ describe('Elements: NovoCollapsibleNavComponent', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(NovoCollapsibleNavComponent);
     component = fixture.componentInstance;
+    const element = component.element;
+    vi.spyOn(element.nativeElement, 'matches').mockReturnValue(true);
     fixture.detectChanges();
   });
 
@@ -73,9 +76,10 @@ describe('Elements: NovoCollapsibleNavComponent', () => {
       fixture.detectChanges();
     });
 
-    it('mouseenter while collapsed should expand the animation state and remove collapsed class', () => {
+    it('mouseenter while collapsed should expand the animation state and remove collapsed class', async () => {
       component.onMouseEnter();
       fixture.detectChanges();
+      await tick(400);
       expect(component.expandCollapseState.value).toBe('expanded');
       expect(component.isCollapsed).toBe(false);
     });
@@ -96,12 +100,24 @@ describe('Elements: NovoCollapsibleNavComponent', () => {
       expect(component.isCollapsed).toBe(true);
     });
 
-    it('setting collapsed to true while hovered should collapse immediately', () => {
+    it('setting collapsed to true while hovered should collapse immediately', async () => {
       component.onMouseEnter();
       fixture.detectChanges();
+      await tick(400);
       expect(component.expandCollapseState.value).toBe('expanded');
       component.collapse();
       fixture.detectChanges();
+      expect(component.expandCollapseState.value).toBe('collapsed');
+    });
+
+    it('should not expand if the user\'s mouse exits before the debounce finishes', async () => {
+      fixture.componentRef.setInput('expandDelay', 300);
+      component.onMouseEnter();
+      fixture.detectChanges();
+      await tick(200);
+      component.onMouseLeave();
+      fixture.detectChanges();
+      await tick(200);
       expect(component.expandCollapseState.value).toBe('collapsed');
     });
 
