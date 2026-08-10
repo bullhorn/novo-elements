@@ -162,7 +162,7 @@
 // bh2026: subtle default text, body text when active/hover, blue indicator only
 :host-context([data-theme='bh2026']) {
   margin-right: var(--spacing-gap-lg);
-
+  
   .novo-tab-link {
     color: var(--color-text-subtle);
     // Tabs are Title Case, not uppercase.
@@ -188,6 +188,10 @@
       font-weight: var(--typography-tabs-default-font-weight) !important;
     }
   }
+}
+
+:host-context([data-theme='bh2026'] novo-nav[direction=vertical]) {
+  margin-right: 0;
 }
 
 :host-context(novo-nav[theme="color"]),

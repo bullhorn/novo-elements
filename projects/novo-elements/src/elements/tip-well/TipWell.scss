@@ -29,5 +29,8 @@
         white-space: pre-line;
       }
     }
+    :root[data-theme='bh2026'] & {
+      background-color: var(--background-muted);
+    }
   }
 }
