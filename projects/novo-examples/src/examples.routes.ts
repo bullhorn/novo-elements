@@ -5990,6 +5990,10 @@ export class CalendarDesignPage {
 <h2>Icon</h2>
 <p>The <code>icon</code> theme is used to create <strong>icon-only</strong> buttons, which contain no text. They can occupy any of the four main functions but require far less visual dominance than normal buttons. Icon buttons <strong>always</strong> have an <code>icon</code> attribute and can use <strong>any</strong> icon. Icon buttons may also use an <code>inverse</code> attribute to change its icon color to white.</p>
 <p><code-example example="button-icon"></code-example></p>
+<p>Icon buttons may also include a text label alongside the icon. In this case the button expands to fit the content.</p>
+<p><code-example example="button-icon-label"></code-example></p>
+<p>A second icon can be specified, and it will take the opposite side of the primary icon.</p>
+<p><code-example example="button-two-icon"></code-example></p>
 <h2>Fab</h2>
 <p>Fab buttons are used to as primary calls-to-action. They should <strong>always</strong> get an <code>icon</code> attribute. Fab buttons with a &quot;success&quot; color <code>color=&quot;success&quot;</code> are used for saving and will almost always contain a &quot;check&quot; icon. Negative color primary buttons <code>color=&quot;negative&quot;</code> are used to delete, clear, or otherwise remove an extant element. Fab buttons should never have a <code>side</code> attribute.</p>
 <p><code-example example="button-fab"></code-example></p>
@@ -5999,9 +6003,6 @@ export class CalendarDesignPage {
 <h2>Loading</h2>
 <p>Buttons can display a loading state when given the &quot;loading&quot; parameter. When loading is true the button will be disabled and get a loading spinner.</p>
 <p><code-example example="button-loading"></code-example></p>
-<h2>Two Icons</h2>
-<p>A second icon can be specified, and it will take the opposite side of the primary icon.</p>
-<p><code-example example="button-two-icon"></code-example></p>
 `,
   host: { class: 'markdown-page' },
   standalone: false,
