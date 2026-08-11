@@ -183,6 +183,12 @@
   }
 }
 
+// bh2026: icon-theme button must not be constrained to a square when it carries chips/label content
+::ng-deep [data-theme='bh2026'] novo-button.tabbed-group-picker-button[theme='icon'] {
+  width: auto;
+  min-width: max-content;
+}
+
 // bh2026: Half-pill shaped indicator, updated colors
 ::ng-deep [data-theme='bh2026'] .dropdown-container {
   .tabbed-group-picker-search {

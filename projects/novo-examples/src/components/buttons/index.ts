@@ -2,6 +2,7 @@ export * from './button-dialogue';
 export * from './button-dynamic';
 export * from './button-fab';
 export * from './button-icon';
+export * from './button-icon-label';
 export * from './button-inverse';
 export * from './button-loading';
 export * from './button-overview';
