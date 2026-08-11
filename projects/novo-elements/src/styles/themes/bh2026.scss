@@ -150,7 +150,7 @@
 // bh2026: primary disabled uses a lighter blue at full opacity instead of the default 0.5 opacity dimming
 :root[data-theme='bh2026'] [theme="primary"][disabled],
 :root[data-theme='bh2026'] [theme="primary"].novo-button-disabled {
-  background: var(--color-utility-blue-400);
+  background: var(--color-utility-blue-300);
   opacity: 1;
 }
 
