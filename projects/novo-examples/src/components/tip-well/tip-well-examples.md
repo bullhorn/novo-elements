@@ -20,3 +20,7 @@ order: 4
 ## HTML Demo
 
 <code-example example="html-tip-well"></code-example>  
+
+## Icon Button Demo
+
+<code-example example="icon-button-tip-well"></code-example>  

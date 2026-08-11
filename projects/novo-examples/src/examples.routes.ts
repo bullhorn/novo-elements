@@ -321,7 +321,7 @@ npm install novo-elements&#64;7.2.0-next.0
 <h2>Upgrading to V7</h2>
 <p>First follow the steps to update your angular app to <a href="https://update.angular.io/?v=10.0-13.0">Version 13</a></p>
 <pre><code><span class="hljs-attribute">npm</span> install --save novo-elements&#64;<span class="hljs-number">7</span>.x.x
-<span class="hljs-attribute">ng</span> update novo-elements --migrate-only --from=<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --to=<span class="hljs-number">7</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --force --<span class="hljs-literal">allow</span>-dirty  
+<span class="hljs-attribute">ng</span> update novo-elements --migrate-only --from=<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --to=<span class="hljs-number">7</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --force --<span class="hljs-literal">allow</span>-dirty
 </code></pre>
 <h2 id="notable-changes">Notable changes <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v7-announce#notable-changes">#</a></h2>
 <ul>
@@ -358,7 +358,7 @@ npm install novo-elements&#64;7.2.0-next.0
 <div class="p">Note: First follow the steps to update your angular app to <a href="https://update.angular.io/?v=10.0-13.0">Version 13</a> if you haven't already.</div>
 </blockquote>
 <pre><code><span class="hljs-attribute">npm</span> install --save novo-elements&#64;<span class="hljs-number">7</span>.x.x
-<span class="hljs-attribute">ng</span> update novo-elements --migrate-only --from=<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --to=<span class="hljs-number">7</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --force --<span class="hljs-literal">allow</span>-dirty  
+<span class="hljs-attribute">ng</span> update novo-elements --migrate-only --from=<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --to=<span class="hljs-number">7</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --force --<span class="hljs-literal">allow</span>-dirty
 </code></pre>
 <h1>📢  August 2022 (version 7.3.x)</h1>
 <p><strong>Announcement</strong>: New features and improvements!</p>
@@ -441,7 +441,7 @@ export class v7Page {
 <p>First follow the steps to update your angular app to <a href="https://update.angular.io/?v=9.0-10.0">Version 10</a></p>
 <pre><code><span class="hljs-attribute">npm</span> install --save timezone-support&#64;<span class="hljs-number">2</span> novo-design-tokens&#64;<span class="hljs-number">0</span> angular-imask&#64;<span class="hljs-number">6</span> imask&#64;<span class="hljs-number">6</span>
 <span class="hljs-attribute">npm</span> install --save novo-elements&#64;<span class="hljs-number">6</span>
-<span class="hljs-attribute">ng</span> update novo-elements --migrate-only --from=<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --to=<span class="hljs-number">6</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --force --<span class="hljs-literal">allow</span>-dirty  
+<span class="hljs-attribute">ng</span> update novo-elements --migrate-only --from=<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --to=<span class="hljs-number">6</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --force --<span class="hljs-literal">allow</span>-dirty
 </code></pre>
 <p>For any issues that are not corrected with the above command, please ask questions in the <a href="https://github.com/bullhorn/novo-elements/discussions/categories/q-a">Q&amp;A Page</a> in github.</p>
 <p>Welcome to the February 2022 release of Novo Elements. There are many updates in this version that we hope you will like, some of the key highlights include:</p>
@@ -3907,6 +3907,8 @@ export class ToasterDesignPage {
 <p><code-example example="icon-tip-well"></code-example></p>
 <h2>HTML Demo</h2>
 <p><code-example example="html-tip-well"></code-example></p>
+<h2>Icon Button Demo</h2>
+<p><code-example example="icon-button-tip-well"></code-example></p>
 `,
   host: { class: 'markdown-page' },
   standalone: false,

@@ -19,7 +19,7 @@
         flex-shrink: 0;
         text-align: center;
         margin-right: var(--spacing-md);
-        color: #aaaaaa;
+        color: var(--color-text-subtle, #aaaaaa);
       }
       > p {
         @include novo-body-text();
