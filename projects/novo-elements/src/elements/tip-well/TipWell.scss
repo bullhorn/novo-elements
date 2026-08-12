@@ -19,7 +19,7 @@
         flex-shrink: 0;
         text-align: center;
         margin-right: var(--spacing-md);
-        color: var(--color-text-subtle, #aaaaaa);
+        color: #aaaaaa;
       }
       > p {
         @include novo-body-text();
@@ -27,6 +27,37 @@
         padding: 0;
         text-align: left;
         white-space: pre-line;
+      }
+    }
+  }
+
+  // Icon theme styling
+  &[data-theme='icon'] {
+    margin: 0 auto 0 var(--spacing-lg);
+    pointer-events: auto;
+    cursor: default;
+
+    > div {
+      display: inline-flex;
+      align-items: center;
+      padding: var(--spacing-sm) var(--spacing-md);
+      border-radius: var(--border-radius-md);
+      border: 0.0625rem solid var(--tip-well-icon-border-color, #0066cc);
+      background-color: var(--tip-well-icon-background-color, #f0f4ff);
+      text-align: center;
+
+      i {
+        color: var(--color-text-subtle, #aaaaaa);
+        margin-right: 0;
+      }
+
+      p {
+        display: none;
+      }
+
+      button {
+        margin-left: var(--spacing-md);
+        color: var(--tip-well-icon-button-color, #333333);
       }
     }
   }

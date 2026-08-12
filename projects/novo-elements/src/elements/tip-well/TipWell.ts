@@ -15,7 +15,7 @@ import { NovoLabelService } from 'novo-elements/services';
         <p *ngIf="!sanitize && tipWithStyles" [attr.data-automation-id]="'novo-tip-well-tip-' + name" [innerHTML]="tipWithStyles"></p>
         <p *ngIf="(sanitize && !tip.length) || (!sanitize && !tipWithStyles)" [attr.data-automation-id]="'novo-tip-well-tip-' + name"><ng-content></ng-content></p>
       </div>
-      <button [theme]="buttonTheme" [size]="buttonSize" (click)="hideTip()" *ngIf="button" [attr.data-automation-id]="'novo-tip-well-button-' + name">
+      <button [theme]="buttonTheme" [size]="buttonSize" [icon]="buttonIcon" (click)="hideTip()" *ngIf="button" [attr.data-automation-id]="'novo-tip-well-button-' + name">
         {{ buttonText }}
       </button>
     </div>
@@ -23,6 +23,7 @@ import { NovoLabelService } from 'novo-elements/services';
     styleUrls: ['./TipWell.scss'],
     host: {
         '[class.active]': 'isActive',
+        '[attr.data-theme]': 'theme',
     },
     standalone: false,
 })
@@ -36,13 +37,17 @@ export class NovoTipWellElement implements OnInit {
   @Input()
   button: boolean = true;
   @Input()
+  buttonIcon: string;
+  @Input()
   icon: string;
   @Input()
   sanitize: boolean = true;
   @Input()
-  buttonTheme: string = 'dialogue';
+  theme: string = 'default';
   @Input()
-  buttonSize: string = 'small';
+  buttonTheme: string;
+  @Input()
+  buttonSize: string;
   @Output()
   confirmed = new EventEmitter();
 
@@ -84,9 +89,20 @@ export class NovoTipWellElement implements OnInit {
 
   ngOnInit() {
     this.tip = this.tip || '';
-    this.buttonText = this.buttonText || this.labels.okGotIt;
     this.button = typeof this.button === 'string' ? this.button === 'true' : this.button;
     this.icon = this.icon || null;
+
+    // Apply theme defaults
+    if (this.theme === 'icon') {
+      this.buttonTheme = this.buttonTheme || 'icon';
+      this.buttonSize = this.buttonSize || 'small';
+      this.buttonText = this.buttonText || '';
+    } else {
+      this.buttonTheme = this.buttonTheme || 'dialogue';
+      this.buttonSize = this.buttonSize || 'small';
+      this.buttonText = this.buttonText || this.labels.okGotIt;
+    }
+
     // Set a (semi) unique name for the tip-well
     this.name = this.name || Math.round(Math.random() * 100);
     this.localStorageKey = `novo-tw_${this.name}`;
