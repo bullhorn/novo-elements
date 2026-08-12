@@ -23,7 +23,7 @@ import { NovoLabelService } from 'novo-elements/services';
     styleUrls: ['./TipWell.scss'],
     host: {
         '[class.active]': 'isActive',
-        '[attr.data-theme]': 'theme',
+        '[attr.data-variant]': 'variant',
     },
     standalone: false,
 })
@@ -43,7 +43,7 @@ export class NovoTipWellElement implements OnInit {
   @Input()
   sanitize: boolean = true;
   @Input()
-  theme: string = 'default';
+  variant: string = 'default';
   @Input()
   buttonTheme: string;
   @Input()
@@ -92,8 +92,8 @@ export class NovoTipWellElement implements OnInit {
     this.button = typeof this.button === 'string' ? this.button === 'true' : this.button;
     this.icon = this.icon || null;
 
-    // Apply theme defaults
-    if (this.theme === 'icon') {
+    // Apply variant defaults
+    if (this.variant === 'icon') {
       this.buttonTheme = this.buttonTheme || 'icon';
       this.buttonSize = this.buttonSize || 'small';
       this.buttonText = this.buttonText || '';

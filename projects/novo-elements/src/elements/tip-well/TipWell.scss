@@ -31,8 +31,8 @@
     }
   }
 
-  // Icon theme styling
-  &[data-theme='icon'] {
+  // Icon variant styling
+  &[data-variant='icon'] {
     margin: 0 auto 0 var(--spacing-lg);
     pointer-events: auto;
     cursor: default;
@@ -47,7 +47,7 @@
       text-align: center;
 
       i {
-        color: var(--color-text-subtle, #aaaaaa);
+        color: $charcoal !important;
         margin-right: 0;
       }
 
@@ -57,7 +57,7 @@
 
       button {
         margin-left: var(--spacing-md);
-        color: var(--tip-well-icon-button-color, #333333);
+        color: $charcoal;
       }
     }
   }
