@@ -21,6 +21,6 @@ order: 4
 
 <code-example example="html-tip-well"></code-example>  
 
-## Icon Button Demo
+## Compact Variant
 
-<code-example example="icon-button-tip-well"></code-example>  
+<code-example example="compact-tip-well"></code-example>  
