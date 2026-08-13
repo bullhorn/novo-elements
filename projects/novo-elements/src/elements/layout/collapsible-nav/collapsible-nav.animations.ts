@@ -1,5 +1,7 @@
 import { animate, AnimationTriggerMetadata, state, style, transition, trigger } from '@angular/animations';
 
+// WARNING: Angular plans to remove the animations library in v23. When upgrading there, use CSS transition effects
+// to apply similar curves, and change event triggers to fire off of transitionstart/transitionend events.
 /**
  * Animation that grows/shrinks the panel width between its expanded and collapsed (icon-rail) sizes.
  * Width is animated rather than transform because the panel shrinks in place rather than sliding away.
