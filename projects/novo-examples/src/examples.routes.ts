@@ -3907,6 +3907,8 @@ export class ToasterDesignPage {
 <p><code-example example="icon-tip-well"></code-example></p>
 <h2>HTML Demo</h2>
 <p><code-example example="html-tip-well"></code-example></p>
+<h2>Compact Variant</h2>
+<p><code-example example="compact-tip-well"></code-example></p>
 `,
   host: { class: 'markdown-page' },
   standalone: false,
