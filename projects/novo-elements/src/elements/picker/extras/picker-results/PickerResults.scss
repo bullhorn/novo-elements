@@ -44,6 +44,10 @@ entity-picker-results {
     color: black;
   }
 
+  > p {
+    margin: 0;
+  }
+
   picker-error,
   picker-loader,
   picker-null-recent-results,
@@ -167,6 +171,7 @@ entity-picker-results {
   background: $white;
   width: 100%;
   min-width: 250px;
+  display: block;
   novo-list {
     background: $white;
     min-width: 30rem;
@@ -306,6 +311,8 @@ distribution-list-picker-results {
   picker-results,
   entity-picker-results {
     border: 1px solid var(--color-border-default);
+    margin-block: var(--spacing-gap-sm);
+    background: var(--background-bright);
 
     .novo-list,
     novo-list,
@@ -324,6 +331,22 @@ distribution-list-picker-results {
     .picker-null-results {
       border: none;
       box-shadow: none;
+    }
+
+    > p {
+      margin: 0;
+      padding: var(--spacing-padding-md) var(--spacing-padding-lg);
+    }
+  }
+
+  workers-comp-codes-picker-results,
+  distribution-list-picker-results {
+    color: var(--text-secondary);
+    background: var(--background-body);
+    border-radius: var(--border-radius-sm);
+
+    .novo-list-item {
+      border-radius: var(--border-radius-sm);
     }
   }
 }

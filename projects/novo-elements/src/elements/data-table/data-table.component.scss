@@ -661,10 +661,12 @@ novo-data-table {
       .novo-data-table-dropdown-cell,
       .novo-data-table-expand-cell,
       .novo-data-table-checkbox-cell {
-        background-color: var(--color-background-muted);
+        // To enable every-other "banded" styling change to --color-background-muted
+        background-color: var(--background-body);
       }
       + .novo-data-table-detail-row {
-        background-color: var(--color-background-muted);
+        // To enable every-other "banded" styling change to --color-background-muted
+        background-color: var(--background-body);
       }
     }
     > .novo-data-table-row:nth-of-type(even) {
