@@ -1,13 +1,46 @@
+import * as i0 from '@angular/core';
+import { AfterContentInit, ChangeDetectorRef, ElementRef, NgZone, DestroyRef, InjectionToken, AfterContentChecked, OnDestroy, EventEmitter, DoCheck, QueryList } from '@angular/core';
 import { Directionality } from '@angular/cdk/bidi';
 import { BooleanInput, NumberInput } from '@angular/cdk/coercion';
 import { CdkScrollable, ScrollDispatcher, ViewportRuler } from '@angular/cdk/overlay';
-import * as i0 from '@angular/core';
-import { AfterContentInit, ChangeDetectorRef, ElementRef, NgZone, DestroyRef, InjectionToken, AfterContentChecked, OnDestroy, EventEmitter, DoCheck, QueryList } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import { AnimationEvent } from '@angular/animations';
 import { FocusTrapFactory, FocusMonitor, FocusOrigin } from '@angular/cdk/a11y';
 import { Platform } from '@angular/cdk/platform';
-import * as i5 from '@angular/common';
+import * as i6 from '@angular/common';
+
+/**
+ * A slide-out navigation panel that expands to a full-width panel or collapses to a narrow icon rail.
+ * Generic building block: consumers project their own header, body, and footer content.
+ */
+declare class NovoCollapsibleNavComponent {
+    /** Whether the panel is collapsed to the icon rail. Two-way bindable via `[(collapsed)]`. */
+    collapsed: i0.ModelSignal<boolean>;
+    /** Width of the panel when expanded. */
+    expandedWidth: i0.InputSignal<string>;
+    /** Width of the panel when collapsed to the icon rail. */
+    collapsedWidth: i0.InputSignal<string>;
+    /** When true, hovering a collapsed panel temporarily expands it as an overlay without affecting layout. */
+    overlayOnHover: i0.InputSignal<boolean>;
+    private readonly isHovered;
+    private readonly effectiveCollapsed;
+    constructor();
+    onMouseEnter(): void;
+    onMouseLeave(): void;
+    get expandCollapseState(): {
+        value: string;
+        params: {
+            expandedWidth: string;
+            collapsedWidth: string;
+        };
+    };
+    get isCollapsed(): boolean;
+    toggle(): void;
+    expand(): void;
+    collapse(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<NovoCollapsibleNavComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<NovoCollapsibleNavComponent, "novo-collapsible-nav", ["novoCollapsibleNav"], { "collapsed": { "alias": "collapsed"; "required": false; "isSignal": true; }; "expandedWidth": { "alias": "expandedWidth"; "required": false; "isSignal": true; }; "collapsedWidth": { "alias": "collapsedWidth"; "required": false; "isSignal": true; }; "overlayOnHover": { "alias": "overlayOnHover"; "required": false; "isSignal": true; }; }, { "collapsed": "collapsedChange"; }, never, ["[novo-collapsible-nav-header]", "[novo-collapsible-nav-body]", "[novo-collapsible-nav-footer]"], false, never>;
+}
 
 declare class NovoLayoutContent extends CdkScrollable implements AfterContentInit {
     private _changeDetectorRef;
@@ -298,9 +331,9 @@ declare class NovoLayoutContainer implements AfterContentInit, DoCheck, OnDestro
 
 declare class NovoLayoutModule {
     static ɵfac: i0.ɵɵFactoryDeclaration<NovoLayoutModule, never>;
-    static ɵmod: i0.ɵɵNgModuleDeclaration<NovoLayoutModule, [typeof NovoLayoutContainer, typeof NovoLayoutContent, typeof NovoSidenavComponent, typeof NovoRailComponent], [typeof i5.CommonModule], [typeof NovoLayoutContainer, typeof NovoLayoutContent, typeof NovoSidenavComponent, typeof NovoRailComponent]>;
+    static ɵmod: i0.ɵɵNgModuleDeclaration<NovoLayoutModule, [typeof NovoLayoutContainer, typeof NovoLayoutContent, typeof NovoSidenavComponent, typeof NovoRailComponent, typeof NovoCollapsibleNavComponent], [typeof i6.CommonModule], [typeof NovoLayoutContainer, typeof NovoLayoutContent, typeof NovoSidenavComponent, typeof NovoRailComponent, typeof NovoCollapsibleNavComponent]>;
     static ɵinj: i0.ɵɵInjectorDeclaration<NovoLayoutModule>;
 }
 
-export { NOVO_LAYOUT_CONTAINER, NOVO_LAYOUT_DEFAULT_AUTOSIZE, NOVO_LAYOUT_DEFAULT_AUTOSIZE_FACTORY, NovoLayoutContainer, NovoLayoutContent, NovoLayoutModule, NovoRailComponent, NovoSidenavComponent, throwNovoDuplicatedSidenavError };
+export { NOVO_LAYOUT_CONTAINER, NOVO_LAYOUT_DEFAULT_AUTOSIZE, NOVO_LAYOUT_DEFAULT_AUTOSIZE_FACTORY, NovoCollapsibleNavComponent, NovoLayoutContainer, NovoLayoutContent, NovoLayoutModule, NovoRailComponent, NovoSidenavComponent, throwNovoDuplicatedSidenavError };
 export type { NovoSidenavMode, NovoSidenavToggleResult };

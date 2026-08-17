@@ -68,12 +68,12 @@ $disabled: $color-stone;
 // --------------------------------------------------
 $spacing-rules: (
   "none": $spacing-none,
-  "px": $spacing-px,
-  "xs": $spacing-xs,
-  "sm": $spacing-sm,
-  "md": $spacing-md,
-  "lg": $spacing-lg,
-  "xl": $spacing-xl,
+  "px": var(--spacing-px),
+  "xs": var(--spacing-xs),
+  "sm": var(--spacing-sm),
+  "md": var(--spacing-md),
+  "lg": var(--spacing-lg),
+  "xl": var(--spacing-xl),
 );
 
 // Sizes

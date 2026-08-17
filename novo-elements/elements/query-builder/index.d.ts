@@ -1,40 +1,40 @@
 import * as i0 from '@angular/core';
-import { TemplateRef, ViewContainerRef, OnInit, OnChanges, AfterContentInit, AfterViewInit, OnDestroy, ElementRef, ChangeDetectorRef, SimpleChanges, QueryList, InputSignal, Signal, AfterContentChecked, InjectionToken } from '@angular/core';
-import * as i15 from '@angular/forms';
+import { TemplateRef, ViewContainerRef, OnInit, OnChanges, AfterContentInit, AfterViewInit, OnDestroy, ElementRef, ChangeDetectorRef, SimpleChanges, QueryList, InputSignal, Signal, AfterContentChecked, PipeTransform, InjectionToken } from '@angular/core';
+import * as i16 from '@angular/forms';
 import { FormGroup, FormControl, ControlContainer, FormControlName, UntypedFormGroup, AbstractControl, FormBuilder, FormArray } from '@angular/forms';
 import { NovoLabelService } from 'novo-elements/services';
 import { Subject, Subscription } from 'rxjs';
 import { Day } from 'date-fns';
-import * as i25 from 'novo-elements/elements/field';
+import * as i26 from 'novo-elements/elements/field';
 import { NovoPickerToggleElement } from 'novo-elements/elements/field';
-import * as i18 from 'novo-elements/elements/places';
-import { PlacesListComponent } from 'novo-elements/elements/places';
-import * as i23 from 'novo-elements/elements/select';
+import * as i19 from 'novo-elements/elements/places';
+import { PlacesListComponent, PlacesSettings } from 'novo-elements/elements/places';
+import * as i24 from 'novo-elements/elements/select';
 import { NovoSelectElement } from 'novo-elements/elements/select';
-import * as i28 from 'novo-elements/elements/tabbed-group-picker';
+import * as i29 from 'novo-elements/elements/tabbed-group-picker';
 import { NovoTabbedGroupPickerElement, TabbedGroupPickerTab, TabbedGroupPickerButtonConfig } from 'novo-elements/elements/tabbed-group-picker';
-import * as i14 from '@angular/common';
-import * as i16 from '@angular/cdk/drag-drop';
-import * as i17 from '@angular/cdk/table';
-import * as i19 from 'novo-elements/elements/autocomplete';
-import * as i20 from 'novo-elements/elements/button';
-import * as i21 from 'novo-elements/elements/common';
-import * as i22 from 'novo-elements/elements/form';
-import * as i24 from 'novo-elements/elements/non-ideal-state';
-import * as i26 from 'novo-elements/elements/flex';
-import * as i27 from 'novo-elements/elements/tabs';
-import * as i29 from 'novo-elements/elements/loading';
-import * as i30 from 'novo-elements/elements/card';
-import * as i31 from 'novo-elements/elements/date-picker';
-import * as i32 from 'novo-elements/elements/date-time-picker';
-import * as i33 from 'novo-elements/elements/icon';
-import * as i34 from 'novo-elements/elements/radio';
-import * as i35 from 'novo-elements/elements/search';
-import * as i36 from 'novo-elements/elements/switch';
-import * as i37 from 'novo-elements/elements/chips';
-import * as i38 from 'novo-elements/elements/select-search';
-import * as i39 from 'novo-elements/elements/dropdown';
-import * as i40 from 'novo-elements/elements/tooltip';
+import * as i15 from '@angular/common';
+import * as i17 from '@angular/cdk/drag-drop';
+import * as i18 from '@angular/cdk/table';
+import * as i20 from 'novo-elements/elements/autocomplete';
+import * as i21 from 'novo-elements/elements/button';
+import * as i22 from 'novo-elements/elements/common';
+import * as i23 from 'novo-elements/elements/form';
+import * as i25 from 'novo-elements/elements/non-ideal-state';
+import * as i27 from 'novo-elements/elements/flex';
+import * as i28 from 'novo-elements/elements/tabs';
+import * as i30 from 'novo-elements/elements/loading';
+import * as i31 from 'novo-elements/elements/card';
+import * as i32 from 'novo-elements/elements/date-picker';
+import * as i33 from 'novo-elements/elements/date-time-picker';
+import * as i34 from 'novo-elements/elements/icon';
+import * as i35 from 'novo-elements/elements/radio';
+import * as i36 from 'novo-elements/elements/search';
+import * as i37 from 'novo-elements/elements/switch';
+import * as i38 from 'novo-elements/elements/chips';
+import * as i39 from 'novo-elements/elements/select-search';
+import * as i40 from 'novo-elements/elements/dropdown';
+import * as i41 from 'novo-elements/elements/tooltip';
 
 /** Base interface for a condidation template directives. */
 interface ConditionDef {
@@ -129,6 +129,7 @@ declare enum Operator {
     isEmpty = "isEmpty",
     isNull = "isNull",
     lessThan = "lessThan",
+    like = "like",
     outsideRadius = "outsideRadius",
     radius = "radius",
     within = "within"
@@ -176,14 +177,34 @@ interface FieldConfig<T extends BaseFieldDef> {
     find: (name: string) => T;
 }
 interface AddressData {
-    address_components: AddressComponent[];
-    formatted_address: string;
-    geometry: AddressGeometry;
+    address_components?: AddressComponent[];
+    formatted_address?: string;
+    geometry?: AddressGeometry;
     name?: string;
-    place_id: string;
+    place_id?: string;
+    address1?: string;
+    address2?: string;
+    city?: string;
+    state?: string;
+    zip?: string;
+    countryName?: string;
+    countryCode?: string;
+    formattedAddress?: string;
+    location?: AddressGeoPoint;
+    viewport?: AddressDetailViewport;
+    placeId?: string;
+    postalCodes?: string[];
     radius?: AddressRadius;
     postal_codes?: string[];
     types?: string[];
+}
+interface AddressGeoPoint {
+    latitude: number;
+    longitude: number;
+}
+interface AddressDetailViewport {
+    northeast: AddressGeoPoint;
+    southwest: AddressGeoPoint;
 }
 interface AddressRadius {
     value: number;
@@ -431,6 +452,7 @@ declare class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef i
     term: string;
     private _addressChangesSubscription;
     element: ElementRef<any>;
+    protected readonly addressConfig: PlacesSettings;
     constructor(labelService: NovoLabelService);
     ngOnDestroy(): void;
     onKeyup(event: any, viewIndex: any): void;
@@ -629,9 +651,19 @@ declare class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterConten
     static ɵcmp: i0.ɵɵComponentDeclaration<CriteriaBuilderComponent, "novo-criteria-builder", never, { "config": { "alias": "config"; "required": false; }; "controlName": { "alias": "controlName"; "required": false; }; "allowedGroupings": { "alias": "allowedGroupings"; "required": false; }; "editTypeFn": { "alias": "editTypeFn"; "required": false; }; "addressConfig": { "alias": "addressConfig"; "required": false; }; "dateConfig": { "alias": "dateConfig"; "required": false; }; "canBeEmpty": { "alias": "canBeEmpty"; "required": false; }; "HideFirstOperator": { "alias": "hideFirstOperator"; "required": false; }; }, {}, ["_contentFieldDefs"], never, false, never>;
 }
 
+/**
+ * Resolves a display label from an address value. Google client-SDK results use formatted_address;
+ * address-search-service results use formattedAddress.
+ */
+declare class AddressLabelPipe implements PipeTransform {
+    transform(item: AddressData): string;
+    static ɵfac: i0.ɵɵFactoryDeclaration<AddressLabelPipe, never>;
+    static ɵpipe: i0.ɵɵPipeDeclaration<AddressLabelPipe, "addressLabel", false>;
+}
+
 declare class NovoQueryBuilderModule {
     static ɵfac: i0.ɵɵFactoryDeclaration<NovoQueryBuilderModule, never>;
-    static ɵmod: i0.ɵɵNgModuleDeclaration<NovoQueryBuilderModule, [typeof CriteriaBuilderComponent, typeof ConditionBuilderComponent, typeof ConditionInputOutlet, typeof ConditionOperatorOutlet, typeof ConditionGroupComponent, typeof NovoDefaultAddressConditionDef, typeof NovoDefaultBooleanConditionDef, typeof NovoDefaultDateConditionDef, typeof NovoDefaultDateTimeConditionDef, typeof NovoConditionOperatorsDef, typeof NovoConditionInputDef, typeof NovoConditionFieldDef, typeof NovoDefaultStringConditionDef, typeof NovoDefaultNumberConditionDef, typeof NovoDefaultIdConditionDef, typeof NovoDefaultPickerConditionDef, typeof NovoConditionTemplatesComponent], [typeof i14.CommonModule, typeof i15.FormsModule, typeof i15.ReactiveFormsModule, typeof i16.DragDropModule, typeof i17.CdkTableModule, typeof i18.GooglePlacesModule, typeof i19.NovoAutoCompleteModule, typeof i20.NovoButtonModule, typeof i21.NovoCommonModule, typeof i22.NovoFormModule, typeof i23.NovoSelectModule, typeof i24.NovoNonIdealStateModule, typeof i25.NovoFieldModule, typeof i21.NovoOptionModule, typeof i26.NovoFlexModule, typeof i27.NovoTabModule, typeof i28.NovoTabbedGroupPickerModule, typeof i29.NovoLoadingModule, typeof i30.NovoCardModule, typeof i31.NovoDatePickerModule, typeof i32.NovoDateTimePickerModule, typeof i33.NovoIconModule, typeof i21.NovoOverlayModule, typeof i34.NovoRadioModule, typeof i35.NovoSearchBoxModule, typeof i36.NovoSwitchModule, typeof i37.NovoChipsModule, typeof i38.NovoSelectSearchModule, typeof i39.NovoDropdownModule, typeof i22.NovoFormExtrasModule, typeof i40.NovoTooltipModule], [typeof CriteriaBuilderComponent, typeof ConditionBuilderComponent, typeof NovoDefaultAddressConditionDef, typeof NovoDefaultBooleanConditionDef, typeof NovoDefaultDateConditionDef, typeof NovoDefaultDateTimeConditionDef, typeof NovoConditionOperatorsDef, typeof NovoConditionInputDef, typeof NovoConditionFieldDef, typeof NovoDefaultStringConditionDef, typeof NovoDefaultNumberConditionDef, typeof NovoDefaultIdConditionDef, typeof NovoDefaultPickerConditionDef, typeof NovoConditionTemplatesComponent]>;
+    static ɵmod: i0.ɵɵNgModuleDeclaration<NovoQueryBuilderModule, [typeof AddressLabelPipe, typeof CriteriaBuilderComponent, typeof ConditionBuilderComponent, typeof ConditionInputOutlet, typeof ConditionOperatorOutlet, typeof ConditionGroupComponent, typeof NovoDefaultAddressConditionDef, typeof NovoDefaultBooleanConditionDef, typeof NovoDefaultDateConditionDef, typeof NovoDefaultDateTimeConditionDef, typeof NovoConditionOperatorsDef, typeof NovoConditionInputDef, typeof NovoConditionFieldDef, typeof NovoDefaultStringConditionDef, typeof NovoDefaultNumberConditionDef, typeof NovoDefaultIdConditionDef, typeof NovoDefaultPickerConditionDef, typeof NovoConditionTemplatesComponent], [typeof i15.CommonModule, typeof i16.FormsModule, typeof i16.ReactiveFormsModule, typeof i17.DragDropModule, typeof i18.CdkTableModule, typeof i19.GooglePlacesModule, typeof i20.NovoAutoCompleteModule, typeof i21.NovoButtonModule, typeof i22.NovoCommonModule, typeof i23.NovoFormModule, typeof i24.NovoSelectModule, typeof i25.NovoNonIdealStateModule, typeof i26.NovoFieldModule, typeof i22.NovoOptionModule, typeof i27.NovoFlexModule, typeof i28.NovoTabModule, typeof i29.NovoTabbedGroupPickerModule, typeof i30.NovoLoadingModule, typeof i31.NovoCardModule, typeof i32.NovoDatePickerModule, typeof i33.NovoDateTimePickerModule, typeof i34.NovoIconModule, typeof i22.NovoOverlayModule, typeof i35.NovoRadioModule, typeof i36.NovoSearchBoxModule, typeof i37.NovoSwitchModule, typeof i38.NovoChipsModule, typeof i39.NovoSelectSearchModule, typeof i40.NovoDropdownModule, typeof i23.NovoFormExtrasModule, typeof i41.NovoTooltipModule], [typeof CriteriaBuilderComponent, typeof ConditionBuilderComponent, typeof NovoDefaultAddressConditionDef, typeof NovoDefaultBooleanConditionDef, typeof NovoDefaultDateConditionDef, typeof NovoDefaultDateTimeConditionDef, typeof NovoConditionOperatorsDef, typeof NovoConditionInputDef, typeof NovoConditionFieldDef, typeof NovoDefaultStringConditionDef, typeof NovoDefaultNumberConditionDef, typeof NovoDefaultIdConditionDef, typeof NovoDefaultPickerConditionDef, typeof NovoConditionTemplatesComponent]>;
     static ɵinj: i0.ɵɵInjectorDeclaration<NovoQueryBuilderModule>;
 }
 
@@ -640,4 +672,4 @@ declare const NOVO_CRITERIA_BUILDER: InjectionToken<any>;
 declare const NOVO_CONDITION_BUILDER: InjectionToken<any>;
 
 export { AbstractConditionFieldDef, BaseConditionFieldDef, ConditionBuilderComponent, ConditionInputOutlet, ConditionOperatorOutlet, Conjunction, CriteriaBuilderComponent, NOVO_CONDITION_BUILDER, NOVO_CRITERIA_BUILDER, NOVO_QUERY_BUILDER, NovoConditionFieldDef, NovoConditionInputDef, NovoConditionOperatorsDef, NovoConditionTemplatesComponent, NovoDefaultAddressConditionDef, NovoDefaultBooleanConditionDef, NovoDefaultDateConditionDef, NovoDefaultDateTimeConditionDef, NovoDefaultIdConditionDef, NovoDefaultNumberConditionDef, NovoDefaultPickerConditionDef, NovoDefaultStringConditionDef, NovoQueryBuilderModule, Operator, RadiusUnits };
-export type { AddressComponent, AddressCriteriaConfig, AddressData, AddressGeometry, AddressGeometryLocation, AddressGeometryViewport, AddressRadius, AddressRadiusUnitsName, BaseFieldDef, Condition, ConditionDef, ConditionGroup, ConditionOrConditionGroup, ConditionType, Criteria, DateCriteriaConfig, FieldConfig, NestedConditionGroup, NestedCriteria, OperatorName, QueryBuilderConfig, QueryFilterOutlet };
+export type { AddressComponent, AddressCriteriaConfig, AddressData, AddressDetailViewport, AddressGeoPoint, AddressGeometry, AddressGeometryLocation, AddressGeometryViewport, AddressRadius, AddressRadiusUnitsName, BaseFieldDef, Condition, ConditionDef, ConditionGroup, ConditionOrConditionGroup, ConditionType, Criteria, DateCriteriaConfig, FieldConfig, NestedConditionGroup, NestedCriteria, OperatorName, QueryBuilderConfig, QueryFilterOutlet };

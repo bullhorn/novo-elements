@@ -4,7 +4,7 @@ samp {
   background: var(--background-main);
   color: var(--code);
   border: 1px solid var(--border);
-  border-radius: 4px;
+  border-radius: var(--border-radius-default, 4px);
   padding: 0 0.5ch;
   margin: 0 0.5ch;
   line-height: inherit;
@@ -34,7 +34,7 @@ kbd {
   font-family: var(--font-family-mono);
   background: var(--background-main);
   border: 1px solid var(--border);
-  border-radius: 2px;
+  border-radius: var(--border-radius-xsm, 2px);
   color: var(--text-main);
   padding: 2px 4px 2px 4px;
 }

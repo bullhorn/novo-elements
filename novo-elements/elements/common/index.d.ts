@@ -230,6 +230,13 @@ declare class BorderDirective {
     static ɵdir: i0.ɵɵDirectiveDeclaration<BorderDirective, "[border], [bb], [borderBottom], [bt], [borderTop], [bl], [borderLeft], [br], [borderRight], [bx], [borderX], [by], [borderY]", never, { "borderStyle": { "alias": "borderStyle"; "required": false; }; "borderColor": { "alias": "borderColor"; "required": false; }; "borderWidth": { "alias": "borderWidth"; "required": false; }; "border": { "alias": "border"; "required": false; }; "borderLeft": { "alias": "borderLeft"; "required": false; }; "bl": { "alias": "bl"; "required": false; }; "borderRight": { "alias": "borderRight"; "required": false; }; "br": { "alias": "br"; "required": false; }; "borderTop": { "alias": "borderTop"; "required": false; }; "bt": { "alias": "bt"; "required": false; }; "borderBottom": { "alias": "borderBottom"; "required": false; }; "bb": { "alias": "bb"; "required": false; }; "borderX": { "alias": "borderX"; "required": false; }; "bx": { "alias": "bx"; "required": false; }; "borderY": { "alias": "borderY"; "required": false; }; "by": { "alias": "by"; "required": false; }; }, {}, never, never, false, never>;
 }
 
+/**
+ * Novo theme generations named `bh<year>-<mode>`
+ */
+type ThemeName = 'bh2022-light' | 'bh2022-dark' | 'bh2026-light' | 'bh2026-dark';
+declare const DEFAULT_THEME: ThemeName;
+/** Map any stored/legacy themeName onto a canonical current name. */
+declare function normalizeThemeName(stored?: string): ThemeName;
 declare class NovoThemeOptions {
     themeName: string;
 }
@@ -241,7 +248,7 @@ declare class NovoTheme {
     private _defaultTheme;
     private _currentTheme;
     onThemeChange: EventEmitter<ThemeChangeEvent>;
-    /** Name of the theme being used. defaults to `modern-light` */
+    /** Name of the theme being used. defaults to `bh2022-light`. */
     get themeName(): string;
     set themeName(value: string);
     use(options: NovoThemeOptions): Observable<any>;
@@ -249,6 +256,7 @@ declare class NovoTheme {
      * Changes the current theme
      */
     private changeTheme;
+    private applyThemeToDom;
     static ɵfac: i0.ɵɵFactoryDeclaration<NovoTheme, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<NovoTheme>;
 }
@@ -741,5 +749,5 @@ type HasTabIndexCtor = Constructor<HasTabIndex>;
 /** Mixin to augment a directive with a `tabIndex` property. */
 declare function mixinTabIndex<T extends AbstractConstructor<CanDisable>>(base: T, defaultTabIndex?: number): HasTabIndexCtor & T;
 
-export { AccentColorDirective, BackgroundColorDirective, BorderDirective, ErrorStateMatcher, FillColorDirective, FlexDirective, GapDirective, MarginDirective, NOVO_OPTGROUP, NOVO_OPTION_PARENT_COMPONENT, NOVO_OVERLAY_CONTAINER, NovoBaseTextElement, NovoCaption, NovoCommonModule, NovoLabel, NovoLink, NovoOptgroup, NovoOptgroupBase, NovoOptgroupMixinBase, NovoOption, NovoOptionBase, NovoOptionModule, NovoOptionSelectionChange, NovoOverlayModule, NovoOverlayTemplateComponent, NovoPseudoCheckbox, NovoPseudoCheckboxModule, NovoTemplate, NovoText, NovoTheme, NovoThemeOptions, NovoTitle, PaddingDirective, ShowOnDirtyErrorStateMatcher, SwitchCasesDirective, TextColorDirective, ThemeColorDirective, VisibleDirective, _countGroupLabelsBeforeOption, _getOptionScrollPosition, getSpacingToken, mixinColor, mixinDisabled, mixinErrorState, mixinOverlay, mixinRequired, mixinSize, mixinTabIndex };
-export type { AbstractConstructor, CanColor, CanColorCtor, CanDisable, CanDisableCtor, CanRequire, CanRequireCtor, CanSize, CanSizeCtor, CanUpdateErrorState, CanUpdateErrorStateCtor, Constructor, ElementSize, HasElementRef, HasErrorState, HasOverlay, HasOverlayCtor, HasTabIndex, HasTabIndexCtor, NovoOptionParentComponent, NovoPseudoCheckboxShape, NovoPseudoCheckboxState, ThemeChangeEvent, ThemePalette, TypographyLength, TypographySize, TypographyWeight };
+export { AccentColorDirective, BackgroundColorDirective, BorderDirective, DEFAULT_THEME, ErrorStateMatcher, FillColorDirective, FlexDirective, GapDirective, MarginDirective, NOVO_OPTGROUP, NOVO_OPTION_PARENT_COMPONENT, NOVO_OVERLAY_CONTAINER, NovoBaseTextElement, NovoCaption, NovoCommonModule, NovoLabel, NovoLink, NovoOptgroup, NovoOptgroupBase, NovoOptgroupMixinBase, NovoOption, NovoOptionBase, NovoOptionModule, NovoOptionSelectionChange, NovoOverlayModule, NovoOverlayTemplateComponent, NovoPseudoCheckbox, NovoPseudoCheckboxModule, NovoTemplate, NovoText, NovoTheme, NovoThemeOptions, NovoTitle, PaddingDirective, ShowOnDirtyErrorStateMatcher, SwitchCasesDirective, TextColorDirective, ThemeColorDirective, VisibleDirective, _countGroupLabelsBeforeOption, _getOptionScrollPosition, getSpacingToken, mixinColor, mixinDisabled, mixinErrorState, mixinOverlay, mixinRequired, mixinSize, mixinTabIndex, normalizeThemeName };
+export type { AbstractConstructor, CanColor, CanColorCtor, CanDisable, CanDisableCtor, CanRequire, CanRequireCtor, CanSize, CanSizeCtor, CanUpdateErrorState, CanUpdateErrorStateCtor, Constructor, ElementSize, HasElementRef, HasErrorState, HasOverlay, HasOverlayCtor, HasTabIndex, HasTabIndexCtor, NovoOptionParentComponent, NovoPseudoCheckboxShape, NovoPseudoCheckboxState, ThemeChangeEvent, ThemeName, ThemePalette, TypographyLength, TypographySize, TypographyWeight };

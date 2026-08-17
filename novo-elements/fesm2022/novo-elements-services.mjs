@@ -542,6 +542,7 @@ class NovoLabelService {
         this.beginsWith = 'Begins With';
         this.true = 'True';
         this.false = 'False';
+        this.like = 'Matches';
         this.before = 'Before';
         this.after = 'After';
         this.within = 'Within';

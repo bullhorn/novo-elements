@@ -8,3 +8,8 @@
     }
   }
 }
+
+// bh2026: subtle breadcrumb text.
+:host-context([data-theme='bh2026']) {
+  color: var(--color-content-subtle, #8ca1b9);
+}

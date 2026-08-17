@@ -10,7 +10,7 @@
   padding: 8px;
   @include entity-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
     i.#{$name} {
-      color: $color;
+      color: getCssVarname($name);
     }
   }
   &.horizontal {
@@ -37,19 +37,20 @@
       margin-top: 7px;
       &.clickable {
         cursor: pointer;
-        color: $ocean;
+        // possible we term this color separately from positive?
+        color: var(--color-positive);
       }
     }
     &.clickable {
       cursor: pointer;
-      color: $ocean;
+      color: var(--color-positive);
     }
   }
   ::ng-deep novo-entity-list {
     display: block;
     @include entity-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
       i.#{$name} {
-        color: $color;
+        color: getCssVarname($name);
       }
     }
     .entity {

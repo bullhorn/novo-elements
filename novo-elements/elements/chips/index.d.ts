@@ -515,6 +515,8 @@ declare class NovoChipInput implements NovoChipTextControl, OnChanges, OnDestroy
     chipEnd: EventEmitter<NovoChipInputEvent>;
     /** The input's placeholder text. */
     placeholder: string;
+    /** Setting to false prevents input from being cleared when focus is lost. */
+    clearOnBlur: boolean;
     /** Unique id for the input. */
     id: string;
     /** Whether the input is disabled. */
@@ -548,7 +550,7 @@ declare class NovoChipInput implements NovoChipTextControl, OnChanges, OnDestroy
     static readonly ngAcceptInputType_addOnBlur: BooleanInput;
     static readonly ngAcceptInputType_disabled: BooleanInput;
     static ɵfac: i0.ɵɵFactoryDeclaration<NovoChipInput, [null, null, { optional: true; }, null, { optional: true; self: true; }]>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<NovoChipInput, "input[novoChipInput]", ["novoChipInput", "novoChipInputFor"], { "addOnBlur": { "alias": "novoChipInputAddOnBlur"; "required": false; }; "separatorKeyCodes": { "alias": "novoChipInputSeparatorKeyCodes"; "required": false; }; "placeholder": { "alias": "placeholder"; "required": false; }; "id": { "alias": "id"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; }, { "chipEnd": "novoChipInputTokenEnd"; }, never, never, false, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NovoChipInput, "input[novoChipInput]", ["novoChipInput", "novoChipInputFor"], { "addOnBlur": { "alias": "novoChipInputAddOnBlur"; "required": false; }; "separatorKeyCodes": { "alias": "novoChipInputSeparatorKeyCodes"; "required": false; }; "placeholder": { "alias": "placeholder"; "required": false; }; "clearOnBlur": { "alias": "clearOnBlur"; "required": false; }; "id": { "alias": "id"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; }, { "chipEnd": "novoChipInputTokenEnd"; }, never, never, false, never>;
 }
 
 declare class NovoChipsElement implements OnInit, ControlValueAccessor {
@@ -594,6 +596,9 @@ declare class NovoChipsElement implements OnInit, ControlValueAccessor {
     get value(): any;
     set value(selected: any);
     clearValue(): void;
+    getDynamicClasses(item: any): string | string[] | {
+        [className: string]: boolean;
+    } | null;
     setItems(): void;
     getLabelFromOptions(value: any): {
         value: any;

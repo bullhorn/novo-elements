@@ -26,6 +26,8 @@ catch (err) {
 class NovoCKEditorElement {
     constructor(zone) {
         this.zone = zone;
+        this.customConfig = null;
+        this.customFonts = '';
         this.startupFocus = false;
         this.fileBrowserImageUploadUrl = '';
         this.disabled = false;
@@ -133,16 +135,17 @@ class NovoCKEditorElement {
             disableNativeSpellChecker: false,
             removePlugins: 'liststyle,tabletools,contextmenu,tableselection', // allows browser based spell checking
             extraAllowedContent: '*(*){*};table tbody tr td th[*];', // allows class names (*) and inline styles {*} for all and attributes [*] on tables
-            font_names: 'Arial/Arial, Helvetica, sans-serif;' +
-                'Calibri/Calibri, Verdana, Geneva, sans-serif;' +
-                'Comic Sans MS/Comic Sans MS, cursive;' +
-                'Courier New/Courier New, Courier, monospace;' +
-                'Georgia/Georgia, serif;' +
-                'Lucida Sans Unicode/Lucida Sans Unicode, Lucida Grande, sans-serif;' +
-                'Tahoma/Tahoma, Geneva, sans-serif;' +
-                'Times New Roman/Times New Roman, Times, serif;' +
-                'Trebuchet MS/Trebuchet MS, Helvetica, sans-serif;' +
-                'Verdana/Verdana, Geneva, sans-serif',
+            font_names: this.customFonts ? this.customFonts :
+                'Arial/Arial, Helvetica, sans-serif;' +
+                    'Calibri/Calibri, Verdana, Geneva, sans-serif;' +
+                    'Comic Sans MS/Comic Sans MS, cursive;' +
+                    'Courier New/Courier New, Courier, monospace;' +
+                    'Georgia/Georgia, serif;' +
+                    'Lucida Sans Unicode/Lucida Sans Unicode, Lucida Grande, sans-serif;' +
+                    'Tahoma/Tahoma, Geneva, sans-serif;' +
+                    'Times New Roman/Times New Roman, Times, serif;' +
+                    'Trebuchet MS/Trebuchet MS, Helvetica, sans-serif;' +
+                    'Verdana/Verdana, Geneva, sans-serif',
         };
         const minimalConfig = {
             toolbar: [
@@ -194,7 +197,10 @@ class NovoCKEditorElement {
             ],
             filebrowserImageUploadUrl: this.fileBrowserImageUploadUrl,
         };
-        return Object.assign(baseConfig, this.minimal ? minimalConfig : extendedConfig);
+        const config = this.customConfig
+            ? this.customConfig
+            : this.minimal ? minimalConfig : extendedConfig;
+        return Object.assign(baseConfig, config);
     }
     writeValue(value) {
         this._value = value;
@@ -221,7 +227,7 @@ class NovoCKEditorElement {
         this.instance.insertText(trimmedText);
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.19", ngImport: i0, type: NovoCKEditorElement, deps: [{ token: i0.NgZone }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.19", type: NovoCKEditorElement, isStandalone: false, selector: "novo-editor", inputs: { config: "config", debounce: "debounce", name: "name", minimal: "minimal", startupFocus: "startupFocus", fileBrowserImageUploadUrl: "fileBrowserImageUploadUrl", disabled: "disabled", value: "value" }, outputs: { change: "change", ready: "ready", blur: "blur", focus: "focus", paste: "paste", loaded: "loaded" }, providers: [CKEDITOR_CONTROL_VALUE_ACCESSOR], viewQueries: [{ propertyName: "host", first: true, predicate: ["host"], descendants: true }], ngImport: i0, template: '<textarea [name]="name" [id]="name" #host></textarea>', isInline: true, styles: [":host ::ng-deep .cke{font:inherit!important;box-shadow:none;border-color:var(--background-muted)}:host ::ng-deep .cke .cke_top,:host ::ng-deep .cke .cke_bottom{background:var(--background-muted) none;box-shadow:none}:host ::ng-deep .cke .cke_bottom{border-top:none}.cke_dialog_background_cover{background-color:#000!important}.cke_dialog .cke_dialog_title{text-shadow:none;background:var(--background-muted) none;box-shadow:none;border-bottom:none}.cke_dialog .cke_dialog_footer{text-shadow:none;background:var(--background-muted) none;box-shadow:none;border-top:none}:host-context(.theme-dark) ::ng-deep .cke_button{filter:invert(1)}:host-context(.theme-dark) ::ng-deep .cke_combo a.cke_combo_button:hover,:host-context(.theme-dark) ::ng-deep .cke_combo a.cke_combo_button:active,:host-context(.theme-dark) ::ng-deep .cke_combo a.cke_combo_button:focus,:host-context(.theme-dark) ::ng-deep .cke_combo a.cke_combo_button.cke_combo_on{background:var(--background-main);border:1px solid var(--border)}:host-context(.theme-dark) ::ng-deep .cke_combo a.cke_combo_button .cke_combo_text{color:#fff}:host-context(.theme-dark) ::ng-deep .cke_combo a.cke_combo_button .cke_combo_arrow{border-top-color:#fff}\n"] }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.19", type: NovoCKEditorElement, isStandalone: false, selector: "novo-editor", inputs: { config: "config", debounce: "debounce", name: "name", minimal: "minimal", customConfig: "customConfig", customFonts: "customFonts", startupFocus: "startupFocus", fileBrowserImageUploadUrl: "fileBrowserImageUploadUrl", disabled: "disabled", value: "value" }, outputs: { change: "change", ready: "ready", blur: "blur", focus: "focus", paste: "paste", loaded: "loaded" }, providers: [CKEDITOR_CONTROL_VALUE_ACCESSOR], viewQueries: [{ propertyName: "host", first: true, predicate: ["host"], descendants: true }], ngImport: i0, template: '<textarea [name]="name" [id]="name" #host></textarea>', isInline: true, styles: [":host ::ng-deep .cke{font:inherit!important;box-shadow:none;border-color:var(--background-muted)}:host ::ng-deep .cke .cke_top,:host ::ng-deep .cke .cke_bottom{background:var(--background-muted) none;box-shadow:none}:host ::ng-deep .cke .cke_bottom{border-top:none}.cke_dialog_background_cover{background-color:#000!important}.cke_dialog .cke_dialog_title{text-shadow:none;background:var(--background-muted) none;box-shadow:none;border-bottom:none}.cke_dialog .cke_dialog_footer{text-shadow:none;background:var(--background-muted) none;box-shadow:none;border-top:none}:host-context(.theme-dark) ::ng-deep .cke_button{filter:invert(1)}:host-context(.theme-dark) ::ng-deep .cke_combo a.cke_combo_button:hover,:host-context(.theme-dark) ::ng-deep .cke_combo a.cke_combo_button:active,:host-context(.theme-dark) ::ng-deep .cke_combo a.cke_combo_button:focus,:host-context(.theme-dark) ::ng-deep .cke_combo a.cke_combo_button.cke_combo_on{background:var(--background-main);border:1px solid var(--border)}:host-context(.theme-dark) ::ng-deep .cke_combo a.cke_combo_button .cke_combo_text{color:#fff}:host-context(.theme-dark) ::ng-deep .cke_combo a.cke_combo_button .cke_combo_arrow{border-top-color:#fff}\n"] }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.19", ngImport: i0, type: NovoCKEditorElement, decorators: [{
             type: Component,
@@ -233,6 +239,10 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.19", ngImpo
             }], name: [{
                 type: Input
             }], minimal: [{
+                type: Input
+            }], customConfig: [{
+                type: Input
+            }], customFonts: [{
                 type: Input
             }], startupFocus: [{
                 type: Input

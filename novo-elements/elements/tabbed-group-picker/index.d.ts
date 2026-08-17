@@ -1,18 +1,20 @@
-import * as i0 from '@angular/core';
+import * as _angular_core from '@angular/core';
 import { OnDestroy, OnInit, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { NovoLabelService } from 'novo-elements/services';
-import * as i9 from 'novo-elements/elements/dropdown';
+import * as i12 from 'novo-elements/elements/dropdown';
 import { NovoDropdownElement } from 'novo-elements/elements/dropdown';
 import * as i2 from '@angular/common';
 import * as i3 from '@angular/forms';
 import * as i4 from '@angular/cdk/scrolling';
-import * as i5 from 'novo-elements/elements/tabs';
-import * as i6 from 'novo-elements/elements/list';
-import * as i7 from 'novo-elements/elements/form';
-import * as i8 from 'novo-elements/elements/button';
-import * as i10 from 'novo-elements/elements/common';
-import * as i11 from 'novo-elements/elements/checkbox';
+import * as i5 from 'novo-elements/elements/chips';
+import * as i6 from 'novo-elements/elements/common';
+import * as i7 from 'novo-elements/elements/icon';
+import * as i8 from 'novo-elements/elements/tabs';
+import * as i9 from 'novo-elements/elements/list';
+import * as i10 from 'novo-elements/elements/form';
+import * as i11 from 'novo-elements/elements/button';
+import * as i13 from 'novo-elements/elements/checkbox';
 
 type TabbedGroupPickerTab = {
     typeName: string;
@@ -20,7 +22,7 @@ type TabbedGroupPickerTab = {
     valueField: string;
     labelField: string;
     scrollOffset?: number;
-    icon?: string;
+    icon?: any;
 } & (ParentTab | ChildTab);
 type ParentTab = {
     childTypeName: string;
@@ -76,11 +78,15 @@ declare class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
     tabs: TabbedGroupPickerTab[];
     quickSelectConfig: QuickSelectConfig;
     showFooter: boolean;
+    useChips: _angular_core.InputSignal<boolean>;
+    maxChips: _angular_core.InputSignal<number>;
+    chipSize: _angular_core.InputSignal<string>;
     selectionEnabled: boolean;
     activation: EventEmitter<any>;
     selectionChange: EventEmitter<TabbedGroupPickerTab[]>;
     applyChange: EventEmitter<any>;
     cancelChange: EventEmitter<any>;
+    tabSelect: EventEmitter<any>;
     displayTabs: TabbedGroupPickerTab[];
     displayTabIndex: number;
     filterText: BehaviorSubject<string>;
@@ -90,6 +96,11 @@ declare class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
     appliedState: TabbedGroupPickerTab[];
     scrollViewportHeight: number;
     virtualScrollItemSize: number;
+    selectedChips: _angular_core.WritableSignal<any[]>;
+    showAllChips: _angular_core.WritableSignal<boolean>;
+    displayedChips: _angular_core.Signal<any[]>;
+    hiddenChips: _angular_core.Signal<any[]>;
+    chipsInputPlaceholder: _angular_core.Signal<string>;
     constructor(labelService: NovoLabelService, ref: ChangeDetectorRef);
     get displayTab(): TabbedGroupPickerTab;
     set displayTab(tab: TabbedGroupPickerTab);
@@ -97,6 +108,7 @@ declare class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
     get maxBufferPx(): number;
     ngOnInit(): void;
     ngOnDestroy(): void;
+    showAllChipsToggle(event: any): void;
     loadValues(): void;
     changeTab(tab: TabbedGroupPickerTab): void;
     getPixelHeight(element: HTMLElement): number;
@@ -114,6 +126,7 @@ declare class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
     onDropdownToggle(event: any): void;
     activateItem(item: any, tab?: TabbedGroupPickerTab): void;
     onItemToggled(item: Option): void;
+    toggleChip(item: Option): void;
     initializeDescendantSelection(): void;
     updateDescendants(parentIsSelected: boolean, children: Option[]): void;
     updateClearAll(itemWasJustSelected?: boolean): void;
@@ -133,14 +146,14 @@ declare class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
         };
     }): void;
     filter: (searchTerm: string) => void;
-    static ɵfac: i0.ɵɵFactoryDeclaration<NovoTabbedGroupPickerElement, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<NovoTabbedGroupPickerElement, "novo-tabbed-group-picker", never, { "buttonConfig": { "alias": "buttonConfig"; "required": false; }; "tabs": { "alias": "tabs"; "required": false; }; "quickSelectConfig": { "alias": "quickSelectConfig"; "required": false; }; "showFooter": { "alias": "showFooter"; "required": false; }; "selectionEnabled": { "alias": "selectionEnabled"; "required": false; }; }, { "activation": "activation"; "selectionChange": "selectionChange"; "applyChange": "applyChange"; "cancelChange": "cancelChange"; }, never, ["*"], false, never>;
+    static ɵfac: _angular_core.ɵɵFactoryDeclaration<NovoTabbedGroupPickerElement, never>;
+    static ɵcmp: _angular_core.ɵɵComponentDeclaration<NovoTabbedGroupPickerElement, "novo-tabbed-group-picker", never, { "buttonConfig": { "alias": "buttonConfig"; "required": false; }; "tabs": { "alias": "tabs"; "required": false; }; "quickSelectConfig": { "alias": "quickSelectConfig"; "required": false; }; "showFooter": { "alias": "showFooter"; "required": false; }; "useChips": { "alias": "useChips"; "required": false; "isSignal": true; }; "maxChips": { "alias": "maxChips"; "required": false; "isSignal": true; }; "chipSize": { "alias": "chipSize"; "required": false; "isSignal": true; }; "selectionEnabled": { "alias": "selectionEnabled"; "required": false; }; }, { "activation": "activation"; "selectionChange": "selectionChange"; "applyChange": "applyChange"; "cancelChange": "cancelChange"; "tabSelect": "tabSelect"; }, never, ["*"], false, never>;
 }
 
 declare class NovoTabbedGroupPickerModule {
-    static ɵfac: i0.ɵɵFactoryDeclaration<NovoTabbedGroupPickerModule, never>;
-    static ɵmod: i0.ɵɵNgModuleDeclaration<NovoTabbedGroupPickerModule, [typeof NovoTabbedGroupPickerElement], [typeof i2.CommonModule, typeof i3.FormsModule, typeof i4.ScrollingModule, typeof i5.NovoTabModule, typeof i6.NovoListModule, typeof i7.NovoFormExtrasModule, typeof i8.NovoButtonModule, typeof i9.NovoDropdownModule, typeof i10.NovoOptionModule, typeof i11.NovoCheckboxModule], [typeof NovoTabbedGroupPickerElement]>;
-    static ɵinj: i0.ɵɵInjectorDeclaration<NovoTabbedGroupPickerModule>;
+    static ɵfac: _angular_core.ɵɵFactoryDeclaration<NovoTabbedGroupPickerModule, never>;
+    static ɵmod: _angular_core.ɵɵNgModuleDeclaration<NovoTabbedGroupPickerModule, [typeof NovoTabbedGroupPickerElement], [typeof i2.CommonModule, typeof i3.FormsModule, typeof i4.ScrollingModule, typeof i5.NovoChipsModule, typeof i6.NovoCommonModule, typeof i7.NovoIconModule, typeof i8.NovoTabModule, typeof i9.NovoListModule, typeof i10.NovoFormExtrasModule, typeof i11.NovoButtonModule, typeof i12.NovoDropdownModule, typeof i6.NovoOptionModule, typeof i13.NovoCheckboxModule], [typeof NovoTabbedGroupPickerElement]>;
+    static ɵinj: _angular_core.ɵɵInjectorDeclaration<NovoTabbedGroupPickerModule>;
 }
 
 export { NovoTabbedGroupPickerElement, NovoTabbedGroupPickerModule };

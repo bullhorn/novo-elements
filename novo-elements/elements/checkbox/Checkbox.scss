@@ -21,7 +21,7 @@
           i {
             &.bhi-checkbox-empty,
             &.bhi-radio-empty {
-              color: $color-positive;
+              color: var(--color-positive);
             }
           }
         }
@@ -51,7 +51,7 @@
         i {
           &.bhi-checkbox-empty,
           &.bhi-checkbox-filled {
-            color: $color-positive;
+            color: var(--color-positive);
           }
         }
       }
@@ -82,7 +82,7 @@
         }
         &.bhi-checkbox-filled,
         &.bhi-radio-filled {
-          color: $color-positive;
+          color: var(--color-positive);
         }
       }
       span {

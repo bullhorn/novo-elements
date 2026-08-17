@@ -4,6 +4,11 @@
   --background-bright: #{$color-moonlight}; //#1a242f
   --background-dark: #{$color-onyx}; //e2e2e2
   --background-muted: #{$color-neutral};
+  --theme-background-body: #{$color-midnight}; //#202b38;
+  --theme-background-main: #{$color-darkness}; //#161f27;
+  --theme-background-bright: #{$color-moonlight}; //#1a242f
+  --theme-background-dark: #{$color-onyx}; //e2e2e2
+  --theme-background-muted: #{$color-neutral};
   --selection: #{$color-ocean}; // #1c76c5;
   --text-selection: #{$color-white};
   --text-main: #{$color-light};
@@ -25,7 +30,7 @@
   --highlight: #efdb43;
 }
 
-.theme-dark {
+:root.theme-dark {
   @include dark-variables();
 
   ::-webkit-calendar-picker-indicator {

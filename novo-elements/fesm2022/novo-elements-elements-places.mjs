@@ -1,11 +1,11 @@
-import * as i3 from '@angular/common';
-import { isPlatformBrowser, CommonModule } from '@angular/common';
 import * as i0 from '@angular/core';
-import { PLATFORM_ID, Inject, Injectable, forwardRef, EventEmitter, Output, Input, Component, NgModule } from '@angular/core';
+import { PLATFORM_ID, Inject, Injectable, InjectionToken, forwardRef, EventEmitter, Output, Input, Optional, Component, NgModule } from '@angular/core';
 import { NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
 import { BasePickerResults } from 'novo-elements/elements/picker';
 import * as i2 from 'novo-elements/services';
-import { Observable } from 'rxjs';
+import { NEVER } from 'rxjs';
+import * as i3 from '@angular/common';
+import { isPlatformBrowser, CommonModule } from '@angular/common';
 import * as i1 from '@angular/common/http';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import * as i4 from 'novo-elements/elements/list';
@@ -18,9 +18,58 @@ class GooglePlacesService {
         this._global = _global;
         this._localStorageService = _localStorageService;
     }
-    getPredictions(url, query) {
+    // Ensure the Google Maps JS SDK is available before any window.google usage.
+    // No-ops when the SDK is already present (host script tag) or no key is configured (search-service path).
+    loadGoogleMaps(settings) {
+        const _window = this._global.nativeGlobal;
+        if (_window?.google?.maps?.places) {
+            return Promise.resolve();
+        }
+        if (!isPlatformBrowser(this.platformId) || !settings?.googleApiKey) {
+            return Promise.resolve();
+        }
+        if (!this.mapsLoad) {
+            this.mapsLoadKey = settings.googleApiKey;
+            this.mapsLoad = this.injectGoogleMapsScript(settings);
+        }
+        else if (this.mapsLoadKey && this.mapsLoadKey !== settings.googleApiKey) {
+            // The Maps JS API can only be loaded once per page; a second, different key is ignored.
+            console.warn('GooglePlacesService: the Google Maps SDK is already loading with a different key; ignoring the new googleApiKey.');
+        }
+        return this.mapsLoad;
+    }
+    injectGoogleMapsScript(settings) {
+        return new Promise((resolve, reject) => {
+            const _window = this._global.nativeGlobal;
+            // Build params one at a time so undefined override values are dropped instead of serialized as "undefined".
+            // The component uses the legacy Places API (AutocompleteService, PlacesService) which requires the
+            // synchronous library load — google.maps.places is fully populated when onload fires.
+            const params = new URLSearchParams();
+            params.set('key', settings.googleApiKey);
+            params.set('libraries', 'places');
+            for (const [key, value] of Object.entries(settings.googleMapsLoaderParams ?? {})) {
+                if (value !== undefined && value !== null) {
+                    params.set(key, value);
+                }
+            }
+            const script = document.createElement('script');
+            script.src = `https://maps.googleapis.com/maps/api/js?${params.toString()}`;
+            script.async = true;
+            script.onload = () => resolve();
+            script.onerror = () => {
+                // Clear both cached fields so a later attempt can retry with any key.
+                this.mapsLoad = undefined;
+                this.mapsLoadKey = undefined;
+                reject(new Error('Failed to load the Google Maps JavaScript API.'));
+            };
+            document.head.appendChild(script);
+        });
+    }
+    getPredictions(url, query, sessionToken) {
         return new Promise((resolve) => {
-            this._http.get(url + '?query=' + query).subscribe((data) => {
+            const separator = url.includes('?') ? '&' : '?';
+            const sessionParam = sessionToken ? '&sessionToken=' + sessionToken : '';
+            this._http.get(url + separator + 'query=' + query + sessionParam).subscribe((data) => {
                 if (data) {
                     resolve(data);
                 }
@@ -30,9 +79,11 @@ class GooglePlacesService {
             });
         });
     }
-    getLatLngDetail(url, lat, lng) {
+    getPlaceDetails(url, placeId, sessionToken) {
         return new Promise((resolve) => {
-            this._http.get(url + '?lat=' + lat + '&lng=' + lng).subscribe((data) => {
+            const separator = url.includes('?') ? '&' : '?';
+            const sessionParam = sessionToken ? '&sessionToken=' + sessionToken : '';
+            this._http.get(url + separator + 'query=' + placeId + sessionParam).subscribe((data) => {
                 if (data) {
                     resolve(data);
                 }
@@ -40,63 +91,6 @@ class GooglePlacesService {
                     resolve(false);
                 }
             });
-        });
-    }
-    getPlaceDetails(url, placeId) {
-        return new Promise((resolve) => {
-            this._http.get(url + '?query=' + placeId).subscribe((data) => {
-                if (data) {
-                    resolve(data);
-                }
-                else {
-                    resolve(false);
-                }
-            });
-        });
-    }
-    getGeoCurrentLocation() {
-        return new Promise((resolve) => {
-            if (isPlatformBrowser(this.platformId)) {
-                const _window = this._global.nativeGlobal;
-                if (_window.navigator.geolocation) {
-                    _window.navigator.geolocation.getCurrentPosition((pos) => {
-                        const latlng = { lat: parseFloat(pos.coords.latitude + ''), lng: parseFloat(pos.coords.longitude + '') };
-                        resolve(latlng);
-                    });
-                }
-                else {
-                    resolve(false);
-                }
-            }
-            else {
-                resolve(false);
-            }
-        });
-    }
-    getGeoLatLngDetail(latlng) {
-        return new Promise((resolve) => {
-            if (isPlatformBrowser(this.platformId)) {
-                const _window = this._global.nativeGlobal;
-                const geocoder = new _window.google.maps.Geocoder();
-                geocoder.geocode({ location: latlng }, (results, status) => {
-                    if (status === 'OK') {
-                        this.getGeoPlaceDetail(results[0].place_id).then((result) => {
-                            if (result) {
-                                resolve(result);
-                            }
-                            else {
-                                resolve(false);
-                            }
-                        });
-                    }
-                    else {
-                        resolve(false);
-                    }
-                });
-            }
-            else {
-                resolve(false);
-            }
         });
     }
     getGeoPrediction(params) {
@@ -159,14 +153,12 @@ class GooglePlacesService {
                 const _window = this._global.nativeGlobal;
                 const placesService = new _window.google.maps.places.PlacesService(document.createElement('div'));
                 placesService.getDetails({ placeId }, (result) => {
-                    if (result === null || result.length === 0) {
+                    if (result === null) {
+                        resolve(false);
+                    }
+                    else if (result.length === 0) {
                         this.getGeoPaceDetailByReferance(result.referance).then((referanceData) => {
-                            if (!referanceData) {
-                                resolve(false);
-                            }
-                            else {
-                                resolve(referanceData);
-                            }
+                            resolve(referanceData || false);
                         });
                     }
                     else {
@@ -238,7 +230,7 @@ class GooglePlacesService {
             geocoder.geocode({ location: placeDetail.geometry.location }, (results, status) => {
                 if (status === 'OK' && results.length) {
                     resolve(results.reduce((postalCodes, result) => {
-                        const postalCodeComponent = result.address_components.find(item => item.types.includes('postal_code'));
+                        const postalCodeComponent = result.address_components.find((item) => item.types.includes('postal_code'));
                         if (postalCodeComponent && !postalCodes.includes(postalCodeComponent.long_name)) {
                             postalCodes.push(postalCodeComponent.long_name);
                         }
@@ -277,6 +269,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.19", ngImpo
                     args: [PLATFORM_ID]
                 }] }, { type: i2.GlobalRef }, { type: i2.LocalStorageService }] });
 
+/** App-wide address-lookup config; when provided, every novo-address enables autocomplete on Address 1. */
+const NOVO_ADDRESS_CONFIG = new InjectionToken('NOVO_ADDRESS_CONFIG');
+
 // NG2
 // Value accessor for the component (supports ngModel)
 const PLACES_VALUE_ACCESSOR = {
@@ -285,17 +280,20 @@ const PLACES_VALUE_ACCESSOR = {
     multi: true,
 };
 class PlacesListComponent extends BasePickerResults {
-    constructor(platformId, _elmRef, _global, _googlePlacesService, cdr) {
+    static { this.SESSION_TOKEN_TIMEOUT_MS = 3 * 60 * 1000; }
+    constructor(_elmRef, _global, _googlePlacesService, cdr, 
+    // Fallback config from the app-wide token; used when [userSettings] does not provide a field.
+    addressConfig = null) {
         super(_elmRef, cdr);
-        this.platformId = platformId;
         this._elmRef = _elmRef;
         this._global = _global;
         this._googlePlacesService = _googlePlacesService;
         this.cdr = cdr;
+        this.addressConfig = addressConfig;
         this.termChange = new EventEmitter();
         this.select = new EventEmitter();
+        this.matchesUpdated = new EventEmitter();
         this.locationInput = '';
-        this.gettingCurrentLocationFlag = false;
         this.dropdownOpen = false;
         this.recentDropdownOpen = false;
         this.isSettingsError = false;
@@ -305,6 +303,8 @@ class PlacesListComponent extends BasePickerResults {
         this.selectedDataIndex = -1;
         this.recentSearchData = [];
         this.userSelectedOption = '';
+        this.sessionToken = '';
+        this.sessionTokenStartedAt = 0;
         this.defaultSettings = {
             geoPredictionServerUrl: '',
             geoLatLangServiceUrl: '',
@@ -328,6 +328,8 @@ class PlacesListComponent extends BasePickerResults {
             currentLocIconUrl: '',
             searchIconUrl: '',
             locationIconUrl: '',
+            googleApiKey: '',
+            googleMapsLoaderParams: {},
         };
         this.onModelChange = () => { };
         this.onModelTouched = () => { };
@@ -365,6 +367,7 @@ class PlacesListComponent extends BasePickerResults {
         }
         else {
             this.matches = [];
+            this.clearSessionToken();
             if (this.userSelectedOption) {
                 this.userQuerySubmit('false');
             }
@@ -397,7 +400,8 @@ class PlacesListComponent extends BasePickerResults {
     selectMatch(match) {
         this.dropdownOpen = false;
         if (this.recentDropdownOpen) {
-            this.setRecentLocation(match);
+            // Recent items carry full detail on `raw`, which downstream consumers need.
+            this.setRecentLocation(match.raw ?? match);
         }
         else {
             this.getPlaceLocationInfo(match);
@@ -420,20 +424,39 @@ class PlacesListComponent extends BasePickerResults {
             // this.select.emit(false);
         }
     }
-    // function to get user current location from the device.
-    currentLocationSelected() {
-        if (isPlatformBrowser(this.platformId)) {
-            this.gettingCurrentLocationFlag = true;
-            this.dropdownOpen = false;
-            this._googlePlacesService.getGeoCurrentLocation().then((result) => {
-                if (!result) {
-                    this.gettingCurrentLocationFlag = false;
+    // Fold a raw Google/REST/recent record into the internal AddressLookupPrediction shape.
+    normalizePrediction(raw) {
+        return {
+            placeId: raw?.placeId || raw?.place_id,
+            primaryText: raw?.primaryText || raw?.structured_formatting?.main_text || raw?.displayAddress || raw?.description || '',
+            secondaryText: raw?.secondaryText || raw?.structured_formatting?.secondary_text || '',
+            displayAddress: raw?.displayAddress || raw?.description,
+            types: raw?.types,
+            raw,
+        };
+    }
+    onKeyDown(event) {
+        if (this.dropdownOpen) {
+            if (event.key === "ArrowUp" /* Key.ArrowUp */) {
+                this.prevActiveMatch();
+                return;
+            }
+            if (event.key === "ArrowDown" /* Key.ArrowDown */) {
+                this.nextActiveMatch();
+                return;
+            }
+            if (event.key === "Enter" /* Key.Enter */) {
+                // Only select when a prediction is highlighted.
+                if (this.activeMatch) {
+                    this.selectMatch(this.activeMatch);
                 }
-                else {
-                    this.getCurrentLocationInfo(result);
-                }
-            });
+                return;
+            }
         }
+    }
+    search(term, mode) {
+        // Disable the base search term functionality here since it is handled by the places picker separately
+        return NEVER;
     }
     // module initialization happens. function called by ngOninit and ngOnChange
     moduleInit() {
@@ -452,6 +475,10 @@ class PlacesListComponent extends BasePickerResults {
         }
         if (this.settings.showRecentSearch) {
             this.getRecentLocations();
+        }
+        if (this.settings.useGoogleGeoApi && !this.settings.googleApiKey) {
+            console.warn('google-places-list: No googleApiKey configured — Google Places autocomplete is disabled. ' +
+                'Pass address.googleApiKey to NovoElementProviders.forRoot() to enable it.');
         }
         if (!this.settings.useGoogleGeoApi) {
             if (!this.settings.geoPredictionServerUrl) {
@@ -484,21 +511,25 @@ class PlacesListComponent extends BasePickerResults {
         }
     }
     // function to set user settings if it is available.
+    // Priority: [userSettings] input > NOVO_ADDRESS_CONFIG token > defaultSettings.
     setUserSettings() {
         const _tempObj = {};
-        if (this.userSettings && typeof this.userSettings === 'object') {
-            const keys = Object.keys(this.defaultSettings);
-            for (const value of keys) {
-                _tempObj[value] = this.userSettings[value] !== undefined ? this.userSettings[value] : this.defaultSettings[value];
+        const keys = Object.keys(this.defaultSettings);
+        for (const value of keys) {
+            if (this.userSettings?.[value] !== undefined) {
+                _tempObj[value] = this.userSettings[value];
             }
-            return _tempObj;
+            else if (this.addressConfig?.[value] !== undefined) {
+                _tempObj[value] = this.addressConfig[value];
+            }
+            else {
+                _tempObj[value] = this.defaultSettings[value];
+            }
         }
-        else {
-            return this.defaultSettings;
-        }
+        return _tempObj;
     }
     // function to get the autocomplete list based on user input.
-    getListQuery(value) {
+    async getListQuery(value) {
         this.recentDropdownOpen = false;
         if (this.settings.useGoogleGeoApi) {
             const _tempParams = {
@@ -510,16 +541,58 @@ class PlacesListComponent extends BasePickerResults {
                 _tempParams.geoLocation = this.settings.geoLocation;
                 _tempParams.radius = this.settings.geoRadius;
             }
-            this._googlePlacesService.getGeoPrediction(_tempParams).then((result) => {
+            try {
+                await this._googlePlacesService.loadGoogleMaps(this.settings);
+                if (!this._global.nativeGlobal?.google?.maps?.places) {
+                    this.updateListItem([]);
+                    return;
+                }
+                const result = await this._googlePlacesService.getGeoPrediction(_tempParams);
                 this.updateListItem(result);
-            });
+            }
+            catch (err) {
+                console.error('Failed to load Google Maps for address predictions', err);
+                this.updateListItem([]);
+            }
         }
         else {
-            this._googlePlacesService.getPredictions(this.settings.geoPredictionServerUrl, value).then((result) => {
+            this._googlePlacesService.getPredictions(this.settings.geoPredictionServerUrl, value, this.ensureSessionToken()).then((result) => {
                 result = this.extractServerList(this.settings.serverResponseListHierarchy, result);
                 this.updateListItem(result);
+            }).catch((err) => {
+                console.error('Failed to load address predictions from server', err);
+                this.updateListItem([]);
             });
         }
+    }
+    // Returns the active billing-session token for prediction calls, minting a fresh UUID v4 when
+    // none exists or the previous one has gone stale (~3 min of inactivity). Each call refreshes the
+    // inactivity window.
+    ensureSessionToken() {
+        const now = Date.now();
+        if (!this.sessionToken || now - this.sessionTokenStartedAt > PlacesListComponent.SESSION_TOKEN_TIMEOUT_MS) {
+            this.sessionToken = this.generateSessionToken();
+        }
+        this.sessionTokenStartedAt = now;
+        return this.sessionToken;
+    }
+    // Mints a v4 UUID for the Google Places billing session. Prefers the built-in crypto.randomUUID(),
+    // which exists only in secure contexts (HTTPS / localhost). Falls back to a locally generated UUID for
+    // insecure-context local development (e.g. localhost development); the token only needs to be a unique
+    // opaque string, so Math.random() is acceptable there.
+    generateSessionToken() {
+        if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+            return crypto.randomUUID();
+        }
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (char) => {
+            const random = (Math.random() * 16) | 0;
+            const value = char === 'x' ? random : (random & 0x3) | 0x8;
+            return value.toString(16);
+        });
+    }
+    clearSessionToken() {
+        this.sessionToken = '';
+        this.sessionTokenStartedAt = 0;
     }
     // function to extratc custom data which is send by the server.
     extractServerList(arrayList, data) {
@@ -536,65 +609,59 @@ class PlacesListComponent extends BasePickerResults {
     }
     // function to update the predicted list.
     updateListItem(listData) {
-        this.matches = listData ? listData : [];
+        this.matches = (listData || []).map((item) => this.normalizePrediction(item));
+        // Reset highlight so Enter can't act on a stale prediction.
+        this.activeMatch = undefined;
         this.dropdownOpen = true;
         this.cdr.detectChanges();
+        this.matchesUpdated.emit(this.matches);
     }
     // function to show the recent search result.
     showRecentSearch() {
         this.recentDropdownOpen = true;
         this.dropdownOpen = true;
         this._googlePlacesService.getRecentList(this.settings.recentStorageName).then((result) => {
-            if (result) {
-                this.matches = result;
-            }
-            else {
-                this.matches = [];
-            }
+            this.matches = (result || []).map((item) => this.normalizePrediction(item));
         });
     }
-    // function to execute to get location detail based on latitude and longitude.
-    getCurrentLocationInfo(latlng) {
-        if (this.settings.useGoogleGeoApi) {
-            this._googlePlacesService.getGeoLatLngDetail(latlng).then((result) => {
-                if (result) {
-                    this.setRecentLocation(result);
-                }
-                this.gettingCurrentLocationFlag = false;
-            });
-        }
-        else {
-            this._googlePlacesService.getLatLngDetail(this.settings.geoLatLangServiceUrl, latlng.lat, latlng.lng).then((result) => {
-                if (result) {
-                    result = this.extractServerList(this.settings.serverResponseatLangHierarchy, result);
-                    this.setRecentLocation(result);
-                }
-                this.gettingCurrentLocationFlag = false;
-            });
-        }
-    }
     // function to retrieve the location info based on google place id.
-    getPlaceLocationInfo(selectedData) {
+    async getPlaceLocationInfo(selectedData) {
+        const placeId = selectedData.placeId;
         if (this.settings.useGoogleGeoApi) {
-            this._googlePlacesService.getGeoPlaceDetail(selectedData.place_id).then((data) => {
+            try {
+                // Ensure the SDK is loaded before getGeoPlaceDetail touches window.google.
+                await this._googlePlacesService.loadGoogleMaps(this.settings);
+                const data = await this._googlePlacesService.getGeoPlaceDetail(placeId);
                 if (data) {
                     this.setRecentLocation(data);
                 }
-            });
+            }
+            catch (err) {
+                console.error('Failed to load Google Maps for place details', err);
+            }
         }
         else {
-            this._googlePlacesService.getPlaceDetails(this.settings.geoLocDetailServerUrl, selectedData.place_id).then((result) => {
+            try {
+                let result = await this._googlePlacesService.getPlaceDetails(this.settings.geoLocDetailServerUrl, placeId, this.sessionToken);
                 if (result) {
                     result = this.extractServerList(this.settings.serverResponseDetailHierarchy, result);
                     this.setRecentLocation(result);
                 }
-            });
+            }
+            catch (err) {
+                console.error('Failed to load place details from server', err);
+            }
+            finally {
+                // The details call ends the Google billing session; clear the token even if the request
+                // failed so the next interaction starts a fresh session.
+                this.clearSessionToken();
+            }
         }
     }
     // function to store the selected user search in the localstorage.
     setRecentLocation(data) {
         data = JSON.parse(JSON.stringify(data));
-        data.description = data.description ? data.description : data.formatted_address;
+        data.description = data.description ? data.description : data.formattedAddress || data.formatted_address;
         data.active = false;
         this.selectedDataIndex = -1;
         this.locationInput = data.description;
@@ -615,60 +682,24 @@ class PlacesListComponent extends BasePickerResults {
             this.recentSearchData = data && data.length ? data : [];
         });
     }
-    onKeyDown(event) {
-        if (this.dropdownOpen) {
-            if (event.key === "ArrowUp" /* Key.ArrowUp */) {
-                this.prevActiveMatch();
-                return;
-            }
-            if (event.key === "ArrowDown" /* Key.ArrowDown */) {
-                this.nextActiveMatch();
-                return;
-            }
-            if (event.key === "Enter" /* Key.Enter */) {
-                this.selectMatch(this.activeMatch);
-                return;
-            }
-        }
-    }
-    search(term, mode) {
-        // Disable the base search term functionality here since it is handled by the places picker separately
-        return new Observable();
-    }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.19", ngImport: i0, type: PlacesListComponent, deps: [{ token: PLATFORM_ID }, { token: i0.ElementRef }, { token: i2.GlobalRef }, { token: GooglePlacesService }, { token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.19", type: PlacesListComponent, isStandalone: false, selector: "google-places-list", inputs: { userSettings: "userSettings" }, outputs: { termChange: "termChange", select: "select" }, providers: [PLACES_VALUE_ACCESSOR], usesInheritance: true, usesOnChanges: true, ngImport: i0, template: `
-    <novo-list direction="vertical">
-      <novo-list-item *ngFor="let data of matches; let $index = index" (click)="selectedListNode($event, $index)" [ngClass]="{ active: data === activeMatch }">
-        <item-header>
-          <item-avatar icon="location"></item-avatar>
-          <item-title>{{ data.structured_formatting?.main_text ? data.structured_formatting.main_text : data.description }}</item-title>
-        </item-header>
-        <item-content>{{ data.structured_formatting?.secondary_text }}</item-content>
-      </novo-list-item>
-    </novo-list>
-  `, isInline: true, styles: [":host{display:grid}:host novo-list{border:1px solid #4a89dc;background-color:#fff}:host novo-list novo-list-item{cursor:pointer;flex:0 0;transition:background-color .25s}:host novo-list novo-list-item>div{width:100%}:host novo-list novo-list-item.active{background-color:#e0ebf9}:host novo-list novo-list-item:hover{background-color:#f1f6fc}:host novo-list novo-list-item item-content{flex-flow:row wrap}:host novo-list novo-list-item item-content>*{flex:0 0 33%;white-space:nowrap}\n"], dependencies: [{ kind: "directive", type: i3.NgClass, selector: "[ngClass]", inputs: ["class", "ngClass"] }, { kind: "directive", type: i3.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "component", type: i4.NovoListElement, selector: "novo-list", inputs: ["theme", "direction"] }, { kind: "component", type: i4.NovoListItemElement, selector: "novo-list-item, a[list-item], button[list-item]" }, { kind: "component", type: i4.NovoItemAvatarElement, selector: "item-avatar, novo-item-avatar", inputs: ["icon", "color"] }, { kind: "component", type: i4.NovoItemTitleElement, selector: "item-title, novo-item-title" }, { kind: "component", type: i4.NovoItemHeaderElement, selector: "item-header, novo-item-header" }, { kind: "component", type: i4.NovoItemContentElement, selector: "item-content, novo-item-content", inputs: ["direction"] }] }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.19", ngImport: i0, type: PlacesListComponent, deps: [{ token: i0.ElementRef }, { token: i2.GlobalRef }, { token: GooglePlacesService }, { token: i0.ChangeDetectorRef }, { token: NOVO_ADDRESS_CONFIG, optional: true }], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "20.3.19", type: PlacesListComponent, isStandalone: false, selector: "google-places-list", inputs: { userSettings: "userSettings" }, outputs: { termChange: "termChange", select: "select", matchesUpdated: "matchesUpdated" }, providers: [PLACES_VALUE_ACCESSOR], usesInheritance: true, usesOnChanges: true, ngImport: i0, template: "<novo-list direction=\"vertical\">\n  @for (data of matches; track $index) {\n    <novo-list-item (click)=\"selectedListNode($event, $index)\" [ngClass]=\"{ active: data === activeMatch }\">\n      <item-header>\n        <item-avatar icon=\"location\"></item-avatar>\n        <item-title>{{ data.primaryText }}</item-title>\n      </item-header>\n      <item-content>{{ data.secondaryText }}</item-content>\n    </novo-list-item>\n  }\n</novo-list>\n", styles: [":host{display:grid}:host novo-list{border:1px solid #4a89dc;background-color:var(--background-body)}:host novo-list novo-list-item{cursor:pointer;flex:0 0;transition:background-color .25s}:host novo-list novo-list-item>div{width:100%}:host novo-list novo-list-item.active{background-color:hsl(from var(--color-positive) h s calc(l + 35))}:host novo-list novo-list-item:hover{background-color:hsl(from var(--color-positive) h s calc(l + 39))}:host novo-list novo-list-item item-content{flex-flow:row wrap}:host novo-list novo-list-item item-content>*{flex:0 0 33%;white-space:nowrap}\n"], dependencies: [{ kind: "directive", type: i3.NgClass, selector: "[ngClass]", inputs: ["class", "ngClass"] }, { kind: "component", type: i4.NovoListElement, selector: "novo-list", inputs: ["theme", "direction"] }, { kind: "component", type: i4.NovoListItemElement, selector: "novo-list-item, a[list-item], button[list-item]" }, { kind: "component", type: i4.NovoItemAvatarElement, selector: "item-avatar, novo-item-avatar", inputs: ["icon", "color"] }, { kind: "component", type: i4.NovoItemTitleElement, selector: "item-title, novo-item-title" }, { kind: "component", type: i4.NovoItemHeaderElement, selector: "item-header, novo-item-header" }, { kind: "component", type: i4.NovoItemContentElement, selector: "item-content, novo-item-content", inputs: ["direction"] }] }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.19", ngImport: i0, type: PlacesListComponent, decorators: [{
             type: Component,
-            args: [{ selector: 'google-places-list', providers: [PLACES_VALUE_ACCESSOR], template: `
-    <novo-list direction="vertical">
-      <novo-list-item *ngFor="let data of matches; let $index = index" (click)="selectedListNode($event, $index)" [ngClass]="{ active: data === activeMatch }">
-        <item-header>
-          <item-avatar icon="location"></item-avatar>
-          <item-title>{{ data.structured_formatting?.main_text ? data.structured_formatting.main_text : data.description }}</item-title>
-        </item-header>
-        <item-content>{{ data.structured_formatting?.secondary_text }}</item-content>
-      </novo-list-item>
-    </novo-list>
-  `, standalone: false, styles: [":host{display:grid}:host novo-list{border:1px solid #4a89dc;background-color:#fff}:host novo-list novo-list-item{cursor:pointer;flex:0 0;transition:background-color .25s}:host novo-list novo-list-item>div{width:100%}:host novo-list novo-list-item.active{background-color:#e0ebf9}:host novo-list novo-list-item:hover{background-color:#f1f6fc}:host novo-list novo-list-item item-content{flex-flow:row wrap}:host novo-list novo-list-item item-content>*{flex:0 0 33%;white-space:nowrap}\n"] }]
-        }], ctorParameters: () => [{ type: Object, decorators: [{
+            args: [{ selector: 'google-places-list', providers: [PLACES_VALUE_ACCESSOR], standalone: false, template: "<novo-list direction=\"vertical\">\n  @for (data of matches; track $index) {\n    <novo-list-item (click)=\"selectedListNode($event, $index)\" [ngClass]=\"{ active: data === activeMatch }\">\n      <item-header>\n        <item-avatar icon=\"location\"></item-avatar>\n        <item-title>{{ data.primaryText }}</item-title>\n      </item-header>\n      <item-content>{{ data.secondaryText }}</item-content>\n    </novo-list-item>\n  }\n</novo-list>\n", styles: [":host{display:grid}:host novo-list{border:1px solid #4a89dc;background-color:var(--background-body)}:host novo-list novo-list-item{cursor:pointer;flex:0 0;transition:background-color .25s}:host novo-list novo-list-item>div{width:100%}:host novo-list novo-list-item.active{background-color:hsl(from var(--color-positive) h s calc(l + 35))}:host novo-list novo-list-item:hover{background-color:hsl(from var(--color-positive) h s calc(l + 39))}:host novo-list novo-list-item item-content{flex-flow:row wrap}:host novo-list novo-list-item item-content>*{flex:0 0 33%;white-space:nowrap}\n"] }]
+        }], ctorParameters: () => [{ type: i0.ElementRef }, { type: i2.GlobalRef }, { type: GooglePlacesService }, { type: i0.ChangeDetectorRef }, { type: undefined, decorators: [{
+                    type: Optional
+                }, {
                     type: Inject,
-                    args: [PLATFORM_ID]
-                }] }, { type: i0.ElementRef }, { type: i2.GlobalRef }, { type: GooglePlacesService }, { type: i0.ChangeDetectorRef }], propDecorators: { userSettings: [{
+                    args: [NOVO_ADDRESS_CONFIG]
+                }] }], propDecorators: { userSettings: [{
                 type: Input
             }], termChange: [{
                 type: Output
             }], select: [{
+                type: Output
+            }], matchesUpdated: [{
                 type: Output
             }] } });
 
@@ -687,5 +718,5 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.19", ngImpo
  * Generated bundle index. Do not edit.
  */
 
-export { GooglePlacesModule, GooglePlacesService, PlacesListComponent };
+export { GooglePlacesModule, GooglePlacesService, NOVO_ADDRESS_CONFIG, PlacesListComponent };
 //# sourceMappingURL=novo-elements-elements-places.mjs.map

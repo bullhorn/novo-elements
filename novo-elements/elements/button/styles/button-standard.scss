@@ -8,10 +8,10 @@
     background: var(--button-background);
     &:hover,
     &:focus {
-      box-shadow: $shadow-2, $shadow-1;
+      box-shadow: var(--shadow-2), var(--shadow-1);
     }
     &:active {
-      box-shadow: $shadow-1;
+      box-shadow: var(--shadow-1);
     }
   }
 }

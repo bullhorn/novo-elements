@@ -70,7 +70,7 @@ class NovoColorSwatchComponent {
     >
       <ng-content></ng-content>
     </div>
-  `, isInline: true, styles: [".swatch{border-radius:.4rem}\n"], dependencies: [{ kind: "directive", type: i1.NgStyle, selector: "[ngStyle]", inputs: ["ngStyle"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush }); }
+  `, isInline: true, styles: [".swatch{border-radius:var(--border-radius-round)}\n"], dependencies: [{ kind: "directive", type: i1.NgStyle, selector: "[ngStyle]", inputs: ["ngStyle"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.19", ngImport: i0, type: NovoColorSwatchComponent, decorators: [{
             type: Component,
@@ -88,7 +88,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.19", ngImpo
     >
       <ng-content></ng-content>
     </div>
-  `, changeDetection: ChangeDetectionStrategy.OnPush, standalone: false, styles: [".swatch{border-radius:.4rem}\n"] }]
+  `, changeDetection: ChangeDetectionStrategy.OnPush, standalone: false, styles: [".swatch{border-radius:var(--border-radius-round)}\n"] }]
         }], propDecorators: { color: [{
                 type: Input
             }], style: [{
@@ -201,7 +201,7 @@ class NovoColorPickerComponent {
     <div class="novo-color-input">
       <input [value]="hex.replace('#', '')" (onChange)="handleValueChange($event)" />
     </div>
-  `, isInline: true, styles: [":host{display:grid;grid-template-rows:6rem 1fr min-content;background-color:var(--background-bright, #ffffff);cursor:default;overflow:auto;box-shadow:0 3px 1px -2px #0003,0 2px 2px #00000024,0 1px 5px #0000001f;transform:translateY(0);transition:all .15s cubic-bezier(.35,0,.25,1);border-radius:.4rem;width:18rem}:host .novo-color-preview{display:flex;align-items:center;justify-content:center}:host .novo-color-swatches{display:grid;grid-template-columns:repeat(6,2.4rem);grid-auto-rows:2.4rem;grid-gap:.4rem;margin:.4rem 0;justify-content:center}:host .novo-color-input{padding:.4rem .8rem}\n"], dependencies: [{ kind: "directive", type: i1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "component", type: NovoColorSwatchComponent, selector: "novo-color-swatch", inputs: ["color", "style", "focusStyle", "focus"], outputs: ["onClick", "onHover"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush }); }
+  `, isInline: true, styles: [":host{display:grid;grid-template-rows:6rem 1fr min-content;background-color:var(--background-bright, #fff);cursor:default;overflow:auto;box-shadow:0 3px 1px -2px #0003,0 2px 2px #00000024,0 1px 5px #0000001f;transform:translateY(0);transition:all .15s cubic-bezier(.35,0,.25,1);border-radius:var(--border-radius-sm);width:18rem}:host .novo-color-preview{display:flex;align-items:center;justify-content:center}:host .novo-color-swatches{display:grid;grid-template-columns:repeat(6,2.4rem);grid-auto-rows:2.4rem;grid-gap:.4rem;margin:.4rem 0;justify-content:center}:host .novo-color-input{padding:.4rem .8rem}\n"], dependencies: [{ kind: "directive", type: i1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "component", type: NovoColorSwatchComponent, selector: "novo-color-swatch", inputs: ["color", "style", "focusStyle", "focus"], outputs: ["onClick", "onHover"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.19", ngImport: i0, type: NovoColorPickerComponent, decorators: [{
             type: Component,
@@ -220,7 +220,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.19", ngImpo
     <div class="novo-color-input">
       <input [value]="hex.replace('#', '')" (onChange)="handleValueChange($event)" />
     </div>
-  `, changeDetection: ChangeDetectionStrategy.OnPush, preserveWhitespaces: false, standalone: false, styles: [":host{display:grid;grid-template-rows:6rem 1fr min-content;background-color:var(--background-bright, #ffffff);cursor:default;overflow:auto;box-shadow:0 3px 1px -2px #0003,0 2px 2px #00000024,0 1px 5px #0000001f;transform:translateY(0);transition:all .15s cubic-bezier(.35,0,.25,1);border-radius:.4rem;width:18rem}:host .novo-color-preview{display:flex;align-items:center;justify-content:center}:host .novo-color-swatches{display:grid;grid-template-columns:repeat(6,2.4rem);grid-auto-rows:2.4rem;grid-gap:.4rem;margin:.4rem 0;justify-content:center}:host .novo-color-input{padding:.4rem .8rem}\n"] }]
+  `, changeDetection: ChangeDetectionStrategy.OnPush, preserveWhitespaces: false, standalone: false, styles: [":host{display:grid;grid-template-rows:6rem 1fr min-content;background-color:var(--background-bright, #fff);cursor:default;overflow:auto;box-shadow:0 3px 1px -2px #0003,0 2px 2px #00000024,0 1px 5px #0000001f;transform:translateY(0);transition:all .15s cubic-bezier(.35,0,.25,1);border-radius:var(--border-radius-sm);width:18rem}:host .novo-color-preview{display:flex;align-items:center;justify-content:center}:host .novo-color-swatches{display:grid;grid-template-columns:repeat(6,2.4rem);grid-auto-rows:2.4rem;grid-gap:.4rem;margin:.4rem 0;justify-content:center}:host .novo-color-input{padding:.4rem .8rem}\n"] }]
         }], propDecorators: { width: [{
                 type: Input
             }], colors: [{

@@ -442,6 +442,7 @@ declare class NovoLabelService {
     beginsWith: string;
     true: string;
     false: string;
+    like: string;
     before: string;
     after: string;
     within: string;

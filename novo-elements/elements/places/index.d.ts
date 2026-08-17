@@ -1,5 +1,5 @@
 import * as i0 from '@angular/core';
-import { OnInit, OnChanges, EventEmitter, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { OnInit, OnChanges, EventEmitter, ElementRef, ChangeDetectorRef, InjectionToken } from '@angular/core';
 import * as i3 from '@angular/forms';
 import { ControlValueAccessor } from '@angular/forms';
 import { BasePickerResults } from 'novo-elements/elements/picker';
@@ -14,12 +14,13 @@ declare class GooglePlacesService {
     private platformId;
     private _global;
     private _localStorageService;
+    private mapsLoad?;
+    private mapsLoadKey?;
     constructor(_http: HttpClient, platformId: Object, _global: GlobalRef, _localStorageService: LocalStorageService);
-    getPredictions(url: string, query: string): Promise<any>;
-    getLatLngDetail(url: string, lat: number, lng: number): Promise<any>;
-    getPlaceDetails(url: string, placeId: string): Promise<any>;
-    getGeoCurrentLocation(): Promise<any>;
-    getGeoLatLngDetail(latlng: any): Promise<any>;
+    loadGoogleMaps(settings: PlacesSettings): Promise<void>;
+    private injectGoogleMapsScript;
+    getPredictions(url: string, query: string, sessionToken?: string): Promise<any>;
+    getPlaceDetails(url: string, placeId: string, sessionToken?: string): Promise<any>;
     getGeoPrediction(params: any): Promise<any>;
     getGeoPlaceDetail(placeId: string): Promise<any>;
     getGeoPaceDetailByReferance(referance: string): Promise<any>;
@@ -32,7 +33,7 @@ declare class GooglePlacesService {
     static ɵprov: i0.ɵɵInjectableDeclaration<GooglePlacesService>;
 }
 
-interface Settings {
+interface PlacesSettings {
     geoPredictionServerUrl?: string;
     geoLatLangServiceUrl?: string;
     geoLocDetailServerUrl?: string;
@@ -55,32 +56,51 @@ interface Settings {
     currentLocIconUrl?: string;
     searchIconUrl?: string;
     locationIconUrl?: string;
+    /** Bullhorn-managed key; when set, the library lazy-loads the Maps JS SDK with it instead of relying on a host script tag. */
+    googleApiKey?: string;
+    /** Extra Maps JS loader query params, merged over the defaults (libraries=places, loading=async). */
+    googleMapsLoaderParams?: Record<string, string>;
+    /** When false/undefined, the address-block inline autocomplete overlay is suppressed even when this config is present. */
+    addressBlockEnabled?: boolean;
+}
+/** Normalized address prediction; raw provider records are mapped into this via normalizePrediction. */
+interface AddressLookupPrediction {
+    placeId?: string;
+    primaryText?: string;
+    secondaryText?: string;
+    displayAddress?: string;
+    types?: string[];
+    /** Original provider record, retained so recent-search selection re-emits full detail. */
+    raw?: any;
 }
 declare class PlacesListComponent extends BasePickerResults implements OnInit, OnChanges, ControlValueAccessor {
-    private platformId;
     private _elmRef;
     private _global;
     private _googlePlacesService;
     private cdr;
-    userSettings: Settings;
+    private addressConfig;
+    private static readonly SESSION_TOKEN_TIMEOUT_MS;
+    userSettings: PlacesSettings;
     termChange: EventEmitter<any>;
     select: EventEmitter<any>;
+    matchesUpdated: EventEmitter<AddressLookupPrediction[]>;
     locationInput: string;
-    gettingCurrentLocationFlag: boolean;
     dropdownOpen: boolean;
     recentDropdownOpen: boolean;
     isSettingsError: boolean;
     settingsErrorMsg: string;
-    settings: Settings;
+    settings: PlacesSettings;
     private moduleinit;
     private selectedDataIndex;
     private recentSearchData;
     private userSelectedOption;
+    private sessionToken;
+    private sessionTokenStartedAt;
     private defaultSettings;
     model: any;
     onModelChange: Function;
     onModelTouched: Function;
-    constructor(platformId: Object, _elmRef: ElementRef, _global: GlobalRef, _googlePlacesService: GooglePlacesService, cdr: ChangeDetectorRef);
+    constructor(_elmRef: ElementRef, _global: GlobalRef, _googlePlacesService: GooglePlacesService, cdr: ChangeDetectorRef, addressConfig?: PlacesSettings);
     ngOnInit(): any;
     ngOnChanges(): any;
     writeValue(model: any): void;
@@ -90,25 +110,27 @@ declare class PlacesListComponent extends BasePickerResults implements OnInit, O
     searchinputCallback(event: any): any;
     activeListNode(index: number): any;
     selectedListNode(event: MouseEvent, index: number): any;
-    selectMatch(match: any): any;
+    selectMatch(match: AddressLookupPrediction): any;
     closeAutocomplete(event: any): any;
     userQuerySubmit(selectedOption?: any): any;
-    currentLocationSelected(): any;
+    normalizePrediction(raw: any): AddressLookupPrediction;
+    onKeyDown(event: KeyboardEvent): void;
+    search(term: any, mode?: any): Observable<any>;
     private moduleInit;
     private processSearchQuery;
     private setUserSettings;
     private getListQuery;
+    private ensureSessionToken;
+    private generateSessionToken;
+    private clearSessionToken;
     private extractServerList;
     private updateListItem;
     private showRecentSearch;
-    private getCurrentLocationInfo;
     private getPlaceLocationInfo;
     private setRecentLocation;
     private getRecentLocations;
-    onKeyDown(event: KeyboardEvent): void;
-    search(term: any, mode?: any): Observable<any>;
-    static ɵfac: i0.ɵɵFactoryDeclaration<PlacesListComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<PlacesListComponent, "google-places-list", never, { "userSettings": { "alias": "userSettings"; "required": false; }; }, { "termChange": "termChange"; "select": "select"; }, never, never, false, never>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<PlacesListComponent, [null, null, null, null, { optional: true; }]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<PlacesListComponent, "google-places-list", never, { "userSettings": { "alias": "userSettings"; "required": false; }; }, { "termChange": "termChange"; "select": "select"; "matchesUpdated": "matchesUpdated"; }, never, never, false, never>;
 }
 
 declare class GooglePlacesModule {
@@ -117,5 +139,8 @@ declare class GooglePlacesModule {
     static ɵinj: i0.ɵɵInjectorDeclaration<GooglePlacesModule>;
 }
 
-export { GooglePlacesModule, GooglePlacesService, PlacesListComponent };
-export type { Settings };
+/** App-wide address-lookup config; when provided, every novo-address enables autocomplete on Address 1. */
+declare const NOVO_ADDRESS_CONFIG: InjectionToken<PlacesSettings>;
+
+export { GooglePlacesModule, GooglePlacesService, NOVO_ADDRESS_CONFIG, PlacesListComponent };
+export type { AddressLookupPrediction, PlacesSettings };

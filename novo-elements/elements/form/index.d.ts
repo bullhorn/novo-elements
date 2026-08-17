@@ -11,8 +11,10 @@ import { NovoToastService, ToastOptions } from 'novo-elements/elements/toast';
 import { BooleanInput } from '@angular/cdk/coercion';
 import * as i5 from '@angular/forms';
 import { UntypedFormGroup, FormBuilder, FormControl, ControlValueAccessor, NgForm, FormGroupDirective, NgControl, FormGroup } from '@angular/forms';
-import * as i29 from 'novo-elements/elements/common';
-import { NovoTemplate, CanUpdateErrorStateCtor, ErrorStateMatcher } from 'novo-elements/elements/common';
+import * as i17 from 'novo-elements/elements/common';
+import { NovoTemplate, NovoOverlayTemplateComponent, CanUpdateErrorStateCtor, ErrorStateMatcher } from 'novo-elements/elements/common';
+import * as i16 from 'novo-elements/elements/places';
+import { PlacesSettings, PlacesListComponent } from 'novo-elements/elements/places';
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import * as i13 from '@angular/cdk/drag-drop';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
@@ -32,8 +34,8 @@ import * as i10$1 from 'novo-elements/elements/radio';
 import * as i11$1 from 'novo-elements/elements/tiles';
 import * as i14$1 from 'novo-elements/elements/chips';
 import * as i15$1 from 'novo-elements/elements/date-picker';
-import * as i16 from 'novo-elements/elements/time-picker';
-import * as i17 from 'novo-elements/elements/date-time-picker';
+import * as i16$1 from 'novo-elements/elements/time-picker';
+import * as i17$1 from 'novo-elements/elements/date-time-picker';
 import * as i18 from 'novo-elements/addons/ckeditor';
 import * as i20 from 'novo-elements/elements/quick-note';
 import * as i21 from 'novo-elements/elements/header';
@@ -944,7 +946,7 @@ declare class NovoFieldsetHeaderElement {
     title: string;
     icon: string;
     static ɵfac: i0.ɵɵFactoryDeclaration<NovoFieldsetHeaderElement, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<NovoFieldsetHeaderElement, "novo-fieldset-header", never, { "title": { "alias": "title"; "required": false; }; "icon": { "alias": "icon"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<NovoFieldsetHeaderElement, "novo-fieldset-header", never, { "title": { "alias": "title"; "required": false; }; "icon": { "alias": "icon"; "required": false; }; }, {}, never, ["*"], false, never>;
 }
 declare class NovoFieldsetElement {
     controls: Array<any>;
@@ -989,6 +991,31 @@ declare class NovoDynamicFormElement implements OnChanges, OnInit, AfterContentI
     static ɵcmp: i0.ɵɵComponentDeclaration<NovoDynamicFormElement, "novo-dynamic-form", never, { "controls": { "alias": "controls"; "required": false; }; "fieldsets": { "alias": "fieldsets"; "required": false; }; "form": { "alias": "form"; "required": false; }; "layout": { "alias": "layout"; "required": false; }; "hideNonRequiredFields": { "alias": "hideNonRequiredFields"; "required": false; }; "autoFocusFirstField": { "alias": "autoFocusFirstField"; "required": false; }; }, {}, ["customTemplates"], ["form-title", "form-subtitle"], false, never>;
 }
 
+interface AddressLookupResult {
+    address1?: string;
+    address2?: string;
+    city?: string;
+    state?: string;
+    zip?: string;
+    countryName?: string;
+    countryCode?: string;
+    formattedAddress?: string;
+    location?: {
+        latitude: number;
+        longitude: number;
+    };
+    viewport?: {
+        northeast: {
+            latitude: number;
+            longitude: number;
+        };
+        southwest: {
+            latitude: number;
+            longitude: number;
+        };
+    };
+    placeId?: string;
+}
 interface NovoAddressSubfieldConfig {
     label: string;
     required: boolean;
@@ -1008,18 +1035,19 @@ interface NovoAddressConfig {
     zip?: NovoAddressSubfieldConfig;
     countryID?: NovoAddressSubfieldConfig;
 }
-declare class NovoAddressElement implements ControlValueAccessor, OnInit, DoCheck {
+declare class NovoAddressElement implements ControlValueAccessor, OnInit, DoCheck, OnDestroy {
     labels: NovoLabelService;
+    addressConfig: PlacesSettings;
     config: NovoAddressConfig;
-    private _readOnly;
-    set readOnly(readOnly: boolean);
-    get readOnly(): boolean;
-    private previousRequiredState;
+    address1ElRef: ElementRef;
+    overlay: NovoOverlayTemplateComponent;
+    placesList: PlacesListComponent;
+    debouncedSearch: string;
+    private searchTerms$;
+    private searchSubscription;
     states: Array<any>;
     fieldList: Array<string>;
     model: any;
-    onModelChange: Function;
-    onModelTouched: Function;
     focused: any;
     invalid: any;
     disabled: any;
@@ -1032,8 +1060,15 @@ declare class NovoAddressElement implements ControlValueAccessor, OnInit, DoChec
     focus: EventEmitter<any>;
     blur: EventEmitter<any>;
     validityChange: EventEmitter<any>;
-    constructor(labels: NovoLabelService);
+    private previousRequiredState;
+    constructor(labels: NovoLabelService, addressConfig: PlacesSettings);
+    private _readOnly;
+    get readOnly(): boolean;
+    set readOnly(readOnly: boolean);
+    onModelChange: Function;
+    onModelTouched: Function;
     ngOnInit(): void;
+    ngOnDestroy(): void;
     initConfig(): void;
     ngDoCheck(): void;
     isValid(field: string): void;
@@ -1043,6 +1078,14 @@ declare class NovoAddressElement implements ControlValueAccessor, OnInit, DoChec
     isBlurred(event: Event, field: string): void;
     onCountryChange(evt: any): void;
     onStateChange(evt: any): void;
+    onAddress1Input(event: Event): void;
+    onMatchesUpdated(matches: any[]): void;
+    onAddress1Keydown(event: KeyboardEvent): void;
+    onPlaceSelected(placeDetail: AddressLookupResult & {
+        address_components?: any[];
+        formatted_address?: string;
+    }): void;
+    private parseGooglePlaceDetail;
     setStateLabel(model: any): void;
     updateStates(): void;
     getStateOptions(filter: string, countryID: number): string[];
@@ -1052,7 +1095,7 @@ declare class NovoAddressElement implements ControlValueAccessor, OnInit, DoChec
     registerOnTouched(fn: Function): void;
     private getDefaultStateConfig;
     private getDefaultCountryConfig;
-    static ɵfac: i0.ɵɵFactoryDeclaration<NovoAddressElement, never>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<NovoAddressElement, [null, { optional: true; }]>;
     static ɵcmp: i0.ɵɵComponentDeclaration<NovoAddressElement, "novo-address", never, { "config": { "alias": "config"; "required": false; }; "readOnly": { "alias": "readOnly"; "required": false; }; }, { "change": "change"; "focus": "focus"; "blur": "blur"; "validityChange": "validityChange"; }, never, never, false, never>;
 }
 
@@ -1230,7 +1273,7 @@ declare class NumberRangeComponent implements OnInit, OnDestroy, ControlValueAcc
 
 declare class NovoFormExtrasModule {
     static ɵfac: i0.ɵɵFactoryDeclaration<NovoFormExtrasModule, never>;
-    static ɵmod: i0.ɵɵNgModuleDeclaration<NovoFormExtrasModule, [typeof NovoAddressElement, typeof NovoFileInputElement, typeof NumberRangeComponent], [typeof i4.CommonModule, typeof i5.FormsModule, typeof i6.NovoPipesModule, typeof i7.NovoButtonModule, typeof i8.NovoSelectModule, typeof i9.NovoPickerModule, typeof i10.NovoLoadingModule, typeof i11.NovoTooltipModule, typeof i12.NovoCheckboxModule, typeof i13.DragDropModule, typeof i14.NovoFlexModule, typeof i15.NovoFieldModule, typeof i5.ReactiveFormsModule], [typeof NovoAddressElement, typeof NovoFileInputElement, typeof NumberRangeComponent]>;
+    static ɵmod: i0.ɵɵNgModuleDeclaration<NovoFormExtrasModule, [typeof NovoAddressElement, typeof NovoFileInputElement, typeof NumberRangeComponent], [typeof i4.CommonModule, typeof i5.FormsModule, typeof i6.NovoPipesModule, typeof i7.NovoButtonModule, typeof i8.NovoSelectModule, typeof i9.NovoPickerModule, typeof i10.NovoLoadingModule, typeof i11.NovoTooltipModule, typeof i12.NovoCheckboxModule, typeof i13.DragDropModule, typeof i14.NovoFlexModule, typeof i15.NovoFieldModule, typeof i5.ReactiveFormsModule, typeof i16.GooglePlacesModule, typeof i17.NovoOverlayModule], [typeof NovoAddressElement, typeof NovoFileInputElement, typeof NumberRangeComponent]>;
     static ɵinj: i0.ɵɵInjectorDeclaration<NovoFormExtrasModule>;
 }
 
@@ -1275,7 +1318,7 @@ declare class NovoFormElement implements AfterContentInit, OnInit {
 
 declare class NovoFormModule {
     static ɵfac: i0.ɵɵFactoryDeclaration<NovoFormModule, never>;
-    static ɵmod: i0.ɵɵNgModuleDeclaration<NovoFormModule, [typeof NovoAutoSize, typeof NovoControlElement, typeof NovoDynamicFormElement, typeof NovoFormElement, typeof NovoFieldsetElement, typeof NovoFieldsetHeaderElement, typeof ControlConfirmModal, typeof ControlPromptModal, typeof NovoControlGroup, typeof NovoControlTemplates], [typeof i4.CommonModule, typeof i8$1.OverlayModule, typeof i5.ReactiveFormsModule, typeof i10$1.NovoRadioModule, typeof i11$1.NovoTilesModule, typeof i8.NovoSelectModule, typeof i9.NovoPickerModule, typeof i14$1.NovoChipsModule, typeof i15$1.NovoDatePickerModule, typeof i16.NovoTimePickerModule, typeof i17.NovoDateTimePickerModule, typeof i18.NovoNovoCKEditorModule, typeof NovoFormExtrasModule, typeof i20.NovoQuickNoteModule, typeof i17.NovoDateTimePickerModule, typeof i21.NovoHeaderModule, typeof i11.NovoTooltipModule, typeof i23.NovoPopOverModule, typeof i24.IMaskModule, typeof i25.NovoTipWellModule, typeof i26.NovoModalModule, typeof i7.NovoButtonModule, typeof i28.NovoCodeEditorModule, typeof i29.NovoCommonModule, typeof i12.NovoCheckboxModule, typeof i31.NovoIconModule, typeof i10$1.NovoRadioModule, typeof i32.NovoSwitchModule], [typeof NovoAutoSize, typeof NovoDynamicFormElement, typeof NovoControlElement, typeof NovoFormElement, typeof NovoFieldsetHeaderElement, typeof NovoControlGroup, typeof NovoControlTemplates]>;
+    static ɵmod: i0.ɵɵNgModuleDeclaration<NovoFormModule, [typeof NovoAutoSize, typeof NovoControlElement, typeof NovoDynamicFormElement, typeof NovoFormElement, typeof NovoFieldsetElement, typeof NovoFieldsetHeaderElement, typeof ControlConfirmModal, typeof ControlPromptModal, typeof NovoControlGroup, typeof NovoControlTemplates], [typeof i4.CommonModule, typeof i8$1.OverlayModule, typeof i5.ReactiveFormsModule, typeof i10$1.NovoRadioModule, typeof i11$1.NovoTilesModule, typeof i8.NovoSelectModule, typeof i9.NovoPickerModule, typeof i14$1.NovoChipsModule, typeof i15$1.NovoDatePickerModule, typeof i16$1.NovoTimePickerModule, typeof i17$1.NovoDateTimePickerModule, typeof i18.NovoNovoCKEditorModule, typeof NovoFormExtrasModule, typeof i20.NovoQuickNoteModule, typeof i17$1.NovoDateTimePickerModule, typeof i21.NovoHeaderModule, typeof i11.NovoTooltipModule, typeof i23.NovoPopOverModule, typeof i24.IMaskModule, typeof i25.NovoTipWellModule, typeof i26.NovoModalModule, typeof i7.NovoButtonModule, typeof i28.NovoCodeEditorModule, typeof i17.NovoCommonModule, typeof i12.NovoCheckboxModule, typeof i31.NovoIconModule, typeof i10$1.NovoRadioModule, typeof i32.NovoSwitchModule], [typeof NovoAutoSize, typeof NovoDynamicFormElement, typeof NovoControlElement, typeof NovoFormElement, typeof NovoFieldsetHeaderElement, typeof NovoControlGroup, typeof NovoControlTemplates]>;
     static ɵinj: i0.ɵɵInjectorDeclaration<NovoFormModule>;
 }
 
@@ -1303,4 +1346,4 @@ declare class FormValidators {
 }
 
 export { AddressControl, BaseControl, CheckListControl, CheckboxControl, CodeEditorControl, ControlConfirmModal, ControlFactory, ControlPromptModal, CustomControl, DateControl, DateTimeControl, EditState, EditorControl, FieldInteractionApi, FileControl, FormUtils, FormValidators, GroupedControl, NativeSelectControl, NovoAddressElement, NovoAutoSize, NovoControlElement, NovoControlGroup, NovoControlTemplates, NovoDynamicFormElement, NovoFieldsetElement, NovoFieldsetHeaderElement, NovoFile, NovoFileInputElement, NovoFormControl, NovoFormElement, NovoFormExtrasModule, NovoFormGroup, NovoFormModule, NumberRangeComponent, PickerControl, QuickNoteControl, RadioControl, ReadOnlyControl, SelectControl, SwitchControl, TablePickerControl, TextAreaControl, TextBoxControl, TilesControl, TimeControl, TimezoneControl };
-export type { CustomHttp, FormField, IFieldInteractionEvent, IMaskOptions, ModifyPickerConfigArgs, NovoAddressConfig, NovoAddressSubfieldConfig, NovoControlConfig, NovoControlGroupAddConfig, NovoControlGroupRowConfig, NovoFieldset, NovoGroupedControlConfig, OptionsFunction, ResultsTemplateType };
+export type { AddressLookupResult, CustomHttp, FormField, IFieldInteractionEvent, IMaskOptions, ModifyPickerConfigArgs, NovoAddressConfig, NovoAddressSubfieldConfig, NovoControlConfig, NovoControlGroupAddConfig, NovoControlGroupRowConfig, NovoFieldset, NovoGroupedControlConfig, OptionsFunction, ResultsTemplateType };

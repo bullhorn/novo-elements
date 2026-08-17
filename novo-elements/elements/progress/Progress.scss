@@ -22,8 +22,8 @@
   &.linear {
     width: 200px;
     height: 1.2em;
-    background-color: $background;
-    border: 1px solid $empty;
+    background-color: var(--background-main);
+    border: 1px solid var(--color-empty);
     overflow: hidden;
   }
 

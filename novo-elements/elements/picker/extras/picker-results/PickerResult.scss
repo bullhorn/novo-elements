@@ -7,6 +7,6 @@
 
 :host(.active) {
   > novo-list-item {
-    background-color: lighten($positive, 35%);
+    background-color: brightenLive('--color-positive', 35);
   }
 }

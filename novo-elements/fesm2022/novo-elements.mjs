@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NovoNovoCKEditorModule, NovoCodeEditorModule } from 'novo-elements/addons';
 export * from 'novo-elements/addons';
-import { NovoAsideModule, NovoAutoCompleteModule, NovoAvatarModule, NovoButtonModule, NovoLoadingModule, NovoCardModule, NovoAgendaModule, NovoCalendarModule, NovoCheckboxModule, NovoFlexModule, NovoLayoutModule, NovoDividerModule, NovoToastModule, NovoTooltipModule, NovoHeaderModule, NovoTabModule, NovoTilesModule, NovoModalModule, NovoQuickNoteModule, NovoRadioModule, NovoDropdownModule, NovoSelectModule, NovoListModule, NovoSwitchModule, NovoSliderModule, NovoPickerModule, NovoChipsModule, NovoDatePickerModule, NovoTimePickerModule, NovoDateTimePickerModule, NovoTipWellModule, NovoSimpleTableModule, NovoFormModule, NovoFormExtrasModule, NovoCategoryDropdownModule, NovoMultiPickerModule, NovoPopOverModule, NovoDataTableModule, NovoSearchBoxModule, NovoProgressModule, NovoOverlayModule, NovoDragDropModule, GooglePlacesModule, NovoValueModule, NovoIconModule, NovoExpansionModule, UnlessModule, NovoCommonModule, NovoOptionModule, NovoStepperModule, NovoToolbarModule, NovoTabbedGroupPickerModule, NovoNonIdealStateModule, NovoBreadcrumbModule, NovoFieldModule, NovoColorPickerModule, NovoMenuModule, NovoSelectSearchModule, NovoQueryBuilderModule, GooglePlacesService, FormUtils, NovoAsideService, NovoModalService, NovoToastService, FieldInteractionApi, MENU_OPTIONS } from 'novo-elements/elements';
+import { NovoAsideModule, NovoAutoCompleteModule, NovoAvatarModule, NovoButtonModule, NovoLoadingModule, NovoCardModule, NovoAgendaModule, NovoCalendarModule, NovoCheckboxModule, NovoFlexModule, NovoLayoutModule, NovoDividerModule, NovoToastModule, NovoTooltipModule, NovoHeaderModule, NovoTabModule, NovoTilesModule, NovoModalModule, NovoQuickNoteModule, NovoRadioModule, NovoDropdownModule, NovoSelectModule, NovoListModule, NovoSwitchModule, NovoSliderModule, NovoPickerModule, NovoChipsModule, NovoDatePickerModule, NovoTimePickerModule, NovoDateTimePickerModule, NovoTipWellModule, NovoSimpleTableModule, NovoFormModule, NovoFormExtrasModule, NovoCategoryDropdownModule, NovoMultiPickerModule, NovoPopOverModule, NovoDataTableModule, NovoSearchBoxModule, NovoProgressModule, NovoOverlayModule, NovoDragDropModule, GooglePlacesModule, NovoValueModule, NovoIconModule, NovoExpansionModule, UnlessModule, NovoCommonModule, NovoOptionModule, NovoStepperModule, NovoToolbarModule, NovoTabbedGroupPickerModule, NovoNonIdealStateModule, NovoBreadcrumbModule, NovoFieldModule, NovoColorPickerModule, NovoMenuModule, NovoSelectSearchModule, NovoQueryBuilderModule, GooglePlacesService, FormUtils, NovoAsideService, NovoModalService, NovoToastService, FieldInteractionApi, MENU_OPTIONS, NOVO_ADDRESS_CONFIG } from 'novo-elements/elements';
 export * from 'novo-elements/elements';
 import { NovoPipesModule } from 'novo-elements/pipes';
 export * from 'novo-elements/pipes';
@@ -247,6 +247,20 @@ const NOVO_ELEMENTS_PROVIDERS = [
     NovoTemplateService,
 ];
 class NovoElementProviders {
+    /**
+     * Registers Novo Elements root services.
+     *
+     * @param options.address - Optional address-lookup config. Set `googleApiKey` to your
+     *   Google Maps Platform API key (https://developers.google.com/maps/documentation/javascript/get-api-key)
+     *   to enable client-side Places autocomplete. Omit or leave blank to use the
+     *   Bullhorn address-search-service path instead.
+     *
+     * @example
+     * // In AppModule imports:
+     * NovoElementProviders.forRoot({
+     *   address: { googleApiKey: environment.googleMapsApiKey },
+     * })
+     */
     static forRoot(options) {
         return {
             ngModule: NovoElementProviders,
@@ -256,6 +270,8 @@ class NovoElementProviders {
                     provide: MENU_OPTIONS,
                     useValue: options && options.menu,
                 },
+                // Only register when supplied, so a bare forRoot() doesn't shadow a root provider with undefined.
+                ...(options?.address ? [{ provide: NOVO_ADDRESS_CONFIG, useValue: options.address }] : []),
             ],
         };
     }

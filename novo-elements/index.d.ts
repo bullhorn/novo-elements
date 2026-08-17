@@ -2,7 +2,7 @@ import * as i0 from '@angular/core';
 import { ModuleWithProviders } from '@angular/core';
 import * as i1 from '@angular/forms';
 import * as i2 from 'novo-elements/elements';
-import { IMenuOptions } from 'novo-elements/elements';
+import { IMenuOptions, PlacesSettings } from 'novo-elements/elements';
 export * from 'novo-elements/elements';
 import * as i3 from 'novo-elements/pipes';
 export * from 'novo-elements/pipes';
@@ -19,8 +19,23 @@ declare class NovoElementsModule {
 }
 
 declare class NovoElementProviders {
+    /**
+     * Registers Novo Elements root services.
+     *
+     * @param options.address - Optional address-lookup config. Set `googleApiKey` to your
+     *   Google Maps Platform API key (https://developers.google.com/maps/documentation/javascript/get-api-key)
+     *   to enable client-side Places autocomplete. Omit or leave blank to use the
+     *   Bullhorn address-search-service path instead.
+     *
+     * @example
+     * // In AppModule imports:
+     * NovoElementProviders.forRoot({
+     *   address: { googleApiKey: environment.googleMapsApiKey },
+     * })
+     */
     static forRoot(options?: {
-        menu: IMenuOptions;
+        menu?: IMenuOptions;
+        address?: PlacesSettings;
     }): ModuleWithProviders<NovoElementProviders>;
     static forChild(): ModuleWithProviders<NovoElementProviders>;
     static ɵfac: i0.ɵɵFactoryDeclaration<NovoElementProviders, never>;

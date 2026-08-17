@@ -41,7 +41,7 @@
           i {
             &.bhi-checkbox-empty,
             &.bhi-checkbox-indeterminate {
-              color: $positive;
+              color: var(--color-positive);
             }
           }
         }
@@ -61,7 +61,7 @@
 
       &.bhi-checkbox-filled,
       &.bhi-checkbox-indeterminate {
-        color: $positive;
+        color: var(--color-positive);
       }
     }
   }

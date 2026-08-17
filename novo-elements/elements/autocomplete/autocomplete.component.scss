@@ -1,6 +1,10 @@
 @import "../../styles/variables.scss";
 @import "../common/typography/text.mixins";
 
+:host {
+  border-radius: var(--border-radius-sm);
+}
+
 .novo-autocomplete-options {
   list-style: none;
   background-color: var(--background-bright);

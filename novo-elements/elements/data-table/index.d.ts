@@ -47,6 +47,7 @@ interface IDataTablePreferences {
     hasUnsavedChanges?: boolean;
     unsavedChanges?: any;
     useBooleanKeywords?: boolean;
+    cardView?: boolean;
 }
 interface AutobuildEntityData {
     id: number;
@@ -662,7 +663,7 @@ type ListInteractionDictionary = {
     [key: string]: ListInteraction[];
 };
 
-type DataTablePreferenceUpdateSrc = 'columndrag' | 'input' | 'statesortchange' | 'pagination';
+type DataTablePreferenceUpdateSrc = 'columndrag' | 'input' | 'statesortchange' | 'pagination' | 'other';
 interface IDataTablePreferencesChangeEvent extends IDataTablePreferences {
     eventSrc: DataTablePreferenceUpdateSrc;
 }

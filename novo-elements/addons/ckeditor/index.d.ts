@@ -15,6 +15,8 @@ declare class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlVa
     debounce: any;
     name: any;
     minimal: any;
+    customConfig: any;
+    customFonts: string;
     startupFocus: boolean;
     fileBrowserImageUploadUrl: string;
     disabled: boolean;
@@ -47,7 +49,7 @@ declare class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlVa
     setDisabledState(disabled: boolean): void;
     insertText(text: any): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<NovoCKEditorElement, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<NovoCKEditorElement, "novo-editor", never, { "config": { "alias": "config"; "required": false; }; "debounce": { "alias": "debounce"; "required": false; }; "name": { "alias": "name"; "required": false; }; "minimal": { "alias": "minimal"; "required": false; }; "startupFocus": { "alias": "startupFocus"; "required": false; }; "fileBrowserImageUploadUrl": { "alias": "fileBrowserImageUploadUrl"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "value": { "alias": "value"; "required": false; }; }, { "change": "change"; "ready": "ready"; "blur": "blur"; "focus": "focus"; "paste": "paste"; "loaded": "loaded"; }, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<NovoCKEditorElement, "novo-editor", never, { "config": { "alias": "config"; "required": false; }; "debounce": { "alias": "debounce"; "required": false; }; "name": { "alias": "name"; "required": false; }; "minimal": { "alias": "minimal"; "required": false; }; "customConfig": { "alias": "customConfig"; "required": false; }; "customFonts": { "alias": "customFonts"; "required": false; }; "startupFocus": { "alias": "startupFocus"; "required": false; }; "fileBrowserImageUploadUrl": { "alias": "fileBrowserImageUploadUrl"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "value": { "alias": "value"; "required": false; }; }, { "change": "change"; "ready": "ready"; "blur": "blur"; "focus": "focus"; "paste": "paste"; "loaded": "loaded"; }, never, never, false, never>;
 }
 
 declare class NovoNovoCKEditorModule {
