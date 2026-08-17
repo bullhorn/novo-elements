@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["projects/novo-elements/src/elements/layout/collapsible-nav/collapsible-nav.component.scss"],
+  "sourcesContent": [".novo-collapsible-nav {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  overflow: hidden;\n  background: var(--background-bright);\n\n  .novo-collapsible-nav-header {\n    flex: 0 0 auto;\n  }\n\n  .novo-collapsible-nav-body {\n    flex: 1 1 auto;\n    overflow: hidden auto;\n  }\n\n  .novo-collapsible-nav-footer {\n    flex: 0 0 auto;\n  }\n}\n"],
+  "mappings": ";AAAA,CAAA;AACE,WAAA;AACA,kBAAA;AACA,UAAA;AACA,YAAA;AACA,cAAA,IAAA;;AAEA,CAPF,qBAOE,CAAA;AACE,QAAA,EAAA,EAAA;;AAGF,CAXF,qBAWE,CAAA;AACE,QAAA,EAAA,EAAA;AACA,YAAA,OAAA;;AAGF,CAhBF,qBAgBE,CAAA;AACE,QAAA,EAAA,EAAA;;",
+  "names": []
+}

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["projects/novo-examples/src/layouts/collapsible-nav/basic-collapsible-nav/basic-collapsible-nav-example.css"],
+  "sourcesContent": [".collapsible-nav-example {\n  height: 640px;\n  display: flex;\n  border: 1px solid var(--border);\n  background: var(--background-main);\n}\n\n.collapsible-nav-example .novo-text {\n  flex: 1;\n  white-space: nowrap;\n  overflow: hidden;\n}\n\n.novo-collapsible-nav-collapsed .novo-text,\n.novo-collapsible-nav-collapsed .novo-action {\n  display: none;\n}\n\n.novo-collapsible-nav-collapsed .novo-option {\n  padding-inline: 0;\n}\n\n.novo-collapsible-nav-collapsed novo-icon {\n  margin: auto;\n}\n\n.novo-collapsible-nav:not(.novo-collapsible-nav-collapsed) .novo-collapsible-nav-header .novo-option-text {\n  justify-content: flex-end;\n}\n"],
+  "mappings": ";AAAA,CAAC;AACC,UAAQ;AACR,WAAS;AACT,UAAQ,IAAI,MAAM,IAAI;AACtB,cAAY,IAAI;AAClB;AAEA,CAPC,wBAOwB,CAAC;AACxB,QAAM;AACN,eAAa;AACb,YAAU;AACZ;AAEA,CAAC,+BAA+B,CANN;AAO1B,CADC,+BAC+B,CAAC;AAC/B,WAAS;AACX;AAEA,CALC,+BAK+B,CAAC;AAC/B,kBAAgB;AAClB;AAEA,CATC,+BAS+B;AAC9B,UAAQ;AACV;AAEA,CAAC,oBAAoB,KAAK,CAbzB,gCAa0D,CAAC,4BAA4B,CAAC;AACvF,mBAAiB;AACnB;",
+  "names": []
+}

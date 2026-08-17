@@ -1,7 +1,7 @@
 {
   "version": 3,
-  "sources": ["angular:styles/component:css;5893ec8476e90bcba36e4d8b706107a9eb517724e7cce32632df50291ba85670;/home/runner/work/novo-elements/novo-elements/projects/novo-elements/src/elements/color-picker/color-swatch.component.ts"],
-  "sourcesContent": ["\n      .swatch {\n        border-radius: 0.4rem;\n      }\n    "],
-  "mappings": ";AACM,CAAC;AACC,iBAAe;AACjB;",
+  "sources": ["angular:styles/component:css;2076fb029e6570b55ed82b44afa19894eb55f4baceb46efe3e3110d844bf86ec;/home/runner/work/novo-elements/novo-elements/projects/novo-elements/src/elements/color-picker/color-swatch.component.ts"],
+  "sourcesContent": ["\n      .swatch {\n        border-radius: var(--border-radius-round);\n      }\n    "],
+  "mappings": ";AACM,CAAC;AACC,iBAAe,IAAI;AACrB;",
   "names": []
 }

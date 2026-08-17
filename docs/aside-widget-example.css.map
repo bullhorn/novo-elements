@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["projects/novo-examples/src/components/aside/aside-widget/aside-widget-example.css"],
+  "sourcesContent": ["/** CSS for this example */\naside-widget-example {\n  display: block;\n  background: rgba(0, 0, 0, 0.55);\n  padding: 35px 0;\n  position: relative;\n  text-align: center;\n}\n\n.aside-overlay-panel {\n    width: 100%;\n}\n\nnovo-aside .example-spacer {\n  flex: 1 1 100%;\n}\n"],
+  "mappings": ";AACA;AACE,WAAS;AACT,cAAY,KAAK,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE;AAC1B,WAAS,KAAK;AACd,YAAU;AACV,cAAY;AACd;AAEA,CAAC;AACG,SAAO;AACX;AAEA,WAAW,CAAC;AACV,QAAM,EAAE,EAAE;AACZ;",
+  "names": []
+}
