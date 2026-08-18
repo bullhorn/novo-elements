@@ -46,7 +46,9 @@ $chip-spacing: (
   @include novo-body-text();
   background: var(--background-main);
   border: 1px solid transparent;
-  transition: all 200ms ease-in-out;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+  transition-property: color, opacity, border-color, border-width, background-color;
   display: inline-flex;
   align-items: center;
   cursor: default;
