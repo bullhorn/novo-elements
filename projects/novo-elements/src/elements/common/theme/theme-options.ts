@@ -1,5 +1,6 @@
-import { EventEmitter, Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { computed, DOCUMENT, inject, Injectable, signal } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
+import { map, Observable, of } from 'rxjs';
 
 /**
  * Novo theme generations named `bh<year>-<mode>`
@@ -41,17 +42,23 @@ export interface ThemeChangeEvent {
 })
 export class NovoTheme {
   private _defaultTheme: NovoThemeOptions = { themeName: DEFAULT_THEME };
-  private _currentTheme: NovoThemeOptions;
+  private _currentTheme = signal<NovoThemeOptions>(undefined);
+  public currentTheme = this._currentTheme.asReadonly();
 
-  onThemeChange: EventEmitter<ThemeChangeEvent> = new EventEmitter<ThemeChangeEvent>();
+  onThemeChange: Observable<ThemeChangeEvent> = toObservable(this._currentTheme).pipe(map(theme => ({
+    themeName: theme?.themeName,
+    options: theme,
+  })));
+
+  document = inject(DOCUMENT);
 
   /** Name of the theme being used. defaults to `bh2022-light`. */
   get themeName() {
-    return this._currentTheme?.themeName || this._defaultTheme.themeName;
+    return this._currentTheme()?.themeName || this._defaultTheme.themeName;
   }
   set themeName(value: string) {
-    this._currentTheme = { themeName: value };
-    this.changeTheme(this._currentTheme);
+    const newTheme = { themeName: value };
+    this.changeTheme(newTheme);
   }
 
   public use(options: NovoThemeOptions): Observable<any> {
@@ -61,20 +68,23 @@ export class NovoTheme {
     return of(options);
   }
 
+  public isBh2026 = computed(() => {
+    return this.currentTheme()?.themeName?.includes('bh2026');
+  });
+
   /**
    * Changes the current theme
    */
   private changeTheme(theme: NovoThemeOptions): void {
-    this._currentTheme = theme;
+    this._currentTheme.set(theme);
     this.applyThemeToDom(theme.themeName);
-    this.onThemeChange.emit({ themeName: theme.themeName, options: theme });
   }
 
   private applyThemeToDom(themeName: string): void {
-    if (typeof document === 'undefined' || !document.documentElement) {
+    if (typeof this.document === 'undefined' || !this.document.documentElement) {
       return;
     }
-    const root = document.documentElement;
+    const root = this.document.documentElement;
     const normalized = normalizeThemeName(themeName);
     const generation = normalized.split('-')[0];
     root.classList.toggle('theme-dark', normalized.endsWith('-dark'));

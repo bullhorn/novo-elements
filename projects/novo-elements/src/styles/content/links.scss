@@ -14,3 +14,7 @@ a {
     color: darken($font-color-link, 10%);
   }
 }
+
+[data-theme='bh2026'] a {
+  font-weight: unset;
+}

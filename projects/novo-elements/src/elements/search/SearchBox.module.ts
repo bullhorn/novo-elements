@@ -6,10 +6,10 @@ import { NovoOverlayModule } from 'novo-elements/elements/common';
 import { NovoIconModule } from 'novo-elements/elements/icon';
 import { NovoPickerModule } from 'novo-elements/elements/picker';
 import { NovoTooltipModule } from 'novo-elements/elements/tooltip';
-import { NovoSearchBoxElement } from './SearchBox';
+import { NovoSearchBoxElement, NovoSearchLeadingContentDirective } from './SearchBox';
 @NgModule({
   imports: [CommonModule, NovoIconModule, NovoPickerModule, NovoTooltipModule, NovoOverlayModule],
-  declarations: [NovoSearchBoxElement],
-  exports: [NovoSearchBoxElement],
+  declarations: [NovoSearchBoxElement, NovoSearchLeadingContentDirective],
+  exports: [NovoSearchBoxElement, NovoSearchLeadingContentDirective],
 })
 export class NovoSearchBoxModule {}

@@ -16,4 +16,5 @@ export * from './option';
 export * from './overlay';
 export * from './selection';
 export * from './theme/theme-options';
+export * from './theme/if2026.pipe';
 export * from './typography';

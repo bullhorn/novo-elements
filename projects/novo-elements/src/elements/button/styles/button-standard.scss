@@ -15,3 +15,17 @@
     }
   }
 }
+
+:host-context([data-theme='bh2026']) {
+  &[theme="standard"] {
+    background: var(--button-background);
+    &:hover {
+      background: var(--button-hover-background);
+      box-shadow: var(--button-shadow-hover);
+    }
+    &:active {
+      background: var(--button-hover-background);
+      box-shadow: var(--button-shadow-active);
+    }
+  }
+}

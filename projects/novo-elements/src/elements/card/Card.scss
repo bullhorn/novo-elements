@@ -8,6 +8,9 @@
   border-radius: var(--border-radius-round);
   position: relative;
   overflow-x: hidden;
+  :root[data-theme=bh2026] & {
+    --spacing-md: var(--spacing-padding-md);
+  }
 
   &.loading {
     min-height: 200px;
@@ -57,10 +60,10 @@
         text-overflow: ellipsis;
         i {
           font-size: 1.2em;
-          &.bhi-info {
-            color: $light;
-          }
         }
+      }
+      :root:not([data-theme='bh2026']) & i.bhi-info {
+        color: $light;
       }
     }
     .actions {
@@ -117,37 +120,95 @@
   }
 }
 
-// bh2026: roomier, rounder card, larger title
+// bh2026: rounder card, grippy on hover
 :host-context([data-theme='bh2026']) {
-  border-radius: var(--border-radius-md, 1.6rem);
-  border: 1px solid var(--color-border-default, #f0f5f9);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--color-border-default);
+  box-shadow: 0 1px 2px var(--color-transparency-black-10);
 
   div.card-loading-container {
-    border-radius: var(--border-radius-md, 1.6rem);
+    border-radius: var(--border-radius-md);
   }
 
   header {
-    padding: var(--spacing-md, 1.6rem);
-    margin-left: var(--spacing-md);
+    padding: var(--spacing-padding-md) var(--spacing-padding-lg) var(--spacing-padding-md) 0;
+    border-bottom: 1px solid var(--color-border-default);
 
     .title {
-      ::ng-deep i.bhi-move {
-        display: none;
-      }
-
+      padding-inline: var(--spacing-gutter);
       h1,
       h2,
       h3 {
-        font-size: 1.8rem;
-        font-weight: 500;
+        font-size: var(--typography-card-header-font-size, var(--typography-font-size-18));
+        font-weight: var(--typography-card-header-font-weight, var(--typography-font-weight-500));
+        ::ng-deep .card-flag-icon {
+          font-size: var(--font-size-lg);
+          vertical-align: 10%;
+        }
+      }
+
+      ::ng-deep i {
+        margin: 0;
       }
     }
 
+    .card-move-handle {
+      position: absolute;
+      left: var(--spacing-padding-xxsm);
+      color: var(--color-content-icon, #89909A);
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-gap-sm);
+    }
+
     novo-button {
-      color: rgba(var(--text-secondary), 0.7);
-      margin-left: var(--spacing-sm);
-      margin-right: var(--spacing-sm);
+      color: var(--color-text-subtle);
+    }
+    ::ng-deep .novo-card-header-text {
+      padding-inline-start: var(--spacing-padding-sm);
+    }
+  }
+  :host {
+    ::ng-deep .card-flag-icon {
+      color: var(--color-content-subtle, #5d7798);
+    }
+    &.icon-color-auto header .title ::ng-deep .card-flag-icon {
+      color: var(--page-entity-color, var(--color-content-subtle, #5d7798));
+      @each $entity, $color in $entity-colors {
+        &.bhi-#{$entity} {
+          @if ($entity == 'person') {
+            color: var(--color-entity-contact);
+          } @else if ($entity == 'notes') {
+            color: var(--color-entity-note);
+          } @else {
+            color: var(--color-entity-#{$entity});
+          }
+        }
+      }
+    }
+    &.icon-color-parent ::ng-deep .card-flag-icon {
+      color: var(--page-entity-color);
+    }
+    .novo-card-header {
+      padding-inline-start: var(--spacing-gutter);
+    }
+    // ng-deep in case this is declared within title bar implementation.
+    ::ng-deep .card-move-handle {
+      position: absolute;
+      left: var(--spacing-padding-xxsm);
+      color: var(--color-content-icon, #89909A);
+      transition: color 0.3s ease-in-out;
+    }
+    header ::ng-deep, ::ng-deep .novo-card-header {
+      &:not(:hover) .card-move-handle {
+        color: transparent;
+      }
+      .novo-icon.card-move-handle i {
+        color: inherit;
+      }
     }
   }
 }

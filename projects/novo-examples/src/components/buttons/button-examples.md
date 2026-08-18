@@ -51,6 +51,14 @@ The `icon` theme is used to create **icon\-only** buttons, which contain no text
 
 <code-example example="button-icon"></code-example>
 
+Icon buttons may also include a text label alongside the icon. In this case the button expands to fit the content.
+
+<code-example example="button-icon-label"></code-example>
+
+A second icon can be specified, and it will take the opposite side of the primary icon.
+
+<code-example example="button-two-icon"></code-example>
+
 ## Fab
 
 Fab buttons are used to as primary calls\-to\-action. They should **always** get an `icon` attribute. Fab buttons with a "success" color `color="success"` are used for saving and will almost always contain a "check" icon. Negative color primary buttons `color="negative"` are used to delete, clear, or otherwise remove an extant element. Fab buttons should never have a `side` attribute.
@@ -68,9 +76,3 @@ Button parameters can be dynamically set and change at runtime. The styles shoul
 Buttons can display a loading state when given the "loading" parameter. When loading is true the button will be disabled and get a loading spinner.
 
 <code-example example="button-loading"></code-example>
-
-## Two Icons
-
-A second icon can be specified, and it will take the opposite side of the primary icon.
-
-<code-example example="button-two-icon"></code-example>

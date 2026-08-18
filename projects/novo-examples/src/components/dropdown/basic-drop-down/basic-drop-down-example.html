@@ -1,20 +1,39 @@
-<novo-dropdown>
+<novo-dropdown containerClass="actions-dropdown-container">
   <novo-button theme="secondary" icon="collapse" data-automation-id="basic-dropdown-actions-button">Actions</novo-button>
+  <novo-option (click)="clickMe('Find related candidates clicked')">Find Related Candidates</novo-option>
   <novo-optgroup label="Engage" data-automation-id="opt-group-engage-label">
-    <novo-option (click)="clickMe('Hello!')">Send Email</novo-option>
-    <novo-option (click)="clickMe('Another!')">Send SMS</novo-option>
+    <novo-option (click)="clickMe('Send email clicked')">Send Email</novo-option>
+    <novo-option (click)="clickMe('Send SMS clicked')">Send SMS</novo-option>
     <novo-option tooltip="Test tooltip :)"
       tooltipPosition="right"
       (click)="clickMe()"
       disabled data-automation-id="dropdown-disabled-option">Advertise Shifts</novo-option>
   </novo-optgroup>
   <novo-optgroup label="Manage">
-    <novo-option (click)="clickMe('Hello!')">Find Matching Jobs</novo-option>
-    <novo-option (click)="clickMe('Another!')">Update Record</novo-option>
+    <novo-option (click)="clickMe('Find matching jobs clicked')">Find Matching Jobs</novo-option>
+    <novo-option (click)="clickMe('Update record clicked')">Update Record</novo-option>
     <novo-option tooltip="Test tooltip :)"
       tooltipPosition="right"
       (click)="clickMe()"
       disabled>Delete Record</novo-option>
+  </novo-optgroup>
+  <novo-optgroup label="Add">
+    <novo-option (click)="clickMe('Add note clicked')">Add Note</novo-option>
+    <novo-option (click)="clickMe('Add task clicked')">Add Task</novo-option>
+    <novo-option (click)="clickMe('Add appointment clicked')">Add Appointment</novo-option>
+    <novo-option (click)="clickMe('Add job submission clicked')">Add Job Submission</novo-option>
+  </novo-optgroup>
+  <novo-optgroup label="Update">
+    <novo-option (click)="clickMe('Update note clicked')">Update Note</novo-option>
+    <novo-option (click)="clickMe('Update task clicked')">Update Task</novo-option>
+    <novo-option (click)="clickMe('Update appointment clicked')">Update Appointment</novo-option>
+    <novo-option (click)="clickMe('Update job submission clicked')">Update Job Submission</novo-option>
+  </novo-optgroup>
+  <novo-optgroup label="Remove">
+    <novo-option (click)="clickMe('Remove note clicked')">Remove Note</novo-option>
+    <novo-option (click)="clickMe('Remove task clicked')">Remove Task</novo-option>
+    <novo-option (click)="clickMe('Remove appointment clicked')">Remove Appointment</novo-option>
+    <novo-option (click)="clickMe('Remove job submission clicked')">Remove Job Submission</novo-option>
   </novo-optgroup>
 </novo-dropdown>
 

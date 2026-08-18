@@ -1329,24 +1329,32 @@ export class LayoutsPage {
 
 @Component({
   selector: 'tabs-examples-page',
-  template: `<h2>Themes</h2>
-<h3>Color</h3>
-<p>Colored background tab navigation gets the theme <code>theme=&quot;color&quot;</code></p>
-<p><code-example example="tabs-color"></code-example></p>
+  template: `<h2>Standard Tabs</h2>
 <h3>White</h3>
 <p>White background tab navigation gets the theme <code>theme=&quot;white&quot;</code></p>
 <p><code-example example="tabs-basic"></code-example></p>
-<h2>Styles</h2>
+<h3>Color (in Toolbar)</h3>
+<p>Tabs inside a colored toolbar — no explicit <code>theme</code> attribute needed when the toolbar provides the background.</p>
+<p><code-example example="tabs-color"></code-example></p>
+<h3>Color / Neutral (standalone)</h3>
+<p>Use <code>theme=&quot;color&quot;</code> or <code>theme=&quot;neutral&quot;</code> when tabs sit directly on a colored background.</p>
+<p><code-example example="tabs-neutral"></code-example></p>
+<h2>Variants</h2>
+<h3>Condensed</h3>
 <p>Condensed tabs to help utilize more space with <code>condensed=&quot;true&quot;</code></p>
 <p><code-example example="tabs-condensed"></code-example></p>
-<h2>Types</h2>
 <h3>Vertical</h3>
 <p>Vertical tabs get a direction attribute <code>direction=&quot;vertical&quot;</code></p>
 <p><code-example example="tabs-vertical"></code-example></p>
-<h3>Button Tab Bars</h3>
-<p>Tabbed Button Bars get a similar style treatment to the <code>&quot;header&quot;</code> theme button.</p>
-<h2>As Application Routing Mechanism</h2>
-<p>Follows the same color/white theme as above, but doesn't use the &quot;novo-tabs&quot; tag and you have to add the classes and html accordingly. The header will now control and route your application and put the content in the &quot;router-outlet&quot; and look/feel like our tabs component.</p>
+<h3>Button Bar</h3>
+<p>Use <code>type=&quot;button-bar&quot;</code> for a segmented-control style. Combine with <code>theme=&quot;white&quot;</code> or <code>theme=&quot;color&quot;</code>.</p>
+<p><code-example example="tabs-button-bar"></code-example></p>
+<h2>Router Navigation</h2>
+<h3>Record / Toolbar Style</h3>
+<p>Use <code>novo-tab-link</code> with <code>router</code> on <code>novo-nav</code> for router-driven tabs — no explicit theme, sits inside a <code>novo-toolbar-row</code>.</p>
+<p><code-example example="tabs-nav-link"></code-example></p>
+<h3>Basic Router Example</h3>
+<p>Follows the same color/white theme as above, but doesn't use the <code>novo-tabs</code> tag. The header controls routing and puts content in the <code>router-outlet</code>.</p>
 <p><code-example example="tabs-router"></code-example></p>
 `,
   host: { class: 'markdown-page' },
@@ -1761,7 +1769,7 @@ export class ExpansionPage {
 @Component({
   selector: 'collapsible-nav-page',
   template: `<h1>Collapsible Nav <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/layout">(source)</a></h1>
-<p>A slide-out navigation panel that expands to a full-width panel or collapses to a narrow icon rail. Consumers project their own header, body, and footer content into the named slots (<code>novo-collapsible-nav-header</code>, <code>novo-collapsible-nav-body</code>, <code>novo-collapsible-nav-footer</code>). The <code>collapsed</code> state is two-way bindable.</p>
+<p>A navigation panel that animates between an expanded sidebar and a collapsed icon rail. Project content into the <code>novo-collapsible-nav-header</code>, <code>novo-collapsible-nav-body</code>, and <code>novo-collapsible-nav-footer</code> slots. The <code>collapsed</code> state is two-way bindable.</p>
 <h5>Examples</h5>
 <h2>Basic Collapsible Nav</h2>
 <p><code-example example="basic-collapsible-nav"></code-example></p>
@@ -3899,6 +3907,8 @@ export class ToasterDesignPage {
 <p><code-example example="icon-tip-well"></code-example></p>
 <h2>HTML Demo</h2>
 <p><code-example example="html-tip-well"></code-example></p>
+<h2>Compact Variant</h2>
+<p><code-example example="compact-tip-well"></code-example></p>
 `,
   host: { class: 'markdown-page' },
   standalone: false,
@@ -4021,8 +4031,11 @@ export class TipWellDesignPage {
 <h2>Footer</h2>
 <p><code-example example="tabbed-group-picker-footer"></code-example></p>
 <h2>Chips</h2>
-<p>Use a Chip List display inside of the Tabbed Group Picker to show selected options.</p>
+<p>Use a Chip List display inside the Tabbed Group Picker to show selected options.</p>
 <p><code-example example="tabbed-group-picker-chips"></code-example></p>
+<h2>Icon Button with Chips</h2>
+<p>Use <code>theme: 'icon'</code> on the button config alongside chips.</p>
+<p><code-example example="tabbed-group-picker-icon-chips"></code-example></p>
 `,
   host: { class: 'markdown-page' },
   standalone: false,
@@ -5979,6 +5992,10 @@ export class CalendarDesignPage {
 <h2>Icon</h2>
 <p>The <code>icon</code> theme is used to create <strong>icon-only</strong> buttons, which contain no text. They can occupy any of the four main functions but require far less visual dominance than normal buttons. Icon buttons <strong>always</strong> have an <code>icon</code> attribute and can use <strong>any</strong> icon. Icon buttons may also use an <code>inverse</code> attribute to change its icon color to white.</p>
 <p><code-example example="button-icon"></code-example></p>
+<p>Icon buttons may also include a text label alongside the icon. In this case the button expands to fit the content.</p>
+<p><code-example example="button-icon-label"></code-example></p>
+<p>A second icon can be specified, and it will take the opposite side of the primary icon.</p>
+<p><code-example example="button-two-icon"></code-example></p>
 <h2>Fab</h2>
 <p>Fab buttons are used to as primary calls-to-action. They should <strong>always</strong> get an <code>icon</code> attribute. Fab buttons with a &quot;success&quot; color <code>color=&quot;success&quot;</code> are used for saving and will almost always contain a &quot;check&quot; icon. Negative color primary buttons <code>color=&quot;negative&quot;</code> are used to delete, clear, or otherwise remove an extant element. Fab buttons should never have a <code>side</code> attribute.</p>
 <p><code-example example="button-fab"></code-example></p>
@@ -5988,9 +6005,6 @@ export class CalendarDesignPage {
 <h2>Loading</h2>
 <p>Buttons can display a loading state when given the &quot;loading&quot; parameter. When loading is true the button will be disabled and get a loading spinner.</p>
 <p><code-example example="button-loading"></code-example></p>
-<h2>Two Icons</h2>
-<p>A second icon can be specified, and it will take the opposite side of the primary icon.</p>
-<p><code-example example="button-two-icon"></code-example></p>
 `,
   host: { class: 'markdown-page' },
   standalone: false,

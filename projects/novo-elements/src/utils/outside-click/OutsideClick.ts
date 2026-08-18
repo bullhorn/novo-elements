@@ -1,17 +1,19 @@
 // NG2
-import { ElementRef, EventEmitter, Injectable, OnDestroy } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, OnDestroy, Output } from '@angular/core';
 // APP
 import { Helpers } from '../Helpers';
 
 /**
  * Outside click helper, makes to set the element as inactive when clicking outside of it
  */
-@Injectable()
+@Directive()
 export class OutsideClick implements OnDestroy {
   element: ElementRef;
   otherElement: ElementRef;
   active: boolean = false;
+  @Output()
   onOutsideClick: EventListenerOrEventListenerObject;
+  @Output()
   onActiveChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(element: ElementRef) {

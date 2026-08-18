@@ -4,3 +4,9 @@
   flex-flow: row nowrap;
   justify-content: space-between;
 }
+
+::ng-deep .actions-dropdown-container {
+  max-height: 505px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}

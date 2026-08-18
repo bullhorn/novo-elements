@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { NovoToastService } from 'novo-elements';
 
 /**
@@ -10,13 +10,15 @@ import { NovoToastService } from 'novo-elements';
     styleUrls: ['basic-card-example.css'],
     standalone: false,
 })
-export class BasicCardExample {
+export class BasicCardExample implements AfterViewInit {
   // Config for demos
   refresh: boolean = true;
   close: boolean = true;
   move: boolean = true;
   padding: boolean = true;
   loading: boolean = true;
+  icon = 'activity';
+  iconColorClass: string = null;
 
   start: number = 2000;
   end: number = 2005;
@@ -33,6 +35,12 @@ export class BasicCardExample {
   donutLabel: string = 'Probability of Win %';
 
   constructor(private toaster: NovoToastService) {}
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.loading = false;
+    }, 2000);
+  }
 
   onClose() {
     this.toaster.alert({

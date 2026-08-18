@@ -23,3 +23,26 @@
 <novo-search data-automation-id="search-candidate" icon="candidate" color="candidate" alwaysOpen="true" [(ngModel)]="entity">
   <entity-picker-results [matches]="searchData" (select)="onSelectEntity($event)"></entity-picker-results>
 </novo-search>
+
+<novo-search data-automation-id="search-bordered" [bordered]="true" placeholder="Search..."></novo-search>
+
+<novo-search data-automation-id="search-bordered-with-settings" [bordered]="true" placeholder="Search...">
+  <novo-action novo-search-trailing-action icon="settings" tooltip="Settings" tooltipPosition="bottom" size="medium"></novo-action>
+</novo-search>
+
+<novo-search data-automation-id="search-bordered-with-submit" [bordered]="true" placeholder="Search...">
+  <novo-button novo-search-trailing-action theme="primary" icon="search" side="left">Search</novo-button>
+</novo-search>
+
+<novo-search data-automation-id="search-bordered-with-close" [bordered]="true" placeholder="Search...">
+  <novo-action novo-search-trailing-action icon="x" tooltip="Close" tooltipPosition="bottom" size="medium"></novo-action>
+</novo-search>
+
+<novo-search data-automation-id="search-bordered-with-chip" [bordered]="true" placeholder="Search...">
+  <div novo-search-leading-content>
+    <novo-chip-list>
+      <novo-chip size="sm">My Saved Search<novo-icon novoChipRemove>x</novo-icon></novo-chip>
+    </novo-chip-list>
+  </div>
+  <novo-button novo-search-trailing-action theme="dialogue" icon="edit" side="left">Edit Search</novo-button>
+</novo-search>

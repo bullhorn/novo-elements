@@ -106,8 +106,11 @@
   100% { transform: translateX(0%) }
 }
 
-// bh2026: pill progress bar ends (fill color rides on the deferred accent).
+// bh2026: pill ends; default fill uses primary blue only when no explicit color is set
 :host-context([data-theme='bh2026']) {
+  &.linear:not([color]) {
+    background-color: var(--button-primary-background);
+  }
   &.linear:first-child {
     border-radius: 999px 0 0 999px;
   }

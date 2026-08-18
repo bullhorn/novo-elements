@@ -364,7 +364,7 @@
   }
 
   &.hasButtons {
-    border-radius: 4px 4px 0 0;
+    border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
 
     &.military {
       .increments--hour,
@@ -379,7 +379,7 @@
       justify-content: flex-end;
       padding: 1rem;
       gap: .5rem;
-      border-radius: 0 0 4px 4px;
+      border-radius: 0 0 var(--border-radius-sm) var(--border-radius-sm);
       box-shadow: 0 1px 3px #00000026, 0 2px 7px #0000001a;
     }
   }

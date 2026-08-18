@@ -20,3 +20,7 @@ order: 4
 ## HTML Demo
 
 <code-example example="html-tip-well"></code-example>  
+
+## Compact Variant
+
+<code-example example="compact-tip-well"></code-example>  

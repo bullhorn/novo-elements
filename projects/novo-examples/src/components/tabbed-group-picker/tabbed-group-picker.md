@@ -34,6 +34,12 @@ When checkboxes are disabled in the activation picker, we can still listen for "
 
 ## Chips
 
-Use a Chip List display inside of the Tabbed Group Picker to show selected options.
+Use a Chip List display inside the Tabbed Group Picker to show selected options.
 
 <code-example example="tabbed-group-picker-chips"></code-example>
+
+## Icon Button with Chips
+
+Use `theme: 'icon'` on the button config alongside chips.
+
+<code-example example="tabbed-group-picker-icon-chips"></code-example>

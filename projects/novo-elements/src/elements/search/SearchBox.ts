@@ -1,9 +1,12 @@
 // NG2
 import { ENTER } from '@angular/cdk/keycodes';
 import {
+  AfterContentChecked,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  ContentChild,
+  Directive,
   ElementRef,
   EventEmitter,
   forwardRef,
@@ -20,6 +23,16 @@ import { NovoLabelService } from 'novo-elements/services';
 import { Key } from 'novo-elements/utils';
 import { NovoOverlayTemplateComponent } from 'novo-elements/elements/common';
 
+/**
+ * Marker directive for content projected into the leading (left) area of `novo-search`.
+ * When present, the text input is hidden and the projected content fills its space.
+ */
+@Directive({
+  selector: '[novo-search-leading-content]',
+  standalone: false,
+})
+export class NovoSearchLeadingContentDirective {}
+
 // Value accessor for the component (supports ngModel)
 const SEARCH_VALUE_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
@@ -34,6 +47,8 @@ const SEARCH_VALUE_ACCESSOR = {
     template: `
     <!-- SEARCH ICON -->
     <novo-icon (click)="showSearch($event)" [tooltip]="hint" tooltipPosition="bottom">{{ icon }}</novo-icon>
+    <!-- LEADING CONTENT SLOT (chips, tags, etc. that visually replace the input when present) -->
+    <ng-content select="[novo-search-leading-content]"></ng-content>
     <!-- SEARCH INPUT -->
     <input
       type="text"
@@ -47,6 +62,8 @@ const SEARCH_VALUE_ACCESSOR = {
       #input
       data-automation-id="novo-search-input"
     />
+    <!-- TRAILING ACTION SLOT -->
+    <ng-content select="[novo-search-trailing-action]"></ng-content>
     <!-- SEARCH OVERLAY -->
     <novo-overlay-template
       [parent]="element"
@@ -62,7 +79,7 @@ const SEARCH_VALUE_ACCESSOR = {
     styleUrls: ['./SearchBox.scss'],
     standalone: false,
 })
-export class NovoSearchBoxElement implements ControlValueAccessor, OnInit {
+export class NovoSearchBoxElement implements ControlValueAccessor, OnInit, AfterContentChecked {
   @Input()
   public name: string;
   @Input()
@@ -74,6 +91,13 @@ export class NovoSearchBoxElement implements ControlValueAccessor, OnInit {
   @Input()
   @HostBinding('class.always-open')
   public alwaysOpen: boolean = false;
+  @Input()
+  public bordered: boolean = false;
+
+  @HostBinding('class.has-border')
+  get hasBorder(): boolean {
+    return this.bordered;
+  }
   @Input()
   public theme: string;
   @Input()
@@ -102,6 +126,14 @@ export class NovoSearchBoxElement implements ControlValueAccessor, OnInit {
   focused: boolean = false;
   public value: any;
 
+  @ContentChild(NovoSearchLeadingContentDirective)
+  leadingContent: NovoSearchLeadingContentDirective;
+
+  @HostBinding('class.has-leading-content')
+  get hasLeadingContent(): boolean {
+    return !!this.leadingContent;
+  }
+
   /** View -> model callback called when value changes */
   _onChange: (value: any) => void = () => {};
   /** View -> model callback called when autocomplete has been touched */
@@ -114,6 +146,7 @@ export class NovoSearchBoxElement implements ControlValueAccessor, OnInit {
   input: any;
 
   private debounceSearchChange: any;
+  private _hasLeadingContent = false;
 
   constructor(
     public element: ElementRef,
@@ -128,18 +161,22 @@ export class NovoSearchBoxElement implements ControlValueAccessor, OnInit {
     }
   }
 
-  /**
-   * @name showFasterFind
-   * @description This function shows the picker and adds the active class (for animation)
-   */
+  ngAfterContentChecked() {
+    const hasLeading = !!this.leadingContent;
+    if (hasLeading !== this._hasLeadingContent) {
+      this._hasLeadingContent = hasLeading;
+      this._changeDetectorRef.markForCheck();
+    }
+  }
+
   showSearch(event?: any, forceClose: boolean = false) {
     if (!this.panelOpen) {
-      // Reset search
-      // Set focus on search
       setTimeout(() => {
-        const element = this.input.nativeElement;
-        if (element) {
-          element.focus();
+        const inputElement = this.input.nativeElement;
+        if (inputElement?.offsetParent) {
+          inputElement.focus();
+        } else {
+          this.openPanel();
         }
       }, 10);
     } else {
