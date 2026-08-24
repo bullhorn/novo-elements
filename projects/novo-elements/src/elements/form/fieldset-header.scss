@@ -15,3 +15,38 @@
     display: none;
   }
 }
+
+:host-context([data-theme='bh2026'] .card-section) {
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  margin-right: 0;
+  padding: var(--spacing-padding-md) var(--spacing-padding-lg);
+  background: var(--background-bright);
+  border-bottom: 1px solid var(--color-border-default);
+  align-items: center;
+  gap: var(--spacing-gap-sm);
+  font-size: var(--typography-title-small-font-size, 1.8rem);
+  font-weight: 600;
+  line-height: var(--typography-title-small-line-height, 2.4rem);
+  letter-spacing: var(--typography-title-small-letter-spacing, 0);
+  text-transform: capitalize;
+  color: var(--color-text-body);
+  > span {
+    flex: 1 0 0;
+    min-width: 0;
+  }
+  ::ng-deep novo-icon {
+    font-size: 1.6rem;
+    width: 1.6rem;
+    height: 1.6rem;
+    flex-shrink: 0;
+    color: var(--color-content-icon);
+    margin: 0;
+    i {
+      font-size: 1.6rem;
+      width: 1.6rem;
+      height: 1.6rem;
+    }
+  }
+}
