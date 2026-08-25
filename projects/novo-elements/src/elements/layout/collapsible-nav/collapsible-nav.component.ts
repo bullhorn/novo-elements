@@ -107,14 +107,6 @@ export class NovoCollapsibleNavComponent {
     this.isHovered.set(false);
   }
 
-  @HostListener('keypress', ['$event'])
-  wPressed(event: KeyboardEvent) {
-    if (event.key === 'w') {
-      const newDelay = (this.expandDelay() === 0 ? 6000 : 0);
-      this.expandDelay.set(newDelay);
-    }
-  }
-
   @HostBinding('@expandCollapse')
   get expandCollapseState(): { value: string; params: { expandedWidth: string; collapsedWidth: string } } {
     return {
