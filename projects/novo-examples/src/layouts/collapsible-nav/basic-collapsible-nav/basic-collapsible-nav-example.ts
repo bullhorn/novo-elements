@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CollapsibleNavExpansionEvent } from 'novo-elements';
 
 /**
  * @title Basic Collapsible Nav
@@ -25,4 +26,11 @@ export class BasicCollapsibleNavExample {
       label: 'Companies',
     },
   ];
+
+  onManualExpansion(event: CollapsibleNavExpansionEvent) {
+    // Do not expand early if a user clicked on a collapsed option (demo of modifying early-expansion rules)
+    if ((event.srcEvent.target as HTMLElement).matches('novo-option, novo-option *')) {
+      event.preventExpand();
+    }
+  }
 }
