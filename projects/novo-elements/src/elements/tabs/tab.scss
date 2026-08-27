@@ -194,6 +194,33 @@
   margin-right: 0;
 }
 
+:host-context([data-theme='bh2026'] novo-nav[theme="color"]) {
+  .novo-tab-link {
+    color: var(--color-text-subtle) !important;
+    text-transform: none;
+    font-weight: var(--typography-tabs-default-font-weight);
+  }
+
+  &.active,
+  &.router-link-active {
+    .novo-tab-link {
+      color: var(--color-text-body) !important;
+      font-weight: var(--typography-tabs-active-font-weight);
+    }
+
+    .indicator {
+      background: var(--tab-indicator-color, var(--color-border-utility-positive));
+      border-radius: 999px 999px 0 0;
+    }
+  }
+
+  &:hover:not(.active):not(.router-link-active):not(.disabled) {
+    .novo-tab-link {
+      color: var(--color-text-body) !important;
+    }
+  }
+}
+
 :host-context(novo-nav[theme="color"]),
 :host-context(novo-nav[theme="neutral"]) {
   .novo-tab-link {
