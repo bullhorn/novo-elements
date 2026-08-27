@@ -309,7 +309,8 @@ distribution-list-picker-results {
 // not on children (where overflow:hidden + border-radius clips the corners)
 :root[data-theme='bh2026'] {
   picker-results,
-  entity-picker-results {
+  entity-picker-results,
+  skill-specialty-picker-results {
     border: 1px solid var(--color-border-default);
     margin-block: var(--spacing-gap-sm);
     background: var(--background-bright);

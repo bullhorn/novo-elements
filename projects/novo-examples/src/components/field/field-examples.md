@@ -7,7 +7,9 @@ order: 4
 
 ## Basic Usage
 
-tbw...
+`novo-field` wraps any supported control — text inputs, textareas, date/time pickers, selects, and chip-based pickers —
+and provides a consistent label, hint, and error surface. Use `novoInput` on native `<input>` and `<textarea>` elements,
+`novo-select` for dropdowns, and `novo-chip-list` with `novo-autocomplete` for single- or multi-value pickers.
 
 <code-example example="field-usage"></code-example>
 

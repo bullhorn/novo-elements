@@ -35,8 +35,13 @@
   > i.bhi-calendar {
     position: absolute;
     right: 0;
-    top: 0px;
+    top: 0;
     font-size: var(--font-size-sm);
+
+    [data-theme='bh2026'] & {
+      font-size: var(--typography-body-lg-font-size);
+      line-height: normal;
+    }
   }
   > i.bhi-times {
     cursor: pointer;
