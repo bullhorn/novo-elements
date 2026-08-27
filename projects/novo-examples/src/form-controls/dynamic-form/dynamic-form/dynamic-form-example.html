@@ -1,5 +1,9 @@
-<button theme="secondary" *ngIf="!myform.showingAllFields && !(myform.allFieldsRequired || myform.allFieldsNotRequired)" (click)="myform.showAllFields()" data-automation-id="dynamic-form-show-all">Show All Fields</button>
-<button theme="secondary" *ngIf="!myform.showingRequiredFields && !(myform.allFieldsRequired || myform.allFieldsNotRequired)" (click)="myform.showOnlyRequired(false)" data-automation-id="dynamic-form-show-required">Show Required Fields</button>
+@if (!myform.showingAllFields && !(myform.allFieldsRequired || myform.allFieldsNotRequired)) {
+    <button theme="secondary" (click)="myform.showAllFields()" data-automation-id="dynamic-form-show-all">Show All Fields</button>
+}
+@if (!myform.showingRequiredFields && !(myform.allFieldsRequired || myform.allFieldsNotRequired)) {
+    <button theme="secondary" (click)="myform.showOnlyRequired(false)" data-automation-id="dynamic-form-show-required">Show Required Fields</button>
+}
 <novo-dynamic-form [autoFocusFirstField]="true" class="dynamic" [fieldsets]="dynamic" [(form)]="dynamicForm" #myform data-automation-id="dynamic-form"></novo-dynamic-form>
 <footer class="dynamic-demo-footer" data-automation-id="dynamic-form-footer">
     <button (click)="save(myform)" theme="primary" icon="check" data-automation-id="dynamic-form-save">Save</button>

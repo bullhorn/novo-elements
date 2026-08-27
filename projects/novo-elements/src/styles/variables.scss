@@ -98,6 +98,7 @@ $analytics-colors: (
 );
 // Entity Color Map
 $entity-colors: (
+  "appointment": $color-neutral,
   "star": $color-placement,
   "person": $color-contact,
   "company": $color-company,
@@ -118,6 +119,7 @@ $entity-colors: (
   "credential": $color-neutral,
   "user": $color-neutral,
   "corporateuser": $color-neutral,
+  "neutral": $color-neutral,
   "contract": $color-contract,
   "jobCode": $color-job-code,
   "earnCode": $color-earn-code,
