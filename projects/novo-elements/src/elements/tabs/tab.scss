@@ -179,6 +179,7 @@
     .indicator {
       background: var(--tab-indicator-color, var(--color-border-utility-positive));
       border-radius: 999px 999px 0 0;
+      height: 2px;
     }
   }
 
@@ -192,6 +193,13 @@
 
 :host-context([data-theme='bh2026'] novo-nav[direction=vertical]) {
   margin-right: 0;
+
+  &.active,
+  &.router-link-active {
+    .indicator {
+      border-radius: 0 999px 999px 0;
+    }
+  }
 }
 
 :host-context([data-theme='bh2026'] novo-nav[theme="color"]) {
@@ -211,6 +219,7 @@
     .indicator {
       background: var(--tab-indicator-color, var(--color-border-utility-positive));
       border-radius: 999px 999px 0 0;
+      height: 2px;
     }
   }
 
