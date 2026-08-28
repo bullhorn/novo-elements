@@ -10,9 +10,12 @@ import {
   QueryList,
   SimpleChanges,
   ViewEncapsulation,
+  computed,
+  inject,
+  input,
 } from '@angular/core';
 import { NovoTemplateService } from 'novo-elements/services';
-import { NovoTemplate } from 'novo-elements/elements/common';
+import { NovoTemplate, NovoTheme } from 'novo-elements/elements/common';
 // App
 import { Helpers } from 'novo-elements/utils';
 import { NovoFieldset } from './FormInterfaces';
@@ -21,10 +24,17 @@ import { NovoFormGroup } from './NovoFormGroup';
 @Component({
     selector: 'novo-fieldset-header',
     template: `
-    <novo-title smaller>
-      <novo-icon>{{ icon?.replace('bhi-', '') }}</novo-icon
-      >{{ title }}
-    </novo-title>
+    @if (cardSection) {
+      @if (icon) {
+        <novo-icon>{{ cardIcon }}</novo-icon>
+      }
+      <span>{{ title }}</span>
+    } @else {
+      <novo-title smaller>
+        <novo-icon>{{ icon?.replace('bhi-', '') }}</novo-icon
+        >{{ title }}
+      </novo-title>
+    }
     <ng-content />
   `,
     styleUrls: ['./fieldset-header.scss'],
@@ -38,26 +48,36 @@ export class NovoFieldsetHeaderElement {
   title: string;
   @Input()
   icon: string = 'section';
+  @Input()
+  cardSection = false;
+
+  get cardIcon(): string {
+    const stripped = this.icon?.replace('bhi-', '') || '';
+    return stripped === 'section' ? 'edit-circle' : stripped;
+  }
 }
 
 @Component({
     selector: 'novo-fieldset',
     template: `
-    <div class="novo-fieldset-container">
-      <novo-fieldset-header
-        [icon]="icon"
-        [title]="title"
-        *ngIf="title"
-        [class.embedded]="isEmbedded"
-        [class.inline-embedded]="isInlineEmbedded"
-        [class.hidden]="hidden"
-      ></novo-fieldset-header>
-      <ng-container *ngFor="let control of controls; let controlIndex = index">
-        <div class="novo-form-row" [class.disabled]="control.disabled" *ngIf="control.__type !== 'GroupedControl'">
-          <novo-control [autoFocus]="autoFocus && index === 0 && controlIndex === 0" [control]="control" [form]="form"></novo-control>
-        </div>
-        <div *ngIf="control.__type === 'GroupedControl'">TODO - GroupedControl</div>
-      </ng-container>
+    <div class="novo-fieldset-container" [class.card-section]="cardSection">
+      @if (title) {
+        <novo-fieldset-header
+          [icon]="icon"
+          [title]="title"
+          [cardSection]="cardSection"
+          [class.embedded]="isEmbedded"
+          [class.inline-embedded]="isInlineEmbedded"
+          [class.hidden]="hidden"
+        ></novo-fieldset-header>
+      }
+      @for (control of controls; track control.key; let controlIndex = $index) {
+        @if (control.__type !== 'GroupedControl') {
+          <div class="novo-form-row" [class.disabled]="control.disabled" [class.hidden]="control.hidden">
+            <novo-control [autoFocus]="autoFocus && index === 0 && controlIndex === 0" [control]="control" [form]="form"></novo-control>
+          </div>
+        }
+      }
     </div>
   `,
     standalone: false,
@@ -81,6 +101,8 @@ export class NovoFieldsetElement {
   isInlineEmbedded = false;
   @Input()
   hidden = false;
+  @Input()
+  cardSection = false;
 }
 
 @Component({
@@ -93,9 +115,8 @@ export class NovoFieldsetElement {
         <ng-content select="form-subtitle"></ng-content>
       </header>
       <form class="novo-form" [formGroup]="form">
-        <ng-container *ngFor="let fieldset of form.fieldsets; let i = index">
+        @for (fieldset of visibleFieldsets; track fieldset.key; let i = $index) {
           <novo-fieldset
-            *ngIf="fieldset.controls.length"
             [index]="i"
             [autoFocus]="autoFocusFirstField"
             [icon]="fieldset.icon"
@@ -105,8 +126,9 @@ export class NovoFieldsetElement {
             [isEmbedded]="fieldset.isEmbedded"
             [isInlineEmbedded]="fieldset.isInlineEmbedded"
             [hidden]="fieldset.hidden"
+            [cardSection]="effectiveCardSections()"
           ></novo-fieldset>
-        </ng-container>
+        }
       </form>
     </div>
   `,
@@ -128,6 +150,7 @@ export class NovoDynamicFormElement implements OnChanges, OnInit, AfterContentIn
   hideNonRequiredFields: boolean = true;
   @Input()
   autoFocusFirstField: boolean = false;
+  readonly hasCardSections = input<boolean | undefined>(undefined);
   @ContentChildren(NovoTemplate)
   customTemplates: QueryList<NovoTemplate>;
   private fieldsAlreadyHidden: string[];
@@ -137,6 +160,26 @@ export class NovoDynamicFormElement implements OnChanges, OnInit, AfterContentIn
   showingAllFields = false;
   showingRequiredFields = true;
   numControls = 0;
+
+  private readonly theme = inject(NovoTheme);
+
+  readonly effectiveCardSections = computed(() => {
+    const override = this.hasCardSections();
+    if (override !== undefined) {
+      return override;
+    }
+    if (!this.theme.isBh2026()) {
+      return false;
+    }
+    return !this.element.nativeElement.closest('novo-modal-container, slide-out');
+  });
+
+  get visibleFieldsets(): NovoFieldset[] {
+    if (!this.effectiveCardSections()) {
+      return this.form?.fieldsets?.filter((fieldset) => fieldset.controls.length) ?? [];
+    }
+    return this.form?.fieldsets?.filter((fieldset) => fieldset.controls.length && this.hasVisibleControls(fieldset)) ?? [];
+  }
 
   constructor(private element: ElementRef, private templates: NovoTemplateService) {}
 
@@ -191,12 +234,20 @@ export class NovoDynamicFormElement implements OnChanges, OnInit, AfterContentIn
     }
   }
 
+  public hasVisibleControls(fieldset: NovoFieldset): boolean {
+    return fieldset.controls.some((control) => {
+      const formControl = this.form.controls[control.key];
+      return formControl && !formControl.hidden;
+    });
+  }
+
   public showAllFields(): void {
     this.form.fieldsets.forEach((fieldset) => {
       fieldset.controls.forEach((control) => {
-        const ctl = this.form.controls[control.key];
+        const formControl = this.form.controls[control.key];
         if (!this.fieldsAlreadyHidden?.includes(control.key)) {
-          ctl.hidden = false;
+          formControl.hidden = false;
+          control.hidden = false;
         }
       });
     });
@@ -208,29 +259,29 @@ export class NovoDynamicFormElement implements OnChanges, OnInit, AfterContentIn
     this.fieldsAlreadyHidden = [];
     this.form.fieldsets.forEach((fieldset) => {
       fieldset.controls.forEach((control) => {
-        const ctl = this.form.controls[control.key];
+        const formControl = this.form.controls[control.key];
 
-        if (ctl.hidden) {
+        if (formControl.hidden) {
           this.fieldsAlreadyHidden.push(control.key);
         }
 
-        // Hide any non-required fields
         if (!control.required) {
-          ctl.hidden = true;
+          formControl.hidden = true;
+          control.hidden = true;
         }
 
-        // Hide required fields that have been successfully filled out
         if (
           hideRequiredWithValue &&
           !Helpers.isBlank(this.form.getRawValue()[control.key]) &&
-          (!control.isEmpty || (control.isEmpty && control.isEmpty(ctl)))
+          (!control.isEmpty || (control.isEmpty && control.isEmpty(formControl)))
         ) {
-          ctl.hidden = true;
+          formControl.hidden = true;
+          control.hidden = true;
         }
 
-        // Don't hide fields with errors
-        if (ctl.errors) {
-          ctl.hidden = false;
+        if (formControl.errors) {
+          formControl.hidden = false;
+          control.hidden = false;
         }
       });
     });

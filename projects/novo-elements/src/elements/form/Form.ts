@@ -1,5 +1,5 @@
 // NG
-import { AfterContentInit, Component, ContentChildren, Input, OnInit, QueryList, ViewEncapsulation } from '@angular/core';
+import { AfterContentInit, Component, ContentChildren, Input, OnInit, QueryList, ViewEncapsulation, computed, input } from '@angular/core';
 // App
 import { NovoTemplateService } from 'novo-elements/services';
 import { Helpers } from 'novo-elements/utils';
@@ -10,7 +10,7 @@ import { NovoFormGroup } from './NovoFormGroup';
     selector: 'novo-form',
     template: `
     <novo-control-templates></novo-control-templates>
-    <div class="novo-form-container">
+    <div class="novo-form-container" [class.card-section]="effectiveCardSections()">
       <header *ngIf="!hideHeader">
         <ng-content select="form-title"></ng-content>
         <ng-content select="form-subtitle"></ng-content>
@@ -32,6 +32,9 @@ export class NovoFormElement implements AfterContentInit, OnInit {
   layout: string;
   @Input()
   hideHeader: boolean = false;
+
+  readonly hasCardSections = input<boolean | undefined>(undefined);
+  readonly effectiveCardSections = computed(() => this.hasCardSections() ?? false);
 
   @ContentChildren(NovoTemplate)
   customTemplates: QueryList<NovoTemplate>;
