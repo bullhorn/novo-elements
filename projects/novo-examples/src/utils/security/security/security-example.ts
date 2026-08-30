@@ -11,7 +11,7 @@ import { Security } from 'novo-elements';
     standalone: false,
 })
 export class SecurityExample {
-  perms = [];
+  perms: string[] = [];
 
   constructor(private security: Security) {}
 
