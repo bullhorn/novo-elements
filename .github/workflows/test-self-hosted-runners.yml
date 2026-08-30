@@ -1,0 +1,35 @@
+name: Test Self-Hosted Runner
+
+on:
+  workflow_dispatch:  # Manual trigger
+  push:
+    branches: [testing-runners]
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Runner Information
+      run: |
+        echo "🎉 Job running on self-hosted runner!"
+        echo "Runner name: ${{ runner.name }}"
+        echo "Runner OS: ${{ runner.os }}"
+        echo "Runner Architecture: ${{ runner.arch }}"
+        
+    - name: System Information
+      run: |
+        echo "System info:"
+        uname -a
+        echo "Current directory:"
+        pwd
+        echo "Available disk space:"
+        df -h
+
+    - name: Update Version
+      run: |
+        # Update novo-elements to use the angular19 branch from novo-elements-snapshot repo
+        update-version "github:bullhorn/novo-elements-snapshot#${{github.ref_name}}" "development" "${{github.ref_name}}"
