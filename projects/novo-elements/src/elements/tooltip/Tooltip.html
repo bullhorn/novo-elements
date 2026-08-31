@@ -1,5 +1,15 @@
-<div *ngIf="this.isHTML" [@state]="noAnimate ? 'no-animation' : 'visible'"
-     [ngClass]="[tooltipType, rounded ? 'rounded' : '', size ? size : '', preline? 'preline' : '', bounce ? 'bounce' : '', position]"
-     [innerHTML]="message"></div>
-<div *ngIf="!this.isHTML" [@state]="noAnimate ? 'no-animation' : 'visible'"
-     [ngClass]="[tooltipType, rounded ? 'rounded' : '', size ? size : '', preline? 'preline' : '', bounce ? 'bounce' : '', position]">{{message}}</div>
+@if (isHTML) {
+  <div [@state]="noAnimate ? 'no-animation' : 'visible'"
+       [ngClass]="[tooltipType, rounded ? 'rounded' : '', size ? size : '', preline ? 'preline' : '', bounce ? 'bounce' : '', position]"
+       [innerHTML]="message()"></div>
+} @else if (preline) {
+  <div [@state]="noAnimate ? 'no-animation' : 'visible'"
+       [ngClass]="[tooltipType, rounded ? 'rounded' : '', size ? size : '', 'preline', bounce ? 'bounce' : '', position]">
+    @for (line of messageLines(); track $index) {
+      <span>{{ line }}</span>
+    }
+  </div>
+} @else {
+  <div [@state]="noAnimate ? 'no-animation' : 'visible'"
+       [ngClass]="[tooltipType, rounded ? 'rounded' : '', size ? size : '', bounce ? 'bounce' : '', position]">{{ message() }}</div>
+}

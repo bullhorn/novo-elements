@@ -25,6 +25,10 @@ order: 4
 
 <code-example example="tooltip-options"></code-example>
 
+## Preline Multi-line
+
+<code-example example="tooltip-preline"></code-example>
+
 ## Toggle Trigger
 
 <code-example example="tooltip-toggle"></code-example>
