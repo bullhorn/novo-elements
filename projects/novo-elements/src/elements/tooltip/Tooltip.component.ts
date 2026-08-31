@@ -1,6 +1,6 @@
 // NG2
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 
 @Component({
     selector: 'novo-tooltip',
@@ -27,7 +27,8 @@ import { Component } from '@angular/core';
     standalone: false,
 })
 export class NovoTooltip {
-  public message: string;
+  public readonly message = signal<string>('');
+  public readonly messageLines = computed(() => this.message().split('\n'));
   public hidden: boolean;
   public tooltipType: string;
   public rounded: boolean;

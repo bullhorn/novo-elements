@@ -3432,6 +3432,8 @@ export class ComponentsPage {
 <p><code-example example="tooltip-sizes"></code-example></p>
 <h2>Options</h2>
 <p><code-example example="tooltip-options"></code-example></p>
+<h2>Preline Multi-line</h2>
+<p><code-example example="tooltip-preline"></code-example></p>
 <h2>Toggle Trigger</h2>
 <p><code-example example="tooltip-toggle"></code-example></p>
 <h2>Overflow</h2>
