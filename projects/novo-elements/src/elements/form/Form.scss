@@ -831,6 +831,7 @@ $bh2026-not-borderless: '';
 // ViewEncapsulation.None: use plain selectors (not :host-context which is Shadow DOM only)
 :root[data-theme='bh2026'] {
   label.novo-control-label {
+    &.novo-control-empty,
     &.novo-control-filled,
     &.novo-control-focused,
     &.novo-control-always-active {
@@ -839,6 +840,12 @@ $bh2026-not-borderless: '';
       letter-spacing: var(--typography-input-label-md-letter-spacing);
       text-transform: var(--typography-input-label-sm-text-transform);
       color: var(--color-text-body) !important;
+    }
+    &.novo-control-empty {
+      transform: translateY(-100%) !important;
+      height: 1.5em !important;
+      top: 0 !important;
+      bottom: auto !important;
     }
   }
   .novo-form-control-label {
