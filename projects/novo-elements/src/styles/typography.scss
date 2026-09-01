@@ -142,3 +142,9 @@ span {
 span > span {
   vertical-align: baseline;
 }
+
+:root[data-theme=bh2026] {
+  h5, h6 {
+    font-size: 1.2rem;
+  }
+}

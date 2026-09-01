@@ -156,7 +156,7 @@
 @mixin novo-label-text() {
   font-weight: 500;
   // text-transform: uppercase;
-  word-break: word-break;
+  word-break: break-word;
   overflow-wrap: break-word;
   line-height: 1.375;
   color: var(--text-muted);
