@@ -7,17 +7,20 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
-  ContentChild,
+  computed,
+  contentChild,
   ContentChildren,
   Directive,
   ElementRef,
   EventEmitter,
   HostListener,
+  inject,
   Input,
   OnDestroy,
   OnInit,
   Output,
   QueryList,
+  Renderer2,
   ViewChild,
 } from '@angular/core';
 // Vendor
@@ -26,6 +29,8 @@ import { takeUntil } from 'rxjs/operators';
 // App
 import { NovoButtonElement } from 'novo-elements/elements/button';
 import {
+  _countGroupLabelsBeforeOption,
+  _getOptionScrollPosition,
   CanDisableCtor,
   HasOverlayCtor,
   HasTabIndexCtor,
@@ -36,8 +41,6 @@ import {
   NovoOption,
   NovoOptionSelectionChange,
   NovoOverlayTemplateComponent,
-  _countGroupLabelsBeforeOption,
-  _getOptionScrollPosition,
 } from 'novo-elements/elements/common';
 import { BooleanInput, Key, notify } from 'novo-elements/utils';
 
@@ -118,10 +121,8 @@ export class NovoDropdownElement extends NovoDropdownMixins implements OnInit, A
   @ViewChild(NovoOverlayTemplateComponent)
   overlay: NovoOverlayTemplateComponent;
 
-  @ContentChild(NovoButtonElement)
-  _button: NovoButtonElement;
-  @ContentChild(NovoDropDownTrigger)
-  _trigger: NovoDropDownTrigger;
+  _button = contentChild(NovoButtonElement);
+  _trigger = contentChild(NovoDropDownTrigger);
 
   @ContentChildren(NovoOptgroup, { descendants: true })
   optionGroups: QueryList<NovoOptgroup>;
@@ -129,6 +130,8 @@ export class NovoDropdownElement extends NovoDropdownMixins implements OnInit, A
   options: QueryList<NovoOption>;
   @ViewChild('panel')
   panel: ElementRef;
+
+  renderer = inject(Renderer2);
 
   private clickHandler: any;
   private closeHandler: any;
@@ -158,9 +161,9 @@ export class NovoDropdownElement extends NovoDropdownMixins implements OnInit, A
   }
   private _scrollToActiveItemOnOpen: boolean = false;
 
-  get button() {
-    return this._trigger || this._button;
-  }
+  button = computed<HTMLElement>(() => {
+    return this._trigger()?.element.nativeElement || this._button()?.element.nativeElement || this._findNativeButton();
+  });
 
   constructor(public element: ElementRef, private ref: ChangeDetectorRef) {
     super();
@@ -175,9 +178,10 @@ export class NovoDropdownElement extends NovoDropdownMixins implements OnInit, A
   }
 
   public ngAfterContentInit(): void {
+    const button = this.button();
     // Add a click handler to the button to toggle the menu
-    this.button.element.nativeElement.addEventListener('click', this.clickHandler);
-    this.button.element.nativeElement.tabIndex = -1;
+    this._onDestroy.subscribe(this.renderer.listen(button, 'click', this.clickHandler));
+    button.tabIndex = -1;
     this.options.changes.pipe(takeUntil(this._onDestroy)).subscribe(() => {
       this._initKeyManager();
       this._watchSelectionEvents();
@@ -194,10 +198,6 @@ export class NovoDropdownElement extends NovoDropdownMixins implements OnInit, A
   public ngOnDestroy(): void {
     this._onDestroy.next();
     this._onDestroy.complete();
-    // Remove listener
-    if (this.button) {
-      this.button.element.nativeElement.removeEventListener('click', this.clickHandler);
-    }
   }
 
   focus(options?: FocusOptions): void {
@@ -221,6 +221,12 @@ export class NovoDropdownElement extends NovoDropdownMixins implements OnInit, A
 
 
   public set items(items: QueryList<NovoItemElement>) {}
+
+  // If the dropdown is using a basic <button> with no theme, it will not appear in the ContentChild directive.
+  private _findNativeButton() {
+    return Array.prototype.find.call(this.element.nativeElement.children,
+      element => element.tagName === 'BUTTON');
+  }
 
   /** Handles all keydown events on the dropdown. */
   @HostListener('keydown', ['$event'])
