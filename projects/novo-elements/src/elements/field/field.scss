@@ -109,7 +109,7 @@
   }
 }
 
-// bh2026: uppercase label + tighter value typography per Figma "Value - Finalized" spec
+// bh2026: uppercase label + tighter value typography
 :host-context([data-theme='bh2026']) {
   .novo-field-label {
       text-transform: var(--typography-input-label-sm-text-transform);
