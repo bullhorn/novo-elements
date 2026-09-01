@@ -1,4 +1,4 @@
-$tooltip-background: var(--tooltip-background-color, #383838);
+$tooltip-background: var(--tooltip-color-background-default, #3D464D);
 $tooltip-error-color: var(--color-shade-error, #b34e4d);
 $tooltip-info-color: var(--color-shade-info, #3986ac);
 $tooltip-warning-color: var(--color-shade-warning, #c09854);
@@ -25,14 +25,23 @@ $tooltip-success-color: var(--color-shade-success, #458746);
 
 :host {
   div {
+    display: flex;
+    max-width: 300px;
+    padding: var(--tooltip-spacing-container-medium-padding-vertical, 16px) var(--tooltip-spacing-container-medium-padding-horizontal, 16px);
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
+    border-radius: var(--tooltip-border-radius-medium, 8px);
     background: $tooltip-background;
-    color: var(--color-white, #fff);
-    border-radius: var(--border-radius-sm, 4px);
-    padding: 8px 10px;
-    font-size: var(--font-size-sm);
-    line-height: 12px;
-    white-space: nowrap;
-    box-shadow: var(--shadow-2);
+    box-shadow: 0 1px 2px -1px rgba(40, 40, 40, 0.10), 0 1px 2px 0 rgba(40, 40, 40, 0.08), 0 2px 2px -1px rgba(40, 40, 40, 0.08);
+    color: var(--tooltip-color-content-default, #fff);
+    font-family: var(--typography-body-sm-font-family, Inter);
+    font-size: var(--typography-body-sm-font-size, 12px);
+    font-weight: var(--typography-body-sm-font-weight-default, 400);
+    line-height: var(--typography-body-sm-line-height, 16px);
+    letter-spacing: var(--typography-body-sm-letter-spacing, 0);
+    white-space: normal;
+    word-wrap: break-word;
 
     &.error {
       background-color: $tooltip-error-color;
@@ -117,16 +126,9 @@ $tooltip-success-color: var(--color-shade-success, #458746);
     }
 
     // Sizing
-    &.extra-large,
-    &.large,
-    &.small,
-    &.medium {
-      white-space: normal;
-      line-height: 1.4em;
-      word-wrap: break-word;
-    }
     &.extra-large {
       width: 400px;
+      max-width: unset;
       font-size: 1.2vh;
     }
     &.large {
@@ -139,7 +141,7 @@ $tooltip-success-color: var(--color-shade-success, #458746);
       width: 80px;
     }
     &.preline {
-      white-space: pre-line;
+      flex-direction: column;
     }
 
     // Bounce
