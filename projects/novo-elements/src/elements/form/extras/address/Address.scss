@@ -148,3 +148,80 @@
     }
   }
 }
+
+:host-context([data-theme='bh2026']) {
+  gap: var(--field-spacing-gap);
+
+  // Take out the space that the overlay template takes up between the fields
+  novo-overlay-template {
+    display: none;
+  }
+
+  // Each sub-field gets its own bordered input treatment
+  .street-address,
+  .apt,
+  .city,
+  .state,
+  .zip,
+  .country-name {
+    border: var(--field-border-width-default) solid var(--field-color-border-default);
+    border-radius: var(--field-border-radius-default);
+    background: var(--field-color-background-default);
+    padding: var(--field-spacing-padding-vertical) var(--field-spacing-padding-horizontal) !important;
+    min-height: 4rem;
+    box-sizing: border-box;
+    gap: var(--field-spacing-gap);
+
+    &:hover {
+      border-color: var(--field-color-border-hover);
+    }
+    &:focus-within {
+      border-width: var(--field-border-width-focus);
+      border-color: var(--field-color-border-focus);
+    }
+
+    input,
+    novo-picker > ::ng-deep input {
+      border: none !important;
+      border-bottom: none !important;
+      &:hover,
+      &:focus {
+        border: none !important;
+        border-bottom: none !important;
+      }
+    }
+    div[type="button"] {
+      border-bottom: none !important;
+      padding: 0 !important;
+    }
+
+    &.disabled {
+      border-color: var(--field-color-border-disabled);
+      border-style: dashed;
+      background: var(--field-color-background-disabled);
+    }
+
+    &.invalid {
+      border-color: var(--field-color-border-negative);
+    }
+
+    i {
+      border-bottom: none !important;
+
+      &.required-indicator.bhi-circle {
+        line-height: 1rem;
+      }
+      &.required-indicator.bhi-check {
+        line-height: 1.8rem;
+      }
+    }
+  }
+
+  // address1 full width on its own row; address2 full width on the row below
+  .street-address {
+    flex: 0 0 100%;
+  }
+  .apt {
+    flex: 0 0 100%;
+  }
+}

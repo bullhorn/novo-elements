@@ -5451,7 +5451,9 @@ export class IconDesignPage {
 @Component({
   selector: 'field-examples-page',
   template: `<h2>Basic Usage</h2>
-<p>tbw...</p>
+<p><code>novo-field</code> wraps any supported control — text inputs, textareas, date/time pickers, selects, and chip-based pickers —
+and provides a consistent label, hint, and error surface. Use <code>novoInput</code> on native <code>&lt;input&gt;</code> and <code>&lt;textarea&gt;</code> elements,
+<code>novo-select</code> for dropdowns, and <code>novo-chip-list</code> with <code>novo-autocomplete</code> for single- or multi-value pickers.</p>
 <p><code-example example="field-usage"></code-example></p>
 <h2>Anatomy</h2>
 <p>Form fields consists of the following parts:</p>

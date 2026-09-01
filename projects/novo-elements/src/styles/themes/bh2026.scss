@@ -73,7 +73,7 @@
   // --- Typography scale (map semantic sizes onto modern composite roles) ---
   --font-size-body:    var(--typography-body-default-font-size); // 1.4rem = 14px; overrides body's 1.2rem default
   --font-size-caption: var(--typography-meta-default-font-size);
-  --font-size-label:   var(--typography-label-lg-font-size);
+  --font-size-label:   var(--typography-input-label-lg-font-size);
   --font-size-text:    var(--typography-body-default-font-size);
   --font-size-button:  var(--typography-body-default-font-size);
   --font-size-title:   var(--typography-title-default-font-size);
@@ -87,7 +87,7 @@
   --button-gap:            var(--spacing-gap-sm);
   --button-height:         3.5rem;
   --button-icon-margin:    0;
-  --button-letter-spacing: var(--typography-button-letter-spacing);
+  --button-letter-spacing: var(--typography-button-default-letter-spacing);
   --button-padding-x:      var(--spacing-padding-md);
   --button-padding-y:      var(--spacing-padding-sm);
   --button-radius:         999px;

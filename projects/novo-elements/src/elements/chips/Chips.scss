@@ -68,6 +68,11 @@
     cursor: pointer;
     display: flex;
     align-items: center;
+
+    [data-theme='bh2026'] & {
+      bottom: -27px;
+    }
+
     i {
       font-size: 0.7rem;
       padding-bottom: 2px;
@@ -80,6 +85,10 @@
     right: 0;
     font-size: 1.1em;
     color: var(--font-color-base);
+
+    [data-theme='bh2026'] & {
+      bottom: 4px;
+    }
   }
 
   & + i {
