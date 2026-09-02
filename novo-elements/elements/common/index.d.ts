@@ -1,5 +1,5 @@
 import * as i0 from '@angular/core';
-import { TemplateRef, ElementRef, OnInit, EventEmitter, OnDestroy, ChangeDetectorRef, Renderer2, DoCheck, ViewContainerRef, InjectionToken, AfterViewChecked, QueryList, NgZone } from '@angular/core';
+import { TemplateRef, ElementRef, OnInit, OnDestroy, ChangeDetectorRef, Renderer2, DoCheck, ViewContainerRef, PipeTransform, InjectionToken, AfterViewChecked, EventEmitter, QueryList, NgZone } from '@angular/core';
 import { Observable, Subject, Subscription } from 'rxjs';
 import * as i3 from '@angular/common';
 import { NgSwitch } from '@angular/common';
@@ -247,11 +247,14 @@ interface ThemeChangeEvent {
 declare class NovoTheme {
     private _defaultTheme;
     private _currentTheme;
-    onThemeChange: EventEmitter<ThemeChangeEvent>;
+    currentTheme: i0.Signal<NovoThemeOptions>;
+    onThemeChange: Observable<ThemeChangeEvent>;
+    document: Document;
     /** Name of the theme being used. defaults to `bh2022-light`. */
     get themeName(): string;
     set themeName(value: string);
     use(options: NovoThemeOptions): Observable<any>;
+    isBh2026: i0.Signal<boolean>;
     /**
      * Changes the current theme
      */
@@ -323,6 +326,13 @@ declare class VisibleDirective {
     constructor(el: ElementRef);
     static ɵfac: i0.ɵɵFactoryDeclaration<VisibleDirective, never>;
     static ɵdir: i0.ɵɵDirectiveDeclaration<VisibleDirective, "[visible]", never, { "visible": { "alias": "visible"; "required": false; }; }, {}, never, never, false, never>;
+}
+
+declare class If2026ThemePipe implements PipeTransform {
+    theme: NovoTheme;
+    transform(value: any, elseVal?: any): any;
+    static ɵfac: i0.ɵɵFactoryDeclaration<If2026ThemePipe, never>;
+    static ɵpipe: i0.ɵɵPipeDeclaration<If2026ThemePipe, "ifBh2026Theme", false>;
 }
 
 /** @docs-private */
@@ -568,7 +578,7 @@ declare class NovoOptionModule {
 
 declare class NovoCommonModule {
     static ɵfac: i0.ɵɵFactoryDeclaration<NovoCommonModule, never>;
-    static ɵmod: i0.ɵɵNgModuleDeclaration<NovoCommonModule, [typeof NovoTemplate, typeof NovoText, typeof NovoTitle, typeof NovoCaption, typeof NovoLabel, typeof NovoLink, typeof MarginDirective, typeof PaddingDirective, typeof BackgroundColorDirective, typeof TextColorDirective, typeof BorderDirective, typeof GapDirective, typeof AccentColorDirective, typeof FillColorDirective, typeof FlexDirective, typeof ThemeColorDirective, typeof SwitchCasesDirective, typeof VisibleDirective], [typeof i3.CommonModule, typeof NovoOptionModule], [typeof NovoTemplate, typeof NovoText, typeof NovoTitle, typeof NovoCaption, typeof NovoLabel, typeof NovoLink, typeof MarginDirective, typeof PaddingDirective, typeof BackgroundColorDirective, typeof TextColorDirective, typeof BorderDirective, typeof GapDirective, typeof AccentColorDirective, typeof FillColorDirective, typeof FlexDirective, typeof ThemeColorDirective, typeof SwitchCasesDirective, typeof VisibleDirective]>;
+    static ɵmod: i0.ɵɵNgModuleDeclaration<NovoCommonModule, [typeof NovoTemplate, typeof NovoText, typeof NovoTitle, typeof NovoCaption, typeof NovoLabel, typeof NovoLink, typeof MarginDirective, typeof PaddingDirective, typeof BackgroundColorDirective, typeof TextColorDirective, typeof BorderDirective, typeof GapDirective, typeof AccentColorDirective, typeof FillColorDirective, typeof FlexDirective, typeof ThemeColorDirective, typeof SwitchCasesDirective, typeof VisibleDirective, typeof If2026ThemePipe], [typeof i3.CommonModule, typeof NovoOptionModule], [typeof NovoTemplate, typeof NovoText, typeof NovoTitle, typeof NovoCaption, typeof NovoLabel, typeof NovoLink, typeof MarginDirective, typeof PaddingDirective, typeof BackgroundColorDirective, typeof TextColorDirective, typeof BorderDirective, typeof GapDirective, typeof AccentColorDirective, typeof FillColorDirective, typeof FlexDirective, typeof ThemeColorDirective, typeof SwitchCasesDirective, typeof VisibleDirective, typeof If2026ThemePipe]>;
     static ɵinj: i0.ɵɵInjectorDeclaration<NovoCommonModule>;
 }
 
@@ -749,5 +759,5 @@ type HasTabIndexCtor = Constructor<HasTabIndex>;
 /** Mixin to augment a directive with a `tabIndex` property. */
 declare function mixinTabIndex<T extends AbstractConstructor<CanDisable>>(base: T, defaultTabIndex?: number): HasTabIndexCtor & T;
 
-export { AccentColorDirective, BackgroundColorDirective, BorderDirective, DEFAULT_THEME, ErrorStateMatcher, FillColorDirective, FlexDirective, GapDirective, MarginDirective, NOVO_OPTGROUP, NOVO_OPTION_PARENT_COMPONENT, NOVO_OVERLAY_CONTAINER, NovoBaseTextElement, NovoCaption, NovoCommonModule, NovoLabel, NovoLink, NovoOptgroup, NovoOptgroupBase, NovoOptgroupMixinBase, NovoOption, NovoOptionBase, NovoOptionModule, NovoOptionSelectionChange, NovoOverlayModule, NovoOverlayTemplateComponent, NovoPseudoCheckbox, NovoPseudoCheckboxModule, NovoTemplate, NovoText, NovoTheme, NovoThemeOptions, NovoTitle, PaddingDirective, ShowOnDirtyErrorStateMatcher, SwitchCasesDirective, TextColorDirective, ThemeColorDirective, VisibleDirective, _countGroupLabelsBeforeOption, _getOptionScrollPosition, getSpacingToken, mixinColor, mixinDisabled, mixinErrorState, mixinOverlay, mixinRequired, mixinSize, mixinTabIndex, normalizeThemeName };
+export { AccentColorDirective, BackgroundColorDirective, BorderDirective, DEFAULT_THEME, ErrorStateMatcher, FillColorDirective, FlexDirective, GapDirective, If2026ThemePipe, MarginDirective, NOVO_OPTGROUP, NOVO_OPTION_PARENT_COMPONENT, NOVO_OVERLAY_CONTAINER, NovoBaseTextElement, NovoCaption, NovoCommonModule, NovoLabel, NovoLink, NovoOptgroup, NovoOptgroupBase, NovoOptgroupMixinBase, NovoOption, NovoOptionBase, NovoOptionModule, NovoOptionSelectionChange, NovoOverlayModule, NovoOverlayTemplateComponent, NovoPseudoCheckbox, NovoPseudoCheckboxModule, NovoTemplate, NovoText, NovoTheme, NovoThemeOptions, NovoTitle, PaddingDirective, ShowOnDirtyErrorStateMatcher, SwitchCasesDirective, TextColorDirective, ThemeColorDirective, VisibleDirective, _countGroupLabelsBeforeOption, _getOptionScrollPosition, getSpacingToken, mixinColor, mixinDisabled, mixinErrorState, mixinOverlay, mixinRequired, mixinSize, mixinTabIndex, normalizeThemeName };
 export type { AbstractConstructor, CanColor, CanColorCtor, CanDisable, CanDisableCtor, CanRequire, CanRequireCtor, CanSize, CanSizeCtor, CanUpdateErrorState, CanUpdateErrorStateCtor, Constructor, ElementSize, HasElementRef, HasErrorState, HasOverlay, HasOverlayCtor, HasTabIndex, HasTabIndexCtor, NovoOptionParentComponent, NovoPseudoCheckboxShape, NovoPseudoCheckboxState, ThemeChangeEvent, ThemeName, ThemePalette, TypographyLength, TypographySize, TypographyWeight };

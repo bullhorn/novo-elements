@@ -4,5 +4,8 @@
   display: block;
   &:not(.condensed) {
     padding: var(--spacing-md);
+    :root[data-theme=bh2026] & {
+      padding-inline: var(--spacing-gutter);
+    }
   }
 }

@@ -801,7 +801,7 @@ control-prompt-modal {
 
 .novo-form-control-label {
   font-weight: 500;
-  word-break: word-break;
+  word-break: break-word;
   overflow-wrap: break-word;
   line-height: 1.375;
   color: var(--text-muted);
@@ -817,5 +817,264 @@ control-prompt-modal {
   &.encrypted {
     max-width: 110px;
     min-width: 110px;
+  }
+}
+
+// Control types that should not receive the bh2026 bordered-input treatment
+$bh2026-borderless-types: ('quick-note', 'checkbox', 'checklist', 'editor', 'tiles', 'switch', 'file', 'address');
+$bh2026-not-borderless: '';
+@each $type in $bh2026-borderless-types {
+  $bh2026-not-borderless: $bh2026-not-borderless + ':not(.#{$type})';
+}
+
+// bh2026: uppercase label + tighter value typography
+// ViewEncapsulation.None: use plain selectors (not :host-context which is Shadow DOM only)
+:root[data-theme='bh2026'] {
+  label.novo-control-label {
+    &.novo-control-filled,
+    &.novo-control-focused,
+    &.novo-control-always-active {
+      font-weight: var(--typography-input-label-md-font-weight) !important;
+      font-size: var(--typography-input-label-md-font-size) !important;
+      letter-spacing: var(--typography-input-label-md-letter-spacing);
+      text-transform: var(--typography-input-label-sm-text-transform);
+      color: var(--color-text-body) !important;
+    }
+  }
+  .novo-form-control-label {
+    font-weight: var(--typography-input-label-md-font-weight) !important;
+    font-size: var(--typography-input-label-md-font-size) !important;
+    letter-spacing: var(--typography-input-label-md-letter-spacing);
+    text-transform: var(--typography-input-label-sm-text-transform);
+    color: var(--color-text-body) !important;
+    margin-right: var(--spacing-gap-lg);
+    max-width: 128px;
+    min-width: 128px;
+  }
+  .novo-control-outer-container input:not([type='checkbox']):not([type='radio']) {
+    font-size: var(--typography-input-value-default-font-size) !important;
+    font-weight: var(--typography-input-value-default-font-weight) !important;
+  }
+  .field-message,
+  novo-tip-well.active {
+    font-size: var(--typography-input-value-sm-font-size);
+    font-weight: var(--typography-input-value-sm-font-weight);
+    color: var(--color-text-subtle);
+
+    // $grey is a compile-time SCSS variable — explicit selectors required to override
+    .character-count,
+    .record-count {
+      font-size: var(--typography-input-value-sm-font-size);
+      color: var(--color-text-subtle);
+    }
+  }
+  .error-message {
+    .character-count {
+      font-size: var(--typography-input-value-sm-font-size);
+      color: var(--color-text-subtle);
+    }
+  }
+
+  // Bordered input container (excludes $bh2026-borderless-types)
+  .novo-control-input#{$bh2026-not-borderless} {
+    border: var(--field-border-width-default) solid var(--field-color-border-default);
+    border-radius: var(--field-border-radius-default);
+    background: var(--field-color-background-default);
+    padding: var(--field-spacing-padding-vertical) var(--field-spacing-padding-horizontal);
+    min-height: 4rem;
+    box-sizing: border-box;
+
+    &:hover {
+      border-color: var(--field-color-border-hover);
+    }
+    &:focus-within {
+      border-width: var(--field-border-width-focus);
+      border-color: var(--field-color-border-focus);
+    }
+
+    // Container owns the border; suppress inner element bottom-borders
+    input,
+    textarea,
+    novo-chips,
+    novo-select > .novo-select-trigger {
+      border: none !important;
+      &:hover,
+      &:focus {
+        border: none !important;
+      }
+    }
+    div[type="button"] {
+      border-bottom: none !important;
+    }
+
+    // Correction for search icon in chips pickers
+    novo-chips.with-value > i {
+      bottom: 8px;
+    }
+  }
+
+  .novo-select-list.active {
+    margin-block: 1.4rem !important; // results in 2px difference between border and overlay
+  }
+
+  // Suppress input-level error border-bottom (container handles it)
+  input.ng-touched.ng-invalid:not(.ng-pristine):not(.novo-control-container),
+  novo-picker.ng-touched.ng-invalid:not(.ng-pristine) input,
+  textarea.ng-touched.ng-invalid:not(.ng-pristine):not(.ng-valid) {
+    border-bottom: none !important;
+  }
+
+  // Error: move negative border to container
+  div.novo-control-input#{$bh2026-not-borderless}:has(input.ng-touched.ng-invalid:not(.ng-pristine)),
+  div.novo-control-input#{$bh2026-not-borderless}:has(textarea.ng-touched.ng-invalid:not(.ng-pristine):not(.ng-valid)) {
+    border-width: var(--field-border-width-negative);
+    border-color: var(--field-color-border-negative);
+    &:hover {
+      border-color: var(--field-color-border-negative);
+    }
+  }
+
+  // Disabled container
+  novo-control.disabled .novo-control-input#{$bh2026-not-borderless},
+  novo-custom-control-container.disabled .novo-control-input#{$bh2026-not-borderless} {
+    border-color: var(--field-color-border-disabled);
+    border-style: dashed;
+    background: var(--field-color-background-disabled);
+
+    input,
+    textarea {
+      border: none !important;
+    }
+    div[type="button"] {
+      border-bottom: none !important;
+    }
+  }
+
+  // Suppress all address input borders when in bh2026
+  novo-form,
+  novo-dynamic-form {
+    .novo-form-container form {
+      div.novo-form-row,
+      div.novo-control-group-control,
+      td.novo-form-row {
+        novo-control,
+        novo-custom-control-container {
+          > div.novo-control-container > div.novo-control-outer-container .novo-control-inner-container .novo-control-inner-input-container > div.novo-control-input.address {
+            input {
+              border: none !important;
+              border-bottom: none !important;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Pickers show up with a 2px space between them and the active control
+  checklist-picker-results,
+  distribution-list-picker-results,
+  entity-picker-results,
+  grouped-multi-picker-results,
+  mixed-multi-picker-results,
+  novo-date-picker,
+  novo-date-time-picker,
+  novo-time-picker,
+  picker-results,
+  skill-specialty-picker-results {
+    margin-block: var(--spacing-12) !important;
+  }
+
+  // Picker overlay styling within forms
+  picker-results,
+  entity-picker-results {
+    border: 1px solid var(--color-border-default);
+    background: var(--background-bright);
+
+    .novo-list,
+    novo-list,
+    ul {
+      border: none;
+      box-shadow: none;
+    }
+
+    picker-error,
+    picker-loader,
+    picker-null-recent-results,
+    picker-null-results,
+    .picker-error,
+    .picker-loader,
+    .picker-null-recent-results,
+    .picker-null-results {
+      border: none;
+      box-shadow: none;
+      padding: var(--spacing-padding-md) var(--spacing-padding-lg);
+    }
+
+    > p {
+      margin: 0;
+      padding: var(--spacing-padding-md) var(--spacing-padding-lg);
+    }
+  }
+
+  // Card styling of fieldsets
+  .novo-fieldset-container.card-section,
+  novo-form .novo-form-container.card-section {
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--color-border-default);
+    box-shadow: var(--shadow-2);
+    background: var(--color-background-default);
+    padding-bottom: var(--spacing-padding-md);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+
+    .novo-form-row {
+      padding-left: var(--spacing-padding-lg);
+      padding-right: var(--spacing-padding-lg);
+    }
+
+    novo-control,
+    novo-custom-control-container {
+      margin-top: 0 !important;
+    }
+  }
+
+  .novo-fieldset-container.card-section {
+    padding-top: 0;
+    padding-left: 0;
+    padding-right: 0;
+    margin-top: var(--spacing-margin);
+    margin-bottom: 0;
+
+    &:not(:has(> novo-fieldset-header)) {
+      padding-top: var(--spacing-padding-lg);
+    }
+  }
+
+  novo-form .novo-form-container.card-section {
+    padding-top: var(--spacing-padding-md);
+  }
+
+  novo-form,
+  novo-dynamic-form {
+    max-width: 720px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .novo-form-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+
+    novo-fieldset {
+      margin-top: 0;
+    }
+  }
+
+  .novo-form-row.hidden {
+    display: none;
   }
 }

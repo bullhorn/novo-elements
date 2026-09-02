@@ -7,8 +7,31 @@
   flex-direction: row;
   align-items: center;
   gap: var(--spacing-md);
+  :root[data-theme=bh2026] & {
+    padding: var(--spacing-padding-md) var(--spacing-padding-md) 0 var(--spacing-gutter);
+    gap: 0;
+    .card-move-handle {
+      transition: color 0.3s ease-in-out;
+    }
+    &:not(:hover) {
+      .card-move-handle {
+        color: transparent;
+      }
+    }
+    .novo-card-header-text {
+      font-size: var(--typography-card-header-font-size, 1.8rem);
+      font-weight: var(--typography-card-header-font-weight, 500);
+      ::ng-deep novo-title {
+        font: inherit;
+      }
+    }
+  }
+  
 
   .novo-card-header-text {
     flex: 1 1 0px;
+    :root[data-theme=bh2026] & {
+      padding-inline-start: var(--spacing-padding-sm);
+    }
   }
 }

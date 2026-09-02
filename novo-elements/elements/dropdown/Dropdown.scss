@@ -16,13 +16,29 @@
       font-size: 0.8em !important;
       width: 1em !important;
       height: 1em !important;
-      margin: 0 0.5em;
+      margin: 0 var(--button-icon-margin, 0.5em);
     }
+  }
+}
+
+// bh2026: swap out the collapse icon for the sort-desc icon and style to ensure proper placement
+:host-context([data-theme='bh2026']) {
+  ::ng-deep .novo-button-icon {
+    font-size: 1em !important;
+  }
+  ::ng-deep i.bhi-collapse {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+  ::ng-deep i.bhi-collapse::before {
+    content: "\f226"; // bhi-sort-desc - all code points are fixed in bullhorn-icons
   }
 }
 
 .dropdown-container {
   background-color: var(--background-bright, $color-bright);
+  border-radius: var(--border-radius-sm);
   list-style: none;
   margin: 0;
   padding: 0;

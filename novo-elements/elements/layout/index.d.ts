@@ -1,5 +1,5 @@
 import * as i0 from '@angular/core';
-import { AfterContentInit, ChangeDetectorRef, ElementRef, NgZone, DestroyRef, InjectionToken, AfterContentChecked, OnDestroy, EventEmitter, DoCheck, QueryList } from '@angular/core';
+import { ElementRef, AfterContentInit, ChangeDetectorRef, NgZone, DestroyRef, InjectionToken, AfterContentChecked, OnDestroy, EventEmitter, DoCheck, QueryList } from '@angular/core';
 import { Directionality } from '@angular/cdk/bidi';
 import { BooleanInput, NumberInput } from '@angular/cdk/coercion';
 import { CdkScrollable, ScrollDispatcher, ViewportRuler } from '@angular/cdk/overlay';
@@ -9,6 +9,14 @@ import { FocusTrapFactory, FocusMonitor, FocusOrigin } from '@angular/cdk/a11y';
 import { Platform } from '@angular/cdk/platform';
 import * as i6 from '@angular/common';
 
+type NavTransitionState = 'collapsed' | 'expanding' | 'expanded' | 'collapsing';
+declare class CollapsibleNavExpansionEvent extends Event {
+    srcEvent: Event;
+    private _expandPrevented;
+    get expandPrevented(): boolean;
+    constructor(srcEvent: Event);
+    preventExpand(): void;
+}
 /**
  * A slide-out navigation panel that expands to a full-width panel or collapses to a narrow icon rail.
  * Generic building block: consumers project their own header, body, and footer content.
@@ -20,10 +28,22 @@ declare class NovoCollapsibleNavComponent {
     expandedWidth: i0.InputSignal<string>;
     /** Width of the panel when collapsed to the icon rail. */
     collapsedWidth: i0.InputSignal<string>;
+    /** Time in ms to delay between the user entering the nav region, and expanding it */
+    expandDelay: i0.ModelSignal<number>;
     /** When true, hovering a collapsed panel temporarily expands it as an overlay without affecting layout. */
     overlayOnHover: i0.InputSignal<boolean>;
+    hoveredChange: i0.OutputEmitterRef<boolean>;
+    transitionChange: i0.OutputEmitterRef<NavTransitionState>;
+    manualExpand: i0.OutputEmitterRef<CollapsibleNavExpansionEvent>;
+    readonly element: ElementRef<any>;
+    private readonly destroyRef;
     private readonly isHovered;
+    private readonly isHoveredDebounced$;
+    private readonly isEffectiveHovered;
     private readonly effectiveCollapsed;
+    private readonly clicked$;
+    private readonly activationKeyPressed$;
+    private readonly manualExpandUnprevented$;
     constructor();
     onMouseEnter(): void;
     onMouseLeave(): void;
@@ -34,12 +54,16 @@ declare class NovoCollapsibleNavComponent {
             collapsedWidth: string;
         };
     };
+    transitionStart(event: any): void;
+    transitionEnd(event: any): void;
+    private debounceHover;
+    private setupExpandFromActivation;
     get isCollapsed(): boolean;
     toggle(): void;
     expand(): void;
     collapse(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<NovoCollapsibleNavComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<NovoCollapsibleNavComponent, "novo-collapsible-nav", ["novoCollapsibleNav"], { "collapsed": { "alias": "collapsed"; "required": false; "isSignal": true; }; "expandedWidth": { "alias": "expandedWidth"; "required": false; "isSignal": true; }; "collapsedWidth": { "alias": "collapsedWidth"; "required": false; "isSignal": true; }; "overlayOnHover": { "alias": "overlayOnHover"; "required": false; "isSignal": true; }; }, { "collapsed": "collapsedChange"; }, never, ["[novo-collapsible-nav-header]", "[novo-collapsible-nav-body]", "[novo-collapsible-nav-footer]"], false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<NovoCollapsibleNavComponent, "novo-collapsible-nav", ["novoCollapsibleNav"], { "collapsed": { "alias": "collapsed"; "required": false; "isSignal": true; }; "expandedWidth": { "alias": "expandedWidth"; "required": false; "isSignal": true; }; "collapsedWidth": { "alias": "collapsedWidth"; "required": false; "isSignal": true; }; "expandDelay": { "alias": "expandDelay"; "required": false; "isSignal": true; }; "overlayOnHover": { "alias": "overlayOnHover"; "required": false; "isSignal": true; }; }, { "collapsed": "collapsedChange"; "expandDelay": "expandDelayChange"; "hoveredChange": "hoveredChange"; "transitionChange": "transitionChange"; "manualExpand": "manualExpand"; }, never, ["[novo-collapsible-nav-header]", "[novo-collapsible-nav-body]", "[novo-collapsible-nav-footer]"], false, never>;
 }
 
 declare class NovoLayoutContent extends CdkScrollable implements AfterContentInit {
@@ -335,5 +359,5 @@ declare class NovoLayoutModule {
     static ɵinj: i0.ɵɵInjectorDeclaration<NovoLayoutModule>;
 }
 
-export { NOVO_LAYOUT_CONTAINER, NOVO_LAYOUT_DEFAULT_AUTOSIZE, NOVO_LAYOUT_DEFAULT_AUTOSIZE_FACTORY, NovoCollapsibleNavComponent, NovoLayoutContainer, NovoLayoutContent, NovoLayoutModule, NovoRailComponent, NovoSidenavComponent, throwNovoDuplicatedSidenavError };
-export type { NovoSidenavMode, NovoSidenavToggleResult };
+export { CollapsibleNavExpansionEvent, NOVO_LAYOUT_CONTAINER, NOVO_LAYOUT_DEFAULT_AUTOSIZE, NOVO_LAYOUT_DEFAULT_AUTOSIZE_FACTORY, NovoCollapsibleNavComponent, NovoLayoutContainer, NovoLayoutContent, NovoLayoutModule, NovoRailComponent, NovoSidenavComponent, throwNovoDuplicatedSidenavError };
+export type { NavTransitionState, NovoSidenavMode, NovoSidenavToggleResult };

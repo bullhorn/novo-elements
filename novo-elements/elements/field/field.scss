@@ -109,15 +109,19 @@
   }
 }
 
-// bh2026: lighter label
+// bh2026: uppercase label + tighter value typography
 :host-context([data-theme='bh2026']) {
   .novo-field-label {
-    font-weight: 600;
-    font-size: 1rem;
-    color: var(--color-content-subtle, #8ca1b9);
+      text-transform: var(--typography-input-label-sm-text-transform);
+    ::ng-deep novo-label {
+      font-weight: var(--typography-input-label-sm-font-weight);
+      font-size: var(--typography-input-label-sm-font-size);
+      letter-spacing: var(--typography-input-label-sm-letter-spacing);
+      color: var(--color-text-body);
+    }
   }
   .novo-field-input ::ng-deep .novo-input-element {
-    font-size: 1.4rem;
-    font-weight: 500;
+    font-size: var(--typography-input-value-default-font-size);
+    font-weight: var(--typography-input-value-default-font-weight);
   }
 }

@@ -107,6 +107,7 @@ $breakpoint: 1000px;
         font-size: var(--font-size-text);
         border-radius: var(--border-radius-xsm, 2px);
         list-style-type: none;
+        margin-top: 3px;
         cursor: pointer;
         color: var(--color-company);
         &.disabled {
@@ -123,6 +124,78 @@ $breakpoint: 1000px;
     .novo-data-table-of-total-amount {
       color: var(--color-slate);
       font-size: var(--font-size-sm);
+    }
+  }
+}
+
+:host-context([data-theme='bh2026']) {
+  &.standard {
+    align-items: center;
+    border-top: 1px solid var(--pagination-color-border-default, var(--border));
+    padding: var(--spacing-padding-sm) var(--spacing-padding-sm) 0 var(--spacing-padding-md);
+
+    > * {
+      margin: 0;
+    }
+
+    h5.rows {
+      color: var(--pagination-color-content-label, var(--text-muted));
+      font-size: var(--typography-font-size-12);
+      font-weight: var(--typography-meta-sm-font-weight);
+      letter-spacing: var(--typography-meta-sm-letter-spacing);
+      line-height: var(--typography-meta-sm-line-height);
+      margin-right: var(--spacing-gap-sm);
+      opacity: 1;
+      padding: 0;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    novo-select {
+      color: var(--text-muted);
+      max-width: 60px;
+      min-width: 60px;
+      margin-right: var(--spacing-gap-sm);
+
+      ::ng-deep .novo-select-trigger {
+        height: var(--spacing-padding-xlg);
+        width: 5rem;
+
+        i.bhi-collapse::before {
+          content: "\f226"; // bhi-sort-desc - all code points are fixed in bullhorn-icons
+        }
+
+        span.text-ellipsis {
+          color: var(--button-color-select-color-content-value, var(--text-secondary));
+          font-size: var(--typography-button-default-font-size, var(--font-size-body));
+          font-weight: var(--typography-button-default-font-weight, var(--typography-body-default-font-weight));
+          letter-spacing: var(--typography-button-default-letter-spacing, var(--typography-body-default-letter-spacing));
+          line-height: var(--typography-button-default-line-height, var(--typography-line-height-20));
+        }
+      }
+    }
+
+    .novo-data-table-of-total-amount {
+      color: var(--pagination-color-content-label, var(--text-muted));
+      font-size: var(--typography-font-size-12);
+      font-weight: var(--typography-meta-sm-font-weight);
+    }
+
+    .pager {
+      gap: var(--data-table-spacing-gap, 0);
+
+      .page {
+        border-radius: var(--border-radius-xsm);
+        color: var(--pagination-color-content-label, var(--text-muted));
+        font-size: var(--typography-font-size-12);
+        font-weight: var(--typography-meta-sm-font-weight);
+
+        &.active {
+          background: var(--color-background-subtle, var(--background-muted));
+          border: 1px solid var(--pagination-color-border-default, var(--border));
+          opacity: 1;
+        }
+      }
     }
   }
 }

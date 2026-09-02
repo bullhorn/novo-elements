@@ -142,10 +142,46 @@ $switch-thumb-size: 20px !default;
   }
 }
 
-// bh2026: outlined toggle — white track + 1px neutral border in the off state
+// bh2026: 32×20 pill track, 16×16 thumb, always white — per Figma spec
 :host-context([data-theme='bh2026']) {
+  .novo-switch-container {
+    width: 32px;
+    height: 20px;
+  }
   .novo-switch-bar {
-    background-color: var(--toggle-color-background, #ffffff);
-    border: 1px solid var(--toggle-color-border, var(--color-border-default, #f0f5f9));
+    top: 0;
+    left: 0;
+    width: 32px;
+    height: 20px;
+    border-radius: 10px;
+    background-color: white;
+    border: 1px solid var(--color-border-input);
+  }
+  .novo-switch-thumb-container {
+    top: 2px;
+    left: 2px;
+    width: 12px; // travel: 32 - 16 - 4px padding = 12px
+  }
+  .novo-switch-thumb {
+    height: 16px;
+    width: 16px;
+    background-color: white;
+    border: 1px solid var(--color-border-input);
+    box-shadow: 0px 2px 4px 0px var(--color-transparency-charcoal-04);
+
+    novo-icon {
+      display: none;
+    }
+  }
+
+  &[aria-checked="true"] {
+    .novo-switch-bar {
+      background-color: var(--color-utility-blue-600);
+      border: none;
+    }
+    .novo-switch-thumb {
+      background-color: white;
+      border: none;
+    }
   }
 }

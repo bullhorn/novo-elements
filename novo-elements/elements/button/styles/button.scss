@@ -42,7 +42,7 @@
 
   &[size="small"],
   &[size="sm"] {
-    font-size: var(--font-size-xs);
+    font-size: var(--font-size-sm);
     padding: 0 var(--spacing-md);
     height: 2.4rem;
     gap: var(--spacing-sm);
@@ -113,5 +113,16 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+:host-context([data-theme='bh2026']) {
+  box-shadow: var(--button-shadow);
+
+  &:hover {
+    box-shadow: var(--button-shadow-hover);
+  }
+  &:active {
+    box-shadow: var(--button-shadow-active);
   }
 }

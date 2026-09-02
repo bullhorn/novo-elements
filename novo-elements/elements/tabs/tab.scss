@@ -28,6 +28,8 @@
     gap: var(--spacing-xs);
     cursor: pointer;
     text-transform: uppercase;
+    -webkit-user-select: none;
+    user-select: none;
     &:focus {
       outline: none;
     }
@@ -157,44 +159,81 @@
   }
 }
 
-// bh2026: charcoal tabs, near-black active text + rounded neutral indicator
+// bh2026: subtle default text, body text when active/hover, blue indicator only
 :host-context([data-theme='bh2026']) {
   margin-right: var(--spacing-gap-lg);
-
+  
   .novo-tab-link {
-    color: var(--color-content-link, #282828);
+    color: var(--color-text-subtle);
     // Tabs are Title Case, not uppercase.
     text-transform: none;
-    font-weight: 400;
+    font-weight: var(--typography-tabs-default-font-weight);
   }
 
   &.active,
   &.router-link-active {
-    color: var(--color-content-link-hover, #221f1f);
     .novo-tab-link {
-      color: var(--color-content-link-hover, #221f1f);
-      font-weight: 500;
+      color: var(--color-text-body);
+      font-weight: var(--typography-tabs-active-font-weight);
     }
     .indicator {
-      background: var(--color-content-link-hover, #221f1f);
-      border-radius: 999px;
-      // Quarter round from the top, flat on bottom
-      border-radius: 3px 3px 0 0 / 100% 100% 0 0;
+      background: var(--tab-indicator-color, var(--color-border-utility-positive));
+      border-radius: 999px 999px 0 0;
+      height: 2px;
     }
   }
 
-  &:hover {
+  &:hover:not(.active):not(.router-link-active):not(.disabled) {
     .novo-tab-link {
-      font-weight: 500;
+      color: var(--color-text-body);
+      font-weight: var(--typography-tabs-default-font-weight) !important;
     }
   }
 }
 
+:host-context([data-theme='bh2026'] novo-nav[direction=vertical]) {
+  margin-right: 0;
+
+  &.active,
+  &.router-link-active {
+    .indicator {
+      border-radius: 0 999px 999px 0;
+    }
+  }
+}
+
+:host-context([data-theme='bh2026'] novo-nav[theme="color"]) {
+  .novo-tab-link {
+    color: var(--color-text-subtle) !important;
+    text-transform: none;
+    font-weight: var(--typography-tabs-default-font-weight);
+  }
+
+  &.active,
+  &.router-link-active {
+    .novo-tab-link {
+      color: var(--color-text-body) !important;
+      font-weight: var(--typography-tabs-active-font-weight);
+    }
+
+    .indicator {
+      background: var(--tab-indicator-color, var(--color-border-utility-positive));
+      border-radius: 999px 999px 0 0;
+      height: 2px;
+    }
+  }
+
+  &:hover:not(.active):not(.router-link-active):not(.disabled) {
+    .novo-tab-link {
+      color: var(--color-text-body) !important;
+    }
+  }
+}
 
 :host-context(novo-nav[theme="color"]),
 :host-context(novo-nav[theme="neutral"]) {
   .novo-tab-link {
-    color: #fff;
+    color: #fff !important;
   }
   &.active,
   &.router-link-active {

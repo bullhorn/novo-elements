@@ -1,10 +1,10 @@
 @import "../../styles/variables.scss";
 
 @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
-  :host-context([theme="#{$name}"]) {
-    &.novo-item-content > ::ng-deep * {
-      color: rgba(#fff, 0.65);
-    }
+  // Wonky deprecation: For 2026, stringently avoid using * selectors to apply font/color changes - prefer inherit functionality
+  // This setup made it very hard to provide overrides.
+  :host-context([theme="#{$name}"]).novo-item-content {
+    color: rgba(#fff, 0.65);
   }
 }
 
@@ -15,13 +15,14 @@
 :host {
   display: flex;
   margin-left: 0.2em;
-  &.novo-item-content > ::ng-deep * {
+  
+  &.novo-item-content {
     color: rgba(#434343, 0.85);
-  }
-  &.novo-item-content ::ng-deep i {
-    @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
-      &.#{$name} {
-        color: getCssVarname($name);
+    ::ng-deep i {
+      @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
+        &.#{$name} {
+          color: getCssVarname($name);
+        }
       }
     }
   }

@@ -6,16 +6,17 @@ novo-picker {
   align-items: center;
   flex-wrap: wrap;
   justify-content: flex-start;
-  padding-bottom: 5px;
+  padding-bottom: 0;
   transition: all 200ms ease-in-out;
   position: relative;
+
   &.selected,
   &.selected:hover {
     & + i {
       color: var(--color-positive);
     }
   }
-  padding-bottom: 0;
+
   &.ng-touched.ng-invalid:not(.ng-pristine) {
     > input,
     > input:hover,
@@ -23,6 +24,7 @@ novo-picker {
       border-bottom-color: transparent !important;
     }
   }
+
   input {
     font-size: 1em;
     background: transparent !important;
@@ -38,26 +40,33 @@ novo-picker {
     box-sizing: content-box;
     transition: all 300ms;
     color: #26282b;
+
     &:hover {
       border-bottom: 1px solid brightenLive('--color-dark', 15);
     }
+
     &:focus {
       border-bottom: 1px solid var(--color-positive);
     }
+
     &:invalid {
       border-bottom: 1px solid #da4453;
     }
+
     &.entity-picker {
       padding-left: 2em;
     }
+
     &.entity-selected {
       padding-left: 2.5em;
       background: var(--background-main) !important;
     }
+
     &:disabled {
       border-bottom: 1px dashed brightenLive('--color-dark', 45) !important;
     }
   }
+
   i.bhi-more {
     position: absolute;
     left: 0;
@@ -67,6 +76,7 @@ novo-picker {
     border-radius: var(--border-radius-sm, 3px);
     padding: 3px;
   }
+
   i.entity-icon {
     position: absolute;
     left: 5px;
@@ -76,28 +86,39 @@ novo-picker {
     padding: 3px;
     color: $white;
 
-    @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
+    @include theme-colors() using($name, $color, $contrast, $tint, $shade, $pale) {
       &.#{$name} {
         background: getCssVarname($name);
       }
     }
   }
+
   i.bhi-search,
   i.bhi-times {
     position: absolute;
     right: 0;
     color: var(--font-color-base);
+
     &.entity-selected {
       right: 5px;
     }
   }
+
   i.bhi-search {
-    top: 0px;
+    top: 0;
     font-size: var(--font-size-sm);
   }
+
   i.bhi-times {
-    top: 0px;
+    top: 0;
     cursor: pointer;
     font-size: var(--font-size-sm);
+  }
+
+  [data-theme='bh2026'] & {
+    i {
+      font-size: var(--typography-body-lg-font-size);
+      line-height: normal;
+    }
   }
 }

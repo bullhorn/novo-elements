@@ -46,7 +46,9 @@ $chip-spacing: (
   @include novo-body-text();
   background: var(--background-main);
   border: 1px solid transparent;
-  transition: all 200ms ease-in-out;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+  transition-property: color, opacity, border-color, border-width, background-color;
   display: inline-flex;
   align-items: center;
   cursor: default;
@@ -182,6 +184,50 @@ $chip-spacing: (
     &.novo-accent-#{$name} {
       border: 1px solid getCssVarname($name);
       color: getCssVarname($name);
+    }
+  }
+}
+
+:root[data-theme='bh2026'] {
+  .novo-chip {
+    background: var(--chip-color-background-default-default);
+    border: var(--chip-border-width) solid var(--chip-color-border-default-default);
+    border-radius: var(--chip-border-radius);
+    color: var(--chip-color-content-default);
+    gap: var(--chip-spacing-md-gap);
+    padding: var(--chip-spacing-md-padding-vertical) var(--chip-spacing-md-padding-horizontal);
+    max-height: var(--chip-spacing-md-max-height);
+    font-size: var(--typography-meta-default-font-size);
+    font-weight: var(--typography-meta-default-font-weight);
+    line-height: var(--typography-meta-default-line-height);
+
+    &:hover:not(.novo-chip-disabled) {
+      background: var(--chip-color-background-default-hover);
+      border-color: var(--chip-color-border-default-hover);
+      color: var(--chip-color-content-hover);
+    }
+
+    &.novo-chip-selectable:focus {
+      outline: none;
+      background: var(--chip-color-background-default-focus);
+      border-width: var(--chip-border-focus-width);
+      border-color: var(--chip-color-border-default-focus);
+      color: var(--chip-color-content-focus);
+      &::after {
+        opacity: 0;
+      }
+    }
+
+    &.novo-chip-disabled {
+      background: var(--chip-color-background-default-disabled);
+      border-color: var(--chip-color-border-default-disabled);
+      color: var(--chip-color-content-disabled);
+      opacity: 1;
+    }
+
+    .novo-chip-remove,
+    .novo-chip-trailing-icon {
+      color: inherit;
     }
   }
 }

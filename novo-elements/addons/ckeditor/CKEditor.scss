@@ -39,6 +39,14 @@
   }
 }
 
+:host-context(:root[data-theme='bh2026']) {
+  ::ng-deep .cke {
+    border: 1px solid var(--card-color-border-default, #dee0e3);
+    border-radius: var(--field-border-radius-default, 0.4rem);
+    overflow: hidden;
+  }
+}
+
 :host-context(.theme-dark) {
   ::ng-deep .cke_button {
     filter: invert(1);

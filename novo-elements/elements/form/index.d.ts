@@ -945,8 +945,10 @@ declare class NovoControlTemplates implements AfterViewInit {
 declare class NovoFieldsetHeaderElement {
     title: string;
     icon: string;
+    cardSection: boolean;
+    get cardIcon(): string;
     static ɵfac: i0.ɵɵFactoryDeclaration<NovoFieldsetHeaderElement, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<NovoFieldsetHeaderElement, "novo-fieldset-header", never, { "title": { "alias": "title"; "required": false; }; "icon": { "alias": "icon"; "required": false; }; }, {}, never, ["*"], false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<NovoFieldsetHeaderElement, "novo-fieldset-header", never, { "title": { "alias": "title"; "required": false; }; "icon": { "alias": "icon"; "required": false; }; "cardSection": { "alias": "cardSection"; "required": false; }; }, {}, never, ["*"], false, never>;
 }
 declare class NovoFieldsetElement {
     controls: Array<any>;
@@ -958,8 +960,9 @@ declare class NovoFieldsetElement {
     isEmbedded: boolean;
     isInlineEmbedded: boolean;
     hidden: boolean;
+    cardSection: boolean;
     static ɵfac: i0.ɵɵFactoryDeclaration<NovoFieldsetElement, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<NovoFieldsetElement, "novo-fieldset", never, { "controls": { "alias": "controls"; "required": false; }; "form": { "alias": "form"; "required": false; }; "title": { "alias": "title"; "required": false; }; "icon": { "alias": "icon"; "required": false; }; "index": { "alias": "index"; "required": false; }; "autoFocus": { "alias": "autoFocus"; "required": false; }; "isEmbedded": { "alias": "isEmbedded"; "required": false; }; "isInlineEmbedded": { "alias": "isInlineEmbedded"; "required": false; }; "hidden": { "alias": "hidden"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<NovoFieldsetElement, "novo-fieldset", never, { "controls": { "alias": "controls"; "required": false; }; "form": { "alias": "form"; "required": false; }; "title": { "alias": "title"; "required": false; }; "icon": { "alias": "icon"; "required": false; }; "index": { "alias": "index"; "required": false; }; "autoFocus": { "alias": "autoFocus"; "required": false; }; "isEmbedded": { "alias": "isEmbedded"; "required": false; }; "isInlineEmbedded": { "alias": "isInlineEmbedded"; "required": false; }; "hidden": { "alias": "hidden"; "required": false; }; "cardSection": { "alias": "cardSection"; "required": false; }; }, {}, never, never, false, never>;
 }
 declare class NovoDynamicFormElement implements OnChanges, OnInit, AfterContentInit {
     private element;
@@ -970,6 +973,7 @@ declare class NovoDynamicFormElement implements OnChanges, OnInit, AfterContentI
     layout: string;
     hideNonRequiredFields: boolean;
     autoFocusFirstField: boolean;
+    readonly hasCardSections: i0.InputSignal<boolean>;
     customTemplates: QueryList<NovoTemplate>;
     private fieldsAlreadyHidden;
     allFieldsRequired: boolean;
@@ -977,10 +981,14 @@ declare class NovoDynamicFormElement implements OnChanges, OnInit, AfterContentI
     showingAllFields: boolean;
     showingRequiredFields: boolean;
     numControls: number;
+    private readonly theme;
+    readonly effectiveCardSections: i0.Signal<boolean>;
+    get visibleFieldsets(): NovoFieldset[];
     constructor(element: ElementRef, templates: NovoTemplateService);
     ngOnInit(): void;
     ngOnChanges(changes?: SimpleChanges): void;
     ngAfterContentInit(): void;
+    hasVisibleControls(fieldset: NovoFieldset): boolean;
     showAllFields(): void;
     showOnlyRequired(hideRequiredWithValue: any): void;
     get values(): any;
@@ -988,7 +996,7 @@ declare class NovoDynamicFormElement implements OnChanges, OnInit, AfterContentI
     updatedValues(): any;
     forceValidation(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<NovoDynamicFormElement, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<NovoDynamicFormElement, "novo-dynamic-form", never, { "controls": { "alias": "controls"; "required": false; }; "fieldsets": { "alias": "fieldsets"; "required": false; }; "form": { "alias": "form"; "required": false; }; "layout": { "alias": "layout"; "required": false; }; "hideNonRequiredFields": { "alias": "hideNonRequiredFields"; "required": false; }; "autoFocusFirstField": { "alias": "autoFocusFirstField"; "required": false; }; }, {}, ["customTemplates"], ["form-title", "form-subtitle"], false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<NovoDynamicFormElement, "novo-dynamic-form", never, { "controls": { "alias": "controls"; "required": false; }; "fieldsets": { "alias": "fieldsets"; "required": false; }; "form": { "alias": "form"; "required": false; }; "layout": { "alias": "layout"; "required": false; }; "hideNonRequiredFields": { "alias": "hideNonRequiredFields"; "required": false; }; "autoFocusFirstField": { "alias": "autoFocusFirstField"; "required": false; }; "hasCardSections": { "alias": "hasCardSections"; "required": false; "isSignal": true; }; }, {}, ["customTemplates"], ["form-title", "form-subtitle"], false, never>;
 }
 
 interface AddressLookupResult {
@@ -1301,6 +1309,8 @@ declare class NovoFormElement implements AfterContentInit, OnInit {
     form: NovoFormGroup;
     layout: string;
     hideHeader: boolean;
+    readonly hasCardSections: i0.InputSignal<boolean>;
+    readonly effectiveCardSections: i0.Signal<boolean>;
     customTemplates: QueryList<NovoTemplate>;
     showingAllFields: boolean;
     showingRequiredFields: boolean;
@@ -1313,7 +1323,7 @@ declare class NovoFormElement implements AfterContentInit, OnInit {
     showOnlyRequired(hideRequiredWithValue: any): void;
     forceValidation(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<NovoFormElement, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<NovoFormElement, "novo-form", never, { "form": { "alias": "form"; "required": false; }; "layout": { "alias": "layout"; "required": false; }; "hideHeader": { "alias": "hideHeader"; "required": false; }; }, {}, ["customTemplates"], ["form-title", "form-subtitle", "*"], false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<NovoFormElement, "novo-form", never, { "form": { "alias": "form"; "required": false; }; "layout": { "alias": "layout"; "required": false; }; "hideHeader": { "alias": "hideHeader"; "required": false; }; "hasCardSections": { "alias": "hasCardSections"; "required": false; "isSignal": true; }; }, {}, ["customTemplates"], ["form-title", "form-subtitle", "*"], false, never>;
 }
 
 declare class NovoFormModule {

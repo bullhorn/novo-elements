@@ -12,8 +12,12 @@ declare class NovoTipWellElement implements OnInit {
     tip: string;
     buttonText: string;
     button: boolean;
+    buttonIcon: string;
     icon: string;
     sanitize: boolean;
+    variant: string;
+    buttonTheme: string;
+    buttonSize: string;
     confirmed: EventEmitter<any>;
     isActive: boolean;
     isLocalStorageEnabled: any;
@@ -25,7 +29,7 @@ declare class NovoTipWellElement implements OnInit {
     ngOnInit(): void;
     hideTip(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<NovoTipWellElement, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<NovoTipWellElement, "novo-tip-well", never, { "name": { "alias": "name"; "required": false; }; "tip": { "alias": "tip"; "required": false; }; "buttonText": { "alias": "buttonText"; "required": false; }; "button": { "alias": "button"; "required": false; }; "icon": { "alias": "icon"; "required": false; }; "sanitize": { "alias": "sanitize"; "required": false; }; }, { "confirmed": "confirmed"; }, never, ["novo-icon", "*"], false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<NovoTipWellElement, "novo-tip-well", never, { "name": { "alias": "name"; "required": false; }; "tip": { "alias": "tip"; "required": false; }; "buttonText": { "alias": "buttonText"; "required": false; }; "button": { "alias": "button"; "required": false; }; "buttonIcon": { "alias": "buttonIcon"; "required": false; }; "icon": { "alias": "icon"; "required": false; }; "sanitize": { "alias": "sanitize"; "required": false; }; "variant": { "alias": "variant"; "required": false; }; "buttonTheme": { "alias": "buttonTheme"; "required": false; }; "buttonSize": { "alias": "buttonSize"; "required": false; }; }, { "confirmed": "confirmed"; }, never, ["novo-icon", "*"], false, never>;
 }
 
 declare class NovoTipWellModule {

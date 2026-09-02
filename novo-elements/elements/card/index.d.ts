@@ -6,6 +6,7 @@ import * as i3 from 'novo-elements/elements/icon';
 import * as i4 from 'novo-elements/elements/button';
 import * as i5 from 'novo-elements/elements/loading';
 import * as i6 from 'novo-elements/elements/tooltip';
+import * as i7 from 'novo-elements/elements/common';
 
 declare class CardActionsElement {
     static ɵfac: i0.ɵɵFactoryDeclaration<CardActionsElement, never>;
@@ -37,6 +38,7 @@ declare class CardElement implements OnChanges, OnInit {
     message: string;
     messageIcon: string;
     icon: string;
+    iconColorClass: 'icon-color-auto' | 'icon-color-parent' | undefined;
     iconTooltip: string;
     refresh: boolean;
     close: boolean;
@@ -44,7 +46,7 @@ declare class CardElement implements OnChanges, OnInit {
     loading: boolean;
     inline: boolean;
     inset: string;
-    get hbInset(): string;
+    get cardClass(): string;
     onClose: EventEmitter<void>;
     onRefresh: EventEmitter<void>;
     cardAutomationId: string;
@@ -57,12 +59,12 @@ declare class CardElement implements OnChanges, OnInit {
     toggleClose(): void;
     toggleRefresh(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<CardElement, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<CardElement, "novo-card", never, { "padding": { "alias": "padding"; "required": false; }; "config": { "alias": "config"; "required": false; }; "title": { "alias": "title"; "required": false; }; "message": { "alias": "message"; "required": false; }; "messageIcon": { "alias": "messageIcon"; "required": false; }; "icon": { "alias": "icon"; "required": false; }; "iconTooltip": { "alias": "iconTooltip"; "required": false; }; "refresh": { "alias": "refresh"; "required": false; }; "close": { "alias": "close"; "required": false; }; "move": { "alias": "move"; "required": false; }; "loading": { "alias": "loading"; "required": false; }; "inline": { "alias": "inline"; "required": false; }; "inset": { "alias": "inset"; "required": false; }; }, { "onClose": "onClose"; "onRefresh": "onRefresh"; }, never, ["novo-card-actions", "*", "footer,novo-card-footer,[novo-card-footer],[novoCardFooter]"], false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<CardElement, "novo-card", never, { "padding": { "alias": "padding"; "required": false; }; "config": { "alias": "config"; "required": false; }; "title": { "alias": "title"; "required": false; }; "message": { "alias": "message"; "required": false; }; "messageIcon": { "alias": "messageIcon"; "required": false; }; "icon": { "alias": "icon"; "required": false; }; "iconColorClass": { "alias": "iconColorClass"; "required": false; }; "iconTooltip": { "alias": "iconTooltip"; "required": false; }; "refresh": { "alias": "refresh"; "required": false; }; "close": { "alias": "close"; "required": false; }; "move": { "alias": "move"; "required": false; }; "loading": { "alias": "loading"; "required": false; }; "inline": { "alias": "inline"; "required": false; }; "inset": { "alias": "inset"; "required": false; }; }, { "onClose": "onClose"; "onRefresh": "onRefresh"; }, never, ["novo-card-actions", "*", "footer,novo-card-footer,[novo-card-footer],[novoCardFooter]"], false, never>;
 }
 
 declare class NovoCardModule {
     static ɵfac: i0.ɵɵFactoryDeclaration<NovoCardModule, never>;
-    static ɵmod: i0.ɵɵNgModuleDeclaration<NovoCardModule, [typeof CardElement, typeof CardActionsElement, typeof CardContentElement, typeof CardHeaderElement, typeof CardFooterElement], [typeof i2.CommonModule, typeof i3.NovoIconModule, typeof i4.NovoButtonModule, typeof i5.NovoLoadingModule, typeof i6.NovoTooltipModule], [typeof CardElement, typeof CardActionsElement, typeof CardContentElement, typeof CardHeaderElement, typeof CardFooterElement]>;
+    static ɵmod: i0.ɵɵNgModuleDeclaration<NovoCardModule, [typeof CardElement, typeof CardActionsElement, typeof CardContentElement, typeof CardHeaderElement, typeof CardFooterElement], [typeof i2.CommonModule, typeof i3.NovoIconModule, typeof i4.NovoButtonModule, typeof i5.NovoLoadingModule, typeof i6.NovoTooltipModule, typeof i7.NovoCommonModule], [typeof CardElement, typeof CardActionsElement, typeof CardContentElement, typeof CardHeaderElement, typeof CardFooterElement]>;
     static ɵinj: i0.ɵɵInjectorDeclaration<NovoCardModule>;
 }
 

@@ -4,7 +4,8 @@ import { Overlay } from '@angular/cdk/overlay';
 import * as i3 from '@angular/common';
 
 declare class NovoTooltip {
-    message: string;
+    readonly message: i0.WritableSignal<string>;
+    readonly messageLines: i0.Signal<string[]>;
     hidden: boolean;
     tooltipType: string;
     rounded: boolean;

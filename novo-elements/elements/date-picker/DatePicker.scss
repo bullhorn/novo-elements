@@ -3,7 +3,7 @@
 :host {
   display: block;
   .date-picker-container {
-    border-radius: var(--border-radius-default, 4px);
+    border-radius: var(--border-radius-sm, 4px);
     width: min-content;
     text-align: center;
     background: var(--background-main);
@@ -218,9 +218,4 @@
   .calendar.popup.open {
     display: block;
   }
-}
-
-// bh2026: rounder calendar
-:host-context([data-theme='bh2026']) .date-picker-container {
-  border-radius: var(--calendar-radius, 0.8rem);
 }
