@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["projects/novo-examples/src/components/tip-well/compact-tip-well/compact-tip-well-example.css"],
+  "sourcesContent": ["novo-tip-well {\n  display: inline-block;\n}\n"],
+  "mappings": ";AAAA;AACE,WAAS;AACX;",
+  "names": []
+}

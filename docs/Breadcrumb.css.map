@@ -1,7 +1,7 @@
 {
   "version": 3,
   "sources": ["projects/novo-elements/src/elements/breadcrumbs/Breadcrumb.scss"],
-  "sourcesContent": [":host {\n  display: flex;\n  align-items: center;\n\n  ::ng-deep novo-breadcrumb-item:last-child {\n    .novo-breadcrumb-separator {\n      display: none;\n    }\n  }\n}\n\n// bh2026: subtle breadcrumb text.\n:host-context([data-theme='bh2026']) {\n  color: var(--color-content-subtle, #8ca1b9);\n}\n"],
-  "mappings": ";AAAA;AACE,WAAA;AACA,eAAA;;AAGE,MAAA,UAAA,oBAAA,YAAA,CAAA;AACE,WAAA;;AAMN,cAAA,CAAA,UAAA,CAAA;AACE,SAAA,IAAA,sBAAA,EAAA;;",
+  "sourcesContent": [":host {\n  display: flex;\n  align-items: center;\n\n  ::ng-deep novo-breadcrumb-item:last-child {\n    .novo-breadcrumb-separator {\n      display: none;\n    }\n  }\n}\n\n// bh2026: subtle breadcrumb text.\n:host-context([data-theme='bh2026']) {\n  color: var(--color-text-subtle);\n}\n"],
+  "mappings": ";AAAA;AACE,WAAA;AACA,eAAA;;AAGE,MAAA,UAAA,oBAAA,YAAA,CAAA;AACE,WAAA;;AAMN,cAAA,CAAA,UAAA,CAAA;AACE,SAAA,IAAA;;",
   "names": []
 }
