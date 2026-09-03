@@ -831,6 +831,7 @@ $bh2026-not-borderless: '';
 // ViewEncapsulation.None: use plain selectors (not :host-context which is Shadow DOM only)
 :root[data-theme='bh2026'] {
   label.novo-control-label {
+    &.novo-control-empty,
     &.novo-control-filled,
     &.novo-control-focused,
     &.novo-control-always-active {
@@ -839,6 +840,12 @@ $bh2026-not-borderless: '';
       letter-spacing: var(--typography-input-label-md-letter-spacing);
       text-transform: var(--typography-input-label-sm-text-transform);
       color: var(--color-text-body) !important;
+    }
+    &.novo-control-empty {
+      transform: translateY(-100%) !important;
+      height: 1.5em !important;
+      top: 0 !important;
+      bottom: auto !important;
     }
   }
   .novo-form-control-label {
@@ -1044,7 +1051,6 @@ $bh2026-not-borderless: '';
     padding-top: 0;
     padding-left: 0;
     padding-right: 0;
-    margin-top: var(--spacing-margin);
     margin-bottom: 0;
 
     &:not(:has(> novo-fieldset-header)) {
@@ -1060,8 +1066,9 @@ $bh2026-not-borderless: '';
   novo-dynamic-form {
     max-width: 720px;
     width: 100%;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: var(--spacing-gap-xlg);
+    margin-right: 0;
+    margin-top: var(--spacing-margin);
   }
 
   .novo-form-container form {
@@ -1071,6 +1078,10 @@ $bh2026-not-borderless: '';
 
     novo-fieldset {
       margin-top: 0;
+    }
+
+    novo-fieldset + novo-fieldset:has(> .novo-fieldset-container.card-section) {
+      margin-top: var(--spacing-gutter);
     }
   }
 
