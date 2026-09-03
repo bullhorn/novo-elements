@@ -1051,7 +1051,6 @@ $bh2026-not-borderless: '';
     padding-top: 0;
     padding-left: 0;
     padding-right: 0;
-    margin-top: var(--spacing-margin);
     margin-bottom: 0;
 
     &:not(:has(> novo-fieldset-header)) {
@@ -1067,8 +1066,9 @@ $bh2026-not-borderless: '';
   novo-dynamic-form {
     max-width: 720px;
     width: 100%;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: var(--spacing-gap-xlg);
+    margin-right: 0;
+    margin-top: var(--spacing-margin);
   }
 
   .novo-form-container form {
@@ -1078,6 +1078,10 @@ $bh2026-not-borderless: '';
 
     novo-fieldset {
       margin-top: 0;
+    }
+
+    novo-fieldset + novo-fieldset:has(> .novo-fieldset-container.card-section) {
+      margin-top: var(--spacing-gutter);
     }
   }
 
