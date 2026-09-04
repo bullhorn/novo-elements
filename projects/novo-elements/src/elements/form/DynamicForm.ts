@@ -71,13 +71,11 @@ export class NovoFieldsetHeaderElement {
           [class.hidden]="hidden"
         ></novo-fieldset-header>
       }
-      @for (control of controls; track control.key; let controlIndex = $index) {
-        @if (control.__type !== 'GroupedControl') {
-          <div class="novo-form-row" [class.disabled]="control.disabled" [class.hidden]="control.hidden">
-            <novo-control [autoFocus]="autoFocus && index === 0 && controlIndex === 0" [control]="control" [form]="form"></novo-control>
-          </div>
-        }
-      }
+      <ng-container *ngFor="let control of controls; let controlIndex = index">
+        <div *ngIf="control.__type !== 'GroupedControl'" class="novo-form-row" [class.disabled]="control.disabled" [class.hidden]="control.hidden">
+          <novo-control [autoFocus]="autoFocus && index === 0 && controlIndex === 0" [control]="control" [form]="form"></novo-control>
+        </div>
+      </ng-container>
     </div>
   `,
     standalone: false,
@@ -115,20 +113,19 @@ export class NovoFieldsetElement {
         <ng-content select="form-subtitle"></ng-content>
       </header>
       <form class="novo-form" [formGroup]="form">
-        @for (fieldset of visibleFieldsets; track fieldset.key; let i = $index) {
-          <novo-fieldset
-            [index]="i"
-            [autoFocus]="autoFocusFirstField"
-            [icon]="fieldset.icon"
-            [controls]="fieldset.controls"
-            [title]="fieldset.title"
-            [form]="form"
-            [isEmbedded]="fieldset.isEmbedded"
-            [isInlineEmbedded]="fieldset.isInlineEmbedded"
-            [hidden]="fieldset.hidden"
-            [cardSection]="effectiveCardSections()"
-          ></novo-fieldset>
-        }
+        <novo-fieldset
+          *ngFor="let fieldset of visibleFieldsets; let i = index"
+          [index]="i"
+          [autoFocus]="autoFocusFirstField"
+          [icon]="fieldset.icon"
+          [controls]="fieldset.controls"
+          [title]="fieldset.title"
+          [form]="form"
+          [isEmbedded]="fieldset.isEmbedded"
+          [isInlineEmbedded]="fieldset.isInlineEmbedded"
+          [hidden]="fieldset.hidden"
+          [cardSection]="effectiveCardSections()"
+        ></novo-fieldset>
       </form>
     </div>
   `,
