@@ -150,8 +150,9 @@ All user-visible strings must go through `NovoLabelService` — never hardcode d
 ### Template Control Flow
 
 -   Use built-in control flow: `@if`, `@for`, `@switch`
--   Flag `*ngIf`, `*ngFor`, `*ngSwitch` in new code — legacy; should migrate
--   When working in a template that uses `*ngIf`, `*ngFor`, or `*ngSwitch`, migrate the whole template to built-in control flow as part of the same change
+-   Flag `*ngIf`, `*ngSwitch` in new code — legacy; should migrate
+-   When working in a template that uses `*ngIf` or `*ngSwitch`, migrate those to built-in control flow as part of the same change
+-   Keep `*ngFor` unless you have a specific reason to switch — `@for` requires a `track` expression that controls component reuse, which can cause stale state in components that initialize in `ngOnInit`
 -   `@for` blocks must include a `track` expression
 
 ### Dependency Injection
