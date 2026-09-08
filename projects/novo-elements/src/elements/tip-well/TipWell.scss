@@ -29,9 +29,6 @@
         white-space: pre-line;
       }
     }
-    :root[data-theme='bh2026'] & {
-      background-color: var(--background-muted);
-    }
   }
 
   // Icon variant styling
@@ -63,5 +60,27 @@
         color: $charcoal;
       }
     }
+  }
+}
+
+// bh2026: bordered card, 4px radius, body text; subtle variant gets muted background
+:host-context([data-theme='bh2026']) {
+  > div {
+    border-radius: 4px;
+    border: 1px solid var(--color-border-default);
+    color: var(--color-text-body);
+    overflow: clip;
+
+    > div > p {
+      line-height: var(--typography-body-default-line-height, 20px);
+    }
+
+    > button {
+      font-size: var(--typography-button-sm-font-size, 12px);
+    }
+  }
+
+  &[data-variant='subtle'] > div {
+    background-color: var(--background-muted);
   }
 }
