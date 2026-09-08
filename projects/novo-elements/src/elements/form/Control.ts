@@ -111,6 +111,7 @@ export class NovoAutoSize implements AfterContentInit {
               [attr.data-automation-id]="control.key"
               [class.control-disabled]="form.controls[control.key].disabled"
               [class.highlighted]="form.controls[control.key].highlighted"
+              [class.control-invalid-touched]="form.controls[control.key].touched && form.controls[control.key].invalid && form.controls[control.key].dirty"
             >
               <!--TODO prefix/suffix on the control-->
               <ng-container *ngIf="templates">
