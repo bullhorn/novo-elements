@@ -5,6 +5,17 @@
   overflow: hidden;
   background: var(--background-bright);
 
+  // Width is animated rather than transform because the panel shrinks in place rather than sliding
+  // away. Both custom properties are set from the component; the fallbacks match the input defaults
+  // so the panel still renders sanely if the effect has not run yet.
+  width: var(--novo-collapsible-nav-width, 18rem);
+  transition: width var(--novo-collapsible-nav-transition-time, 300ms) cubic-bezier(0.25, 0.8, 0.25, 1);
+
+  // Enable to skip transitions
+  &.novo-collapsible-nav-no-transition {
+    transition: none;
+  }
+
   .novo-collapsible-nav-header {
     flex: 0 0 auto;
   }
