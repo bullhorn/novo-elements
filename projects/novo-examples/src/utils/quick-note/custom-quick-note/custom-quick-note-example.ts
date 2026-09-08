@@ -50,10 +50,10 @@ export class CustomQuickNoteExample {
       whats: '$title',
     },
     renderer: {
-      whos: (symbol, item) => {
+      whos: (symbol: string, item: any) => {
         return `<a href="http://www.bullhorn.com" class="WHOS">${symbol}${item.label}</a>`;
       },
-      whats: (symbol, item) => {
+      whats: (symbol: string, item: any) => {
         return `<a href="http://www.bullhorn.com" class="tag">${symbol}${item.label}</a>`;
       },
     },
