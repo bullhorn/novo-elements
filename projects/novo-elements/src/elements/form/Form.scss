@@ -933,7 +933,8 @@ $bh2026-not-borderless: '';
 
   // Error: move negative border to container
   div.novo-control-input#{$bh2026-not-borderless}:has(input.ng-touched.ng-invalid:not(.ng-pristine)),
-  div.novo-control-input#{$bh2026-not-borderless}:has(textarea.ng-touched.ng-invalid:not(.ng-pristine):not(.ng-valid)) {
+  div.novo-control-input#{$bh2026-not-borderless}:has(textarea.ng-touched.ng-invalid:not(.ng-pristine):not(.ng-valid)),
+  div.novo-control-input#{$bh2026-not-borderless}.control-invalid-touched {
     border-width: var(--field-border-width-negative);
     border-color: var(--field-color-border-negative);
     &:hover {
