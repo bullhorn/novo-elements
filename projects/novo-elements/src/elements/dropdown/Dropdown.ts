@@ -179,6 +179,12 @@ export class NovoDropdownElement extends NovoDropdownMixins implements OnInit, A
 
   public ngAfterContentInit(): void {
     const button = this.button();
+    if (!button) {
+      throw new Error(`A <novo-dropdown> component was configured without a content button associated. Expected one of the following:
+        <novo-dropdown><novo-button></novo-dropdown>
+        <novo-dropdown><button theme="..."></novo-dropdown>
+        <novo-dropdown><button></novo-dropdown>`);
+    }
     // Add a click handler to the button to toggle the menu
     this._onDestroy.subscribe(this.renderer.listen(button, 'click', this.clickHandler));
     button.tabIndex = -1;
