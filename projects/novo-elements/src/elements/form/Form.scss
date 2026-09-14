@@ -1065,7 +1065,7 @@ $bh2026-not-borderless: '';
 
   novo-form,
   novo-dynamic-form {
-    max-width: 800px;
+    max-width: var(--form-container-max-width);
     width: 100%;
     margin-left: var(--spacing-gap-xlg);
     margin-right: 0;
