@@ -636,6 +636,7 @@ novo-data-table {
   .novo-data-table-header-cell {
     padding: var(--spacing-padding-sm) var(--spacing-padding-md);
     color: var(--color-text-body);
+    line-height: normal;
   }
 
   // Restore zero vertical padding on action/control cells — the general rule above overrides
