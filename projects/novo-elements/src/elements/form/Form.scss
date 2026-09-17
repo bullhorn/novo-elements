@@ -144,7 +144,7 @@ novo-dynamic-form {
             i.bhi-checkbox-filled,
             i.bhi-checkbox-empty,
             i.bhi-calendar {
-              :root:not([data-theme=bh2026]) {
+              :root:not([data-theme=bh2026]) & {
                 top: -5px;
               }
             }
@@ -411,7 +411,7 @@ novo-dynamic-form {
                         padding-left: 5px;
                         color: var(--font-color-base);
 
-                        :host-context([data-theme='bh2026']) {
+                        :host-context([data-theme=bh2026]) & {
                           padding-top: 3px;
                         }
                       }
@@ -661,7 +661,7 @@ novo-dynamic-form {
               i.bhi-checkbox-filled,
               i.bhi-checkbox-empty,
               i.bhi-calendar {
-                :root:not([data-theme='bh2026']) {
+                :root:not([data-theme=bh2026]) & {
                   top: -5px;
                 }
               }
@@ -680,11 +680,11 @@ novo-dynamic-form {
                     align-items: center;
                     position: relative;
                     i.required-indicator {
-                      :host-context([data-theme='bh2026']) & {
+                      :host-context([data-theme=bh2026]) & {
                         margin-right: 4px;
                       }
                       &.bhi-circle {
-                        :root:not([data-theme='bh2026']) {
+                        :root:not([data-theme=bh2026]) & {
                           padding-top: 2px;
                         }
                       }
@@ -757,7 +757,7 @@ novo-dynamic-form {
                 .file,
                 .select,
                 .tiles {
-                  :root:not([data-theme='bh2026']) {
+                  :root:not([data-theme=bh2026]) & {
                     margin-top: 0.5em;
                   }
                 }
@@ -857,7 +857,7 @@ $bh2026-not-borderless: '';
 }
 
 // bh2026: ViewEncapsulation.None can use plain selectors (not :host-context which is Shadow DOM only)
-:root[data-theme='bh2026'] {
+:root[data-theme=bh2026] {
   // We need this extra repeated specification to override existing 2022 themed !important styles on form variants
   label.novo-control-label {
     &.novo-control-empty,

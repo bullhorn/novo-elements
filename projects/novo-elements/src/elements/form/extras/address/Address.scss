@@ -20,7 +20,7 @@
     }
   }
   ::ng-deep novo-picker i {
-    :root:not([data-theme=bh2026]) {
+    :root:not([data-theme=bh2026]) & {
       padding: 0 5px;
     }
   }
