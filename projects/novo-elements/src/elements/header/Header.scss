@@ -172,7 +172,7 @@
     background: var(--header-background, var(--color-transparency-white-90));
     border-bottom: var(--modal-border-width-default) solid var(--modal-color-border-default);
     box-shadow: 0 1px 2px var(--color-transparency-charcoal-08);
-    padding: var(--spacing-md) var(--spacing-lg);
+    padding: var(--spacing-sm) var(--spacing-lg);
 
     & > section:first-of-type {
       border-bottom: none;

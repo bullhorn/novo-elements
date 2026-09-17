@@ -33,7 +33,7 @@
     overflow: auto;
 
     [data-theme=bh2026] & {
-      max-height: min(70vh, 800px);
+      max-height: min(70vh, 768px);
       padding: var(--card-spacing-header-padding-vertical) var(--card-spacing-header-padding-horizontal) var(--card-spacing-header-padding-vertical) 1.8rem;
     }
   }
