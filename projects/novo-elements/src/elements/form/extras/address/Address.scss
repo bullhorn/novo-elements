@@ -20,7 +20,9 @@
     }
   }
   ::ng-deep novo-picker i {
-    padding: 0 5px;
+    :root:not([data-theme=bh2026]) {
+      padding: 0 5px;
+    }
   }
   input {
     min-width: 10px;
@@ -149,7 +151,7 @@
   }
 }
 
-:host-context([data-theme='bh2026']) {
+:host-context([data-theme=bh2026]) {
   gap: var(--field-spacing-gap);
 
   // Take out the space that the overlay template takes up between the fields
