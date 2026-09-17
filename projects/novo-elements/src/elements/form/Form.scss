@@ -287,11 +287,11 @@ novo-dynamic-form {
                 width: 100%;
                 &.required {
                   div.novo-control-input.address {
-                    margin-left: 20px;
+                    margin-left: var(--form-control-address-margin-left, 20px);
                   }
                 }
                 .field-message.address {
-                  margin-left: 20px;
+                  margin-left: var(--form-control-address-margin-left, 20px);
                 }
                 .novo-control-inner-input-container {
                   display: flex;
@@ -700,7 +700,7 @@ novo-dynamic-form {
                       display: flex;
                     }
                     div.novo-control-input.address {
-                      margin-left: 20px;
+                      margin-left: var(--form-control-address-margin-left, 20px);
                     }
                   }
                 }
