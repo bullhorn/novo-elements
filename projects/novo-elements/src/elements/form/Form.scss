@@ -260,7 +260,7 @@ novo-dynamic-form {
             > div.novo-control-outer-container {
               display: flex;
               align-items: center;
-              max-width: 550px;
+              max-width: var(--form-control-max-width, 550px);
               position: relative;
               width: 100%;
               i.loading {
@@ -672,7 +672,7 @@ novo-dynamic-form {
               position: relative;
               margin-top: 16px;
               .novo-control-outer-container {
-                max-width: 550px;
+                max-width: var(--form-control-max-width, 550px);
                 width: 100%;
                 .novo-control-inner-container {
                   position: relative;
@@ -878,6 +878,11 @@ $bh2026-not-borderless: '';
     margin-right: var(--spacing-gap-lg);
     max-width: 128px;
     min-width: 128px;
+
+    &.encrypted {
+      max-width: 100px;
+      min-width: 100px;
+    }
   }
   .novo-control-outer-container input:not([type='checkbox']):not([type='radio']) {
     font-size: var(--typography-input-value-default-font-size) !important;
