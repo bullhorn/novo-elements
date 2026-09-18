@@ -680,7 +680,7 @@ novo-dynamic-form {
                     align-items: center;
                     position: relative;
                     i.required-indicator {
-                      :host-context([data-theme=bh2026]) & {
+                      [data-theme=bh2026] & {
                         margin-right: 4px;
                       }
                       &.bhi-circle {
