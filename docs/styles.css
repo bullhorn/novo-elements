@@ -2059,6 +2059,7 @@ template {
   --spacing-xl: 2rem;
   --spacing-2xl: 3rem;
   --spacing-3xl: 4rem;
+  --form-container-max-width: 800px;
   --background-body: var(--color-gray-0);
   --background-main: var(--color-background-default);
   --background-bright: var(--color-gray-0);
