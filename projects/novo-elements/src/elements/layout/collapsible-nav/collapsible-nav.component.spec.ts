@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { NovoCollapsibleNavComponent } from './collapsible-nav.component';
 import { tick } from 'novo-testing';
+import { NovoCollapsibleNavComponent } from './collapsible-nav.component';
 
 describe('Elements: NovoCollapsibleNavComponent', () => {
   let fixture: ComponentFixture<NovoCollapsibleNavComponent>;
@@ -59,13 +59,58 @@ describe('Elements: NovoCollapsibleNavComponent', () => {
     expect(component.isCollapsed).toBe(true);
   });
 
-  it('expandCollapseState should carry the current state and width params', () => {
+  it('should apply the width params as CSS styles', async () => {
     component.collapse();
     fixture.componentRef.setInput('expandedWidth', '20rem');
     fixture.componentRef.setInput('collapsedWidth', '5rem');
-    expect(component.expandCollapseState).toEqual({
-      value: 'collapsed',
-      params: { expandedWidth: '20rem', collapsedWidth: '5rem' },
+    fixture.detectChanges();
+    expect(fixture.componentRef.location.nativeElement.style.getPropertyValue('--novo-collapsible-nav-width')).toBe('5rem');
+  });
+
+  describe('CSS width transition', () => {
+    const widthVar = () => component.element.nativeElement.style.getPropertyValue('--novo-collapsible-nav-width');
+
+    // jsdom implements the TransitionEvent constructor but ignores `propertyName` in its init dict,
+    // so it has to be defined explicitly for the component's property filter to be exercised at all.
+    const transitionEndEvent = (propertyName: string): TransitionEvent => {
+      const evt = new TransitionEvent('transitionend', { bubbles: true });
+      Object.defineProperty(evt, 'propertyName', { value: propertyName });
+      return evt;
+    };
+
+    it('should publish the expanded width as a custom property', () => {
+      expect(widthVar()).toBe('18rem');
+    });
+
+    it('should publish the collapsed width after collapse()', () => {
+      component.collapse();
+      fixture.detectChanges();
+      expect(widthVar()).toBe('4rem');
+    });
+
+    it('should publish transitionTime as a custom property', () => {
+      expect(component.element.nativeElement.style.getPropertyValue('--novo-collapsible-nav-transition-time')).toBe('300ms');
+    });
+
+    it('should update the width when expandedWidth changes while already expanded', () => {
+      expect(widthVar()).toBe('18rem');
+      fixture.componentRef.setInput('expandedWidth', '30rem');
+      fixture.detectChanges();
+      expect(widthVar()).toBe('30rem');
+    });
+
+    it('should ignore transitionend for properties other than width', () => {
+      vi.spyOn(component.transitionChange, 'emit');
+      component.element.nativeElement.dispatchEvent(transitionEndEvent('height'));
+      expect(component.transitionChange.emit).not.toHaveBeenCalled();
+    });
+
+    it('should ignore transitionend bubbled from projected content', () => {
+      vi.spyOn(component.transitionChange, 'emit');
+      const child = document.createElement('div');
+      component.element.nativeElement.appendChild(child);
+      child.dispatchEvent(transitionEndEvent('width'));
+      expect(component.transitionChange.emit).not.toHaveBeenCalled();
     });
   });
 
@@ -80,7 +125,7 @@ describe('Elements: NovoCollapsibleNavComponent', () => {
       component.onMouseEnter();
       fixture.detectChanges();
       await tick(400);
-      expect(component.expandCollapseState.value).toBe('expanded');
+      expect(component.appliedWidth()).toBe('18rem');
       expect(component.isCollapsed).toBe(false);
     });
 
@@ -88,7 +133,7 @@ describe('Elements: NovoCollapsibleNavComponent', () => {
       component.onMouseEnter();
       component.onMouseLeave();
       fixture.detectChanges();
-      expect(component.expandCollapseState.value).toBe('collapsed');
+      expect(component.appliedWidth()).toBe('4rem');
       expect(component.isCollapsed).toBe(true);
     });
 
@@ -96,29 +141,30 @@ describe('Elements: NovoCollapsibleNavComponent', () => {
       fixture.componentRef.setInput('overlayOnHover', false);
       component.onMouseEnter();
       fixture.detectChanges();
-      expect(component.expandCollapseState.value).toBe('collapsed');
+      expect(component.appliedWidth()).toBe('4rem');
       expect(component.isCollapsed).toBe(true);
     });
 
     it('setting collapsed to true while hovered should collapse immediately', async () => {
       component.onMouseEnter();
       fixture.detectChanges();
-      await tick(400);
-      expect(component.expandCollapseState.value).toBe('expanded');
+      await tick(40);
+      expect(component.appliedWidth()).toBe('18rem');
       component.collapse();
       fixture.detectChanges();
-      expect(component.expandCollapseState.value).toBe('collapsed');
+      expect(component.appliedWidth()).toBe('4rem');
     });
 
     it('should not expand if the user\'s mouse exits before the debounce finishes', async () => {
       fixture.componentRef.setInput('expandDelay', 300);
       component.onMouseEnter();
       fixture.detectChanges();
-      await tick(200);
+      await tick(10);
       component.onMouseLeave();
       fixture.detectChanges();
-      await tick(200);
-      expect(component.expandCollapseState.value).toBe('collapsed');
+      await tick(10);
+
+      expect(component.appliedWidth()).toBe('4rem');
     });
 
     it('setting collapsed input to true while hovered should reset hover via effect', () => {
@@ -135,7 +181,6 @@ describe('Elements: NovoCollapsibleNavComponent', () => {
     it('mouseleave without prior mouseenter should be a no-op', () => {
       component.onMouseLeave();
       fixture.detectChanges();
-      expect(component.expandCollapseState.value).toBe('collapsed');
       expect(component.isCollapsed).toBe(true);
     });
   });

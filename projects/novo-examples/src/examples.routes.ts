@@ -1770,6 +1770,8 @@ export class ExpansionPage {
   selector: 'collapsible-nav-page',
   template: `<h1>Collapsible Nav <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/layout">(source)</a></h1>
 <p>A navigation panel that animates between an expanded sidebar and a collapsed icon rail. Project content into the <code>novo-collapsible-nav-header</code>, <code>novo-collapsible-nav-body</code>, and <code>novo-collapsible-nav-footer</code> slots. The <code>collapsed</code> state is two-way bindable.</p>
+<p>Track progress with the <code>transitionChange</code> output, which emits <code>expanding</code>/<code>collapsing</code> when a width change starts and <code>expanded</code>/<code>collapsed</code> when it finishes.</p>
+<p>The navigation also fires a <code>manualExpand</code> event when a user's click has skipped the initial transition delay. This event is preventable with <code>event.preventExpand()</code>, which allows users to click within the navbar without automatically expanding it.</p>
 <h5>Examples</h5>
 <h2>Basic Collapsible Nav</h2>
 <p><code-example example="basic-collapsible-nav"></code-example></p>
