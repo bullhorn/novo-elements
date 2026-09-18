@@ -391,7 +391,7 @@ novo-dynamic-form {
                       padding-bottom: 0;
                     }
                     textarea:not(.quick-note-textarea) {
-                      transition: height;
+                      transition: height 0ms;
                       background: transparent !important;
                     }
                     > div.novo-control-input-with-label {
@@ -411,7 +411,7 @@ novo-dynamic-form {
                         padding-left: 5px;
                         color: var(--font-color-base);
 
-                        :host-context([data-theme=bh2026]) & {
+                        [data-theme=bh2026] & {
                           padding-top: 3px;
                         }
                       }
