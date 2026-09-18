@@ -8,7 +8,7 @@
   z-index: z(modal);
   position: relative;
   min-width: 330px;
-  max-width: 600px;
+  max-width: var(--modal-max-width, 600px);
 
   > .novo-button.modal-close {
     position: absolute;
@@ -31,6 +31,11 @@
     padding: var(--spacing-md) var(--spacing-xl);
     max-height: 500px;
     overflow: auto;
+
+    [data-theme=bh2026] & {
+      max-height: min(70vh, 768px);
+      padding: var(--card-spacing-header-padding-vertical) var(--card-spacing-header-padding-horizontal) var(--card-spacing-header-padding-vertical) 1.8rem;
+    }
   }
 
   ::ng-deep .novo-modal-footer {
