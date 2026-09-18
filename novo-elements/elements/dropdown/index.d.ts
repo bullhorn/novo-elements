@@ -1,5 +1,5 @@
 import * as i0 from '@angular/core';
-import { ElementRef, OnInit, AfterContentInit, AfterViewInit, OnDestroy, EventEmitter, QueryList, ChangeDetectorRef } from '@angular/core';
+import { ElementRef, OnInit, AfterContentInit, AfterViewInit, OnDestroy, EventEmitter, QueryList, Renderer2, ChangeDetectorRef } from '@angular/core';
 import { NovoButtonElement } from 'novo-elements/elements/button';
 import * as i2 from 'novo-elements/elements/common';
 import { HasOverlayCtor, CanDisableCtor, HasTabIndexCtor, NovoOverlayTemplateComponent, NovoOptgroup, NovoOption } from 'novo-elements/elements/common';
@@ -31,11 +31,12 @@ declare class NovoDropdownElement extends NovoDropdownMixins implements OnInit, 
     appendToBody: boolean;
     toggled: EventEmitter<boolean>;
     overlay: NovoOverlayTemplateComponent;
-    _button: NovoButtonElement;
-    _trigger: NovoDropDownTrigger;
+    _button: i0.Signal<NovoButtonElement>;
+    _trigger: i0.Signal<NovoDropDownTrigger>;
     optionGroups: QueryList<NovoOptgroup>;
     options: QueryList<NovoOption>;
     panel: ElementRef;
+    renderer: Renderer2;
     private clickHandler;
     private closeHandler;
     private _selectedOptionChanges;
@@ -51,7 +52,7 @@ declare class NovoDropdownElement extends NovoDropdownMixins implements OnInit, 
     get scrollToActiveItemOnOpen(): boolean;
     set scrollToActiveItemOnOpen(value: boolean);
     private _scrollToActiveItemOnOpen;
-    get button(): NovoDropDownTrigger | NovoButtonElement;
+    button: i0.Signal<HTMLElement>;
     constructor(element: ElementRef, ref: ChangeDetectorRef);
     ngOnInit(): void;
     ngAfterContentInit(): void;
@@ -61,6 +62,7 @@ declare class NovoDropdownElement extends NovoDropdownMixins implements OnInit, 
     openPanel(): void;
     private findFirstSelectedOptionIndex;
     set items(items: QueryList<NovoItemElement>);
+    private _findNativeButton;
     /** Handles all keydown events on the dropdown. */
     _handleKeydown(event: KeyboardEvent): void;
     /** Handles keyboard events while the dropdown is closed. */

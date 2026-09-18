@@ -6,6 +6,7 @@ import * as i3 from '@angular/common';
 declare class NovoTooltip {
     readonly message: i0.WritableSignal<string>;
     readonly messageLines: i0.Signal<string[]>;
+    customClass: string;
     hidden: boolean;
     tooltipType: string;
     rounded: boolean;
@@ -37,6 +38,7 @@ declare class TooltipDirective implements OnDestroy, OnInit, AfterViewInit {
     autoPosition: boolean;
     isHTML: boolean;
     closeOnClick: boolean;
+    customClass: string;
     onOverflow: boolean;
     private _active;
     set active(value: boolean);
@@ -59,7 +61,7 @@ declare class TooltipDirective implements OnDestroy, OnInit, AfterViewInit {
     hide(): void;
     private getPosition;
     static ɵfac: i0.ɵɵFactoryDeclaration<TooltipDirective, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<TooltipDirective, "[tooltip]", never, { "tooltip": { "alias": "tooltip"; "required": false; }; "position": { "alias": "tooltipPosition"; "required": false; }; "type": { "alias": "tooltipType"; "required": false; }; "size": { "alias": "tooltipSize"; "required": false; }; "bounce": { "alias": "tooltipBounce"; "required": false; }; "noAnimate": { "alias": "tooltipNoAnimate"; "required": false; }; "rounded": { "alias": "tooltipRounded"; "required": false; }; "always": { "alias": "tooltipAlways"; "required": false; }; "preline": { "alias": "tooltipPreline"; "required": false; }; "removeArrow": { "alias": "removeTooltipArrow"; "required": false; }; "autoPosition": { "alias": "tooltipAutoPosition"; "required": false; }; "isHTML": { "alias": "tooltipIsHTML"; "required": false; }; "closeOnClick": { "alias": "tooltipCloseOnClick"; "required": false; }; "onOverflow": { "alias": "tooltipOnOverflow"; "required": false; }; "active": { "alias": "tooltipActive"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<TooltipDirective, "[tooltip]", never, { "tooltip": { "alias": "tooltip"; "required": false; }; "position": { "alias": "tooltipPosition"; "required": false; }; "type": { "alias": "tooltipType"; "required": false; }; "size": { "alias": "tooltipSize"; "required": false; }; "bounce": { "alias": "tooltipBounce"; "required": false; }; "noAnimate": { "alias": "tooltipNoAnimate"; "required": false; }; "rounded": { "alias": "tooltipRounded"; "required": false; }; "always": { "alias": "tooltipAlways"; "required": false; }; "preline": { "alias": "tooltipPreline"; "required": false; }; "removeArrow": { "alias": "removeTooltipArrow"; "required": false; }; "autoPosition": { "alias": "tooltipAutoPosition"; "required": false; }; "isHTML": { "alias": "tooltipIsHTML"; "required": false; }; "closeOnClick": { "alias": "tooltipCloseOnClick"; "required": false; }; "customClass": { "alias": "tooltipCustomClass"; "required": false; }; "onOverflow": { "alias": "tooltipOnOverflow"; "required": false; }; "active": { "alias": "tooltipActive"; "required": false; }; }, {}, never, never, false, never>;
 }
 
 declare class NovoTooltipModule {

@@ -2,7 +2,7 @@ import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { hasModifierKey } from '@angular/cdk/keycodes';
 import * as i0 from '@angular/core';
-import { Directive, EventEmitter, HostListener, Input, ViewChild, ContentChildren, ContentChild, Output, Component, NgModule } from '@angular/core';
+import { Directive, EventEmitter, contentChild, inject, Renderer2, computed, HostListener, Input, ViewChild, ContentChildren, Output, Component, NgModule } from '@angular/core';
 import { Subscription, Subject, merge, of } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NovoButtonElement } from 'novo-elements/elements/button';
@@ -57,9 +57,6 @@ class NovoDropdownElement extends NovoDropdownMixins {
     set scrollToActiveItemOnOpen(value) {
         this._scrollToActiveItemOnOpen = coerceBooleanProperty(value);
     }
-    get button() {
-        return this._trigger || this._button;
-    }
     constructor(element, ref) {
         super();
         this.element = element;
@@ -74,11 +71,17 @@ class NovoDropdownElement extends NovoDropdownMixins {
         this.width = -1; // Defaults to dynamic width (no hardcoded width value and no host width lookup)
         this.appendToBody = false; // Deprecated
         this.toggled = new EventEmitter();
+        this._button = contentChild(NovoButtonElement, ...(ngDevMode ? [{ debugName: "_button" }] : []));
+        this._trigger = contentChild(NovoDropDownTrigger, ...(ngDevMode ? [{ debugName: "_trigger" }] : []));
+        this.renderer = inject(Renderer2);
         this._selectedOptionChanges = Subscription.EMPTY;
         /** The Subject to complete all subscriptions when destroyed. */
         this._onDestroy = new Subject();
         this._multiple = false;
         this._scrollToActiveItemOnOpen = false;
+        this.button = computed(() => {
+            return this._trigger()?.element.nativeElement || this._button()?.element.nativeElement || this._findNativeButton();
+        }, ...(ngDevMode ? [{ debugName: "button" }] : []));
         this.clickHandler = this.togglePanel.bind(this);
         this.closeHandler = this.closePanel.bind(this);
     }
@@ -88,9 +91,16 @@ class NovoDropdownElement extends NovoDropdownMixins {
         }
     }
     ngAfterContentInit() {
+        const button = this.button();
+        if (!button) {
+            throw new Error(`A <novo-dropdown> component was configured without a content button associated. Expected one of the following:
+        <novo-dropdown><novo-button></novo-dropdown>
+        <novo-dropdown><button theme="..."></novo-dropdown>
+        <novo-dropdown><button></novo-dropdown>`);
+        }
         // Add a click handler to the button to toggle the menu
-        this.button.element.nativeElement.addEventListener('click', this.clickHandler);
-        this.button.element.nativeElement.tabIndex = -1;
+        this._onDestroy.subscribe(this.renderer.listen(button, 'click', this.clickHandler));
+        button.tabIndex = -1;
         this.options.changes.pipe(takeUntil(this._onDestroy)).subscribe(() => {
             this._initKeyManager();
             this._watchSelectionEvents();
@@ -105,10 +115,6 @@ class NovoDropdownElement extends NovoDropdownMixins {
     ngOnDestroy() {
         this._onDestroy.next();
         this._onDestroy.complete();
-        // Remove listener
-        if (this.button) {
-            this.button.element.nativeElement.removeEventListener('click', this.clickHandler);
-        }
     }
     focus(options) {
         if (!this.disabled) {
@@ -127,6 +133,10 @@ class NovoDropdownElement extends NovoDropdownMixins {
         });
     }
     set items(items) { }
+    // If the dropdown is using a basic <button> with no theme, it will not appear in the ContentChild directive.
+    _findNativeButton() {
+        return Array.prototype.find.call(this.element.nativeElement.children, element => element.tagName === 'BUTTON');
+    }
     /** Handles all keydown events on the dropdown. */
     _handleKeydown(event) {
         if (!this.disabled) {
@@ -246,7 +256,7 @@ class NovoDropdownElement extends NovoDropdownMixins {
         return 0;
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.19", ngImport: i0, type: NovoDropdownElement, deps: [{ token: i0.ElementRef }, { token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "20.3.19", type: NovoDropdownElement, isStandalone: false, selector: "novo-dropdown", inputs: { parentScrollSelector: "parentScrollSelector", parentScrollAction: "parentScrollAction", containerClass: "containerClass", side: "side", scrollStrategy: "scrollStrategy", keepOpen: "keepOpen", height: "height", width: "width", appendToBody: "appendToBody", multiple: "multiple", scrollToActiveItemOnOpen: "scrollToActiveItemOnOpen" }, outputs: { toggled: "toggled" }, host: { listeners: { "keydown": "_handleKeydown($event)" }, properties: { "attr.tabIndex": "disabled ? -1 : 0" } }, queries: [{ propertyName: "_button", first: true, predicate: NovoButtonElement, descendants: true }, { propertyName: "_trigger", first: true, predicate: NovoDropDownTrigger, descendants: true }, { propertyName: "optionGroups", predicate: NovoOptgroup, descendants: true }, { propertyName: "options", predicate: NovoOption, descendants: true }], viewQueries: [{ propertyName: "overlay", first: true, predicate: NovoOverlayTemplateComponent, descendants: true }, { propertyName: "panel", first: true, predicate: ["panel"], descendants: true }], usesInheritance: true, ngImport: i0, template: `
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.2.0", version: "20.3.19", type: NovoDropdownElement, isStandalone: false, selector: "novo-dropdown", inputs: { parentScrollSelector: "parentScrollSelector", parentScrollAction: "parentScrollAction", containerClass: "containerClass", side: "side", scrollStrategy: "scrollStrategy", keepOpen: "keepOpen", height: "height", width: "width", appendToBody: "appendToBody", multiple: "multiple", scrollToActiveItemOnOpen: "scrollToActiveItemOnOpen" }, outputs: { toggled: "toggled" }, host: { listeners: { "keydown": "_handleKeydown($event)" }, properties: { "attr.tabIndex": "disabled ? -1 : 0" } }, queries: [{ propertyName: "_button", first: true, predicate: NovoButtonElement, descendants: true, isSignal: true }, { propertyName: "_trigger", first: true, predicate: NovoDropDownTrigger, descendants: true, isSignal: true }, { propertyName: "optionGroups", predicate: NovoOptgroup, descendants: true }, { propertyName: "options", predicate: NovoOption, descendants: true }], viewQueries: [{ propertyName: "overlay", first: true, predicate: NovoOverlayTemplateComponent, descendants: true }, { propertyName: "panel", first: true, predicate: ["panel"], descendants: true }], usesInheritance: true, ngImport: i0, template: `
     <ng-content select="button,novo-button,[dropdownTrigger]" #trigger></ng-content>
     <novo-overlay-template [parent]="element" [width]="width" [position]="side" [scrollStrategy]="scrollStrategy">
       <div #panel class="dropdown-container {{ containerClass }}" [style.max-height.px]="height" [class.has-height]="!!height">
@@ -294,13 +304,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.19", ngImpo
             }], overlay: [{
                 type: ViewChild,
                 args: [NovoOverlayTemplateComponent]
-            }], _button: [{
-                type: ContentChild,
-                args: [NovoButtonElement]
-            }], _trigger: [{
-                type: ContentChild,
-                args: [NovoDropDownTrigger]
-            }], optionGroups: [{
+            }], _button: [{ type: i0.ContentChild, args: [i0.forwardRef(() => NovoButtonElement), { isSignal: true }] }], _trigger: [{ type: i0.ContentChild, args: [i0.forwardRef(() => NovoDropDownTrigger), { isSignal: true }] }], optionGroups: [{
                 type: ContentChildren,
                 args: [NovoOptgroup, { descendants: true }]
             }], options: [{

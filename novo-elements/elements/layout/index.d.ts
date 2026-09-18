@@ -1,5 +1,5 @@
 import * as i0 from '@angular/core';
-import { ElementRef, AfterContentInit, ChangeDetectorRef, NgZone, DestroyRef, InjectionToken, AfterContentChecked, OnDestroy, EventEmitter, DoCheck, QueryList } from '@angular/core';
+import { ElementRef, Signal, AfterContentInit, ChangeDetectorRef, NgZone, DestroyRef, InjectionToken, AfterContentChecked, OnDestroy, EventEmitter, DoCheck, QueryList } from '@angular/core';
 import { Directionality } from '@angular/cdk/bidi';
 import { BooleanInput, NumberInput } from '@angular/cdk/coercion';
 import { CdkScrollable, ScrollDispatcher, ViewportRuler } from '@angular/cdk/overlay';
@@ -33,8 +33,12 @@ declare class NovoCollapsibleNavComponent {
     /** When true, hovering a collapsed panel temporarily expands it as an overlay without affecting layout. */
     overlayOnHover: i0.InputSignal<boolean>;
     hoveredChange: i0.OutputEmitterRef<boolean>;
+    /**
+     * Emits `expanding`/`collapsing`/`expanded`/`collapsed`. Called when the target width changes.
+     */
     transitionChange: i0.OutputEmitterRef<NavTransitionState>;
     manualExpand: i0.OutputEmitterRef<CollapsibleNavExpansionEvent>;
+    transitionTime: i0.WritableSignal<string>;
     readonly element: ElementRef<any>;
     private readonly destroyRef;
     private readonly isHovered;
@@ -44,18 +48,12 @@ declare class NovoCollapsibleNavComponent {
     private readonly clicked$;
     private readonly activationKeyPressed$;
     private readonly manualExpandUnprevented$;
+    appliedWidth: Signal<string>;
     constructor();
     onMouseEnter(): void;
     onMouseLeave(): void;
-    get expandCollapseState(): {
-        value: string;
-        params: {
-            expandedWidth: string;
-            collapsedWidth: string;
-        };
-    };
-    transitionStart(event: any): void;
-    transitionEnd(event: any): void;
+    transitionStart(event: TransitionEvent): void;
+    transitionEnd(event: TransitionEvent): void;
     private debounceHover;
     private setupExpandFromActivation;
     get isCollapsed(): boolean;

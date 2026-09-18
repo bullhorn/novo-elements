@@ -636,6 +636,7 @@ novo-data-table {
   .novo-data-table-header-cell {
     padding: var(--spacing-padding-sm) var(--spacing-padding-md);
     color: var(--color-text-body);
+    line-height: normal;
   }
 
   // Restore zero vertical padding on action/control cells — the general rule above overrides
@@ -700,6 +701,68 @@ novo-data-table {
       }
       + .novo-data-table-detail-row {
         background-color: var(--color-utility-blue-100);
+      }
+    }
+  }
+
+  // CSS-drawn checkboxes — replaces icon-font glyphs
+  .novo-data-table-checkbox-header-cell,
+  .novo-data-table-checkbox-cell {
+    div.data-table-checkbox {
+      label i.bhi-checkbox-empty,
+      label i.bhi-checkbox-filled,
+      label i.bhi-checkbox-disabled {
+        font-size: 0;
+        display: inline-flex;
+        align-self: center;
+        width: 16px;
+        height: 16px;
+        position: relative;
+        flex-shrink: 0;
+      }
+
+      label i.bhi-checkbox-empty {
+        &::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          border: 1px solid var(--color-border-control);
+          border-radius: 2px;
+          background: white;
+        }
+      }
+
+      label i.bhi-checkbox-filled {
+        &::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: var(--color-background-utility-positive);
+          border: 1px solid var(--color-utility-blue-600);
+          border-radius: 2px;
+        }
+        &::after {
+          content: '';
+          position: absolute;
+          left: 3px;
+          top: 4px;
+          width: 9px;
+          height: 5px;
+          border-left: 2px solid var(--color-utility-blue-600);
+          border-bottom: 2px solid var(--color-utility-blue-600);
+          transform: rotate(-45deg);
+        }
+      }
+
+      label i.bhi-checkbox-disabled {
+        &::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: var(--color-background-utility-positive);
+          border: 1px solid var(--color-border-input-disabled);
+          border-radius: 2px;
+        }
       }
     }
   }

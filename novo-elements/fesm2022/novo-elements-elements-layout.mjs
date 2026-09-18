@@ -1,8 +1,7 @@
 import * as i0 from '@angular/core';
-import { model, input, output, inject, ElementRef, DestroyRef, signal, computed, effect, HostBinding, HostListener, ViewEncapsulation, ChangeDetectionStrategy, Component, InjectionToken, Inject, EventEmitter, DOCUMENT, Output, Input, Optional, QueryList, ViewChild, ContentChild, ContentChildren, NgModule } from '@angular/core';
+import { model, input, output, signal, inject, ElementRef, DestroyRef, computed, effect, HostBinding, HostListener, ViewEncapsulation, ChangeDetectionStrategy, Component, InjectionToken, Inject, EventEmitter, DOCUMENT, Output, Input, Optional, QueryList, ViewChild, ContentChild, ContentChildren, NgModule } from '@angular/core';
 import { toSignal, takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { fromEvent, filter, partition, switchMap, race, of, delay, map, merge, Subject } from 'rxjs';
-import { trigger, state, style, transition, animate } from '@angular/animations';
 import * as i1$2 from '@angular/cdk/bidi';
 import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
 import * as i1 from '@angular/cdk/overlay';
@@ -12,23 +11,12 @@ import { filter as filter$1, map as map$1, mapTo, takeUntil, distinctUntilChange
 import * as i1$1 from '@angular/cdk/a11y';
 import { hasModifierKey } from '@angular/cdk/keycodes';
 import * as i2 from '@angular/cdk/platform';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 import * as i3 from '@angular/common';
 import { CommonModule } from '@angular/common';
 
-// WARNING: Angular plans to remove the animations library in v23. When upgrading there, use CSS transition effects
-// to apply similar curves, and change event triggers to fire off of transitionstart/transitionend events.
-/**
- * Animation that grows/shrinks the panel width between its expanded and collapsed (icon-rail) sizes.
- * Width is animated rather than transform because the panel shrinks in place rather than sliding away.
- */
-const novoCollapsibleNavAnimations = {
-    expandCollapse: trigger('expandCollapse', [
-        state('expanded', style({ width: '{{ expandedWidth }}' }), { params: { expandedWidth: '18rem' } }),
-        state('collapsed', style({ width: '{{ collapsedWidth }}' }), { params: { collapsedWidth: '4rem' } }),
-        transition('expanded <=> collapsed', animate('300ms cubic-bezier(0.25, 0.8, 0.25, 1)')),
-    ]),
-};
-
+/** Host class applied for the first render only, so the panel does not animate up from its intrinsic width on load. */
+const NO_TRANSITION_CLASS = 'novo-collapsible-nav-no-transition';
 // Event fired when a user event (click, space) is about to expand navigation early
 class CollapsibleNavExpansionEvent extends Event {
     get expandPrevented() {
@@ -60,8 +48,12 @@ class NovoCollapsibleNavComponent {
         /** When true, hovering a collapsed panel temporarily expands it as an overlay without affecting layout. */
         this.overlayOnHover = input(false, ...(ngDevMode ? [{ debugName: "overlayOnHover" }] : []));
         this.hoveredChange = output();
+        /**
+         * Emits `expanding`/`collapsing`/`expanded`/`collapsed`. Called when the target width changes.
+         */
         this.transitionChange = output();
         this.manualExpand = output();
+        this.transitionTime = signal('300ms', ...(ngDevMode ? [{ debugName: "transitionTime" }] : []));
         this.element = inject(ElementRef);
         this.destroyRef = inject(DestroyRef);
         this.isHovered = signal(false, ...(ngDevMode ? [{ debugName: "isHovered" }] : []));
@@ -70,6 +62,10 @@ class NovoCollapsibleNavComponent {
         this.effectiveCollapsed = computed(() => this.collapsed() && !(this.overlayOnHover() && this.isEffectiveHovered()), ...(ngDevMode ? [{ debugName: "effectiveCollapsed" }] : []));
         this.clicked$ = fromEvent(this.element.nativeElement, 'click');
         this.activationKeyPressed$ = fromEvent(this.element.nativeElement, 'keydown').pipe(filter(kevt => kevt.key === ' ' || kevt.key === 'Enter'));
+        this.appliedWidth = computed(() => {
+            const collapsed = this.effectiveCollapsed();
+            return collapsed ? this.collapsedWidth() : this.expandedWidth();
+        }, ...(ngDevMode ? [{ debugName: "appliedWidth" }] : []));
         effect(() => {
             if (this.collapsed()) {
                 this.isHovered.set(false);
@@ -86,17 +82,15 @@ class NovoCollapsibleNavComponent {
     onMouseLeave() {
         this.isHovered.set(false);
     }
-    get expandCollapseState() {
-        return {
-            value: this.effectiveCollapsed() ? 'collapsed' : 'expanded',
-            params: { expandedWidth: this.expandedWidth(), collapsedWidth: this.collapsedWidth() },
-        };
-    }
     transitionStart(event) {
-        this.transitionChange.emit(event.toState === 'expanded' ? 'expanding' : 'collapsing');
+        if (event.target === this.element.nativeElement && event.propertyName === 'width') {
+            this.transitionChange.emit(this.effectiveCollapsed() ? 'collapsing' : 'expanding');
+        }
     }
     transitionEnd(event) {
-        this.transitionChange.emit(event.toState === 'expanded' ? 'expanded' : 'collapsed');
+        if (event.target === this.element.nativeElement && event.propertyName === 'width') {
+            this.transitionChange.emit(this.effectiveCollapsed() ? 'collapsed' : 'expanded');
+        }
     }
     debounceHover(hoverSignal) {
         const hoverObs = toObservable(hoverSignal);
@@ -108,7 +102,7 @@ class NovoCollapsibleNavComponent {
         const userEvents = merge(this.clicked$, this.activationKeyPressed$);
         // Emit anytime that the user clicks, or presses space/enter inside the nav,
         // AND the ensuing event is not prevented when emitted to parent components.
-        return userEvents.pipe(takeUntilDestroyed(this.destroyRef), map(event => {
+        return userEvents.pipe(takeUntilDestroyed(this.destroyRef), filter(() => this.effectiveCollapsed()), map(event => {
             const expandEvent = new CollapsibleNavExpansionEvent(event);
             this.manualExpand.emit(expandEvent);
             return expandEvent;
@@ -128,28 +122,23 @@ class NovoCollapsibleNavComponent {
         this.isHovered.set(false);
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.19", ngImport: i0, type: NovoCollapsibleNavComponent, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.1.0", version: "20.3.19", type: NovoCollapsibleNavComponent, isStandalone: false, selector: "novo-collapsible-nav", inputs: { collapsed: { classPropertyName: "collapsed", publicName: "collapsed", isSignal: true, isRequired: false, transformFunction: null }, expandedWidth: { classPropertyName: "expandedWidth", publicName: "expandedWidth", isSignal: true, isRequired: false, transformFunction: null }, collapsedWidth: { classPropertyName: "collapsedWidth", publicName: "collapsedWidth", isSignal: true, isRequired: false, transformFunction: null }, expandDelay: { classPropertyName: "expandDelay", publicName: "expandDelay", isSignal: true, isRequired: false, transformFunction: null }, overlayOnHover: { classPropertyName: "overlayOnHover", publicName: "overlayOnHover", isSignal: true, isRequired: false, transformFunction: null } }, outputs: { collapsed: "collapsedChange", expandDelay: "expandDelayChange", hoveredChange: "hoveredChange", transitionChange: "transitionChange", manualExpand: "manualExpand" }, host: { listeners: { "mouseenter": "onMouseEnter()", "mouseleave": "onMouseLeave()", "@expandCollapse.start": "transitionStart($event)", "@expandCollapse.done": "transitionEnd($event)" }, properties: { "@expandCollapse": "this.expandCollapseState", "class.novo-collapsible-nav-collapsed": "this.isCollapsed" }, classAttribute: "novo-collapsible-nav" }, exportAs: ["novoCollapsibleNav"], ngImport: i0, template: "<div class=\"novo-collapsible-nav-header\">\n  <ng-content select=\"[novo-collapsible-nav-header]\"></ng-content>\n</div>\n<div class=\"novo-collapsible-nav-body\">\n  <ng-content select=\"[novo-collapsible-nav-body]\"></ng-content>\n</div>\n<div class=\"novo-collapsible-nav-footer\">\n  <ng-content select=\"[novo-collapsible-nav-footer]\"></ng-content>\n</div>\n", styles: [".novo-collapsible-nav{display:flex;flex-direction:column;height:100%;overflow:hidden;background:var(--background-bright)}.novo-collapsible-nav .novo-collapsible-nav-header{flex:0 0 auto}.novo-collapsible-nav .novo-collapsible-nav-body{flex:1 1 auto;overflow:hidden auto}.novo-collapsible-nav .novo-collapsible-nav-footer{flex:0 0 auto}\n"], animations: [novoCollapsibleNavAnimations.expandCollapse], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.1.0", version: "20.3.19", type: NovoCollapsibleNavComponent, isStandalone: false, selector: "novo-collapsible-nav", inputs: { collapsed: { classPropertyName: "collapsed", publicName: "collapsed", isSignal: true, isRequired: false, transformFunction: null }, expandedWidth: { classPropertyName: "expandedWidth", publicName: "expandedWidth", isSignal: true, isRequired: false, transformFunction: null }, collapsedWidth: { classPropertyName: "collapsedWidth", publicName: "collapsedWidth", isSignal: true, isRequired: false, transformFunction: null }, expandDelay: { classPropertyName: "expandDelay", publicName: "expandDelay", isSignal: true, isRequired: false, transformFunction: null }, overlayOnHover: { classPropertyName: "overlayOnHover", publicName: "overlayOnHover", isSignal: true, isRequired: false, transformFunction: null } }, outputs: { collapsed: "collapsedChange", expandDelay: "expandDelayChange", hoveredChange: "hoveredChange", transitionChange: "transitionChange", manualExpand: "manualExpand" }, host: { listeners: { "transitionstart": "transitionStart($event)", "transitionend": "transitionEnd($event)", "mouseenter": "onMouseEnter()", "mouseleave": "onMouseLeave()" }, properties: { "style.--novo-collapsible-nav-transition-time": "transitionTime()", "style.--novo-collapsible-nav-width": "appliedWidth()", "class.novo-collapsible-nav-collapsed": "this.isCollapsed" }, classAttribute: "novo-collapsible-nav" }, exportAs: ["novoCollapsibleNav"], ngImport: i0, template: "<div class=\"novo-collapsible-nav-header\">\n  <ng-content select=\"[novo-collapsible-nav-header]\"></ng-content>\n</div>\n<div class=\"novo-collapsible-nav-body\">\n  <ng-content select=\"[novo-collapsible-nav-body]\"></ng-content>\n</div>\n<div class=\"novo-collapsible-nav-footer\">\n  <ng-content select=\"[novo-collapsible-nav-footer]\"></ng-content>\n</div>\n", styles: [".novo-collapsible-nav{display:flex;flex-direction:column;height:100%;overflow:hidden;background:var(--background-bright);width:var(--novo-collapsible-nav-width, 18rem);transition:width var(--novo-collapsible-nav-transition-time, .3s) cubic-bezier(.25,.8,.25,1)}.novo-collapsible-nav.novo-collapsible-nav-no-transition{transition:none}.novo-collapsible-nav .novo-collapsible-nav-header{flex:0 0 auto}.novo-collapsible-nav .novo-collapsible-nav-body{flex:1 1 auto;overflow:hidden auto}.novo-collapsible-nav .novo-collapsible-nav-footer{flex:0 0 auto}\n"], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.19", ngImport: i0, type: NovoCollapsibleNavComponent, decorators: [{
             type: Component,
-            args: [{ selector: 'novo-collapsible-nav', exportAs: 'novoCollapsibleNav', animations: [novoCollapsibleNavAnimations.expandCollapse], host: {
+            args: [{ selector: 'novo-collapsible-nav', exportAs: 'novoCollapsibleNav', host: {
                         class: 'novo-collapsible-nav',
-                    }, changeDetection: ChangeDetectionStrategy.OnPush, encapsulation: ViewEncapsulation.None, standalone: false, template: "<div class=\"novo-collapsible-nav-header\">\n  <ng-content select=\"[novo-collapsible-nav-header]\"></ng-content>\n</div>\n<div class=\"novo-collapsible-nav-body\">\n  <ng-content select=\"[novo-collapsible-nav-body]\"></ng-content>\n</div>\n<div class=\"novo-collapsible-nav-footer\">\n  <ng-content select=\"[novo-collapsible-nav-footer]\"></ng-content>\n</div>\n", styles: [".novo-collapsible-nav{display:flex;flex-direction:column;height:100%;overflow:hidden;background:var(--background-bright)}.novo-collapsible-nav .novo-collapsible-nav-header{flex:0 0 auto}.novo-collapsible-nav .novo-collapsible-nav-body{flex:1 1 auto;overflow:hidden auto}.novo-collapsible-nav .novo-collapsible-nav-footer{flex:0 0 auto}\n"] }]
+                        '[style.--novo-collapsible-nav-transition-time]': 'transitionTime()',
+                        '[style.--novo-collapsible-nav-width]': 'appliedWidth()',
+                        '(transitionstart)': 'transitionStart($event)',
+                        '(transitionend)': 'transitionEnd($event)',
+                    }, changeDetection: ChangeDetectionStrategy.OnPush, encapsulation: ViewEncapsulation.None, standalone: false, template: "<div class=\"novo-collapsible-nav-header\">\n  <ng-content select=\"[novo-collapsible-nav-header]\"></ng-content>\n</div>\n<div class=\"novo-collapsible-nav-body\">\n  <ng-content select=\"[novo-collapsible-nav-body]\"></ng-content>\n</div>\n<div class=\"novo-collapsible-nav-footer\">\n  <ng-content select=\"[novo-collapsible-nav-footer]\"></ng-content>\n</div>\n", styles: [".novo-collapsible-nav{display:flex;flex-direction:column;height:100%;overflow:hidden;background:var(--background-bright);width:var(--novo-collapsible-nav-width, 18rem);transition:width var(--novo-collapsible-nav-transition-time, .3s) cubic-bezier(.25,.8,.25,1)}.novo-collapsible-nav.novo-collapsible-nav-no-transition{transition:none}.novo-collapsible-nav .novo-collapsible-nav-header{flex:0 0 auto}.novo-collapsible-nav .novo-collapsible-nav-body{flex:1 1 auto;overflow:hidden auto}.novo-collapsible-nav .novo-collapsible-nav-footer{flex:0 0 auto}\n"] }]
         }], ctorParameters: () => [], propDecorators: { collapsed: [{ type: i0.Input, args: [{ isSignal: true, alias: "collapsed", required: false }] }, { type: i0.Output, args: ["collapsedChange"] }], expandedWidth: [{ type: i0.Input, args: [{ isSignal: true, alias: "expandedWidth", required: false }] }], collapsedWidth: [{ type: i0.Input, args: [{ isSignal: true, alias: "collapsedWidth", required: false }] }], expandDelay: [{ type: i0.Input, args: [{ isSignal: true, alias: "expandDelay", required: false }] }, { type: i0.Output, args: ["expandDelayChange"] }], overlayOnHover: [{ type: i0.Input, args: [{ isSignal: true, alias: "overlayOnHover", required: false }] }], hoveredChange: [{ type: i0.Output, args: ["hoveredChange"] }], transitionChange: [{ type: i0.Output, args: ["transitionChange"] }], manualExpand: [{ type: i0.Output, args: ["manualExpand"] }], onMouseEnter: [{
                 type: HostListener,
                 args: ['mouseenter']
             }], onMouseLeave: [{
                 type: HostListener,
                 args: ['mouseleave']
-            }], expandCollapseState: [{
-                type: HostBinding,
-                args: ['@expandCollapse']
-            }], transitionStart: [{
-                type: HostListener,
-                args: ['@expandCollapse.start', ['$event']]
-            }], transitionEnd: [{
-                type: HostListener,
-                args: ['@expandCollapse.done', ['$event']]
             }], isCollapsed: [{
                 type: HostBinding,
                 args: ['class.novo-collapsible-nav-collapsed']
