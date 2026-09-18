@@ -40,6 +40,8 @@ export class TooltipDirective implements OnDestroy, OnInit, AfterViewInit {
   isHTML: boolean;
   @Input('tooltipCloseOnClick')
   closeOnClick: boolean = false;
+  @Input('tooltipCustomClass')
+  customClass: string;
   @BooleanInput()
   @Input('tooltipOnOverflow')
   onOverflow: boolean = false;
@@ -144,6 +146,7 @@ export class TooltipDirective implements OnDestroy, OnInit, AfterViewInit {
     tooltipInstance.position = this.removeArrow ? 'no-arrow' : this.position;
     tooltipInstance.isHTML = this.isHTML;
     tooltipInstance.bounce = this.bounce;
+    tooltipInstance.customClass = this.customClass;
   }
 
   @HostListener('blur')

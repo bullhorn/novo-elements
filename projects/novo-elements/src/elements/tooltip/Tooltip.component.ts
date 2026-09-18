@@ -6,6 +6,9 @@ import { Component, computed, signal } from '@angular/core';
     selector: 'novo-tooltip',
     templateUrl: './Tooltip.html',
     styleUrls: ['./Tooltip.scss'],
+    host: {
+        '[class]': 'customClass',
+    },
     animations: [
         trigger('state', [
             state('initial, void, hidden', style({ opacity: '0' })),
@@ -29,6 +32,7 @@ import { Component, computed, signal } from '@angular/core';
 export class NovoTooltip {
   public readonly message = signal<string>('');
   public readonly messageLines = computed(() => this.message().split('\n'));
+  public customClass: string;
   public hidden: boolean;
   public tooltipType: string;
   public rounded: boolean;
