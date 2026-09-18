@@ -2,6 +2,10 @@
 
 A navigation panel that animates between an expanded sidebar and a collapsed icon rail. Project content into the `novo-collapsible-nav-header`, `novo-collapsible-nav-body`, and `novo-collapsible-nav-footer` slots. The `collapsed` state is two-way bindable.
 
+Track progress with the `transitionChange` output, which emits `expanding`/`collapsing` when a width change starts and `expanded`/`collapsed` when it finishes.
+
+The navigation also fires a `manualExpand` event when a user's click has skipped the initial transition delay. This event is preventable with `event.preventExpand()`, which allows users to click within the navbar without automatically expanding it.
+
 ##### Examples
 
 ## Basic Collapsible Nav

@@ -17,7 +17,9 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { delay, filter, fromEvent, map, merge, Observable, of, partition, race, switchMap } from 'rxjs';
-import { novoCollapsibleNavAnimations } from './collapsible-nav.animations';
+
+/** Host class applied for the first render only, so the panel does not animate up from its intrinsic width on load. */
+const NO_TRANSITION_CLASS = 'novo-collapsible-nav-no-transition';
 
 export type NavTransitionState = 'collapsed' | 'expanding' | 'expanded' | 'collapsing';
 
@@ -44,9 +46,12 @@ export class CollapsibleNavExpansionEvent extends Event {
   templateUrl: './collapsible-nav.component.html',
   styleUrls: ['./collapsible-nav.component.scss'],
   exportAs: 'novoCollapsibleNav',
-  animations: [novoCollapsibleNavAnimations.expandCollapse],
   host: {
     class: 'novo-collapsible-nav',
+    '[style.--novo-collapsible-nav-transition-time]': 'transitionTime()',
+    '[style.--novo-collapsible-nav-width]': 'appliedWidth()',
+    '(transitionstart)': 'transitionStart($event)',
+    '(transitionend)': 'transitionEnd($event)',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
@@ -69,9 +74,15 @@ export class NovoCollapsibleNavComponent {
   overlayOnHover = input<boolean>(false);
 
   hoveredChange = output<boolean>();
+
+  /**
+   * Emits `expanding`/`collapsing`/`expanded`/`collapsed`. Called when the target width changes.
+   */
   transitionChange = output<NavTransitionState>();
 
   manualExpand = output<CollapsibleNavExpansionEvent>();
+
+  transitionTime = signal('300ms');
 
   public readonly element = inject(ElementRef);
   private readonly destroyRef = inject(DestroyRef);
@@ -83,6 +94,11 @@ export class NovoCollapsibleNavComponent {
   private readonly activationKeyPressed$ = fromEvent<KeyboardEvent>(this.element.nativeElement, 'keydown').pipe(
     filter(kevt => kevt.key === ' ' || kevt.key === 'Enter'));
   private readonly manualExpandUnprevented$: Observable<CollapsibleNavExpansionEvent>;
+
+  appliedWidth = computed(() => {
+    const collapsed = this.effectiveCollapsed();
+    return collapsed ? this.collapsedWidth() : this.expandedWidth();
+  });
 
   constructor() {
     effect(() => {
@@ -107,22 +123,16 @@ export class NovoCollapsibleNavComponent {
     this.isHovered.set(false);
   }
 
-  @HostBinding('@expandCollapse')
-  get expandCollapseState(): { value: string; params: { expandedWidth: string; collapsedWidth: string } } {
-    return {
-      value: this.effectiveCollapsed() ? 'collapsed' : 'expanded',
-      params: { expandedWidth: this.expandedWidth(), collapsedWidth: this.collapsedWidth() },
-    };
+  transitionStart(event: TransitionEvent): void {
+    if (event.target === this.element.nativeElement && event.propertyName === 'width') {
+      this.transitionChange.emit(this.effectiveCollapsed() ? 'collapsing' : 'expanding');
+    }
   }
 
-  @HostListener('@expandCollapse.start', ['$event'])
-  transitionStart(event: any) {
-    this.transitionChange.emit(event.toState === 'expanded' ? 'expanding' : 'collapsing');
-  }
-
-  @HostListener('@expandCollapse.done', ['$event'])
-  transitionEnd(event) {
-    this.transitionChange.emit(event.toState === 'expanded' ? 'expanded' : 'collapsed');
+  transitionEnd(event: TransitionEvent): void {
+    if (event.target === this.element.nativeElement && event.propertyName === 'width') {
+      this.transitionChange.emit(this.effectiveCollapsed() ? 'collapsed' : 'expanded');
+    }
   }
 
   private debounceHover(hoverSignal: Signal<boolean>): Observable<boolean> {
@@ -142,6 +152,7 @@ export class NovoCollapsibleNavComponent {
     // AND the ensuing event is not prevented when emitted to parent components.
     return userEvents.pipe(
       takeUntilDestroyed(this.destroyRef),
+      filter(() => this.effectiveCollapsed()),
       map(event => {
         const expandEvent = new CollapsibleNavExpansionEvent(event);
         this.manualExpand.emit(expandEvent);
