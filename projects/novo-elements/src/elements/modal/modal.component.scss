@@ -8,7 +8,7 @@
   z-index: z(modal);
   position: relative;
   min-width: 330px;
-  max-width: 600px;
+  max-width: var(--modal-max-width, 600px);
 
   > .novo-button.modal-close {
     position: absolute;
