@@ -137,11 +137,9 @@ dialog > header:first-child {
   text-align: center;
 }
 
-:root:not([data-theme='bh2026']) & {
-  dialog::backdrop {
-    background: #0000009c;
-    backdrop-filter: blur(4px);
-  }
+:root:not([data-theme='bh2026']) dialog::backdrop {
+  background: #0000009c;
+  backdrop-filter: blur(4px);
 }
 
 footer {
