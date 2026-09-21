@@ -590,6 +590,9 @@ novo-dynamic-form {
   }
   &[layout="vertical"] {
     .novo-form-container {
+      [data-theme=bh2026] & {
+        margin-top: var(--spacing-md);
+      }
       form {
         div.novo-form-row,
         div.novo-control-group-control {
