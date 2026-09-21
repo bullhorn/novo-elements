@@ -68,15 +68,27 @@
     cursor: pointer;
     display: flex;
     align-items: center;
+    text-transform: uppercase;
 
     [data-theme='bh2026'] & {
-      bottom: -27px;
+      bottom: -28px;
+      color: var(--button-color-dialogue-negative-content-default);
+      font-size: var(--typography-button-sm-font-size);
+      font-weight: var(--typography-button-sm-font-weight);
+      line-height: var(--typography-button-sm-line-height);
+      text-transform: none;
     }
 
     i {
       font-size: 0.7rem;
       padding-bottom: 2px;
       margin-left: 5px;
+
+      [data-theme='bh2026'] & {
+        font-size: var(--typography-meta-sm-font-size);
+        padding-bottom: 3px;
+        margin-left: 10px;
+      }
     }
   }
   i.bhi-search {

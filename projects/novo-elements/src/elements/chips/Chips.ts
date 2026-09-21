@@ -70,7 +70,7 @@ const CHIPS_VALUE_ACCESSOR = {
     </div>
     <i class="bhi-search" [class.has-value]="items.length" *ngIf="!disablePickerInput"></i>
     <label class="clear-all" *ngIf="items.length && !disablePickerInput" (click)="clearValue()"
-      >{{ labels.clearAll }} <i class="bhi-times"></i
+      >{{ labels.clearAllNormalCase }} <i class="bhi-times"></i
     ></label>
   `,
     styleUrls: ['./Chips.scss'],

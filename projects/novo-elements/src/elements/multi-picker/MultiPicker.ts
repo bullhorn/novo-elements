@@ -51,7 +51,7 @@ interface Item {
       </novo-picker>
     </div>
     <i class="bhi-search" [class.has-value]="items.length"></i>
-    <label class="clear-all" *ngIf="items.length" (click)="clearValue()">{{ labels.clearAll }} <i class="bhi-times"></i></label>
+    <label class="clear-all" *ngIf="items.length" (click)="clearValue()">{{ labels.clearAllNormalCase }} <i class="bhi-times"></i></label>
   `,
     styleUrls: ['./_MultiPicker.scss'],
     host: {

@@ -39,6 +39,18 @@
     }
   }
 
+  label.clear-all {
+    text-transform: uppercase;
+
+    [data-theme='bh2026'] & {
+      color: var(--button-color-dialogue-negative-content-default);
+      font-size: var(--typography-button-sm-font-size);
+      font-weight: var(--typography-button-sm-font-weight);
+      line-height: var(--typography-button-sm-line-height);
+      text-transform: none;
+    }
+  }
+
   chip {
     span {
       text-transform: capitalize;
