@@ -367,7 +367,6 @@ novo-dynamic-form {
                       padding: 5px 0;
                       box-shadow: none;
                       box-sizing: content-box;
-                      transition: height 0ms;
                       color: var(--text-main);
                       overflow-y: hidden;
                       &:hover {
@@ -391,7 +390,6 @@ novo-dynamic-form {
                       padding-bottom: 0;
                     }
                     textarea:not(.quick-note-textarea) {
-                      transition: height 0ms;
                       background: transparent !important;
                     }
                     > div.novo-control-input-with-label {
