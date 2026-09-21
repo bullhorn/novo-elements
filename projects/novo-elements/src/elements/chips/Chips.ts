@@ -68,7 +68,7 @@ const CHIPS_VALUE_ACCESSOR = {
     <div class="preview-container">
       <span #preview></span>
     </div>
-    <i class="bhi-search" [class.has-value]="items.length" *ngIf="!disablePickerInput"></i>
+    <i class="bhi-search" [class.has-value]="items.length" *ngIf="!disablePickerInput" (click)="openPanel()"></i>
     <label class="clear-all" *ngIf="items.length && !disablePickerInput" (click)="clearValue()"
       >{{ labels.clearAllNormalCase }} <i class="bhi-times"></i
     ></label>
@@ -160,6 +160,11 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
   set value(selected) {
     this.itemToAdd = '';
     this._value = selected;
+  }
+
+  openPanel() {
+    this.picker?.show();
+    this.picker?.input?.nativeElement?.focus();
   }
 
   clearValue() {

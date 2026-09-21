@@ -40,6 +40,9 @@
   }
 
   label.clear-all {
+    font-size: 0.9rem;
+    color: var(--color-negative);
+    cursor: pointer;
     text-transform: uppercase;
 
     [data-theme='bh2026'] & {
@@ -48,6 +51,10 @@
       font-weight: var(--typography-button-sm-font-weight);
       line-height: var(--typography-button-sm-line-height);
       text-transform: none;
+    }
+
+    i {
+      font-size: 0.8rem;
     }
   }
 

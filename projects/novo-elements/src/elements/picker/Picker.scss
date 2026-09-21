@@ -96,23 +96,16 @@ novo-picker {
   i.bhi-search,
   i.bhi-times {
     position: absolute;
+    top: 0;
     right: 0;
+    bottom: 8px;
     color: var(--font-color-base);
+    font-size: var(--typography-input-label-field-label-font-size, 1.1em);
+    cursor: pointer;
 
     &.entity-selected {
       right: 5px;
     }
-  }
-
-  i.bhi-search {
-    top: 0;
-    font-size: var(--font-size-sm);
-  }
-
-  i.bhi-times {
-    top: 0;
-    cursor: pointer;
-    font-size: var(--font-size-sm);
   }
 
   [data-theme=bh2026] & {
