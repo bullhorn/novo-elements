@@ -95,13 +95,9 @@
     position: absolute;
     bottom: 4px;
     right: 0;
-    font-size: 1.1em;
+    font-size: var(--typography-body-lg-font-size, 1.1em);
     color: var(--font-color-base);
     cursor: pointer;
-
-    [data-theme='bh2026'] & {
-      bottom: 4px;
-    }
   }
 
   & + i {
