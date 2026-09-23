@@ -840,12 +840,13 @@ control-prompt-modal {
   }
 }
 
-// Control types that should not receive the bh2026 bordered-input treatment
-$bh2026-borderless-types: ('quick-note', 'checkbox', 'checklist', 'editor', 'tiles', 'switch', 'file', 'address');
-$bh2026-not-borderless: '';
-@each $type in $bh2026-borderless-types {
-  $bh2026-not-borderless: $bh2026-not-borderless + ':not(.#{$type})';
-}
+// Control types that receive the bh2026 bordered-input treatment. An allowlist, not a
+// blocklist: the class on .novo-control-input is the control's `controlType`, and a custom
+// control's controlType is the consumer's template name. Anything unlisted therefore either
+// draws its own chrome (editor, file, quick-note, address, ...) or is app-supplied markup the
+// library knows nothing about. Names come from the novoTemplate keys in ControlTemplates.ts.
+// :is() keeps the whole list at one class of specificity so consumers can override it.
+$bh2026-bordered: ':is(.code-editor, .date, .date-time, .native-input, .native-select, .picker, .radio, .read-only, .select, .text-area, .textbox, .time, .timezone)';
 
 @mixin bh2026-field-label {
   font-weight: var(--typography-input-label-field-label-font-weight) !important;
@@ -909,8 +910,8 @@ $bh2026-not-borderless: '';
     }
   }
 
-  // Bordered input container (excludes $bh2026-borderless-types)
-  .novo-control-input#{$bh2026-not-borderless} {
+  // Bordered input container
+  .novo-control-input#{$bh2026-bordered} {
     border: var(--field-border-width-default) solid var(--field-color-border-default);
     border-radius: var(--field-border-radius-default);
     background: var(--field-color-background-default);
@@ -959,9 +960,9 @@ $bh2026-not-borderless: '';
   }
 
   // Error: move negative border to container
-  div.novo-control-input#{$bh2026-not-borderless}:has(input.ng-touched.ng-invalid:not(.ng-pristine)),
-  div.novo-control-input#{$bh2026-not-borderless}:has(textarea.ng-touched.ng-invalid:not(.ng-pristine):not(.ng-valid)),
-  div.novo-control-input#{$bh2026-not-borderless}.control-invalid-touched {
+  div.novo-control-input#{$bh2026-bordered}:has(input.ng-touched.ng-invalid:not(.ng-pristine)),
+  div.novo-control-input#{$bh2026-bordered}:has(textarea.ng-touched.ng-invalid:not(.ng-pristine):not(.ng-valid)),
+  div.novo-control-input#{$bh2026-bordered}.control-invalid-touched {
     border-width: var(--field-border-width-negative);
     border-color: var(--field-color-border-negative);
     &:hover {
@@ -970,8 +971,8 @@ $bh2026-not-borderless: '';
   }
 
   // Disabled container
-  novo-control.disabled .novo-control-input#{$bh2026-not-borderless},
-  novo-custom-control-container.disabled .novo-control-input#{$bh2026-not-borderless} {
+  novo-control.disabled .novo-control-input#{$bh2026-bordered},
+  novo-custom-control-container.disabled .novo-control-input#{$bh2026-bordered} {
     border-color: var(--field-color-border-disabled);
     background: var(--field-color-background-disabled);
 
