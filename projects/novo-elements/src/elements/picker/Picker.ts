@@ -61,7 +61,7 @@ const DEFAULT_DEBOUNCE_TIME = 250;
       #input
       [disabled]="disablePickerInput"
     />
-    <i class="bhi-search" *ngIf="(!_value || clearValueOnSelect) && !disablePickerInput"></i>
+    <i class="bhi-search" *ngIf="(!_value || clearValueOnSelect) && !disablePickerInput" (click)="show(); input.focus()"></i>
     <i
       class="bhi-times"
       [class.entity-selected]="config?.entityIcon && _value"
@@ -210,7 +210,7 @@ export class NovoPickerElement implements OnInit {
     return this.container && this.container.panelOpen;
   }
 
-  private show(term?: string): void {
+  public show(term?: string): void {
     this.openPanel();
     // Show the results inside - only if openPanel actually opened (will be skipped if no parent)
     if (this.panelOpen) {

@@ -38,7 +38,7 @@ const MULTI_DATE_VALUE_ACCESSOR = {
       <span class="placeholder" *ngIf="!value.length" data-automation-id="multi-date-input">{{ placeholder }}</span>
     </div>
     <novo-icon class="panel-toggle" [class.selected]="panelOpen" (click)="openPanel()">calendar</novo-icon>
-    <label class="clear-all" *ngIf="value.length" (click)="clearValue()">{{ labels.clearAll }} <i class="bhi-times"></i></label>
+    <label class="clear-all" *ngIf="value.length" (click)="clearValue()">{{ labels.clearAllNormalCase }} <i class="bhi-times"></i></label>
     <novo-overlay-template [parent]="element" position="above-below">
       <novo-date-picker
         [start]="start"

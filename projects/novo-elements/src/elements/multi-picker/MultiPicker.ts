@@ -1,9 +1,10 @@
 // NG2
-import { Component, ElementRef, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 // Vendor
 import { ReplaySubject } from 'rxjs';
 import { NovoLabelService } from 'novo-elements/services';
+import { NovoPickerElement } from 'novo-elements/elements/picker';
 import { Helpers, Key } from 'novo-elements/utils';
 
 // Value accessor for the component (supports ngModel)
@@ -39,6 +40,7 @@ interface Item {
     </div>
     <div class="chip-input-container">
       <novo-picker
+        #picker
         clearValueOnSelect="true"
         [config]="source"
         [placeholder]="placeholder"
@@ -50,8 +52,8 @@ interface Item {
       >
       </novo-picker>
     </div>
-    <i class="bhi-search" [class.has-value]="items.length"></i>
-    <label class="clear-all" *ngIf="items.length" (click)="clearValue()">{{ labels.clearAll }} <i class="bhi-times"></i></label>
+    <i class="bhi-search" [class.has-value]="items.length" (click)="openPanel()"></i>
+    <label class="clear-all" *ngIf="items.length" (click)="clearValue()">{{ labels.clearAllNormalCase }} <i class="bhi-times"></i></label>
   `,
     styleUrls: ['./_MultiPicker.scss'],
     host: {
@@ -60,6 +62,8 @@ interface Item {
     standalone: false,
 })
 export class NovoMultiPickerElement implements OnInit {
+  @ViewChild('picker', { static: false })
+  picker: NovoPickerElement;
   @Input()
   source: { options: []; resultsTemplate; selectAllOption: boolean; chipsCount; strictRelationship };
   @Input()
@@ -115,6 +119,11 @@ export class NovoMultiPickerElement implements OnInit {
     this.chipsCount = this.source.chipsCount || 4;
     this.strictRelationship = this.source.strictRelationship || false;
     this.setupOptions();
+  }
+
+  openPanel() {
+    this.picker?.show();
+    this.picker?.input?.nativeElement?.focus();
   }
 
   clearValue() {
