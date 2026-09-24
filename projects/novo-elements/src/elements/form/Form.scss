@@ -960,8 +960,6 @@ $bh2026-bordered: ':is(.code-editor, .date, .date-time, .native-input, .native-s
   }
 
   // Error: move negative border to container
-  div.novo-control-input#{$bh2026-bordered}:has(input.ng-touched.ng-invalid:not(.ng-pristine)),
-  div.novo-control-input#{$bh2026-bordered}:has(textarea.ng-touched.ng-invalid:not(.ng-pristine):not(.ng-valid)),
   div.novo-control-input#{$bh2026-bordered}.control-invalid-touched {
     border-width: var(--field-border-width-negative);
     border-color: var(--field-color-border-negative);
@@ -1081,7 +1079,7 @@ $bh2026-bordered: ':is(.code-editor, .date, .date-time, .native-input, .native-s
     padding-right: 0;
     margin-bottom: 0;
 
-    &:not(:has(> novo-fieldset-header)) {
+    &.no-header {
       padding-top: var(--spacing-padding-lg);
     }
   }
@@ -1106,7 +1104,7 @@ $bh2026-bordered: ':is(.code-editor, .date, .date-time, .native-input, .native-s
       margin-top: 0;
     }
 
-    novo-fieldset + novo-fieldset:has(> .novo-fieldset-container.card-section) {
+    novo-fieldset + novo-fieldset.card-fieldset {
       margin-top: var(--spacing-gutter);
     }
   }

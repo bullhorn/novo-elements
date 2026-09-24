@@ -60,7 +60,7 @@ export class NovoFieldsetHeaderElement {
 @Component({
     selector: 'novo-fieldset',
     template: `
-    <div class="novo-fieldset-container" [class.card-section]="cardSection">
+    <div class="novo-fieldset-container" [class.card-section]="cardSection" [class.no-header]="!title">
       @if (title) {
         <novo-fieldset-header
           [icon]="icon"
@@ -78,6 +78,9 @@ export class NovoFieldsetHeaderElement {
       </ng-container>
     </div>
   `,
+    host: {
+        '[class.card-fieldset]': 'cardSection',
+    },
     standalone: false,
 })
 export class NovoFieldsetElement {
