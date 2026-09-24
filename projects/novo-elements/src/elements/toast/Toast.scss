@@ -1,6 +1,38 @@
 @import "../../styles/variables.scss";
 @import "../common/typography/text.mixins.scss";
 
+// Map of `.novo-theme-*` toast variants to their CSS custom property values.
+// `token` overrides the `--color-*-utility-#{token}` segment when it differs
+// from the map key (e.g. `.novo-theme-info` maps onto the "positive" tokens).
+$novo-toast-themes2026: (
+  danger: (
+    token: negative,
+    border: #da4453,
+    background: #ffe6e8,
+    text: #9f111f,
+    knockout: #9f111f,
+  ),
+  warning: (
+    border: #f6b042,
+    background: #fff5e6,
+    text: #b0710e,
+    knockout: #b0710e,
+  ),
+  success: (
+    border: #78b732,
+    background: #e6f1ff,
+    text: #4d8a0c,
+    knockout: #4d8a0c,
+  ),
+  info: (
+    token: positive,
+    border: #4a89dc,
+    background: #e6f1ff,
+    text: #1450a0,
+    knockout: #1450a0,
+  ),
+);
+
 :host {
   display: grid;
   grid-template-columns: 5rem 1fr 15px;
@@ -14,12 +46,10 @@
   box-shadow: var(--shadow-1);
   border-radius: var(--border-radius-sm);
 
-  &.show {
-    display: grid !important;
-  }
-
   &.launched {
-    display: none;
+    &:not(.show) {
+      display: none !important;
+    }
     position: fixed;
     z-index: 9999;
   }
@@ -40,7 +70,9 @@
     justify-content: center;
     align-content: center;
     align-items: center;
-    align-self: flex-start;
+    :root:not([data-theme='bh2026']) & {
+      align-self: flex-start;
+    }
     cursor: pointer;
     height: 100%;
   }
@@ -262,6 +294,57 @@
       border: 1px solid getCssVarname($name);
       background: getPaleColor($name);
       color: var(--font-color-base);
+    }
+  }
+  :root[data-theme='bh2026'] & {
+    display: flex;
+    gap: var(--toast-spacing-gap, 0.8rem);
+    padding: var(--toast-spacing-padding-vertical, 0.8rem) var(--toast-spacing-padding-horizontal, 0.8rem);
+    box-shadow: 0 var(--spacing-4, 4px) var(--spacing-8, 8px) 0 var(--color-transparency-charcoal-08, rgba(47, 47, 51, 0.08));
+
+    h5 {
+      text-transform: none;
+      font-size: var(--typography-body-lg-font-size, 1.6rem);
+      font-weight: var(--typography-body-lg-font-weight-medium, 500);
+      line-height: var(--typography-body-lg-line-height, 2.4rem);
+      padding: 0;
+    }
+
+    p {
+      font-size: var(--typography-body-sm-font-size, 12px);
+      font-weight: 500;
+      line-height: 1;
+      padding: 0;
+    }
+
+    .toast-content {
+      flex-grow: 1;
+    }
+    .toast-icon {
+      width: 2.4rem;
+      height: 2.4rem;
+      border-radius: var(--border-radius-xsm, 0.4rem);
+      &:has(> .bhi-null) {
+        display: none;
+      }
+    }
+    .close-icon i {
+      font-size: var(--font-size-md, 1.3rem);
+    }
+
+    @each $name, $props in $novo-toast-themes2026 {
+      $token: if(map-has-key($props, token), map-get($props, token), $name);
+      &.novo-theme-#{$name}, &.novo-accent-#{$name} {
+        border: 1px solid var(--color-border-utility-#{$token}, #{map-get($props, border)});
+        background-color: var(--color-background-utility-#{$token}, #{map-get($props, background)});
+        color: var(--color-text-utility-#{$token}, #{map-get($props, text)});
+        .toast-icon {
+          background-color: var(--color-background-utility-#{$token}-knockout, #{map-get($props, knockout)});
+          i {
+            color: var(--color-background-utility-#{$token}, #{map-get($props, background)});
+          }
+        }
+      }
     }
   }
 }

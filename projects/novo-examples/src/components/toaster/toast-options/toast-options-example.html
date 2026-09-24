@@ -5,7 +5,6 @@
     [appearance]="appearance.value"
     [icon]="icon.value"
     [title]="title.value ? 'Save Failed' : null"
-    [margin]="margin.value ? '1rem' : 0"
     [isCloseable]="closeable.value"
     message="Oops! Looks like you're missing some required fields" data-automation-id="toast-options-preview"></novo-toast>
 </div>
@@ -48,13 +47,6 @@
     <novo-radio-group #title appearance="vertical" [value]="true" data-automation-id="toast-title-group">
       <novo-radio name="title" [value]="true" data-automation-id="toast-title-show">Show</novo-radio>
       <novo-radio name="title" [value]="false" data-automation-id="toast-title-hide">Hide</novo-radio>
-    </novo-radio-group>
-  </novo-field>
-  <novo-field data-automation-id="toast-option-margin">
-    <novo-label>Margin</novo-label>
-    <novo-radio-group #margin appearance="vertical" [value]="false" data-automation-id="toast-margin-group">
-      <novo-radio name="margin" [value]="false" data-automation-id="toast-margin-none">none</novo-radio>
-      <novo-radio name="margin" [value]="true" data-automation-id="toast-margin-inset">inset</novo-radio>
     </novo-radio-group>
   </novo-field>
   <novo-field data-automation-id="toast-option-closeable">
