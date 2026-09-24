@@ -34,7 +34,7 @@ export class IconsetExample {
     this.options = {
       title: `${icon}`,
       message: 'Copied to your clipboard',
-      theme: 'ocean',
+      theme: 'info',
       icon: 'clipboard',
       position: 'growlTopRight',
     };

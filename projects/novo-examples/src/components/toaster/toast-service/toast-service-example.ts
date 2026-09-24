@@ -61,7 +61,7 @@ export class ToastServiceExample {
         title: 'Growl',
         message: 'This positioning is growlTopLeft',
         icon: 'coffee',
-        theme: 'ocean',
+        theme: 'info',
         position: 'growlTopLeft',
         hideDelay: 100000000,
       };
@@ -79,7 +79,7 @@ export class ToastServiceExample {
         title: 'Growl',
         message: 'This positioning is growlTopLeft',
         icon: 'coffee',
-        theme: 'ocean',
+        theme: 'info',
         position: 'growlBottomLeft',
       };
     }
