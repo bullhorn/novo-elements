@@ -186,6 +186,15 @@ describe('Elements: NovoAddressElement', () => {
       expect(component.validityChange.emit).toHaveBeenCalled();
       expect(component.onInput).toHaveBeenCalledWith(null, 'state');
     });
+    it('should resolve with the loaded state options', async () => {
+      await expect(component.updateStates()).resolves.toEqual(['MA']);
+    });
+    it('should resolve with an empty list when no country is selected', async () => {
+      component.model = {};
+      await expect(component.updateStates()).resolves.toEqual([]);
+      expect(stateOptionsSpy).not.toHaveBeenCalled();
+      expect(component.tooltip.state).toEqual(component.labels.selectCountryFirst);
+    });
   });
 
   describe('Method: writeValue()', () => {
@@ -620,30 +629,35 @@ describe('Elements: NovoAddressElement', () => {
     });
 
     describe('Method: onPlaceSelected()', () => {
+      let updateStatesSpy;
+
       beforeEach(() => {
-        vi.spyOn(component, 'updateStates').mockImplementation(() => {});
+        updateStatesSpy = vi.spyOn(component, 'updateStates').mockResolvedValue([]);
         vi.spyOn(component, 'updateControl').mockImplementation(() => {});
       });
 
-      it('should no-op on null/undefined', () => {
+      it('should no-op on null/undefined', async () => {
         component.model = { address1: 'keep' };
         component.onPlaceSelected(null);
         component.onPlaceSelected(undefined);
+        await tick();
         expect(component.model.address1).toEqual('keep');
         expect(component.updateControl).not.toHaveBeenCalled();
       });
 
-      it('should overwrite returned fields and map countryCode to countryID/countryName', () => {
+      it('should overwrite returned fields and map countryCode to countryID/countryName', async () => {
         component.onPlaceSelected({
           address1: '100 Summer Street',
           city: 'Boston',
           state: 'MA',
+          stateName: 'Massachusetts',
           zip: '02110',
           countryCode: 'US',
         });
+        await tick();
         expect(component.model.address1).toEqual('100 Summer Street');
         expect(component.model.city).toEqual('Boston');
-        expect(component.model.state).toEqual('MA');
+        expect(component.model.state).toEqual('Massachusetts');
         expect(component.model.zip).toEqual('02110');
         expect(component.model.countryID).toEqual(1);
         expect(component.model.countryName).toEqual('United States');
@@ -651,16 +665,18 @@ describe('Elements: NovoAddressElement', () => {
         expect(component.updateControl).toHaveBeenCalled();
       });
 
-      it('should persist a field the API omits (address2 with no unit)', () => {
+      it('should persist a field the API omits (address2 with no unit)', async () => {
         component.model = { address2: 'Suite 500' };
         component.onPlaceSelected({ address1: '100 Summer Street', city: 'Boston' });
+        await tick();
         expect(component.model.address2).toEqual('Suite 500');
         expect(component.model.address1).toEqual('100 Summer Street');
       });
 
-      it('should clear a field when the API returns an empty string', () => {
+      it('should clear a field when the API returns an empty string', async () => {
         component.model = { address2: 'Suite 500' };
         component.onPlaceSelected({ address1: '100 Summer Street', address2: '' });
+        await tick();
         expect(component.model.address2).toEqual('');
       });
 
@@ -669,6 +685,120 @@ describe('Elements: NovoAddressElement', () => {
         component.onPlaceSelected({ address1: '100 Summer Street' });
         expect(component.debouncedSearch).toEqual('');
         expect(component.overlay.closePanel).toHaveBeenCalled();
+      });
+
+      describe('state resolution', () => {
+        const flatTexas = {
+          address1: '2380 Performance Dr',
+          city: 'Richardson',
+          state: 'TX',
+          stateName: 'Texas',
+          zip: '75080',
+          countryCode: 'US',
+        };
+
+        const selectWithStateOptions = async (pickerConfig: any, stateOptions: any[], place: any = flatTexas) => {
+          component.config.state = { required: false, pickerConfig };
+          updateStatesSpy.mockResolvedValue(stateOptions);
+          component.onPlaceSelected(place);
+          await tick();
+        };
+
+        it('should store the state name for a Picker:Text:State (StateText) picker', async () => {
+          await selectWithStateOptions({ field: 'label' }, [
+            { value: 'Tennessee', label: 'Tennessee' },
+            { value: 'Texas', label: 'Texas' },
+          ]);
+          expect(component.model.state).toEqual('Texas');
+        });
+
+        it('should store the state code for a State - Drop Down / Mini Picker (NorthAmericaState) picker', async () => {
+          await selectWithStateOptions({ field: 'value' }, [
+            { value: 'TN', label: 'Tennessee' },
+            { value: 'TX', label: 'Texas' },
+          ]);
+          expect(component.model.state).toEqual('TX');
+        });
+
+        it('should store the state id for a Picker:State ID picker', async () => {
+          await selectWithStateOptions({ field: 'value' }, [
+            { value: 43, label: 'Tennessee' },
+            { value: 44, label: 'Texas' },
+          ]);
+          expect(component.model.state).toEqual(44);
+        });
+
+        it('should store the state name for the default string state list', async () => {
+          await selectWithStateOptions({ field: 'value' }, ['Tennessee', 'Texas']);
+          expect(component.model.state).toEqual('Texas');
+        });
+
+        it('should use option.value when the picker config has no field', async () => {
+          await selectWithStateOptions({}, [{ value: 'TX', label: 'Texas' }]);
+          expect(component.model.state).toEqual('TX');
+        });
+
+        it('should match the state code when the result has no state name', async () => {
+          await selectWithStateOptions({ field: 'value' }, [{ value: 'TX', label: 'Texas' }], { ...flatTexas, stateName: undefined });
+          expect(component.model.state).toEqual('TX');
+        });
+
+        it('should match on the state code when the state name differs from the option label', async () => {
+          await selectWithStateOptions({ field: 'value' }, [{ value: 'QC', label: 'Quebec' }], {
+            ...flatTexas,
+            state: 'QC',
+            stateName: ' Québec ',
+            countryCode: 'CA',
+          });
+          expect(component.model.state).toEqual('QC');
+        });
+
+        it('should fall back to the state name when no option matches', async () => {
+          await selectWithStateOptions({ field: 'value' }, []);
+          expect(component.model.state).toEqual('Texas');
+        });
+
+        it('should fall back to the state code when no option matches and there is no state name', async () => {
+          await selectWithStateOptions({ field: 'label' }, [{ value: 'Ohio', label: 'Ohio' }], { ...flatTexas, stateName: undefined });
+          expect(component.model.state).toEqual('TX');
+        });
+
+        it('should fall back to the state name when loading state options fails', async () => {
+          component.config.state = { required: false, pickerConfig: { field: 'value' } };
+          updateStatesSpy.mockRejectedValue(new Error('options failed'));
+          component.onPlaceSelected(flatTexas);
+          await tick();
+          expect(component.model.state).toEqual('Texas');
+          expect(component.updateControl).toHaveBeenCalled();
+        });
+
+        it('should leave the existing state when the result has no state fields', async () => {
+          component.model = { state: 'Texas' };
+          await selectWithStateOptions({ field: 'label' }, [{ value: 'Ohio', label: 'Ohio' }], { address1: '1 Main St' });
+          expect(component.model.state).toEqual('Texas');
+        });
+
+        it('should clear the state when the result returns empty state fields', async () => {
+          component.model = { state: 'Texas' };
+          await selectWithStateOptions({ field: 'label' }, [{ value: 'Texas', label: 'Texas' }], {
+            address1: '1 Main St',
+            state: '',
+            stateName: '',
+          });
+          expect(component.model.state).toEqual('');
+        });
+
+        it('should emit the control value once, after the state is resolved', async () => {
+          component.config.state = { required: false, pickerConfig: { field: 'label' } };
+          const statesAtUpdate: any[] = [];
+          vi.spyOn(component, 'updateControl').mockImplementation(() => statesAtUpdate.push(component.model.state));
+          updateStatesSpy.mockResolvedValue([{ value: 'Texas', label: 'Texas' }]);
+          component.onPlaceSelected(flatTexas);
+          expect(component.updateControl).not.toHaveBeenCalled();
+          await tick();
+          expect(statesAtUpdate).toEqual(['Texas']);
+          expect(component.onInput).toHaveBeenCalledWith(null, 'state');
+        });
       });
     });
 
@@ -686,17 +816,19 @@ describe('Elements: NovoAddressElement', () => {
         formatted_address: '100 Summer St, Boston, MA 02110, USA',
         place_id: 'ChIJexample',
       };
+      let updateStatesSpy;
 
       beforeEach(() => {
-        vi.spyOn(component, 'updateStates').mockImplementation(() => {});
+        updateStatesSpy = vi.spyOn(component, 'updateStates').mockResolvedValue([]);
         vi.spyOn(component, 'updateControl').mockImplementation(() => {});
       });
 
-      it('should map raw address_components into the flat model fields', () => {
+      it('should map raw address_components into the flat model fields', async () => {
         component.onPlaceSelected(usPlace as any);
+        await tick();
         expect(component.model.address1).toEqual('100 Summer Street'); // street_number + route
         expect(component.model.city).toEqual('Boston'); // locality
-        expect(component.model.state).toEqual('Massachusetts'); // admin_area_level_1 long_name, not 'MA'
+        expect(component.model.state).toEqual('Massachusetts'); // admin_area_level_1 long_name when no option matches
         expect(component.model.zip).toEqual('02110'); // postal_code
         expect(component.model.countryID).toEqual(1); // country short_name 'US' -> COUNTRIES.code
         expect(component.model.countryName).toEqual('United States');
@@ -704,21 +836,31 @@ describe('Elements: NovoAddressElement', () => {
         expect(component.updateControl).toHaveBeenCalled();
       });
 
-      it('should map subpremise into address2', () => {
+      it('should resolve the raw state to the code for a code-valued picker', async () => {
+        component.config.state = { required: false, pickerConfig: { field: 'value' } };
+        updateStatesSpy.mockResolvedValue([{ value: 'MA', label: 'Massachusetts' }]);
+        component.onPlaceSelected(usPlace as any);
+        await tick();
+        expect(component.model.state).toEqual('MA');
+      });
+
+      it('should map subpremise into address2', async () => {
         const place = {
           address_components: [...usPlace.address_components, { long_name: 'Suite 500', short_name: 'Suite 500', types: ['subpremise'] }],
         };
         component.onPlaceSelected(place as any);
+        await tick();
         expect(component.model.address2).toEqual('Suite 500');
       });
 
-      it('should blank an existing address2 when the selected place has no subpremise', () => {
+      it('should blank an existing address2 when the selected place has no subpremise', async () => {
         component.model = { address2: 'Suite 500' };
         component.onPlaceSelected(usPlace as any);
+        await tick();
         expect(component.model.address2).toEqual('');
       });
 
-      it('should clear the finer fields when a partial place (state/country only) is selected', () => {
+      it('should clear the finer fields when a partial place (state/country only) is selected', async () => {
         component.model = { address1: '100 Summer Street', address2: 'Suite 500', city: 'Boston', state: 'Massachusetts', zip: '02110' };
         const statePlace = {
           address_components: [
@@ -728,6 +870,7 @@ describe('Elements: NovoAddressElement', () => {
           formatted_address: 'Texas, USA',
         };
         component.onPlaceSelected(statePlace as any);
+        await tick();
         expect(component.model.address1).toEqual('');
         expect(component.model.address2).toEqual('');
         expect(component.model.city).toEqual('');
@@ -737,7 +880,17 @@ describe('Elements: NovoAddressElement', () => {
         expect(component.model.countryName).toEqual('United States');
       });
 
-      it('should fall back to postal_town for city when locality is absent', () => {
+      it('should clear the state when the selected place has no administrative area', async () => {
+        component.model = { state: 'Massachusetts' };
+        const countryPlace = {
+          address_components: [{ long_name: 'United States', short_name: 'US', types: ['country', 'political'] }],
+        };
+        component.onPlaceSelected(countryPlace as any);
+        await tick();
+        expect(component.model.state).toEqual('');
+      });
+
+      it('should fall back to postal_town for city when locality is absent', async () => {
         const ukPlace = {
           address_components: [
             { long_name: '10', short_name: '10', types: ['street_number'] },
@@ -748,13 +901,16 @@ describe('Elements: NovoAddressElement', () => {
           ],
         };
         component.onPlaceSelected(ukPlace as any);
+        await tick();
         expect(component.model.city).toEqual('London');
       });
 
-      it('should pass through formattedAddress, placeId, and the country code/name', () => {
+      it('should pass through formattedAddress, placeId, both state forms, and the country code/name', () => {
         const result = component.parseGooglePlaceDetail(usPlace);
         expect(result.formattedAddress).toEqual('100 Summer St, Boston, MA 02110, USA');
         expect(result.placeId).toEqual('ChIJexample');
+        expect(result.state).toEqual('MA'); // short_name
+        expect(result.stateName).toEqual('Massachusetts'); // long_name
         expect(result.countryCode).toEqual('US'); // short_name
         expect(result.countryName).toEqual('United States'); // long_name
       });
