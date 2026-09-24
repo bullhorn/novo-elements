@@ -1,3 +1,7 @@
+const { versionFiles } = require('./tools/release/bump-version-files');
+
+const isMaster = process.env.GITHUB_REF_NAME === 'master';
+
 module.exports = {
   branches: [
     "+([0-9])?(.{+([0-9]),x}).x",
@@ -30,6 +34,18 @@ module.exports = {
         pkgRoot: 'dist/novo-elements',
       },
     ],
+    ...(isMaster
+      ? [
+          './tools/release/bump-version-files.js',
+          [
+            '@semantic-release/git',
+            {
+              assets: [...versionFiles, 'CHANGELOG.md'],
+              message: 'chore(Release): ${nextRelease.version} [skip ci]',
+            },
+          ],
+        ]
+      : []),
   ],
   repositoryUrl: 'https://github.com/bullhorn/novo-elements',
 };
