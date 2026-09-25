@@ -14,19 +14,6 @@ jobs:
     strategy:
       fail-fast: false
     steps:
-      # Release commit is pushed straight to master, so the token must belong to a repo admin
-      # to bypass branch protection (required reviews and status checks)
-      - name: Verify Release Token
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          login=$(gh api user --jq .login || echo unknown)
-          admin=$(gh api repos/${{ github.repository }} --jq .permissions.admin)
-          echo "Release token user: $login (admin: $admin)"
-          if [ "${{ github.ref_name }}" = "master" ] && [ "$admin" != "true" ]; then
-            echo "::error::API_TOKEN_GITHUB must have admin access to push the release commit to master"
-            exit 1
-          fi
       - name: Checkout
         uses: actions/checkout@v6
         with:
