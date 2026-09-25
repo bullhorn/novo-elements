@@ -12,6 +12,9 @@ Run the [release action](https://github.com/bullhorn/novo-elements/actions/workf
 - **next** / **beta**: prerelease (e.g. `13.7.0-next.1`). Publishes to npm on the `next` / `beta` tag.
   No commit is pushed; only the git tag.
 
+Master releases also create a [GitHub Release](https://github.com/bullhorn/novo-elements/releases) with the
+generated notes. Prereleases do not.
+
 Check **Dry Run** to see the next version and release notes without publishing, tagging, or pushing.
 
 The version is decided by semantic-release from commit messages since the last release:
