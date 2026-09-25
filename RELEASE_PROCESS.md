@@ -4,18 +4,39 @@
 
 ## Automatic
 
-Run the [release action](https://github.com/bullhorn/novo-elements/actions/workflows/release.yml).
+Run the [release action](https://github.com/bullhorn/novo-elements/actions/workflows/release.yml) and select the branch to release from.
 
-The release version number will be decided based on commits tagged with
-"feat()", "fix()", "chore()", "breaking()", "refactor()" messages.
-Others may not trigger a release.
+- **master**: stable release (e.g. `13.6.1`). Publishes to npm on the `latest` tag, then pushes a
+  `chore(Release): x.y.z [skip ci]` commit to master that bumps the version in every `package.json`
+  (see [tools/release/bump-version-files.js](tools/release/bump-version-files.js)) and updates `CHANGELOG.md`.
+- **next** / **beta**: prerelease (e.g. `13.7.0-next.1`). Publishes to npm on the `next` / `beta` tag.
+  No commit is pushed; only the git tag.
+
+Master releases also create a [GitHub Release](https://github.com/bullhorn/novo-elements/releases) with the
+generated notes. Prereleases do not.
+
+Check **Dry Run** to see the next version and release notes without publishing, tagging, or pushing.
+
+The version is decided by semantic-release from commit messages since the last release:
+
+| Commit type                                    | Release |
+| ---------------------------------------------- | ------- |
+| `breaking()` or a `BREAKING CHANGE:` footer    | major   |
+| `feat()`, `refactor()`                         | minor   |
+| `fix()`, `perf()`, `chore()`                   | patch   |
+
+Other types (`docs`, `style`, `test`, ...) do not trigger a release.
+
+The action pushes to master with `secrets.API_TOKEN_GITHUB`, which must belong to a repo admin to bypass
+branch protection.
 
 ### Manual (if automatic fails)
 
-    # Manually update the projects/*/package.json to the version you want
-    # TAG
+    # Update the version in package.json, package-lock.json, projects/novo-elements/src/package.json,
+    #   projects/novo-examples/package.json, projects/schematics/package.json, tools/vitest-builder/package.json
+    # Add an entry to CHANGELOG.md
     # npm test
     # npm run lint
-    # npm run build
-    # CD INTO EACH PROJECT IN DIST
-    # npm publish
+    # npm run build:ci
+    # Commit, then tag the commit as vX.Y.Z and push the commit and tag
+    # cd dist/novo-elements && npm publish

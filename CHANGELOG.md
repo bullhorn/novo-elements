@@ -1,3 +1,1103 @@
+# [13.6.0](https://github.com/bullhorn/novo-elements/compare/v13.5.0...v13.6.0) (2026-09-18)
+
+
+### Features
+
+* **CollapsibleNav:** Move to native CSS transitions for collapsible nav ([#1927](https://github.com/bullhorn/novo-elements/issues/1927)) ([5470edc](https://github.com/bullhorn/novo-elements/commit/5470edcd58a29fe11519c22cae1e780a2c133317))
+* **Dropdown:** Address a niche case with native buttons ([#1916](https://github.com/bullhorn/novo-elements/issues/1916)) ([1332ef0](https://github.com/bullhorn/novo-elements/commit/1332ef091a1bd73da641e04ff445b1bba096b453))
+* **Form:** Update max width on forms for bh2026 ([9e3c0c8](https://github.com/bullhorn/novo-elements/commit/9e3c0c8cb0987895fbdf881ebd3bef6fc1842668))
+* **Form:** Update max width on forms for bh2026 ([#1928](https://github.com/bullhorn/novo-elements/issues/1928)) ([8fb4852](https://github.com/bullhorn/novo-elements/commit/8fb4852f88f767f3a016537c0cab778bb1e4db2c))
+* **Table:** Update checkbox style for bh2026 ([9be75a5](https://github.com/bullhorn/novo-elements/commit/9be75a57b658d99c001569deb5824002fbeae04b))
+* **Tooltip:** Support for [tooltipCustomClass] directive input ([#1930](https://github.com/bullhorn/novo-elements/issues/1930)) ([da0ad41](https://github.com/bullhorn/novo-elements/commit/da0ad416dbe88f0ebb759a6d3d690fe191a2724a))
+
+
+
+# [13.5.0](https://github.com/bullhorn/novo-elements/compare/v13.4.0...v13.5.0) (2026-09-08)
+
+
+### Bug Fixes
+
+* **Form:** revert [@for](https://github.com/for) to *ngFor in DynamicForm templates ([#1915](https://github.com/bullhorn/novo-elements/issues/1915)) ([5de54d2](https://github.com/bullhorn/novo-elements/commit/5de54d2d33c72cef651f8b9b58faf389de4e3f6a))
+
+
+### Features
+
+* **bh2026:** update vertical form and tipwell styling ([#1910](https://github.com/bullhorn/novo-elements/issues/1910)) ([574e302](https://github.com/bullhorn/novo-elements/commit/574e30265fc401110ded61e2d7e6272561aad055))
+* next ([#1919](https://github.com/bullhorn/novo-elements/issues/1919)) ([9fb59a3](https://github.com/bullhorn/novo-elements/commit/9fb59a3e9b43a8ff7a164bd4dd059ae281339c4a))
+
+
+
+# [13.4.0](https://github.com/bullhorn/novo-elements/compare/v13.3.0...v13.4.0) (2026-09-01)
+
+
+### Features
+
+* **bh2026:** Styling of the edit form page for bh2026 theme ([#1906](https://github.com/bullhorn/novo-elements/issues/1906)) ([c22e304](https://github.com/bullhorn/novo-elements/commit/c22e3040365f4fdb6eab28dfa762438b6ed9e8f3))
+* **CollapsibleNav:** Transition enhancements ([8fb0be1](https://github.com/bullhorn/novo-elements/commit/8fb0be1c6324fc67aefe041c886d0c179f33e2e9))
+* **CollapsibleNav:** Transition enhancements ([#1900](https://github.com/bullhorn/novo-elements/issues/1900)) ([ca80cde](https://github.com/bullhorn/novo-elements/commit/ca80cde34821e859f4f2e9d2f3c2e0c3ca132f69))
+* **Form:** Add Bh2026 styling for dynamic forms to appear card like ([#1902](https://github.com/bullhorn/novo-elements/issues/1902)) ([0e45e72](https://github.com/bullhorn/novo-elements/commit/0e45e722a89156f9de24bde9f4aa54aeb185f1ba))
+* **Next:** Numerous collected changes for bh2026 ([b28f912](https://github.com/bullhorn/novo-elements/commit/b28f9129abcf036a3f54a43e014441b71f739e4f))
+* **tooltip:** Add preline tooltip component ([#1907](https://github.com/bullhorn/novo-elements/issues/1907)) ([d31df0d](https://github.com/bullhorn/novo-elements/commit/d31df0d2762a7ffc1b0cb1c98785bce3d6039775))
+
+
+
+# [13.3.0](https://github.com/bullhorn/novo-elements/compare/v13.2.0...v13.3.0) (2026-08-18)
+
+
+### Bug Fixes
+
+* **bh2026:** Add tab examples and fix styling ([296d581](https://github.com/bullhorn/novo-elements/commit/296d58153831a121702d14fb49159ccd6d2f1eb1))
+* **bh2026:** Fix button sizing when using icon buttons with text ([2f2933c](https://github.com/bullhorn/novo-elements/commit/2f2933c8c70f517730767e0aad7b31865b6e9ab9))
+* **bh2026:** Fix styling of tabbed group picker icon version ([f3d788e](https://github.com/bullhorn/novo-elements/commit/f3d788e4e83fb12fb26329bc4aa69794c5ce1cee))
+* **bh2026:** Fixed several edge case styling issues with bh2026 styles ([#1892](https://github.com/bullhorn/novo-elements/issues/1892)) ([ee35637](https://github.com/bullhorn/novo-elements/commit/ee356375d5918c72c1e390ae849c2e44a15c6e88))
+* **bh2026:** Remove banded list look ([#1897](https://github.com/bullhorn/novo-elements/issues/1897)) ([722a1b7](https://github.com/bullhorn/novo-elements/commit/722a1b74aba83cf460e96074c0d75db964148f51))
+* **Chip:** Limit transition effects to border/color ([b6db1fc](https://github.com/bullhorn/novo-elements/commit/b6db1fc96215181802b7b4ff1c6ab9807e58e196))
+* **Chip:** Limit transition effects to border/color ([#1901](https://github.com/bullhorn/novo-elements/issues/1901)) ([6cea732](https://github.com/bullhorn/novo-elements/commit/6cea7323e7f70aed78b413b299acd25269bd0101))
+* **Dropdown:** Remove erroneous overflow hidden ([e26a92e](https://github.com/bullhorn/novo-elements/commit/e26a92ebd6a05e1f697b73d0257790fc1bd0b258))
+* **Dropdown:** Remove erroneous overflow hidden ([#1889](https://github.com/bullhorn/novo-elements/issues/1889)) ([2f63d35](https://github.com/bullhorn/novo-elements/commit/2f63d35c556a5899efa581fce44f202439b3327f))
+
+
+### Features
+
+* **bh2026:** Card styles improvements for bh2026 theme and theme shortcuts ([#1870](https://github.com/bullhorn/novo-elements/issues/1870)) ([09e673f](https://github.com/bullhorn/novo-elements/commit/09e673f2e166a7f1db9bd77ec6305cb9ebbcdfbe))
+* **bh2026:** modern theme styling pass ([e1ddca4](https://github.com/bullhorn/novo-elements/commit/e1ddca48da2c7c30b7c14f295cf10377312785f5))
+* **bh2026:** tokenize component styles and update form styles ([#1869](https://github.com/bullhorn/novo-elements/issues/1869)) ([24eebd3](https://github.com/bullhorn/novo-elements/commit/24eebd3b143ce77aaa3c304c5ee7a89a3a1c568e))
+* **bh2026:** Updating bh2026 styles for search lists (BH-102559) ([#1878](https://github.com/bullhorn/novo-elements/issues/1878)) ([2c7e0d5](https://github.com/bullhorn/novo-elements/commit/2c7e0d54dbce9d6c09d109940dd160f466f01748))
+* **CollapsibleNav:** Add an expandDelay input to collapsible nav ([32e5870](https://github.com/bullhorn/novo-elements/commit/32e58701da65964df01561c02d8728e1fa9a483b))
+* **CollapsibleNav:** Add an expandDelay input to collapsible nav ([#1894](https://github.com/bullhorn/novo-elements/issues/1894)) ([8668db1](https://github.com/bullhorn/novo-elements/commit/8668db1d425573bc8e9a93d8df467172b9b4718d))
+* Create new icon button option for tip-well ([#1896](https://github.com/bullhorn/novo-elements/issues/1896)) ([4b0d483](https://github.com/bullhorn/novo-elements/commit/4b0d4833eba24551bc4b1e7084c7b1e6ae5da3d7))
+* **styles:** BH-102237 - update bh2026 component styling ([#1861](https://github.com/bullhorn/novo-elements/issues/1861)) ([4c1d34e](https://github.com/bullhorn/novo-elements/commit/4c1d34e461ab1a679f4de06b38b791851d331474))
+* Update Countries.ts file with new countries and states ([#1881](https://github.com/bullhorn/novo-elements/issues/1881)) ([ccd2fc5](https://github.com/bullhorn/novo-elements/commit/ccd2fc55312789866cb2aeed132cda76cc6d0098))
+
+
+
+# [13.2.0](https://github.com/bullhorn/novo-elements/compare/v13.1.0...v13.2.0) (2026-07-21)
+
+
+### Bug Fixes
+
+* **Address:** Address search service use of sessions for cost savings ([#1847](https://github.com/bullhorn/novo-elements/issues/1847)) ([7c31823](https://github.com/bullhorn/novo-elements/commit/7c3182309772951c7b93fc111f7592a0122c5ff7))
+* **Address:** fix placeId, allow address to be separately gated and remove dead address code ([#1853](https://github.com/bullhorn/novo-elements/issues/1853)) ([81e2359](https://github.com/bullhorn/novo-elements/commit/81e2359ca94ebd4bd7d9cff6aa566e96d62f4684))
+* **Address:** harden Google Maps lazy-load and flat address shape (BH… ([#1846](https://github.com/bullhorn/novo-elements/issues/1846)) ([317d758](https://github.com/bullhorn/novo-elements/commit/317d7587f14af46661c5b66b9af594a296545d60))
+
+
+### Features
+
+* **Aside:** Amplify branch + Aside Component ([#1855](https://github.com/bullhorn/novo-elements/issues/1855)) ([d87c1df](https://github.com/bullhorn/novo-elements/commit/d87c1df99a5bec310cabe7f49a4252e004124823))
+* **Aside:** Making the Aside component draggable ([dc39a6f](https://github.com/bullhorn/novo-elements/commit/dc39a6fce625d39017624bb13487098c787a5123))
+* **CollapsibleNav:** Add collapsible nav ([#1854](https://github.com/bullhorn/novo-elements/issues/1854)) ([4dd8196](https://github.com/bullhorn/novo-elements/commit/4dd819625a05f6e22f8665f8ec4850eec7f4c192)), closes [#f0f5f9](https://github.com/bullhorn/novo-elements/issues/f0f5f9) [#221f1f](https://github.com/bullhorn/novo-elements/issues/221f1f) [#f0f5f9](https://github.com/bullhorn/novo-elements/issues/f0f5f9) [#8ca1b9](https://github.com/bullhorn/novo-elements/issues/8ca1b9) [#0095da](https://github.com/bullhorn/novo-elements/issues/0095da) [#e1e1e1](https://github.com/bullhorn/novo-elements/issues/e1e1e1)
+* **NovoAsideRef:** making overlay ref public ([f7b8aa2](https://github.com/bullhorn/novo-elements/commit/f7b8aa2d5cc14f2d78101cd945a31b80f6e7d6ab))
+* **theme:** BH-102063 - add bh2026 theme ([#1850](https://github.com/bullhorn/novo-elements/issues/1850)) ([d2af800](https://github.com/bullhorn/novo-elements/commit/d2af800a2f51476cd1850809d6a7a14b700d4b21)), closes [#f0f5f9](https://github.com/bullhorn/novo-elements/issues/f0f5f9) [#221f1f](https://github.com/bullhorn/novo-elements/issues/221f1f) [#f0f5f9](https://github.com/bullhorn/novo-elements/issues/f0f5f9) [#8ca1b9](https://github.com/bullhorn/novo-elements/issues/8ca1b9) [#0095da](https://github.com/bullhorn/novo-elements/issues/0095da) [#e1e1e1](https://github.com/bullhorn/novo-elements/issues/e1e1e1)
+
+
+
+# [13.1.0](https://github.com/bullhorn/novo-elements/compare/v13.0.0...v13.1.0) (2026-06-24)
+
+
+### Features
+
+* **Address:** Add auto suggestions to address block (BH-101288) ([#1832](https://github.com/bullhorn/novo-elements/issues/1832)) ([f15ba19](https://github.com/bullhorn/novo-elements/commit/f15ba1946ced9c5e1498957daaa9e2d15a4ca1a5))
+* **Chips:** add classFunction config for data-driven chip styling ([#1828](https://github.com/bullhorn/novo-elements/issues/1828)) ([c1e3845](https://github.com/bullhorn/novo-elements/commit/c1e38457c306cdaed5571f9f389b45db2c0ffa3a))
+* **Chips:** AI-authored plan to allow for a custom status function on chips (incomplete) ([49eb17e](https://github.com/bullhorn/novo-elements/commit/49eb17e5fd9b9b5465aa833175c483d61693ac33))
+* master ([#1842](https://github.com/bullhorn/novo-elements/issues/1842)) ([b510aea](https://github.com/bullhorn/novo-elements/commit/b510aea746de55dddd5ff231fade79b529d9c643))
+* next ([#1844](https://github.com/bullhorn/novo-elements/issues/1844)) ([d62d592](https://github.com/bullhorn/novo-elements/commit/d62d592b55d748005cb8ecdf42dff886a385b6e6))
+
+
+
+# [13.0.0](https://github.com/bullhorn/novo-elements/compare/v12.1.0...v13.0.0) (2026-05-26)
+
+
+* chore(AceEditor/CodeEditor)!: Version 13 - removed deprecated AceEditor (#1797) ([dcbd680](https://github.com/bullhorn/novo-elements/commit/dcbd680fb249bcd9f423521b038d8d9a08d4be5f)), closes [#1797](https://github.com/bullhorn/novo-elements/issues/1797)
+
+
+### Bug Fixes
+
+* **Field:** compute errorState dynamically in NovoInput directive ([#1817](https://github.com/bullhorn/novo-elements/issues/1817)) ([b4bc74c](https://github.com/bullhorn/novo-elements/commit/b4bc74c95d50139c0dfd13cde22eac4bfac06d30))
+* **Popover:** allow title text to wrap within popover bounds ([#1819](https://github.com/bullhorn/novo-elements/issues/1819)) ([a3a33cf](https://github.com/bullhorn/novo-elements/commit/a3a33cfe12d246c4187bc3b71955bb01bbe55af1))
+
+
+### Features
+
+* next ([#1814](https://github.com/bullhorn/novo-elements/issues/1814)) ([d464f8a](https://github.com/bullhorn/novo-elements/commit/d464f8ae1b75c496297c69d4d72afa1e1cbaaf7a))
+
+
+### BREAKING CHANGES
+
+* Completely removed deprecated Ace Editor
+
+* refactor(AceEditor/CodeEditor): Completely removed deprecated Ace Editor
+
+* doc(v13): Begin rearranging docs pages to remove new tags and document v13
+
+* chore(Dependencies): Upgrade novo-design-tokens and re-build package-lock.json
+
+* chore(Dependencies): Update to latest github actions
+
+* chore(Dependencies): Update to Node 24
+
+* chore(Release): Update release notes
+
+
+
+# [12.1.0](https://github.com/bullhorn/novo-elements/compare/v12.0.0...v12.1.0) (2026-04-21)
+
+
+### Bug Fixes
+
+* **Dependencies:** Adjust postrobot dependency to be more permissive, as 9.0 was meant to be used ([6b36d7f](https://github.com/bullhorn/novo-elements/commit/6b36d7f659b1ab6305dab995cb2c359665ad92c2))
+* **Memory:** Change modalService and toastService to avoid maintaining ViewContainerRefs longer than needed. Added a function on toastService: ownViewContainer ([c05917c](https://github.com/bullhorn/novo-elements/commit/c05917cdebcbc8cb8f47c3aff88723ddf7e084a3))
+* **Memory:** Remove references to viewContainers for memory optimization ([#1782](https://github.com/bullhorn/novo-elements/issues/1782)) ([069e4ae](https://github.com/bullhorn/novo-elements/commit/069e4ae87ff2c21d0b40a8dce1ae60c9cee48aff))
+* **QuickNote:** Address a CKEditor bug where browser spellcheck menus did not trigger a change event ([0c11149](https://github.com/bullhorn/novo-elements/commit/0c11149e5338267b1893a1586150f9d79ae899ce))
+* **QuickNote:** Address a CKEditor bug with browser spellcheck menus ([#1807](https://github.com/bullhorn/novo-elements/issues/1807)) ([6f96498](https://github.com/bullhorn/novo-elements/commit/6f96498a0c3598459a982b34cc6aad1492ec6048))
+
+
+### Features
+
+* **ConditionBuilder:** Allow ability to not recreate templates when … ([#1771](https://github.com/bullhorn/novo-elements/issues/1771)) ([ba0ef4a](https://github.com/bullhorn/novo-elements/commit/ba0ef4ada4da31628ddd1f0381eded88f63ac774))
+* next ([#1781](https://github.com/bullhorn/novo-elements/issues/1781)) ([b801369](https://github.com/bullhorn/novo-elements/commit/b801369e4ff99a148cd38b37c963bbe1a5dd9c29))
+
+
+
+# [12.0.0](https://github.com/bullhorn/novo-elements/compare/v11.4.0...v12.0.0) (2026-03-25)
+
+
+* chore(Upgrade)!: Angular 20 upgrade (#1773) ([909b074](https://github.com/bullhorn/novo-elements/commit/909b074f6ad41d819f2d1c660d2fb26f7014baf3)), closes [#1773](https://github.com/bullhorn/novo-elements/issues/1773)
+
+
+### Features
+
+* next ([#1780](https://github.com/bullhorn/novo-elements/issues/1780)) - Merge For v12 Release ([7c5a71f](https://github.com/bullhorn/novo-elements/commit/7c5a71f6fc0690396d225969ea41480ebe7e76a9))
+
+
+### BREAKING CHANGES
+
+* Novo Elements now Requires Angular 20 and Node 22
+
+* chore(upgrade): Upgrade to Angular 20
+
+* chore(upgrade): updating package lock
+
+* chore(upgrade): updating package lock
+
+* chore(upgrade): updating package lock
+
+* chore(upgrade): fixing npm audit
+
+* chore(upgrade): upgrading minor/patch to latest
+
+* chore(upgrade): upgrading dev dependencies
+
+* chore(upgrade): update v12 docs
+
+* chore(upgrade): update v12 docs
+
+* chore(upgrade): update dev deps
+
+* chore(upgrade): regenerate package-lock
+
+* chore(upgrade): upgrade dev dependencies to align with Angular 20
+
+Upgrades the following packages to maintain compatibility and receive latest features:
+
+Build Tools & Schematics:
+- @schematics/angular: ^15.2.11 → ^21.2.0
+- ng-packagr: 20.3.2 → 21.2.0
+
+Testing Framework:
+- @types/jasmine: ~3.10.19 → ~6.0.0
+- @types/jest: ~29.5.14 → ~30.0.0
+- jasmine: ^3.99.0 → ^6.1.0
+- jasmine-core: ~3.99.1 → ~6.1.0
+- jest: ~29.7.0 → ~30.2.0
+- jest-environment-jsdom: ~29.7.0 → ~30.2.0
+- jest-jasmine2: ~29.7.0 → ~30.2.0
+- jest-preset-angular: ~14.6.2 → ~16.0.0
+
+Type Definitions & Core:
+- @types/node: ^20.19.34 → ^25.3.2
+- zone.js: ~0.15.1 → ~0.16.1
+
+Date Handling:
+- date-fns: 2.30.0 → 4.1.0
+
+Utility & Styling:
+- glob: ^11.1.0 → ^13.0.6
+- stylelint-config-prettier: ^8.0.2 → ^9.0.5
+
+Changes include:
+- Updated date-fns imports to use Day type from date-fns
+- Fixed CalendarUtils to use includes() instead of indexOf() for Day comparison
+- Updated jest matchers: toBeCalled → toHaveBeenCalled, toBeCalledWith → toHaveBeenCalledWith
+- Updated DatePicker test mocks for date-fns v4 compatibility
+- All builds pass (novo-elements, novo-examples, demo)
+- All tests pass with 2137 tests passing
+
+Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>
+
+* chore(upgrade): fix versions of dev deps
+
+* chore(upgrade): migrate ckeditor test objects to spec file
+
+* chore(upgrade): correct version of node types
+
+* chore(upgrade): fix import
+
+* chore(upgrade): clean up unit tests
+
+* chore(upgrade): clean up unit tests
+
+* chore(upgrade): fix forChild() import with empty providers property
+
+* chore(upgrade): version bump
+
+* chore(upgrade): re-enable tests
+
+* chore(upgrade): Fix NovoActivityTable data not rendering in Angular 20
+
+* chore(upgrade): Fix simple table styling for cdk-table v20
+
+* chore(upgrade): Fix test type for Angular 20
+
+
+
+# [11.4.0](https://github.com/bullhorn/novo-elements/compare/v11.3.0...v11.4.0) (2026-03-24)
+
+
+### Bug Fixes
+
+* Memory management fixes ([#1778](https://github.com/bullhorn/novo-elements/issues/1778)) ([876e67e](https://github.com/bullhorn/novo-elements/commit/876e67eb665931fa5fcbfed0a7252a4505138992))
+* Memory management fixes, properly unsub from listeners in some unique cases ([2e1c53f](https://github.com/bullhorn/novo-elements/commit/2e1c53f19362ba6c24e9a13726302761985bf0b6))
+* **PickerCondition:** fix isEmpty operator switching causing type mis… ([#1775](https://github.com/bullhorn/novo-elements/issues/1775)) ([7cbe432](https://github.com/bullhorn/novo-elements/commit/7cbe432a07df2fbd4c006d7a3622c891c8c1f07f))
+
+
+### Features
+
+* next ([#1779](https://github.com/bullhorn/novo-elements/issues/1779)) ([3e200bf](https://github.com/bullhorn/novo-elements/commit/3e200bfea2a61fa9e2ae11f380efcd0c54e79370))
+
+
+
+# [11.3.0](https://github.com/bullhorn/novo-elements/compare/v11.2.1...v11.3.0) (2026-02-26)
+
+
+### Features
+
+* **ConditionBuilder:** Allow meta to express custom options for a boolean condition (fixes an issue where they would display as a text entry) ([7a9a650](https://github.com/bullhorn/novo-elements/commit/7a9a650f2e387dc96ed802ca4aee12cfb9e8e68d))
+* **ConditionBuilder:** Boolean conditions v2 - use boolean form pattern when 2 options are available (simpler to apply for text-backed fields) ([315a2f4](https://github.com/bullhorn/novo-elements/commit/315a2f49685a0dccafca2da3d7052a474e4710a4))
+* **ConditionBuilder:** Custom options for a boolean condition  ([#1764](https://github.com/bullhorn/novo-elements/issues/1764)) ([b059d38](https://github.com/bullhorn/novo-elements/commit/b059d3883f3642ff0f8f0441ca773672bc523120))
+* **QueryBuilder:** Add ability to pop a confirmation modal when dele… ([#1758](https://github.com/bullhorn/novo-elements/issues/1758)) ([a41eaa9](https://github.com/bullhorn/novo-elements/commit/a41eaa975fbacc7f78828e686971bec23d8a2615))
+* **types:** Add matchMetaData to DataTableWhere type ([#1762](https://github.com/bullhorn/novo-elements/issues/1762)) ([d47c096](https://github.com/bullhorn/novo-elements/commit/d47c096b9a384b095cfccfcdb94cb20aaecebd6b))
+
+
+
+## [11.2.1](https://github.com/bullhorn/novo-elements/compare/v11.2.0...v11.2.1) (2026-01-29)
+
+
+
+# [11.2.0](https://github.com/bullhorn/novo-elements/compare/v11.1.0...v11.2.0) (2025-12-16)
+
+
+### Bug Fixes
+
+* **TabbeGroupPicker:** add saftey checks when setting the state of th… ([#1735](https://github.com/bullhorn/novo-elements/issues/1735)) ([63e85e3](https://github.com/bullhorn/novo-elements/commit/63e85e38cb3899ac2ffa164895274c0f8216d478))
+
+
+### Features
+
+* next ([#1737](https://github.com/bullhorn/novo-elements/issues/1737)) ([df160c4](https://github.com/bullhorn/novo-elements/commit/df160c429a2eead6db0a3a4207d0405ce0db2cf0))
+
+
+
+# [11.1.0](https://github.com/bullhorn/novo-elements/compare/v11.0.6...v11.1.0) (2025-11-20)
+
+
+### Features
+
+* **DragDropModule:** Updates to drag/drop, and implementation in Data Table ([#1720](https://github.com/bullhorn/novo-elements/issues/1720)) ([029a628](https://github.com/bullhorn/novo-elements/commit/029a628c452f4372754f3606d02f2fd470f29441))
+* **Helpers:** Add isNullOrUndefined function and update descriptions ([#1723](https://github.com/bullhorn/novo-elements/issues/1723)) ([2c383b9](https://github.com/bullhorn/novo-elements/commit/2c383b93e58a429237b7697ce35a1f6d6f2deafd))
+* next ([#1719](https://github.com/bullhorn/novo-elements/issues/1719)) ([7acfa0a](https://github.com/bullhorn/novo-elements/commit/7acfa0a80b49e0245675001beb44034852a83d5e))
+
+
+
+## [11.0.6](https://github.com/bullhorn/novo-elements/compare/v11.0.5...v11.0.6) (2025-11-07)
+
+
+
+## [11.0.5](https://github.com/bullhorn/novo-elements/compare/v11.0.4...v11.0.5) (2025-11-05)
+
+
+
+## [11.0.4](https://github.com/bullhorn/novo-elements/compare/v11.0.3...v11.0.4) (2025-10-30)
+
+
+
+## [11.0.3](https://github.com/bullhorn/novo-elements/compare/v11.0.2...v11.0.3) (2025-10-30)
+
+
+
+## [11.0.2](https://github.com/bullhorn/novo-elements/compare/v11.0.1...v11.0.2) (2025-10-29)
+
+
+
+## [11.0.1](https://github.com/bullhorn/novo-elements/compare/v11.0.0...v11.0.1) (2025-10-28)
+
+
+
+# [11.0.0](https://github.com/bullhorn/novo-elements/compare/v10.18.1...v11.0.0) (2025-10-23)
+
+
+### Features
+
+* **Condition Builder:** update helper text for text fields ([#1712](https://github.com/bullhorn/novo-elements/issues/1712)) ([7fc2efb](https://github.com/bullhorn/novo-elements/commit/7fc2efb01ce5d2e589490bd7c58d63bd77db7bee))
+* next ([#1708](https://github.com/bullhorn/novo-elements/issues/1708)) ([e9cc49c](https://github.com/bullhorn/novo-elements/commit/e9cc49cd632c8cb08be1d864067bec2ccff82ac1))
+* **NovoDefaultStringConditionDef:** add chipsToggleable input ([#1705](https://github.com/bullhorn/novo-elements/issues/1705)) ([5193c8e](https://github.com/bullhorn/novo-elements/commit/5193c8e8a01209ff9f4d969b00759bb91d716148))
+* **Query Builder:** Add date configuration to date and time pickers ([cd4e06a](https://github.com/bullhorn/novo-elements/commit/cd4e06a2e43d80d7df81f45b3dddfbda2e8e843f))
+* **Query Builder:** Add date configuration to date and time pickers ([#1713](https://github.com/bullhorn/novo-elements/issues/1713)) ([9dc82a9](https://github.com/bullhorn/novo-elements/commit/9dc82a9ae1f54cbe0f10566ba52bfd8439c53cc7))
+* **QueryBuilder:** Add more options for querying Date and Date/Time … ([#1707](https://github.com/bullhorn/novo-elements/issues/1707)) ([a41d1bb](https://github.com/bullhorn/novo-elements/commit/a41d1bbde153d9138629724539e8b2473d8dbeb7))
+* **QueryBuilder:** Add the ability to use entity as a class on condi… ([#1697](https://github.com/bullhorn/novo-elements/issues/1697)) ([a8006f7](https://github.com/bullhorn/novo-elements/commit/a8006f72800f1857b7db87ef618e945281d98479))
+
+
+
+## [10.18.1](https://github.com/bullhorn/novo-elements/compare/v10.18.0...v10.18.1) (2025-10-16)
+
+
+### Bug Fixes
+
+* **Select:** Addressed an issue preventing keyboard navigation ([#1715](https://github.com/bullhorn/novo-elements/issues/1715)) ([e9aa42c](https://github.com/bullhorn/novo-elements/commit/e9aa42cd22d65573fd0478c2a5d5da296aaa6ab3))
+
+
+
+# [10.18.0](https://github.com/bullhorn/novo-elements/compare/v10.17.1...v10.18.0) (2025-09-25)
+
+
+### Bug Fixes
+
+* **CriteriaBuilder:** Rollback fix for criteria builder string condition chiplist bug  ([#1695](https://github.com/bullhorn/novo-elements/issues/1695)) ([bc0e5fc](https://github.com/bullhorn/novo-elements/commit/bc0e5fc1eff8ed4d596f7c600fab95523415cbac))
+
+
+### Features
+
+* **ConditionBuilder:** Add the "Equal To" option to DateTime ([#1704](https://github.com/bullhorn/novo-elements/issues/1704)) ([ba46cab](https://github.com/bullhorn/novo-elements/commit/ba46cabc460f30a0cf64e5e7f257316afe96f16b))
+* **ConditionBuilder:** Custom values for picker values ([#1691](https://github.com/bullhorn/novo-elements/issues/1691)) ([64ed0a8](https://github.com/bullhorn/novo-elements/commit/64ed0a83ee9976c1bea937364bbe43b97a4e76f2))
+* **CriteriaBuilder:** Fix criteria builder string condition chiplist bug ([#1694](https://github.com/bullhorn/novo-elements/issues/1694)) ([134ccd1](https://github.com/bullhorn/novo-elements/commit/134ccd1187bb6f80c268b8b2e3eb83874280265b))
+* **DatePicker:** Add optional Cancel/Save buttons to Date Picker ([#1698](https://github.com/bullhorn/novo-elements/issues/1698)) ([b9088e5](https://github.com/bullhorn/novo-elements/commit/b9088e547975b904f5b7f03ac98a9e35c160e8ed))
+* **GooglePlacesService:** add postal_codes to AddressData for better locality support ([#1703](https://github.com/bullhorn/novo-elements/issues/1703)) ([cfbae5b](https://github.com/bullhorn/novo-elements/commit/cfbae5be3b4789d6a4ae866f6d1767eace601431))
+* next ([#1696](https://github.com/bullhorn/novo-elements/issues/1696)) ([faae681](https://github.com/bullhorn/novo-elements/commit/faae68174fc3bf2e9dc7729775e822106b9ee9e0))
+* **QueryBuilder:** Add Begins With operator ([#1692](https://github.com/bullhorn/novo-elements/issues/1692)) ([e5ff3f1](https://github.com/bullhorn/novo-elements/commit/e5ff3f127968d8dfbe6daa84096a1bba746076a9))
+
+
+
+## [10.17.1](https://github.com/bullhorn/novo-elements/compare/v10.17.0...v10.17.1) (2025-09-16)
+
+
+### Bug Fixes
+
+* **addressComponent:** Update valid and invalid arrays when the config required property updates externally ([f5b615a](https://github.com/bullhorn/novo-elements/commit/f5b615ab12185a3020a4cb5468dd32a95d098f0c))
+* **addressComponent:** Update valid and invalid arrays when the config required property updates externally ([#1702](https://github.com/bullhorn/novo-elements/issues/1702)) ([614e031](https://github.com/bullhorn/novo-elements/commit/614e0310a6fd9a61ced207b31f812be80702441f))
+
+
+
+# [10.17.0](https://github.com/bullhorn/novo-elements/compare/v10.16.0...v10.17.0) (2025-08-20)
+
+
+### Bug Fixes
+
+* **NovoDataTableCellHeader:** adding back removed public function ([6375fe7](https://github.com/bullhorn/novo-elements/commit/6375fe7bf95a615482552de156ab7a983affa4b7))
+* **NovoDataTableCellHeader:** adding back removed public function ([#1689](https://github.com/bullhorn/novo-elements/issues/1689)) ([fbac3e7](https://github.com/bullhorn/novo-elements/commit/fbac3e7f4f4ed0240fef69ed3b97d402f808ea2e))
+
+
+### Features
+
+* **ConditionBuilder:** Add an "Equals" operator for Date field ([#1683](https://github.com/bullhorn/novo-elements/issues/1683)) ([f6b52ea](https://github.com/bullhorn/novo-elements/commit/f6b52eaa90c9b01fd230eaf0dfed759887e5f7ad))
+* **DataTable:** Emit external column filter events ([629675a](https://github.com/bullhorn/novo-elements/commit/629675ae84ddbb4deaa4f3f6e13d87b759fc8059))
+* next ([#1690](https://github.com/bullhorn/novo-elements/issues/1690)) ([3bb6ba5](https://github.com/bullhorn/novo-elements/commit/3bb6ba5e904c6cb2d7c97e56e529ae0433d0236a))
+
+
+
+# [10.16.0](https://github.com/bullhorn/novo-elements/compare/v10.15.0...v10.16.0) (2025-06-26)
+
+
+### Features
+
+* **ConditionBuilder:** Correct support for international date formats ([#1681](https://github.com/bullhorn/novo-elements/issues/1681)) ([bbeac7d](https://github.com/bullhorn/novo-elements/commit/bbeac7dbf29bee9936dedc921428e8a559ac1682))
+* next ([#1682](https://github.com/bullhorn/novo-elements/issues/1682)) ([a8d1b19](https://github.com/bullhorn/novo-elements/commit/a8d1b190c187d9f9f7c02f7dc3d1e009fd4264d4))
+
+
+
+# [10.15.0](https://github.com/bullhorn/novo-elements/compare/v10.14.0...v10.15.0) (2025-05-29)
+
+
+### Bug Fixes
+
+* **Accent:** Resolve a memory leak ([273c9ee](https://github.com/bullhorn/novo-elements/commit/273c9eedaf5451a4b5d50c6e641c032d90dbe030))
+* **Accent:** Resolve a memory leak ([#1666](https://github.com/bullhorn/novo-elements/issues/1666)) ([0d2a1e0](https://github.com/bullhorn/novo-elements/commit/0d2a1e08a026ed59a02e70bf787b981d55091bb9))
+* **Select:** Hide legacy options select if text-filtered ([#1667](https://github.com/bullhorn/novo-elements/issues/1667)) ([78afc88](https://github.com/bullhorn/novo-elements/commit/78afc88bc3aab84ad8b80ede2a3d2be64fc4c701))
+* **Select:** Hide legacy options when a <novo-select> is used with a <novo-select-search> ([c3eaab0](https://github.com/bullhorn/novo-elements/commit/c3eaab06444e6b32e87088195dc3ca2af91c162a))
+* **Select:** novo-select, call _initLegacyOptions sooner to address race condition ([#1665](https://github.com/bullhorn/novo-elements/issues/1665)) ([4cad82c](https://github.com/bullhorn/novo-elements/commit/4cad82cc89dd09a89df78c5daada3eb75a6187be))
+* **Select:** restoring ngOnInit > initLegacyOptions ([58eeb6c](https://github.com/bullhorn/novo-elements/commit/58eeb6ca7fae2f009ec516ae9f289c8d28105cfb))
+* **Select:** restoring ngOnInit > initLegacyOptions ([#1678](https://github.com/bullhorn/novo-elements/issues/1678)) ([ca5b29d](https://github.com/bullhorn/novo-elements/commit/ca5b29d3bb8f3dfd8bce51e303cc8386788901da))
+
+
+### Features
+
+* next ([#1664](https://github.com/bullhorn/novo-elements/issues/1664)) ([33f01a3](https://github.com/bullhorn/novo-elements/commit/33f01a3c81d9195f692002373eea77b027a86b3d))
+* **QueryBuilder:** Add option to not show Is Empty filter depending … ([#1669](https://github.com/bullhorn/novo-elements/issues/1669)) ([db85d28](https://github.com/bullhorn/novo-elements/commit/db85d2866a83110b4f62899018d38cbac93a7fda))
+* **QueryBuilder:** Remove Is Empty option from numerical conditions ([#1662](https://github.com/bullhorn/novo-elements/issues/1662)) ([ff1d6a7](https://github.com/bullhorn/novo-elements/commit/ff1d6a7ac47dfff8bd8c20c076755e94b3bbfc5a))
+* **QueryBuilder:** Remove Is Empty option from numerical value conditions ([ef7bc5c](https://github.com/bullhorn/novo-elements/commit/ef7bc5c0f4fad55317494fc3373dfc7822d6f79e))
+* **Types:** Keywords are no longer required in the autobuild response ([#1670](https://github.com/bullhorn/novo-elements/issues/1670)) ([9c28843](https://github.com/bullhorn/novo-elements/commit/9c2884359890b6c52ef3b1ee4795cd4c3b3c03a9))
+
+
+
+# [10.14.0](https://github.com/bullhorn/novo-elements/compare/v10.13.0...v10.14.0) (2025-04-23)
+
+
+### Bug Fixes
+
+* **label.component:** added implements onInit to class level ([96f656b](https://github.com/bullhorn/novo-elements/commit/96f656bc0b7308724411143ed334435584e2a122))
+* **label.component:** calling OnInit at the class level ([7898083](https://github.com/bullhorn/novo-elements/commit/7898083b5af8157f7c95e0abca2e2a7dc77a5246))
+* **label.component:** create a computed signal for id ([28f94dd](https://github.com/bullhorn/novo-elements/commit/28f94ddf1cfd36b20f0f0d2048dd9370edd4c55f))
+* **label.component:** renaming property and calling it in decorator ([8d854d8](https://github.com/bullhorn/novo-elements/commit/8d854d84783cb7800aeecfcdb65bcfb5c4bd9015))
+* **label.component:** Switch from @HostBinding in ngOnInit to computed signal for ID ([0d3fe2a](https://github.com/bullhorn/novo-elements/commit/0d3fe2adb940022bfd086811021992eaf8336d19))
+* **Select:** Changes to better support screen readers in <novo-select> ([5b0b2ab](https://github.com/bullhorn/novo-elements/commit/5b0b2ab6c6377ff81bc7caf7259cb79c3e211d60))
+* **Select:** Changes to better support screen readers in <novo-select> ([#1659](https://github.com/bullhorn/novo-elements/issues/1659)) ([bfdb436](https://github.com/bullhorn/novo-elements/commit/bfdb4365c02e193a5b420910c66371b351ec1b58))
+
+
+### Features
+
+* next ([#1661](https://github.com/bullhorn/novo-elements/issues/1661)) ([250d2b3](https://github.com/bullhorn/novo-elements/commit/250d2b3361be7e299ea38f1818c74abfbc5a0068))
+
+
+
+# [10.13.0](https://github.com/bullhorn/novo-elements/compare/v10.12.0...v10.13.0) (2025-03-26)
+
+
+### Features
+
+* next ([#1656](https://github.com/bullhorn/novo-elements/issues/1656)) ([a1cb7eb](https://github.com/bullhorn/novo-elements/commit/a1cb7eb9d945ef7d712b1b89dae6ecbbbf53da7b))
+* **NovoModalService:** adding accessible overlay ref on modal service ([4f447a2](https://github.com/bullhorn/novo-elements/commit/4f447a27c376e3cf81d67cb6bc5058fe84291583))
+* **NovoOverlay:** contextual custom overlay containers ([#1639](https://github.com/bullhorn/novo-elements/issues/1639)) ([61fda32](https://github.com/bullhorn/novo-elements/commit/61fda3284872db82958795e38463bb171a825af2))
+* **QueryBuilder:** Replace Radius with Inside Radius and add new Outside Radius operator for address field ([#1638](https://github.com/bullhorn/novo-elements/issues/1638)) ([9e21529](https://github.com/bullhorn/novo-elements/commit/9e21529ffbf61864dfa05294ae3c37eaa1138c6b))
+
+
+
+# [10.12.0](https://github.com/bullhorn/novo-elements/compare/v10.11.1...v10.12.0) (2025-02-26)
+
+
+### Bug Fixes
+
+* **Build:** updating build runner due to github decommissioning 20.04 in april ([8e4ba49](https://github.com/bullhorn/novo-elements/commit/8e4ba49fb69f4640c3effb9c97a3a40d21b576e1))
+* **Build:** updating build runner due to github decommissioning ubuntu 20.04 support in april ([#1653](https://github.com/bullhorn/novo-elements/issues/1653)) ([9695e05](https://github.com/bullhorn/novo-elements/commit/9695e05a6dc50360727850bd4370bcd867b3b1ef))
+* **GroupedMultiPickerResults:** Ensure Background Visibility ([#1655](https://github.com/bullhorn/novo-elements/issues/1655)) ([d3382b6](https://github.com/bullhorn/novo-elements/commit/d3382b60ea95a87de8bb358647ce8cebb1b049fc))
+
+
+### Features
+
+* **DataTable:** updating some data table types ([#1647](https://github.com/bullhorn/novo-elements/issues/1647)) ([71c07af](https://github.com/bullhorn/novo-elements/commit/71c07afa85e78c3ee8954c18cc7c5dbf51678e44)), closes [#1648](https://github.com/bullhorn/novo-elements/issues/1648)
+* next ([#1649](https://github.com/bullhorn/novo-elements/issues/1649)) ([e4d9952](https://github.com/bullhorn/novo-elements/commit/e4d9952ffa70fdd85c9dcfc7df761c50d205f151))
+* **NovoDataTablePagination:** Add option to show the total number of… ([#1648](https://github.com/bullhorn/novo-elements/issues/1648)) ([8e241ae](https://github.com/bullhorn/novo-elements/commit/8e241ae324c45d80d397a910005bb8c534c4e124))
+* **NovoDataTablePagination:** Add option to show the total number of… ([#1648](https://github.com/bullhorn/novo-elements/issues/1648)) ([87f65d7](https://github.com/bullhorn/novo-elements/commit/87f65d7b04d87f5bc0058329fd7304f41de537cc))
+* **QueryBuilder:** Add option to not show Include All option dependi… ([#1654](https://github.com/bullhorn/novo-elements/issues/1654)) ([d2fba6f](https://github.com/bullhorn/novo-elements/commit/d2fba6fe7df7068254f67ef8ad749374802f56ae))
+
+
+
+## [10.11.1](https://github.com/bullhorn/novo-elements/compare/v10.11.0...v10.11.1) (2025-02-14)
+
+
+### Bug Fixes
+
+* **Overlay:** Set width to 100% on overlays ([011e63f](https://github.com/bullhorn/novo-elements/commit/011e63f11ef2fc1e751aaab05ecdd63fc9ed8399))
+* **Overlay:** Set width to 100% on overlays ([#1652](https://github.com/bullhorn/novo-elements/issues/1652)) ([a2d7119](https://github.com/bullhorn/novo-elements/commit/a2d7119ab87f2553978ca5755ab0ed9ef7e409a6))
+
+
+
+# [10.11.0](https://github.com/bullhorn/novo-elements/compare/v10.10.0...v10.11.0) (2025-01-30)
+
+
+### Features
+
+* **Button:** Add support for two icon buttons ([1b38729](https://github.com/bullhorn/novo-elements/commit/1b387299838a4a491416f482e31c62c9d5d90693))
+* next ([#1642](https://github.com/bullhorn/novo-elements/issues/1642)) ([c9a5774](https://github.com/bullhorn/novo-elements/commit/c9a5774b0b26db92631e690f11a46b9e8ffda023))
+* **novo-field:** added disabled state styling to novo-field  ([#1644](https://github.com/bullhorn/novo-elements/issues/1644)) ([40077a1](https://github.com/bullhorn/novo-elements/commit/40077a1d181a659bccff167361b6442f21d68b5c))
+* **Types:** Fixing data table filter value type ([#1640](https://github.com/bullhorn/novo-elements/issues/1640)) ([47a58e0](https://github.com/bullhorn/novo-elements/commit/47a58e0ddaf906c6779a556e0ef79386e4bd0d08))
+
+
+
+# [10.10.0](https://github.com/bullhorn/novo-elements/compare/v10.9.0...v10.10.0) (2024-12-18)
+
+
+### Bug Fixes
+
+* **Picker:** Add null check when clearing custom text value ([#1637](https://github.com/bullhorn/novo-elements/issues/1637)) ([9e27c94](https://github.com/bullhorn/novo-elements/commit/9e27c94258362d0759e3f718850d1537c3ba6210))
+
+
+### Features
+
+* **Condition Builder:** Add reset method to condition builder ([#1631](https://github.com/bullhorn/novo-elements/issues/1631)) ([cf97fe9](https://github.com/bullhorn/novo-elements/commit/cf97fe9a1c8e4f78b526540d7089359e718e2ba5))
+* **DatePicker:** Add optional dateForInitialView input ([#1635](https://github.com/bullhorn/novo-elements/issues/1635)) ([e56dbb0](https://github.com/bullhorn/novo-elements/commit/e56dbb05b9ca3b2f897b1ed69fe91c12fc8f6d80))
+* next ([#1636](https://github.com/bullhorn/novo-elements/issues/1636)) ([2968b90](https://github.com/bullhorn/novo-elements/commit/2968b904bbe0567bfa3e45f40d2ab1aa4b9f9a43))
+
+
+
+# [10.9.0](https://github.com/bullhorn/novo-elements/compare/v10.8.0...v10.9.0) (2024-11-20)
+
+
+### Bug Fixes
+
+* **ChipList:** Do not unnecessarily grow width of chip list ([e770f05](https://github.com/bullhorn/novo-elements/commit/e770f052bef398f7eaddfbb1918632df4127c04e))
+* **ChipList:** Minor styling appearance fix ([a0860a1](https://github.com/bullhorn/novo-elements/commit/a0860a1cc1b950304c1fedd30082070f004562e0))
+* **ChipList:** Minor styling appearance fix ([#1633](https://github.com/bullhorn/novo-elements/issues/1633)) ([5c32100](https://github.com/bullhorn/novo-elements/commit/5c32100f6a6bdb822e608f206af3a558bead0f01))
+* **ChipList:** Prevent Chips from stretching ([86ab884](https://github.com/bullhorn/novo-elements/commit/86ab88490428e7ef988015eec164a55a4e047c5e))
+* **ChipList:** Prevent Chips from stretching ([#1634](https://github.com/bullhorn/novo-elements/issues/1634)) ([5554a4d](https://github.com/bullhorn/novo-elements/commit/5554a4dff0e4682104cf76272b0ccdca49c1e3f8))
+* **QueryBuilder:** Existing date range values were not appearing in input field ([cd56c77](https://github.com/bullhorn/novo-elements/commit/cd56c77025bc613a7c5899c3b8d59848aac56d87))
+* **QueryBuilder:** Prevent a logic error normalizing dates ([#1599](https://github.com/bullhorn/novo-elements/issues/1599)) ([cda59b9](https://github.com/bullhorn/novo-elements/commit/cda59b9bacd6b5f7bd2d45e29a0f6c4564868786))
+* **QueryBuilder:** Prevent a logic error when attempting to normalize an empty date value ([7e2deba](https://github.com/bullhorn/novo-elements/commit/7e2debaa36e32b01771442e687880e7970976677))
+* **Release:** added a note to the release process readme ([d04c989](https://github.com/bullhorn/novo-elements/commit/d04c989c7e2d0ecb68de678b4b3c4d8a18d069a1))
+* **Release:** added a note to the release process readme ([#1632](https://github.com/bullhorn/novo-elements/issues/1632)) ([510623d](https://github.com/bullhorn/novo-elements/commit/510623d77f588a948a9a2d2cebe7f013cf60702e))
+* **Tiles:** adds type to button ([#1630](https://github.com/bullhorn/novo-elements/issues/1630)) ([0cf56a2](https://github.com/bullhorn/novo-elements/commit/0cf56a20bffc476b45ecb132d29b0342f8c7e944))
+
+
+### Features
+
+* next ([#1624](https://github.com/bullhorn/novo-elements/issues/1624)) ([3cae4bb](https://github.com/bullhorn/novo-elements/commit/3cae4bb5759d47566aaceff0cd301bde9f137c4f))
+* **RowChips:** supporting checkboxes in row chips ([#1615](https://github.com/bullhorn/novo-elements/issues/1615)) ([2d9ed44](https://github.com/bullhorn/novo-elements/commit/2d9ed4400423a3713faab10bab01f23504df857b))
+* **Tooltip:** added tooltipOnOverflow, proper reactive resizing enablement ([dfa3d5e](https://github.com/bullhorn/novo-elements/commit/dfa3d5e33a0b3707ee342693d8d96db6fd3ab43d))
+* **Tooltip:** tooltipOnOverflow, proper reactive resizing enablement ([#1622](https://github.com/bullhorn/novo-elements/issues/1622)) ([9272ba5](https://github.com/bullhorn/novo-elements/commit/9272ba55b0c626c046ed669497aaa67db6378aae))
+
+
+
+# [10.8.0](https://github.com/bullhorn/novo-elements/compare/v10.7.0...v10.8.0) (2024-10-24)
+
+
+### Bug Fixes
+
+* **Button:** Set the native disabled attribute ([#1621](https://github.com/bullhorn/novo-elements/issues/1621)) ([d0e55bd](https://github.com/bullhorn/novo-elements/commit/d0e55bd72244b45d07adc92936e322d2c6e7ee1f))
+* **NovoDataTablePagination:** updating displayed pages when setting page ([0c28dd6](https://github.com/bullhorn/novo-elements/commit/0c28dd64285170b3108fb79748b37cc5cd5f3a62))
+* **NovoDataTablePagination:** updating displayed pages when setting page ([#1612](https://github.com/bullhorn/novo-elements/issues/1612)) ([eda67ee](https://github.com/bullhorn/novo-elements/commit/eda67eeed0bdec70a859d4ddb7677191a73ad5a4))
+* **TabbedGroupPicker:** adjusting indentation on groups ([4b77227](https://github.com/bullhorn/novo-elements/commit/4b77227fa42aa48c6125f9bde6acfd05000090fa))
+* **TabbedGroupPicker:** adjusting indentation on groups ([#1605](https://github.com/bullhorn/novo-elements/issues/1605)) ([0eb5f46](https://github.com/bullhorn/novo-elements/commit/0eb5f468def7d98cf9c91a07c80391864cd47bf5))
+* **TabbedGroupPicker:** Emit selected values on cancel ([#1613](https://github.com/bullhorn/novo-elements/issues/1613)) ([0d7f558](https://github.com/bullhorn/novo-elements/commit/0d7f558ad778c10c26f0e6380fc787013839cc62))
+
+
+### Features
+
+* **Autocomplete:** Clear the input field when the user loses focus ([#1618](https://github.com/bullhorn/novo-elements/issues/1618)) ([a6baa36](https://github.com/bullhorn/novo-elements/commit/a6baa36ffb2798724d3ee3dbe7738b58ada94798))
+* next ([#1609](https://github.com/bullhorn/novo-elements/issues/1609)) ([286c486](https://github.com/bullhorn/novo-elements/commit/286c486fed643f45ff110a4d4922b86cb15a4a0a))
+* **NovoDataTable:** Use spinner instead of loading dots when page options are loading ([#1617](https://github.com/bullhorn/novo-elements/issues/1617)) ([c81d260](https://github.com/bullhorn/novo-elements/commit/c81d2602f188712dba433ac08bd11cd91031965f))
+* **Picker:** Add Optional Keyboard Nav Logic ([#1610](https://github.com/bullhorn/novo-elements/issues/1610)) ([5597781](https://github.com/bullhorn/novo-elements/commit/559778196dc21ba7b66f8c22f4fcd408720be614))
+* **QueryBuilder:** add isBetween option for number/timestamp fields ([#1597](https://github.com/bullhorn/novo-elements/issues/1597)) ([82485bb](https://github.com/bullhorn/novo-elements/commit/82485bb2d22fe4747262aba6427bcdaf9881c49a))
+
+
+
+## [10.7.1](https://github.com/bullhorn/novo-elements/compare/v10.7.0...v10.7.1) (2024-11-01)
+
+
+
+# [10.7.0](https://github.com/bullhorn/novo-elements/compare/v10.6.0...v10.7.0) (2024-09-25)
+
+
+### Bug Fixes
+
+* **ChipList:** Fixed a bug clearing ChipLists when clicked ([#1582](https://github.com/bullhorn/novo-elements/issues/1582)) ([1e04bcc](https://github.com/bullhorn/novo-elements/commit/1e04bcc007e2143288093454f74146ab7d703971))
+* **ConditionBuilder:** When swapping between similar operators, preserve value ([#1589](https://github.com/bullhorn/novo-elements/issues/1589)) ([622247b](https://github.com/bullhorn/novo-elements/commit/622247b749642e608b5b571d58ac108da7931c04))
+* **DatePickerInput:** Add hideFooter input to pass to DatePicker ([#1581](https://github.com/bullhorn/novo-elements/issues/1581)) ([ac7be36](https://github.com/bullhorn/novo-elements/commit/ac7be36b931e9edc375e165f316c7c14256a1d09))
+* **Overlay:** Drag events close overlays ([#1585](https://github.com/bullhorn/novo-elements/issues/1585)) ([f339f50](https://github.com/bullhorn/novo-elements/commit/f339f50b126bf2ad5f4003b6233ca270dd923880))
+* **TabbedGroupPicker:** Fix scroll behavior ([1631764](https://github.com/bullhorn/novo-elements/commit/1631764d49f44f74ce562886870be1b9be0c3f2a))
+* **Toast:** some styling fixes for Toast banners ([#1571](https://github.com/bullhorn/novo-elements/issues/1571)) ([3f915b5](https://github.com/bullhorn/novo-elements/commit/3f915b54942161949e59111a8b5ff67676a86fc9)), closes [#1568](https://github.com/bullhorn/novo-elements/issues/1568)
+* **Tooltip:** Add closeOnClick input to pass to Tooltip ([#1598](https://github.com/bullhorn/novo-elements/issues/1598)) ([0e38db0](https://github.com/bullhorn/novo-elements/commit/0e38db0827b8961bff6960f3f9818aff3552802b))
+* **Types:** Add scoreByEntityId to the DataTableWhere type ([#1607](https://github.com/bullhorn/novo-elements/issues/1607)) ([75b9168](https://github.com/bullhorn/novo-elements/commit/75b91683d4e566d7f50114c00b6485201234969e))
+* **types:** Update autobuild types ([#1600](https://github.com/bullhorn/novo-elements/issues/1600)) ([85c89a6](https://github.com/bullhorn/novo-elements/commit/85c89a66a10b3a00b46028f9bb7cf9398cfbcfe2))
+* **types:** Update keyword types ([#1591](https://github.com/bullhorn/novo-elements/issues/1591)) ([8df45aa](https://github.com/bullhorn/novo-elements/commit/8df45aaac7948ee2b9b6769790a4851e46831363)), closes [#1568](https://github.com/bullhorn/novo-elements/issues/1568)
+* **types:** Update keyword types ([#1595](https://github.com/bullhorn/novo-elements/issues/1595)) ([550de2d](https://github.com/bullhorn/novo-elements/commit/550de2ddc105be4dd93e8edf98298b71012ccd6c))
+
+
+### Features
+
+* **AddressDef:** adding some additional properties to the address obj we set in the query builder ([2c03c3f](https://github.com/bullhorn/novo-elements/commit/2c03c3ff25baf2ad53c0e1fce42402b316fb05e7))
+* **AddressDef:** adding some additional properties to the address obj we set in the query builder ([#1596](https://github.com/bullhorn/novo-elements/issues/1596)) ([4a9b7bd](https://github.com/bullhorn/novo-elements/commit/4a9b7bdce3c8377631c736317411f7b8144e9c40))
+* **Autocomplete:** Introduce makeFirstItemActive option ([#1574](https://github.com/bullhorn/novo-elements/issues/1574)) ([b9db6b2](https://github.com/bullhorn/novo-elements/commit/b9db6b2f98e3bfd272ce7064e20df4b02daabc50))
+* **Criteria Builder:** Add location radius option to the criteria condition builder ([#1573](https://github.com/bullhorn/novo-elements/issues/1573)) ([f84172d](https://github.com/bullhorn/novo-elements/commit/f84172d54229acd20187718c537a5c93dcfb9c41))
+* **Data Table, Overlay, CriteriaBuilder:** Fixes for data table state updates, overlay backdrop clicks and criteria value changes ([#1568](https://github.com/bullhorn/novo-elements/issues/1568)) ([43eb43a](https://github.com/bullhorn/novo-elements/commit/43eb43a963c9075e72afec59f7ff3d4cf207cf80))
+* next ([#1594](https://github.com/bullhorn/novo-elements/issues/1594)) ([8d4b1ba](https://github.com/bullhorn/novo-elements/commit/8d4b1bacb99c002416fcc3a8a872fb08d9f35828))
+* **QueryBuilder:** adding a flag to decide whether to remove or clear the final row in a criteria builder ([30d0a34](https://github.com/bullhorn/novo-elements/commit/30d0a341d65b71a373d5e99f56910bda324d9849))
+* **QueryBuilder:** adding flag to show/hide first row's operator ([7b3c26d](https://github.com/bullhorn/novo-elements/commit/7b3c26d0a4a2849ef67a9d7640c065f654988710))
+* **QueryBuilder:** adding new 'multiple scope' concept to criteria builder ([#1592](https://github.com/bullhorn/novo-elements/issues/1592)) ([7e059f1](https://github.com/bullhorn/novo-elements/commit/7e059f129b3658b4ecc0d0dff70137310b82280c))
+* **QueryBuilder:** updating to allow for scoped groupes and criteria ([ab8a126](https://github.com/bullhorn/novo-elements/commit/ab8a126dc82bd18d0fe82e27b3aff6ccfcacffee))
+* **SwitchControl:** add change propogation to Switch Control Template ([4e8250b](https://github.com/bullhorn/novo-elements/commit/4e8250bfb412fe9c56fd9fc02a890c91be1c3f1c))
+* **SwitchControl:** add change propogation to Switch Control Template ([#1593](https://github.com/bullhorn/novo-elements/issues/1593)) ([5c2bcb2](https://github.com/bullhorn/novo-elements/commit/5c2bcb218c752d8c0b31d3660dec2777857eebf2))
+* **SwitchControl:** add control.minimal to BaseControl.ts ([d394281](https://github.com/bullhorn/novo-elements/commit/d39428156841565db3eaa374a93b02e4e26f8ddf))
+* **SwitchControl:** revert BaseControl.ts change ([b5f6569](https://github.com/bullhorn/novo-elements/commit/b5f6569add3ec5921a75f8fb8b77c092ff15df44))
+* **Tiles:** restyling the novo-tiles component to be more legible ([9643b71](https://github.com/bullhorn/novo-elements/commit/9643b7100a5ee12b20d04a0b858b13e63e194540))
+* **Tiles:** restyling the novo-tiles component to be more legible ([#1590](https://github.com/bullhorn/novo-elements/issues/1590)) ([3146302](https://github.com/bullhorn/novo-elements/commit/3146302c2f095f1d5df630124045c7c3121e39c6))
+
+
+
+# [10.6.0](https://github.com/bullhorn/novo-elements/compare/v10.5.0...v10.6.0) (2024-08-14)
+
+
+### Bug Fixes
+
+* **ChipList:** Fixed a bug clearing ChipLists when clicked ([#1582](https://github.com/bullhorn/novo-elements/issues/1582)) ([14e6aa9](https://github.com/bullhorn/novo-elements/commit/14e6aa986389f2760c02202b58575a93865c2067))
+* **DatePickerInput:** Add hideFooter input to pass to DatePicker ([#1581](https://github.com/bullhorn/novo-elements/issues/1581)) ([ed63db2](https://github.com/bullhorn/novo-elements/commit/ed63db2a6d4b232c550994206e68c9c65c8e7013))
+* **Overlay:** Drag events close overlays ([#1585](https://github.com/bullhorn/novo-elements/issues/1585)) ([6ceb7db](https://github.com/bullhorn/novo-elements/commit/6ceb7db5315c3cb414697eadd1c87c19750e3f5f))
+* **TabbedGroupPicker:** Fix scroll behavior ([7081f00](https://github.com/bullhorn/novo-elements/commit/7081f007495ff6cf8e370b4352115de3e253ff4c))
+* **Toast:** some styling fixes for Toast banners ([#1571](https://github.com/bullhorn/novo-elements/issues/1571)) ([7f6b1d6](https://github.com/bullhorn/novo-elements/commit/7f6b1d63d04d8214491970bfec97414d3d676e99)), closes [#1568](https://github.com/bullhorn/novo-elements/issues/1568)
+
+
+### Features
+
+* **Autocomplete:** Introduce makeFirstItemActive option ([#1574](https://github.com/bullhorn/novo-elements/issues/1574)) ([5d5ad35](https://github.com/bullhorn/novo-elements/commit/5d5ad353c549818f5299a59bf462c402b266afc2))
+* **Criteria Builder:** Add location radius option to the criteria condition builder ([#1573](https://github.com/bullhorn/novo-elements/issues/1573)) ([cef1669](https://github.com/bullhorn/novo-elements/commit/cef166950b19b12c143af73436d12a65ac1ef068))
+* **Data Table, Overlay, CriteriaBuilder:** Fixes for data table state updates, overlay backdrop clicks and criteria value changes ([#1568](https://github.com/bullhorn/novo-elements/issues/1568)) ([3dfb652](https://github.com/bullhorn/novo-elements/commit/3dfb65224169ed1e0b32a97d01f7917eb0295a82))
+
+
+
+# [10.5.0](https://github.com/bullhorn/novo-elements/compare/v10.4.0...v10.5.0) (2024-07-25)
+
+
+### Bug Fixes
+
+* **Select:** Provide an optional fix directive for <novo-select> elements ([#1560](https://github.com/bullhorn/novo-elements/issues/1560)) ([0684b27](https://github.com/bullhorn/novo-elements/commit/0684b2709db72efa9b517f81b76ef8cfa149f303))
+* **TabbedGroupPicker:** Revised commit name to trigger release ([#1572](https://github.com/bullhorn/novo-elements/issues/1572)) ([bbb8a5a](https://github.com/bullhorn/novo-elements/commit/bbb8a5a1506c2ee76d2a97e3223e1b8021a6180b))
+
+
+### Features
+
+* **Data Table:** Allow for saving of keywords in data table preferences ([#1562](https://github.com/bullhorn/novo-elements/issues/1562)) ([052b1f5](https://github.com/bullhorn/novo-elements/commit/052b1f5a3cc86992f97338fc88e5a3aa6e92ea65))
+* next ([#1564](https://github.com/bullhorn/novo-elements/issues/1564)) ([5f0896c](https://github.com/bullhorn/novo-elements/commit/5f0896c03f4631d8fc7a1697647997ff9a1b7246))
+* **QueryBuilder:** Enabling nested search criteria via new types ([#1554](https://github.com/bullhorn/novo-elements/issues/1554)) ([9a9e41c](https://github.com/bullhorn/novo-elements/commit/9a9e41ccc20dbbde437df66a4e15b0c3bc9e5b1c))
+* **Recursive Criteria:** Enabling nested search criteria ([54d39ab](https://github.com/bullhorn/novo-elements/commit/54d39ab01c6966fcaa921721723f91d33c0c8c46))
+* **Search:** adding ability to override parent element for custom overlay positioning ([1226902](https://github.com/bullhorn/novo-elements/commit/12269028cee4064565343348e691b96ec34c7f32))
+* **Search:** adding ability to override parent element for custom overlay positioning ([#1559](https://github.com/bullhorn/novo-elements/issues/1559)) ([5ebf232](https://github.com/bullhorn/novo-elements/commit/5ebf232e08c3d7bd1c6da54d2ffd53badb513a09))
+* **Select:** add icon option to select ([#1570](https://github.com/bullhorn/novo-elements/issues/1570)) ([4416e42](https://github.com/bullhorn/novo-elements/commit/4416e42d9f0b8c6dec91e59de661d1a0de050289))
+
+
+
+# [10.4.0](https://github.com/bullhorn/novo-elements/compare/v10.3.0...v10.4.0) (2024-06-27)
+
+
+### Bug Fixes
+
+* **): Revert "fix(Criteria Types:** Adding missing operator types" ([#1546](https://github.com/bullhorn/novo-elements/issues/1546)) ([ed28bc7](https://github.com/bullhorn/novo-elements/commit/ed28bc7b10c2224bd7245d204bb629056ad9e978)), closes [#1545](https://github.com/bullhorn/novo-elements/issues/1545)
+* **Criteria Types:** Adding missing operator types ([#1545](https://github.com/bullhorn/novo-elements/issues/1545)) ([e54b66d](https://github.com/bullhorn/novo-elements/commit/e54b66d241b9a70871eff4281e51fe0965e40a57))
+* **Criteria:** Added criteria operator types ([#1542](https://github.com/bullhorn/novo-elements/issues/1542)) ([063b187](https://github.com/bullhorn/novo-elements/commit/063b187129c81930951be8c902d9e20a31ba4c12))
+* **CriteriaTypes:** Adding missing operator types ([#1547](https://github.com/bullhorn/novo-elements/issues/1547)) ([e233914](https://github.com/bullhorn/novo-elements/commit/e233914d4b232a432c735ef5bb0aa8b8571a5b2a)), closes [#1545](https://github.com/bullhorn/novo-elements/issues/1545)
+* **QueryBuilder:** reverting to old conjunction enum format for backwards compatability ([f8ad855](https://github.com/bullhorn/novo-elements/commit/f8ad855a8ee23879041bc9545735711aa3fe04a5))
+
+
+### Features
+
+* **AppBridge:** Log origin information during method calls ([#1538](https://github.com/bullhorn/novo-elements/issues/1538)) ([2eda5c1](https://github.com/bullhorn/novo-elements/commit/2eda5c1766bd6e16b9dbfef79fe56b87a5bffc0d))
+* **Chips:** allow novo-chip size input via novo-chips ([#1548](https://github.com/bullhorn/novo-elements/issues/1548)) ([2fef92c](https://github.com/bullhorn/novo-elements/commit/2fef92c4f251c651ce54d59d4044d51dcee89396))
+* **CriteriaBuilder:** Allow the single Condition Builder component to be self-hosted ([#1544](https://github.com/bullhorn/novo-elements/issues/1544)) ([85d4287](https://github.com/bullhorn/novo-elements/commit/85d42879e2daa1303c6f41cd80f430385ca32a01))
+* next ([#1551](https://github.com/bullhorn/novo-elements/issues/1551)) ([3c44d42](https://github.com/bullhorn/novo-elements/commit/3c44d4280d3184031103dbc4c829abbeaac66d6d))
+* **TabbedGroupPicker:** Added option to disable item selection/checkboxes ([#1549](https://github.com/bullhorn/novo-elements/issues/1549)) ([18adbbf](https://github.com/bullhorn/novo-elements/commit/18adbbf273486f304cbcf0a5479dbae618fcd079))
+* **TabbedGroupPicker:** some updates to the tabbed group picker component ([#1543](https://github.com/bullhorn/novo-elements/issues/1543)) ([9ba51b7](https://github.com/bullhorn/novo-elements/commit/9ba51b781bb3707c7a6ba43c48b5292e7f9513c4))
+* **TabbedGroupPicker:** tabbed-group-picker styling updates and bug fixes ([#1536](https://github.com/bullhorn/novo-elements/issues/1536)) ([5233ac3](https://github.com/bullhorn/novo-elements/commit/5233ac3f6cf05eac6c753953a6efd3a12239f293))
+* upping required node version in readme ([08d4047](https://github.com/bullhorn/novo-elements/commit/08d4047d6539599daf4acc6572724c528efbb737))
+
+
+
+# [10.3.0](https://github.com/bullhorn/novo-elements/compare/v10.2.0...v10.3.0) (2024-05-24)
+
+
+### Bug Fixes
+
+* **): Revert "fix(Criteria Types:** Adding missing operator types" ([#1546](https://github.com/bullhorn/novo-elements/issues/1546)) ([e0d572e](https://github.com/bullhorn/novo-elements/commit/e0d572e39d1c7ccb42864007888af0b23659951e)), closes [#1545](https://github.com/bullhorn/novo-elements/issues/1545)
+* **Criteria Types:** Adding missing operator types ([#1545](https://github.com/bullhorn/novo-elements/issues/1545)) ([be25bd7](https://github.com/bullhorn/novo-elements/commit/be25bd7ff11b5f4041f62639a7cf27e2b0b6ce40))
+* **Criteria:** Added criteria operator types ([#1542](https://github.com/bullhorn/novo-elements/issues/1542)) ([8c47514](https://github.com/bullhorn/novo-elements/commit/8c47514d322ffe96b39e247d0c2549156e593d64))
+* **QueryBuilder:** reverting to old conjunction enum format for backwards compatability ([e535b7c](https://github.com/bullhorn/novo-elements/commit/e535b7c4c6d9d96a82244ab4f801e466bbbae815))
+
+
+### Features
+
+* **AppBridge:** Log origin information during method calls ([#1538](https://github.com/bullhorn/novo-elements/issues/1538)) ([ce79632](https://github.com/bullhorn/novo-elements/commit/ce796325a6bfc9f1bea53a3ae51af28518e8c282))
+* **TabbedGroupPicker:** tabbed-group-picker styling updates and bug fixes ([#1536](https://github.com/bullhorn/novo-elements/issues/1536)) ([7bc504e](https://github.com/bullhorn/novo-elements/commit/7bc504e93b5ef4d61c6b178507d9f5acea1fa97d))
+* upping required node version in readme ([6cafd52](https://github.com/bullhorn/novo-elements/commit/6cafd5224225726882b60adcb416522d29c907b1))
+
+
+
+# [10.2.0](https://github.com/bullhorn/novo-elements/compare/v10.1.0...v10.2.0) (2024-04-22)
+
+
+### Bug Fixes
+
+* **Progress Bar:** Check for a valid total to avoid wrong percentages ([#1531](https://github.com/bullhorn/novo-elements/issues/1531)) ([967f441](https://github.com/bullhorn/novo-elements/commit/967f441654562606f2ebe8fb7d22c769c025e034))
+
+
+### Features
+
+* **Chips:** Allow for better interaction with the picker/overlay from a <novo-chips> element ([#1523](https://github.com/bullhorn/novo-elements/issues/1523)) ([60430d1](https://github.com/bullhorn/novo-elements/commit/60430d1fea10203b1277e4b64c583e69e0e081cb)), closes [#1501](https://github.com/bullhorn/novo-elements/issues/1501) [#1513](https://github.com/bullhorn/novo-elements/issues/1513) [#1413](https://github.com/bullhorn/novo-elements/issues/1413) [#1406](https://github.com/bullhorn/novo-elements/issues/1406) [#1409](https://github.com/bullhorn/novo-elements/issues/1409) [#1411](https://github.com/bullhorn/novo-elements/issues/1411)
+* **Country:** updating country and state data for Country util ([#1533](https://github.com/bullhorn/novo-elements/issues/1533)) ([495cd56](https://github.com/bullhorn/novo-elements/commit/495cd569b65cf7a7311edf0773f62348e1f8421f)), closes [#1501](https://github.com/bullhorn/novo-elements/issues/1501) [#1513](https://github.com/bullhorn/novo-elements/issues/1513) [#1413](https://github.com/bullhorn/novo-elements/issues/1413) [#1406](https://github.com/bullhorn/novo-elements/issues/1406) [#1409](https://github.com/bullhorn/novo-elements/issues/1409) [#1411](https://github.com/bullhorn/novo-elements/issues/1411)
+* **Data Tables:** Add applied search type ([#1529](https://github.com/bullhorn/novo-elements/issues/1529)) ([cfa5d13](https://github.com/bullhorn/novo-elements/commit/cfa5d137d63b22b5a6594ff22878c12c31820441))
+* **DataTable:** Add ability to show pagination on footer of Data Table ([#1532](https://github.com/bullhorn/novo-elements/issues/1532)) ([38bb94f](https://github.com/bullhorn/novo-elements/commit/38bb94fa7ab7d8d8d407e7b7265aa24ea1fc457b))
+
+
+
+# [10.1.0](https://github.com/bullhorn/novo-elements/compare/v10.0.0...v10.1.0) (2024-04-16)
+
+
+### Features
+
+* **AppBridge): Revert "feat(AppBridge:** When handling AppBridge events, pass origin … ([#1535](https://github.com/bullhorn/novo-elements/issues/1535)) ([09832e1](https://github.com/bullhorn/novo-elements/commit/09832e16ab517250daaf9260a74206e64bc51af3)), closes [#1509](https://github.com/bullhorn/novo-elements/issues/1509)
+
+
+
+# [10.0.0](https://github.com/bullhorn/novo-elements/compare/v9.3.1...v10.0.0) (2024-03-26)
+
+
+### Bug Fixes
+
+* **BaseRenderer:** adding base renderer back as a util ([f09d1bd](https://github.com/bullhorn/novo-elements/commit/f09d1bd5c4a6bec8702ca4efc6f5c7412e47e361))
+* **Chips:** hidden-chips, existing model data ([#1525](https://github.com/bullhorn/novo-elements/issues/1525)) ([ffb4c23](https://github.com/bullhorn/novo-elements/commit/ffb4c23789aeee4229bc1a07018abe56f030fd26))
+* **Control:** Fixes to an error in Control affecting maxlength fields ([#1518](https://github.com/bullhorn/novo-elements/issues/1518)) ([c703901](https://github.com/bullhorn/novo-elements/commit/c703901887ca9708e07f362946d39190558f9bbc))
+* **Pagination:** adding back table pagination component for now ([a917ccc](https://github.com/bullhorn/novo-elements/commit/a917cccce2924b10c0780556d93602051890f81f))
+* **Pagination:** fixing unit test ([0b4f0a1](https://github.com/bullhorn/novo-elements/commit/0b4f0a1ee2ee10403ee47efd39c3663266fc90af))
+
+
+### Features
+
+* **AppBridge:** When handling AppBridge events, pass origin to handler ([#1509](https://github.com/bullhorn/novo-elements/issues/1509)) ([5db1d47](https://github.com/bullhorn/novo-elements/commit/5db1d4718d9c617b123402f01694823c32d3a5d2))
+* **Chips:** added new hidden chips feature to Chips picker ([#1521](https://github.com/bullhorn/novo-elements/issues/1521)) ([a2da7b0](https://github.com/bullhorn/novo-elements/commit/a2da7b0130ab5eb37126c7373cade7328c107fba))
+* **Dragula:** deleting dragula add-on ([#1517](https://github.com/bullhorn/novo-elements/issues/1517)) ([f8afe20](https://github.com/bullhorn/novo-elements/commit/f8afe20dea3f143f622cddfa2ae71c01e71b9fea))
+
+
+
+## [9.3.1](https://github.com/bullhorn/novo-elements/compare/v9.3.0...v9.3.1) (2024-02-29)
+
+
+### Bug Fixes
+
+* **Control:** Revert: Issue preventing length of text input from displaying ([#1515](https://github.com/bullhorn/novo-elements/issues/1515)) ([3a29333](https://github.com/bullhorn/novo-elements/commit/3a293332389667cf8954b9abbc7a732c1538d1ee))
+
+
+
+# [9.3.0](https://github.com/bullhorn/novo-elements/compare/v9.2.0...v9.3.0) (2024-02-23)
+
+
+### Bug Fixes
+
+* **Control:** Issue preventing length of text input from displaying ([#1508](https://github.com/bullhorn/novo-elements/issues/1508)) ([3104b03](https://github.com/bullhorn/novo-elements/commit/3104b03e0e2232235b1ef94eba82e5f0e63ed1ee))
+* **Demo:** fixing a few issues with the examples and their components ([e95d958](https://github.com/bullhorn/novo-elements/commit/e95d9585b810a509e7defaf26f639d2238b44887))
+* **License:** updating date on license ([868dae0](https://github.com/bullhorn/novo-elements/commit/868dae0d486fd6c1ab763699396be3775a63a992))
+
+
+### Features
+
+* new minor version ([6de7eb7](https://github.com/bullhorn/novo-elements/commit/6de7eb722ee6a84679c96348402e36424d6adb3e))
+* **RowChips:** Add flag to show chips at full height ([#1510](https://github.com/bullhorn/novo-elements/issues/1510)) ([a3cb20e](https://github.com/bullhorn/novo-elements/commit/a3cb20e34bfafd85bcfbd93ca1add5f90b48a5d5))
+
+
+### Reverts
+
+* Revert "pull in latest icon changes" ([af4b4af](https://github.com/bullhorn/novo-elements/commit/af4b4af42996b745a374d5f7fa772b09d010c420))
+
+
+
+# [9.2.0](https://github.com/bullhorn/novo-elements/compare/v9.1.1...v9.2.0) (2024-01-30)
+
+
+### Bug Fixes
+
+* **Collection:** fixing a strict=true TS compilation error ([bb19227](https://github.com/bullhorn/novo-elements/commit/bb19227c7424eff82103469762e5a6ae47f00750))
+* **DataTable:** Make text stay visual while resizing right align columns ([#1488](https://github.com/bullhorn/novo-elements/issues/1488)) ([4a755f2](https://github.com/bullhorn/novo-elements/commit/4a755f265cac7e9a4c1eba2ef0ba3a9e58261fd0)), closes [#1481](https://github.com/bullhorn/novo-elements/issues/1481) [#1483](https://github.com/bullhorn/novo-elements/issues/1483) [#1495](https://github.com/bullhorn/novo-elements/issues/1495)
+* **ExpansionPanelHeader:** adding default heights to expansion-panel-header input properties ([257000b](https://github.com/bullhorn/novo-elements/commit/257000b98dfa402c09b14123cca0198a20454dcf))
+
+
+### Features
+
+* **AppBridge): Revert "feat(AppBridge:** When handling AppBridge events, pass origin to handler" ([#1502](https://github.com/bullhorn/novo-elements/issues/1502)) ([6ce48a8](https://github.com/bullhorn/novo-elements/commit/6ce48a8a783442c24749c8c21cae2dcc1d8ff0a3))
+* **AppBridge:** When handling AppBridge events, pass origin to handler ([#1498](https://github.com/bullhorn/novo-elements/issues/1498)) ([12f025a](https://github.com/bullhorn/novo-elements/commit/12f025a5fd8f4a925598328246d3839487d6f387))
+* **Progress:** adding 'flash' state to progress bar ([f131d57](https://github.com/bullhorn/novo-elements/commit/f131d57dd29fd0330305616954b6ce3a0967a0ad))
+
+
+
+## [9.1.1](https://github.com/bullhorn/novo-elements/compare/v9.1.0...v9.1.1) (2023-12-29)
+
+
+### Bug Fixes
+
+* **DatePickerInput:** Default mask to a permissive number/separator r… ([#1495](https://github.com/bullhorn/novo-elements/issues/1495)) ([dba0c48](https://github.com/bullhorn/novo-elements/commit/dba0c48b1462c9794ee83c4c0e5f99ac4ee360cd))
+
+
+
+# [9.1.0](https://github.com/bullhorn/novo-elements/compare/v9.0.0...v9.1.0) (2023-12-19)
+
+
+### Bug Fixes
+
+* **imask:** upping the max date on all date/text masks from 2030 to 2100 ([f8259f2](https://github.com/bullhorn/novo-elements/commit/f8259f229cfd64ac759d0546f0295cc86dfab229))
+
+
+### Features
+
+* **Picker:** Specify parent of picker components ([#1483](https://github.com/bullhorn/novo-elements/issues/1483)) ([612be98](https://github.com/bullhorn/novo-elements/commit/612be98fed09a1a5e1c0734efcde0315221680b5))
+* **TimePicker:** Add Save and Cancel buttons to Time Picker ([#1481](https://github.com/bullhorn/novo-elements/issues/1481)) ([f280f9c](https://github.com/bullhorn/novo-elements/commit/f280f9cfa95f6f845da7226e2b15b60c19f800fd))
+
+
+
+# [9.0.0](https://github.com/bullhorn/novo-elements/compare/v8.3.0...v9.0.0) (2023-11-16)
+
+
+### Bug Fixes
+
+* **DragDrop:** Address dragdrop parenting issues ([#1471](https://github.com/bullhorn/novo-elements/issues/1471)) ([c8fdbf2](https://github.com/bullhorn/novo-elements/commit/c8fdbf2b269ad121d4a3f9f72383131e0a1f4199))
+* **DragDrop:** Fix Firefox's use of drag events ([#1474](https://github.com/bullhorn/novo-elements/issues/1474)) ([6e371f0](https://github.com/bullhorn/novo-elements/commit/6e371f021fb78617fbc8be62c24666666366e58c))
+* **Dropdown:** add example to show scrolling more clearly and fix scrolling to previously selected item ([ae2161a](https://github.com/bullhorn/novo-elements/commit/ae2161af6b3faf81d554c3a68cbcd247ef68420e))
+* **Dropdown:** add new flag to demo ([2394803](https://github.com/bullhorn/novo-elements/commit/239480359f3e0bff24931a0a1c3728ef5fc46bc5))
+* **Dropdown:** allow for item to be selected before dropdown is opened (selected on creation) ([15173e6](https://github.com/bullhorn/novo-elements/commit/15173e6b3ad6c224fb0fbf7e824b94d2db8d3af3))
+* **Dropdown:** fixing use of height attribute and scrolling to selected item if exists on dropdown open ([4f9e5ef](https://github.com/bullhorn/novo-elements/commit/4f9e5ef93bd2122758e539b99dc526ed81a59c43))
+* **Dropdown:** remove references to copy-pasted code ([76e5972](https://github.com/bullhorn/novo-elements/commit/76e59727b54ed6a4f549e30fa116cfc11a73abe6))
+* **FormControl:** Prevent input events from firing if a mask has reje… ([#1478](https://github.com/bullhorn/novo-elements/issues/1478)) ([144da04](https://github.com/bullhorn/novo-elements/commit/144da047a64f1f1d3fdce632a1bef21a22228c6e))
+
+
+### Features
+
+* **CodeEditor:** Deprecate ace editor ([#1466](https://github.com/bullhorn/novo-elements/issues/1466)) ([b546038](https://github.com/bullhorn/novo-elements/commit/b5460385945fadf6d741cc45f846c1a89c842b92))
+* **DragDrop:** New drag-and-drop directive to replace Dragula usage ([#1468](https://github.com/bullhorn/novo-elements/issues/1468)) ([36091fe](https://github.com/bullhorn/novo-elements/commit/36091fecfa6940cde76fa4977eb7f390b5a4feb6))
+* **timezone-support:** implementing dependency in utils to avoid CommonJS optimization bailout warnings ([1d19a07](https://github.com/bullhorn/novo-elements/commit/1d19a074c7514dcb90a2bbcb7efa6d42429878ea))
+
+
+
+# [8.3.0](https://github.com/bullhorn/novo-elements/compare/v8.2.0...v8.3.0) (2023-09-22)
+
+
+### Bug Fixes
+
+* **docs:** Build problem preventing documentation generation ([#1459](https://github.com/bullhorn/novo-elements/issues/1459)) ([6ceacf3](https://github.com/bullhorn/novo-elements/commit/6ceacf392c3cd9a98a91ce1ab60e966d10115de5))
+* **dropdown:** fixing a styling bug around dropdown icon cursors introduced in v8 ([#1464](https://github.com/bullhorn/novo-elements/issues/1464)) ([91cefb2](https://github.com/bullhorn/novo-elements/commit/91cefb233f8c323233f4921f8be8561897e36ef9))
+
+
+### Features
+
+* **header:** Fix a css issue in sidebar header ([#1462](https://github.com/bullhorn/novo-elements/issues/1462)) ([ba485a7](https://github.com/bullhorn/novo-elements/commit/ba485a7139d6d361817732291a1c045f4295c47f))
+* **test:** Configure SonarQube to inspect code coverage from jest ([#1460](https://github.com/bullhorn/novo-elements/issues/1460)) ([11e194d](https://github.com/bullhorn/novo-elements/commit/11e194d8787d50ec1e0faf0a7d8d89bc42be0b45))
+
+
+
+# [8.2.0](https://github.com/bullhorn/novo-elements/compare/v8.1.1...v8.2.0) (2023-08-23)
+
+
+### Features
+
+* next ([#1453](https://github.com/bullhorn/novo-elements/issues/1453)) ([d9ee4e6](https://github.com/bullhorn/novo-elements/commit/d9ee4e6c4358ed203a0dfbd9313079bff2228273)), closes [#1451](https://github.com/bullhorn/novo-elements/issues/1451) [#1454](https://github.com/bullhorn/novo-elements/issues/1454)
+
+
+
+## [8.1.1](https://github.com/bullhorn/novo-elements/compare/v8.1.0...v8.1.1) (2023-08-18)
+
+
+### Bug Fixes
+
+* **Dropdown:** fixing a styling bug with data table dropdown cell lists ([#1457](https://github.com/bullhorn/novo-elements/issues/1457)) ([8e20dfd](https://github.com/bullhorn/novo-elements/commit/8e20dfd41f198575303617c22fec6290893c8410))
+
+
+
+# [8.1.0](https://github.com/bullhorn/novo-elements/compare/v8.0.2...v8.1.0) (2023-07-26)
+
+
+### Features
+
+* next ([#1446](https://github.com/bullhorn/novo-elements/issues/1446)) ([397b097](https://github.com/bullhorn/novo-elements/commit/397b0971edd5c1bc96657d86f7237fb2ec9c64ff)), closes [#1434](https://github.com/bullhorn/novo-elements/issues/1434) [#1445](https://github.com/bullhorn/novo-elements/issues/1445) [#1413](https://github.com/bullhorn/novo-elements/issues/1413) [#1406](https://github.com/bullhorn/novo-elements/issues/1406) [#1409](https://github.com/bullhorn/novo-elements/issues/1409) [#1411](https://github.com/bullhorn/novo-elements/issues/1411)
+
+
+
+## [8.0.2](https://github.com/bullhorn/novo-elements/compare/v8.0.1...v8.0.2) (2023-07-14)
+
+
+### Bug Fixes
+
+* **picker:** updates TimePickerInput and Chips change event handling ([#1447](https://github.com/bullhorn/novo-elements/issues/1447)) ([c99b957](https://github.com/bullhorn/novo-elements/commit/c99b957335e536aea20c04991dc5870927f4774e))
+
+
+
+## [8.0.1](https://github.com/bullhorn/novo-elements/compare/v8.0.0...v8.0.1) (2023-07-05)
+
+
+### Bug Fixes
+
+* **Popover:** renaming popover attribute due to new HTML spec attribute ([b1ba6ce](https://github.com/bullhorn/novo-elements/commit/b1ba6ce6e1f7907a15a38b7ca02592f6838fa83e))
+
+
+
+# [8.0.0](https://github.com/bullhorn/novo-elements/compare/v7.13.0...v8.0.0) (2023-06-28)
+
+
+### Bug Fixes
+
+* **Checkbox:** fixing a display bug introduced with checkboxes and adding demo ([57abe41](https://github.com/bullhorn/novo-elements/commit/57abe41e2a60478f078f5d2976eb4c05f8543693))
+* **Checkbox:** updating checkbox, checklist, radio, tiles to have consistent disabled styling ([a492a51](https://github.com/bullhorn/novo-elements/commit/a492a51b890263fa14b8b06e10265fbf54d0ff12))
+
+
+### Features
+
+* **DataTable:** making data tables emit scroll events through the cdk ([#1431](https://github.com/bullhorn/novo-elements/issues/1431)) ([aae7cc3](https://github.com/bullhorn/novo-elements/commit/aae7cc38a28cd9196a3c51186f89e76cef21f115))
+* **docs:** v8 release docs ([#1436](https://github.com/bullhorn/novo-elements/issues/1436)) ([66151d4](https://github.com/bullhorn/novo-elements/commit/66151d4742a2127388652848bc8b081ee2dbed03))
+* **Places:** adding keyboard support to places component ([#1433](https://github.com/bullhorn/novo-elements/issues/1433)) ([4cadaf0](https://github.com/bullhorn/novo-elements/commit/4cadaf0b008924200c436301f0eca99f3acdc592))
+
+
+
+## [7.13.1](https://github.com/bullhorn/novo-elements/compare/v7.13.0...v7.13.1) (2023-06-29)
+
+
+### Bug Fixes
+
+* **Popover:** renaming popover attribute due to new HTML spec attribute ([fdfe061](https://github.com/bullhorn/novo-elements/commit/fdfe061eb0a323a120e700f5a3dd9b4013768503))
+
+
+
+# [7.13.0](https://github.com/bullhorn/novo-elements/compare/v7.12.0...v7.13.0) (2023-05-22)
+
+
+### Bug Fixes
+
+* **Chips:** Prevent overwriting value before labels are resolved ([#1416](https://github.com/bullhorn/novo-elements/issues/1416)) ([c337ff2](https://github.com/bullhorn/novo-elements/commit/c337ff2c9aa73e4cd22ba0ccf4fae5002d12be9a))
+* **DataTable:** use overrideTotal to determine empty state when it's defined ([#1424](https://github.com/bullhorn/novo-elements/issues/1424)) ([d65a54d](https://github.com/bullhorn/novo-elements/commit/d65a54d726dc25d81a910fdf49939e647e28d482))
+* **NovoTimePickerInput:** always dispatching a time change when the text input throws a complete event ([#1392](https://github.com/bullhorn/novo-elements/issues/1392)) ([9f14e07](https://github.com/bullhorn/novo-elements/commit/9f14e078f9851b1f37505ff3dc86422246c9cae6)), closes [#1388](https://github.com/bullhorn/novo-elements/issues/1388) [#1399](https://github.com/bullhorn/novo-elements/issues/1399)
+* **QueryBuilder:** fixing how we handle focus behavior on the new address definition ([#1422](https://github.com/bullhorn/novo-elements/issues/1422)) ([f3bd7e5](https://github.com/bullhorn/novo-elements/commit/f3bd7e5a4cf5ebfd5f57ddfc5a3d156d57c9742f))
+
+
+### Features
+
+* **EntityColor:** Add compliance manager entity color ([#1415](https://github.com/bullhorn/novo-elements/issues/1415)) ([064bc5a](https://github.com/bullhorn/novo-elements/commit/064bc5a2ea19a0121cd004fdc1d3b1a6da9c41d9)), closes [#1406](https://github.com/bullhorn/novo-elements/issues/1406) [#1409](https://github.com/bullhorn/novo-elements/issues/1409) [#1411](https://github.com/bullhorn/novo-elements/issues/1411)
+* **QueryBuilder:** new address picker definition for query builder ([#1407](https://github.com/bullhorn/novo-elements/issues/1407)) ([578b08b](https://github.com/bullhorn/novo-elements/commit/578b08b57324461554ebd86dc43216effa7fa0cb)), closes [#1406](https://github.com/bullhorn/novo-elements/issues/1406) [#1409](https://github.com/bullhorn/novo-elements/issues/1409) [#1411](https://github.com/bullhorn/novo-elements/issues/1411)
+
+
+
+# [7.12.0](https://github.com/bullhorn/novo-elements/compare/v7.11.0...v7.12.0) (2023-04-26)
+
+
+### Features
+
+* next ([#1408](https://github.com/bullhorn/novo-elements/issues/1408)) ([e53f61c](https://github.com/bullhorn/novo-elements/commit/e53f61ccee462c1648763dd06f3f6e74bf94e982)), closes [#1406](https://github.com/bullhorn/novo-elements/issues/1406) [#1409](https://github.com/bullhorn/novo-elements/issues/1409) [#1411](https://github.com/bullhorn/novo-elements/issues/1411)
+
+
+
+# [7.11.0](https://github.com/bullhorn/novo-elements/compare/v7.10.0...v7.11.0) (2023-03-30)
+
+
+### Features
+
+* next ([#1400](https://github.com/bullhorn/novo-elements/issues/1400)) ([882d0d1](https://github.com/bullhorn/novo-elements/commit/882d0d1c2eb2160bf36376bc05028e9f916ba182)), closes [#1399](https://github.com/bullhorn/novo-elements/issues/1399) [#1389](https://github.com/bullhorn/novo-elements/issues/1389) [#1388](https://github.com/bullhorn/novo-elements/issues/1388)
+
+
+
+# [7.10.0](https://github.com/bullhorn/novo-elements/compare/v7.9.0...v7.10.0) (2023-03-02)
+
+
+### Features
+
+* next ([#1390](https://github.com/bullhorn/novo-elements/issues/1390)) ([9fb72bc](https://github.com/bullhorn/novo-elements/commit/9fb72bcbee021c892e5ea1f70d88b3dfd1b748d9)), closes [#1388](https://github.com/bullhorn/novo-elements/issues/1388) [#1394](https://github.com/bullhorn/novo-elements/issues/1394)
+
+
+
+# [7.9.0](https://github.com/bullhorn/novo-elements/compare/v7.8.0...v7.9.0) (2023-02-02)
+
+
+### Features
+
+* next ([#1384](https://github.com/bullhorn/novo-elements/issues/1384)) ([e2ef564](https://github.com/bullhorn/novo-elements/commit/e2ef56410a704020871ff754950e3c3fbc49bd2e)), closes [#1382](https://github.com/bullhorn/novo-elements/issues/1382) [#1375](https://github.com/bullhorn/novo-elements/issues/1375) [#1374](https://github.com/bullhorn/novo-elements/issues/1374) [#1376](https://github.com/bullhorn/novo-elements/issues/1376) [#1386](https://github.com/bullhorn/novo-elements/issues/1386)
+
+
+
+# [7.8.0](https://github.com/bullhorn/novo-elements/compare/v7.7.1...v7.8.0) (2023-01-05)
+
+
+### Features
+
+* next ([#1377](https://github.com/bullhorn/novo-elements/issues/1377)) ([b77d596](https://github.com/bullhorn/novo-elements/commit/b77d5967497d5f04657fbb4c3c078e8852cba22a)), closes [#1375](https://github.com/bullhorn/novo-elements/issues/1375) [#1374](https://github.com/bullhorn/novo-elements/issues/1374) [#1376](https://github.com/bullhorn/novo-elements/issues/1376)
+
+
+
+## [7.7.1](https://github.com/bullhorn/novo-elements/compare/v7.7.0...v7.7.1) (2022-12-06)
+
+
+### Bug Fixes
+
+* **CKEditor:** Also disable tableselection plugin ([#1379](https://github.com/bullhorn/novo-elements/issues/1379)) ([8dd0bfb](https://github.com/bullhorn/novo-elements/commit/8dd0bfbfa4888ae8a9d72865748ceb4e06035770))
+
+
+
+# [7.7.0](https://github.com/bullhorn/novo-elements/compare/v7.6.0...v7.7.0) (2022-11-29)
+
+
+### Features
+
+* next ([#1360](https://github.com/bullhorn/novo-elements/issues/1360)) ([79e6d0a](https://github.com/bullhorn/novo-elements/commit/79e6d0a5fb099044b44cf9d312cc9d7f357d1fe9)), closes [#1349](https://github.com/bullhorn/novo-elements/issues/1349) [#1361](https://github.com/bullhorn/novo-elements/issues/1361) [#1358](https://github.com/bullhorn/novo-elements/issues/1358) [#1357](https://github.com/bullhorn/novo-elements/issues/1357) [#1362](https://github.com/bullhorn/novo-elements/issues/1362)
+
+
+
+# [7.6.0](https://github.com/bullhorn/novo-elements/compare/v7.5.0...v7.6.0) (2022-10-28)
+
+
+### Bug Fixes
+
+* **Overlay:** add safety check to nested overlay check method ([#1356](https://github.com/bullhorn/novo-elements/issues/1356)) ([767594c](https://github.com/bullhorn/novo-elements/commit/767594cbec33866fd8dcce97201f0738fc34f79c))
+* **picker:** fixed field interaction issue on picker ([#1345](https://github.com/bullhorn/novo-elements/issues/1345)) ([88a3a93](https://github.com/bullhorn/novo-elements/commit/88a3a93cb372c1c93c40c83959947f942a263a6a))
+
+
+### Features
+
+* **DataTable:** Add Subject on Data Table State for data source loading ([#1354](https://github.com/bullhorn/novo-elements/issues/1354)) ([6037fe3](https://github.com/bullhorn/novo-elements/commit/6037fe380cfeaee2327d90367ebddb10c231e217))
+* **NovoDataTable:** Update pagination with loading state, refresh button, and ability to override total ([#1340](https://github.com/bullhorn/novo-elements/issues/1340)) ([7cf6e2c](https://github.com/bullhorn/novo-elements/commit/7cf6e2cb63bd3c067839289b6f2f44d4cbae335b))
+
+
+
+# [7.5.0](https://github.com/bullhorn/novo-elements/compare/v7.4.0...v7.5.0) (2022-08-31)
+
+
+### Bug Fixes
+
+* fixing some typos and removing some commented out code ([52896f9](https://github.com/bullhorn/novo-elements/commit/52896f9b65036e22b5241f547e7b764a8088ea13))
+* **NovoDefaultStringConditionDef:** fixing bug with the model when loading multiple string defs ([#1342](https://github.com/bullhorn/novo-elements/issues/1342)) ([0080221](https://github.com/bullhorn/novo-elements/commit/0080221157844a6ff6f17c9bfe663f90b3555ab4))
+* **WorkersCompCodesPickerResults:** - fix buggy picker behaviour for workers comp codes ([#1343](https://github.com/bullhorn/novo-elements/issues/1343)) ([8da45e8](https://github.com/bullhorn/novo-elements/commit/8da45e8f37281732f8cb683b875a7e6406af02cc))
+
+
+### Features
+
+* **DataTable:** adding ability to explicitly set data-table state ([#1341](https://github.com/bullhorn/novo-elements/issues/1341)) ([6a680de](https://github.com/bullhorn/novo-elements/commit/6a680de70b23005f1d6e0a487b7ad25bdae20779))
+
+
+
+# [7.4.0](https://github.com/bullhorn/novo-elements/compare/v7.3.0...v7.4.0) (2022-08-04)
+
+
+### Features
+
+* next ([#1336](https://github.com/bullhorn/novo-elements/issues/1336)) ([8946ccf](https://github.com/bullhorn/novo-elements/commit/8946ccf4caca60721bce2b09e3a8eb7a98b6d94e)), closes [#1326](https://github.com/bullhorn/novo-elements/issues/1326) [#1331](https://github.com/bullhorn/novo-elements/issues/1331) [#1334](https://github.com/bullhorn/novo-elements/issues/1334) [#1333](https://github.com/bullhorn/novo-elements/issues/1333) [#1328](https://github.com/bullhorn/novo-elements/issues/1328) [#1266](https://github.com/bullhorn/novo-elements/issues/1266) [#1271](https://github.com/bullhorn/novo-elements/issues/1271) [#1300](https://github.com/bullhorn/novo-elements/issues/1300) [#1302](https://github.com/bullhorn/novo-elements/issues/1302) [#1299](https://github.com/bullhorn/novo-elements/issues/1299) [#1303](https://github.com/bullhorn/novo-elements/issues/1303) [#1305](https://github.com/bullhorn/novo-elements/issues/1305) [#1304](https://github.com/bullhorn/novo-elements/issues/1304) [#1312](https://github.com/bullhorn/novo-elements/issues/1312) [#1317](https://github.com/bullhorn/novo-elements/issues/1317) [#1320](https://github.com/bullhorn/novo-elements/issues/1320)
+
+
+
+# [7.3.0](https://github.com/bullhorn/novo-elements/compare/v7.2.0...v7.3.0) (2022-08-01)
+
+
+### Bug Fixes
+
+* **Select:** Fix miscalculation of scrollTop by making all select-items same height ([#1330](https://github.com/bullhorn/novo-elements/issues/1330)) ([785f483](https://github.com/bullhorn/novo-elements/commit/785f4830c1d7d476a2dee74edd7642e428b127a3))
+
+
+### Features
+
+* **Autocomplete, Chips, NonIdealState, Description:** merging next ([#1335](https://github.com/bullhorn/novo-elements/issues/1335)) ([63a5453](https://github.com/bullhorn/novo-elements/commit/63a545335ae0ad749cc11a4441d08b2efc22a48e)), closes [#1326](https://github.com/bullhorn/novo-elements/issues/1326) [#1331](https://github.com/bullhorn/novo-elements/issues/1331) [#1334](https://github.com/bullhorn/novo-elements/issues/1334) [#1333](https://github.com/bullhorn/novo-elements/issues/1333)
+
+
+
+# [7.2.0](https://github.com/bullhorn/novo-elements/compare/v7.1.0...v7.2.0) (2022-06-30)
+
+
+### Features
+
+* **data-table:** Add no-more-results container ([#1327](https://github.com/bullhorn/novo-elements/issues/1327)) ([846d752](https://github.com/bullhorn/novo-elements/commit/846d752bf3936efddd2b1a18d2dc0ecf76a647c8))
+
+
+
+# [7.1.0](https://github.com/bullhorn/novo-elements/compare/v7.0.0...v7.1.0) (2022-06-22)
+
+
+### Features
+
+* **CKEditor:** Do not encode special characters by default ([#1320](https://github.com/bullhorn/novo-elements/issues/1320)) ([6b96c49](https://github.com/bullhorn/novo-elements/commit/6b96c499aa262c5c91dd20dac1235c8b7c607297))
+
+
+
 # [7.0.0](https://github.com/bullhorn/novo-elements/compare/v6.2.2...v7.0.0) (2022-06-08)
 
 

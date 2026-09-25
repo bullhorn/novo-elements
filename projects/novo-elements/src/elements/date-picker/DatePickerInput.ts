@@ -51,7 +51,7 @@ const DATE_VALUE_ACCESSOR = {
       [disabled]="disabled"
     />
     <span class="error-text" *ngIf="showInvalidDateError">{{ invalidDateErrorMessage }}</span>
-    <i *ngIf="!hasValue" (click)="openPanel()" class="bhi-calendar"></i>
+    <i *ngIf="!hasValue" (click)="openPanel(); input.focus()" class="bhi-calendar"></i>
     <i *ngIf="hasValue" (click)="clearAction()" class="bhi-times"></i>
     <novo-overlay-template [parent]="overlayElement" position="above-below">
       <novo-date-picker
