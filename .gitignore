@@ -30,6 +30,7 @@ novo-elements.iml
 !.vscode/extensions.json
 
 # misc
+/.claude
 /.angular/cache
 /.scannerwork
 /.sass-cache

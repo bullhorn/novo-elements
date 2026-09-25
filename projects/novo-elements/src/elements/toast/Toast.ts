@@ -29,7 +29,7 @@ import { Deferred, DeferredPromise } from 'novo-elements/utils';
         <ng-content></ng-content>
       </div>
       <div *ngIf="action" class="action">
-        <button theme="dialogue" color="white" (click)="actionHandler($event)">{{ action }}</button>
+        <button theme="dialogue" color="text" (click)="actionHandler($event)">{{ action }}</button>
       </div>
     </div>
     <div class="close-icon" *ngIf="isCloseable" (click)="close($event)">
