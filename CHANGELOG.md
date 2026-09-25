@@ -1,3 +1,10 @@
+# [13.7.0](https://github.com/bullhorn/novo-elements/compare/v13.6.0...v13.7.0) (2026-09-25)
+
+
+### Features
+
+* **bh2026:** BH-103293 Update forms and modal styling ([#1929](https://github.com/bullhorn/novo-elements/issues/1929)) ([c10abc5](https://github.com/bullhorn/novo-elements/commit/c10abc5213efaa39cfd4e074952f7a73a199a504))
+
 # [13.6.0](https://github.com/bullhorn/novo-elements/compare/v13.5.0...v13.6.0) (2026-09-18)
 
 
