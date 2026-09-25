@@ -25,7 +25,7 @@ The version is decided by semantic-release from commit messages since the last r
 Other types (`docs`, `style`, `test`, ...) do not trigger a release.
 
 The action pushes to master with `secrets.API_TOKEN_GITHUB`, which must belong to a repo admin to bypass
-branch protection. The first step of the action fails early if it does not.
+branch protection.
 
 ### Manual (if automatic fails)
 
