@@ -319,6 +319,19 @@ $novo-toast-themes2026: (
 
     .toast-content {
       flex-grow: 1;
+      ::ng-deep button, ::ng-deep novo-button {
+        &[theme=dialogue] {
+          // Explicitly override the background effects of button-dialogue.scss, which conflict with any content using a non-white background
+          // This can be removed if the button theme is updated to better respect a variety of backgrounds
+          &:hover,
+          &:focus {
+            background: rgba(0, 0, 0, 0.2);
+          }
+          &:active {
+            background: rgba(0, 0, 0, 0.35);
+          }
+        }
+      }
     }
     .toast-icon {
       width: 2.4rem;

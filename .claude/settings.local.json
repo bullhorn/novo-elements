@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx sass *)",
+      "Bash(grep -v \"DEPRECATION\\\\|More info\\\\|^$\\\\|^  ╷\\\\|^  ╵\\\\|root stylesheet\\\\|@import$\")"
+    ]
+  }
+}

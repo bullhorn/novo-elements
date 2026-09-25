@@ -5,10 +5,13 @@ import {
   ElementRef,
   HostBinding,
   HostListener,
+  inject,
+  input,
   Input,
   OnChanges, signal, Signal,
   SimpleChanges, WritableSignal,
 } from '@angular/core';
+import { NovoTheme } from 'novo-elements/elements/common';
 import { BooleanInput, Helpers, Key } from 'novo-elements/utils';
 
 @Component({
@@ -16,7 +19,7 @@ import { BooleanInput, Helpers, Key } from 'novo-elements/utils';
     host: {
         class: 'novo-button',
         '[attr.theme]': 'theme',
-        '[attr.color]': 'color',
+        '[attr.color]': 'color()',
         '[attr.icon]': 'icon',
         '[attr.loading]': 'loading',
         '[attr.side]': 'side',
@@ -76,7 +79,20 @@ export class NovoButtonElement implements OnChanges {
   /**
    * The text color of the button. Should be used for Icon buttons. see theme.
    */
-  @Input() color: string;
+  inputColor = input<string>(undefined, { alias: 'color' });
+
+  color = computed(() => {
+    const inputValue = this.inputColor();
+    if (this.inputColor()) {
+      return inputValue;
+    } else {
+      if (this.novoTheme.isBh2026() && this.theme === 'dialogue') {
+        return 'text'; // inherit color of parent element
+      } else {
+        return undefined;
+      }
+    }
+  });
   /**
    * The side of the button to display the icon.
    */
@@ -141,6 +157,8 @@ export class NovoButtonElement implements OnChanges {
   private _icon: WritableSignal<string> = signal(undefined);
 
   private _secondIcon: WritableSignal<string> = signal(undefined);
+
+  private novoTheme = inject(NovoTheme);
 
   constructor(public element: ElementRef) {}
 
