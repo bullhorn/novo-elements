@@ -17,11 +17,12 @@ import {
   ViewChild,
   ViewChildren,
   ViewEncapsulation,
+  inject,
 } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { NovoLabelService } from 'novo-elements/services';
 import { BooleanInput, Helpers, notify } from 'novo-elements/utils';
-import { NovoTemplate } from 'novo-elements/elements/common';
+import { NovoTemplate, NovoTheme } from 'novo-elements/elements/common';
 import { NovoDataTableCellHeader } from './cell-headers/data-table-header-cell.component';
 import { DataTableSource } from './data-table.source';
 import { NOVO_DATA_TABLE_REF } from './data-table.token';
@@ -237,6 +238,13 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   get useOverrideTotal(): boolean {
     return !Helpers.isBlank(this.overrideTotal)
   }
+
+  // bh2026 lists paginate below the table unless explicitly set to `onFooter: false`
+  get isPaginationOnFooter(): boolean {
+    return this.paginationOptions?.onFooter ?? Boolean(this.theme.isBh2026());
+  }
+
+  private readonly theme = inject(NovoTheme);
 
   @Input() listInteractions: ListInteractionDictionary;
 

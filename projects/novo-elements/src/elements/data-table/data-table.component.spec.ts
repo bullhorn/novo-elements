@@ -1,6 +1,7 @@
 import { ChangeDetectorRef } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
+import { NovoTheme } from 'novo-elements/elements/common';
 import { NovoSelectModule } from 'novo-elements/elements/select';
 import { NovoTilesModule } from 'novo-elements/elements/tiles';
 import { NovoLabelService } from 'novo-elements/services';
@@ -41,6 +42,39 @@ describe('Elements: NovoDataTable', () => {
       component.overrideTotal = 99;
       const result = component.empty;
       expect(result).toEqual(false);
+    });
+  });
+
+  describe('Getter: isPaginationOnFooter', () => {
+    let theme: NovoTheme;
+    let previousThemeName: string;
+
+    beforeEach(() => {
+      theme = TestBed.inject(NovoTheme);
+      previousThemeName = theme.themeName;
+    });
+
+    afterEach(() => {
+      theme.themeName = previousThemeName;
+    });
+
+    it('should keep pagination in the header by default outside bh2026', () => {
+      component.paginationOptions = { page: 0, pageSize: 10, pageSizeOptions: [10] };
+      expect(component.isPaginationOnFooter).toEqual(false);
+    });
+    it('should move pagination to the footer by default in bh2026', () => {
+      theme.themeName = 'bh2026-light';
+      component.paginationOptions = { page: 0, pageSize: 10, pageSizeOptions: [10] };
+      expect(component.isPaginationOnFooter).toEqual(true);
+    });
+    it('should respect an explicit onFooter: false in bh2026', () => {
+      theme.themeName = 'bh2026-light';
+      component.paginationOptions = { page: 0, pageSize: 10, pageSizeOptions: [10], onFooter: false };
+      expect(component.isPaginationOnFooter).toEqual(false);
+    });
+    it('should respect an explicit onFooter: true outside bh2026', () => {
+      component.paginationOptions = { page: 0, pageSize: 10, pageSizeOptions: [10], onFooter: true };
+      expect(component.isPaginationOnFooter).toEqual(true);
     });
   });
 
