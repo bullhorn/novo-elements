@@ -840,12 +840,9 @@ control-prompt-modal {
   }
 }
 
-// Control types that receive the bh2026 bordered-input treatment. An allowlist, not a
-// blocklist: the class on .novo-control-input is the control's `controlType`, and a custom
-// control's controlType is the consumer's template name. Anything unlisted therefore either
-// draws its own chrome (editor, file, quick-note, address, ...) or is app-supplied markup the
-// library knows nothing about. Names come from the novoTemplate keys in ControlTemplates.ts.
-// :is() keeps the whole list at one class of specificity so consumers can override it.
+// Control types that get the bh2026 bordered-input treatment. Allowlist, not a blocklist,
+// so unlisted types (custom controls, editor, file, address, ...) draw their own chrome.
+// :is() keeps the list at one specificity class so consumers can still override it.
 $bh2026-bordered: ':is(.code-editor, .date, .date-time, .native-input, .native-select, .picker, .radio, .read-only, .select, .text-area, .textbox, .time, .timezone)';
 
 @mixin bh2026-field-label {
