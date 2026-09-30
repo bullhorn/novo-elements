@@ -1,13 +1,13 @@
 // Theme scoping mixins. This file emits no CSS, so component stylesheets can @import it freely.
 
-// Novo classic only: everything except bh2026.
+// Novo classic only: all styles before bh2026.
 @mixin classic-only {
   :root:not([data-theme='bh2026']) & {
     @content;
   }
 }
 
-// bh2026 only.
+// Styles that should show in bh2026 only.
 @mixin bh2026-only {
   :root[data-theme='bh2026'] & {
     @content;
