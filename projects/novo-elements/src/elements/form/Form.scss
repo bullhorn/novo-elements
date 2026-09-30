@@ -1,4 +1,5 @@
 @import "../../styles/variables.scss";
+@import "../../styles/themes/bh2026.mixins";
 
 novo-form,
 novo-dynamic-form {
@@ -144,7 +145,7 @@ novo-dynamic-form {
             i.bhi-checkbox-filled,
             i.bhi-checkbox-empty,
             i.bhi-calendar {
-              :root:not([data-theme=bh2026]) & {
+              @include classic-only {
                 top: -5px;
               }
             }
@@ -409,7 +410,7 @@ novo-dynamic-form {
                         padding-left: 5px;
                         color: var(--font-color-base);
 
-                        [data-theme=bh2026] & {
+                        @include bh2026-only {
                           padding-top: 3px;
                         }
                       }
@@ -588,7 +589,7 @@ novo-dynamic-form {
   }
   &[layout="vertical"] {
     .novo-form-container {
-      [data-theme=bh2026] & {
+      @include bh2026-only {
         margin-top: var(--spacing-md);
       }
       form {
@@ -662,7 +663,7 @@ novo-dynamic-form {
               i.bhi-checkbox-filled,
               i.bhi-checkbox-empty,
               i.bhi-calendar {
-                :root:not([data-theme=bh2026]) & {
+                @include classic-only {
                   top: -5px;
                 }
               }
@@ -681,11 +682,11 @@ novo-dynamic-form {
                     align-items: center;
                     position: relative;
                     i.required-indicator {
-                      [data-theme=bh2026] & {
+                      @include bh2026-only {
                         margin-right: 4px;
                       }
                       &.bhi-circle {
-                        :root:not([data-theme=bh2026]) & {
+                        @include classic-only {
                           padding-top: 2px;
                         }
                       }
@@ -728,7 +729,7 @@ novo-dynamic-form {
                   transform-origin: bottom left;
                   transition: transform 400ms cubic-bezier(0.25, 0.8, 0.25, 1), scale 400ms cubic-bezier(0.25, 0.8, 0.25, 1),
                     color 400ms cubic-bezier(0.25, 0.8, 0.25, 1), width 400ms cubic-bezier(0.25, 0.8, 0.25, 1);
-                  [data-theme=bh2026] & {
+                  @include bh2026-only {
                     padding-top: 0;
                     padding-bottom: 22px;
                     padding-left: 1px;
@@ -758,7 +759,7 @@ novo-dynamic-form {
                 .file,
                 .select,
                 .tiles {
-                  :root:not([data-theme=bh2026]) & {
+                  @include classic-only {
                     margin-top: 0.5em;
                   }
                 }
