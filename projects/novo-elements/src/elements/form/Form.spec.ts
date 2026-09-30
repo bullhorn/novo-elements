@@ -29,4 +29,26 @@ describe('Elements: NovoFormElement', () => {
     expect(component.layout).toBe('vertical');
     expect(component.form.layout).toBe('vertical');
   });
+
+  it('should re-sync layout onto a reassigned form on ngOnChanges', () => {
+    component.ngOnInit();
+
+    const reassignedForm = {
+      value: 'TEST',
+      valid: false,
+      getRawValue: () => {
+        return 'TEST';
+      },
+    };
+    component.form = reassignedForm;
+    component.ngOnChanges();
+
+    expect(reassignedForm.layout).toBe('vertical');
+  });
+
+  it('should not throw when ngOnChanges runs without a bound form', () => {
+    component.form = undefined;
+
+    expect(() => component.ngOnChanges()).not.toThrow();
+  });
 });

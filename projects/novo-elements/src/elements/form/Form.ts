@@ -1,5 +1,17 @@
 // NG
-import { AfterContentInit, Component, ContentChildren, Input, OnInit, QueryList, ViewEncapsulation, computed, input } from '@angular/core';
+import {
+  AfterContentInit,
+  Component,
+  ContentChildren,
+  Input,
+  OnChanges,
+  OnInit,
+  QueryList,
+  SimpleChanges,
+  ViewEncapsulation,
+  computed,
+  input,
+} from '@angular/core';
 // App
 import { NovoTemplateService } from 'novo-elements/services';
 import { Helpers } from 'novo-elements/utils';
@@ -25,7 +37,7 @@ import { NovoFormGroup } from './NovoFormGroup';
     providers: [NovoTemplateService],
     standalone: false,
 })
-export class NovoFormElement implements AfterContentInit, OnInit {
+export class NovoFormElement implements AfterContentInit, OnChanges, OnInit {
   @Input()
   form: NovoFormGroup;
   @Input()
@@ -52,8 +64,14 @@ export class NovoFormElement implements AfterContentInit, OnInit {
     return this.form.valid;
   }
 
-  ngOnInit() {
-    this.form.layout = this.layout;
+  ngOnInit(): void {
+    this.ngOnChanges();
+  }
+
+  ngOnChanges(changes?: SimpleChanges): void {
+    if (this.form) {
+      this.form.layout = this.layout;
+    }
   }
 
   ngAfterContentInit() {
