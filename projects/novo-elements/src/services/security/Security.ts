@@ -45,10 +45,10 @@ export class Security {
     return this.change.subscribe(fn);
   }
 
-  checkRoutes(
-    routes: { entities?: any[]; permissions?: any[] | Function; path?: string; label?: string; canDisable?: Boolean }[],
+  checkRoutes<R extends { entities?: any[]; permissions?: any[] | Function; path?: string | string[]; label?: string; canDisable?: Boolean }>(
+    routes: R[],
     options: { entityType?: string },
-  ): any {
+  ): R[] {
     const filtered = [];
     for (const route of routes) {
       if (route.entities && ~route.entities.indexOf(options.entityType)) {
