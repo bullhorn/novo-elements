@@ -224,6 +224,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   private _columns: IDataTableColumn<T>[];
   private scrollListenerHandler: any;
   private initialized: boolean = false;
+  private readonly theme = inject(NovoTheme);
 
   @HostBinding('class.empty')
   get empty() {
@@ -236,15 +237,13 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   }
 
   get useOverrideTotal(): boolean {
-    return !Helpers.isBlank(this.overrideTotal)
+    return !Helpers.isBlank(this.overrideTotal);
   }
 
   // bh2026 lists paginate below the table unless explicitly set to `onFooter: false`
   get isPaginationOnFooter(): boolean {
     return this.paginationOptions?.onFooter ?? Boolean(this.theme.isBh2026());
   }
-
-  private readonly theme = inject(NovoTheme);
 
   @Input() listInteractions: ListInteractionDictionary;
 
@@ -473,7 +472,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
       return false;
     }
     return this.dragEnabledByColumn.get(columnName) ?? false;
-  }
+  };
 
   public columnDragged(event: NovoDragFinishEvent<string>): void {
     this.updateDisplayedColumns(event.allItems, 'columndrag');
