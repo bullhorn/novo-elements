@@ -21,6 +21,7 @@ export interface AddressLookupResult {
   address2?: string;
   city?: string;
   state?: string;
+  stateName?: string;
   zip?: string;
   countryName?: string;
   countryCode?: string;
@@ -541,9 +542,6 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit, DoCheck
     if (result.city !== undefined) {
       this.model.city = result.city;
     }
-    if (result.state !== undefined) {
-      this.model.state = result.state;
-    }
     if (result.zip !== undefined) {
       this.model.zip = result.zip;
     }
@@ -556,11 +554,34 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit, DoCheck
       }
     }
 
-    this.updateStates();
-    this.updateControl();
-    this.fieldList.forEach((field) => this.onInput(null, field));
     this.debouncedSearch = '';
     this.overlay?.closePanel();
+
+    // State values differ by picker (name, code or id), so resolve against the loaded options before emitting.
+    this.updateStates()
+      .catch(() => [])
+      .then((stateOptions) => {
+        if (result.state !== undefined || result.stateName !== undefined) {
+          this.model.state = this.resolveStateValue(stateOptions, result);
+        }
+        this.updateControl();
+        this.fieldList.forEach((field) => this.onInput(null, field));
+      });
+  }
+
+  // Store what a manual pick of the same state would store (option[pickerConfig.field]).
+  private resolveStateValue(stateOptions: any[], { state, stateName }: AddressLookupResult): any {
+    const name = stateName?.trim().toLowerCase();
+    const code = state?.trim().toLowerCase();
+    const match = stateOptions.find((option) => {
+      const label = String(option?.label ?? option).toLowerCase();
+      const value = String(option?.value ?? option).toLowerCase();
+      return label === name || value === code;
+    });
+    if (match === undefined) {
+      return stateName || state;
+    }
+    return typeof match === 'string' ? match : match[this.config.state.pickerConfig.field ?? 'value'];
   }
 
   // Map a raw Google detail to flat fields; omitted components resolve to '' so partial selections clear finer fields.
@@ -578,7 +599,8 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit, DoCheck
       address1: street,
       address2: find('subpremise'),
       city: find('locality') || find('postal_town') || find('sublocality') || find('sublocality_level_1'),
-      state: find('administrative_area_level_1'),
+      state: find('administrative_area_level_1', true),
+      stateName: find('administrative_area_level_1'),
       zip: find('postal_code'),
       countryName: find('country'),
       countryCode: find('country', true),
@@ -602,12 +624,12 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit, DoCheck
     }
   }
 
-  updateStates() {
+  updateStates(): Promise<any[]> {
     if (this.config.state.pickerConfig.options && !Helpers.isBlank(this.model.countryID)) {
       this.config.state.pickerConfig.options = (query = '') => {
         return this.stateOptions(query, this.model.countryID);
       };
-      this.stateOptions('', this.model.countryID).then((results) => {
+      return this.stateOptions('', this.model.countryID).then((results) => {
         this.config.state.pickerConfig.defaultOptions = results;
         if (results.length) {
           this.tooltip.state = undefined;
@@ -622,6 +644,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit, DoCheck
         }
         this.validityChange.emit();
         this.onInput(null, 'state');
+        return results;
       });
     } else {
       this.config.state.pickerConfig.defaultOptions = [];
@@ -630,6 +653,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit, DoCheck
       if (this.config.state.required) {
         this.valid.state = false;
       }
+      return Promise.resolve([]);
     }
   }
 
