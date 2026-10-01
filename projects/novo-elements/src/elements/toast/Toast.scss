@@ -347,7 +347,7 @@ $novo-toast-themes2026: (
 
     @each $name, $props in $novo-toast-themes2026 {
       $token: if(map-has-key($props, token), map-get($props, token), $name);
-      &.novo-theme-#{$name}, &.novo-accent-#{$name} {
+      &.novo-theme-#{$name}, &.novo-accent-#{$name}, &.#{$name} {
         border: 1px solid var(--color-border-utility-#{$token}, #{map-get($props, border)});
         background-color: var(--color-background-utility-#{$token}, #{map-get($props, background)});
         color: var(--color-text-utility-#{$token}, #{map-get($props, text)});
