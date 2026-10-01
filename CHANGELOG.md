@@ -1,3 +1,12 @@
+## [13.7.1](https://github.com/bullhorn/novo-elements/compare/v13.7.0...v13.7.1) (2026-10-01)
+
+
+### Bug Fixes
+
+* **address:** BH-103391 - fix state picker auto-complete ([#1933](https://github.com/bullhorn/novo-elements/issues/1933)) ([701c8ab](https://github.com/bullhorn/novo-elements/commit/701c8ab96054ccb30ce39888bbd628de56011983))
+* **Form:** re-sync layout when form input is reassigned after init ([7c0091e](https://github.com/bullhorn/novo-elements/commit/7c0091e15971c122e8ba7a50dfa7b09582341480))
+* **Form:** re-sync layout when form input is reassigned after init ([#1939](https://github.com/bullhorn/novo-elements/issues/1939)) ([b4b654d](https://github.com/bullhorn/novo-elements/commit/b4b654d922707a48579ebd1a8fab38c43c0bbc25))
+
 # [13.7.0](https://github.com/bullhorn/novo-elements/compare/v13.6.0...v13.7.0) (2026-09-25)
 
 
