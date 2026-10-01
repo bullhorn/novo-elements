@@ -1,0 +1,7 @@
+<div class="fake-card" data-automation-id="toast-content-buttons-container">
+  <novo-toast theme="info" icon="check" message="Your TPS Report is ready" [hasDialogue]="true" [isCloseable]="true"
+    data-automation-id="toast-content-buttons-display">
+    <button theme="dialogue" color="text" inverse (click)="viewReport()" data-automation-id="toast-content-buttons-view">View the Report</button>
+    <button theme="dialogue" color="text" inverse (click)="downloadReport()" data-automation-id="toast-content-buttons-download">Download Report</button>
+  </novo-toast>
+</div>

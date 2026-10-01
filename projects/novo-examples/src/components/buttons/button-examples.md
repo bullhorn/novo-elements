@@ -37,6 +37,8 @@ Secondary buttons can also get an `inverse` attribute for use on a colored backg
 
 Similar to icon buttons, dialogue buttons require less visual dominance but often need additional helper text. Dialogue buttons _may_ contain **any** icon and a `side` may be specified eg:`side="right"` to place the icon on the right or left side of the text. Dialogue buttons may also use an `inverse` attribute to change its text color to white.
 
+When using 2026 theming, the default color changes. Pre-2026, a `<button theme="dialogue">` with no explicit color will use `color="primary"`. In 2026, this will instead use `color="text"`, using CSS inheritance to choose the text color.
+
 <code-example example="button-dialogue"></code-example>
 
 ## Standard

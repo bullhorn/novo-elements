@@ -17,6 +17,10 @@ This type of toast notification takes a template, a style, and a location.
 
 <code-example example="toast-usage"></code-example>
 
+## Toast with Content Buttons
+
+<code-example example="toast-content-buttons"></code-example>
+
 ## Toaster Service
 
 <code-example example="toast-service"></code-example>
