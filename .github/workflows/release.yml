@@ -37,3 +37,13 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           npx semantic-release --dry-run ${{ github.event.inputs.dry-run }}
+      # Only fast-forwards; if next has commits master doesn't, merge master into next manually
+      - name: Fast-forward next to master
+        if: github.ref_name == 'master' && !inputs.dry-run
+        run: |
+          git fetch origin next
+          if git merge-base --is-ancestor origin/next HEAD; then
+            git push origin HEAD:next
+          else
+            echo "::warning::next has diverged from master; merge master into next manually"
+          fi

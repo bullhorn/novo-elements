@@ -6,9 +6,11 @@
 
 Run the [release action](https://github.com/bullhorn/novo-elements/actions/workflows/release.yml) and select the branch to release from.
 
-- **master**: stable release (e.g. `13.6.1`). Publishes to npm on the `latest` tag, then pushes a
-  `chore(Release): x.y.z [skip ci]` commit to master that bumps the version in every `package.json`
-  (see [tools/release/bump-version-files.js](tools/release/bump-version-files.js)) and updates `CHANGELOG.md`.
+- **master**: stable release (e.g. `13.7.0`). Pushes a `chore(Release): x.y.z [skip ci]` commit to master
+  that bumps the version in every `package.json`
+  (see [tools/release/bump-version-files.js](tools/release/bump-version-files.js)) and updates `CHANGELOG.md`,
+  then publishes to npm on the `latest` tag. Afterwards, next is fast-forwarded to master. If next has commits
+  that master doesn't, this is skipped with a warning and master must be merged into next manually.
 - **next** / **beta**: prerelease (e.g. `13.7.0-next.1`). Publishes to npm on the `next` / `beta` tag.
   No commit is pushed; only the git tag.
 
@@ -27,8 +29,8 @@ The version is decided by semantic-release from commit messages since the last r
 
 Other types (`docs`, `style`, `test`, ...) do not trigger a release.
 
-The action pushes to master with `secrets.API_TOKEN_GITHUB`, which must belong to a repo admin to bypass
-branch protection.
+The action pushes to master and next with `secrets.API_TOKEN_GITHUB`, which must belong to a repo admin to
+bypass branch protection.
 
 ### Manual (if automatic fails)
 
@@ -40,3 +42,4 @@ branch protection.
     # npm run build:ci
     # Commit, then tag the commit as vX.Y.Z and push the commit and tag
     # cd dist/novo-elements && npm publish
+    # Merge master into next
