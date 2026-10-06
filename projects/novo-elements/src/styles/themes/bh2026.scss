@@ -1,3 +1,5 @@
+@import "./bh2026.mixins";
+
 // Maps design tokens onto the semantic CSS-variable contract for novo-elements components.
 @mixin bh2026-variables {
   // Live color-math direction (light): elevate() brightens, recede() darkens.
