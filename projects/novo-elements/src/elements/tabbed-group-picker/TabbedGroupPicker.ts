@@ -1,5 +1,6 @@
 import { CdkScrollable } from '@angular/cdk/scrolling';
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -79,7 +80,7 @@ export type TabbedGroupPickerButtonConfig = {
       '[class.use-chips]': 'useChips()',
     },
 })
-export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
+export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit, AfterViewInit {
   @ViewChild('tabbedGroupPickerVirtualScrollViewport')
   private scrollableInstance: CdkScrollable;
   @ViewChild('inputElement')
@@ -88,6 +89,7 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
   public dropdown: NovoDropdownElement;
 
   multiple = true;
+  private elementStyle: CSSStyleDeclaration;
 
   @Input() buttonConfig: TabbedGroupPickerButtonConfig;
   @Input() tabs: TabbedGroupPickerTab[];
@@ -128,7 +130,7 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
   hiddenChips = computed(() => this.showAllChips() ? [] : this.selectedChips().slice(this.maxChips()));
   chipsInputPlaceholder = computed(() => this.displayedChips().length ? '' : this.buttonConfig.label);
 
-  constructor(public labelService: NovoLabelService, private ref: ChangeDetectorRef) {}
+  constructor(public labelService: NovoLabelService, private ref: ChangeDetectorRef, private element: ElementRef) {}
 
   get displayTab(): TabbedGroupPickerTab {
     return this.displayTabs[this.displayTabIndex];
@@ -157,6 +159,10 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
     if (this.filterTextSubscription) {
       this.filterTextSubscription.unsubscribe();
     }
+  }
+
+  ngAfterViewInit(): void {
+    this.elementStyle = getComputedStyle(this.element.nativeElement);
   }
 
   showAllChipsToggle(event) {
@@ -285,7 +291,12 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
       this.scrollViewportHeight = this.getPixelHeight(this.scrollableInstance.getElementRef().nativeElement);
       this.virtualScrollItemSize = this.getPixelHeight(this.scrollableInstance.getElementRef().nativeElement.querySelector('novo-option'));
       // Emit a fake scroll event so the rendered items update
-      this.scrollableInstance.getElementRef().nativeElement.dispatchEvent(new Event('scroll'));
+      const virtualScrollViewport = this.scrollableInstance.getElementRef().nativeElement;
+      const pickerAccent = this.elementStyle.getPropertyValue('--novo-tabbed-picker-accent');
+      virtualScrollViewport.dispatchEvent(new Event('scroll'));
+      if (pickerAccent) {
+        this.dropdown.overlay.panel.nativeElement.style.setProperty('--novo-tabbed-picker-accent', pickerAccent);
+      }
     }
   }
 

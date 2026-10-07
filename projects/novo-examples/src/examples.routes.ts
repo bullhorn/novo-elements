@@ -4038,7 +4038,7 @@ export class TipWellDesignPage {
 <p>Use a Chip List display inside the Tabbed Group Picker to show selected options.</p>
 <p><code-example example="tabbed-group-picker-chips"></code-example></p>
 <h2>Icon Button with Chips</h2>
-<p>Use <code>theme: 'icon'</code> on the button config alongside chips.</p>
+<p>Use <code>theme: 'icon'</code> on the button config alongside chips. Apply the CSS style property &quot;--novo-tabbed-picker-accent&quot; to customize the selection color.</p>
 <p><code-example example="tabbed-group-picker-icon-chips"></code-example></p>
 `,
   host: { class: 'markdown-page' },

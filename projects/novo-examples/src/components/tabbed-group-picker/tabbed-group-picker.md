@@ -40,6 +40,6 @@ Use a Chip List display inside the Tabbed Group Picker to show selected options.
 
 ## Icon Button with Chips
 
-Use `theme: 'icon'` on the button config alongside chips.
+Use `theme: 'icon'` on the button config alongside chips. Apply the CSS style property "--novo-tabbed-picker-accent" to customize the selection color.
 
 <code-example example="tabbed-group-picker-icon-chips"></code-example>

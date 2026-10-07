@@ -7,7 +7,7 @@ import { ChildTab, TabbedGroupPickerTab } from 'novo-elements';
 @Component({
   selector: 'tabbed-group-picker-icon-chips-example',
   templateUrl: 'tabbed-group-picker-icon-chips-example.html',
-  styleUrls: ['../tabbed-group-picker-example.scss'],
+  styleUrls: ['../tabbed-group-picker-example.scss', './tabbed-group-picker-icon-chips-example.scss'],
   standalone: false,
 })
 export class TabbedGroupPickerIconChipsExample implements OnInit {
