@@ -55,7 +55,7 @@ export class ToastActionsExample {
         message: 'This positioning is growlTopLeft',
         action: 'Click Me',
         icon: 'coffee',
-        theme: 'ocean',
+        theme: 'info',
         position: 'growlTopLeft',
         hideDelay: 100000000,
       };
@@ -74,7 +74,7 @@ export class ToastActionsExample {
         message: 'This positioning is growlTopLeft',
         action: 'Click Me',
         icon: 'coffee',
-        theme: 'ocean',
+        theme: 'info',
         position: 'growlBottomLeft',
       };
     }

@@ -22,7 +22,7 @@ export class DetailsCardExample {
   private options: any = {
     title: 'Title',
     message: 'Some Message...',
-    theme: 'ocean',
+    theme: 'info',
     icon: 'clipboard',
     position: 'growlTopRight',
   };
@@ -62,7 +62,7 @@ export class DetailsCardExample {
     this.options = {
       title: `${type}`,
       message: `${ev} fired...`,
-      theme: 'ocean',
+      theme: 'info',
       icon: `${type}`,
       position: 'growlTopRight',
     };

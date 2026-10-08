@@ -3725,6 +3725,8 @@ export class ToolbarDesignPage {
 <p><code-example example="toast-options"></code-example></p>
 <h2>Embedded Toast</h2>
 <p><code-example example="toast-usage"></code-example></p>
+<h2>Toast with Content Buttons</h2>
+<p><code-example example="toast-content-buttons"></code-example></p>
 <h2>Toaster Service</h2>
 <p><code-example example="toast-service"></code-example></p>
 <h2>Toaster Actions</h2>
@@ -5991,6 +5993,7 @@ export class CalendarDesignPage {
 <p><code-example example="button-inverse"></code-example></p>
 <h2>Dialogue</h2>
 <p>Similar to icon buttons, dialogue buttons require less visual dominance but often need additional helper text. Dialogue buttons <em>may</em> contain <strong>any</strong> icon and a <code>side</code> may be specified eg:<code>side=&quot;right&quot;</code> to place the icon on the right or left side of the text. Dialogue buttons may also use an <code>inverse</code> attribute to change its text color to white.</p>
+<p>When using 2026 theming, the default color changes. Pre-2026, a <code>&lt;button theme=&quot;dialogue&quot;&gt;</code> with no explicit color will use <code>color=&quot;primary&quot;</code>. In 2026, this will instead use <code>color=&quot;text&quot;</code>, using CSS inheritance to choose the text color.</p>
 <p><code-example example="button-dialogue"></code-example></p>
 <h2>Standard</h2>
 <p>Standard buttons are the most generic button style. Standard buttons by default are styled identically to standard buttons with a <code>color=&quot;light&quot;</code> attribute. Typically, a standard button is used to cancel an action, or to cease any additional progress. Although standard buttons <em>can</em> get an <code>icon</code> attribute, they should almost never be used with an icon. If your proposed design calls for a standard button with an icon, consider using a different button theme, like dialogue.</p>
