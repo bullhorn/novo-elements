@@ -1,7 +1,7 @@
 <header
   *ngIf="(!(empty && !state.userFiltered) && !loading) || forceShowHeader"
   [class.empty]="hideGlobalSearch && !paginationOptions && !templates['customActions']"
-  [ngClass]="{ 'pagination-footer': paginationOptions?.onFooter }"
+  [ngClass]="{ 'pagination-footer': isPaginationOnFooter }"
 >
   <ng-container *ngTemplateOutlet="templates['customHeader']"></ng-container>
   <novo-search
@@ -15,7 +15,7 @@
   </novo-search>
   <!-- Updates to novo-data-table-pagination here need to be applied to the footer as well -->
   <novo-data-table-pagination
-    *ngIf="paginationOptions && !paginationOptions.onFooter"
+    *ngIf="paginationOptions && !isPaginationOnFooter"
     [theme]="paginationOptions.theme"
     [length]="useOverrideTotal ? overrideTotal : dataSource?.currentTotal"
     [page]="paginationOptions.page"
@@ -237,12 +237,12 @@
 </ng-template>
 <!-- CUSTOM CELLS PASSED IN -->
 <footer
-  *ngIf="paginationOptions?.onFooter && ((!(empty && !state.userFiltered) && !loading) || forceShowHeader)"
+  *ngIf="paginationOptions && isPaginationOnFooter && ((!(empty && !state.userFiltered) && !loading) || forceShowHeader)"
   [class.empty]="!paginationOptions"
 >
   <!-- Updates to novo-data-table-pagination here need to be applied to the header as well -->
   <novo-data-table-pagination
-    *ngIf="paginationOptions?.onFooter"
+    *ngIf="paginationOptions && isPaginationOnFooter"
     [theme]="paginationOptions.theme"
     [length]="useOverrideTotal ? overrideTotal : dataSource?.currentTotal"
     [page]="paginationOptions.page"

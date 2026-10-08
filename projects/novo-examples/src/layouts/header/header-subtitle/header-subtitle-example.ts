@@ -24,7 +24,7 @@ export class HeaderSubtitleExample {
     this.options = {
       title: 'Title',
       message: 'Some Message...',
-      theme: 'ocean',
+      theme: 'info',
       icon: 'clipboard',
       position: 'growlTopRight',
     };
@@ -41,7 +41,7 @@ export class HeaderSubtitleExample {
     this.options = {
       title: `${type}`,
       message: `${ev} fired...`,
-      theme: 'ocean',
+      theme: 'info',
       icon: `${type}`,
       position: 'growlTopRight',
     };
