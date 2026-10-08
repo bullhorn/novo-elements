@@ -622,9 +622,10 @@ novo-data-table {
 [data-theme='bh2026'] {
   .novo-data-table-header-cell,
   .novo-data-table-header-cell > label {
-    font-weight: var(--typography-font-weight-600);
-    font-size: var(--font-size-caption);
-    color: var(--color-text-subtle);
+    font-weight: var(--typography-input-label-md-font-weight, 400);
+    font-size: var(--typography-input-label-md-font-size, 1.2rem);
+    color: var(--data-table-color-content-header, var(--color-text-secondary, #525B63));
+    text-transform: uppercase;
   }
 
   .novo-data-table-row,
