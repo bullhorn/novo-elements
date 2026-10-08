@@ -1,3 +1,16 @@
+# [13.8.0](https://github.com/bullhorn/novo-elements/compare/v13.7.1...v13.8.0) (2026-10-08)
+
+
+### Bug Fixes
+
+* **Security:** Allow checkRoutes function to take array paths ([#1940](https://github.com/bullhorn/novo-elements/issues/1940)) ([b14e70b](https://github.com/bullhorn/novo-elements/commit/b14e70b07a09edba6eb94c499717c8a1f03a6c04))
+
+
+### Features
+
+* **bh2026:** BH-103476 - Form updates ([#1932](https://github.com/bullhorn/novo-elements/issues/1932)) ([50de383](https://github.com/bullhorn/novo-elements/commit/50de383b8f02714fc497688942bf1345f37bdc9d))
+* **Button:** Improve on button inheritance of color for 2026 ([bb425ca](https://github.com/bullhorn/novo-elements/commit/bb425ca9d88d7fd8c102a84e87f665839fdd8792))
+
 ## [13.7.1](https://github.com/bullhorn/novo-elements/compare/v13.7.0...v13.7.1) (2026-10-01)
 
 
