@@ -790,6 +790,14 @@ novo-dynamic-form {
             }
           }
         }
+        // Standalone tip-wells, in a form row or a direct child of the form; tip-wells inside a control keep the 22px offset above
+        novo-tip-well.active:not(novo-control novo-tip-well) {
+          @include bh2026-only {
+            padding-left: var(--spacing-padding-md);
+            margin-bottom: var(--spacing-padding-lg);
+            max-width: var(--form-control-max-width);
+          }
+        }
       }
     }
   }
