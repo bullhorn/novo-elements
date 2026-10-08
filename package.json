@@ -60,7 +60,7 @@
     "@angular/platform-browser": "^20.3.18",
     "@angular/platform-browser-dynamic": "^20.3.18",
     "@angular/platform-server": "^20.3.18",
-    "@angular/router": "^20.3.18",
+    "@angular/router": "^20.3.32",
     "@codemirror/commands": "^6.10.2",
     "@codemirror/state": "^6.5.4",
     "@codemirror/view": "^6.39.16",
