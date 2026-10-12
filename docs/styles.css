@@ -638,6 +638,9 @@
   --color-yellow-honey-yellow:#ffce5c;
   --color-yellow-golden-yellow:#ffb400;
   --color-yellow-light-yellow:#ffda85;
+  --color-amplify-amplify-green:#00d72e;
+  --color-amplify-amplify-light-blue:#aae1f4;
+  --color-amplify-amplify-blue:#008eff;
   --color-entity-lead:#aa6699;
   --color-entity-contact:#ffaa44;
   --color-entity-company:#3399dd;
@@ -771,12 +774,14 @@
   --color-text-link-hover:#1450a0;
   --color-text-disabled:#89909a;
   --color-text-disabled-knockout:#f7f8f8;
+  --color-text-amplify:#125783;
   --color-text-utility-negative:#9f111f;
   --color-text-utility-warning:#b0710e;
   --color-text-utility-success:#4d8a0c;
   --color-text-utility-positive:#1450a0;
   --color-text-utility-knockout:#ffffff;
   --color-icon-icon:#3d464d;
+  --color-icon-hover:#2f2f33;
   --color-icon-icon-knockout:#ffffff;
   --color-icon-subtle:#677079;
   --color-icon-illustration:#89909a;
@@ -950,7 +955,7 @@
   --bowling-alley-color-content-text-default:#677079;
   --bowling-alley-color-content-text-hover:#2f2f33;
   --bowling-alley-color-content-icon-default:#677079;
-  --bowling-alley-color-content-icon-hover:#3d464d;
+  --bowling-alley-color-content-icon-hover:#2f2f33;
   --bowling-alley-color-border-default:#dee0e3;
   --bowling-alley-color-uploader-border-hover:#9ba1a9;
   --bowling-alley-color-uploader-border-default:#dee0e3;
@@ -1101,6 +1106,13 @@
   --button-color-secondary-content-focus:#2f2f33;
   --button-color-secondary-content-active:#2f2f33;
   --button-color-secondary-content-disabled:#89909a;
+  --button-color-secondary-amplify-background-default:#ffffff;
+  --button-color-secondary-amplify-background-disabled:#fcfdfd;
+  --button-color-secondary-amplify-content-default:#125783;
+  --button-color-secondary-amplify-content-hover:#125783;
+  --button-color-secondary-amplify-content-focus:#125783;
+  --button-color-secondary-amplify-content-active:#125783;
+  --button-color-secondary-amplify-content-disabled:#89909a;
   --button-color-secondary-negative-background-default:#ffffff;
   --button-color-secondary-negative-background-hover:#f8a9b1;
   --button-color-secondary-negative-background-focus:#f8a9b1;
@@ -1140,6 +1152,11 @@
   --button-color-dialogue-content-active:#2f2f33;
   --button-color-dialogue-content-disabled:#89909a;
   --button-color-dialogue-border-focus:#4a89dc;
+  --button-color-dialogue-amplify-content-default:#125783;
+  --button-color-dialogue-amplify-content-hover:#125783;
+  --button-color-dialogue-amplify-content-focus:#125783;
+  --button-color-dialogue-amplify-content-active:#125783;
+  --button-color-dialogue-amplify-content-disabled:#89909a;
   --button-color-dialogue-negative-background-default:#ffffff;
   --button-color-dialogue-negative-background-hover:#f8a9b1;
   --button-color-dialogue-negative-background-focus:#f8a9b1;
@@ -1206,6 +1223,11 @@
   --button-color-icon-content-focus:#2f2f33;
   --button-color-icon-content-active:#2f2f33;
   --button-color-icon-content-disabled:#89909a;
+  --button-color-icon-amplify-content-default:#125783;
+  --button-color-icon-amplify-content-hover:#125783;
+  --button-color-icon-amplify-content-focus:#125783;
+  --button-color-icon-amplify-content-active:#125783;
+  --button-color-icon-amplify-content-disabled:#89909a;
   --button-color-icon-negative-background-default:#ffffff;
   --button-color-icon-negative-background-hover:#ffe6e8;
   --button-color-icon-negative-background-focus:#ffffff;
@@ -1395,8 +1417,8 @@
   --dropdown-spacing-header-padding-horizontal:0.8rem;
   --dropdown-spacing-header-padding-vertical:0.8rem;
   --dropdown-spacing-container-gap:0.8rem;
-  --dropdown-spacing-container-padding-horizontal:1.6rem;
-  --dropdown-spacing-container-padding-vertical:1.6rem;
+  --dropdown-spacing-container-padding-horizontal:0.8rem;
+  --dropdown-spacing-container-padding-vertical:0.8rem;
   --dropdown-spacing-container-children-padding-left:2.4rem;
   --dropdown-spacing-footer-gap:0.8rem;
   --dropdown-spacing-footer-padding-horizontal:0.8rem;
@@ -1412,6 +1434,7 @@
   --dropdown-color-content-text-selected:#011e44;
   --dropdown-border-radius:0.8rem;
   --dropdown-border-width:0.1rem;
+  --dropdown-sapcing-gap:0.4rem;
   --dropzone-min-width:4rem;
   --expansion-spacing-header-gap:0.8rem;
   --expansion-spacing-header-padding-vertical:1.6rem;
@@ -1439,6 +1462,7 @@
   --expansion-border-width-focus:0.2rem;
   --expansion-border-width-expanded:0.2rem;
   --field-min-height:4rem;
+  --field-max-width:60rem;
   --field-spacing-gap:0.8rem;
   --field-spacing-padding-horizontal:1.6rem;
   --field-spacing-padding-vertical:0.8rem;
@@ -1657,6 +1681,28 @@
   --search-color-content-icon:#89909a;
   --slideout-gap-vertical:1.6rem;
   --slideout-color-background:#fcfdfd;
+  --switch-spacing-gap:0.8rem;
+  --switch-color-background:#ffffff;
+  --switch-color-border:#1450a0;
+  --switch-color-off-default-background:#ffffff;
+  --switch-color-off-default-border:#89909a;
+  --switch-color-off-default-content:#3d464d;
+  --switch-color-off-disabled-background:#fcfdfd;
+  --switch-color-off-disabled-border:#dee0e3;
+  --switch-color-off-disabled-content:#89909a;
+  --switch-color-on-default-background:#1450a0;
+  --switch-color-on-default-border:#1450a0;
+  --switch-color-on-default-content:#3d464d;
+  --switch-color-on-disabled-background:#76a9ed;
+  --switch-color-on-disabled-border:#76a9ed;
+  --switch-color-on-disabled-content:#89909a;
+  --switch-color-switch-thumb-background:#ffffff;
+  --switch-color-switch-thumb-border-on:#ffffff;
+  --switch-color-switch-thumb-border-on-disabled:#ffffff;
+  --switch-color-switch-thumb-border-off:#89909a;
+  --switch-color-switch-thumb-border-off-disabled:#dee0e3;
+  --switch-border-radius:0;
+  --switch-border-width:0;
   --tabs-spacing-tab-items-gap:2.4rem;
   --tabs-spacing-tab-items-padding-horizontal:0.8rem;
   --tabs-spacing-tab-items-padding-vertical:0.8rem;
@@ -1801,28 +1847,6 @@
   --workflow-color-content-workflow-tooltip:#1450a0;
   --workflow-border-radius-default:1.6rem;
   --workflow-border-width-default:0.1rem;
-  --switch-spacing-gap:0.8rem;
-  --switch-color-background:#ffffff;
-  --switch-color-border:#1450a0;
-  --switch-color-off-default-background:#ffffff;
-  --switch-color-off-default-border:#89909a;
-  --switch-color-off-default-content:#3d464d;
-  --switch-color-off-disabled-background:#fcfdfd;
-  --switch-color-off-disabled-border:#dee0e3;
-  --switch-color-off-disabled-content:#89909a;
-  --switch-color-on-default-background:#1450a0;
-  --switch-color-on-default-border:#1450a0;
-  --switch-color-on-default-content:#3d464d;
-  --switch-color-on-disabled-background:#76a9ed;
-  --switch-color-on-disabled-border:#76a9ed;
-  --switch-color-on-disabled-content:#89909a;
-  --switch-color-switch-thumb-background:#ffffff;
-  --switch-color-switch-thumb-border-on:#ffffff;
-  --switch-color-switch-thumb-border-on-disabled:#ffffff;
-  --switch-color-switch-thumb-border-off:#89909a;
-  --switch-color-switch-thumb-border-off-disabled:#dee0e3;
-  --switch-border-radius:0;
-  --switch-border-width:0;
 }
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 html {
@@ -2005,6 +2029,7 @@ template {
   --font-size-button: 1.3rem;
   --font-size-title: 2rem;
   --font-size-tab: 1.1rem;
+  --modal-max-width: 600px;
 }
 :root.theme-dark {
   --background-body: #202945;
@@ -2060,6 +2085,8 @@ template {
   --spacing-2xl: 3rem;
   --spacing-3xl: 4rem;
   --form-container-max-width: 800px;
+  --form-control-max-width: 590px;
+  --form-control-address-margin-left: 23px;
   --background-body: var(--color-gray-0);
   --background-main: var(--color-background-default);
   --background-bright: var(--color-gray-0);
@@ -2136,6 +2163,7 @@ template {
   --button-dialogue-hover-background: var(--color-background-subtle-hover);
   --color-content-icon: var(--color-gray-500, #89909A);
   --color-text-body: var(--color-gray-800, #3d464d);
+  --modal-max-width: 642px;
 }
 :root[data-theme=bh2026] [theme=primary] {
   flex-direction: row-reverse;
@@ -2451,7 +2479,7 @@ dialog > header:first-child {
   padding: 10px;
   text-align: center;
 }
-dialog::backdrop {
+:root:not([data-theme=bh2026]) dialog::backdrop {
   background: rgba(0, 0, 0, 0.6117647059);
   backdrop-filter: blur(4px);
 }
@@ -4667,9 +4695,13 @@ span > i[theme][theme=contained]:before,
   transition: opacity 400ms cubic-bezier(0.25, 0.8, 0.25, 1);
   opacity: 0;
 }
-.cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
+:root:not([data-theme=bh2026]) .cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
   opacity: 0.48;
   backdrop-filter: blur(4px);
+}
+[data-theme=bh2026] .cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
+  opacity: 1;
+  background-color: var(--color-background-overlay);
 }
 .cdk-overlay-dark-backdrop {
   background: rgba(0, 0, 0, 0.6);
@@ -6841,7 +6873,7 @@ distribution-list-picker-results section {
 }
 .modal-overlay-backdrop,
 .aside-overlay-backdrop {
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: var(--color-background-overlay, rgba(0, 0, 0, 0.8));
 }
 .aside-overlay-panel {
   position: relative;
@@ -7879,10 +7911,6 @@ multi-code-snippet pre code.hljs {
   display: grid;
   align-items: start;
   grid-template-columns: 1fr 1fr;
-}
-.markdown-body p,
-.markdown-body .p {
-  line-height: 1.5 !important;
 }
 body {
   font-size: 1.4rem;
