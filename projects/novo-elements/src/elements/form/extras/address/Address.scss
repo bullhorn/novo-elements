@@ -1,3 +1,4 @@
+@import "../../../../styles/themes/bh2026.mixins";
 @import "../../../../styles/variables.scss";
 
 :host {
@@ -88,7 +89,9 @@
       &::placeholder {
         color: brightenLive('--color-dark', 30) !important;
       }
-      border-bottom-style: dashed !important;
+      @include classic-only {
+        border-bottom-style: dashed !important;
+      }
     }
   }
 }

@@ -1,3 +1,4 @@
+@import "../../styles/themes/bh2026.mixins";
 @import "../common/typography/text.mixins.scss";
 
 :host {
@@ -31,7 +32,9 @@
     }
   }
   &.disabled {
-    border-bottom-style: dashed !important;
+    @include classic-only {
+      border-bottom-style: dashed !important;
+    }
   }
   .novo-chip-container {
     flex: 1;
