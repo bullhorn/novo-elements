@@ -91,3 +91,90 @@
     }
   }
 }
+
+// bh2026: the overlay panel is portaled out of the host, so :host-context cannot match here.
+// ::ng-deep must lead the selector, otherwise emulated encapsulation tags [data-theme] with
+// _ngcontent and it never matches.
+::ng-deep [data-theme='bh2026'] .dropdown-container {
+  background-color: var(--dropdown-color-background-default, #fff);
+  border: 1px solid var(--dropdown-color-border-default, #c2c5cb);
+  border-radius: var(--dropdown-border-radius, 0.8rem);
+  box-shadow: 0 0.4rem 0.8rem 0 var(--color-transparency-charcoal-04, rgba(40, 40, 40, 0.04)),
+    0.8rem 1.2rem 1.6rem 0 var(--color-transparency-charcoal-08, rgba(47, 47, 51, 0.08));
+  padding: var(--dropdown-spacing-container-padding-horizontal, 0.8rem) 0;
+
+  list {
+    padding: 0;
+  }
+
+  list + list,
+  novo-optgroup + novo-optgroup {
+    margin-top: var(--dropdown-spacing-container-gap, 0.8rem);
+  }
+
+  item {
+    display: block;
+    height: auto !important;
+    min-height: 0;
+    padding: 0 !important;
+  }
+
+  // Legacy `item span` makes .novo-option-text a block, whose line box adds height
+  novo-option.novo-option > .novo-option-text {
+    display: flex;
+    max-width: none;
+  }
+
+  // novo-option.novo-option outranks the optgroup padding-left rule in option.component.scss
+  novo-option.novo-option {
+    align-items: center;
+    border-radius: 0;
+    gap: var(--dropdown-spacing-option-gap, 0.8rem);
+    padding: var(--dropdown-spacing-option-padding, 0.8rem) calc(2 * var(--dropdown-spacing-option-padding, 0.8rem));
+    font-size: var(--typography-input-value-default-font-size, 1.4rem);
+    font-weight: var(--typography-input-value-default-font-weight, 400);
+    letter-spacing: var(--typography-input-value-default-letter-spacing, 0);
+    line-height: var(--typography-input-value-default-line-height, 2rem);
+
+    &:not(.disabled):not(.novo-option-disabled) {
+      color: var(--dropdown-color-content-text-default, #3d464d);
+    }
+
+    &:hover:not(.novo-option-inert),
+    &:active:not(.novo-option-inert),
+    &.novo-active:not(.novo-option-inert) {
+      background: var(--dropdown-color-content-background-hover, #e6f1ff);
+
+      &:not(.disabled):not(.novo-option-disabled) {
+        color: var(--dropdown-color-content-text-hover, #011e44);
+      }
+    }
+  }
+
+  list dropdown-item-header,
+  .novo-optgroup-label {
+    color: var(--dropdown-color-content-text-header, #525b63);
+    font-size: var(--typography-input-label-md-font-size, 1.2rem);
+    font-weight: var(--typography-input-label-md-font-weight, 400);
+    letter-spacing: var(--typography-input-label-md-letter-spacing, 0.05rem);
+    line-height: var(--typography-input-label-md-line-height, 1.4rem);
+    padding: var(--dropdown-spacing-header-padding-vertical, 0.8rem) calc(2 * var(--dropdown-spacing-header-padding-horizontal, 0.8rem));
+    text-transform: uppercase;
+  }
+
+  // The legacy novo-table-dropdown-cell rules are more specific and use !important
+  &.novo-table-dropdown-cell {
+    list {
+      padding: 0;
+    }
+
+    item {
+      height: auto !important;
+      padding: 0 !important;
+    }
+
+    dropdown-item-header {
+      padding: var(--dropdown-spacing-header-padding-vertical, 0.8rem) calc(2 * var(--dropdown-spacing-header-padding-horizontal, 0.8rem)) !important;
+    }
+  }
+}
