@@ -47,3 +47,11 @@ jobs:
           else
             echo "::warning::next has diverged from master; merge master into next manually"
           fi
+
+  publish_docs:
+    name: Publish Docs
+    needs: build_and_release
+    if: github.ref_name == 'master' && !inputs.dry-run
+    permissions:
+      contents: write
+    uses: ./.github/workflows/publish-docs.yml
