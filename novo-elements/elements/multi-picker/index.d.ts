@@ -2,9 +2,10 @@ import * as i0 from '@angular/core';
 import { OnInit, ElementRef, EventEmitter } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
 import { NovoLabelService } from 'novo-elements/services';
+import * as i4 from 'novo-elements/elements/picker';
+import { NovoPickerElement } from 'novo-elements/elements/picker';
 import * as i2 from '@angular/common';
 import * as i3 from '@angular/forms';
-import * as i4 from 'novo-elements/elements/picker';
 import * as i5 from 'novo-elements/elements/chips';
 
 interface Item {
@@ -15,6 +16,7 @@ interface Item {
 declare class NovoMultiPickerElement implements OnInit {
     element: ElementRef;
     labels: NovoLabelService;
+    picker: NovoPickerElement;
     source: {
         options: [];
         resultsTemplate: any;
@@ -51,6 +53,7 @@ declare class NovoMultiPickerElement implements OnInit {
     onModelTouched: Function;
     constructor(element: ElementRef, labels: NovoLabelService);
     ngOnInit(): void;
+    openPanel(): void;
     clearValue(): void;
     removeFromDisplay(event: any, item: any): void;
     setupOptions(): void;

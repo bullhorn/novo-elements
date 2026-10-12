@@ -1004,6 +1004,7 @@ interface AddressLookupResult {
     address2?: string;
     city?: string;
     state?: string;
+    stateName?: string;
     zip?: string;
     countryName?: string;
     countryCode?: string;
@@ -1093,9 +1094,10 @@ declare class NovoAddressElement implements ControlValueAccessor, OnInit, DoChec
         address_components?: any[];
         formatted_address?: string;
     }): void;
+    private resolveStateValue;
     private parseGooglePlaceDetail;
     setStateLabel(model: any): void;
-    updateStates(): void;
+    updateStates(): Promise<any[]>;
     getStateOptions(filter: string, countryID: number): string[];
     updateControl(): void;
     writeValue(model: any): void;
@@ -1304,7 +1306,7 @@ declare class ControlPromptModal {
     static ɵcmp: i0.ɵɵComponentDeclaration<ControlPromptModal, "control-prompt-modal", never, {}, {}, never, never, false, never>;
 }
 
-declare class NovoFormElement implements AfterContentInit, OnInit {
+declare class NovoFormElement implements AfterContentInit, OnChanges, OnInit {
     private templates;
     form: NovoFormGroup;
     layout: string;
@@ -1318,6 +1320,7 @@ declare class NovoFormElement implements AfterContentInit, OnInit {
     get value(): any;
     get isValid(): boolean;
     ngOnInit(): void;
+    ngOnChanges(changes?: SimpleChanges): void;
     ngAfterContentInit(): void;
     showAllFields(): void;
     showOnlyRequired(hideRequiredWithValue: any): void;

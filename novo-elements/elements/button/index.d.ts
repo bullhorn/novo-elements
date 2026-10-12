@@ -7,7 +7,8 @@ declare class NovoButtonElement implements OnChanges {
     /**
      * The text color of the button. Should be used for Icon buttons. see theme.
      */
-    color: string;
+    inputColor: i0.InputSignal<string>;
+    color: Signal<string>;
     /**
      * The side of the button to display the icon.
      */
@@ -47,13 +48,14 @@ declare class NovoButtonElement implements OnChanges {
     disabledAttr: undefined | '';
     private _icon;
     private _secondIcon;
+    private novoTheme;
     constructor(element: ElementRef);
     ngOnChanges(changes: SimpleChanges): void;
     handleKeydown(event: KeyboardEvent): void;
     /** Focuses the input. */
     focus(options?: FocusOptions): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<NovoButtonElement, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<NovoButtonElement, "novo-button,button[theme]", never, { "color": { "alias": "color"; "required": false; }; "side": { "alias": "side"; "required": false; }; "size": { "alias": "size"; "required": false; }; "theme": { "alias": "theme"; "required": false; }; "loading": { "alias": "loading"; "required": false; }; "icon": { "alias": "icon"; "required": false; }; "secondIcon": { "alias": "secondIcon"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; }, {}, never, ["*"], false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<NovoButtonElement, "novo-button,button[theme]", never, { "inputColor": { "alias": "color"; "required": false; "isSignal": true; }; "side": { "alias": "side"; "required": false; }; "size": { "alias": "size"; "required": false; }; "theme": { "alias": "theme"; "required": false; }; "loading": { "alias": "loading"; "required": false; }; "icon": { "alias": "icon"; "required": false; }; "secondIcon": { "alias": "secondIcon"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; }, {}, never, ["*"], false, never>;
 }
 
 declare class NovoButtonModule {

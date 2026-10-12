@@ -568,15 +568,15 @@ declare class Security {
     revoke(value: any): void;
     clear(): void;
     subscribe(fn: any): Subscription;
-    checkRoutes(routes: {
+    checkRoutes<R extends {
         entities?: any[];
         permissions?: any[] | Function;
-        path?: string;
+        path?: string | string[];
         label?: string;
         canDisable?: Boolean;
-    }[], options: {
+    }>(routes: R[], options: {
         entityType?: string;
-    }): any;
+    }): R[];
     static ɵfac: i0.ɵɵFactoryDeclaration<Security, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<Security>;
 }

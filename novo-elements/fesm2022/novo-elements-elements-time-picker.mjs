@@ -617,7 +617,7 @@ class NovoTimePickerInputElement {
       data-automation-id="time-input"
       [disabled]="disabled"
     />
-    <i *ngIf="!hasValue" (click)="openPanel()" class="bhi-clock"></i> <i *ngIf="hasValue" (click)="clearValue()" class="bhi-times"></i>
+    <i *ngIf="!hasValue" (click)="openPanel(); input.focus()" class="bhi-clock"></i> <i *ngIf="hasValue" (click)="clearValue()" class="bhi-times"></i>
     <novo-overlay-template [parent]="overlayElement" position="above-below">
       <novo-time-picker
         [ngClass]="{ 'hasButtons': hasButtons }"
@@ -653,7 +653,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.19", ngImpo
       data-automation-id="time-input"
       [disabled]="disabled"
     />
-    <i *ngIf="!hasValue" (click)="openPanel()" class="bhi-clock"></i> <i *ngIf="hasValue" (click)="clearValue()" class="bhi-times"></i>
+    <i *ngIf="!hasValue" (click)="openPanel(); input.focus()" class="bhi-clock"></i> <i *ngIf="hasValue" (click)="clearValue()" class="bhi-times"></i>
     <novo-overlay-template [parent]="overlayElement" position="above-below">
       <novo-time-picker
         [ngClass]="{ 'hasButtons': hasButtons }"

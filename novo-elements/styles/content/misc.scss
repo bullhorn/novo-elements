@@ -137,7 +137,7 @@ dialog > header:first-child {
   text-align: center;
 }
 
-dialog::backdrop {
+:root:not([data-theme='bh2026']) dialog::backdrop {
   background: #0000009c;
   backdrop-filter: blur(4px);
 }

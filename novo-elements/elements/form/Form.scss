@@ -1,4 +1,5 @@
 @import "../../styles/variables.scss";
+@import "../../styles/themes/bh2026.mixins";
 
 novo-form,
 novo-dynamic-form {
@@ -144,7 +145,9 @@ novo-dynamic-form {
             i.bhi-checkbox-filled,
             i.bhi-checkbox-empty,
             i.bhi-calendar {
-              top: -5px;
+              @include classic-only {
+                top: -5px;
+              }
             }
           }
           novo-tip-well.active {
@@ -258,7 +261,7 @@ novo-dynamic-form {
             > div.novo-control-outer-container {
               display: flex;
               align-items: center;
-              max-width: 550px;
+              max-width: var(--form-control-max-width, 550px);
               position: relative;
               width: 100%;
               i.loading {
@@ -285,11 +288,11 @@ novo-dynamic-form {
                 width: 100%;
                 &.required {
                   div.novo-control-input.address {
-                    margin-left: 20px;
+                    margin-left: var(--form-control-address-margin-left, 20px);
                   }
                 }
                 .field-message.address {
-                  margin-left: 20px;
+                  margin-left: var(--form-control-address-margin-left, 20px);
                 }
                 .novo-control-inner-input-container {
                   display: flex;
@@ -365,8 +368,6 @@ novo-dynamic-form {
                       padding: 5px 0;
                       box-shadow: none;
                       box-sizing: content-box;
-                      transition: all 300ms;
-                      transition: height 0ms;
                       color: var(--text-main);
                       overflow-y: hidden;
                       &:hover {
@@ -390,7 +391,6 @@ novo-dynamic-form {
                       padding-bottom: 0;
                     }
                     textarea:not(.quick-note-textarea) {
-                      transition: height 0;
                       background: transparent !important;
                     }
                     > div.novo-control-input-with-label {
@@ -409,6 +409,10 @@ novo-dynamic-form {
                       label.input-label {
                         padding-left: 5px;
                         color: var(--font-color-base);
+
+                        @include bh2026-only {
+                          padding-top: 3px;
+                        }
                       }
                     }
                     > div.novo-control-input-container {
@@ -585,6 +589,9 @@ novo-dynamic-form {
   }
   &[layout="vertical"] {
     .novo-form-container {
+      @include bh2026-only {
+        margin-top: var(--spacing-md);
+      }
       form {
         div.novo-form-row,
         div.novo-control-group-control {
@@ -656,7 +663,9 @@ novo-dynamic-form {
               i.bhi-checkbox-filled,
               i.bhi-checkbox-empty,
               i.bhi-calendar {
-                top: -5px;
+                @include classic-only {
+                  top: -5px;
+                }
               }
             }
             .novo-control-container {
@@ -665,7 +674,7 @@ novo-dynamic-form {
               position: relative;
               margin-top: 16px;
               .novo-control-outer-container {
-                max-width: 550px;
+                max-width: var(--form-control-max-width, 550px);
                 width: 100%;
                 .novo-control-inner-container {
                   position: relative;
@@ -673,8 +682,13 @@ novo-dynamic-form {
                     align-items: center;
                     position: relative;
                     i.required-indicator {
+                      @include bh2026-only {
+                        margin-right: 4px;
+                      }
                       &.bhi-circle {
-                        padding-top: 2px;
+                        @include classic-only {
+                          padding-top: 2px;
+                        }
                       }
                       &.bhi-check {
                         margin-top: -4px;
@@ -688,13 +702,13 @@ novo-dynamic-form {
                       display: flex;
                     }
                     div.novo-control-input.address {
-                      margin-left: 20px;
+                      margin-left: var(--form-control-address-margin-left, 20px);
                     }
                   }
                 }
                 > label.novo-control-label {
                   font-weight: 500;
-                  word-break: word-break;
+                  word-break: break-word;
                   overflow-wrap: break-word;
                   line-height: 1.375;
                   color: var(--text-muted);
@@ -715,6 +729,11 @@ novo-dynamic-form {
                   transform-origin: bottom left;
                   transition: transform 400ms cubic-bezier(0.25, 0.8, 0.25, 1), scale 400ms cubic-bezier(0.25, 0.8, 0.25, 1),
                     color 400ms cubic-bezier(0.25, 0.8, 0.25, 1), width 400ms cubic-bezier(0.25, 0.8, 0.25, 1);
+                  @include bh2026-only {
+                    padding-top: 0;
+                    padding-bottom: 22px;
+                    padding-left: 1px;
+                  }
                   &.novo-control-empty {
                     display: block;
                     cursor: text;
@@ -740,7 +759,9 @@ novo-dynamic-form {
                 .file,
                 .select,
                 .tiles {
-                  margin-top: 0.5em;
+                  @include classic-only {
+                    margin-top: 0.5em;
+                  }
                 }
               }
               novo-tip-well.active {
@@ -820,26 +841,30 @@ control-prompt-modal {
   }
 }
 
-// Control types that should not receive the bh2026 bordered-input treatment
-$bh2026-borderless-types: ('quick-note', 'checkbox', 'checklist', 'editor', 'tiles', 'switch', 'file', 'address');
-$bh2026-not-borderless: '';
-@each $type in $bh2026-borderless-types {
-  $bh2026-not-borderless: $bh2026-not-borderless + ':not(.#{$type})';
+// Control types that get the bh2026 bordered-input treatment. Allowlist, not a blocklist,
+// so unlisted types (custom controls, editor, file, address, ...) draw their own chrome.
+// :is() keeps the list at one specificity class so consumers can still override it.
+$bh2026-bordered: ':is(.code-editor, .date, .date-time, .native-input, .native-select, .picker, .radio, .read-only, .select, .text-area, .textbox, .time, .timezone)';
+
+@mixin bh2026-field-label {
+  font-weight: var(--typography-input-label-field-label-font-weight) !important;
+  font-size: var(--typography-input-label-field-label-font-size) !important;
+  letter-spacing: var(--typography-input-label-field-label-letter-spacing);
+  text-transform: var(--typography-input-label-field-label-text-transform);
+  color: var(--field-color-content-label) !important;
+  line-height: var(--typography-input-label-field-label-line-height);
+  padding-top: 10px;
 }
 
-// bh2026: uppercase label + tighter value typography
-// ViewEncapsulation.None: use plain selectors (not :host-context which is Shadow DOM only)
-:root[data-theme='bh2026'] {
+// bh2026: ViewEncapsulation.None can use plain selectors (not :host-context which is Shadow DOM only)
+:root[data-theme=bh2026] {
+  // We need this extra repeated specification to override existing 2022 themed !important styles on form variants
   label.novo-control-label {
     &.novo-control-empty,
     &.novo-control-filled,
     &.novo-control-focused,
     &.novo-control-always-active {
-      font-weight: var(--typography-input-label-md-font-weight) !important;
-      font-size: var(--typography-input-label-md-font-size) !important;
-      letter-spacing: var(--typography-input-label-md-letter-spacing);
-      text-transform: var(--typography-input-label-sm-text-transform);
-      color: var(--color-text-body) !important;
+      @include bh2026-field-label;
     }
     &.novo-control-empty {
       transform: translateY(-100%) !important;
@@ -849,14 +874,15 @@ $bh2026-not-borderless: '';
     }
   }
   .novo-form-control-label {
-    font-weight: var(--typography-input-label-md-font-weight) !important;
-    font-size: var(--typography-input-label-md-font-size) !important;
-    letter-spacing: var(--typography-input-label-md-letter-spacing);
-    text-transform: var(--typography-input-label-sm-text-transform);
-    color: var(--color-text-body) !important;
+    @include bh2026-field-label;
     margin-right: var(--spacing-gap-lg);
     max-width: 128px;
     min-width: 128px;
+
+    &.encrypted {
+      max-width: 100px;
+      min-width: 100px;
+    }
   }
   .novo-control-outer-container input:not([type='checkbox']):not([type='radio']) {
     font-size: var(--typography-input-value-default-font-size) !important;
@@ -882,8 +908,8 @@ $bh2026-not-borderless: '';
     }
   }
 
-  // Bordered input container (excludes $bh2026-borderless-types)
-  .novo-control-input#{$bh2026-not-borderless} {
+  // Bordered input container
+  .novo-control-input#{$bh2026-bordered} {
     border: var(--field-border-width-default) solid var(--field-color-border-default);
     border-radius: var(--field-border-radius-default);
     background: var(--field-color-background-default);
@@ -932,9 +958,7 @@ $bh2026-not-borderless: '';
   }
 
   // Error: move negative border to container
-  div.novo-control-input#{$bh2026-not-borderless}:has(input.ng-touched.ng-invalid:not(.ng-pristine)),
-  div.novo-control-input#{$bh2026-not-borderless}:has(textarea.ng-touched.ng-invalid:not(.ng-pristine):not(.ng-valid)),
-  div.novo-control-input#{$bh2026-not-borderless}.control-invalid-touched {
+  div.novo-control-input#{$bh2026-bordered}.control-invalid-touched {
     border-width: var(--field-border-width-negative);
     border-color: var(--field-color-border-negative);
     &:hover {
@@ -943,10 +967,9 @@ $bh2026-not-borderless: '';
   }
 
   // Disabled container
-  novo-control.disabled .novo-control-input#{$bh2026-not-borderless},
-  novo-custom-control-container.disabled .novo-control-input#{$bh2026-not-borderless} {
+  novo-control.disabled .novo-control-input#{$bh2026-bordered},
+  novo-custom-control-container.disabled .novo-control-input#{$bh2026-bordered} {
     border-color: var(--field-color-border-disabled);
-    border-style: dashed;
     background: var(--field-color-background-disabled);
 
     input,
@@ -1054,7 +1077,7 @@ $bh2026-not-borderless: '';
     padding-right: 0;
     margin-bottom: 0;
 
-    &:not(:has(> novo-fieldset-header)) {
+    &.no-header {
       padding-top: var(--spacing-padding-lg);
     }
   }
@@ -1079,7 +1102,7 @@ $bh2026-not-borderless: '';
       margin-top: 0;
     }
 
-    novo-fieldset + novo-fieldset:has(> .novo-fieldset-container.card-section) {
+    novo-fieldset + novo-fieldset.card-fieldset {
       margin-top: var(--spacing-gutter);
     }
   }

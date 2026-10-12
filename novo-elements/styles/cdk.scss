@@ -68,8 +68,15 @@ $backdrop-animation-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1) !default;
     opacity: 0;
 
     &.cdk-overlay-backdrop-showing {
-      opacity: 0.48;
-      backdrop-filter: blur(4px);
+      :root:not([data-theme='bh2026']) & {
+        opacity: 0.48;
+        backdrop-filter: blur(4px);
+      }
+
+      [data-theme='bh2026'] & {
+        opacity: 1;
+        background-color: var(--color-background-overlay);
+      }
     }
   }
 

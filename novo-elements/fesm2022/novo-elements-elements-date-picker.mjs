@@ -803,7 +803,7 @@ class NovoDatePickerInputElement {
       [disabled]="disabled"
     />
     <span class="error-text" *ngIf="showInvalidDateError">{{ invalidDateErrorMessage }}</span>
-    <i *ngIf="!hasValue" (click)="openPanel()" class="bhi-calendar"></i>
+    <i *ngIf="!hasValue" (click)="openPanel(); input.focus()" class="bhi-calendar"></i>
     <i *ngIf="hasValue" (click)="clearAction()" class="bhi-times"></i>
     <novo-overlay-template [parent]="overlayElement" position="above-below">
       <novo-date-picker
@@ -867,7 +867,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.19", ngImpo
       [disabled]="disabled"
     />
     <span class="error-text" *ngIf="showInvalidDateError">{{ invalidDateErrorMessage }}</span>
-    <i *ngIf="!hasValue" (click)="openPanel()" class="bhi-calendar"></i>
+    <i *ngIf="!hasValue" (click)="openPanel(); input.focus()" class="bhi-calendar"></i>
     <i *ngIf="hasValue" (click)="clearAction()" class="bhi-times"></i>
     <novo-overlay-template [parent]="overlayElement" position="above-below">
       <novo-date-picker
@@ -1449,7 +1449,7 @@ class NovoMultiDateInputElement {
       <span class="placeholder" *ngIf="!value.length" data-automation-id="multi-date-input">{{ placeholder }}</span>
     </div>
     <novo-icon class="panel-toggle" [class.selected]="panelOpen" (click)="openPanel()">calendar</novo-icon>
-    <label class="clear-all" *ngIf="value.length" (click)="clearValue()">{{ labels.clearAll }} <i class="bhi-times"></i></label>
+    <label class="clear-all" *ngIf="value.length" (click)="clearValue()">{{ labels.clearAllNormalCase }} <i class="bhi-times"></i></label>
     <novo-overlay-template [parent]="element" position="above-below">
       <novo-date-picker
         [start]="start"
@@ -1461,7 +1461,7 @@ class NovoMultiDateInputElement {
         [weekStart]="weekStart"
       ></novo-date-picker>
     </novo-overlay-template>
-  `, isInline: true, styles: [":host .chip-input-container{padding-top:10px}:host .chip-input-container .placeholder{color:var(--form-placeholder)}:host .panel-toggle{padding:.2em}:host .panel-toggle i{margin:0}:host .panel-toggle.selected{background:var(--background-main, #dbdbdb);border-radius:50%}:host ul.summary{display:inline;list-style:none;color:#868686;padding:0 10px}:host ul.summary li{display:inline;padding:0 3px}:host ul.summary li:after{content:\", \"}:host ul.summary li:last-child:after{content:\" \"}:host chip span{text-transform:capitalize}\n"], dependencies: [{ kind: "directive", type: i2$1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i2$1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i3.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i3.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }, { kind: "component", type: i4$1.NovoOverlayTemplateComponent, selector: "novo-overlay-template", inputs: ["position", "scrollStrategy", "width", "minWidth", "height", "closeOnSelect", "hasBackdrop", "parent"], outputs: ["select", "opening", "closing", "backDropClicked"] }, { kind: "component", type: i6$1.NovoIconComponent, selector: "novo-icon", inputs: ["raised", "theme", "shape", "color", "size", "smaller", "larger", "alt", "name"] }, { kind: "component", type: i6$2.NovoChipElement, selector: "novo-chip, [novo-chip]", inputs: ["color", "tabIndex", "size", "type", "selected", "value", "selectable", "disabled", "removable"], outputs: ["selectionChange", "destroyed", "removed"] }, { kind: "directive", type: i6$2.NovoChipRemove, selector: "[novoChipRemove]" }, { kind: "component", type: i6$2.NovoChipList, selector: "novo-chip-list", inputs: ["errorStateMatcher", "multiple", "chipsToggleable", "stacked", "compareWith", "value", "required", "placeholder", "disabled", "aria-orientation", "selectable", "tabIndex"], outputs: ["change", "valueChange"], exportAs: ["novoChipList"] }, { kind: "component", type: NovoDatePickerElement, selector: "novo-date-picker", inputs: ["minYear", "maxYear", "start", "end", "inline", "weekStart", "preselected", "hideOverflowDays", "hideFooter", "hideToday", "disabledDateMessage", "dateForInitialView", "numberOfMonths", "mode", "range", "weekRangeSelect"], outputs: ["onSelect"] }, { kind: "pipe", type: i2$1.DatePipe, name: "date" }, { kind: "pipe", type: i8.DefaultPipe, name: "default" }] }); }
+  `, isInline: true, styles: [":host .chip-input-container{padding-top:10px}:host .chip-input-container .placeholder{color:var(--form-placeholder)}:host .panel-toggle{padding:.2em}:host .panel-toggle i{margin:0}:host .panel-toggle.selected{background:var(--background-main, #dbdbdb);border-radius:50%}:host ul.summary{display:inline;list-style:none;color:#868686;padding:0 10px}:host ul.summary li{display:inline;padding:0 3px}:host ul.summary li:after{content:\", \"}:host ul.summary li:last-child:after{content:\" \"}:host label.clear-all{font-size:.9rem;color:var(--color-negative);cursor:pointer;text-transform:uppercase}[data-theme=bh2026] :host label.clear-all{color:var(--button-color-dialogue-negative-content-default);font-size:var(--typography-button-sm-font-size);font-weight:var(--typography-button-sm-font-weight);line-height:var(--typography-button-sm-line-height);text-transform:none}:host label.clear-all i{font-size:.8rem}:host chip span{text-transform:capitalize}\n"], dependencies: [{ kind: "directive", type: i2$1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i2$1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i3.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i3.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }, { kind: "component", type: i4$1.NovoOverlayTemplateComponent, selector: "novo-overlay-template", inputs: ["position", "scrollStrategy", "width", "minWidth", "height", "closeOnSelect", "hasBackdrop", "parent"], outputs: ["select", "opening", "closing", "backDropClicked"] }, { kind: "component", type: i6$1.NovoIconComponent, selector: "novo-icon", inputs: ["raised", "theme", "shape", "color", "size", "smaller", "larger", "alt", "name"] }, { kind: "component", type: i6$2.NovoChipElement, selector: "novo-chip, [novo-chip]", inputs: ["color", "tabIndex", "size", "type", "selected", "value", "selectable", "disabled", "removable"], outputs: ["selectionChange", "destroyed", "removed"] }, { kind: "directive", type: i6$2.NovoChipRemove, selector: "[novoChipRemove]" }, { kind: "component", type: i6$2.NovoChipList, selector: "novo-chip-list", inputs: ["errorStateMatcher", "multiple", "chipsToggleable", "stacked", "compareWith", "value", "required", "placeholder", "disabled", "aria-orientation", "selectable", "tabIndex"], outputs: ["change", "valueChange"], exportAs: ["novoChipList"] }, { kind: "component", type: NovoDatePickerElement, selector: "novo-date-picker", inputs: ["minYear", "maxYear", "start", "end", "inline", "weekStart", "preselected", "hideOverflowDays", "hideFooter", "hideToday", "disabledDateMessage", "dateForInitialView", "numberOfMonths", "mode", "range", "weekRangeSelect"], outputs: ["onSelect"] }, { kind: "pipe", type: i2$1.DatePipe, name: "date" }, { kind: "pipe", type: i8.DefaultPipe, name: "default" }] }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.19", ngImport: i0, type: NovoMultiDateInputElement, decorators: [{
             type: Component,
@@ -1476,7 +1476,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.19", ngImpo
       <span class="placeholder" *ngIf="!value.length" data-automation-id="multi-date-input">{{ placeholder }}</span>
     </div>
     <novo-icon class="panel-toggle" [class.selected]="panelOpen" (click)="openPanel()">calendar</novo-icon>
-    <label class="clear-all" *ngIf="value.length" (click)="clearValue()">{{ labels.clearAll }} <i class="bhi-times"></i></label>
+    <label class="clear-all" *ngIf="value.length" (click)="clearValue()">{{ labels.clearAllNormalCase }} <i class="bhi-times"></i></label>
     <novo-overlay-template [parent]="element" position="above-below">
       <novo-date-picker
         [start]="start"
@@ -1488,7 +1488,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.19", ngImpo
         [weekStart]="weekStart"
       ></novo-date-picker>
     </novo-overlay-template>
-  `, standalone: false, styles: [":host .chip-input-container{padding-top:10px}:host .chip-input-container .placeholder{color:var(--form-placeholder)}:host .panel-toggle{padding:.2em}:host .panel-toggle i{margin:0}:host .panel-toggle.selected{background:var(--background-main, #dbdbdb);border-radius:50%}:host ul.summary{display:inline;list-style:none;color:#868686;padding:0 10px}:host ul.summary li{display:inline;padding:0 3px}:host ul.summary li:after{content:\", \"}:host ul.summary li:last-child:after{content:\" \"}:host chip span{text-transform:capitalize}\n"] }]
+  `, standalone: false, styles: [":host .chip-input-container{padding-top:10px}:host .chip-input-container .placeholder{color:var(--form-placeholder)}:host .panel-toggle{padding:.2em}:host .panel-toggle i{margin:0}:host .panel-toggle.selected{background:var(--background-main, #dbdbdb);border-radius:50%}:host ul.summary{display:inline;list-style:none;color:#868686;padding:0 10px}:host ul.summary li{display:inline;padding:0 3px}:host ul.summary li:after{content:\", \"}:host ul.summary li:last-child:after{content:\" \"}:host label.clear-all{font-size:.9rem;color:var(--color-negative);cursor:pointer;text-transform:uppercase}[data-theme=bh2026] :host label.clear-all{color:var(--button-color-dialogue-negative-content-default);font-size:var(--typography-button-sm-font-size);font-weight:var(--typography-button-sm-font-weight);line-height:var(--typography-button-sm-line-height);text-transform:none}:host label.clear-all i{font-size:.8rem}:host chip span{text-transform:capitalize}\n"] }]
         }], ctorParameters: () => [{ type: i0.ElementRef }, { type: i1.NovoLabelService }, { type: i0.ChangeDetectorRef }, { type: i1.DateFormatService }], propDecorators: { name: [{
                 type: Input
             }], start: [{

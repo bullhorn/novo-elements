@@ -354,7 +354,7 @@ declare class NovoPickerElement implements OnInit {
     openPanel(): void;
     closePanel(): void;
     get panelOpen(): boolean;
-    private show;
+    show(term?: string): void;
     onKeyDown(event: KeyboardEvent): void;
     clearValue(wipeTerm: any): void;
     /**

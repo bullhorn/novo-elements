@@ -595,6 +595,7 @@ declare class NovoChipsElement implements OnInit, ControlValueAccessor {
     ngOnInit(): void;
     get value(): any;
     set value(selected: any);
+    openPanel(): void;
     clearValue(): void;
     getDynamicClasses(item: any): string | string[] | {
         [className: string]: boolean;

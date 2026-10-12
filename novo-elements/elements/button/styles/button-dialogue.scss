@@ -11,6 +11,9 @@
     }
     &[color=text] {
       color: inherit;
+      i {
+        color: inherit;
+      }
     }
     &:hover,
     &:focus,

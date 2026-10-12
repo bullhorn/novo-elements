@@ -746,9 +746,11 @@ declare class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     private _columns;
     private scrollListenerHandler;
     private initialized;
+    private readonly theme;
     get empty(): boolean;
     get loadingClass(): boolean;
     get useOverrideTotal(): boolean;
+    get isPaginationOnFooter(): boolean;
     listInteractions: ListInteractionDictionary;
     constructor(labels: NovoLabelService, ref: ChangeDetectorRef, state: DataTableState<T>);
     modifyCellHeaderMultiSelectFilterOptions(column: string, newOptions: {
