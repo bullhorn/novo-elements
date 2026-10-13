@@ -92,6 +92,7 @@ cdk-table {
   flex-direction: row;
   flex-wrap: nowrap;
   background-color: var(--background-body, $white);
+  contain: content;
   .novo-data-table-header-cell,
   .novo-data-table-checkbox-header-cell {
     background-color: var(--background-body, $white);
