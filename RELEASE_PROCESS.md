@@ -17,6 +17,12 @@ Run the [release action](https://github.com/bullhorn/novo-elements/actions/workf
 Master releases also create a [GitHub Release](https://github.com/bullhorn/novo-elements/releases) with the
 generated notes. Prereleases do not.
 
+Master releases also publish the demo site to GitHub Pages. After the release job succeeds, it calls the
+[publish docs workflow](https://github.com/bullhorn/novo-elements/actions/workflows/publish-docs.yml), which
+builds from the tip of master (including the release commit). This is skipped for prereleases and dry runs.
+If the docs job fails, the npm release is unaffected; re-run the failed job or run the publish docs workflow
+manually on master.
+
 Check **Dry Run** to see the next version and release notes without publishing, tagging, or pushing.
 
 The version is decided by semantic-release from commit messages since the last release:
