@@ -1,3 +1,10 @@
+## [13.8.1](https://github.com/bullhorn/novo-elements/compare/v13.8.0...v13.8.1) (2026-10-15)
+
+
+### Bug Fixes
+
+* **bh2026:** BH-103732 - Remove dotted lines from disabled controls ([#1954](https://github.com/bullhorn/novo-elements/issues/1954)) ([bdd384f](https://github.com/bullhorn/novo-elements/commit/bdd384fd4f7d4459469da30d2700471115da4d80))
+
 # [13.8.0](https://github.com/bullhorn/novo-elements/compare/v13.7.1...v13.8.0) (2026-10-08)
 
 
