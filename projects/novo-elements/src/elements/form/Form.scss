@@ -93,17 +93,23 @@ novo-dynamic-form {
               &::placeholder {
                 color: brightenLive('--color-dark', 30) !important;
               }
-              border-bottom-style: dashed !important;
+              @include classic-only {
+                border-bottom-style: dashed !important;
+              }
             }
             input[type="checkbox"]:not(.picker-input):not(.tiles-input) {
               border-bottom-style: none !important;
             }
             textarea {
-              border-bottom-style: dashed !important;
+              @include classic-only {
+                border-bottom-style: dashed !important;
+              }
               -webkit-text-fill-color: var(--text-main);
             }
             div[type="button"] {
-              border-bottom-style: dashed !important;
+              @include classic-only {
+                border-bottom-style: dashed !important;
+              }
               i.bhi-collapse {
                 top: auto;
                 color: brightenLive('--color-dark', 30) !important;
@@ -606,16 +612,22 @@ novo-dynamic-form {
                 &::placeholder {
                   color: brightenLive('--color-dark', 30) !important;
                 }
-                border-bottom-style: dashed !important;
+                @include classic-only {
+                  border-bottom-style: dashed !important;
+                }
               }
               input[type="checkbox"]:not(.picker-input):not(.tiles-input) {
                 border-bottom-style: none !important;
               }
               textarea {
-                border-bottom-style: dashed !important;
+                @include classic-only {
+                  border-bottom-style: dashed !important;
+                }
               }
               div[type="button"] {
-                border-bottom-style: dashed !important;
+                @include classic-only {
+                  border-bottom-style: dashed !important;
+                }
                 i.bhi-collapse {
                   top: auto;
                   color: brightenLive('--color-dark', 30) !important;
