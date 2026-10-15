@@ -128,9 +128,11 @@
   // novo-option.novo-option outranks the optgroup padding-left rule in option.component.scss
   novo-option.novo-option {
     align-items: center;
-    border-radius: 0;
+    border-radius: var(--border-radius-xsm, 0.4rem);
     gap: var(--dropdown-spacing-option-gap, 0.8rem);
-    padding: var(--dropdown-spacing-option-padding, 0.8rem) calc(2 * var(--dropdown-spacing-option-padding, 0.8rem));
+    // Inset via margin, not container padding: the container also wraps full-bleed content (data-table headers/footers, tabbed picker nav)
+    margin: 0 var(--dropdown-spacing-container-padding-horizontal, 0.8rem);
+    padding: var(--dropdown-spacing-option-padding, 0.8rem);
     font-size: var(--typography-input-value-default-font-size, 1.4rem);
     font-weight: var(--typography-input-value-default-font-weight, 400);
     letter-spacing: var(--typography-input-value-default-letter-spacing, 0);
