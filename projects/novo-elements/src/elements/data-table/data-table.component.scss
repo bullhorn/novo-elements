@@ -649,6 +649,20 @@ novo-data-table {
       padding-top: 0;
       padding-bottom: 0;
     }
+
+    &.dropdown-cell {
+      min-width: 120px;
+      max-width: 120px;
+
+      &.empty {
+        min-width: 39px;
+        max-width: 39px;
+      }
+
+      novo-dropdown button {
+        padding-inline: var(--spacing-padding-sm);
+      }
+    }
   }
 
   .novo-data-table-cell.clickable {
