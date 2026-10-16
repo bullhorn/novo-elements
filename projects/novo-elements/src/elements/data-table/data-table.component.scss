@@ -17,52 +17,34 @@ cdk-table {
     min-height: 62px;
     max-height: 62px;
   }
-  > .novo-data-table-row:nth-of-type(odd) {
+  > .novo-data-table-row:nth-of-type(odd):not(.active) {
     .novo-data-table-cell,
     .novo-data-table-button-cell,
     .novo-data-table-dropdown-cell,
     .novo-data-table-expand-cell,
-    .novo-data-table-checkbox-cell {
-      background-color: var(--background-muted, $sand);
-    }
-    &.active {
-      .novo-data-table-cell,
-      .novo-data-table-button-cell,
-      .novo-data-table-dropdown-cell,
-      .novo-data-table-expand-cell,
-      .novo-data-table-checkbox-cell {
-        background-color: rgb(from var(--color-positive) r g b / 0.15);
-      }
-      + .novo-data-table-detail-row {
-        background-color: rgb(from var(--color-positive) r g b / 0.15);
-      }
-    }
+    .novo-data-table-checkbox-cell,
     + .novo-data-table-detail-row {
-      background-color: var(--background-muted, $sand);
+      background-color: var(--novo-data-table-bg-banding-color);
     }
   }
-  > .novo-data-table-row:nth-of-type(even) {
-    .novo-data-table-cell,
-    .novo-data-table-button-cell,
-    .novo-data-table-dropdown-cell,
-    .novo-data-table-expand-cell,
-    .novo-data-table-checkbox-cell {
-      background-color: var(--background-body, $white);
-    }
-    &.active {
+  > .novo-data-table-row:nth-of-type(even):not(.active) {
       .novo-data-table-cell,
       .novo-data-table-button-cell,
       .novo-data-table-dropdown-cell,
       .novo-data-table-expand-cell,
-      .novo-data-table-checkbox-cell {
-        background-color: rgb(from var(--color-positive) r g b / 0.15);
-      }
-      + .novo-data-table-detail-row {
-        background-color: rgb(from var(--color-positive) r g b / 0.15);
-      }
-    }
+    .novo-data-table-checkbox-cell,
     + .novo-data-table-detail-row {
-      background-color: var(--background-body, $white);
+      background-color: var(--novo-data-table-bg-nonbanding-color);
+    }
+  }
+  > .novo-data-table-row.active {
+    .novo-data-table-cell,
+    .novo-data-table-button-cell,
+    .novo-data-table-dropdown-cell,
+    .novo-data-table-expand-cell,
+    .novo-data-table-checkbox-cell,
+    + .novo-data-table-detail-row {
+      background-color: var(--novo-data-table-bg-color-active);
     }
   }
 }
@@ -445,7 +427,7 @@ novo-data-table {
   .novo-data-table-no-results-container,
   .novo-data-table-no-more-results-container{
     position: absolute;
-    top: 48%;
+    top: calc(50% - 40px);
     left: 0;
     right: 0;
     width: 100%;
@@ -654,56 +636,6 @@ novo-data-table {
 
   .novo-data-table-cell.clickable {
     color: var(--color-text-link);
-  }
-
-  cdk-table {
-    > .novo-data-table-row:nth-of-type(odd) {
-      .novo-data-table-cell,
-      .novo-data-table-button-cell,
-      .novo-data-table-dropdown-cell,
-      .novo-data-table-expand-cell,
-      .novo-data-table-checkbox-cell {
-        // To enable every-other "banded" styling change to --color-background-muted
-        background-color: var(--background-body);
-      }
-      + .novo-data-table-detail-row {
-        // To enable every-other "banded" styling change to --color-background-muted
-        background-color: var(--background-body);
-      }
-    }
-    > .novo-data-table-row:nth-of-type(even) {
-      .novo-data-table-cell,
-      .novo-data-table-button-cell,
-      .novo-data-table-dropdown-cell,
-      .novo-data-table-expand-cell,
-      .novo-data-table-checkbox-cell {
-        background-color: var(--background-body);
-      }
-      + .novo-data-table-detail-row {
-        background-color: var(--background-body);
-      }
-    }
-    > .novo-data-table-row:hover {
-      .novo-data-table-cell,
-      .novo-data-table-button-cell,
-      .novo-data-table-dropdown-cell,
-      .novo-data-table-expand-cell,
-      .novo-data-table-checkbox-cell {
-        background-color: var(--color-background-subtle);
-      }
-    }
-    > .novo-data-table-row.active {
-      .novo-data-table-cell,
-      .novo-data-table-button-cell,
-      .novo-data-table-dropdown-cell,
-      .novo-data-table-expand-cell,
-      .novo-data-table-checkbox-cell {
-        background-color: var(--color-utility-blue-100);
-      }
-      + .novo-data-table-detail-row {
-        background-color: var(--color-utility-blue-100);
-      }
-    }
   }
 
   // CSS-drawn checkboxes — replaces icon-font glyphs
