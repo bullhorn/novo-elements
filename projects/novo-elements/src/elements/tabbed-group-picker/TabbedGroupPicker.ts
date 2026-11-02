@@ -132,7 +132,7 @@ export class NovoTabbedGroupPickerElement implements OnChanges, OnDestroy, OnIni
 
   constructor(
     public labelService: NovoLabelService,
-    private readonly ref: ChangeDetectorRef
+    private readonly ref: ChangeDetectorRef,
   ) {}
 
   get displayTab(): TabbedGroupPickerTab {
