@@ -8,8 +8,10 @@ import {
   EventEmitter,
   input,
   Input,
+  OnChanges,
   OnDestroy,
   OnInit,
+  SimpleChanges,
   Output,
   signal,
   ViewChild,
@@ -79,11 +81,11 @@ export type TabbedGroupPickerButtonConfig = {
       '[class.use-chips]': 'useChips()',
     },
 })
-export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
+export class NovoTabbedGroupPickerElement implements OnChanges, OnDestroy, OnInit {
   @ViewChild('tabbedGroupPickerVirtualScrollViewport')
-  private scrollableInstance: CdkScrollable;
+  private readonly scrollableInstance: CdkScrollable;
   @ViewChild('inputElement')
-  private inputElement: ElementRef<HTMLInputElement>;
+  private readonly inputElement: ElementRef<HTMLInputElement>;
   @ViewChild('dropdown')
   public dropdown: NovoDropdownElement;
 
@@ -128,7 +130,10 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
   hiddenChips = computed(() => this.showAllChips() ? [] : this.selectedChips().slice(this.maxChips()));
   chipsInputPlaceholder = computed(() => this.displayedChips().length ? '' : this.buttonConfig.label);
 
-  constructor(public labelService: NovoLabelService, private ref: ChangeDetectorRef) {}
+  constructor(
+    public labelService: NovoLabelService,
+    private readonly ref: ChangeDetectorRef
+  ) {}
 
   get displayTab(): TabbedGroupPickerTab {
     return this.displayTabs[this.displayTabIndex];
@@ -143,6 +148,14 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
 
   get maxBufferPx() {
     return 2 * this.scrollViewportHeight; // render at most 3x the number of items visible (viewport + max buffer)
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.tabs && !changes.tabs.firstChange) {
+      this.selectedChips.set([]);
+      this.loadValues();
+      this.ref.markForCheck();
+    }
   }
 
   ngOnInit(): void {
