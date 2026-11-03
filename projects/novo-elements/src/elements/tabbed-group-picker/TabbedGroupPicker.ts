@@ -210,8 +210,10 @@ export class NovoTabbedGroupPickerElement implements OnChanges, OnDestroy, OnIni
     }
     // shallow copy here so that reassigning displayTabs[i].data doesn't mutate tabs[i].data
     // but both data values point to the same items
+    const previousTypeName = this.displayTabs?.[this.displayTabIndex]?.typeName;
     this.displayTabs = this.tabs.map((tab) => ({ ...tab }));
-    this.displayTab = this.tabs[0];
+    const preserved = this.tabs.find((tab) => tab.typeName === previousTypeName);
+    this.displayTab = preserved || this.tabs[0];
     this.updateAppliedState();
   }
 
