@@ -39,4 +39,8 @@
   --font-size-tab: 1.1rem; // todo: why?
 
   --modal-max-width: 600px;
+
+  --novo-data-table-bg-banding-color: var(--background-muted, $sand);
+  --novo-data-table-bg-nonbanding-color: var(--background-body, $white);
+  --novo-data-table-bg-color-active: #{rgb(from var(--color-positive) r g b / 0.15)};
 }
