@@ -63,34 +63,6 @@
   visibility: hidden !important;
 }
 
-@include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
-  $excluded: (bright, muted);
-
-  @if index($excluded, $name) == null {
-    .novo-background-#{$name} {
-      background: getCssVarname($name);
-      color: getContrastColor($name);
-    }
-    .novo-text-#{$name} {
-      color: getCssVarname($name);
-    }
-
-    .bgc-#{$name} {
-      background: getCssVarname($name);
-      color: $contrast;
-    }
-
-    .bgc-#{$name}-striped {
-      & > *:nth-child(odd) {
-        background: getCssVarname($name);
-      }
-    }
-    .txc-#{$name} {
-      color: getCssVarname($name);
-    }
-  }
-}
-
 @each $key, $value in $spacing-rules {
   .padding-#{$key} {
     padding: $value !important;
