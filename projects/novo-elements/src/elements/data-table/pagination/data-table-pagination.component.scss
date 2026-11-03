@@ -140,10 +140,10 @@ $breakpoint: 1000px;
 
     h5.rows {
       color: var(--pagination-color-content-label, var(--text-muted));
-      font-size: var(--typography-font-size-12);
-      font-weight: var(--typography-meta-sm-font-weight);
-      letter-spacing: var(--typography-meta-sm-letter-spacing);
-      line-height: var(--typography-meta-sm-line-height);
+      font-size: var(--typography-input-label-md-font-size, var(--typography-font-size-12));
+      font-weight: var(--typography-input-label-md-font-weight, 400);
+      letter-spacing: var(--typography-input-label-md-letter-spacing, 0.5px);
+      line-height: var(--typography-input-label-md-line-height, 14px);
       margin-right: var(--spacing-gap-sm);
       opacity: 1;
       padding: 0;
@@ -177,8 +177,11 @@ $breakpoint: 1000px;
 
     .novo-data-table-of-total-amount {
       color: var(--pagination-color-content-label, var(--text-muted));
-      font-size: var(--typography-font-size-12);
-      font-weight: var(--typography-meta-sm-font-weight);
+      font-size: var(--typography-input-label-md-font-size, var(--typography-font-size-12));
+      font-weight: var(--typography-input-label-md-font-weight, 400);
+      letter-spacing: var(--typography-input-label-md-letter-spacing, 0.5px);
+      line-height: var(--typography-input-label-md-line-height, 14px);
+      text-transform: uppercase;
     }
 
     .pager {
