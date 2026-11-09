@@ -1,3 +1,4 @@
+import { SimpleChange } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { ComponentUtils, NovoLabelService } from 'novo-elements/services';
 import { vi } from 'vitest';
@@ -62,6 +63,60 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
     it('should stop loading', () => {
       component.ngOnInit();
       expect(component.loading).toEqual(false);
+    });
+  });
+
+  describe('function: ngOnChanges', () => {
+    const makeTabs = (): TabbedGroupPickerTab[] => [
+      {
+        typeName: 'animals',
+        typeLabel: 'Animals',
+        valueField: 'id',
+        labelField: 'name',
+        data: [
+          { id: 1, name: 'Cat' } as any,
+          { id: 2, name: 'Dog' } as any,
+        ],
+      },
+    ];
+
+    beforeEach(() => {
+      component.tabs = makeTabs();
+      component.ngOnInit();
+    });
+
+    it('should reload values when tabs change after first change', () => {
+      vi.spyOn(component, 'loadValues');
+      const newTabs = makeTabs();
+      component.tabs = newTabs;
+      component.ngOnChanges({
+        tabs: new SimpleChange(makeTabs(), newTabs, false),
+      });
+      expect(component.loadValues).toHaveBeenCalled();
+    });
+
+    it('should reset selectedChips when tabs change', () => {
+      component.selectedChips.set([{ id: 1, name: 'Cat' }] as any);
+      const newTabs = makeTabs();
+      component.tabs = newTabs;
+      component.ngOnChanges({
+        tabs: new SimpleChange(makeTabs(), newTabs, false),
+      });
+      expect(component.selectedChips()).toEqual([]);
+    });
+
+    it('should not reload values on first change', () => {
+      vi.spyOn(component, 'loadValues');
+      component.ngOnChanges({
+        tabs: new SimpleChange(undefined, makeTabs(), true),
+      });
+      expect(component.loadValues).not.toHaveBeenCalled();
+    });
+
+    it('should not reload values when tabs is not in changes', () => {
+      vi.spyOn(component, 'loadValues');
+      component.ngOnChanges({});
+      expect(component.loadValues).not.toHaveBeenCalled();
     });
   });
 
