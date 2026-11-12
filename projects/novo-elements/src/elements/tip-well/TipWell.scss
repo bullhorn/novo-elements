@@ -65,7 +65,12 @@
 
 // bh2026: bordered card, 4px radius, body text; subtle variant gets muted background
 :host-context([data-theme='bh2026']) {
+  &.active {
+    display: block;
+  }
+
   > div {
+    display: block;
     border-radius: 4px;
     border: 1px solid var(--color-border-default);
     color: var(--color-text-body);
