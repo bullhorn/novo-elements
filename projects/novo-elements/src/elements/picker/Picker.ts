@@ -179,12 +179,12 @@ export class NovoPickerElement implements OnInit {
     // Custom results template
     this.resultsComponent = this.config.resultsTemplate || PickerResults;
 
-    const pasteObserver = fromEvent(this.input.nativeElement, 'paste').pipe(takeUntilDestroyed(this.destroyRef), debounceTime(debounceTimeInMilliSeconds), distinctUntilChanged());
+    const pasteObserver = fromEvent(this.input.nativeElement, 'paste').pipe(debounceTime(debounceTimeInMilliSeconds), distinctUntilChanged(), takeUntilDestroyed(this.destroyRef));
     pasteObserver.subscribe({
       next: (event: ClipboardEvent) => this.onDebouncedKeyup(event),
       error: (err) => this.hideResults(err),
     });
-    const keyboardObserver = fromEvent(this.input.nativeElement, 'keyup').pipe(takeUntilDestroyed(this.destroyRef), debounceTime(debounceTimeInMilliSeconds), distinctUntilChanged());
+    const keyboardObserver = fromEvent(this.input.nativeElement, 'keyup').pipe(debounceTime(debounceTimeInMilliSeconds), distinctUntilChanged(), takeUntilDestroyed(this.destroyRef));
     keyboardObserver.subscribe({
       next: (event: KeyboardEvent) => this.onDebouncedKeyup(event),
       error: (err) => this.hideResults(err),
