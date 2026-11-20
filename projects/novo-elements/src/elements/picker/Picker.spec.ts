@@ -35,6 +35,48 @@ describe('Elements: NovoPickerElement', () => {
       component.ngOnInit();
       expect(component.resultsComponent).toEqual(PickerResults);
     });
+
+    describe('debounced input events', () => {
+      beforeEach(() => {
+        vi.useFakeTimers();
+      });
+
+      afterEach(() => {
+        vi.useRealTimers();
+      });
+
+      it('should show results once the debounce elapses after a paste', () => {
+        fixture.detectChanges();
+        const showSpy = vi.spyOn(component, 'show').mockImplementation(() => {});
+
+        component.input.nativeElement.dispatchEvent(new Event('paste'));
+        vi.advanceTimersByTime(250);
+
+        expect(showSpy).toHaveBeenCalledTimes(1);
+      });
+
+      it('should not show results for a pending paste when destroyed before the debounce elapses', () => {
+        fixture.detectChanges();
+        const showSpy = vi.spyOn(component, 'show').mockImplementation(() => {});
+
+        component.input.nativeElement.dispatchEvent(new Event('paste'));
+        fixture.destroy();
+        vi.advanceTimersByTime(250);
+
+        expect(showSpy).not.toHaveBeenCalled();
+      });
+
+      it('should not show results for a pending keyup when destroyed before the debounce elapses', () => {
+        fixture.detectChanges();
+        const showSpy = vi.spyOn(component, 'show').mockImplementation(() => {});
+
+        component.input.nativeElement.dispatchEvent(new KeyboardEvent('keyup', { key: 'a' }));
+        fixture.destroy();
+        vi.advanceTimersByTime(250);
+
+        expect(showSpy).not.toHaveBeenCalled();
+      });
+    });
   });
 
   describe('Method: onKeyDown()', () => {
