@@ -1,3 +1,13 @@
+# [13.9.0](https://github.com/bullhorn/novo-elements/compare/v13.8.1...v13.9.0) (2026-11-20)
+
+
+### Features
+
+* next ([#1961](https://github.com/bullhorn/novo-elements/issues/1961)) ([6890081](https://github.com/bullhorn/novo-elements/commit/68900818aff0085fe92da0ecf7c148a1276c6319))
+* **TabbedGroupPicker:** Added change detection for tabs input ([#1957](https://github.com/bullhorn/novo-elements/issues/1957)) ([7d7b73b](https://github.com/bullhorn/novo-elements/commit/7d7b73bb484516e1dd6f6e79cea3e11061c934a4))
+* **Table:** Style headers with uppercase/nonbold in 2026 ([acc362a](https://github.com/bullhorn/novo-elements/commit/acc362a6a4de03dc82af520d2d9717de99d743ca))
+* **Table:** Style headers with uppercase/nonbold in 2026 ([#1947](https://github.com/bullhorn/novo-elements/issues/1947)) ([0d90929](https://github.com/bullhorn/novo-elements/commit/0d909295b5b9b2cd7b43ce9a54d16f1e5f04eea6))
+
 ## [13.8.1](https://github.com/bullhorn/novo-elements/compare/v13.8.0...v13.8.1) (2026-10-15)
 
 
