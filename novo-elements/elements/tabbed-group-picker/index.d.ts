@@ -1,5 +1,5 @@
 import * as _angular_core from '@angular/core';
-import { OnDestroy, OnInit, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { OnChanges, OnDestroy, OnInit, EventEmitter, ChangeDetectorRef, SimpleChanges } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { NovoLabelService } from 'novo-elements/services';
 import * as i12 from 'novo-elements/elements/dropdown';
@@ -67,11 +67,11 @@ type TabbedGroupPickerButtonConfig = {
     label: string;
     size?: string;
 };
-declare class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
+declare class NovoTabbedGroupPickerElement implements OnChanges, OnDestroy, OnInit {
     labelService: NovoLabelService;
-    private ref;
-    private scrollableInstance;
-    private inputElement;
+    private readonly ref;
+    private readonly scrollableInstance;
+    private readonly inputElement;
     dropdown: NovoDropdownElement;
     multiple: boolean;
     buttonConfig: TabbedGroupPickerButtonConfig;
@@ -106,6 +106,7 @@ declare class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
     set displayTab(tab: TabbedGroupPickerTab);
     get minBufferPx(): number;
     get maxBufferPx(): number;
+    ngOnChanges(changes: SimpleChanges): void;
     ngOnInit(): void;
     ngOnDestroy(): void;
     showAllChipsToggle(event: any): void;

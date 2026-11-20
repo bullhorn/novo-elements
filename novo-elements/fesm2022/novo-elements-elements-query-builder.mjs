@@ -2137,7 +2137,11 @@ class CriteriaBuilderComponent {
         }
     }
     _configureQueryBuilderService() {
-        this.qbs.scopes.set(this.config?.fields.map((f) => f.value));
+        const newScopes = this.config?.fields.map((f) => f.value);
+        const currentScopes = this.qbs.scopes();
+        if (newScopes?.length !== currentScopes?.length || !newScopes?.every((s, i) => s === currentScopes[i])) {
+            this.qbs.scopes.set(newScopes);
+        }
         this.qbs.config = this.config;
         this.qbs.editTypeFn = this.editTypeFn;
         this.qbs.allowedGroupings = this.allowedGroupings;
