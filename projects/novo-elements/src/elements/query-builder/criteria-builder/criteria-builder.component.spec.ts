@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ControlContainer, UntypedFormBuilder, Validators } from '@angular/forms';
 import { vi } from 'vitest';
 import { NovoLabelService } from '../../../services';
-import { AddressData, Condition, Criteria, NovoFlexModule, NovoQueryBuilderModule, Operator } from '../../index';
+import { AddressData, Condition, Conjunction, Criteria, NovoFlexModule, NovoQueryBuilderModule, Operator } from '../../index';
 import { QueryBuilderService } from '../query-builder.service';
 import { CriteriaBuilderComponent } from './criteria-builder.component';
 
@@ -297,6 +297,59 @@ describe('CriteriaBuilderComponent', () => {
       vi.spyOn(component, 'conditionGroups').mockReturnValue([MOCK_CONDITION_GROUP_2]);
       component.onFieldSelect(MOCK_FIELD);
       expect(component.addConditionGroup).toHaveBeenCalled();
+    });
+  });
+
+  describe('Function: _configureQueryBuilderService', () => {
+    beforeEach(() => {
+      component.config = {
+        fields: [
+          { value: 'Candidate', label: 'Candidate' },
+          { value: 'Job', label: 'Job' },
+        ],
+      };
+      component.allowedGroupings = [Conjunction.AND, Conjunction.OR];
+      component.editTypeFn = (field) => field.type;
+    });
+
+    it('should set scopes when they differ from current scopes', () => {
+      component.qbs.scopes.set([]);
+      (component as any)._configureQueryBuilderService();
+      expect(component.qbs.scopes()).toEqual(['Candidate', 'Job']);
+    });
+
+    it('should not set scopes when they match current scopes', () => {
+      component.qbs.scopes.set(['Candidate', 'Job']);
+      const setSpy = vi.spyOn(component.qbs.scopes, 'set');
+      (component as any)._configureQueryBuilderService();
+      expect(setSpy).not.toHaveBeenCalled();
+    });
+
+    it('should set scopes when lengths differ', () => {
+      component.qbs.scopes.set(['Candidate']);
+      (component as any)._configureQueryBuilderService();
+      expect(component.qbs.scopes()).toEqual(['Candidate', 'Job']);
+    });
+
+    it('should set scopes when values differ at same length', () => {
+      component.qbs.scopes.set(['Candidate', 'Placement']);
+      (component as any)._configureQueryBuilderService();
+      expect(component.qbs.scopes()).toEqual(['Candidate', 'Job']);
+    });
+
+    it('should set config on the query builder service', () => {
+      (component as any)._configureQueryBuilderService();
+      expect(component.qbs.config).toBe(component.config);
+    });
+
+    it('should set editTypeFn on the query builder service', () => {
+      (component as any)._configureQueryBuilderService();
+      expect(component.qbs.editTypeFn).toBe(component.editTypeFn);
+    });
+
+    it('should set allowedGroupings on the query builder service', () => {
+      (component as any)._configureQueryBuilderService();
+      expect(component.qbs.allowedGroupings).toEqual([Conjunction.AND, Conjunction.OR]);
     });
   });
 
