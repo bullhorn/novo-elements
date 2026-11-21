@@ -51,7 +51,7 @@
     "e2e:single:headed:debug": "bash -c 'wdio run projects/novo-e2e/wdio.conf.ts --spec \"projects/novo-e2e/src/e2e/$1\" --headless=false \"${@:2}\"' --"
   },
   "dependencies": {
-    "@angular/animations": "^20.3.18",
+    "@angular/animations": "^20.3.25",
     "@angular/cdk": "^20.2.14",
     "@angular/common": "^20.3.18",
     "@angular/compiler": "^20.3.18",
